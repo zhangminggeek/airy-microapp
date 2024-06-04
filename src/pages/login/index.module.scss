@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0 40px;
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .slogan {
+      color: #77b0aa;
+      margin-top: 40px;
+    }
+
+    .btn {
+      margin-top: 240px;
+    }
+  }
+
+  .action {
+    .protocols {
+      margin-bottom: 40px;
+
+      .link {
+        color: #003c43;
+      }
+
+      :global {
+        .nut-checkbox-label {
+          color: #7c7c7c;
+        }
+      }
+    }
+  }
+}

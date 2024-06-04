@@ -1,0 +1,11 @@
+.m-expiration-status-tag {
+  &.nut-tag-danger {
+    background-color: #ff6952;
+  }
+
+  .nut-tag {
+    &-text {
+      line-height: 28px;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.m-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  &-text {
+    font-size: 28px;
+    font-weight: 600;
+  }
+}

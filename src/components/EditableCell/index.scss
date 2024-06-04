@@ -1,0 +1,13 @@
+.m-editable-cell {
+  &-item.nut-cell {
+    padding: 0;
+  }
+
+  .nut-cell {
+    &-left {
+      flex: auto;
+      flex-grow: 0;
+      padding: 24px 32px;
+    }
+  }
+}

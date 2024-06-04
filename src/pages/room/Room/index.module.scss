@@ -1,0 +1,44 @@
+.room {
+  &-header {
+    :global {
+      .nut-cell-left {
+        flex: 1;
+      }
+      .nut-cell-extra {
+        flex: auto;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: 1;
+      }
+    }
+
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+
+      &-name {
+        &-count {
+          font-size: 24px;
+          color: #959595;
+        }
+      }
+    }
+  }
+
+  &-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    row-gap: 40px;
+
+    &-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      height: 120px;
+      border: 2px solid #e0e0e0;
+    }
+  }
+}

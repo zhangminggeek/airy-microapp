@@ -1,0 +1,11 @@
+.m-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+
+  &-extra {
+    display: flex;
+    align-items: center;
+  }
+}

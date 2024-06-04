@@ -1,0 +1,13 @@
+.m-picker-view {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &-text {
+    color: #7c7c7c;
+  }
+
+  &-placeholder {
+    color: #7c7c7c;
+  }
+}

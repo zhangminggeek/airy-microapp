@@ -1,0 +1,103 @@
+{
+  "name": "airy-microapp",
+  "version": "1.0.0",
+  "author": "zhangming <qianzm2490@gmail.com>",
+  "private": true,
+  "description": "",
+  "templateInfo": {
+    "name": "taro-hooks",
+    "typescript": true,
+    "css": "scss"
+  },
+  "scripts": {
+    "build": "cross-env CUSTOM_ENV=development taro build --type weapp",
+    "build:production": "cross-env CUSTOM_ENV=production taro build --type weapp",
+    "dev": "NODE_ENV=production npm run build -- --watch",
+    "dev:production": "NODE_ENV=production npm run build:production -- --watch",
+    "prepare": "husky",
+    "lint": "tsc --noemit --skipLibCheck && eslint 'src/**/*.{js,jsx,tsx,ts}' --quiet",
+    "lint:fix": "tsc --noemit && eslint 'src/**/*.{js,jsx,tsx,ts}' --fix --quiet",
+    "prettier": "prettier --write '**/*.{scss,css,md,json}'",
+    "ytt": "npx ytt -c config/ytt.config.ts"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint",
+      "git add ."
+    ],
+    "*.{scss,css,md,json}": [
+      "npm run prettier",
+      "git add ."
+    ]
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.24.6",
+    "@nutui/icons-react-taro": "^1.0.4",
+    "@nutui/nutui-react-taro": "^2.6.8",
+    "@tarojs/components": "3.6.30",
+    "@tarojs/helper": "3.6.30",
+    "@tarojs/plugin-framework-react": "3.6.30",
+    "@tarojs/plugin-html": "^3.6.30",
+    "@tarojs/plugin-platform-alipay": "3.6.30",
+    "@tarojs/plugin-platform-h5": "3.6.30",
+    "@tarojs/plugin-platform-jd": "3.6.30",
+    "@tarojs/plugin-platform-qq": "3.6.30",
+    "@tarojs/plugin-platform-swan": "3.6.30",
+    "@tarojs/plugin-platform-tt": "3.6.30",
+    "@tarojs/plugin-platform-weapp": "3.6.30",
+    "@tarojs/react": "3.6.30",
+    "@tarojs/runtime": "3.6.30",
+    "@tarojs/shared": "3.6.30",
+    "@tarojs/taro": "3.6.30",
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.11",
+    "lodash": "^4.17.21",
+    "qs": "^6.12.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "taro-hooks": "latest",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.4.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@tarojs/cli": "3.6.30",
+    "@tarojs/webpack5-runner": "3.6.30",
+    "@types/lodash": "^4.17.4",
+    "@types/qs": "^6.9.15",
+    "@types/react": "^18.3.3",
+    "@types/webpack-env": "^1.18.5",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@typescript-eslint/parser": "^7.12.0",
+    "babel-plugin-import": "^1.13.8",
+    "babel-preset-taro": "3.6.30",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.4.0",
+    "eslint-config-taro": "3.6.30",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^17.7.0",
+    "eslint-plugin-promise": "^6.2.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "globals": "^15.3.0",
+    "husky": "^9.0.11",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.0",
+    "react-refresh": "^0.14.2",
+    "stylelint": "16.6.1",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.12.0",
+    "webpack": "5.91.0",
+    "yapi-to-typescript": "^3.37.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

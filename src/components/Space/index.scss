@@ -1,0 +1,14 @@
+.m-space {
+  &-item {
+    display: flex;
+    align-items: center;
+  }
+
+  &-split {
+    height: 100%;
+
+    &-divider {
+      border-inline-start: 4px solid #e0e0e0;
+    }
+  }
+}

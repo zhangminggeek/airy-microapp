@@ -1,0 +1,23 @@
+.m-modal-form {
+  &-item {
+    &:not(.m-modal-form-item-with-label) {
+      .nut-cell.nut-form-item {
+        padding: 0;
+      }
+
+      .nut-form-item + .nut-form-item {
+        margin-top: 16px;
+      }
+
+      .nut-form-item-body-slots {
+        padding: 16px 24px;
+        background-color: #f9f9f9;
+      }
+
+      .nut-input,
+      .nut-textarea {
+        background-color: transparent;
+      }
+    }
+  }
+}

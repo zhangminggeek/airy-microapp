@@ -1,0 +1,35 @@
+.m-upload {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  &-item {
+    position: relative;
+
+    &-img {
+      width: 200px;
+      height: 200px;
+    }
+
+    &-icon {
+      position: absolute;
+      right: -16px;
+      top: -16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #4a4a4a;
+      border-radius: 50%;
+      padding: 6px;
+    }
+  }
+
+  &-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background-color: #f6f6f6;
+  }
+}
