@@ -1,10 +1,11 @@
 @import './styles/var.scss';
+@import './styles/reset-nutui.scss';
 
 page {
   --nutui-color-primary: #f76793;
   --nutui-color-primary-stop-1: #f76793;
   --nutui-color-primary-stop-2: #ff9b9d;
-  --nutui-color-primary-light: #ff9b9d;
+  --nutui-color-primary-light: #faedf1;
   --nutui-form-item-required-color: #fa2c19;
   --nutui-form-item-error-message-color: #fa2c19;
   --nutui-form-item-error-line-color: #fa2c19;

@@ -43,12 +43,17 @@ const Page = () => {
           <Button
             className={classnames(styles.btn, styles['btn-primary'])}
             type="primary"
+            size="xlarge"
             block
             onClick={handleLogin}
           >
             手机号快捷登录
           </Button>
-          <Link className={classnames(styles.btn, styles['btn-link'])} block>
+          <Link
+            className={classnames(styles.btn, styles['btn-link'])}
+            block
+            to="/pages/user/login/other/index"
+          >
             其他方式登录
           </Link>
         </View>

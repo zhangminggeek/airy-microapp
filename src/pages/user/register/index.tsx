@@ -1,5 +1,6 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
+import classnames from 'classnames';
 
 import styles from './index.module.scss';
 
@@ -21,13 +22,15 @@ const Page = () => {
     <BasicLayout className={styles.container} title="注册" back fill>
       <View className={styles.content}>
         <Form
-          className={styles.form}
+          className={classnames('form-with-footer', 'form-large')}
+          labelPosition="left"
           footer={
             <Button
               className={styles.btn}
               formType="submit"
-              block
               type="primary"
+              size="xlarge"
+              block
             >
               注册
             </Button>

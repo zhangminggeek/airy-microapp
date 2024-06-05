@@ -1,0 +1,9 @@
+.m-input-password {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &-input {
+    flex: 1;
+  }
+}

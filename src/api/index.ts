@@ -547,6 +547,79 @@ export const postCompanyRegister = /*#__PURE__*/ (
 
 postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
 
+/**
+ * 接口 审核公司 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/audit`
+ */
+export interface PostCompanyAuditRequest {
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 审核结果, 0:不通过 1:通过
+   */
+  status: number
+}
+
+/**
+ * 接口 审核公司 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/audit`
+ */
+export type PostCompanyAuditResponse = any
+
+/**
+ * 接口 审核公司 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/audit`
+ */
+type PostCompanyAuditRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/audit', 'data', string, string, false>
+>
+
+/**
+ * 接口 审核公司 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/audit`
+ */
+const postCompanyAuditRequestConfig: PostCompanyAuditRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/company/audit',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyAudit',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 审核公司 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/audit`
+ */
+export const postCompanyAudit = /*#__PURE__*/ (requestData: PostCompanyAuditRequest, ...args: UserRequestRestArgs) => {
+  return request<PostCompanyAuditResponse>(prepare(postCompanyAuditRequestConfig, requestData), ...args)
+}
+
+postCompanyAudit.requestConfig = postCompanyAuditRequestConfig
+
 const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_2 = '' as any
 const prodUrl_0_0_0_2 = '' as any
@@ -1326,6 +1399,142 @@ export const deleteAccount = /*#__PURE__*/ (requestData: DeleteAccountRequest, .
 }
 
 deleteAccount.requestConfig = deleteAccountRequestConfig
+
+/**
+ * 接口 获取新盐值 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt`
+ */
+export interface GetAccountSaltRequest {}
+
+/**
+ * 接口 获取新盐值 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt`
+ */
+export type GetAccountSaltResponse = string
+
+/**
+ * 接口 获取新盐值 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt`
+ */
+type GetAccountSaltRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt', 'data', string, string, true>
+>
+
+/**
+ * 接口 获取新盐值 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt`
+ */
+const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account/salt',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountSalt',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取新盐值 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt`
+ */
+export const getAccountSalt = /*#__PURE__*/ (requestData?: GetAccountSaltRequest, ...args: UserRequestRestArgs) => {
+  return request<GetAccountSaltResponse>(prepare(getAccountSaltRequestConfig, requestData), ...args)
+}
+
+getAccountSalt.requestConfig = getAccountSaltRequestConfig
+
+/**
+ * 接口 获取账号盐值 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt/{account}`
+ */
+export interface GetAccountSaltAccountRequest {
+  /**
+   * 账号
+   */
+  account: string
+}
+
+/**
+ * 接口 获取账号盐值 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt/{account}`
+ */
+export type GetAccountSaltAccountResponse = string
+
+/**
+ * 接口 获取账号盐值 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt/{account}`
+ */
+type GetAccountSaltAccountRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt/{account}', 'data', 'account', string, false>
+>
+
+/**
+ * 接口 获取账号盐值 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt/{account}`
+ */
+const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account/salt/{account}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: ['account'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountSaltAccount',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取账号盐值 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/salt/{account}`
+ */
+export const getAccountSaltAccount = /*#__PURE__*/ (
+  requestData: GetAccountSaltAccountRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetAccountSaltAccountResponse>(prepare(getAccountSaltAccountRequestConfig, requestData), ...args)
+}
+
+getAccountSaltAccount.requestConfig = getAccountSaltAccountRequestConfig
 
 /**
  * 接口 获取账号信息 的 **请求类型**

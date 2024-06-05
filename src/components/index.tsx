@@ -6,6 +6,7 @@ import CalenderPicker from './CalendarPicker';
 import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
+import InputPassword from './InputPassword';
 import Link from './Link';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
@@ -23,6 +24,7 @@ export {
   Descriptions,
   EditableCell,
   Empty,
+  InputPassword,
   Link,
   ModalForm,
   Picker,

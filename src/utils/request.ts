@@ -4,7 +4,7 @@ import { Method, type RequestFunctionParams } from 'yapi-to-typescript';
 import type { BaseResponse } from '@/interfaces/base';
 
 import { StorageKey } from '@/constants/storage';
-import { Toast, WeChatUtil } from '@/utils';
+import { Toast } from '@/utils';
 
 export const DEFAULT_TIP_MESSAGE = '请求失败，请刷新重试';
 
@@ -51,9 +51,9 @@ const request = <ResponseData>(payload: RequestFunctionParams) => {
         if (!success) {
           // 登录失效时静默登录，登录成功后重新发起请求
           if (['2001'].includes(code)) {
-            await WeChatUtil.loginForWeChat();
-            await request(payload);
-            return;
+            // await WeChatUtil.loginForWeChat();
+            // await request(payload);
+            // return;
           }
           Toast.info(message, { mask: true });
           reject();

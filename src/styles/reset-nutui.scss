@@ -1,0 +1,33 @@
+// nut-ui 样式修改
+// Button
+.nut-button {
+  &.nut-button-xlarge {
+    font-size: $font-size-large;
+  }
+}
+
+// Form
+.nut-form {
+  // form-with-footer 类名是自己定义的，用来修改 Form footer 样式
+  &.form-with-footer {
+    .nut-cell:last-child {
+      padding: 0;
+      margin-top: 64px;
+    }
+  }
+
+  // form-with-footer 类名是自己定义的，用来修改大表单样式
+  &.form-large {
+    .nut-form-item {
+      border-bottom: 2px solid $border-color;
+
+      &:not(:first-child) {
+        margin-top: 32px;
+      }
+    }
+
+    .nut-cell {
+      padding: 24px 0;
+    }
+  }
+}
