@@ -1,0 +1,47 @@
+@import '../../../styles/var.scss';
+
+.container {
+  background-color: #fff;
+
+  .content {
+    padding: 0 48px;
+
+    .form {
+      :global {
+        .nut-form-item {
+          border-bottom: 2px solid $border-color;
+
+          &:not(:first-child) {
+            margin-top: 32px;
+          }
+        }
+
+        .nut-cell {
+          padding: 24px 0;
+
+          &:last-child {
+            padding: 0;
+            margin-top: 64px;
+          }
+        }
+      }
+
+      .btn {
+        height: 96px;
+        font-size: $font-size-large;
+      }
+    }
+
+    .login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 232px;
+
+      &-text {
+        font-size: $font-size-base;
+        color: $text-color-secondary;
+      }
+    }
+  }
+}

@@ -1,13 +1,25 @@
+@import '../../styles/var.scss';
+
 .m-picker-view {
   display: flex;
   align-items: center;
   gap: 20px;
 
+  &-block {
+    .m-picker-view-text {
+      flex: 1;
+    }
+  }
+
   &-text {
-    color: #7c7c7c;
+    color: $text-color-main;
+  }
+
+  &-icon {
+    color: $text-color-placeholder;
   }
 
   &-placeholder {
-    color: #7c7c7c;
+    color: $text-color-placeholder;
   }
 }

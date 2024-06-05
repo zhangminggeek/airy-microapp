@@ -1,0 +1,12 @@
+@import '../../styles/var.scss';
+
+.m-link {
+  display: inline-flex;
+  color: $color-primary;
+  font-size: $font-size-base;
+
+  &-block {
+    display: flex;
+    justify-content: center;
+  }
+}

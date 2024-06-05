@@ -1,0 +1,54 @@
+@import '../../../styles/var.scss';
+
+.container {
+  background: #fff;
+
+  .content {
+    padding: 244px 24px 0;
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      margin-bottom: 48px;
+    }
+
+    .name {
+      color: $text-color-main;
+      font-weight: 500;
+    }
+  }
+
+  .login {
+    flex: 1;
+    margin-top: 296px;
+
+    .btn {
+      &-primary {
+        height: 96px;
+        margin-bottom: 64px;
+        font-size: $font-size-large;
+      }
+
+      &-link {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 252px;
+
+    &-text {
+      font-size: $font-size-base;
+      color: $text-color-secondary;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-export const PROJECT_NAME = 'home-simplicity';
+export const PROJECT_NAME = 'airy';
 
 export const YEAR_FORMAT = 'YYYY';
 

@@ -96,9 +96,9 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
         if (!success) {
           // 登录失效时静默登录，登录成功后重新发起请求
           if (['2001'].includes(code)) {
-            await WeChatUtil.loginForWeChat();
-            await request(payload);
-            return;
+            // await WeChatUtil.loginForWeChat();
+            // await request(payload);
+            // return;
           }
           Toast.info(message, { mask: true });
           reject();

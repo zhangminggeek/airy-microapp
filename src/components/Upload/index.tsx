@@ -1,4 +1,4 @@
-import { Camera, Close } from '@nutui/icons-react-taro';
+import { Add, Close } from '@nutui/icons-react-taro';
 import { ImagePreview, Loading } from '@nutui/nutui-react-taro';
 import { Image, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -80,7 +80,7 @@ const Upload: FC<UploadProps> = ({
   const beforeUpload = async (file: Taro.chooseImage.ImageFile) => {
     if (!checkFile(file)) return Promise.reject();
     // 校验 signature 是否过期，过期则重新获取
-    if (!signature?.expire || dayjs().isBefore(dayjs.unix(signature?.expire))) {
+    if (!signature?.expire || dayjs().isAfter(dayjs.unix(signature?.expire))) {
       await fetchOSSSignature();
     }
   };
@@ -153,7 +153,7 @@ const Upload: FC<UploadProps> = ({
           {uploading ? (
             <Loading />
           ) : (
-            <Camera className={`${PREFIX_CLS}-btn-icon`} />
+            <Add className={`${PREFIX_CLS}-btn-icon`} />
           )}
         </View>
       ) : null}

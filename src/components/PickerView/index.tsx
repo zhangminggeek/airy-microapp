@@ -1,4 +1,4 @@
-import { TriangleDown } from '@nutui/icons-react-taro';
+import { ArrowRight, TriangleDown } from '@nutui/icons-react-taro';
 import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 import { Fragment, useMemo } from 'react';
@@ -17,6 +17,8 @@ interface PickerViewProps {
   text?: ReactNode;
   defaultText?: ReactNode;
   children?: ReactNode;
+  block?: boolean;
+  arrowType?: 'bottom' | 'right';
   onClick?: (e: ITouchEvent) => void;
 }
 
@@ -26,6 +28,8 @@ const PickerView: FC<PickerViewProps> = ({
   text,
   defaultText = DEFAULT_TEXT,
   children,
+  block,
+  arrowType = 'bottom',
   onClick,
 }) => {
   const view = useMemo(() => {
@@ -37,12 +41,20 @@ const PickerView: FC<PickerViewProps> = ({
   return (
     <Fragment>
       <View
-        className={classnames(PREFIX_CLS, className)}
+        className={classnames(
+          PREFIX_CLS,
+          { [`${PREFIX_CLS}-block`]: block },
+          className,
+        )}
         style={style}
         onClick={onClick}
       >
-        <View className={`${PREFIX_CLS}-view-text`}>{view}</View>
-        <TriangleDown className={`${PREFIX_CLS}-view-icon`} size={14} />
+        <View className={`${PREFIX_CLS}-text`}>{view}</View>
+        {arrowType === 'bottom' ? (
+          <TriangleDown className={`${PREFIX_CLS}-icon`} size={14} />
+        ) : (
+          <ArrowRight className={`${PREFIX_CLS}-icon`} size={14} />
+        )}
       </View>
       {children}
     </Fragment>

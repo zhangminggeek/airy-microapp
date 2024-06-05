@@ -131,47 +131,392 @@ const prodUrl_0_0_0_1 = '' as any
 const dataKey_0_0_0_1 = 'data' as any
 
 /**
- * 接口 微信授权登录 的 **请求类型**
+ * 接口 获取公司列表 的 **请求类型**
  *
- * @分类 用户
- * @请求头 `POST /user/login/wechat`
+ * @分类 公司
+ * @请求头 `GET /company`
  */
-export interface PostUserLoginWechatRequest {
+export interface GetCompanyRequest {}
+
+/**
+ * 接口 获取公司列表 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company`
+ */
+export interface GetCompanyResponse {
   /**
-   * wx.login 获取的 code
+   * 创建时间
    */
-  code: string
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司
+   */
+  company: string
 }
 
 /**
- * 接口 微信授权登录 的 **返回类型**
+ * 接口 获取公司列表 的 **请求配置的类型**
  *
- * @分类 用户
- * @请求头 `POST /user/login/wechat`
+ * @分类 公司
+ * @请求头 `GET /company`
  */
-export type PostUserLoginWechatResponse = any
-
-/**
- * 接口 微信授权登录 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `POST /user/login/wechat`
- */
-type PostUserLoginWechatRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user/login/wechat', 'data', string, string, false>
+type GetCompanyRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, string, true>
 >
 
 /**
- * 接口 微信授权登录 的 **请求配置**
+ * 接口 获取公司列表 的 **请求配置**
  *
- * @分类 用户
- * @请求头 `POST /user/login/wechat`
+ * @分类 公司
+ * @请求头 `GET /company`
  */
-const postUserLoginWechatRequestConfig: PostUserLoginWechatRequestConfig = /*#__PURE__*/ {
+const getCompanyRequestConfig: GetCompanyRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/user/login/wechat',
+  path: '/company',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompany',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取公司列表 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company`
+ */
+export const getCompany = /*#__PURE__*/ (requestData?: GetCompanyRequest, ...args: UserRequestRestArgs) => {
+  return request<GetCompanyResponse>(prepare(getCompanyRequestConfig, requestData), ...args)
+}
+
+getCompany.requestConfig = getCompanyRequestConfig
+
+/**
+ * 接口 更新公司 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `PUT /company`
+ */
+export interface PutCompanyRequest {
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司
+   */
+  company: string
+  /**
+   * 密码（明文）
+   */
+  password: string
+  /**
+   * 微信用户唯一标识
+   */
+  openid?: string
+}
+
+/**
+ * 接口 更新公司 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `PUT /company`
+ */
+export type PutCompanyResponse = any
+
+/**
+ * 接口 更新公司 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `PUT /company`
+ */
+type PutCompanyRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, string, false>
+>
+
+/**
+ * 接口 更新公司 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `PUT /company`
+ */
+const putCompanyRequestConfig: PutCompanyRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/company',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putCompany',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 更新公司 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `PUT /company`
+ */
+export const putCompany = /*#__PURE__*/ (requestData: PutCompanyRequest, ...args: UserRequestRestArgs) => {
+  return request<PutCompanyResponse>(prepare(putCompanyRequestConfig, requestData), ...args)
+}
+
+putCompany.requestConfig = putCompanyRequestConfig
+
+/**
+ * 接口 删除公司 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company`
+ */
+export interface DeleteCompanyRequest {
+  /**
+   * 公司id
+   */
+  id: string
+}
+
+/**
+ * 接口 删除公司 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company`
+ */
+export type DeleteCompanyResponse = any
+
+/**
+ * 接口 删除公司 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company`
+ */
+type DeleteCompanyRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, 'id', false>
+>
+
+/**
+ * 接口 删除公司 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company`
+ */
+const deleteCompanyRequestConfig: DeleteCompanyRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/company',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteCompany',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 删除公司 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company`
+ */
+export const deleteCompany = /*#__PURE__*/ (requestData: DeleteCompanyRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteCompanyResponse>(prepare(deleteCompanyRequestConfig, requestData), ...args)
+}
+
+deleteCompany.requestConfig = deleteCompanyRequestConfig
+
+/**
+ * 接口 获取公司信息 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+export interface GetCompanyIdRequest {
+  /**
+   * 公司id
+   */
+  id: string
+}
+
+/**
+ * 接口 获取公司信息 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+export interface GetCompanyIdResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司
+   */
+  company: string
+}
+
+/**
+ * 接口 获取公司信息 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+type GetCompanyIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 获取公司信息 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+const getCompanyIdRequestConfig: GetCompanyIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/company/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取公司信息 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+export const getCompanyId = /*#__PURE__*/ (requestData: GetCompanyIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetCompanyIdResponse>(prepare(getCompanyIdRequestConfig, requestData), ...args)
+}
+
+getCompanyId.requestConfig = getCompanyIdRequestConfig
+
+/**
+ * 接口 创建公司 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+export interface PostCompanyRegisterRequest {
+  /**
+   * 公司名称
+   */
+  name: string
+  /**
+   * 联系人
+   */
+  contacts: string
+  /**
+   * 联系电话
+   */
+  contactPhone: string
+  /**
+   * 省编码
+   */
+  province: string
+  /**
+   * 市编码
+   */
+  city: string
+  /**
+   * 区编码
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 营业执照
+   */
+  licenses: string[]
+}
+
+/**
+ * 接口 创建公司 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+export type PostCompanyRegisterResponse = any
+
+/**
+ * 接口 创建公司 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+type PostCompanyRegisterRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/register', 'data', string, string, false>
+>
+
+/**
+ * 接口 创建公司 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+const postCompanyRegisterRequestConfig: PostCompanyRegisterRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/company/register',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -182,101 +527,357 @@ const postUserLoginWechatRequestConfig: PostUserLoginWechatRequestConfig = /*#__
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postUserLoginWechat',
+  requestFunctionName: 'postCompanyRegister',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 微信授权登录 的 **请求函数**
+ * 接口 创建公司 的 **请求函数**
  *
- * @分类 用户
- * @请求头 `POST /user/login/wechat`
+ * @分类 公司
+ * @请求头 `POST /company/register`
  */
-export const postUserLoginWechat = /*#__PURE__*/ (
-  requestData: PostUserLoginWechatRequest,
+export const postCompanyRegister = /*#__PURE__*/ (
+  requestData: PostCompanyRegisterRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<PostUserLoginWechatResponse>(prepare(postUserLoginWechatRequestConfig, requestData), ...args)
+  return request<PostCompanyRegisterResponse>(prepare(postCompanyRegisterRequestConfig, requestData), ...args)
 }
 
-postUserLoginWechat.requestConfig = postUserLoginWechatRequestConfig
+postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
+
+const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_2 = '' as any
+const prodUrl_0_0_0_2 = '' as any
+const dataKey_0_0_0_2 = 'data' as any
 
 /**
- * 接口 修改个人资料 的 **请求类型**
+ * 接口 获取用户列表 的 **请求类型**
  *
  * @分类 用户
- * @请求头 `PUT /user/self`
+ * @请求头 `GET /user`
  */
-export interface PutUserSelfRequest {
+export interface GetUserRequest {}
+
+/**
+ * 接口 获取用户列表 的 **返回类型**
+ *
+ * @分类 用户
+ * @请求头 `GET /user`
+ */
+export type GetUserResponse = {
   /**
-   * 昵称
+   * 用户id
    */
-  name?: string
+  id: number
+  /**
+   * 账号id
+   */
+  accountId: number
+  /**
+   * 姓名
+   */
+  name: string
+  /**
+   * 手机号
+   */
+  phone: string
   /**
    * 头像
    */
   avatar?: string
-}
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 角色id
+   */
+  roleId: number
+}[]
 
 /**
- * 接口 修改个人资料 的 **返回类型**
+ * 接口 获取用户列表 的 **请求配置的类型**
  *
  * @分类 用户
- * @请求头 `PUT /user/self`
+ * @请求头 `GET /user`
  */
-export type PutUserSelfResponse = any
-
-/**
- * 接口 修改个人资料 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `PUT /user/self`
- */
-type PutUserSelfRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user/self', 'data', string, 'name' | 'avatar', false>
+type GetUserRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, string, true>
 >
 
 /**
- * 接口 修改个人资料 的 **请求配置**
+ * 接口 获取用户列表 的 **请求配置**
  *
  * @分类 用户
- * @请求头 `PUT /user/self`
+ * @请求头 `GET /user`
  */
-const putUserSelfRequestConfig: PutUserSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
-  path: '/user/self',
-  method: Method.PUT,
+const getUserRequestConfig: GetUserRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/user',
+  method: Method.GET,
   requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
-  queryNames: ['name', 'avatar'],
-  requestDataOptional: false,
+  queryNames: [],
+  requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putUserSelf',
+  requestFunctionName: 'getUser',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 修改个人资料 的 **请求函数**
+ * 接口 获取用户列表 的 **请求函数**
  *
  * @分类 用户
- * @请求头 `PUT /user/self`
+ * @请求头 `GET /user`
  */
-export const putUserSelf = /*#__PURE__*/ (requestData: PutUserSelfRequest, ...args: UserRequestRestArgs) => {
-  return request<PutUserSelfResponse>(prepare(putUserSelfRequestConfig, requestData), ...args)
+export const getUser = /*#__PURE__*/ (requestData?: GetUserRequest, ...args: UserRequestRestArgs) => {
+  return request<GetUserResponse>(prepare(getUserRequestConfig, requestData), ...args)
 }
 
-putUserSelf.requestConfig = putUserSelfRequestConfig
+getUser.requestConfig = getUserRequestConfig
 
 /**
- * 接口 获取当前登录账号信息 的 **请求类型**
+ * 接口 创建用户 的 **请求类型**
+ *
+ * @分类 用户
+ * @请求头 `POST /user`
+ */
+export interface PostUserRequest {
+  /**
+   * 姓名
+   */
+  name: string
+  /**
+   * 头像
+   */
+  avatar?: string
+  /**
+   * 手机号
+   */
+  phone: string
+  /**
+   * 角色id
+   */
+  roleId: number
+}
+
+/**
+ * 接口 创建用户 的 **返回类型**
+ *
+ * @分类 用户
+ * @请求头 `POST /user`
+ */
+export type PostUserResponse = number
+
+/**
+ * 接口 创建用户 的 **请求配置的类型**
+ *
+ * @分类 用户
+ * @请求头 `POST /user`
+ */
+type PostUserRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, string, false>
+>
+
+/**
+ * 接口 创建用户 的 **请求配置**
+ *
+ * @分类 用户
+ * @请求头 `POST /user`
+ */
+const postUserRequestConfig: PostUserRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/user',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postUser',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 创建用户 的 **请求函数**
+ *
+ * @分类 用户
+ * @请求头 `POST /user`
+ */
+export const postUser = /*#__PURE__*/ (requestData: PostUserRequest, ...args: UserRequestRestArgs) => {
+  return request<PostUserResponse>(prepare(postUserRequestConfig, requestData), ...args)
+}
+
+postUser.requestConfig = postUserRequestConfig
+
+/**
+ * 接口 更新用户 的 **请求类型**
+ *
+ * @分类 用户
+ * @请求头 `PUT /user`
+ */
+export interface PutUserRequest {
+  /**
+   * 用户id
+   */
+  id: number
+  /**
+   * 用户
+   */
+  user: string
+  /**
+   * 密码（明文）
+   */
+  password: string
+  /**
+   * 微信用户唯一标识
+   */
+  openid?: string
+}
+
+/**
+ * 接口 更新用户 的 **返回类型**
+ *
+ * @分类 用户
+ * @请求头 `PUT /user`
+ */
+export type PutUserResponse = any
+
+/**
+ * 接口 更新用户 的 **请求配置的类型**
+ *
+ * @分类 用户
+ * @请求头 `PUT /user`
+ */
+type PutUserRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, string, false>
+>
+
+/**
+ * 接口 更新用户 的 **请求配置**
+ *
+ * @分类 用户
+ * @请求头 `PUT /user`
+ */
+const putUserRequestConfig: PutUserRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/user',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putUser',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 更新用户 的 **请求函数**
+ *
+ * @分类 用户
+ * @请求头 `PUT /user`
+ */
+export const putUser = /*#__PURE__*/ (requestData: PutUserRequest, ...args: UserRequestRestArgs) => {
+  return request<PutUserResponse>(prepare(putUserRequestConfig, requestData), ...args)
+}
+
+putUser.requestConfig = putUserRequestConfig
+
+/**
+ * 接口 删除用户 的 **请求类型**
+ *
+ * @分类 用户
+ * @请求头 `DELETE /user`
+ */
+export interface DeleteUserRequest {
+  /**
+   * 用户id
+   */
+  id: string
+}
+
+/**
+ * 接口 删除用户 的 **返回类型**
+ *
+ * @分类 用户
+ * @请求头 `DELETE /user`
+ */
+export type DeleteUserResponse = any
+
+/**
+ * 接口 删除用户 的 **请求配置的类型**
+ *
+ * @分类 用户
+ * @请求头 `DELETE /user`
+ */
+type DeleteUserRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, 'id', false>
+>
+
+/**
+ * 接口 删除用户 的 **请求配置**
+ *
+ * @分类 用户
+ * @请求头 `DELETE /user`
+ */
+const deleteUserRequestConfig: DeleteUserRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/user',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteUser',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 删除用户 的 **请求函数**
+ *
+ * @分类 用户
+ * @请求头 `DELETE /user`
+ */
+export const deleteUser = /*#__PURE__*/ (requestData: DeleteUserRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteUserResponse>(prepare(deleteUserRequestConfig, requestData), ...args)
+}
+
+deleteUser.requestConfig = deleteUserRequestConfig
+
+/**
+ * 接口 获取当前登录用户信息 的 **请求类型**
  *
  * @分类 用户
  * @请求头 `GET /user/self`
@@ -284,7 +885,7 @@ putUserSelf.requestConfig = putUserSelfRequestConfig
 export interface GetUserSelfRequest {}
 
 /**
- * 接口 获取当前登录账号信息 的 **返回类型**
+ * 接口 获取当前登录用户信息 的 **返回类型**
  *
  * @分类 用户
  * @请求头 `GET /user/self`
@@ -295,29 +896,45 @@ export interface GetUserSelfResponse {
    */
   id: number
   /**
-   * 用户编号
+   * 账号id
    */
-  no: string
+  accountId: number
   /**
-   * 昵称
+   * 姓名
    */
   name: string
+  /**
+   * 手机号
+   */
+  phone: string
   /**
    * 头像
    */
   avatar?: string
   /**
-   * 当前选中的组织
+   * 公司id
    */
-  orgId: number
+  companyId: number
   /**
-   * 当前组织下的角色
+   * 角色id
    */
   roleId: number
+  /**
+   * 角色名称
+   */
+  roleName: string
+  /**
+   * 是否为超级管理员
+   */
+  isAdmin: boolean
+  /**
+   * 权限点
+   */
+  auth: number[]
 }
 
 /**
- * 接口 获取当前登录账号信息 的 **请求配置的类型**
+ * 接口 获取当前登录用户信息 的 **请求配置的类型**
  *
  * @分类 用户
  * @请求头 `GET /user/self`
@@ -327,21 +944,21 @@ type GetUserSelfRequestConfig = Readonly<
 >
 
 /**
- * 接口 获取当前登录账号信息 的 **请求配置**
+ * 接口 获取当前登录用户信息 的 **请求配置**
  *
  * @分类 用户
  * @请求头 `GET /user/self`
  */
 const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/user/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -353,7 +970,7 @@ const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
 }
 
 /**
- * 接口 获取当前登录账号信息 的 **请求函数**
+ * 接口 获取当前登录用户信息 的 **请求函数**
  *
  * @分类 用户
  * @请求头 `GET /user/self`
@@ -365,7 +982,7 @@ export const getUserSelf = /*#__PURE__*/ (requestData?: GetUserSelfRequest, ...a
 getUserSelf.requestConfig = getUserSelfRequestConfig
 
 /**
- * 接口 获取账号信息 的 **请求类型**
+ * 接口 获取用户信息 的 **请求类型**
  *
  * @分类 用户
  * @请求头 `GET /user/{id}`
@@ -378,7 +995,7 @@ export interface GetUserIdRequest {
 }
 
 /**
- * 接口 获取账号信息 的 **返回类型**
+ * 接口 获取用户信息 的 **返回类型**
  *
  * @分类 用户
  * @请求头 `GET /user/{id}`
@@ -389,21 +1006,45 @@ export interface GetUserIdResponse {
    */
   id: number
   /**
-   * 用户编号
+   * 账号id
    */
-  no: string
+  accountId: number
   /**
-   * 昵称
+   * 姓名
    */
   name: string
+  /**
+   * 手机号
+   */
+  phone: string
   /**
    * 头像
    */
   avatar?: string
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 角色id
+   */
+  roleId: number
+  /**
+   * 角色名称
+   */
+  roleName: string
+  /**
+   * 是否为超级管理员
+   */
+  isAdmin: boolean
+  /**
+   * 权限点
+   */
+  auth: number[]
 }
 
 /**
- * 接口 获取账号信息 的 **请求配置的类型**
+ * 接口 获取用户信息 的 **请求配置的类型**
  *
  * @分类 用户
  * @请求头 `GET /user/{id}`
@@ -413,21 +1054,21 @@ type GetUserIdRequestConfig = Readonly<
 >
 
 /**
- * 接口 获取账号信息 的 **请求配置**
+ * 接口 获取用户信息 的 **请求配置**
  *
  * @分类 用户
  * @请求头 `GET /user/{id}`
  */
 const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/user/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -439,7 +1080,7 @@ const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
 }
 
 /**
- * 接口 获取账号信息 的 **请求函数**
+ * 接口 获取用户信息 的 **请求函数**
  *
  * @分类 用户
  * @请求头 `GET /user/{id}`
@@ -450,799 +1091,146 @@ export const getUserId = /*#__PURE__*/ (requestData: GetUserIdRequest, ...args: 
 
 getUserId.requestConfig = getUserIdRequestConfig
 
-const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_2 = '' as any
-const prodUrl_0_0_0_2 = '' as any
-const dataKey_0_0_0_2 = 'data' as any
-
-/**
- * 接口 获取组织列表 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `GET /organization`
- */
-export interface GetOrganizationRequest {}
-
-/**
- * 接口 获取组织列表 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `GET /organization`
- */
-export type GetOrganizationResponse = {
-  /**
-   * 组织id
-   */
-  id: number
-  /**
-   * 组织名称
-   */
-  name: string
-  /**
-   * 是否为默认组织
-   */
-  isDefault: number
-}[]
-
-/**
- * 接口 获取组织列表 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `GET /organization`
- */
-type GetOrganizationRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization', 'data', string, string, true>
->
-
-/**
- * 接口 获取组织列表 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `GET /organization`
- */
-const getOrganizationRequestConfig: GetOrganizationRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrganization',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 获取组织列表 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `GET /organization`
- */
-export const getOrganization = /*#__PURE__*/ (requestData?: GetOrganizationRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOrganizationResponse>(prepare(getOrganizationRequestConfig, requestData), ...args)
-}
-
-getOrganization.requestConfig = getOrganizationRequestConfig
-
-/**
- * 接口 创建组织 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `POST /organization`
- */
-export interface PostOrganizationRequest {
-  /**
-   * 组织名称
-   */
-  name: string
-}
-
-/**
- * 接口 创建组织 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `POST /organization`
- */
-export interface PostOrganizationResponse {}
-
-/**
- * 接口 创建组织 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `POST /organization`
- */
-type PostOrganizationRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization', 'data', string, string, false>
->
-
-/**
- * 接口 创建组织 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `POST /organization`
- */
-const postOrganizationRequestConfig: PostOrganizationRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrganization',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 创建组织 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `POST /organization`
- */
-export const postOrganization = /*#__PURE__*/ (requestData: PostOrganizationRequest, ...args: UserRequestRestArgs) => {
-  return request<PostOrganizationResponse>(prepare(postOrganizationRequestConfig, requestData), ...args)
-}
-
-postOrganization.requestConfig = postOrganizationRequestConfig
-
-/**
- * 接口 更新组织 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `PUT /organization`
- */
-export interface PutOrganizationRequest {
-  /**
-   * 组织id
-   */
-  id: number
-  /**
-   * 组织名称
-   */
-  name: string
-}
-
-/**
- * 接口 更新组织 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `PUT /organization`
- */
-export type PutOrganizationResponse = any
-
-/**
- * 接口 更新组织 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `PUT /organization`
- */
-type PutOrganizationRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization', 'data', string, string, false>
->
-
-/**
- * 接口 更新组织 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `PUT /organization`
- */
-const putOrganizationRequestConfig: PutOrganizationRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putOrganization',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 更新组织 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `PUT /organization`
- */
-export const putOrganization = /*#__PURE__*/ (requestData: PutOrganizationRequest, ...args: UserRequestRestArgs) => {
-  return request<PutOrganizationResponse>(prepare(putOrganizationRequestConfig, requestData), ...args)
-}
-
-putOrganization.requestConfig = putOrganizationRequestConfig
-
-/**
- * 接口 获取组织详情 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `GET /organization/{id}`
- */
-export interface GetOrganizationIdRequest {
-  /**
-   * 组织id
-   */
-  id: string
-}
-
-/**
- * 接口 获取组织详情 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `GET /organization/{id}`
- */
-export interface GetOrganizationIdResponse {
-  /**
-   * id
-   */
-  id: number
-  /**
-   * 组织名称
-   */
-  name: string
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 房间数量
-   */
-  roomCount: number
-  /**
-   * 物品数量
-   */
-  belongingsCount: number
-  /**
-   * 组织内的用户列表
-   */
-  members: {
-    /**
-     * 用户id
-     */
-    id: number
-    /**
-     * 用户名称
-     */
-    name: string
-    /**
-     * 用户头像
-     */
-    avatar?: string
-    /**
-     * 角色id
-     */
-    roleId: number
-  }[]
-}
-
-/**
- * 接口 获取组织详情 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `GET /organization/{id}`
- */
-type GetOrganizationIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 获取组织详情 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `GET /organization/{id}`
- */
-const getOrganizationIdRequestConfig: GetOrganizationIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization/{id}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrganizationId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 获取组织详情 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `GET /organization/{id}`
- */
-export const getOrganizationId = /*#__PURE__*/ (
-  requestData: GetOrganizationIdRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetOrganizationIdResponse>(prepare(getOrganizationIdRequestConfig, requestData), ...args)
-}
-
-getOrganizationId.requestConfig = getOrganizationIdRequestConfig
-
-/**
- * 接口 删除组织 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{id}`
- */
-export interface DeleteOrganizationIdRequest {
-  /**
-   * 组织id
-   */
-  id: string
-}
-
-/**
- * 接口 删除组织 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{id}`
- */
-export type DeleteOrganizationIdResponse = any
-
-/**
- * 接口 删除组织 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{id}`
- */
-type DeleteOrganizationIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 删除组织 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{id}`
- */
-const deleteOrganizationIdRequestConfig: DeleteOrganizationIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization/{id}',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteOrganizationId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 删除组织 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{id}`
- */
-export const deleteOrganizationId = /*#__PURE__*/ (
-  requestData: DeleteOrganizationIdRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<DeleteOrganizationIdResponse>(prepare(deleteOrganizationIdRequestConfig, requestData), ...args)
-}
-
-deleteOrganizationId.requestConfig = deleteOrganizationIdRequestConfig
-
-/**
- * 接口 切换默认组织 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `PUT /organization/change`
- */
-export interface PutOrganizationChangeRequest {
-  /**
-   * 组织id
-   */
-  id: number
-}
-
-/**
- * 接口 切换默认组织 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `PUT /organization/change`
- */
-export type PutOrganizationChangeResponse = any
-
-/**
- * 接口 切换默认组织 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `PUT /organization/change`
- */
-type PutOrganizationChangeRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization/change', 'data', string, string, false>
->
-
-/**
- * 接口 切换默认组织 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `PUT /organization/change`
- */
-const putOrganizationChangeRequestConfig: PutOrganizationChangeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization/change',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putOrganizationChange',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 切换默认组织 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `PUT /organization/change`
- */
-export const putOrganizationChange = /*#__PURE__*/ (
-  requestData: PutOrganizationChangeRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PutOrganizationChangeResponse>(prepare(putOrganizationChangeRequestConfig, requestData), ...args)
-}
-
-putOrganizationChange.requestConfig = putOrganizationChangeRequestConfig
-
-/**
- * 接口 加入组织 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `POST /organization/join`
- */
-export interface PostOrganizationJoinRequest {
-  /**
-   * 组织id
-   */
-  orgId: number
-}
-
-/**
- * 接口 加入组织 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `POST /organization/join`
- */
-export type PostOrganizationJoinResponse = any
-
-/**
- * 接口 加入组织 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `POST /organization/join`
- */
-type PostOrganizationJoinRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/organization/join', 'data', string, string, false>
->
-
-/**
- * 接口 加入组织 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `POST /organization/join`
- */
-const postOrganizationJoinRequestConfig: PostOrganizationJoinRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/organization/join',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrganizationJoin',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 加入组织 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `POST /organization/join`
- */
-export const postOrganizationJoin = /*#__PURE__*/ (
-  requestData: PostOrganizationJoinRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrganizationJoinResponse>(prepare(postOrganizationJoinRequestConfig, requestData), ...args)
-}
-
-postOrganizationJoin.requestConfig = postOrganizationJoinRequestConfig
-
-/**
- * 接口 移除组织中的成员 的 **请求类型**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{orgId}/member/{memberId}`
- */
-export interface DeleteOrganizationOrgIdMemberMemberIdRequest {
-  /**
-   * 要移除的用户id
-   */
-  memberId: string
-  /**
-   * 组织id
-   */
-  orgId: string
-}
-
-/**
- * 接口 移除组织中的成员 的 **返回类型**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{orgId}/member/{memberId}`
- */
-export type DeleteOrganizationOrgIdMemberMemberIdResponse = any
-
-/**
- * 接口 移除组织中的成员 的 **请求配置的类型**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{orgId}/member/{memberId}`
- */
-type DeleteOrganizationOrgIdMemberMemberIdRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/organization/{orgId}/member/{memberId}',
-    'data',
-    'memberId' | 'orgId',
-    string,
-    false
-  >
->
-
-/**
- * 接口 移除组织中的成员 的 **请求配置**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{orgId}/member/{memberId}`
- */
-const deleteOrganizationOrgIdMemberMemberIdRequestConfig: DeleteOrganizationOrgIdMemberMemberIdRequestConfig =
-  /*#__PURE__*/ {
-    mockUrl: mockUrl_0_0_0_2,
-    devUrl: devUrl_0_0_0_2,
-    prodUrl: prodUrl_0_0_0_2,
-    path: '/organization/{orgId}/member/{memberId}',
-    method: Method.DELETE,
-    requestHeaders: {},
-    requestBodyType: RequestBodyType.raw,
-    responseBodyType: ResponseBodyType.raw,
-    dataKey: dataKey_0_0_0_2,
-    paramNames: ['memberId', 'orgId'],
-    queryNames: [],
-    requestDataOptional: false,
-    requestDataJsonSchema: {},
-    responseDataJsonSchema: {},
-    requestFunctionName: 'deleteOrganizationOrgIdMemberMemberId',
-    queryStringArrayFormat: QueryStringArrayFormat.brackets,
-    extraInfo: {},
-  }
-
-/**
- * 接口 移除组织中的成员 的 **请求函数**
- *
- * @分类 组织
- * @请求头 `DELETE /organization/{orgId}/member/{memberId}`
- */
-export const deleteOrganizationOrgIdMemberMemberId = /*#__PURE__*/ (
-  requestData: DeleteOrganizationOrgIdMemberMemberIdRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<DeleteOrganizationOrgIdMemberMemberIdResponse>(
-    prepare(deleteOrganizationOrgIdMemberMemberIdRequestConfig, requestData),
-    ...args,
-  )
-}
-
-deleteOrganizationOrgIdMemberMemberId.requestConfig = deleteOrganizationOrgIdMemberMemberIdRequestConfig
-
 const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_3 = '' as any
 const prodUrl_0_0_0_3 = '' as any
 const dataKey_0_0_0_3 = 'data' as any
 
 /**
- * 接口 获取房间列表 的 **请求类型**
+ * 接口 获取账号列表 的 **请求类型**
  *
- * @分类 房间
- * @请求头 `GET /room`
+ * @分类 账号
+ * @请求头 `GET /account`
  */
-export interface GetRoomRequest {
-  /**
-   * 组织id
-   */
-  orgId: string
-}
+export interface GetAccountRequest {}
 
 /**
- * 接口 获取房间列表 的 **返回类型**
+ * 接口 获取账号列表 的 **返回类型**
  *
- * @分类 房间
- * @请求头 `GET /room`
+ * @分类 账号
+ * @请求头 `GET /account`
  */
-export type GetRoomResponse = {
+export interface GetAccountResponse {
   /**
-   * 房间id
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 账号id
    */
   id: number
   /**
-   * 房间名称
+   * 账号
    */
-  name: string
-  /**
-   * 物品列表
-   */
-  belongingsList: {
-    /**
-     * 物品id
-     */
-    id: number
-    /**
-     * 物品名称
-     */
-    name: string
-    /**
-     * 物品图片
-     */
-    pic: string
-  }[]
-}[]
+  account: string
+}
 
 /**
- * 接口 获取房间列表 的 **请求配置的类型**
+ * 接口 获取账号列表 的 **请求配置的类型**
  *
- * @分类 房间
- * @请求头 `GET /room`
+ * @分类 账号
+ * @请求头 `GET /account`
  */
-type GetRoomRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/room', 'data', string, 'orgId', false>
+type GetAccountRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account', 'data', string, string, true>
 >
 
 /**
- * 接口 获取房间列表 的 **请求配置**
+ * 接口 获取账号列表 的 **请求配置**
  *
- * @分类 房间
- * @请求头 `GET /room`
+ * @分类 账号
+ * @请求头 `GET /account`
  */
-const getRoomRequestConfig: GetRoomRequestConfig = /*#__PURE__*/ {
+const getAccountRequestConfig: GetAccountRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_3,
   devUrl: devUrl_0_0_0_3,
   prodUrl: prodUrl_0_0_0_3,
-  path: '/room',
+  path: '/account',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_3,
   paramNames: [],
-  queryNames: ['orgId'],
-  requestDataOptional: false,
+  queryNames: [],
+  requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getRoom',
+  requestFunctionName: 'getAccount',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取房间列表 的 **请求函数**
+ * 接口 获取账号列表 的 **请求函数**
  *
- * @分类 房间
- * @请求头 `GET /room`
+ * @分类 账号
+ * @请求头 `GET /account`
  */
-export const getRoom = /*#__PURE__*/ (requestData: GetRoomRequest, ...args: UserRequestRestArgs) => {
-  return request<GetRoomResponse>(prepare(getRoomRequestConfig, requestData), ...args)
+export const getAccount = /*#__PURE__*/ (requestData?: GetAccountRequest, ...args: UserRequestRestArgs) => {
+  return request<GetAccountResponse>(prepare(getAccountRequestConfig, requestData), ...args)
 }
 
-getRoom.requestConfig = getRoomRequestConfig
+getAccount.requestConfig = getAccountRequestConfig
 
 /**
- * 接口 创建房间 的 **请求类型**
+ * 接口 创建账号 的 **请求类型**
  *
- * @分类 房间
- * @请求头 `POST /room`
+ * @分类 账号
+ * @请求头 `POST /account`
  */
-export interface PostRoomRequest {
+export interface PostAccountRequest {
   /**
-   * 房间名称
+   * 账号
    */
-  name: string
+  account: string
   /**
-   * 组织id
+   * 密码（明文）
    */
-  orgId: number
+  password?: string
+  /**
+   * 盐值
+   */
+  salt?: string
+  /**
+   * 微信用户唯一标识
+   */
+  openid?: string
 }
 
 /**
- * 接口 创建房间 的 **返回类型**
+ * 接口 创建账号 的 **返回类型**
  *
- * @分类 房间
- * @请求头 `POST /room`
+ * @分类 账号
+ * @请求头 `POST /account`
  */
-export interface PostRoomResponse {}
+export type PostAccountResponse = number
 
 /**
- * 接口 创建房间 的 **请求配置的类型**
+ * 接口 创建账号 的 **请求配置的类型**
  *
- * @分类 房间
- * @请求头 `POST /room`
+ * @分类 账号
+ * @请求头 `POST /account`
  */
-type PostRoomRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/room', 'data', string, string, false>
+type PostAccountRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account', 'data', string, string, false>
 >
 
 /**
- * 接口 创建房间 的 **请求配置**
+ * 接口 创建账号 的 **请求配置**
  *
- * @分类 房间
- * @请求头 `POST /room`
+ * @分类 账号
+ * @请求头 `POST /account`
  */
-const postRoomRequestConfig: PostRoomRequestConfig = /*#__PURE__*/ {
+const postAccountRequestConfig: PostAccountRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_3,
   devUrl: devUrl_0_0_0_3,
   prodUrl: prodUrl_0_0_0_3,
-  path: '/room',
+  path: '/account',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -1253,55 +1241,112 @@ const postRoomRequestConfig: PostRoomRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postRoom',
+  requestFunctionName: 'postAccount',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 创建房间 的 **请求函数**
+ * 接口 创建账号 的 **请求函数**
  *
- * @分类 房间
- * @请求头 `POST /room`
+ * @分类 账号
+ * @请求头 `POST /account`
  */
-export const postRoom = /*#__PURE__*/ (requestData: PostRoomRequest, ...args: UserRequestRestArgs) => {
-  return request<PostRoomResponse>(prepare(postRoomRequestConfig, requestData), ...args)
+export const postAccount = /*#__PURE__*/ (requestData: PostAccountRequest, ...args: UserRequestRestArgs) => {
+  return request<PostAccountResponse>(prepare(postAccountRequestConfig, requestData), ...args)
 }
 
-postRoom.requestConfig = postRoomRequestConfig
+postAccount.requestConfig = postAccountRequestConfig
 
 /**
- * 接口 获取房间详情 的 **请求类型**
+ * 接口 删除账号 的 **请求类型**
  *
- * @分类 房间
- * @请求头 `GET /room/{id}`
+ * @分类 账号
+ * @请求头 `DELETE /account`
  */
-export interface GetRoomIdRequest {
+export interface DeleteAccountRequest {
   /**
-   * 房间id
+   * 账号id
    */
   id: string
 }
 
 /**
- * 接口 获取房间详情 的 **返回类型**
+ * 接口 删除账号 的 **返回类型**
  *
- * @分类 房间
- * @请求头 `GET /room/{id}`
+ * @分类 账号
+ * @请求头 `DELETE /account`
  */
-export interface GetRoomIdResponse {
+export type DeleteAccountResponse = any
+
+/**
+ * 接口 删除账号 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `DELETE /account`
+ */
+type DeleteAccountRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account', 'data', string, 'id', false>
+>
+
+/**
+ * 接口 删除账号 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `DELETE /account`
+ */
+const deleteAccountRequestConfig: DeleteAccountRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteAccount',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 删除账号 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `DELETE /account`
+ */
+export const deleteAccount = /*#__PURE__*/ (requestData: DeleteAccountRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteAccountResponse>(prepare(deleteAccountRequestConfig, requestData), ...args)
+}
+
+deleteAccount.requestConfig = deleteAccountRequestConfig
+
+/**
+ * 接口 获取账号信息 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/{id}`
+ */
+export interface GetAccountIdRequest {
   /**
-   * 房间id
+   * 账号id
    */
-  id: number
-  /**
-   * 房间名称
-   */
-  name: string
-  /**
-   * 组织id
-   */
-  orgId: number
+  id: string
+}
+
+/**
+ * 接口 获取账号信息 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/{id}`
+ */
+export interface GetAccountIdResponse {
   /**
    * 创建时间
    */
@@ -1310,29 +1355,37 @@ export interface GetRoomIdResponse {
    * 修改时间
    */
   updateTime: string
+  /**
+   * 账号id
+   */
+  id: number
+  /**
+   * 账号
+   */
+  account: string
 }
 
 /**
- * 接口 获取房间详情 的 **请求配置的类型**
+ * 接口 获取账号信息 的 **请求配置的类型**
  *
- * @分类 房间
- * @请求头 `GET /room/{id}`
+ * @分类 账号
+ * @请求头 `GET /account/{id}`
  */
-type GetRoomIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/room/{id}', 'data', 'id', string, false>
+type GetAccountIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/{id}', 'data', 'id', string, false>
 >
 
 /**
- * 接口 获取房间详情 的 **请求配置**
+ * 接口 获取账号信息 的 **请求配置**
  *
- * @分类 房间
- * @请求头 `GET /room/{id}`
+ * @分类 账号
+ * @请求头 `GET /account/{id}`
  */
-const getRoomIdRequestConfig: GetRoomIdRequestConfig = /*#__PURE__*/ {
+const getAccountIdRequestConfig: GetAccountIdRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_3,
   devUrl: devUrl_0_0_0_3,
   prodUrl: prodUrl_0_0_0_3,
-  path: '/room/{id}',
+  path: '/account/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
@@ -1343,168 +1396,99 @@ const getRoomIdRequestConfig: GetRoomIdRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getRoomId',
+  requestFunctionName: 'getAccountId',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取房间详情 的 **请求函数**
+ * 接口 获取账号信息 的 **请求函数**
  *
- * @分类 房间
- * @请求头 `GET /room/{id}`
+ * @分类 账号
+ * @请求头 `GET /account/{id}`
  */
-export const getRoomId = /*#__PURE__*/ (requestData: GetRoomIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetRoomIdResponse>(prepare(getRoomIdRequestConfig, requestData), ...args)
+export const getAccountId = /*#__PURE__*/ (requestData: GetAccountIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetAccountIdResponse>(prepare(getAccountIdRequestConfig, requestData), ...args)
 }
 
-getRoomId.requestConfig = getRoomIdRequestConfig
+getAccountId.requestConfig = getAccountIdRequestConfig
 
 /**
- * 接口 更新房间 的 **请求类型**
+ * 接口 登录 的 **请求类型**
  *
- * @分类 房间
- * @请求头 `PUT /room/{id}`
+ * @分类 账号
+ * @请求头 `POST /account/login`
  */
-export interface PutRoomIdRequest {
+export interface PostAccountLoginRequest {
   /**
-   * 房间名称
+   * 账号
    */
-  name: string
+  account: string
   /**
-   * 组织id
+   * 密码（密文）
    */
-  orgId: number
+  password: string
   /**
-   * 房间id
+   * 盐值
    */
-  id: string
+  salt: string
 }
 
 /**
- * 接口 更新房间 的 **返回类型**
+ * 接口 登录 的 **返回类型**
  *
- * @分类 房间
- * @请求头 `PUT /room/{id}`
+ * @分类 账号
+ * @请求头 `POST /account/login`
  */
-export type PutRoomIdResponse = any
+export type PostAccountLoginResponse = any
 
 /**
- * 接口 更新房间 的 **请求配置的类型**
+ * 接口 登录 的 **请求配置的类型**
  *
- * @分类 房间
- * @请求头 `PUT /room/{id}`
+ * @分类 账号
+ * @请求头 `POST /account/login`
  */
-type PutRoomIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/room/{id}', 'data', 'id', string, false>
+type PostAccountLoginRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login', 'data', string, string, false>
 >
 
 /**
- * 接口 更新房间 的 **请求配置**
+ * 接口 登录 的 **请求配置**
  *
- * @分类 房间
- * @请求头 `PUT /room/{id}`
+ * @分类 账号
+ * @请求头 `POST /account/login`
  */
-const putRoomIdRequestConfig: PutRoomIdRequestConfig = /*#__PURE__*/ {
+const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_3,
   devUrl: devUrl_0_0_0_3,
   prodUrl: prodUrl_0_0_0_3,
-  path: '/room/{id}',
-  method: Method.PUT,
+  path: '/account/login',
+  method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
   dataKey: dataKey_0_0_0_3,
-  paramNames: ['id'],
+  paramNames: [],
   queryNames: [],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putRoomId',
+  requestFunctionName: 'postAccountLogin',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 更新房间 的 **请求函数**
+ * 接口 登录 的 **请求函数**
  *
- * @分类 房间
- * @请求头 `PUT /room/{id}`
+ * @分类 账号
+ * @请求头 `POST /account/login`
  */
-export const putRoomId = /*#__PURE__*/ (requestData: PutRoomIdRequest, ...args: UserRequestRestArgs) => {
-  return request<PutRoomIdResponse>(prepare(putRoomIdRequestConfig, requestData), ...args)
+export const postAccountLogin = /*#__PURE__*/ (requestData: PostAccountLoginRequest, ...args: UserRequestRestArgs) => {
+  return request<PostAccountLoginResponse>(prepare(postAccountLoginRequestConfig, requestData), ...args)
 }
 
-putRoomId.requestConfig = putRoomIdRequestConfig
-
-/**
- * 接口 删除房间 的 **请求类型**
- *
- * @分类 房间
- * @请求头 `DELETE /room/{id}`
- */
-export interface DeleteRoomIdRequest {
-  /**
-   * 房间id
-   */
-  id: string
-}
-
-/**
- * 接口 删除房间 的 **返回类型**
- *
- * @分类 房间
- * @请求头 `DELETE /room/{id}`
- */
-export type DeleteRoomIdResponse = any
-
-/**
- * 接口 删除房间 的 **请求配置的类型**
- *
- * @分类 房间
- * @请求头 `DELETE /room/{id}`
- */
-type DeleteRoomIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/room/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 删除房间 的 **请求配置**
- *
- * @分类 房间
- * @请求头 `DELETE /room/{id}`
- */
-const deleteRoomIdRequestConfig: DeleteRoomIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/room/{id}',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteRoomId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 删除房间 的 **请求函数**
- *
- * @分类 房间
- * @请求头 `DELETE /room/{id}`
- */
-export const deleteRoomId = /*#__PURE__*/ (requestData: DeleteRoomIdRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteRoomIdResponse>(prepare(deleteRoomIdRequestConfig, requestData), ...args)
-}
-
-deleteRoomId.requestConfig = deleteRoomIdRequestConfig
+postAccountLogin.requestConfig = postAccountLoginRequestConfig
 
 const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_4 = '' as any
@@ -1512,49 +1496,20 @@ const prodUrl_0_0_0_4 = '' as any
 const dataKey_0_0_0_4 = 'data' as any
 
 /**
- * 接口 获取储物空间列表 的 **请求类型**
+ * 接口 获取角色列表 的 **请求类型**
  *
- * @分类 储物空间
- * @请求头 `GET /space`
+ * @分类 角色
+ * @请求头 `GET /role`
  */
-export interface GetSpaceRequest {
-  /**
-   * 房间id
-   */
-  roomId: string
-  /**
-   * 父级储物空间id
-   */
-  parentId?: string
-}
+export interface GetRoleRequest {}
 
 /**
- * 接口 获取储物空间列表 的 **返回类型**
+ * 接口 获取角色列表 的 **返回类型**
  *
- * @分类 储物空间
- * @请求头 `GET /space`
+ * @分类 角色
+ * @请求头 `GET /role`
  */
-export type GetSpaceResponse = {
-  /**
-   * 储物空间id
-   */
-  id: number
-  /**
-   * 储物空间名称
-   */
-  name: string
-  /**
-   * 父级储物空间id
-   */
-  parentId: number
-  /**
-   * 所属房间id
-   */
-  roomId: number
-  /**
-   * 备注
-   */
-  remark?: string
+export interface GetRoleResponse {
   /**
    * 创建时间
    */
@@ -1563,195 +1518,187 @@ export type GetSpaceResponse = {
    * 修改时间
    */
   updateTime: string
-}[]
+  /**
+   * 角色id
+   */
+  id: number
+  /**
+   * 角色
+   */
+  role: string
+}
 
 /**
- * 接口 获取储物空间列表 的 **请求配置的类型**
+ * 接口 获取角色列表 的 **请求配置的类型**
  *
- * @分类 储物空间
- * @请求头 `GET /space`
+ * @分类 角色
+ * @请求头 `GET /role`
  */
-type GetSpaceRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/space', 'data', string, 'roomId' | 'parentId', false>
+type GetRoleRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, string, true>
 >
 
 /**
- * 接口 获取储物空间列表 的 **请求配置**
+ * 接口 获取角色列表 的 **请求配置**
  *
- * @分类 储物空间
- * @请求头 `GET /space`
+ * @分类 角色
+ * @请求头 `GET /role`
  */
-const getSpaceRequestConfig: GetSpaceRequestConfig = /*#__PURE__*/ {
+const getRoleRequestConfig: GetRoleRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_4,
   devUrl: devUrl_0_0_0_4,
   prodUrl: prodUrl_0_0_0_4,
-  path: '/space',
+  path: '/role',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_4,
   paramNames: [],
-  queryNames: ['roomId', 'parentId'],
-  requestDataOptional: false,
+  queryNames: [],
+  requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getSpace',
+  requestFunctionName: 'getRole',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取储物空间列表 的 **请求函数**
+ * 接口 获取角色列表 的 **请求函数**
  *
- * @分类 储物空间
- * @请求头 `GET /space`
+ * @分类 角色
+ * @请求头 `GET /role`
  */
-export const getSpace = /*#__PURE__*/ (requestData: GetSpaceRequest, ...args: UserRequestRestArgs) => {
-  return request<GetSpaceResponse>(prepare(getSpaceRequestConfig, requestData), ...args)
+export const getRole = /*#__PURE__*/ (requestData?: GetRoleRequest, ...args: UserRequestRestArgs) => {
+  return request<GetRoleResponse>(prepare(getRoleRequestConfig, requestData), ...args)
 }
 
-getSpace.requestConfig = getSpaceRequestConfig
+getRole.requestConfig = getRoleRequestConfig
 
 /**
- * 接口 创建储物空间 的 **请求类型**
+ * 接口 创建角色 的 **请求类型**
  *
- * @分类 储物空间
- * @请求头 `POST /space`
+ * @分类 角色
+ * @请求头 `POST /role`
  */
-export interface PostSpaceRequest {
+export interface PostRoleRequest {
   /**
-   * 储物空间名称
+   * 角色名称
    */
   name: string
-  /**
-   * 房间id
-   */
-  roomId: number
-  /**
-   * 父级储物空间id
-   */
-  parentId?: number
-  /**
-   * 备注
-   */
-  remark?: string
 }
 
 /**
- * 接口 创建储物空间 的 **返回类型**
+ * 接口 创建角色 的 **返回类型**
  *
- * @分类 储物空间
- * @请求头 `POST /space`
+ * @分类 角色
+ * @请求头 `POST /role`
  */
-export interface PostSpaceResponse {}
+export type PostRoleResponse = any
 
 /**
- * 接口 创建储物空间 的 **请求配置的类型**
+ * 接口 创建角色 的 **请求配置的类型**
  *
- * @分类 储物空间
- * @请求头 `POST /space`
+ * @分类 角色
+ * @请求头 `POST /role`
  */
-type PostSpaceRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/space', 'data', string, string, false>
+type PostRoleRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, string, false>
 >
 
 /**
- * 接口 创建储物空间 的 **请求配置**
+ * 接口 创建角色 的 **请求配置**
  *
- * @分类 储物空间
- * @请求头 `POST /space`
+ * @分类 角色
+ * @请求头 `POST /role`
  */
-const postSpaceRequestConfig: PostSpaceRequestConfig = /*#__PURE__*/ {
+const postRoleRequestConfig: PostRoleRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_4,
   devUrl: devUrl_0_0_0_4,
   prodUrl: prodUrl_0_0_0_4,
-  path: '/space',
+  path: '/role',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
   dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postSpace',
+  requestFunctionName: 'postRole',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 创建储物空间 的 **请求函数**
+ * 接口 创建角色 的 **请求函数**
  *
- * @分类 储物空间
- * @请求头 `POST /space`
+ * @分类 角色
+ * @请求头 `POST /role`
  */
-export const postSpace = /*#__PURE__*/ (requestData: PostSpaceRequest, ...args: UserRequestRestArgs) => {
-  return request<PostSpaceResponse>(prepare(postSpaceRequestConfig, requestData), ...args)
+export const postRole = /*#__PURE__*/ (requestData: PostRoleRequest, ...args: UserRequestRestArgs) => {
+  return request<PostRoleResponse>(prepare(postRoleRequestConfig, requestData), ...args)
 }
 
-postSpace.requestConfig = postSpaceRequestConfig
+postRole.requestConfig = postRoleRequestConfig
 
 /**
- * 接口 更新储物空间 的 **请求类型**
+ * 接口 创建角色 的 **请求类型**
  *
- * @分类 储物空间
- * @请求头 `PUT /space`
+ * @分类 角色
+ * @请求头 `PUT /role`
  */
-export interface PutSpaceRequest {
+export interface PutRoleRequest {
   /**
-   * 储物空间id
+   * 角色id
    */
   id: number
   /**
-   * 储物空间名称
+   * 角色
    */
-  name?: string
+  role: string
   /**
-   * 房间id
+   * 密码（明文）
    */
-  roomId?: number
+  password: string
   /**
-   * 父级储物空间id
+   * 微信用户唯一标识
    */
-  parentId?: number
-  /**
-   * 备注
-   */
-  remark?: string
+  openid?: string
 }
 
 /**
- * 接口 更新储物空间 的 **返回类型**
+ * 接口 创建角色 的 **返回类型**
  *
- * @分类 储物空间
- * @请求头 `PUT /space`
+ * @分类 角色
+ * @请求头 `PUT /role`
  */
-export type PutSpaceResponse = any
+export type PutRoleResponse = any
 
 /**
- * 接口 更新储物空间 的 **请求配置的类型**
+ * 接口 创建角色 的 **请求配置的类型**
  *
- * @分类 储物空间
- * @请求头 `PUT /space`
+ * @分类 角色
+ * @请求头 `PUT /role`
  */
-type PutSpaceRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/space', 'data', string, string, false>
+type PutRoleRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, string, false>
 >
 
 /**
- * 接口 更新储物空间 的 **请求配置**
+ * 接口 创建角色 的 **请求配置**
  *
- * @分类 储物空间
- * @请求头 `PUT /space`
+ * @分类 角色
+ * @请求头 `PUT /role`
  */
-const putSpaceRequestConfig: PutSpaceRequestConfig = /*#__PURE__*/ {
+const putRoleRequestConfig: PutRoleRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_4,
   devUrl: devUrl_0_0_0_4,
   prodUrl: prodUrl_0_0_0_4,
-  path: '/space',
+  path: '/role',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -1762,63 +1709,112 @@ const putSpaceRequestConfig: PutSpaceRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putSpace',
+  requestFunctionName: 'putRole',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 更新储物空间 的 **请求函数**
+ * 接口 创建角色 的 **请求函数**
  *
- * @分类 储物空间
- * @请求头 `PUT /space`
+ * @分类 角色
+ * @请求头 `PUT /role`
  */
-export const putSpace = /*#__PURE__*/ (requestData: PutSpaceRequest, ...args: UserRequestRestArgs) => {
-  return request<PutSpaceResponse>(prepare(putSpaceRequestConfig, requestData), ...args)
+export const putRole = /*#__PURE__*/ (requestData: PutRoleRequest, ...args: UserRequestRestArgs) => {
+  return request<PutRoleResponse>(prepare(putRoleRequestConfig, requestData), ...args)
 }
 
-putSpace.requestConfig = putSpaceRequestConfig
+putRole.requestConfig = putRoleRequestConfig
 
 /**
- * 接口 获取储物空间列表 的 **请求类型**
+ * 接口 删除角色 的 **请求类型**
  *
- * @分类 储物空间
- * @请求头 `GET /space/ids`
+ * @分类 角色
+ * @请求头 `DELETE /role`
  */
-export interface GetSpaceIdsRequest {
+export interface DeleteRoleRequest {
   /**
-   * 空间id，用 `,` 分割
+   * 角色id
    */
-  ids: string
+  id: string
 }
 
 /**
- * 接口 获取储物空间列表 的 **返回类型**
+ * 接口 删除角色 的 **返回类型**
  *
- * @分类 储物空间
- * @请求头 `GET /space/ids`
+ * @分类 角色
+ * @请求头 `DELETE /role`
  */
-export type GetSpaceIdsResponse = {
+export type DeleteRoleResponse = any
+
+/**
+ * 接口 删除角色 的 **请求配置的类型**
+ *
+ * @分类 角色
+ * @请求头 `DELETE /role`
+ */
+type DeleteRoleRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, 'id', false>
+>
+
+/**
+ * 接口 删除角色 的 **请求配置**
+ *
+ * @分类 角色
+ * @请求头 `DELETE /role`
+ */
+const deleteRoleRequestConfig: DeleteRoleRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/role',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteRole',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 删除角色 的 **请求函数**
+ *
+ * @分类 角色
+ * @请求头 `DELETE /role`
+ */
+export const deleteRole = /*#__PURE__*/ (requestData: DeleteRoleRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteRoleResponse>(prepare(deleteRoleRequestConfig, requestData), ...args)
+}
+
+deleteRole.requestConfig = deleteRoleRequestConfig
+
+/**
+ * 接口 获取角色信息 的 **请求类型**
+ *
+ * @分类 角色
+ * @请求头 `GET /role/{id}`
+ */
+export interface GetRoleIdRequest {
   /**
-   * 储物空间id
+   * 角色id
    */
-  id: number
-  /**
-   * 储物空间名称
-   */
-  name: string
-  /**
-   * 父级储物空间id
-   */
-  parentId: number
-  /**
-   * 所属房间id
-   */
-  roomId: number
-  /**
-   * 备注
-   */
-  remark?: string
+  id: string
+}
+
+/**
+ * 接口 获取角色信息 的 **返回类型**
+ *
+ * @分类 角色
+ * @请求头 `GET /role/{id}`
+ */
+export interface GetRoleIdResponse {
   /**
    * 创建时间
    */
@@ -1827,127 +1823,37 @@ export type GetSpaceIdsResponse = {
    * 修改时间
    */
   updateTime: string
-}[]
-
-/**
- * 接口 获取储物空间列表 的 **请求配置的类型**
- *
- * @分类 储物空间
- * @请求头 `GET /space/ids`
- */
-type GetSpaceIdsRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/space/ids', 'data', string, 'ids', false>
->
-
-/**
- * 接口 获取储物空间列表 的 **请求配置**
- *
- * @分类 储物空间
- * @请求头 `GET /space/ids`
- */
-const getSpaceIdsRequestConfig: GetSpaceIdsRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
-  path: '/space/ids',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
-  paramNames: [],
-  queryNames: ['ids'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getSpaceIds',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 获取储物空间列表 的 **请求函数**
- *
- * @分类 储物空间
- * @请求头 `GET /space/ids`
- */
-export const getSpaceIds = /*#__PURE__*/ (requestData: GetSpaceIdsRequest, ...args: UserRequestRestArgs) => {
-  return request<GetSpaceIdsResponse>(prepare(getSpaceIdsRequestConfig, requestData), ...args)
-}
-
-getSpaceIds.requestConfig = getSpaceIdsRequestConfig
-
-/**
- * 接口 获取空间详情 的 **请求类型**
- *
- * @分类 储物空间
- * @请求头 `GET /space/{id}`
- */
-export interface GetSpaceIdRequest {
   /**
-   * 空间id
-   */
-  id: string
-}
-
-/**
- * 接口 获取空间详情 的 **返回类型**
- *
- * @分类 储物空间
- * @请求头 `GET /space/{id}`
- */
-export interface GetSpaceIdResponse {
-  /**
-   * id
+   * 角色id
    */
   id: number
   /**
-   * 储物空间名称
+   * 角色
    */
-  name: string
-  /**
-   * 父id
-   */
-  parentId: number
-  /**
-   * 房间id
-   */
-  roomId: number
-  /**
-   * 备注
-   */
-  remark?: string
-  /**
-   * 创建时间
-   */
-  createTime?: string
-  /**
-   * 修改时间
-   */
-  updateTime?: string
+  role: string
 }
 
 /**
- * 接口 获取空间详情 的 **请求配置的类型**
+ * 接口 获取角色信息 的 **请求配置的类型**
  *
- * @分类 储物空间
- * @请求头 `GET /space/{id}`
+ * @分类 角色
+ * @请求头 `GET /role/{id}`
  */
-type GetSpaceIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/space/{id}', 'data', 'id', string, false>
+type GetRoleIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role/{id}', 'data', 'id', string, false>
 >
 
 /**
- * 接口 获取空间详情 的 **请求配置**
+ * 接口 获取角色信息 的 **请求配置**
  *
- * @分类 储物空间
- * @请求头 `GET /space/{id}`
+ * @分类 角色
+ * @请求头 `GET /role/{id}`
  */
-const getSpaceIdRequestConfig: GetSpaceIdRequestConfig = /*#__PURE__*/ {
+const getRoleIdRequestConfig: GetRoleIdRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_4,
   devUrl: devUrl_0_0_0_4,
   prodUrl: prodUrl_0_0_0_4,
-  path: '/space/{id}',
+  path: '/role/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
@@ -1958,91 +1864,22 @@ const getSpaceIdRequestConfig: GetSpaceIdRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getSpaceId',
+  requestFunctionName: 'getRoleId',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取空间详情 的 **请求函数**
+ * 接口 获取角色信息 的 **请求函数**
  *
- * @分类 储物空间
- * @请求头 `GET /space/{id}`
+ * @分类 角色
+ * @请求头 `GET /role/{id}`
  */
-export const getSpaceId = /*#__PURE__*/ (requestData: GetSpaceIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetSpaceIdResponse>(prepare(getSpaceIdRequestConfig, requestData), ...args)
+export const getRoleId = /*#__PURE__*/ (requestData: GetRoleIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetRoleIdResponse>(prepare(getRoleIdRequestConfig, requestData), ...args)
 }
 
-getSpaceId.requestConfig = getSpaceIdRequestConfig
-
-/**
- * 接口 删除物品 的 **请求类型**
- *
- * @分类 储物空间
- * @请求头 `DELETE /space/{id}`
- */
-export interface DeleteSpaceIdRequest {
-  /**
-   * 空间id
-   */
-  id: string
-}
-
-/**
- * 接口 删除物品 的 **返回类型**
- *
- * @分类 储物空间
- * @请求头 `DELETE /space/{id}`
- */
-export type DeleteSpaceIdResponse = any
-
-/**
- * 接口 删除物品 的 **请求配置的类型**
- *
- * @分类 储物空间
- * @请求头 `DELETE /space/{id}`
- */
-type DeleteSpaceIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/space/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 删除物品 的 **请求配置**
- *
- * @分类 储物空间
- * @请求头 `DELETE /space/{id}`
- */
-const deleteSpaceIdRequestConfig: DeleteSpaceIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
-  path: '/space/{id}',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_4,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteSpaceId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 删除物品 的 **请求函数**
- *
- * @分类 储物空间
- * @请求头 `DELETE /space/{id}`
- */
-export const deleteSpaceId = /*#__PURE__*/ (requestData: DeleteSpaceIdRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteSpaceIdResponse>(prepare(deleteSpaceIdRequestConfig, requestData), ...args)
-}
-
-deleteSpaceId.requestConfig = deleteSpaceIdRequestConfig
+getRoleId.requestConfig = getRoleIdRequestConfig
 
 const mockUrl_0_0_0_5 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_5 = '' as any
@@ -2050,85 +1887,20 @@ const prodUrl_0_0_0_5 = '' as any
 const dataKey_0_0_0_5 = 'data' as any
 
 /**
- * 接口 获取物品列表 的 **请求类型**
+ * 接口 获取地址列表 的 **请求类型**
  *
- * @分类 物品
- * @请求头 `GET /belongings`
+ * @分类 地址
+ * @请求头 `GET /address`
  */
-export interface GetBelongingsRequest {
-  /**
-   * 组织id
-   */
-  orgId: string
-  /**
-   * 用户id
-   */
-  userId?: string
-  /**
-   * 物品名称
-   */
-  name?: string
-  /**
-   * 房间id
-   */
-  roomId?: string
-  /**
-   * 储物空间id
-   */
-  spaceId?: string
-  /**
-   * 过期状态，0:未过期 1:即将过期 2:已过期
-   */
-  expirationStatus?: string
-}
+export interface GetAddressRequest {}
 
 /**
- * 接口 获取物品列表 的 **返回类型**
+ * 接口 获取地址列表 的 **返回类型**
  *
- * @分类 物品
- * @请求头 `GET /belongings`
+ * @分类 地址
+ * @请求头 `GET /address`
  */
-export type GetBelongingsResponse = {
-  /**
-   * id
-   */
-  id: number
-  /**
-   * 物品名称
-   */
-  name: string
-  /**
-   * 物品描述
-   */
-  desc?: string
-  /**
-   * 物品数量
-   */
-  count: number
-  /**
-   * 物品图片
-   */
-  pic?: string
-  /**
-   * 组织id
-   */
-  orgId: number
-  /**
-   * 用户id
-   */
-  userId: number
-  /**
-   * 空间id
-   */
-  spaceId: number
-  /**
-   * 空间路径
-   */
-  spacePath: string
-  /**
-   * 过期时间
-   */
-  expirationDate: string
+export type GetAddressResponse = {
   /**
    * 创建时间
    */
@@ -2137,131 +1909,134 @@ export type GetBelongingsResponse = {
    * 修改时间
    */
   updateTime: string
+  /**
+   * 地址id
+   */
+  id: number
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 省
+   */
+  province: string
+  /**
+   * 市
+   */
+  city: string
+  /**
+   * 区
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
 }[]
 
 /**
- * 接口 获取物品列表 的 **请求配置的类型**
+ * 接口 获取地址列表 的 **请求配置的类型**
  *
- * @分类 物品
- * @请求头 `GET /belongings`
+ * @分类 地址
+ * @请求头 `GET /address`
  */
-type GetBelongingsRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/belongings',
-    'data',
-    string,
-    'orgId' | 'userId' | 'name' | 'roomId' | 'spaceId' | 'expirationStatus',
-    false
-  >
+type GetAddressRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address', 'data', string, string, true>
 >
 
 /**
- * 接口 获取物品列表 的 **请求配置**
+ * 接口 获取地址列表 的 **请求配置**
  *
- * @分类 物品
- * @请求头 `GET /belongings`
+ * @分类 地址
+ * @请求头 `GET /address`
  */
-const getBelongingsRequestConfig: GetBelongingsRequestConfig = /*#__PURE__*/ {
+const getAddressRequestConfig: GetAddressRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_5,
   devUrl: devUrl_0_0_0_5,
   prodUrl: prodUrl_0_0_0_5,
-  path: '/belongings',
+  path: '/address',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_5,
   paramNames: [],
-  queryNames: ['orgId', 'userId', 'name', 'roomId', 'spaceId', 'expirationStatus'],
-  requestDataOptional: false,
+  queryNames: [],
+  requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getBelongings',
+  requestFunctionName: 'getAddress',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取物品列表 的 **请求函数**
+ * 接口 获取地址列表 的 **请求函数**
  *
- * @分类 物品
- * @请求头 `GET /belongings`
+ * @分类 地址
+ * @请求头 `GET /address`
  */
-export const getBelongings = /*#__PURE__*/ (requestData: GetBelongingsRequest, ...args: UserRequestRestArgs) => {
-  return request<GetBelongingsResponse>(prepare(getBelongingsRequestConfig, requestData), ...args)
+export const getAddress = /*#__PURE__*/ (requestData?: GetAddressRequest, ...args: UserRequestRestArgs) => {
+  return request<GetAddressResponse>(prepare(getAddressRequestConfig, requestData), ...args)
 }
 
-getBelongings.requestConfig = getBelongingsRequestConfig
+getAddress.requestConfig = getAddressRequestConfig
 
 /**
- * 接口 创建物品 的 **请求类型**
+ * 接口 创建地址 的 **请求类型**
  *
- * @分类 物品
- * @请求头 `POST /belongings`
+ * @分类 地址
+ * @请求头 `POST /address`
  */
-export interface PostBelongingsRequest {
+export interface PostAddressRequest {
   /**
-   * 物品名称
+   * 省编码
    */
-  name: string
+  province: string
   /**
-   * 物品描述
+   * 市编码
    */
-  desc?: string
+  city: string
   /**
-   * 物品数量
+   * 区编码
    */
-  count: number
+  area: string
   /**
-   * 物品图片
+   * 地址
    */
-  pic?: string
-  /**
-   * 组织id
-   */
-  orgId: number
-  /**
-   * 空间路径
-   */
-  spacePath: string
-  /**
-   * 过期时间
-   */
-  expirationDate?: string
+  address: string
 }
 
 /**
- * 接口 创建物品 的 **返回类型**
+ * 接口 创建地址 的 **返回类型**
  *
- * @分类 物品
- * @请求头 `POST /belongings`
+ * @分类 地址
+ * @请求头 `POST /address`
  */
-export interface PostBelongingsResponse {}
+export type PostAddressResponse = number
 
 /**
- * 接口 创建物品 的 **请求配置的类型**
+ * 接口 创建地址 的 **请求配置的类型**
  *
- * @分类 物品
- * @请求头 `POST /belongings`
+ * @分类 地址
+ * @请求头 `POST /address`
  */
-type PostBelongingsRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/belongings', 'data', string, string, false>
+type PostAddressRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address', 'data', string, string, false>
 >
 
 /**
- * 接口 创建物品 的 **请求配置**
+ * 接口 创建地址 的 **请求配置**
  *
- * @分类 物品
- * @请求头 `POST /belongings`
+ * @分类 地址
+ * @请求头 `POST /address`
  */
-const postBelongingsRequestConfig: PostBelongingsRequestConfig = /*#__PURE__*/ {
+const postAddressRequestConfig: PostAddressRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_5,
   devUrl: devUrl_0_0_0_5,
   prodUrl: prodUrl_0_0_0_5,
-  path: '/belongings',
+  path: '/address',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -2272,93 +2047,81 @@ const postBelongingsRequestConfig: PostBelongingsRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postBelongings',
+  requestFunctionName: 'postAddress',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 创建物品 的 **请求函数**
+ * 接口 创建地址 的 **请求函数**
  *
- * @分类 物品
- * @请求头 `POST /belongings`
+ * @分类 地址
+ * @请求头 `POST /address`
  */
-export const postBelongings = /*#__PURE__*/ (requestData: PostBelongingsRequest, ...args: UserRequestRestArgs) => {
-  return request<PostBelongingsResponse>(prepare(postBelongingsRequestConfig, requestData), ...args)
+export const postAddress = /*#__PURE__*/ (requestData: PostAddressRequest, ...args: UserRequestRestArgs) => {
+  return request<PostAddressResponse>(prepare(postAddressRequestConfig, requestData), ...args)
 }
 
-postBelongings.requestConfig = postBelongingsRequestConfig
+postAddress.requestConfig = postAddressRequestConfig
 
 /**
- * 接口 更新物品 的 **请求类型**
+ * 接口 更新地址 的 **请求类型**
  *
- * @分类 物品
- * @请求头 `PUT /belongings`
+ * @分类 地址
+ * @请求头 `PUT /address`
  */
-export interface PutBelongingsRequest {
+export interface PutAddressRequest {
   /**
-   * 物品id
+   * 地址id
    */
   id: number
   /**
-   * 物品名称
+   * 省编码
    */
-  name: string
+  province?: string
   /**
-   * 物品描述
+   * 市编码
    */
-  desc?: string
+  city?: string
   /**
-   * 物品数量
+   * 区编码
    */
-  count: number
+  area?: string
   /**
-   * 物品图片
+   * 地址
    */
-  pic?: string
-  /**
-   * 组织id
-   */
-  orgId: number
-  /**
-   * 空间路径
-   */
-  spacePath: string
-  /**
-   * 过期时间
-   */
-  expirationDate?: string
+  address?: string
 }
 
 /**
- * 接口 更新物品 的 **返回类型**
+ * 接口 更新地址 的 **返回类型**
  *
- * @分类 物品
- * @请求头 `PUT /belongings`
+ * @分类 地址
+ * @请求头 `PUT /address`
  */
-export type PutBelongingsResponse = any
+export type PutAddressResponse = any
 
 /**
- * 接口 更新物品 的 **请求配置的类型**
+ * 接口 更新地址 的 **请求配置的类型**
  *
- * @分类 物品
- * @请求头 `PUT /belongings`
+ * @分类 地址
+ * @请求头 `PUT /address`
  */
-type PutBelongingsRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/belongings', 'data', string, string, false>
+type PutAddressRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address', 'data', string, string, false>
 >
 
 /**
- * 接口 更新物品 的 **请求配置**
+ * 接口 更新地址 的 **请求配置**
  *
- * @分类 物品
- * @请求头 `PUT /belongings`
+ * @分类 地址
+ * @请求头 `PUT /address`
  */
-const putBelongingsRequestConfig: PutBelongingsRequestConfig = /*#__PURE__*/ {
+const putAddressRequestConfig: PutAddressRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_5,
   devUrl: devUrl_0_0_0_5,
   prodUrl: prodUrl_0_0_0_5,
-  path: '/belongings',
+  path: '/address',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -2369,83 +2132,43 @@ const putBelongingsRequestConfig: PutBelongingsRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putBelongings',
+  requestFunctionName: 'putAddress',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 更新物品 的 **请求函数**
+ * 接口 更新地址 的 **请求函数**
  *
- * @分类 物品
- * @请求头 `PUT /belongings`
+ * @分类 地址
+ * @请求头 `PUT /address`
  */
-export const putBelongings = /*#__PURE__*/ (requestData: PutBelongingsRequest, ...args: UserRequestRestArgs) => {
-  return request<PutBelongingsResponse>(prepare(putBelongingsRequestConfig, requestData), ...args)
+export const putAddress = /*#__PURE__*/ (requestData: PutAddressRequest, ...args: UserRequestRestArgs) => {
+  return request<PutAddressResponse>(prepare(putAddressRequestConfig, requestData), ...args)
 }
 
-putBelongings.requestConfig = putBelongingsRequestConfig
+putAddress.requestConfig = putAddressRequestConfig
 
 /**
- * 接口 获取物品详情 的 **请求类型**
+ * 接口 获取地址信息 的 **请求类型**
  *
- * @分类 物品
- * @请求头 `GET /belongings/{id}`
+ * @分类 地址
+ * @请求头 `GET /address/{id}`
  */
-export interface GetBelongingsIdRequest {
+export interface GetAddressIdRequest {
   /**
-   * 物品id
+   * 地址id
    */
   id: string
 }
 
 /**
- * 接口 获取物品详情 的 **返回类型**
+ * 接口 获取地址信息 的 **返回类型**
  *
- * @分类 物品
- * @请求头 `GET /belongings/{id}`
+ * @分类 地址
+ * @请求头 `GET /address/{id}`
  */
-export interface GetBelongingsIdResponse {
-  /**
-   * id
-   */
-  id: number
-  /**
-   * 物品名称
-   */
-  name: string
-  /**
-   * 物品描述
-   */
-  desc?: string
-  /**
-   * 物品数量
-   */
-  count: number
-  /**
-   * 物品图片
-   */
-  pic?: string
-  /**
-   * 组织id
-   */
-  orgId: number
-  /**
-   * 用户id
-   */
-  userId: number
-  /**
-   * 空间id
-   */
-  spaceId: number
-  /**
-   * 空间路径
-   */
-  spacePath: string
-  /**
-   * 过期时间
-   */
-  expirationDate: string
+export interface GetAddressIdResponse {
   /**
    * 创建时间
    */
@@ -2455,32 +2178,52 @@ export interface GetBelongingsIdResponse {
    */
   updateTime: string
   /**
-   * 房间id
+   * 地址id
    */
-  roomId: number
+  id: number
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 省
+   */
+  province: string
+  /**
+   * 市
+   */
+  city: string
+  /**
+   * 区
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
 }
 
 /**
- * 接口 获取物品详情 的 **请求配置的类型**
+ * 接口 获取地址信息 的 **请求配置的类型**
  *
- * @分类 物品
- * @请求头 `GET /belongings/{id}`
+ * @分类 地址
+ * @请求头 `GET /address/{id}`
  */
-type GetBelongingsIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/belongings/{id}', 'data', 'id', string, false>
+type GetAddressIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/{id}', 'data', 'id', string, false>
 >
 
 /**
- * 接口 获取物品详情 的 **请求配置**
+ * 接口 获取地址信息 的 **请求配置**
  *
- * @分类 物品
- * @请求头 `GET /belongings/{id}`
+ * @分类 地址
+ * @请求头 `GET /address/{id}`
  */
-const getBelongingsIdRequestConfig: GetBelongingsIdRequestConfig = /*#__PURE__*/ {
+const getAddressIdRequestConfig: GetAddressIdRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_5,
   devUrl: devUrl_0_0_0_5,
   prodUrl: prodUrl_0_0_0_5,
-  path: '/belongings/{id}',
+  path: '/address/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
@@ -2491,65 +2234,65 @@ const getBelongingsIdRequestConfig: GetBelongingsIdRequestConfig = /*#__PURE__*/
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getBelongingsId',
+  requestFunctionName: 'getAddressId',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取物品详情 的 **请求函数**
+ * 接口 获取地址信息 的 **请求函数**
  *
- * @分类 物品
- * @请求头 `GET /belongings/{id}`
+ * @分类 地址
+ * @请求头 `GET /address/{id}`
  */
-export const getBelongingsId = /*#__PURE__*/ (requestData: GetBelongingsIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetBelongingsIdResponse>(prepare(getBelongingsIdRequestConfig, requestData), ...args)
+export const getAddressId = /*#__PURE__*/ (requestData: GetAddressIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetAddressIdResponse>(prepare(getAddressIdRequestConfig, requestData), ...args)
 }
 
-getBelongingsId.requestConfig = getBelongingsIdRequestConfig
+getAddressId.requestConfig = getAddressIdRequestConfig
 
 /**
- * 接口 删除物品 的 **请求类型**
+ * 接口 删除地址 的 **请求类型**
  *
- * @分类 物品
- * @请求头 `DELETE /belongings/{id}`
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
  */
-export interface DeleteBelongingsIdRequest {
+export interface DeleteAddressIdRequest {
   /**
-   * 物品id
+   * 地址id
    */
   id: string
 }
 
 /**
- * 接口 删除物品 的 **返回类型**
+ * 接口 删除地址 的 **返回类型**
  *
- * @分类 物品
- * @请求头 `DELETE /belongings/{id}`
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
  */
-export type DeleteBelongingsIdResponse = any
+export type DeleteAddressIdResponse = any
 
 /**
- * 接口 删除物品 的 **请求配置的类型**
+ * 接口 删除地址 的 **请求配置的类型**
  *
- * @分类 物品
- * @请求头 `DELETE /belongings/{id}`
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
  */
-type DeleteBelongingsIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/belongings/{id}', 'data', 'id', string, false>
+type DeleteAddressIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/{id}', 'data', 'id', string, false>
 >
 
 /**
- * 接口 删除物品 的 **请求配置**
+ * 接口 删除地址 的 **请求配置**
  *
- * @分类 物品
- * @请求头 `DELETE /belongings/{id}`
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
  */
-const deleteBelongingsIdRequestConfig: DeleteBelongingsIdRequestConfig = /*#__PURE__*/ {
+const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_5,
   devUrl: devUrl_0_0_0_5,
   prodUrl: prodUrl_0_0_0_5,
-  path: '/belongings/{id}',
+  path: '/address/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
@@ -2560,102 +2303,21 @@ const deleteBelongingsIdRequestConfig: DeleteBelongingsIdRequestConfig = /*#__PU
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'deleteBelongingsId',
+  requestFunctionName: 'deleteAddressId',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 删除物品 的 **请求函数**
+ * 接口 删除地址 的 **请求函数**
  *
- * @分类 物品
- * @请求头 `DELETE /belongings/{id}`
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
  */
-export const deleteBelongingsId = /*#__PURE__*/ (
-  requestData: DeleteBelongingsIdRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<DeleteBelongingsIdResponse>(prepare(deleteBelongingsIdRequestConfig, requestData), ...args)
+export const deleteAddressId = /*#__PURE__*/ (requestData: DeleteAddressIdRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteAddressIdResponse>(prepare(deleteAddressIdRequestConfig, requestData), ...args)
 }
 
-deleteBelongingsId.requestConfig = deleteBelongingsIdRequestConfig
-
-const mockUrl_0_0_0_6 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_6 = '' as any
-const prodUrl_0_0_0_6 = '' as any
-const dataKey_0_0_0_6 = 'data' as any
-
-/**
- * 接口 创建反馈 的 **请求类型**
- *
- * @分类 反馈
- * @请求头 `POST /feedback`
- */
-export interface PostFeedbackRequest {
-  /**
-   * 反馈类型
-   */
-  type: number
-  /**
-   * 反馈内容
-   */
-  content: string
-}
-
-/**
- * 接口 创建反馈 的 **返回类型**
- *
- * @分类 反馈
- * @请求头 `POST /feedback`
- */
-export type PostFeedbackResponse = any
-
-/**
- * 接口 创建反馈 的 **请求配置的类型**
- *
- * @分类 反馈
- * @请求头 `POST /feedback`
- */
-type PostFeedbackRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/feedback', 'data', string, string, false>
->
-
-/**
- * 接口 创建反馈 的 **请求配置**
- *
- * @分类 反馈
- * @请求头 `POST /feedback`
- */
-const postFeedbackRequestConfig: PostFeedbackRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
-  path: '/feedback',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postFeedback',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 创建反馈 的 **请求函数**
- *
- * @分类 反馈
- * @请求头 `POST /feedback`
- */
-export const postFeedback = /*#__PURE__*/ (requestData: PostFeedbackRequest, ...args: UserRequestRestArgs) => {
-  return request<PostFeedbackResponse>(prepare(postFeedbackRequestConfig, requestData), ...args)
-}
-
-postFeedback.requestConfig = postFeedbackRequestConfig
+deleteAddressId.requestConfig = deleteAddressIdRequestConfig
 
 /* prettier-ignore-end */
