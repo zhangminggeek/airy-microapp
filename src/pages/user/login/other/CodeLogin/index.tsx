@@ -1,16 +1,18 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import classnames from 'classnames';
+import { useState } from 'react';
 
 import styles from './index.module.scss';
 
-import { getAccountSalt, getAccountSaltAccount, postAccountLogin } from '@/api';
-import { InputPassword } from '@/components';
+import { postAccountLoginCode } from '@/api';
+import { InputCode } from '@/components';
 import { useRequest } from '@/hooks';
-import { encode } from '@/utils';
 
-const PasswordLogin = () => {
+const CaptchaLogin = () => {
+  // 手机号
+  const [accountValue, setAccountValue] = useState<string>();
   // 登录
-  const { run } = useRequest(postAccountLogin, {
+  const { run } = useRequest(postAccountLoginCode, {
     manual: true,
     onSuccess() {
       // TODO: 登录成功
@@ -27,15 +29,7 @@ const PasswordLogin = () => {
         </Button>
       }
       onFinish={async (values) => {
-        const { account, password } = values;
-        try {
-          const oldSalt = (await getAccountSaltAccount({ account })).data;
-          const newSalt = (await getAccountSalt()).data;
-          const pwd = encode(password, oldSalt);
-          await run({ account, password: pwd, salt: newSalt });
-        } catch (err) {
-          console.log(err);
-        }
+        await run(values);
       }}
     >
       <Form.Item
@@ -44,18 +38,22 @@ const PasswordLogin = () => {
         rules={[{ required: true, message: '请输入手机号' }]}
         required={false}
       >
-        <Input />
+        <Input
+          onChange={(v) => {
+            setAccountValue(v);
+          }}
+        />
       </Form.Item>
       <Form.Item
-        label="密码"
-        name="password"
-        rules={[{ required: true, message: '请输入密码' }]}
+        label="验证码"
+        name="code"
+        rules={[{ required: true, message: '请输入验证码' }]}
         required={false}
       >
-        <InputPassword />
+        <InputCode phone={accountValue} />
       </Form.Item>
     </Form>
   );
 };
 
-export default PasswordLogin;
+export default CaptchaLogin;

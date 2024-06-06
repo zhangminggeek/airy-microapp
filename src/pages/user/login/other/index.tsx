@@ -1,6 +1,7 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 
+import CodeLogin from './CodeLogin';
 import styles from './index.module.scss';
 import PasswordLogin from './PasswordLogin';
 
@@ -30,7 +31,9 @@ const Page = () => {
           <Tabs.TabPane title="密码登录">
             <PasswordLogin />
           </Tabs.TabPane>
-          <Tabs.TabPane title="验证码登录">Tab 2</Tabs.TabPane>
+          <Tabs.TabPane title="验证码登录">
+            <CodeLogin />
+          </Tabs.TabPane>
         </Tabs>
       </View>
     </BasicLayout>

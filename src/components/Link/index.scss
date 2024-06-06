@@ -9,4 +9,8 @@
     display: flex;
     justify-content: center;
   }
+
+  &-disabled {
+    color: $text-color-disabled;
+  }
 }

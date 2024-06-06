@@ -12,6 +12,7 @@ interface LinkProps {
   style?: CSSProperties;
   to?: string;
   block?: boolean;
+  disabled?: boolean;
   children?: ReactNode;
   onClick?: () => void;
 }
@@ -23,10 +24,12 @@ const Link: FC<LinkProps> = ({
   style,
   to,
   block,
+  disabled,
   children,
   onClick,
 }) => {
   const handleClick = () => {
+    if (disabled) return;
     if (to) {
       RouterUtil.navigateTo(to);
     }
@@ -38,6 +41,7 @@ const Link: FC<LinkProps> = ({
       className={classnames(
         PREFIX_CLS,
         { [`${PREFIX_CLS}-block`]: block },
+        { [`${PREFIX_CLS}-disabled`]: disabled },
         className,
       )}
       style={style}
