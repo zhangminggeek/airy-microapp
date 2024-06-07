@@ -1,0 +1,36 @@
+@import '../../styles/var.scss';
+
+.m-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 0;
+
+  &-success {
+    .m-result-icon {
+      color: $color-primary;
+    }
+  }
+
+  &-icon {
+  }
+
+  &-title {
+    font-size: $font-size-xlarge;
+    color: $text-color-main;
+    font-weight: 500;
+    margin-top: 56px;
+  }
+
+  &-desc {
+    font-size: $font-size-base;
+    color: $text-color-base;
+    margin-top: 16px;
+  }
+
+  &-extra {
+    width: 100%;
+    margin-top: 112px;
+  }
+}

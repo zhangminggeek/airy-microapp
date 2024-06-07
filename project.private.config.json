@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/user/register/result/index",
+          "pathName": "pages/user/register/result/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/register/password/index",
           "pathName": "pages/user/register/password/index",
           "query": "",

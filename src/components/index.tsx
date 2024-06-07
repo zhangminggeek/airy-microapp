@@ -13,6 +13,7 @@ import Link from './Link';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
+import Result from './Result';
 import Space from './Space';
 import Title from './Title';
 import Upload from './Upload';
@@ -33,6 +34,7 @@ export {
   ModalForm,
   Picker,
   PickerView,
+  Result,
   Space,
   Title,
   Upload,
