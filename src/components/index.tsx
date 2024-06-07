@@ -3,6 +3,7 @@ import AdministrativePicker from './AdministrativePicker';
 import Affix from './Affix';
 import Avatar from './Avatar';
 import CalenderPicker from './CalendarPicker';
+import CodeInput from './CodeInput';
 import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
@@ -22,6 +23,7 @@ export {
   Affix,
   Avatar,
   CalenderPicker,
+  CodeInput,
   Descriptions,
   EditableCell,
   Empty,

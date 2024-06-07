@@ -1251,59 +1251,135 @@ export const getAccount = /*#__PURE__*/ (requestData?: GetAccountRequest, ...arg
 getAccount.requestConfig = getAccountRequestConfig
 
 /**
- * 接口 创建账号 的 **请求类型**
+ * 接口 获取短信注册验证码 的 **请求类型**
  *
  * @分类 账号
- * @请求头 `POST /account`
+ * @请求头 `GET /account/register/code/{account}`
  */
-export interface PostAccountRequest {
+export interface GetAccountRegisterCodeAccountRequest {
+  /**
+   * 账号
+   */
+  account: string
+}
+
+/**
+ * 接口 获取短信注册验证码 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/register/code/{account}`
+ */
+export type GetAccountRegisterCodeAccountResponse = any
+
+/**
+ * 接口 获取短信注册验证码 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/register/code/{account}`
+ */
+type GetAccountRegisterCodeAccountRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/account/register/code/{account}',
+    'data',
+    'account',
+    string,
+    false
+  >
+>
+
+/**
+ * 接口 获取短信注册验证码 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/register/code/{account}`
+ */
+const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account/register/code/{account}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: ['account'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountRegisterCodeAccount',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取短信注册验证码 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/register/code/{account}`
+ */
+export const getAccountRegisterCodeAccount = /*#__PURE__*/ (
+  requestData: GetAccountRegisterCodeAccountRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetAccountRegisterCodeAccountResponse>(
+    prepare(getAccountRegisterCodeAccountRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getAccountRegisterCodeAccount.requestConfig = getAccountRegisterCodeAccountRequestConfig
+
+/**
+ * 接口 校验注册验证码 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/register/code/check`
+ */
+export interface PostAccountRegisterCodeCheckRequest {
   /**
    * 账号
    */
   account: string
   /**
-   * 密码（明文）
+   * 验证码
    */
-  password?: string
-  /**
-   * 盐值
-   */
-  salt?: string
-  /**
-   * 微信用户唯一标识
-   */
-  openid?: string
+  code: string
 }
 
 /**
- * 接口 创建账号 的 **返回类型**
+ * 接口 校验注册验证码 的 **返回类型**
  *
  * @分类 账号
- * @请求头 `POST /account`
+ * @请求头 `POST /account/register/code/check`
  */
-export type PostAccountResponse = number
+export type PostAccountRegisterCodeCheckResponse = string
 
 /**
- * 接口 创建账号 的 **请求配置的类型**
+ * 接口 校验注册验证码 的 **请求配置的类型**
  *
  * @分类 账号
- * @请求头 `POST /account`
+ * @请求头 `POST /account/register/code/check`
  */
-type PostAccountRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account', 'data', string, string, false>
+type PostAccountRegisterCodeCheckRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/register/code/check', 'data', string, string, false>
 >
 
 /**
- * 接口 创建账号 的 **请求配置**
+ * 接口 校验注册验证码 的 **请求配置**
  *
  * @分类 账号
- * @请求头 `POST /account`
+ * @请求头 `POST /account/register/code/check`
  */
-const postAccountRequestConfig: PostAccountRequestConfig = /*#__PURE__*/ {
+const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_3,
   devUrl: devUrl_0_0_0_3,
   prodUrl: prodUrl_0_0_0_3,
-  path: '/account',
+  path: '/account/register/code/check',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -1314,91 +1390,28 @@ const postAccountRequestConfig: PostAccountRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postAccount',
+  requestFunctionName: 'postAccountRegisterCodeCheck',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 创建账号 的 **请求函数**
+ * 接口 校验注册验证码 的 **请求函数**
  *
  * @分类 账号
- * @请求头 `POST /account`
+ * @请求头 `POST /account/register/code/check`
  */
-export const postAccount = /*#__PURE__*/ (requestData: PostAccountRequest, ...args: UserRequestRestArgs) => {
-  return request<PostAccountResponse>(prepare(postAccountRequestConfig, requestData), ...args)
+export const postAccountRegisterCodeCheck = /*#__PURE__*/ (
+  requestData: PostAccountRegisterCodeCheckRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountRegisterCodeCheckResponse>(
+    prepare(postAccountRegisterCodeCheckRequestConfig, requestData),
+    ...args,
+  )
 }
 
-postAccount.requestConfig = postAccountRequestConfig
-
-/**
- * 接口 删除账号 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `DELETE /account`
- */
-export interface DeleteAccountRequest {
-  /**
-   * 账号id
-   */
-  id: string
-}
-
-/**
- * 接口 删除账号 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `DELETE /account`
- */
-export type DeleteAccountResponse = any
-
-/**
- * 接口 删除账号 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `DELETE /account`
- */
-type DeleteAccountRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account', 'data', string, 'id', false>
->
-
-/**
- * 接口 删除账号 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `DELETE /account`
- */
-const deleteAccountRequestConfig: DeleteAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/account',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['id'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteAccount',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 删除账号 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `DELETE /account`
- */
-export const deleteAccount = /*#__PURE__*/ (requestData: DeleteAccountRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteAccountResponse>(prepare(deleteAccountRequestConfig, requestData), ...args)
-}
-
-deleteAccount.requestConfig = deleteAccountRequestConfig
+postAccountRegisterCodeCheck.requestConfig = postAccountRegisterCodeCheckRequestConfig
 
 /**
  * 接口 获取新盐值 的 **请求类型**
@@ -1537,12 +1550,89 @@ export const getAccountSaltAccount = /*#__PURE__*/ (
 getAccountSaltAccount.requestConfig = getAccountSaltAccountRequestConfig
 
 /**
- * 接口 获取短信验证码 的 **请求类型**
+ * 接口 登录 的 **请求类型**
  *
  * @分类 账号
- * @请求头 `GET /account/code/{account}`
+ * @请求头 `POST /account/login`
  */
-export interface GetAccountCodeAccountRequest {
+export interface PostAccountLoginRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 密码（密文）
+   */
+  password: string
+  /**
+   * 盐值
+   */
+  salt: string
+}
+
+/**
+ * 接口 登录 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login`
+ */
+export type PostAccountLoginResponse = string
+
+/**
+ * 接口 登录 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login`
+ */
+type PostAccountLoginRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login', 'data', string, string, false>
+>
+
+/**
+ * 接口 登录 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login`
+ */
+const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account/login',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLogin',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 登录 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login`
+ */
+export const postAccountLogin = /*#__PURE__*/ (requestData: PostAccountLoginRequest, ...args: UserRequestRestArgs) => {
+  return request<PostAccountLoginResponse>(prepare(postAccountLoginRequestConfig, requestData), ...args)
+}
+
+postAccountLogin.requestConfig = postAccountLoginRequestConfig
+
+/**
+ * 接口 获取短信登录验证码 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `GET /account/login/code/{account}`
+ */
+export interface GetAccountLoginCodeAccountRequest {
   /**
    * 账号
    */
@@ -1550,63 +1640,151 @@ export interface GetAccountCodeAccountRequest {
 }
 
 /**
- * 接口 获取短信验证码 的 **返回类型**
+ * 接口 获取短信登录验证码 的 **返回类型**
  *
  * @分类 账号
- * @请求头 `GET /account/code/{account}`
+ * @请求头 `GET /account/login/code/{account}`
  */
-export type GetAccountCodeAccountResponse = string
+export type GetAccountLoginCodeAccountResponse = any
 
 /**
- * 接口 获取短信验证码 的 **请求配置的类型**
+ * 接口 获取短信登录验证码 的 **请求配置的类型**
  *
  * @分类 账号
- * @请求头 `GET /account/code/{account}`
+ * @请求头 `GET /account/login/code/{account}`
  */
-type GetAccountCodeAccountRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/code/{account}', 'data', 'account', string, false>
+type GetAccountLoginCodeAccountRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/account/login/code/{account}',
+    'data',
+    'account',
+    string,
+    false
+  >
 >
 
 /**
- * 接口 获取短信验证码 的 **请求配置**
+ * 接口 获取短信登录验证码 的 **请求配置**
  *
  * @分类 账号
- * @请求头 `GET /account/code/{account}`
+ * @请求头 `GET /account/login/code/{account}`
  */
-const getAccountCodeAccountRequestConfig: GetAccountCodeAccountRequestConfig = /*#__PURE__*/ {
+const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_3,
   devUrl: devUrl_0_0_0_3,
   prodUrl: prodUrl_0_0_0_3,
-  path: '/account/code/{account}',
+  path: '/account/login/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
   dataKey: dataKey_0_0_0_3,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getAccountCodeAccount',
+  requestFunctionName: 'getAccountLoginCodeAccount',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取短信验证码 的 **请求函数**
+ * 接口 获取短信登录验证码 的 **请求函数**
  *
  * @分类 账号
- * @请求头 `GET /account/code/{account}`
+ * @请求头 `GET /account/login/code/{account}`
  */
-export const getAccountCodeAccount = /*#__PURE__*/ (
-  requestData: GetAccountCodeAccountRequest,
+export const getAccountLoginCodeAccount = /*#__PURE__*/ (
+  requestData: GetAccountLoginCodeAccountRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<GetAccountCodeAccountResponse>(prepare(getAccountCodeAccountRequestConfig, requestData), ...args)
+  return request<GetAccountLoginCodeAccountResponse>(
+    prepare(getAccountLoginCodeAccountRequestConfig, requestData),
+    ...args,
+  )
 }
 
-getAccountCodeAccount.requestConfig = getAccountCodeAccountRequestConfig
+getAccountLoginCodeAccount.requestConfig = getAccountLoginCodeAccountRequestConfig
+
+/**
+ * 接口 短信验证码登录 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/code`
+ */
+export interface PostAccountLoginCodeRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 验证码
+   */
+  code: string
+}
+
+/**
+ * 接口 短信验证码登录 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/code`
+ */
+export type PostAccountLoginCodeResponse = string
+
+/**
+ * 接口 短信验证码登录 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/code`
+ */
+type PostAccountLoginCodeRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/code', 'data', string, string, false>
+>
+
+/**
+ * 接口 短信验证码登录 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/code`
+ */
+const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account/login/code',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLoginCode',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 短信验证码登录 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/code`
+ */
+export const postAccountLoginCode = /*#__PURE__*/ (
+  requestData: PostAccountLoginCodeRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountLoginCodeResponse>(prepare(postAccountLoginCodeRequestConfig, requestData), ...args)
+}
+
+postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
 
 /**
  * 接口 获取账号信息 的 **请求类型**
@@ -1693,159 +1871,6 @@ export const getAccountId = /*#__PURE__*/ (requestData: GetAccountIdRequest, ...
 }
 
 getAccountId.requestConfig = getAccountIdRequestConfig
-
-/**
- * 接口 登录 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
-export interface PostAccountLoginRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 密码（密文）
-   */
-  password: string
-  /**
-   * 盐值
-   */
-  salt: string
-}
-
-/**
- * 接口 登录 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
-export type PostAccountLoginResponse = string
-
-/**
- * 接口 登录 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
-type PostAccountLoginRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login', 'data', string, string, false>
->
-
-/**
- * 接口 登录 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
-const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/account/login',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountLogin',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 登录 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
-export const postAccountLogin = /*#__PURE__*/ (requestData: PostAccountLoginRequest, ...args: UserRequestRestArgs) => {
-  return request<PostAccountLoginResponse>(prepare(postAccountLoginRequestConfig, requestData), ...args)
-}
-
-postAccountLogin.requestConfig = postAccountLoginRequestConfig
-
-/**
- * 接口 短信验证码登录 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
-export interface PostAccountLoginCodeRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 验证码
-   */
-  code: string
-}
-
-/**
- * 接口 短信验证码登录 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
-export type PostAccountLoginCodeResponse = string
-
-/**
- * 接口 短信验证码登录 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
-type PostAccountLoginCodeRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/code', 'data', string, string, false>
->
-
-/**
- * 接口 短信验证码登录 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
-const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/account/login/code',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountLoginCode',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 短信验证码登录 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
-export const postAccountLoginCode = /*#__PURE__*/ (
-  requestData: PostAccountLoginCodeRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountLoginCodeResponse>(prepare(postAccountLoginCodeRequestConfig, requestData), ...args)
-}
-
-postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
 
 const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_4 = '' as any

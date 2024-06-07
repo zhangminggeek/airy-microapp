@@ -1,10 +1,12 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
+import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 
 import styles from './index.module.scss';
 
 import { getAccountSalt, getAccountSaltAccount, postAccountLogin } from '@/api';
 import { InputPassword } from '@/components';
+import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { encode } from '@/utils';
 
@@ -12,7 +14,8 @@ const PasswordLogin = () => {
   // 登录
   const { run } = useRequest(postAccountLogin, {
     manual: true,
-    onSuccess() {
+    onSuccess(data) {
+      Taro.setStorageSync(StorageKey.TOKEN, data);
       // TODO: 登录成功
     },
   });

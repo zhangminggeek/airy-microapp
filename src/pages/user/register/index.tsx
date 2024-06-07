@@ -1,21 +1,29 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
+import Taro, { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 
 import styles from './index.module.scss';
 
-import { postCompanyRegister } from '@/api';
+import type { CompanyInfo } from './interfaces';
+
 import { AdministrativePicker, Link, Upload } from '@/components';
-import { useRequest } from '@/hooks';
+import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
+import { parseJson, RouterUtil } from '@/utils';
 
 const Page = () => {
-  // 注册
-  const { run } = useRequest(postCompanyRegister, {
-    manual: true,
-    onSuccess() {
-      console.log('onSuccess');
-    },
+  const [form] = Form.useForm();
+
+  useDidShow(() => {
+    const info = parseJson<Partial<CompanyInfo>>(
+      Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
+      undefined,
+    );
+    if (info) {
+      const { province, city, area, ...rest } = info;
+      form.setFieldsValue({ ...rest, region: [province, city, area] });
+    }
   });
 
   return (
@@ -38,7 +46,14 @@ const Page = () => {
           onFinish={async (values) => {
             const { region, ...rest } = values;
             const [province, city, area] = region;
-            await run({ ...rest, province, city, area });
+            const params = { ...rest, province, city, area };
+            // 保存到本地，等后面验证手机号流程通过后使用
+            Taro.setStorageSync(
+              StorageKey.COMPANY_RESIGTER_INFO,
+              JSON.stringify(params),
+            );
+            RouterUtil.navigateTo('/pages/user/register/code/index');
+            // await run({ ...rest, province, city, area });
           }}
         >
           <Form.Item
@@ -51,7 +66,10 @@ const Page = () => {
           <Form.Item
             label="手机号"
             name="contactPhone"
-            rules={[{ required: true, message: '请输入手机号' }]}
+            rules={[
+              { required: true, message: '请输入手机号' },
+              { pattern: /1\d{10}/, message: '请输入正确的手机号' },
+            ]}
           >
             <Input />
           </Form.Item>

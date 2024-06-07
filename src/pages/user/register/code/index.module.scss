@@ -1,0 +1,32 @@
+@import '../../../../styles/var.scss';
+
+.container {
+  background-color: #fff;
+
+  .title {
+    font-size: 48px;
+    color: $text-color-main;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .tip {
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    margin-bottom: 24px;
+  }
+
+  .input {
+    margin-bottom: 64px;
+  }
+
+  .countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    margin-bottom: 64px;
+  }
+}

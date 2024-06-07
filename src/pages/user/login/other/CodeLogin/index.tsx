@@ -1,4 +1,5 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
+import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useState } from 'react';
 
@@ -6,6 +7,7 @@ import styles from './index.module.scss';
 
 import { postAccountLoginCode } from '@/api';
 import { InputCode } from '@/components';
+import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 
 const CaptchaLogin = () => {
@@ -14,7 +16,8 @@ const CaptchaLogin = () => {
   // 登录
   const { run } = useRequest(postAccountLoginCode, {
     manual: true,
-    onSuccess() {
+    onSuccess(data) {
+      Taro.setStorageSync(StorageKey.TOKEN, data);
       // TODO: 登录成功
     },
   });
@@ -50,7 +53,7 @@ const CaptchaLogin = () => {
         rules={[{ required: true, message: '请输入验证码' }]}
         required={false}
       >
-        <InputCode phone={accountValue} />
+        <InputCode type="login" phone={accountValue} />
       </Form.Item>
     </Form>
   );

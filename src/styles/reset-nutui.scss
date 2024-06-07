@@ -1,8 +1,16 @@
+@import './var.scss';
+
 // nut-ui 样式修改
 // Button
 .nut-button {
   &.nut-button-xlarge {
     font-size: $font-size-large;
+  }
+
+  &.nut-button-primary.nut-button-disabled {
+    background-image: linear-gradient(90deg, #f76793 0%, #ff9b9d 100%);
+    border-color: transparent;
+    opacity: 0.4;
   }
 }
 

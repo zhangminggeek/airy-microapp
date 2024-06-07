@@ -62,3 +62,17 @@ export const decode = (encryptedPwd: string, salt: string) => {
   const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
   return decryptedStr.toString();
 };
+
+/**
+ * 解析 json 格式的字符串
+ * @param data json 字符串
+ * @param defaultData 解析失败的默认值
+ * @returns json 对象
+ */
+export function parseJson<T>(data: string, defaultData: T = {} as any): T {
+  try {
+    return data ? JSON.parse(data) : defaultData;
+  } catch (err) {
+    return defaultData;
+  }
+}
