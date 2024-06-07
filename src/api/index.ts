@@ -1787,6 +1787,78 @@ export const postAccountLoginCode = /*#__PURE__*/ (
 postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
 
 /**
+ * 接口 微信授权登录 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat`
+ */
+export interface PostAccountLoginWechatRequest {
+  /**
+   * 微信登录code
+   */
+  code: string
+}
+
+/**
+ * 接口 微信授权登录 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat`
+ */
+export type PostAccountLoginWechatResponse = string
+
+/**
+ * 接口 微信授权登录 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat`
+ */
+type PostAccountLoginWechatRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat', 'data', string, string, false>
+>
+
+/**
+ * 接口 微信授权登录 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat`
+ */
+const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/account/login/wechat',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLoginWechat',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 微信授权登录 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat`
+ */
+export const postAccountLoginWechat = /*#__PURE__*/ (
+  requestData: PostAccountLoginWechatRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountLoginWechatResponse>(prepare(postAccountLoginWechatRequestConfig, requestData), ...args)
+}
+
+postAccountLoginWechat.requestConfig = postAccountLoginWechatRequestConfig
+
+/**
  * 接口 获取账号信息 的 **请求类型**
  *
  * @分类 账号

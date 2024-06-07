@@ -1,31 +1,48 @@
 import { Button, Checkbox, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import Taro, { useRouter } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 
 import type { CSSProperties } from 'react';
 
+import { postAccountLoginWechat } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Link } from '@/components';
+import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil, Toast, WeChatUtil } from '@/utils';
+import { RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
-  const { params } = useRouter();
   // 是否已阅读协议
   const [hasRead, setHasRead] = useState<boolean>(false);
 
-  const handleLogin = async () => {
-    if (!hasRead) {
-      Toast.info('请先阅读并同意《用户隐私协议》');
-      return;
-    }
-    await WeChatUtil.loginForWeChat();
-    RouterUtil.navigateTo('/pages/security/index', params);
-  };
+  // 微信授权手机号登录
+  const { run } = useRequest(postAccountLoginWechat, {
+    manual: true,
+    onSuccess() {
+      RouterUtil.navigateTo('/pages/home/index');
+    },
+  });
+
+  // 根据是否阅读协议，决定按钮是否可用
+  const buttonConfig = useMemo(() => {
+    return hasRead
+      ? {
+          'open-type': 'getPhoneNumber',
+          onGetPhoneNumber(e) {
+            run({ code: e.detail.code });
+          },
+        }
+      : {
+          onClick() {
+            Toast.info('请先阅读并同意《用户隐私协议》');
+            return;
+          },
+        };
+  }, [hasRead]);
 
   return (
     <BasicLayout className={styles.container} fill>
@@ -45,7 +62,7 @@ const Page = () => {
             type="primary"
             size="xlarge"
             block
-            onClick={handleLogin}
+            {...buttonConfig}
           >
             手机号快捷登录
           </Button>

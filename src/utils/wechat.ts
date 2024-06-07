@@ -2,7 +2,8 @@ import Taro from '@tarojs/taro';
 
 import { Toast } from './toast';
 
-// import { StorageKey } from '@/constants/storage';
+import { postAccountLoginWechat } from '@/api';
+import { StorageKey } from '@/constants/storage';
 
 export class WeChatUtil {
   /**
@@ -16,9 +17,9 @@ export class WeChatUtil {
           const { code } = res;
           if (code) {
             // 发起网络请求
-            // const { data } = await postUserLoginWechat({ code });
-            // Taro.setStorageSync(StorageKey.TOKEN, data);
-            // resolve(data);
+            const { data } = await postAccountLoginWechat({ code });
+            Taro.setStorageSync(StorageKey.TOKEN, data);
+            resolve(data);
             resolve(undefined);
           } else {
             Toast.info('微信登录失败, 请稍后重试');
