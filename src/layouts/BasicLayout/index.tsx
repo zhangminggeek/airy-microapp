@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { RouterUtil } from '@/utils';
-import { ShareWrapper } from '@/wrapper';
+import { ShareWrapper } from '@/wrappers';
 
 import './index.scss';
 

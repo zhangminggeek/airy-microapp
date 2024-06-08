@@ -8,7 +8,7 @@ import { getAccountSalt, getAccountSaltAccount, postAccountLogin } from '@/api';
 import { InputPassword } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
-import { encode } from '@/utils';
+import { encode, RouterUtil } from '@/utils';
 
 const PasswordLogin = () => {
   // 登录
@@ -16,7 +16,7 @@ const PasswordLogin = () => {
     manual: true,
     onSuccess(data) {
       Taro.setStorageSync(StorageKey.TOKEN, data);
-      // TODO: 登录成功
+      RouterUtil.navigateTo('/pages/security/index');
     },
   });
 

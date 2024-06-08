@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import type { IconFontConfig } from '@nutui/icons-react-taro';
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import IconSuccessFilled from '@/assets/icons/SuccessFilled.svg';
+import IconSuccessFilled from '@/assets/icons/success_filled.svg';
 
 import './index.scss';
 

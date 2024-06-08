@@ -1,0 +1,40 @@
+@import '../../../styles/var.scss';
+
+.container {
+  background-image: linear-gradient(
+    180deg,
+    rgba($color-primary, 0.15) 0%,
+    rgba($color-secondary, 0.15) 100%
+  );
+
+  :global {
+    .g-basic-layout-header-title {
+      justify-content: flex-start;
+      padding: 0 24px;
+    }
+  }
+
+  .account {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+
+      &-btn {
+        width: 120px;
+      }
+    }
+
+    &-body {
+      display: grid;
+      grid-template-columns: repeat(3, 33%);
+      grid-column-gap: 16px;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-row-gap: 48px;
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../../../styles/var.scss';
+
+.section {
+  padding: 32px;
+  border-radius: 24px;
+  background-color: #fff;
+
+  & + & {
+    margin-top: 24px;
+  }
+
+  &-header {
+    font-size: $font-size-large;
+    color: $text-color-main;
+    font-weight: 600;
+    margin-bottom: 48px;
+  }
+}

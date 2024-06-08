@@ -1,17 +1,59 @@
 import Taro from '@tarojs/taro';
 import qs from 'qs';
 
+import { StorageKey } from '@/constants/storage';
+
 type ParamsType = {
   [key: string]: any;
 };
 
 export class RouterUtil {
+  private static notReuiredTokenPageList = [
+    'pages/security/index',
+    'pages/home/index',
+    'pages/user/login/index',
+    'pages/user/login/other/index',
+    'pages/user/register/index',
+    'pages/user/register/code/index',
+    'pages/user/register/result/index',
+  ];
+
+  /**
+   * 校验路由是否需要鉴权
+   * @param path 路由地址
+   */
+  private static checkToken(path: string) {
+    if (this.notReuiredTokenPageList.includes(path)) {
+      return;
+    }
+    const token = Taro.getStorageSync(StorageKey.TOKEN);
+    if (!token) {
+      Taro.navigateTo({ url: '/pages/user/login/index' });
+    }
+  }
+
+  /**
+   * 格式化 url
+   * @param params 路由参数
+   * @returns 格式化后的参数
+   * @example
+   * ```ts
+   * formatParams({ id: 1, text: 'text' })
+   * // '?id=1&text=text'
+   * ```
+   */
+  private static formatUrl(target: string, params: ParamsType = {}): string {
+    const paramsString = qs.stringify(params);
+    return `${target}${paramsString ? `?${paramsString}` : ''}`;
+  }
+
   /**
    * 路由跳转
    * @param target 目标路由地址
    * @param params 路由参数
    */
   static navigateTo(target: string, params: ParamsType = {}) {
+    this.checkToken(target);
     const url = this.formatUrl(target, params);
     Taro.navigateTo({ url });
   }
@@ -22,6 +64,7 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static redirectTo(target: string, params: ParamsType = {}) {
+    this.checkToken(target);
     const url = this.formatUrl(target, params);
     Taro.redirectTo({ url });
   }
@@ -40,6 +83,7 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static switchTab(target: string, params: ParamsType = {}) {
+    this.checkToken(target);
     const url = this.formatUrl(target, params);
     Taro.switchTab({ url });
   }
@@ -50,6 +94,7 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static reLaunch(target: string, params: ParamsType = {}) {
+    this.checkToken(target);
     const url = this.formatUrl(target, params);
     Taro.reLaunch({ url });
   }
@@ -69,20 +114,5 @@ export class RouterUtil {
         console.log('error', error);
       }
     }
-  }
-
-  /**
-   * 格式化 url
-   * @param params 路由参数
-   * @returns 格式化后的参数
-   * @example
-   * ```ts
-   * formatParams({ id: 1, text: 'text' })
-   * // '?id=1&text=text'
-   * ```
-   */
-  private static formatUrl(target: string, params: ParamsType = {}): string {
-    const paramsString = qs.stringify(params);
-    return `${target}${paramsString ? `?${paramsString}` : ''}`;
   }
 }

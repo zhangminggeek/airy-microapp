@@ -11,6 +11,7 @@ import type { CSSProperties } from 'react';
 import { postAccountLoginWechat } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Link } from '@/components';
+import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -22,8 +23,9 @@ const Page = () => {
   // 微信授权手机号登录
   const { run } = useRequest(postAccountLoginWechat, {
     manual: true,
-    onSuccess() {
-      RouterUtil.navigateTo('/pages/home/index');
+    onSuccess(data) {
+      Taro.setStorageSync(StorageKey.TOKEN, data);
+      RouterUtil.navigateTo('/pages/security/index');
     },
   });
 

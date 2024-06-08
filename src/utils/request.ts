@@ -30,6 +30,9 @@ function formatPath(path: string, method: Method) {
   return path;
 }
 
+// 不处理错误的接口列表
+const NOT_DEAL_ERROR_URLS = ['GET /user/self'];
+
 const request = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;
   const url = `${process.env.BASE_URL || ''}${formatPath(path, method)}`;
@@ -55,8 +58,12 @@ const request = <ResponseData>(payload: RequestFunctionParams) => {
             // await request(payload);
             // return;
           }
-          Toast.info(message, { mask: true });
-          reject();
+          if (
+            !NOT_DEAL_ERROR_URLS.includes(`${method.toUpperCase()} ${path}`)
+          ) {
+            Toast.info(message, { mask: true });
+            reject();
+          }
         }
         resolve(res.data);
       },
@@ -100,8 +107,12 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
             // await request(payload);
             // return;
           }
-          Toast.info(message, { mask: true });
-          reject();
+          if (
+            !NOT_DEAL_ERROR_URLS.includes(`${method.toUpperCase()} ${path}`)
+          ) {
+            Toast.info(message, { mask: true });
+            reject();
+          }
         }
         resolve(res.data);
       },

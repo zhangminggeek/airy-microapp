@@ -9,6 +9,7 @@ import { postAccountLoginCode } from '@/api';
 import { InputCode } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
+import { RouterUtil } from '@/utils';
 
 const CaptchaLogin = () => {
   // 手机号
@@ -18,7 +19,7 @@ const CaptchaLogin = () => {
     manual: true,
     onSuccess(data) {
       Taro.setStorageSync(StorageKey.TOKEN, data);
-      // TODO: 登录成功
+      RouterUtil.navigateTo('/pages/security/index');
     },
   });
 
