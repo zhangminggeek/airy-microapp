@@ -27,7 +27,13 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout className={styles.container} title="注册" back fill>
+    <BasicLayout
+      className={styles.container}
+      title="注册"
+      back
+      fill
+      transparent
+    >
       <View className={styles.content}>
         <Form
           className={classnames('form-with-footer', 'form-large')}

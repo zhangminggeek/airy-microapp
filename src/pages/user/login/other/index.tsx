@@ -15,6 +15,7 @@ const Page = () => {
       bodyClassName={styles['container-body']}
       back
       fill
+      transparent
       safeArea={false}
     >
       <View className={styles.header}>

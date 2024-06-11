@@ -7,18 +7,23 @@ import CodeInput from './CodeInput';
 import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
+import FormSection from './FormSection';
 import InputCode from './InputCode';
 import InputPassword from './InputPassword';
+import InputSearch from './InputSearch';
 import Link from './Link';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
 import Result from './Result';
+import Section from './Section';
 import Space from './Space';
+import TagChecker from './TagChecker';
 import Title from './Title';
 import Upload from './Upload';
 
 export {
+  // 基础组件
   ActionSheet,
   AdministrativePicker,
   Affix,
@@ -28,14 +33,18 @@ export {
   Descriptions,
   EditableCell,
   Empty,
+  FormSection,
   InputCode,
   InputPassword,
+  InputSearch,
   Link,
   ModalForm,
   Picker,
   PickerView,
   Result,
+  Section,
   Space,
+  TagChecker,
   Title,
   Upload,
 };

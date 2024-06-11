@@ -5,10 +5,9 @@ import AmountItem from './AmountItem';
 import { marketConfig, settingConfig, shopConfig } from './config';
 import IconItem from './IconItem';
 import styles from './index.module.scss';
-import Section from './Section';
 
 import ImageLogo from '@/assets/logo.svg';
-import { Space } from '@/components';
+import { Section, Space } from '@/components';
 import { BasicLayout } from '@/layouts';
 
 const Page = () => {
@@ -21,6 +20,7 @@ const Page = () => {
           <Text>AIRYBLUE 婚纱礼服</Text>
         </Space>
       }
+      transparent
     >
       <Section className={styles.account}>
         <View className={styles['account-header']}>
@@ -55,6 +55,7 @@ const Page = () => {
               icon={item.icon}
               name={item.name}
               iconSize={44}
+              to={item.to}
             />
           ))}
         </View>
@@ -62,14 +63,24 @@ const Page = () => {
       <Section title="二手市场">
         <View className={styles.grid}>
           {marketConfig?.map((item) => (
-            <IconItem key={item.name} icon={item.icon} name={item.name} />
+            <IconItem
+              key={item.name}
+              icon={item.icon}
+              name={item.name}
+              to={item.to}
+            />
           ))}
         </View>
       </Section>
       <Section title="设置">
         <View className={styles.grid}>
           {settingConfig?.map((item) => (
-            <IconItem key={item.name} icon={item.icon} name={item.name} />
+            <IconItem
+              key={item.name}
+              icon={item.icon}
+              name={item.name}
+              to={item.to}
+            />
           ))}
         </View>
       </Section>

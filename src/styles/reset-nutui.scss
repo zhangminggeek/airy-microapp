@@ -18,16 +18,16 @@
 .nut-form {
   // form-with-footer 类名是自己定义的，用来修改 Form footer 样式
   &.form-with-footer {
-    .nut-cell:last-child {
-      padding: 0;
+    .nut-cell-group-wrap > .nut-cell:last-child {
       margin-top: 64px;
+      background-color: transparent;
     }
   }
 
   // form-with-footer 类名是自己定义的，用来修改大表单样式
   &.form-large {
     .nut-form-item {
-      border-bottom: 2px solid $border-color;
+      border-bottom: 2px solid $border-color-base;
 
       &:not(:first-child) {
         margin-top: 32px;
@@ -36,6 +36,21 @@
 
     .nut-cell {
       padding: 24px 0;
+    }
+  }
+}
+
+// Tabs
+.nut-tabs {
+  .nut-tabs-titles {
+    background: #ffffff;
+
+    &-item {
+      color: $text-color-secondary;
+
+      &-active {
+        color: $color-primary;
+      }
     }
   }
 }

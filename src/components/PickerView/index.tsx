@@ -28,8 +28,8 @@ const PickerView: FC<PickerViewProps> = ({
   text,
   defaultText = DEFAULT_TEXT,
   children,
-  block,
-  arrowType = 'bottom',
+  block = true,
+  arrowType = 'right',
   onClick,
 }) => {
   const view = useMemo(() => {

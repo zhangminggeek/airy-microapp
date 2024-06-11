@@ -9,13 +9,13 @@ type ParamsType = {
 
 export class RouterUtil {
   private static notReuiredTokenPageList = [
-    'pages/security/index',
-    'pages/home/index',
-    'pages/user/login/index',
-    'pages/user/login/other/index',
-    'pages/user/register/index',
-    'pages/user/register/code/index',
-    'pages/user/register/result/index',
+    '/pages/security/index',
+    '/pages/home/index',
+    '/pages/user/login/index',
+    '/pages/user/login/other/index',
+    '/pages/user/register/index',
+    '/pages/user/register/code/index',
+    '/pages/user/register/result/index',
   ];
 
   /**
@@ -23,9 +23,11 @@ export class RouterUtil {
    * @param path 路由地址
    */
   private static checkToken(path: string) {
+    console.log('path', path);
     if (this.notReuiredTokenPageList.includes(path)) {
       return;
     }
+    console.log('pass');
     const token = Taro.getStorageSync(StorageKey.TOKEN);
     if (!token) {
       Taro.navigateTo({ url: '/pages/user/login/index' });

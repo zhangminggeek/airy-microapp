@@ -3,10 +3,12 @@ import Taro, { useDidShow } from '@tarojs/taro';
 
 import { StorageKey } from '@/constants/storage';
 import { useUserStore } from '@/models';
+import { useProductStore } from '@/models/product';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
   const { fetchUserInfo } = useUserStore((state) => state);
+  const { fetchProductType } = useProductStore((state) => state);
 
   useDidShow(async () => {
     const token = Taro.getStorageSync(StorageKey.TOKEN);
@@ -14,9 +16,11 @@ const Page = () => {
     if (token) {
       await fetchUserInfo();
     }
-    await fetchUserInfo();
 
-    RouterUtil.redirectTo('/pages/home/index');
+    // 获取产品类型
+    await fetchProductType();
+
+    RouterUtil.switchTab('/pages/home/index');
   });
 
   return <Skeleton title rows={10} animated />;

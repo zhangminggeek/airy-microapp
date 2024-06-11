@@ -17,7 +17,11 @@ import IconWeChatNotice from '@/assets/icons/wechat_notice.png';
 export const shopConfig = [
   { icon: IconOrderManagement, name: '订单管理', to: '' },
   { icon: IconCustomerManagement, name: '客户管理', to: '' },
-  { icon: IconDressManagement, name: '服饰管理', to: '' },
+  {
+    icon: IconDressManagement,
+    name: '服饰管理',
+    to: '/pages/dress/management/index',
+  },
   { icon: IconEmployeeManagement, name: '员工管理', to: '' },
   { icon: IconShopManagement, name: '店铺信息', to: '' },
 ];

@@ -8,6 +8,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/dress/action/index",
+          "pathName": "pages/dress/action/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/dress/management/index",
+          "pathName": "pages/dress/management/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/index/index",
           "pathName": "pages/user/index/index",
           "query": "",

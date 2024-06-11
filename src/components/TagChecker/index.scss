@@ -1,0 +1,22 @@
+@import '../../styles/var.scss';
+
+.m-tag-checker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+
+  &-item {
+    padding: 8px 32px;
+    border-radius: 30px;
+    font-size: $font-size-base;
+    font-weight: 400;
+    color: $text-color-base;
+    background-color: $background-color-base;
+
+    &-checked {
+      color: $color-primary;
+      background-color: $color-secondary;
+    }
+  }
+}

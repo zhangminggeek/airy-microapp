@@ -12,7 +12,7 @@ import { PickerView } from '@/components';
 
 import './index.scss';
 
-interface PickerProps<V extends number | string = number>
+export interface PickerProps<V extends number | string = number>
   extends Partial<
     Omit<
       NutPickerProps,

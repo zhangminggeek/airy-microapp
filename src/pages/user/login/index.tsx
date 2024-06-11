@@ -47,7 +47,7 @@ const Page = () => {
   }, [hasRead]);
 
   return (
-    <BasicLayout className={styles.container} fill>
+    <BasicLayout className={styles.container} fill transparent>
       <View className={styles.content}>
         <View className={styles.brand}>
           <Image

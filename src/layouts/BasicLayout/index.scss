@@ -12,13 +12,19 @@
     }
   }
 
+  &:not(.g-basic-layout-transparent) {
+    .g-basic-layout-status-bar,
+    .g-basic-layout-header {
+      background-color: #ffffff;
+    }
+  }
+
   &-header {
     position: relative;
     display: flex;
     align-items: center;
     width: 100vw;
     height: 96px;
-    z-index: 99999;
 
     &-icon {
       position: absolute;

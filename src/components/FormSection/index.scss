@@ -1,0 +1,42 @@
+@import '../../styles/var.scss';
+
+.m-form-section.m-section {
+  &.m-form-section-fill {
+    padding: 0;
+  }
+
+  .m-section-header {
+    margin-bottom: 24px;
+
+    .m-title-text {
+      font-size: $font-size-base;
+      font-weight: 400;
+    }
+  }
+
+  .m-section-body {
+    & > .nut-cell {
+      padding: 24px 0;
+    }
+  }
+
+  .nut-form-item-label {
+    padding-left: 32px;
+
+    .required {
+      left: 0.4em;
+    }
+  }
+
+  .nut-cell-value {
+    padding-right: 32px;
+  }
+
+  .nut-textarea {
+    padding: 0;
+
+    textarea {
+      height: 200px;
+    }
+  }
+}

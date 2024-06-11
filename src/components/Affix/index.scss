@@ -2,4 +2,11 @@
   position: fixed;
   bottom: 120px;
   right: 40px;
+
+  .m-affix-btn.nut-button {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+  }
 }

@@ -15,22 +15,24 @@ interface AffixProps {
 
 import './index.scss';
 
+const PREFIX_CLS = 'm-affix';
+
 const Affix: FC<AffixProps> = ({ className, style, children, onClick }) => {
   const renderContent = () => {
     const content = children ?? (
       <Button
-        style={{ width: '40px' }}
+        className={`${PREFIX_CLS}-btn`}
         type="primary"
         size="large"
         shape="round"
-        icon={<Plus width="28px" height="28px" />}
+        icon={<Plus size={28} />}
       />
     );
     return cloneElement(content, { onClick });
   };
 
   return (
-    <View className={classnames('m-affix', className)} style={style}>
+    <View className={classnames(PREFIX_CLS, className)} style={style}>
       {renderContent()}
     </View>
   );

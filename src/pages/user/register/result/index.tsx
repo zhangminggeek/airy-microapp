@@ -13,7 +13,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout>
+    <BasicLayout transparent>
       <Result
         title="注册成功"
         desc="请等待审核，审核需要1-3个工作日"

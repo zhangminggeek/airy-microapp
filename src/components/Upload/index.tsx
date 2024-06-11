@@ -1,6 +1,6 @@
 import { Add, Close } from '@nutui/icons-react-taro';
 import { ImagePreview, Loading } from '@nutui/nutui-react-taro';
-import { Image, View } from '@tarojs/components';
+import { Image, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import dayjs from 'dayjs';
@@ -21,6 +21,7 @@ interface UploadProps {
   maxCount?: number; // 最大上传数量
   maxFileSize?: number; // 最大文件大小，单位字节
   sourceType?: Array<'album' | 'camera'>;
+  placeholder?: string;
   value?: ValueType;
   onChange?: (value: ValueType) => void;
 }
@@ -33,6 +34,7 @@ const Upload: FC<UploadProps> = ({
   maxCount = 1,
   maxFileSize,
   sourceType = ['album', 'camera'],
+  placeholder,
   value = [],
   onChange,
 }) => {
@@ -113,6 +115,7 @@ const Upload: FC<UploadProps> = ({
   const handleDelete = (index: number) => {
     const ret = [...value];
     ret.splice(index, 1);
+    console.log('handleDelete', ret);
     onChange?.(ret);
   };
 
@@ -153,7 +156,12 @@ const Upload: FC<UploadProps> = ({
           {uploading ? (
             <Loading />
           ) : (
-            <Add className={`${PREFIX_CLS}-btn-icon`} />
+            <View className={`${PREFIX_CLS}-btn-content`}>
+              <Add className={`${PREFIX_CLS}-btn-icon`} />
+              <Text className={`${PREFIX_CLS}-btn-placeholder`}>
+                {placeholder}
+              </Text>
+            </View>
           )}
         </View>
       ) : null}

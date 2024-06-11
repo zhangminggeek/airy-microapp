@@ -44,8 +44,6 @@ const AdministrativePicker: FC<AdministrativePickerProps> = ({
     <PickerView
       className={classnames(PREFIX_CLS, className)}
       style={style}
-      block
-      arrowType="right"
       text={text}
       onClick={() => {
         setVisible(true);

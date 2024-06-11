@@ -1,0 +1,9 @@
+@import '../../../styles/var.scss';
+
+.container {
+  :global {
+    .nut-cell-group-wrap {
+      background-color: transparent;
+    }
+  }
+}

@@ -20,7 +20,7 @@ interface BasicLayoutProps {
   title?: ReactNode;
   fill?: boolean;
   back?: boolean;
-  home?: boolean;
+  transparent?: boolean;
   loading?: boolean;
   share?: boolean;
   safeArea?: boolean;
@@ -35,6 +35,7 @@ const BasicLayout: FC<BasicLayoutProps> = ({
   children,
   title,
   fill = false,
+  transparent = false,
   back = false,
   loading = false,
   share = true,
@@ -55,13 +56,19 @@ const BasicLayout: FC<BasicLayoutProps> = ({
     <View
       className={classnames(
         PREFIX_CLS,
-        { [`${PREFIX_CLS}-fill`]: fill },
+        {
+          [`${PREFIX_CLS}-fill`]: fill,
+          [`${PREFIX_CLS}-transparent`]: transparent,
+        },
         className,
       )}
       style={style}
       id="g-basic-layout"
     >
-      <View style={{ height: `${statusBarHeight}px` }} />
+      <View
+        className={`${PREFIX_CLS}-status-bar`}
+        style={{ height: `${statusBarHeight}px` }}
+      />
       <View className={`${PREFIX_CLS}-header`}>
         {back && (
           <ArrowLeft

@@ -16,6 +16,9 @@ export default {
     'pages/requirement/index',
     // 我的
     'pages/user/index/index',
+    // 服装管理
+    'pages/dress/management/index',
+    'pages/dress/action/index',
   ],
   window: {
     backgroundTextStyle: 'dark',
