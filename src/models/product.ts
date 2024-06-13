@@ -29,7 +29,8 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   sizeList: [],
   fieldMap: new Map(),
   fetchProductType: async () => {
-    if (get().typeList.length) return;
+    const { typeList } = get();
+    if (typeList.length) return;
     const res = await getProductType();
     set({ typeList: res.data });
   },

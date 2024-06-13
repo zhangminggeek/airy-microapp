@@ -8,7 +8,7 @@ import {
   Table,
 } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -40,9 +40,29 @@ const ProductInventoryPicker: FC<ProductInventoryPickerProps> = ({
   const [visibleSizePicker, setVisibleSizePicker] = useState<boolean>(false);
   // 组件内部值
   const [internalValue, setInternalValue] = useState<ValueType>([]);
+  // 尺码选择器的值
+  const [sizePickerSelectedIndex, setSizePickerSelectedIndex] =
+    useState<number>(0);
 
   // 尺码选项
   const { data = [] } = useRequest(getProductSizeOption);
+
+  // 尺码选项
+  const options = useMemo(() => {
+    return data
+      ?.filter((item) => {
+        // 过滤掉已被选的选项
+        const checkedSizeIdList = internalValue?.map((field) => field.sizeId);
+        return !checkedSizeIdList.includes(item.id);
+      })
+      ?.map((item) => ({ text: item.name, value: item.id }));
+  }, [data, internalValue]);
+
+  useEffect(() => {
+    if (visibleSizePicker) {
+      setSizePickerSelectedIndex(0);
+    }
+  }, [visibleSizePicker]);
 
   const handleChange = (val: number, index: number) => {
     const ret = [...internalValue];
@@ -151,28 +171,26 @@ const ProductInventoryPicker: FC<ProductInventoryPickerProps> = ({
           <SafeArea position="bottom" />
         </Popup>
       </PickerView>
-      <Picker
-        options={data
-          ?.filter((item) => {
-            // 过滤掉已被选的选项
-            const checkedSizeIdList = internalValue?.map(
-              (field) => field.sizeId,
-            );
-            return !checkedSizeIdList.includes(item.id);
-          })
-          ?.map((item) => ({ text: item.name, value: item.id }))}
-        visible={visibleSizePicker}
-        onConfirm={(_, selectedValue: number[]) => {
-          setInternalValue([
-            ...internalValue,
-            { sizeId: selectedValue[0], count: 0 },
-          ]);
-          setVisibleSizePicker(false);
-        }}
-        onClose={() => {
-          setVisibleSizePicker(false);
-        }}
-      />
+      {data?.length ? (
+        <Picker
+          value={[options[sizePickerSelectedIndex]?.value]}
+          options={options}
+          visible={visibleSizePicker}
+          onChange={(_, __, index) => {
+            setSizePickerSelectedIndex(index);
+          }}
+          onConfirm={(_, selectedValue: number[]) => {
+            setInternalValue([
+              ...internalValue,
+              { sizeId: selectedValue[0], count: 1 },
+            ]);
+            setVisibleSizePicker(false);
+          }}
+          onClose={() => {
+            setVisibleSizePicker(false);
+          }}
+        />
+      ) : null}
     </Fragment>
   );
 };

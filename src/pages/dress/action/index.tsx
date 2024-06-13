@@ -82,12 +82,12 @@ const Page = () => {
             noStyle
             rules={[{ required: true, message: '请上传商品图片' }]}
           >
-            <Upload placeholder="添加商品图片" maxCount={5} />
+            <Upload placeholder="添加商品图片" maxCount={4} />
           </Form.Item>
         </FormSection>
         <FormSection fill>
           <Form.Item label="编号" name="no">
-            <Input maxLength={255} />
+            <Input maxLength={8} />
           </Form.Item>
           <Form.Item label="品牌" name="brand">
             <Input maxLength={255} />
@@ -146,7 +146,7 @@ const Page = () => {
             : null}
         </FormSection>
         <FormSection title="标签">
-          <Form.Item name="tag" noStyle>
+          <Form.Item name="tagIdList" noStyle>
             <TagChecker
               options={tagList?.map((item) => ({
                 label: item.name,

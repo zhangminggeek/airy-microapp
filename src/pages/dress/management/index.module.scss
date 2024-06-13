@@ -1,4 +1,13 @@
+@import '../../../styles/var.scss';
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
+  width: 100vw;
   background-color: #fff;
 
   &-search {
@@ -7,5 +16,58 @@
 }
 
 .body {
+  flex: 1;
+  width: 100vw;
   padding: 24px;
+  overflow-y: auto;
+
+  :global {
+    .m-list {
+      .nut-infinite-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 24px 0;
+      }
+    }
+  }
+
+  .card {
+    width: 340px;
+    background-color: #fff;
+    border-radius: 16px;
+
+    &-header {
+      height: 340px;
+    }
+
+    &-body {
+      height: 148px;
+      padding: 16px;
+
+      &-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 16px;
+      }
+
+      &-content {
+        display: flex;
+        gap: 32px;
+        color: $text-color-secondary;
+        font-size: $font-size-small;
+
+        .no {
+          flex: 1;
+        }
+
+        .lease {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+      }
+    }
+  }
 }

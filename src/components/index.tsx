@@ -12,12 +12,14 @@ import InputCode from './InputCode';
 import InputPassword from './InputPassword';
 import InputSearch from './InputSearch';
 import Link from './Link';
+import List from './List';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
 import Result from './Result';
 import Section from './Section';
 import Space from './Space';
+import Tag from './Tag';
 import TagChecker from './TagChecker';
 import Title from './Title';
 import Upload from './Upload';
@@ -38,12 +40,14 @@ export {
   InputPassword,
   InputSearch,
   Link,
+  List,
   ModalForm,
   Picker,
   PickerView,
   Result,
   Section,
   Space,
+  Tag,
   TagChecker,
   Title,
   Upload,

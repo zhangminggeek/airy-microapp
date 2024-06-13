@@ -2785,7 +2785,24 @@ const dataKey_0_0_0_6 = 'data' as any
  * @分类 服饰
  * @请求头 `GET /product`
  */
-export interface GetProductRequest {}
+export interface GetProductRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 服饰类型code
+   */
+  productTypeCode?: string
+  /**
+   * 服饰名称
+   */
+  name?: string
+}
 
 /**
  * 接口 获取服饰列表 的 **返回类型**
@@ -2795,21 +2812,97 @@ export interface GetProductRequest {}
  */
 export interface GetProductResponse {
   /**
-   * 创建时间
+   * 数据总条数
    */
-  createTime: string
+  total: number
   /**
-   * 修改时间
+   * 数据
    */
-  updateTime: string
-  /**
-   * 服饰id
-   */
-  id: number
-  /**
-   * 服饰
-   */
-  product: string
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 服饰id
+     */
+    id: number
+    /**
+     * 服饰名称
+     */
+    name: string
+    /**
+     * 服饰编号
+     */
+    no?: string
+    /**
+     * 服饰品牌
+     */
+    brand?: string
+    /**
+     * 服饰类型
+     */
+    typeCode: string
+    /**
+     * 描述
+     */
+    desc?: string
+    /**
+     * 租赁次数
+     */
+    leaseCount: number
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+    /**
+     * 库存
+     */
+    inventory: {
+      /**
+       * 库存数据id
+       */
+      id: number
+      /**
+       * 服饰尺码id
+       */
+      sizeId: number
+      /**
+       * 服饰数量
+       */
+      count: number
+      /**
+       * 尺码信息
+       */
+      size: {
+        /**
+         * 尺码id
+         */
+        id: number
+        /**
+         * 尺码
+         */
+        name: string
+      }
+    }[]
+  }[]
 }
 
 /**
@@ -2819,7 +2912,16 @@ export interface GetProductResponse {
  * @请求头 `GET /product`
  */
 type GetProductRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, string, true>
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/product',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'productTypeCode' | 'name',
+    false
+  >
 >
 
 /**
@@ -2839,8 +2941,8 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_6,
   paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
+  queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name'],
+  requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
   requestFunctionName: 'getProduct',
@@ -2854,7 +2956,7 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
  * @分类 服饰
  * @请求头 `GET /product`
  */
-export const getProduct = /*#__PURE__*/ (requestData?: GetProductRequest, ...args: UserRequestRestArgs) => {
+export const getProduct = /*#__PURE__*/ (requestData: GetProductRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductResponse>(prepare(getProductRequestConfig, requestData), ...args)
 }
 
@@ -2872,6 +2974,10 @@ export interface PostProductRequest {
    */
   name: string
   /**
+   * 服饰图片
+   */
+  picList: string[]
+  /**
    * 服饰编号
    */
   no?: string
@@ -2884,33 +2990,30 @@ export interface PostProductRequest {
    */
   typeCode: string
   /**
-   * 服饰颜色
-   */
-  color: string
-  /**
-   * 服饰材质
-   */
-  materialId: number
-  /**
-   * 服饰图片
-   */
-  picList: string[]
-  /**
    * 库存信息
    */
-  inventoryList: {
+  inventory: {
     /**
-     * 服饰id
+     * 服饰尺码id
      */
-    productId: number
-    /**
-     * 服饰尺码
-     */
-    size: string
+    sizeId: number
     /**
      * 服饰数量
      */
     count: number
+  }[]
+  /**
+   * 其他信息
+   */
+  other?: {
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段的值(该字段选项的id)
+     */
+    fieldValue: string
   }[]
   /**
    * 服饰标签
@@ -3314,7 +3417,7 @@ export type GetProductFieldResponse = {
    */
   name: string
   /**
-   * 产品类型编码
+   * 服饰类型编码
    */
   prodectTypeCode: string
 }[]
@@ -3404,7 +3507,7 @@ export type GetProductFieldOptionResponse = {
    */
   fieldKey: string
   /**
-   * 产品类型编码
+   * 服饰类型编码
    */
   prodectTypeCode: string
 }[]
@@ -3502,9 +3605,110 @@ export interface GetProductIdResponse {
    */
   id: number
   /**
-   * 服饰
+   * 服饰名称
    */
-  product: string
+  name: string
+  /**
+   * 服饰编号
+   */
+  no?: string
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 服饰类型
+   */
+  typeCode: string
+  /**
+   * 描述
+   */
+  desc?: string
+  /**
+   * 租赁次数
+   */
+  leaseCount: number
+  /**
+   * 图片
+   */
+  picList: {
+    /**
+     * 服饰图片id
+     */
+    id: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 服饰图片地址
+     */
+    url: string
+  }[]
+  /**
+   * 库存
+   */
+  inventory: {
+    /**
+     * 库存数据id
+     */
+    id: number
+    /**
+     * 服饰尺码id
+     */
+    sizeId: number
+    /**
+     * 服饰数量
+     */
+    count: number
+    /**
+     * 尺码信息
+     */
+    size: {
+      /**
+       * 尺码id
+       */
+      id: number
+      /**
+       * 尺码
+       */
+      name: string
+    }
+  }[]
+  /**
+   * 标签
+   */
+  tagList: {
+    /**
+     * id
+     */
+    id: number
+    /**
+     * 标签id
+     */
+    tagId: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 标签
+     */
+    tag: {
+      /**
+       * 标签id
+       */
+      id: number
+      /**
+       * 标签名称
+       */
+      name: string
+      /**
+       * 用途, 1:服饰标签
+       */
+      use: number
+    }
+  }[]
 }
 
 /**
@@ -3589,7 +3793,7 @@ export type GetTagResponse = {
    */
   name: string
   /**
-   * 用途, 1:产品标签
+   * 用途, 1:服饰标签
    */
   use: number
 }[]

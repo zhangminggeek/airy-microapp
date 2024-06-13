@@ -23,11 +23,9 @@ export class RouterUtil {
    * @param path 路由地址
    */
   private static checkToken(path: string) {
-    console.log('path', path);
     if (this.notReuiredTokenPageList.includes(path)) {
       return;
     }
-    console.log('pass');
     const token = Taro.getStorageSync(StorageKey.TOKEN);
     if (!token) {
       Taro.navigateTo({ url: '/pages/user/login/index' });

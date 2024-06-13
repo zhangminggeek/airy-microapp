@@ -1,0 +1,52 @@
+@import '../../../styles/var.scss';
+
+.info {
+  padding: 24px 32px;
+  background-color: #fff;
+
+  .image {
+    &-group {
+      margin-bottom: 32px;
+    }
+
+    &-item {
+      border-radius: 4px;
+      overflow: hidden;
+
+      &-selected {
+        border: 3px solid $color-primary;
+      }
+    }
+  }
+
+  .other {
+    display: flex;
+    margin-bottom: 20px;
+
+    .tag-group {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lease {
+      font-size: $font-size-small;
+      color: $text-color-secondary;
+      font-weight: 400;
+    }
+  }
+
+  .name {
+    font-size: 36px;
+    color: $text-color-main;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .desc {
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    font-weight: 400;
+  }
+}

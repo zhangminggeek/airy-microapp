@@ -10,6 +10,10 @@ export const TIME_FORMAT = 'HH:mm:ss';
 
 export const DATE_TIME_FORMAT = `${DATE_FORMAT} ${TIME_FORMAT}`;
 
+// 分页默认值
+export const DEFAULT_PAGE_NUM = 1;
+export const DEFAULT_PAGE_SIZE = 20;
+
 // OSS 路径
 export const OSS_PREFIX = `https://front.jiuworker.com/${PROJECT_NAME}/${process.env.OSS_ENV}`;
 // OSS superKey

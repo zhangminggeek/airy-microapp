@@ -1,0 +1,16 @@
+@import '../../styles/var.scss';
+
+.m-tag {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: $font-size-small;
+  line-height: 1em;
+
+  &-primary {
+    color: $color-primary;
+    border: 2px solid $color-primary;
+  }
+}

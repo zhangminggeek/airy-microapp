@@ -19,6 +19,7 @@ export default {
     // 服装管理
     'pages/dress/management/index',
     'pages/dress/action/index',
+    'pages/dress/detail/index',
   ],
   window: {
     backgroundTextStyle: 'dark',

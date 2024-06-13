@@ -1,7 +1,11 @@
-export interface Pagination {
+export type PaginationParams<T> = {
+  pageNum: string;
+  pageSize: string;
+} & T;
+
+export interface PaginationResponse<T> {
+  list: T[];
   total: number;
-  index: number;
-  length: number;
 }
 
 export interface BaseResponse<T = any> {

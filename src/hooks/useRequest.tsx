@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import type { BaseResponse } from '@/interfaces/base';
 
-type FunctionType<P, R> = (params?: P) => Promise<BaseResponse<R>>;
+export type FunctionType<P, R> = (params: P) => Promise<BaseResponse<R>>;
 
 interface BaseOpions<P, R> {
   manual?: boolean;
