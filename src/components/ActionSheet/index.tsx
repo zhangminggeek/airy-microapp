@@ -1,6 +1,5 @@
-import { More } from '@nutui/icons-react-taro';
 import { ActionSheet as NutActionSheet } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { Fragment, useState } from 'react';
 
@@ -44,16 +43,12 @@ const ActionSheet: FC<ActionSheetProps> = ({
   return (
     <Fragment>
       <View
-        className={`${PREFIX_CLS}-icon`}
+        className={`${PREFIX_CLS}-view`}
         onClick={() => {
           setShowActionSheet(true);
         }}
       >
-        {children ?? (
-          <Text className={`${PREFIX_CLS}-icon-default`}>
-            <More size={10} color="#ffffff" />
-          </Text>
-        )}
+        {children}
       </View>
       <NutActionSheet
         className={classnames(PREFIX_CLS, className)}

@@ -1,17 +1,15 @@
-import { Cell } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Space } from '@/components';
-
 import './index.scss';
 
-interface Option {
+export interface Option {
   label: ReactNode;
   field: string;
-  format?: (v: any) => ReactNode;
+  render?: (v: any) => ReactNode;
+  col?: number;
 }
 
 interface DescriptionsProps {
@@ -23,30 +21,41 @@ interface DescriptionsProps {
 }
 
 const PREFIX_CLS = 'm-descriptions';
+const EMPTY_TEXT = '-';
 
 const Descriptions: FC<DescriptionsProps> = ({
   className,
   style,
   colon = true,
-  options,
+  options = [],
   data,
 }) => {
+  const renderContent = (value: any, render: Option['render']) => {
+    const ret = render ? render(value) : value;
+    return ret ?? EMPTY_TEXT;
+  };
+
   return (
-    <Cell.Group className={classnames(PREFIX_CLS, className)} style={style}>
-      {options.map(({ label, field, format }) => (
-        <Cell key={field} className={`${PREFIX_CLS}-cell`}>
-          <Space className={`${PREFIX_CLS}-cell-label`} size={2}>
-            <Text className={`${PREFIX_CLS}-cell-label-text`}>{label}</Text>
+    <View className={classnames(PREFIX_CLS, className)} style={style}>
+      {options?.map((item) => (
+        <View
+          key={item.field}
+          className={classnames(`${PREFIX_CLS}-item`, {
+            [`${PREFIX_CLS}-item-full`]: item.col === 2,
+          })}
+        >
+          <View className={`${PREFIX_CLS}-item-label`}>
+            {item.label}
             {colon ? (
-              <Text className={`${PREFIX_CLS}-cell-label-colon`}>:</Text>
+              <View className={`${PREFIX_CLS}-item-label-colon`}>:</View>
             ) : null}
-          </Space>
-          <View className={`${PREFIX_CLS}-cell-content`}>
-            {(format ? format(data?.[field]) : data?.[field]) ?? '-'}
           </View>
-        </Cell>
+          <View className={`${PREFIX_CLS}-item-content`}>
+            {renderContent(data?.[item.field], item.render)}
+          </View>
+        </View>
       ))}
-    </Cell.Group>
+    </View>
   );
 };
 

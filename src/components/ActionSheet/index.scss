@@ -1,16 +1,6 @@
 .m-action-sheet {
-  &-icon {
+  &-view {
     display: flex;
     align-items: center;
-
-    &-default {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: #135d66;
-    }
   }
 }

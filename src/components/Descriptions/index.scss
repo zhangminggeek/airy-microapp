@@ -1,10 +1,39 @@
+@import '../../styles/var.scss';
+
 .m-descriptions {
-  .m-descriptions-cell {
-    gap: 16px;
-    padding: 24px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 16px;
+  row-gap: 16px;
+
+  &-item {
+    display: flex;
+    align-items: flex-start;
+    font-size: $font-size-base;
+    font-weight: 400;
+
+    &-full {
+      grid-column: 1 / span 2;
+    }
 
     &-label {
-      color: #959595;
+      position: relative;
+      padding-right: 16px;
+      color: $text-color-secondary;
+      flex-shrink: 0;
+
+      &-colon {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        transform: translateY(-50%);
+      }
+    }
+
+    &-content {
+      flex: 1;
+      color: $text-color-main;
+      overflow: hidden;
     }
   }
 }

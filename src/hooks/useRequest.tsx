@@ -11,9 +11,10 @@ interface BaseOpions<P, R> {
   onError?: (error: Error) => void;
 }
 
-type BaseOpionsWithFormat<P, R, U, UU extends U> = {
+interface BaseOpionsWithFormat<P, R, U, UU extends U>
+  extends BaseOpions<P, UU> {
   formatResult: (data: BaseResponse<R>) => U;
-} & BaseOpions<P, UU>;
+}
 
 interface RequestResponse<P, R> {
   loading: boolean;
@@ -25,12 +26,7 @@ export function useRequest<R, P = Record<string, any>>(
   fn: FunctionType<P, R>,
   options?: BaseOpions<P, R>,
 ): RequestResponse<P, R>;
-export function useRequest<
-  R,
-  P = Record<string, any>,
-  U = any,
-  UU extends U = any,
->(
+export function useRequest<R, P, U, UU extends U>(
   fn: FunctionType<P, R>,
   options: BaseOpionsWithFormat<P, R, U, UU>,
 ): RequestResponse<P, U>;

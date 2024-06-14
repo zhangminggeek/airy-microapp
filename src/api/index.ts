@@ -3166,9 +3166,9 @@ putProduct.requestConfig = putProductRequestConfig
  * 接口 删除服饰 的 **请求类型**
  *
  * @分类 服饰
- * @请求头 `DELETE /product`
+ * @请求头 `DELETE /product/{id}`
  */
-export interface DeleteProductRequest {
+export interface DeleteProductIdRequest {
   /**
    * 服饰id
    */
@@ -3179,42 +3179,42 @@ export interface DeleteProductRequest {
  * 接口 删除服饰 的 **返回类型**
  *
  * @分类 服饰
- * @请求头 `DELETE /product`
+ * @请求头 `DELETE /product/{id}`
  */
-export type DeleteProductResponse = any
+export type DeleteProductIdResponse = any
 
 /**
  * 接口 删除服饰 的 **请求配置的类型**
  *
  * @分类 服饰
- * @请求头 `DELETE /product`
+ * @请求头 `DELETE /product/{id}`
  */
-type DeleteProductRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, 'id', false>
+type DeleteProductIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/{id}', 'data', 'id', string, false>
 >
 
 /**
  * 接口 删除服饰 的 **请求配置**
  *
  * @分类 服饰
- * @请求头 `DELETE /product`
+ * @请求头 `DELETE /product/{id}`
  */
-const deleteProductRequestConfig: DeleteProductRequestConfig = /*#__PURE__*/ {
+const deleteProductIdRequestConfig: DeleteProductIdRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_6,
   devUrl: devUrl_0_0_0_6,
   prodUrl: prodUrl_0_0_0_6,
-  path: '/product',
+  path: '/product/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
   dataKey: dataKey_0_0_0_6,
-  paramNames: [],
-  queryNames: ['id'],
+  paramNames: ['id'],
+  queryNames: [],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'deleteProduct',
+  requestFunctionName: 'deleteProductId',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
@@ -3223,13 +3223,280 @@ const deleteProductRequestConfig: DeleteProductRequestConfig = /*#__PURE__*/ {
  * 接口 删除服饰 的 **请求函数**
  *
  * @分类 服饰
- * @请求头 `DELETE /product`
+ * @请求头 `DELETE /product/{id}`
  */
-export const deleteProduct = /*#__PURE__*/ (requestData: DeleteProductRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteProductResponse>(prepare(deleteProductRequestConfig, requestData), ...args)
+export const deleteProductId = /*#__PURE__*/ (requestData: DeleteProductIdRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteProductIdResponse>(prepare(deleteProductIdRequestConfig, requestData), ...args)
 }
 
-deleteProduct.requestConfig = deleteProductRequestConfig
+deleteProductId.requestConfig = deleteProductIdRequestConfig
+
+/**
+ * 接口 获取服饰信息 的 **请求类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/{id}`
+ */
+export interface GetProductIdRequest {
+  /**
+   * 服饰id
+   */
+  id: string
+}
+
+/**
+ * 接口 获取服饰信息 的 **返回类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/{id}`
+ */
+export interface GetProductIdResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 服饰id
+   */
+  id: number
+  /**
+   * 服饰名称
+   */
+  name: string
+  /**
+   * 服饰编号
+   */
+  no?: string
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 服饰类型
+   */
+  typeCode: string
+  /**
+   * 描述
+   */
+  desc?: string
+  /**
+   * 租赁次数
+   */
+  leaseCount: number
+  /**
+   * 产品类型
+   */
+  productType: {
+    /**
+     * 类型id
+     */
+    id: number
+    /**
+     * 类型名称
+     */
+    name: string
+    /**
+     * 类型编码
+     */
+    code: string
+  }
+  /**
+   * 图片
+   */
+  picList: {
+    /**
+     * 服饰图片id
+     */
+    id: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 服饰图片地址
+     */
+    url: string
+  }[]
+  /**
+   * 库存
+   */
+  inventory: {
+    /**
+     * 库存数据id
+     */
+    id: number
+    /**
+     * 服饰尺码id
+     */
+    sizeId: number
+    /**
+     * 服饰数量
+     */
+    count: number
+    /**
+     * 尺码信息
+     */
+    size: {
+      /**
+       * 尺码id
+       */
+      id: number
+      /**
+       * 尺码
+       */
+      name: string
+    }
+  }[]
+  /**
+   * 标签
+   */
+  tagList: {
+    /**
+     * id
+     */
+    id: number
+    /**
+     * 标签id
+     */
+    tagId: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 标签
+     */
+    tag: {
+      /**
+       * 标签id
+       */
+      id: number
+      /**
+       * 标签名称
+       */
+      name: string
+      /**
+       * 用途, 1:服饰标签
+       */
+      use: number
+    }
+  }[]
+  /**
+   * 其他字段信息
+   */
+  fieldList: {
+    /**
+     * 选项id
+     */
+    id: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段的值(该字段选项的id)
+     */
+    fieldValue: string
+    /**
+     * 字段key信息
+     */
+    fieldKeyInfo: {
+      /**
+       * 字段id
+       */
+      id: number
+      /**
+       * 字段key
+       */
+      key: string
+      /**
+       * 字段名
+       */
+      name: string
+      /**
+       * 服饰类型编码
+       */
+      prodectTypeCode: string
+    }
+    /**
+     * 字段值信息
+     */
+    fieldValueInfo: {
+      /**
+       * 选项id
+       */
+      id: number
+      /**
+       * 选项名
+       */
+      name: string
+      /**
+       * 字段key
+       */
+      fieldKey: string
+      /**
+       * 服饰类型编码
+       */
+      prodectTypeCode: string
+    }
+  }[]
+}
+
+/**
+ * 接口 获取服饰信息 的 **请求配置的类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/{id}`
+ */
+type GetProductIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 获取服饰信息 的 **请求配置**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/{id}`
+ */
+const getProductIdRequestConfig: GetProductIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/product/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getProductId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取服饰信息 的 **请求函数**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/{id}`
+ */
+export const getProductId = /*#__PURE__*/ (requestData: GetProductIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetProductIdResponse>(prepare(getProductIdRequestConfig, requestData), ...args)
+}
+
+getProductId.requestConfig = getProductIdRequestConfig
 
 /**
  * 接口 获取服饰类型 的 **请求类型**
@@ -3571,193 +3838,6 @@ export const getProductFieldOption = /*#__PURE__*/ (
 }
 
 getProductFieldOption.requestConfig = getProductFieldOptionRequestConfig
-
-/**
- * 接口 获取服饰信息 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
-export interface GetProductIdRequest {
-  /**
-   * 服饰id
-   */
-  id: string
-}
-
-/**
- * 接口 获取服饰信息 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
-export interface GetProductIdResponse {
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 服饰id
-   */
-  id: number
-  /**
-   * 服饰名称
-   */
-  name: string
-  /**
-   * 服饰编号
-   */
-  no?: string
-  /**
-   * 服饰品牌
-   */
-  brand?: string
-  /**
-   * 服饰类型
-   */
-  typeCode: string
-  /**
-   * 描述
-   */
-  desc?: string
-  /**
-   * 租赁次数
-   */
-  leaseCount: number
-  /**
-   * 图片
-   */
-  picList: {
-    /**
-     * 服饰图片id
-     */
-    id: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 服饰图片地址
-     */
-    url: string
-  }[]
-  /**
-   * 库存
-   */
-  inventory: {
-    /**
-     * 库存数据id
-     */
-    id: number
-    /**
-     * 服饰尺码id
-     */
-    sizeId: number
-    /**
-     * 服饰数量
-     */
-    count: number
-    /**
-     * 尺码信息
-     */
-    size: {
-      /**
-       * 尺码id
-       */
-      id: number
-      /**
-       * 尺码
-       */
-      name: string
-    }
-  }[]
-  /**
-   * 标签
-   */
-  tagList: {
-    /**
-     * id
-     */
-    id: number
-    /**
-     * 标签id
-     */
-    tagId: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 标签
-     */
-    tag: {
-      /**
-       * 标签id
-       */
-      id: number
-      /**
-       * 标签名称
-       */
-      name: string
-      /**
-       * 用途, 1:服饰标签
-       */
-      use: number
-    }
-  }[]
-}
-
-/**
- * 接口 获取服饰信息 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
-type GetProductIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 获取服饰信息 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
-const getProductIdRequestConfig: GetProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
-  path: '/product/{id}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getProductId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 获取服饰信息 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
-export const getProductId = /*#__PURE__*/ (requestData: GetProductIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetProductIdResponse>(prepare(getProductIdRequestConfig, requestData), ...args)
-}
-
-getProductId.requestConfig = getProductIdRequestConfig
 
 const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_7 = '' as any
