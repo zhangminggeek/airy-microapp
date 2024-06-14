@@ -1,14 +1,15 @@
 import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 import ProductFieldPicker from './ProductFieldPicker';
 import ProductInventoryPicker from './ProductInventoryPicker';
 import ProductTypePicker from './ProductTypePicker';
 
-import { getTag, postProduct } from '@/api';
+import { getProductId, getTag, postProduct, putProduct } from '@/api';
 import { FormSection, TagChecker, Upload } from '@/components';
+import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useProductStore } from '@/models/product';
@@ -16,17 +17,71 @@ import { RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
+  const [form] = Form.useForm();
 
   // 当前选中的服饰类型code
   const [currentCode, setCurrentCode] = useState<string>();
 
   const { fieldMap, fetchProjectField } = useProductStore((state) => state);
 
+  useEffect(() => {
+    if (id) {
+      fetchDetail({ id: `${id}` });
+    }
+  }, []);
+
   // 获取标签选项
-  const { data: tagList } = useRequest(getTag, { defaultParams: { use: '1' } });
+  const { data: tagList } = useRequest(getTag, {
+    defaultParams: { use: `${TagType.PRODUCT}` },
+  });
+
+  // 获取详情
+  const { run: fetchDetail } = useRequest(getProductId, {
+    manual: true,
+    async onSuccess(data) {
+      const {
+        name,
+        picList,
+        no,
+        brand,
+        typeCode,
+        inventory,
+        fieldList,
+        tagList,
+        desc,
+      } = data;
+      await fetchProjectField(typeCode);
+      const formData: Record<string, any> = {
+        name,
+        picList: picList.map((item) => item.url),
+        no,
+        brand,
+        typeCode,
+        inventory: inventory?.map((item) => ({
+          sizeId: item.sizeId,
+          count: item.count,
+        })),
+        tagIdList: tagList.map((item) => item.tagId),
+        desc,
+      };
+      fieldList.forEach((item) => {
+        formData[item.fieldKey] = item.fieldValue;
+      });
+      form.setFieldsValue(formData);
+      setCurrentCode(typeCode);
+    },
+  });
 
   // 创建服饰
   const { run: create } = useRequest(postProduct, {
+    manual: true,
+    onSuccess() {
+      RouterUtil.navigateBack();
+    },
+  });
+
+  // 更新服饰
+  const { run: update } = useRequest(putProduct, {
     manual: true,
     onSuccess() {
       RouterUtil.navigateBack();
@@ -41,6 +96,7 @@ const Page = () => {
     >
       <Form
         className="form-with-footer"
+        form={form}
         labelPosition="left"
         divider
         footer={
@@ -51,7 +107,7 @@ const Page = () => {
         onFinish={async (values) => {
           const params = {
             ...values,
-            other: Array.from(fieldMap.get(currentCode!) ?? [])?.map(
+            fieldList: Array.from(fieldMap.get(currentCode!) ?? [])?.map(
               (item) => ({
                 fieldKey: item.key,
                 fieldValue: values?.[item.key],
@@ -59,7 +115,7 @@ const Page = () => {
             ),
           };
           if (id) {
-            // ...
+            await update({ ...params, id });
           } else {
             await create(params);
           }

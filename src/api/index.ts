@@ -3005,7 +3005,7 @@ export interface PostProductRequest {
   /**
    * 其他信息
    */
-  other?: {
+  fieldList?: {
     /**
      * 字段key
      */
@@ -3013,7 +3013,7 @@ export interface PostProductRequest {
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: string
+    fieldValue: number
   }[]
   /**
    * 服饰标签
@@ -3089,21 +3089,63 @@ postProduct.requestConfig = postProductRequestConfig
  */
 export interface PutProductRequest {
   /**
+   * 服饰名称
+   */
+  name: string
+  /**
+   * 服饰图片
+   */
+  picList: string[]
+  /**
+   * 服饰编号
+   */
+  no?: string
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 服饰类型code
+   */
+  typeCode: string
+  /**
+   * 库存信息
+   */
+  inventory: {
+    /**
+     * 服饰尺码id
+     */
+    sizeId: number
+    /**
+     * 服饰数量
+     */
+    count: number
+  }[]
+  /**
+   * 其他信息
+   */
+  fieldList?: {
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段的值(该字段选项的id)
+     */
+    fieldValue: number
+  }[]
+  /**
+   * 服饰标签
+   */
+  tagIdList?: number[]
+  /**
+   * 描述
+   */
+  desc?: string
+  /**
    * 服饰id
    */
   id: number
-  /**
-   * 服饰
-   */
-  product: string
-  /**
-   * 密码（明文）
-   */
-  password: string
-  /**
-   * 微信用户唯一标识
-   */
-  openid?: string
 }
 
 /**
@@ -3404,7 +3446,7 @@ export interface GetProductIdResponse {
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: string
+    fieldValue: number
     /**
      * 字段key信息
      */

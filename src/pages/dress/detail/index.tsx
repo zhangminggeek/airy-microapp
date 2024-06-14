@@ -1,7 +1,7 @@
 import { ArrowRight } from '@nutui/icons-react-taro';
 import { Button, Image, ImagePreview, SafeArea } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import { useRouter } from '@tarojs/taro';
+import { useDidShow, useRouter } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
 
@@ -24,14 +24,18 @@ const Page = () => {
   // 是否显示大图预览
   const [showPreview, setShowPreview] = useState<boolean>(false);
 
+  useDidShow(() => {
+    fetchDetail({ id: `${id}` });
+  });
+
   // 获取服饰详情
-  const { data } = useRequest<
+  const { data, run: fetchDetail } = useRequest<
     GetProductIdResponse,
     GetProductIdRequest,
     GetProductIdResponse,
     any
   >(getProductId, {
-    defaultParams: { id: `${id}` },
+    manual: true,
     formatResult(res) {
       const { data } = res;
       const ret = { ...data, productTypeName: data?.productType?.name };
