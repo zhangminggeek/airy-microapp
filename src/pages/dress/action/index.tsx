@@ -95,7 +95,6 @@ const Page = () => {
       back
     >
       <Form
-        className="form-with-footer"
         form={form}
         labelPosition="left"
         divider

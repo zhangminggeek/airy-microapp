@@ -11,7 +11,7 @@ import { useGlobalStore } from '@/models';
 
 type ValueType = [string, string, string];
 
-interface AdministrativePickerProps {
+interface RegionPickerProps {
   className?: string;
   style?: CSSProperties;
   value?: ValueType;
@@ -20,7 +20,7 @@ interface AdministrativePickerProps {
 
 const PREFIX_CLS = 'm-administrative-picker';
 
-const AdministrativePicker: FC<AdministrativePickerProps> = ({
+const RegionPicker: FC<RegionPickerProps> = ({
   className,
   style,
   value,
@@ -28,6 +28,7 @@ const AdministrativePicker: FC<AdministrativePickerProps> = ({
 }) => {
   const {
     administrativeCodeMap,
+    administrativeCodeTree,
     fetchAdministrativeCode,
     saveAdministrativeCode,
   } = useGlobalStore((state) => state);
@@ -35,10 +36,17 @@ const AdministrativePicker: FC<AdministrativePickerProps> = ({
   const [visible, setVisible] = useState<boolean>(false);
 
   const text = useMemo(() => {
-    return value
-      ?.map((code) => administrativeCodeMap.get(code)?.name)
-      ?.join(' / ');
-  }, [value, administrativeCodeMap]);
+    if (!value?.length) {
+      return;
+    }
+    const [provinceCode, cityCode, areaCode] = value || [];
+    const province = administrativeCodeTree.find(
+      (item) => item.code === provinceCode,
+    );
+    const city = province?.children?.find((item) => item.code === cityCode);
+    const area = city?.children?.find((item) => item.code === areaCode);
+    return [province?.name, city?.name, area?.name];
+  }, [value, administrativeCodeTree]);
 
   return (
     <PickerView
@@ -77,4 +85,4 @@ const AdministrativePicker: FC<AdministrativePickerProps> = ({
   );
 };
 
-export default AdministrativePicker;
+export default RegionPicker;

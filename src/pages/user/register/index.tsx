@@ -1,13 +1,12 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
-import classnames from 'classnames';
 
 import styles from './index.module.scss';
 
 import type { CompanyInfo } from './interfaces';
 
-import { AdministrativePicker, Link, Upload } from '@/components';
+import { Link, RegionPicker, Upload } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
@@ -36,7 +35,7 @@ const Page = () => {
     >
       <View className={styles.content}>
         <Form
-          className={classnames('form-with-footer', 'form-large')}
+          className="form-large"
           labelPosition="left"
           footer={
             <Button
@@ -91,7 +90,7 @@ const Page = () => {
             name="region"
             rules={[{ required: true, message: '请选择店铺地址' }]}
           >
-            <AdministrativePicker />
+            <RegionPicker />
           </Form.Item>
           <Form.Item
             label="详细地址"

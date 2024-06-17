@@ -1,14 +1,24 @@
 import { Dialog } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import { useRef } from 'react';
 
 import type { DialogProps } from '@nutui/nutui-react-taro';
 
-interface UseDialogProps extends Partial<Omit<DialogProps, 'id' | 'visible'>> {
-  id: string;
-  center?: boolean;
+interface OpenParams<P> extends DialogProps {
+  params?: P;
 }
 
-export const useDialog = ({
+interface UseDialogProps<P extends Record<string, any> = any>
+  extends Partial<Omit<DialogProps, 'id' | 'visible' | 'onConfirm'>> {
+  id: string;
+  center?: boolean;
+  onConfirm?: (
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    params?: P,
+  ) => void;
+}
+
+export const useDialog = <P extends Record<string, any> = any>({
   id,
   content,
   center = true,
@@ -16,12 +26,18 @@ export const useDialog = ({
   onConfirm,
   onCancel,
   ...rest
-}: UseDialogProps) => {
-  const open = (props?: DialogProps) => {
-    Dialog.open(id, { ...props });
+}: UseDialogProps<P>) => {
+  const params = useRef<P>();
+
+  const open = (props?: OpenParams<P>) => {
+    const { params: p, ...restProps } = props ?? {};
+    params.current = p;
+    console.log('props', restProps);
+    Dialog.open(id, { ...restProps });
   };
 
   const close = () => {
+    params.current = undefined;
     Dialog.close(id);
   };
 
@@ -30,13 +46,13 @@ export const useDialog = ({
       <Dialog
         id={id}
         lockScroll={lockScroll}
-        onConfirm={() => {
-          onConfirm?.();
-          Dialog.close(id);
+        onConfirm={(e) => {
+          onConfirm?.(e, params.current);
+          close();
         }}
         onCancel={() => {
           onCancel?.();
-          Dialog.close(id);
+          close();
         }}
         {...rest}
       >

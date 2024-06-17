@@ -25,7 +25,7 @@ const CaptchaLogin = () => {
 
   return (
     <Form
-      className={classnames('form-with-footer', 'form-large', styles.form)}
+      className={classnames('form-large', styles.form)}
       labelPosition="left"
       footer={
         <Button type="primary" formType="submit" size="xlarge" block>

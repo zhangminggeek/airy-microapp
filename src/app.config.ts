@@ -21,6 +21,12 @@ export default {
     'pages/dress/action/index',
     'pages/dress/detail/index',
   ],
+  subpackages: [
+    {
+      root: 'packageAddress',
+      pages: ['pages/management/index', 'pages/action/index'],
+    },
+  ],
   window: {
     backgroundTextStyle: 'dark',
     navigationStyle: 'custom',

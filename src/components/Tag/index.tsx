@@ -8,7 +8,7 @@ import './index.scss';
 interface TagProps {
   className?: string;
   style?: CSSProperties;
-  type?: 'primary';
+  type: 'primary';
   children?: ReactNode;
 }
 

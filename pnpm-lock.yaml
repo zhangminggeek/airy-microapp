@@ -12,8 +12,8 @@ dependencies:
     specifier: ^1.0.4
     version: 1.0.4
   '@nutui/nutui-react-taro':
-    specifier: ^2.6.8
-    version: 2.6.8(react-dom@18.3.1)(react@18.3.1)
+    specifier: ^2.6.9
+    version: 2.6.9(react-dom@18.3.1)(react@18.3.1)
   '@tarojs/components':
     specifier: 3.6.30
     version: 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30)(@tarojs/shared@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)(react@18.3.1)
@@ -82,7 +82,7 @@ dependencies:
     version: 18.3.1(react@18.3.1)
   taro-hooks:
     specifier: latest
-    version: 2.0.10(@tarojs/taro-h5@3.6.30)(@tarojs/taro@3.6.30)
+    version: 2.0.10(@tarojs/taro-h5@3.6.32)(@tarojs/taro@3.6.30)
   zustand:
     specifier: ^4.5.2
     version: 4.5.2(@types/react@18.3.3)(react@18.3.1)
@@ -1683,6 +1683,13 @@ packages:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  /@babel/runtime@7.24.7:
+    resolution: {integrity: sha512-UwgBRMjJP+xv857DCngvqXI3Iq6J4v0wXmwc6sapg+zyhbwmQX67LUEFrkK5tbyJ30jGuG3ZvWpBiB9LCy1kWw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+    dev: false
+
   /@babel/template@7.24.0:
     resolution: {integrity: sha512-Bkf2q8lMB0AFpX0NFEqSbx1OkTHf0f+0j82mkw+ZpzBnkk7e9Ql0891vlfgi+kHwOk8tQjiQHpqh4LaSa0fKEA==}
     engines: {node: '>=6.9.0'}
@@ -2255,8 +2262,8 @@ packages:
     resolution: {integrity: sha512-2sDhJXJPAgatSg8dSWVYLYVvxCZo2OIWpSzVO0xkyCU0X6pWtKt7Hh26UbT9PTWaTfg9cX9xqwYvBkkxUypvSQ==}
     dev: false
 
-  /@nutui/nutui-react-taro@2.6.8(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-bQW4FlJsamaehs2+Ras5k2UCzJhUrUHXO44J4zv18Ztd7PvpdmRRee4xPg9sqoGRyokyt/buD35p0+xwrkk2cA==}
+  /@nutui/nutui-react-taro@2.6.9(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-SgJcgsBzGTEjbkvj4xI4z5i3VTxrGP6IKi647FffF6oyP3HBoCs5X2eMTM7VmzbLJ5RQP1H2kMqQsZf6P8KkgQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -2573,7 +2580,7 @@ packages:
     resolution: {integrity: sha512-rfMr5KHzIkGcesiNGpTgdw0pKwJrUbtK0ZThp2u2otBPqoOuH7ohIJBGuwbPosrBl/Vfx5Fh0LH7n6SFl2g1PA==}
     dev: false
 
-  /@taro-hooks/use-request@2.0.10(@tarojs/taro-h5@3.6.30)(@tarojs/taro@3.6.30):
+  /@taro-hooks/use-request@2.0.10(@tarojs/taro-h5@3.6.32)(@tarojs/taro@3.6.30):
     resolution: {integrity: sha512-HfICQcJFZ9XlGfp704X2wbQWzVFAIFo79jfwf3maApFff5YvhIno/CfFFloAG2humEjAr2lesXLPFJ7dVA1YmA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -2583,9 +2590,9 @@ packages:
       '@taro-hooks/ahooks': 2.0.10
       '@taro-hooks/shared': 2.0.10
       '@tarojs/taro': 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)
-      '@tarojs/taro-h5': 3.6.30(@tarojs/components@3.6.30)(@tarojs/taro@3.6.30)
+      '@tarojs/taro-h5': 3.6.32(@tarojs/components@3.6.30)(@tarojs/taro@3.6.30)
       lodash-wechat: 1.0.0
-      taro-hooks: 2.0.10(@tarojs/taro-h5@3.6.30)(@tarojs/taro@3.6.30)
+      taro-hooks: 2.0.10(@tarojs/taro-h5@3.6.32)(@tarojs/taro@3.6.30)
     dev: false
 
   /@tarojs/api@3.6.30:
@@ -2594,6 +2601,14 @@ packages:
       '@babel/runtime': 7.24.6
       '@tarojs/runtime': 3.6.30(@tarojs/shared@3.6.30)
       '@tarojs/shared': 3.6.30
+
+  /@tarojs/api@3.6.32:
+    resolution: {integrity: sha512-+QlaylfS6quKJTU8upPzP9PYFD8u5kY4xGnKBHou9OLIF1N6wyxuVm4aUocNBQqbYYu4a7cyZN01kMCJzJaMoA==}
+    dependencies:
+      '@babel/runtime': 7.24.7
+      '@tarojs/runtime': 3.6.32(@tarojs/shared@3.6.32)
+      '@tarojs/shared': 3.6.32
+    dev: false
 
   /@tarojs/binding-darwin-arm64@3.6.30:
     resolution: {integrity: sha512-C+V7d0+uyVu3cDGGSP/Vh6uGcQSGIG6O92Q09TDpSqLa7TQEKqhHB4U1MCsuShRpuzLNG1RbUTn9AWBU71W5mQ==}
@@ -3112,6 +3127,24 @@ packages:
       universal-router: 8.3.0
     dev: false
 
+  /@tarojs/router@3.6.32(@tarojs/runtime@3.6.32)(@tarojs/shared@3.6.32)(@tarojs/taro@3.6.30):
+    resolution: {integrity: sha512-Z8/fcaVunSfnY8NjoN1o8G48hnn+idKr4zUBiH/d8q/A66rozTT1fffls8pJOlk6cTICGkYltIPUAtzJ7VWz5A==}
+    peerDependencies:
+      '@tarojs/runtime': 3.6.32
+      '@tarojs/shared': 3.6.32
+      '@tarojs/taro': 3.6.32
+    dependencies:
+      '@tarojs/runtime': 3.6.32(@tarojs/shared@3.6.32)
+      '@tarojs/shared': 3.6.32
+      '@tarojs/taro': 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)
+      dingtalk-jsapi: 2.15.4
+      history: 5.3.0
+      mobile-detect: 1.4.5
+      query-string: 7.1.3
+      tslib: 2.6.3
+      universal-router: 8.3.0
+    dev: false
+
   /@tarojs/runner-utils@3.6.30:
     resolution: {integrity: sha512-pM1WkEXNckQmwRlQg7RGxTwxdyffVX/y2eGkcbDxUZ6csCi7IZkr0z6tmyK6suqylLYf8bTAFRwIN6Kb3MSJcw==}
     dependencies:
@@ -3130,6 +3163,16 @@ packages:
       '@tarojs/shared': 3.6.30
       lodash-es: 4.17.21
       tslib: 2.6.2
+
+  /@tarojs/runtime@3.6.32(@tarojs/shared@3.6.32):
+    resolution: {integrity: sha512-1W46qkKaSEU9NctryijvE4jgVJA83jBRrKBickmiRKFdoS36CmxN/djm6N1ae9NSp/95xldQzM/aTTQfLf4e3g==}
+    peerDependencies:
+      '@tarojs/shared': ~3.6.32
+    dependencies:
+      '@tarojs/shared': 3.6.32
+      lodash-es: 4.17.21
+      tslib: 2.6.3
+    dev: false
 
   /@tarojs/service@3.6.30(@tarojs/shared@3.6.30)(@tarojs/taro@3.6.30):
     resolution: {integrity: sha512-asTYSqPIz5nHbmORUSeSZDywHixrPax/QsQecYaSmYyngbtRWxIf2n59U71kIUsrhtTic52zAOlTdl9bltf1QA==}
@@ -3153,6 +3196,10 @@ packages:
   /@tarojs/shared@3.6.30:
     resolution: {integrity: sha512-lS70MNmPARc3W28ZWIWJ4y2fk52uVHmYgHmMsEy0SmcjARihn0ED2j/AIvDWsZR8vxt33KEnG/7ZH6ZgRlp0gA==}
 
+  /@tarojs/shared@3.6.32:
+    resolution: {integrity: sha512-y3NOpkcWMPYmj6vnNPsjwDTHufIrXF71FC5uwXgGIxX/yRiff3raTdksH3qpo0A4oorvfbvFrcPua6GCH+EvZA==}
+    dev: false
+
   /@tarojs/taro-h5@3.6.30(@tarojs/components@3.6.30)(@tarojs/taro@3.6.30):
     resolution: {integrity: sha512-HHeEUilDcOExwACNTiDYo6d2WLFmXKG8IYX5Ka1Aih/4U00OQDYwiUVsYRGSpjAV+Q5TeTEazKy0QrNckTjeWQ==}
     peerDependencies:
@@ -3172,6 +3219,30 @@ packages:
       platform: 1.3.6
       query-string: 7.1.3
       tslib: 2.6.2
+      whatwg-fetch: 3.6.20
+    transitivePeerDependencies:
+      - '@tarojs/taro'
+    dev: false
+
+  /@tarojs/taro-h5@3.6.32(@tarojs/components@3.6.30)(@tarojs/taro@3.6.30):
+    resolution: {integrity: sha512-hSJ/qnvgCKbNlb+38L4ViXkOOlJyxB8o8kfg/6ITNQNSoUR1GrHFFLjNyrWlTrhIuEiUYzr1Oga5D5MnQtNhBg==}
+    peerDependencies:
+      '@tarojs/components': ~3.6.32
+    dependencies:
+      '@tarojs/api': 3.6.32
+      '@tarojs/components': 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30)(@tarojs/shared@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)(react@18.3.1)
+      '@tarojs/router': 3.6.32(@tarojs/runtime@3.6.32)(@tarojs/shared@3.6.32)(@tarojs/taro@3.6.30)
+      '@tarojs/runtime': 3.6.32(@tarojs/shared@3.6.32)
+      '@tarojs/shared': 3.6.32
+      abortcontroller-polyfill: 1.7.5
+      base64-js: 1.5.1
+      ics: 3.7.6
+      is-mobile: 4.0.0
+      jsonp-retry: 1.0.3
+      lodash-es: 4.17.21
+      platform: 1.3.6
+      query-string: 7.1.3
+      tslib: 2.6.3
       whatwg-fetch: 3.6.20
     transitivePeerDependencies:
       - '@tarojs/taro'
@@ -8522,6 +8593,14 @@ packages:
       yup: 1.4.0
     dev: false
 
+  /ics@3.7.6:
+    resolution: {integrity: sha512-Z1QIWoPzyzqKUSj2Ui9vD3ca0AS+uHyiCjkROFx9PiKtJu9vMuMo6KJ4aqFmMAqn5q3fLq/5tLTJRm4zr9jjgw==}
+    dependencies:
+      nanoid: 3.3.7
+      runes2: 1.1.4
+      yup: 1.4.0
+    dev: false
+
   /icss-utils@5.1.0(postcss@8.4.38):
     resolution: {integrity: sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==}
     engines: {node: ^10 || ^12 || >= 14}
@@ -12967,7 +13046,7 @@ packages:
       xtend: 4.0.2
     dev: true
 
-  /taro-hooks@2.0.10(@tarojs/taro-h5@3.6.30)(@tarojs/taro@3.6.30):
+  /taro-hooks@2.0.10(@tarojs/taro-h5@3.6.32)(@tarojs/taro@3.6.30):
     resolution: {integrity: sha512-s1me1mviGekp7a3+j6cKSOhOepJ5Tcrdt3EYNlca05Dp64O/sPRsz2FTlA4Wl4Xnvn8Y7VdNggABnmm9plhkKg==}
     engines: {node: '>=12.0.0'}
     requiresBuild: true
@@ -12978,9 +13057,9 @@ packages:
       '@taro-hooks/ahooks': 2.0.10
       '@taro-hooks/compressorjs': 2.0.10
       '@taro-hooks/shared': 2.0.10
-      '@taro-hooks/use-request': 2.0.10(@tarojs/taro-h5@3.6.30)(@tarojs/taro@3.6.30)
+      '@taro-hooks/use-request': 2.0.10(@tarojs/taro-h5@3.6.32)(@tarojs/taro@3.6.30)
       '@tarojs/taro': 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)
-      '@tarojs/taro-h5': 3.6.30(@tarojs/components@3.6.30)(@tarojs/taro@3.6.30)
+      '@tarojs/taro-h5': 3.6.32(@tarojs/components@3.6.30)(@tarojs/taro@3.6.30)
       lodash-wechat: 1.0.0
       querystring: 0.2.1
     dev: false
@@ -13236,6 +13315,10 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+
+  /tslib@2.6.3:
+    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+    dev: false
 
   /tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}

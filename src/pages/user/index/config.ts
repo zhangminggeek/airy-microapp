@@ -35,7 +35,11 @@ export const marketConfig = [
 ];
 
 export const settingConfig = [
-  { icon: IconAddressManagement, name: '地址管理', to: '' },
+  {
+    icon: IconAddressManagement,
+    name: '地址管理',
+    to: '/packageAddress/pages/management/index',
+  },
   { icon: IconReceivingAccount, name: '收款账户', to: '' },
   { icon: IconWeChatNotice, name: '微信通知', to: '' },
   { icon: IconProtocolGuide, name: '协议指南', to: '' },

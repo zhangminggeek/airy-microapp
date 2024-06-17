@@ -1,5 +1,5 @@
 import ActionSheet from './ActionSheet';
-import AdministrativePicker from './AdministrativePicker';
+import AddressCard from './AddressCard';
 import Affix from './Affix';
 import Avatar from './Avatar';
 import CalenderPicker from './CalendarPicker';
@@ -16,6 +16,7 @@ import List from './List';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
+import RegionPicker from './RegionPicker';
 import Result from './Result';
 import Section from './Section';
 import Space from './Space';
@@ -27,7 +28,7 @@ import Upload from './Upload';
 export {
   // 基础组件
   ActionSheet,
-  AdministrativePicker,
+  AddressCard,
   Affix,
   Avatar,
   CalenderPicker,
@@ -44,6 +45,7 @@ export {
   ModalForm,
   Picker,
   PickerView,
+  RegionPicker,
   Result,
   Section,
   Space,

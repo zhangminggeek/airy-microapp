@@ -1,0 +1,43 @@
+@import '../../../styles/var.scss';
+
+.form {
+  :global {
+    .nut-form-item-label {
+      width: 140px;
+      font-weight: 500;
+    }
+  }
+
+  .btn-wrapper {
+    padding: 40px 24px;
+
+    .btn {
+      border-radius: 16px;
+    }
+  }
+}
+
+.center {
+  :global {
+    .nut-form-item-body-slots {
+      text-align: center;
+    }
+  }
+}
+
+.checkbox {
+  display: inline-flex;
+
+  :global {
+    .nut-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nut-checkbox-label {
+      font-size: $font-size-base;
+      color: $text-color-main;
+      font-weight: 500;
+    }
+  }
+}

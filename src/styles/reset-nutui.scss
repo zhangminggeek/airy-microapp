@@ -16,9 +16,8 @@
 
 // Form
 .nut-form {
-  // form-with-footer 类名是自己定义的，用来修改 Form footer 样式
-  &.form-with-footer {
-    .nut-cell-group-wrap > .nut-cell:last-child {
+  .nut-cell-group-wrap {
+    & > .nut-form-footer {
       margin-top: 64px;
       background-color: transparent;
     }
@@ -52,5 +51,19 @@
         color: $color-primary;
       }
     }
+  }
+}
+
+// checkbox
+.nut-checkbox {
+  .nut-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nut-checkbox-label {
+    font-size: $font-size-small;
+    color: $text-color-secondary;
+    font-weight: 400;
   }
 }
