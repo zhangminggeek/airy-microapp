@@ -17,6 +17,8 @@
 // Form
 .nut-form {
   .nut-cell-group-wrap {
+    background-color: transparent;
+
     & > .nut-form-footer {
       margin-top: 64px;
       background-color: transparent;
@@ -41,6 +43,31 @@
 
 // Tabs
 .nut-tabs {
+  &.nut-tabs-vertical {
+    .nut-tabs-titles {
+      width: 100%;
+      background-color: #f5f5fa;
+
+      &-item {
+        height: 112px;
+        color: $text-color-base;
+
+        &-active {
+          font-size: $font-size-large;
+          font-weight: 600;
+          color: $color-primary;
+          background-color: #ffffff;
+
+          .nut-tabs-titles-item-line {
+            width: 6px;
+            height: 32px;
+            background: $color-primary;
+          }
+        }
+      }
+    }
+  }
+
   .nut-tabs-titles {
     background: #ffffff;
 

@@ -9,6 +9,7 @@ import EditableCell from './EditableCell';
 import Empty from './Empty';
 import FormSection from './FormSection';
 import InputCode from './InputCode';
+import InputNumber from './InputNumber';
 import InputPassword from './InputPassword';
 import InputSearch from './InputSearch';
 import Link from './Link';
@@ -16,6 +17,9 @@ import List from './List';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
+import ProductCard from './ProductCard';
+import ProductField from './ProductField';
+import ProductPicture from './ProductPicture';
 import RegionPicker from './RegionPicker';
 import Result from './Result';
 import Section from './Section';
@@ -38,6 +42,7 @@ export {
   Empty,
   FormSection,
   InputCode,
+  InputNumber,
   InputPassword,
   InputSearch,
   Link,
@@ -45,6 +50,9 @@ export {
   ModalForm,
   Picker,
   PickerView,
+  ProductCard,
+  ProductField,
+  ProductPicture,
   RegionPicker,
   Result,
   Section,

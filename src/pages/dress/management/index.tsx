@@ -6,9 +6,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import type { GetProductResponse } from '@/api';
+import type { GetProductPageResponse } from '@/api';
+import type { ActionType } from '@/components/List';
 
-import { getProduct } from '@/api';
+import { getProductPage } from '@/api';
 import IconRentOutlined from '@/assets/icons/rent_outlined.svg';
 import { Affix, InputSearch, List } from '@/components';
 import { BasicLayout } from '@/layouts';
@@ -18,7 +19,8 @@ import { RouterUtil } from '@/utils';
 const Page = () => {
   const { typeList, fetchProductType } = useProductStore((state) => state);
 
-  const actionRef = useRef<any>(null);
+  const actionRef =
+    useRef<ActionType<{ productTypeCode?: string; name?: string }>>(null);
 
   // 搜索词
   const [keyword, setKeyword] = useState<string>();
@@ -38,7 +40,7 @@ const Page = () => {
 
   // 计算产品数量
   const getProductCount = (
-    inventory: GetProductResponse['list'][0]['inventory'],
+    inventory: GetProductPageResponse['list'][0]['inventory'],
   ) => {
     return inventory?.reduce((pre, cur) => {
       return pre + cur.count;
@@ -74,7 +76,7 @@ const Page = () => {
           {typeList?.length ? (
             <List
               actionRef={actionRef}
-              request={getProduct}
+              request={getProductPage}
               params={{
                 productTypeCode: typeList?.[currentIndex]?.code,
                 name: keyword,

@@ -1,0 +1,18 @@
+@import '../../styles/mixins.scss';
+
+.m-product-field {
+  .m-section-header.m-title {
+    margin-bottom: 24px;
+  }
+
+  &-btn {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    &-text {
+      flex: 1;
+      @include ellipsis;
+    }
+  }
+}

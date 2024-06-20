@@ -1,0 +1,30 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
+.container {
+  .btn {
+    @include flex-center(column);
+    gap: 8px;
+    width: 160px;
+    height: 160px;
+    border: 2px dashed $border-color-base;
+    color: $text-color-secondary;
+
+    &-text {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+.popup {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+  }
+
+  &-body {
+    padding: 0 32px;
+  }
+}

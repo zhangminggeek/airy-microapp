@@ -1,5 +1,9 @@
 @import '../../styles/var.scss';
 
+.m-form-section + .m-form-section {
+  margin-top: 24px;
+}
+
 .m-form-section.m-section {
   &.m-form-section-fill {
     padding: 0;
@@ -20,11 +24,13 @@
     }
   }
 
-  .nut-form-item-label {
-    padding-left: 32px;
+  .nut-form-item {
+    &-label {
+      padding-left: 32px;
 
-    .required {
-      left: 0.4em;
+      .required {
+        left: 0.4em;
+      }
     }
   }
 

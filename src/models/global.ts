@@ -17,7 +17,7 @@ interface GloablState {
 }
 
 interface GloablStore extends GloablState {
-  // 获取行政编码
+  // 获取行政编码，获取全量数据并保存
   fetchAdministrativeCode: () => Promise<AdministrativeCode[]>;
   // 储存行政编码
   saveAdministrativeCode: (code: string, data: AdministrativeCode) => void;

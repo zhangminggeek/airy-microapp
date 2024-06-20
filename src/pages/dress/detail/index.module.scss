@@ -2,23 +2,8 @@
 @import '../../../styles/mixins.scss';
 
 .header {
-  padding: 24px 32px;
+  padding: 8px 32px 32px;
   background-color: #fff;
-
-  .image {
-    &-group {
-      margin-bottom: 32px;
-    }
-
-    &-item {
-      border-radius: 4px;
-      overflow: hidden;
-
-      &-selected {
-        border: 3px solid $color-primary;
-      }
-    }
-  }
 
   .other {
     display: flex;
@@ -58,19 +43,6 @@
   :global {
     .m-section-header.m-title {
       margin-bottom: 24px;
-    }
-  }
-
-  .product {
-    .size {
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-
-      &-name {
-        flex: 1;
-        @include ellipsis;
-      }
     }
   }
 }

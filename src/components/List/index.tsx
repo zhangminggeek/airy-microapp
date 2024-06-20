@@ -14,12 +14,13 @@ import './index.scss';
 
 type ParamWithoutPaginationParams<T> = Omit<T, 'pageNum' | 'pageSize'>;
 
-interface ActionType<P = any> {
-  refresh?: (p?: ParamWithoutPaginationParams<P>) => Promise<void>;
+export interface ActionType<P = any> {
+  refresh: (p?: ParamWithoutPaginationParams<P>) => Promise<void>;
 }
 
 interface ListProps<R = any, P = any, U extends PaginationParams<P> = any>
   extends Partial<InfiniteLoadingProps> {
+  column?: 1 | 2;
   actionRef?: Ref<ActionType<P>>;
   params?: ParamWithoutPaginationParams<P>;
   request: FunctionType<U, PaginationResponse<R>>;
@@ -30,6 +31,7 @@ const PREFIX_CLS = 'm-list';
 
 const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
   className,
+  column = 2,
   actionRef,
   params,
   request,
@@ -79,7 +81,11 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
 
   return (
     <InfiniteLoading
-      className={classnames(PREFIX_CLS, className)}
+      className={classnames(
+        PREFIX_CLS,
+        { [`${PREFIX_CLS}-multicolumn`]: column === 2 },
+        className,
+      )}
       hasMore={total > list?.length}
       onLoadMore={async () => {
         await fetchData({ pageNum: `${currentPageNum + 1}` } as any);

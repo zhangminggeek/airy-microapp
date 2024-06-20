@@ -1,5 +1,20 @@
-@mixin ellipsis {
+@mixin ellipsis($row: 1) {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+
+  @if $row > 1 {
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  } @else {
+    white-space: nowrap;
+  }
+}
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
 }

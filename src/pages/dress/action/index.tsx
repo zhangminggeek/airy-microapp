@@ -2,7 +2,6 @@ import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
-import styles from './index.module.scss';
 import ProductFieldPicker from './ProductFieldPicker';
 import ProductInventoryPicker from './ProductInventoryPicker';
 import ProductTypePicker from './ProductTypePicker';
@@ -48,7 +47,7 @@ const Page = () => {
         inventory,
         fieldList,
         tagList,
-        desc,
+        description,
       } = data;
       await fetchProjectField(typeCode);
       const formData: Record<string, any> = {
@@ -62,7 +61,7 @@ const Page = () => {
           count: item.count,
         })),
         tagIdList: tagList.map((item) => item.tagId),
-        desc,
+        description,
       };
       fieldList.forEach((item) => {
         formData[item.fieldKey] = item.fieldValue;
@@ -89,11 +88,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout
-      className={styles.container}
-      title={`${id ? '编辑' : '新增'}服饰`}
-      back
-    >
+    <BasicLayout title={`${id ? '编辑' : '新增'}服饰`} back>
       <Form
         form={form}
         labelPosition="left"
@@ -126,11 +121,7 @@ const Page = () => {
             noStyle
             rules={[{ required: true, message: '请输入商品名称' }]}
           >
-            <TextArea
-              className={styles.textarea}
-              placeholder="请输入商品名称"
-              maxLength={255}
-            />
+            <TextArea placeholder="请输入商品名称" maxLength={255} />
           </Form.Item>
           <Form.Item
             name="picList"
@@ -212,12 +203,8 @@ const Page = () => {
           </Form.Item>
         </FormSection>
         <FormSection title="描述">
-          <Form.Item name="desc" noStyle>
-            <TextArea
-              className={styles.textarea}
-              placeholder="请输入描述"
-              maxLength={255}
-            />
+          <Form.Item name="description" noStyle>
+            <TextArea placeholder="请输入描述" maxLength={255} />
           </Form.Item>
         </FormSection>
       </Form>

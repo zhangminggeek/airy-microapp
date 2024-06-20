@@ -22,17 +22,6 @@
   padding: 24px;
   overflow-y: auto;
 
-  :global {
-    .m-list {
-      .nut-infinite-container {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 24px 0;
-      }
-    }
-  }
-
   .card {
     width: 340px;
     background-color: #fff;
@@ -43,11 +32,11 @@
     }
 
     &-body {
-      height: 148px;
+      height: 180px;
       padding: 16px;
 
       &-title {
-        @include ellipsis;
+        @include ellipsis(2);
         margin-bottom: 16px;
       }
 

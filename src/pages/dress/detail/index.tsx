@@ -1,28 +1,19 @@
-import { ArrowRight } from '@nutui/icons-react-taro';
-import { Button, Image, ImagePreview, SafeArea } from '@nutui/nutui-react-taro';
+import { Button, SafeArea } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow, useRouter } from '@tarojs/taro';
-import classnames from 'classnames';
-import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 
 import type { GetProductIdRequest, GetProductIdResponse } from '@/api';
-import type { Option } from '@/components/Descriptions';
 
 import { deleteProductId, getProductId } from '@/api';
-import { ActionSheet, Descriptions, Section, Space, Tag } from '@/components';
+import { ActionSheet, ProductField, ProductPicture, Tag } from '@/components';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
-
-  // 选中图片列表的索引值
-  const [imageIndex, setImageIndex] = useState<number>(0);
-  // 是否显示大图预览
-  const [showPreview, setShowPreview] = useState<boolean>(false);
 
   useDidShow(() => {
     fetchDetail({ id: `${id}` });
@@ -55,19 +46,8 @@ const Page = () => {
     },
   });
 
-  // 尺码详情弹框
-  const { renderDialog: renderSizeInfoDialog, open: openSizeInfoDialog } =
-    useDialog({
-      id: 'size-info',
-      title: '尺码',
-      hideCancelButton: true,
-    });
-
   // 删除服饰二次确认弹框
-  const {
-    renderDialog: renderDeleteConfirmDialog,
-    open: openDeleteConfirmDialog,
-  } = useDialog({
+  const { renderDialog, open } = useDialog({
     id: 'delete-confirm',
     title: '删除服饰',
     content: '是否确认删除服饰',
@@ -76,86 +56,10 @@ const Page = () => {
     },
   });
 
-  // 产品信息字段信息
-  const options: Option[] = useMemo(() => {
-    const otherField =
-      data?.fieldList?.map(({ fieldKeyInfo }) => ({
-        field: fieldKeyInfo.key,
-        label: fieldKeyInfo.name,
-      })) ?? [];
-    return [
-      { field: 'no', label: '编号', col: 2 },
-      { field: 'productTypeName', label: '类型' },
-      {
-        field: 'inventory',
-        label: '尺码',
-        render: (v: GetProductIdResponse['inventory']) => {
-          return (
-            <View
-              className={styles.size}
-              onClick={() => {
-                openSizeInfoDialog({
-                  content: v
-                    ?.map((item) => `${item.size.name}/${item.count}件`)
-                    ?.join('、'),
-                });
-              }}
-            >
-              <View className={styles['size-name']}>
-                {v?.map((item) => item.size.name)?.join('/')}
-              </View>
-              <ArrowRight size={12} color="#7c7c7c" />
-            </View>
-          );
-        },
-      },
-      ...otherField,
-    ];
-  }, [data]);
-
   return (
     <BasicLayout title="详情" back fill safeArea={false}>
-      <Image
-        className={styles.poster}
-        mode="aspectFill"
-        src={data?.picList?.[imageIndex]?.url}
-        width="100vw"
-        height="100vw"
-        onClick={() => {
-          setShowPreview(true);
-        }}
-      />
-      <ImagePreview
-        visible={showPreview}
-        images={data?.picList?.map((item) => ({ src: item.url }))}
-        defaultValue={imageIndex}
-        closeOnContentClick
-        onClose={() => {
-          setShowPreview(false);
-        }}
-      />
+      <ProductPicture images={data?.picList?.map((item) => item.url)} />
       <View className={styles.header}>
-        <Space className={styles['image-group']} block>
-          {data?.picList?.map((item, index) => (
-            <View
-              className={classnames(styles['image-item'], {
-                [styles['image-item-selected']]: index === imageIndex,
-              })}
-              key={item.id}
-              onClick={() => {
-                setImageIndex(index);
-              }}
-            >
-              <Image
-                className={styles.image}
-                src={item.url}
-                mode="aspectFill"
-                width={48}
-                height={48}
-              />
-            </View>
-          ))}
-        </Space>
         <View className={styles.name}>{data?.name}</View>
         <View className={styles.other}>
           <View className={styles['tag-group']}>
@@ -167,12 +71,16 @@ const Page = () => {
           </View>
           <Text className={styles.lease}>已租{data?.leaseCount}次</Text>
         </View>
-        <View className={styles.desc}>{data?.desc}</View>
+        <View className={styles.desc}>{data?.description}</View>
       </View>
       <View className={styles.body}>
-        <Section className={styles.product} title="产品信息">
-          <Descriptions options={options} data={data} />
-        </Section>
+        <ProductField
+          fieldList={data?.fieldList?.map(({ fieldKeyInfo }) => ({
+            label: fieldKeyInfo?.name,
+            field: fieldKeyInfo?.key,
+          }))}
+          data={data}
+        />
       </View>
       <View className={styles.footer}>
         <View className={styles['footer-content']}>
@@ -185,7 +93,7 @@ const Page = () => {
               if (item.key === 'sell') {
                 // TODO: 跳转创建二手页
               } else if (item.key === 'delete') {
-                openDeleteConfirmDialog();
+                open();
               }
             }}
           >
@@ -202,8 +110,7 @@ const Page = () => {
         </View>
         <SafeArea position="bottom" />
       </View>
-      {renderSizeInfoDialog()}
-      {renderDeleteConfirmDialog()}
+      {renderDialog()}
     </BasicLayout>
   );
 };

@@ -15,7 +15,7 @@ const Page = () => {
       await fetchUserInfo();
     }
 
-    RouterUtil.switchTab('/pages/home/index');
+    RouterUtil.switchTab('/pages/market/index/index');
   });
 
   return <Skeleton title rows={10} animated />;

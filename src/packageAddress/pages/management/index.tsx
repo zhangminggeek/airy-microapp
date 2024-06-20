@@ -55,6 +55,9 @@ const Page = () => {
           className={styles.card}
           name={item.recipient}
           phone={item.phone}
+          province={item.province}
+          city={item.city}
+          area={item.area}
           address={item.address}
           isDefault={!!item.isDefault}
           footer={

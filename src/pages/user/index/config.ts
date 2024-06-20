@@ -27,7 +27,7 @@ export const shopConfig = [
 ];
 
 export const marketConfig = [
-  { icon: IconMyRelease, name: '我发布的', to: '' },
+  { icon: IconMyRelease, name: '我发布的', to: '/pages/user/published/index' },
   { icon: IconMyPurchase, name: '我的购买', to: '' },
   { icon: IconMySold, name: '我卖出的', to: '' },
   { icon: IconMyRequirement, name: '我求购的', to: '' },

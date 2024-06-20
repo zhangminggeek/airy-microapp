@@ -1,0 +1,42 @@
+@import '../../../styles/var.scss';
+
+.container {
+  :global {
+    .g-basic-layout-header-title {
+      padding: 0 24px;
+      justify-content: flex-start;
+    }
+  }
+
+  .filter {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(2, 1fr);
+    background-color: #fff;
+    padding: 8px 0;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      height: 192px;
+
+      &-label {
+        font-size: $font-size-small;
+        color: $text-color-secondary;
+      }
+    }
+  }
+
+  .tabs {
+    margin: 16px 0;
+
+    :global {
+      .nut-tabs-titles {
+        background-color: transparent;
+      }
+    }
+  }
+}

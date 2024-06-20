@@ -221,7 +221,7 @@ export interface PostOrderRequest {
   /**
    * 产品id
    */
-  projectId: number
+  productId: number
   /**
    * 是否允许出售, 0:否 1:是
    */
@@ -2815,13 +2815,13 @@ export type GetAddressResponse = {
    */
   address: string
   /**
-   * 是否为默认地址, 0:否 1:是
+   * 是否为默认地址
    */
-  isDefault: number
+  isDefault: boolean
   /**
-   * 是否被删除, 0:否 1:是
+   * 是否被删除
    */
-  isDeleted: number
+  isDeleted: boolean
 }[]
 
 /**
@@ -2904,9 +2904,9 @@ export interface PostAddressRequest {
    */
   address: string
   /**
-   * 是否为默认地址, 0:否 1:是
+   * 是否为默认地址
    */
-  isDefault?: number
+  isDefault?: boolean
 }
 
 /**
@@ -3119,13 +3119,13 @@ export interface GetAddressIdResponse {
    */
   address: string
   /**
-   * 是否为默认地址, 0:否 1:是
+   * 是否为默认地址
    */
-  isDefault: number
+  isDefault: boolean
   /**
-   * 是否被删除, 0:否 1:是
+   * 是否被删除
    */
-  isDeleted: number
+  isDeleted: boolean
 }
 
 /**
@@ -3323,152 +3323,87 @@ const prodUrl_0_0_0_7 = '' as any
 const dataKey_0_0_0_7 = 'data' as any
 
 /**
- * 接口 获取服饰列表 的 **请求类型**
+ * 接口 获取未上架的服饰列表 的 **请求类型**
  *
  * @分类 服饰
  * @请求头 `GET /product`
  */
-export interface GetProductRequest {
+export interface GetProductRequest {}
+
+/**
+ * 接口 获取未上架的服饰列表 的 **返回类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product`
+ */
+export type GetProductResponse = {
   /**
-   * 页码
+   * 创建时间
    */
-  pageNum: string
+  createTime: string
   /**
-   * 分页条数
+   * 修改时间
    */
-  pageSize: string
+  updateTime: string
   /**
-   * 服饰类型code
+   * 服饰id
    */
-  productTypeCode?: string
+  id: number
   /**
    * 服饰名称
    */
-  name?: string
-}
-
-/**
- * 接口 获取服饰列表 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product`
- */
-export interface GetProductResponse {
+  name: string
   /**
-   * 数据总条数
+   * 服饰编号
    */
-  total: number
+  no?: string
   /**
-   * 数据
+   * 服饰品牌
    */
-  list: {
+  brand?: string
+  /**
+   * 服饰类型
+   */
+  typeCode: string
+  /**
+   * 描述
+   */
+  description?: string
+  /**
+   * 租赁次数
+   */
+  leaseCount: number
+  /**
+   * 图片
+   */
+  picList: {
     /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 服饰id
+     * 服饰图片id
      */
     id: number
     /**
-     * 服饰名称
+     * 服饰id
      */
-    name: string
+    productId: number
     /**
-     * 服饰编号
+     * 服饰图片地址
      */
-    no?: string
-    /**
-     * 服饰品牌
-     */
-    brand?: string
-    /**
-     * 服饰类型
-     */
-    typeCode: string
-    /**
-     * 描述
-     */
-    desc?: string
-    /**
-     * 租赁次数
-     */
-    leaseCount: number
-    /**
-     * 图片
-     */
-    picList: {
-      /**
-       * 服饰图片id
-       */
-      id: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 服饰图片地址
-       */
-      url: string
-    }[]
-    /**
-     * 库存
-     */
-    inventory: {
-      /**
-       * 库存数据id
-       */
-      id: number
-      /**
-       * 服饰尺码id
-       */
-      sizeId: number
-      /**
-       * 服饰数量
-       */
-      count: number
-      /**
-       * 尺码信息
-       */
-      size: {
-        /**
-         * 尺码id
-         */
-        id: number
-        /**
-         * 尺码
-         */
-        name: string
-      }
-    }[]
+    url: string
   }[]
-}
+}[]
 
 /**
- * 接口 获取服饰列表 的 **请求配置的类型**
+ * 接口 获取未上架的服饰列表 的 **请求配置的类型**
  *
  * @分类 服饰
  * @请求头 `GET /product`
  */
 type GetProductRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/product',
-    'data',
-    string,
-    'pageNum' | 'pageSize' | 'productTypeCode' | 'name',
-    false
-  >
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, string, true>
 >
 
 /**
- * 接口 获取服饰列表 的 **请求配置**
+ * 接口 获取未上架的服饰列表 的 **请求配置**
  *
  * @分类 服饰
  * @请求头 `GET /product`
@@ -3484,8 +3419,8 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_7,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name'],
-  requestDataOptional: false,
+  queryNames: [],
+  requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
   requestFunctionName: 'getProduct',
@@ -3494,12 +3429,12 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
 }
 
 /**
- * 接口 获取服饰列表 的 **请求函数**
+ * 接口 获取未上架的服饰列表 的 **请求函数**
  *
  * @分类 服饰
  * @请求头 `GET /product`
  */
-export const getProduct = /*#__PURE__*/ (requestData: GetProductRequest, ...args: UserRequestRestArgs) => {
+export const getProduct = /*#__PURE__*/ (requestData?: GetProductRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductResponse>(prepare(getProductRequestConfig, requestData), ...args)
 }
 
@@ -3565,7 +3500,7 @@ export interface PostProductRequest {
   /**
    * 描述
    */
-  desc?: string
+  description?: string
 }
 
 /**
@@ -3684,7 +3619,7 @@ export interface PutProductRequest {
   /**
    * 描述
    */
-  desc?: string
+  description?: string
   /**
    * 服饰id
    */
@@ -3746,6 +3681,189 @@ export const putProduct = /*#__PURE__*/ (requestData: PutProductRequest, ...args
 }
 
 putProduct.requestConfig = putProductRequestConfig
+
+/**
+ * 接口 获取服饰列表(分页) 的 **请求类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/page`
+ */
+export interface GetProductPageRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 服饰类型code
+   */
+  productTypeCode?: string
+  /**
+   * 服饰名称
+   */
+  name?: string
+}
+
+/**
+ * 接口 获取服饰列表(分页) 的 **返回类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/page`
+ */
+export interface GetProductPageResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 服饰id
+     */
+    id: number
+    /**
+     * 服饰名称
+     */
+    name: string
+    /**
+     * 服饰编号
+     */
+    no?: string
+    /**
+     * 服饰品牌
+     */
+    brand?: string
+    /**
+     * 服饰类型
+     */
+    typeCode: string
+    /**
+     * 描述
+     */
+    description?: string
+    /**
+     * 租赁次数
+     */
+    leaseCount: number
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+    /**
+     * 库存
+     */
+    inventory: {
+      /**
+       * 库存数据id
+       */
+      id: number
+      /**
+       * 服饰尺码id
+       */
+      sizeId: number
+      /**
+       * 服饰数量
+       */
+      count: number
+      /**
+       * 尺码信息
+       */
+      size: {
+        /**
+         * 尺码id
+         */
+        id: number
+        /**
+         * 尺码
+         */
+        name: string
+      }
+    }[]
+  }[]
+}
+
+/**
+ * 接口 获取服饰列表(分页) 的 **请求配置的类型**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/page`
+ */
+type GetProductPageRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/product/page',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'productTypeCode' | 'name',
+    false
+  >
+>
+
+/**
+ * 接口 获取服饰列表(分页) 的 **请求配置**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/page`
+ */
+const getProductPageRequestConfig: GetProductPageRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
+  path: '/product/page',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_7,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getProductPage',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取服饰列表(分页) 的 **请求函数**
+ *
+ * @分类 服饰
+ * @请求头 `GET /product/page`
+ */
+export const getProductPage = /*#__PURE__*/ (requestData: GetProductPageRequest, ...args: UserRequestRestArgs) => {
+  return request<GetProductPageResponse>(prepare(getProductPageRequestConfig, requestData), ...args)
+}
+
+getProductPage.requestConfig = getProductPageRequestConfig
 
 /**
  * 接口 删除服饰 的 **请求类型**
@@ -3867,7 +3985,7 @@ export interface GetProductIdResponse {
   /**
    * 描述
    */
-  desc?: string
+  description?: string
   /**
    * 租赁次数
    */
@@ -4522,7 +4640,36 @@ const dataKey_0_0_0_9 = 'data' as any
  * @分类 二手市场出售/借调服饰
  * @请求头 `GET /market`
  */
-export interface GetMarketRequest {}
+export interface GetMarketRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 产品描述
+   */
+  description?: string
+  /**
+   * 产品类型
+   */
+  productTypeCode?: string
+  /**
+   * 公司id
+   */
+  companyId?: string
+  /**
+   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+   */
+  status?: string
+  /**
+   * 排序方式 1:最新发布 2:最多收藏
+   */
+  order?: string
+}
 
 /**
  * 接口 获取二手市场出售\/借调服饰列表 的 **返回类型**
@@ -4532,21 +4679,158 @@ export interface GetMarketRequest {}
  */
 export interface GetMarketResponse {
   /**
-   * 创建时间
+   * 总数
    */
-  createTime: string
+  total: number
   /**
-   * 修改时间
+   * 列表
    */
-  updateTime: string
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: number
-  /**
-   * 二手市场出售/借调服饰
-   */
-  market: string
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 产品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    deliveryMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+      /**
+       * 标签
+       */
+      tagList: {
+        /**
+         * id
+         */
+        id: number
+        /**
+         * 标签id
+         */
+        tagId: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 标签
+         */
+        tag: {
+          /**
+           * 标签id
+           */
+          id: number
+          /**
+           * 标签名称
+           */
+          name: string
+          /**
+           * 用途, 1:服饰标签
+           */
+          use: number
+        }
+      }[]
+    }
+    /**
+     * 被收藏数
+     */
+    favorities: number
+  }[]
 }
 
 /**
@@ -4556,7 +4840,16 @@ export interface GetMarketResponse {
  * @请求头 `GET /market`
  */
 type GetMarketRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, true>
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/market',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'description' | 'productTypeCode' | 'companyId' | 'status' | 'order',
+    false
+  >
 >
 
 /**
@@ -4576,8 +4869,8 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_9,
   paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
+  queryNames: ['pageNum', 'pageSize', 'description', 'productTypeCode', 'companyId', 'status', 'order'],
+  requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
   requestFunctionName: 'getMarket',
@@ -4591,7 +4884,7 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
  * @分类 二手市场出售/借调服饰
  * @请求头 `GET /market`
  */
-export const getMarket = /*#__PURE__*/ (requestData?: GetMarketRequest, ...args: UserRequestRestArgs) => {
+export const getMarket = /*#__PURE__*/ (requestData: GetMarketRequest, ...args: UserRequestRestArgs) => {
   return request<GetMarketResponse>(prepare(getMarketRequestConfig, requestData), ...args)
 }
 
@@ -4605,33 +4898,37 @@ getMarket.requestConfig = getMarketRequestConfig
  */
 export interface PostMarketRequest {
   /**
-   * 产品id
-   */
-  projectId: number
-  /**
    * 公司收货id
    */
   companyAddressId?: number
   /**
+   * 产品id
+   */
+  productId: number
+  /**
+   * 产品描述
+   */
+  description: string
+  /**
    * 是否允许出售, 0:否 1:是
    */
-  allowMarket: number
+  allowSell: boolean
   /**
    * 是否允许借调, 0:否 1:是
    */
-  allowSecondments: number
+  allowLease: boolean
   /**
    * 出售价
    */
-  marketPrice?: number
+  sellingPrice?: string
   /**
    * 借调价
    */
-  secondmentsPrice?: number
+  leasePrice?: string
   /**
    * 借调押金
    */
-  marketDeposit?: number
+  leaseDeposit?: string
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */

@@ -1,0 +1,92 @@
+@import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
+
+.container {
+  :global {
+    .g-basic-layout-body {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.header {
+  height: 104px;
+  padding: 16px 32px;
+  border-bottom: 2px solid $border-color-base;
+  background-color: #fff;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  width: 100vw;
+
+  .tabs {
+    width: 160px;
+  }
+
+  &-content {
+    flex: 1;
+    height: 100%;
+    padding: 16px 0;
+    background-color: #fff;
+    overflow: hidden;
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 32px;
+      overflow: hidden;
+
+      &-image {
+        flex-shrink: 0;
+      }
+
+      &-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        gap: 16px;
+
+        &-name {
+          font-size: $font-size-base;
+          font-weight: 500;
+          color: $text-color-main;
+          @include ellipsis;
+        }
+
+        &-desc {
+          font-size: $font-size-small;
+          color: $text-color-secondary;
+          @include ellipsis;
+        }
+
+        &-desc {
+          display: flex;
+          justify-content: space-between;
+          color: $text-color-secondary;
+          font-size: $font-size-small;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #fff;
+  border-top: 2px solid $border-color-base;
+
+  &-content {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 32px;
+  }
+}

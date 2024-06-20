@@ -1,0 +1,62 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 160px auto;
+  grid-template-rows: repeat(3, auto);
+  column-gap: 24px;
+  border: 2px solid $border-color-base;
+  border-radius: 16px;
+  padding: 8px;
+  overflow: hidden;
+
+  & + & {
+    margin-top: 16px;
+  }
+
+  &-selected {
+    border-color: $color-primary;
+  }
+
+  &-image {
+    grid-row: 1 / span 3;
+  }
+
+  &-name {
+    font-size: $font-size-base;
+    color: $text-color-main;
+    font-weight: 500;
+    @include ellipsis;
+  }
+
+  &-desc {
+    font-size: $font-size-small;
+    color: $text-color-secondary;
+    font-weight: 400;
+    @include ellipsis;
+  }
+
+  &-no {
+    font-size: $font-size-small;
+    color: $text-color-placeholder;
+    font-weight: 400;
+    @include ellipsis;
+  }
+
+  &-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #7c7c7c;
+    color: #fff;
+    border-radius: 0 0 0 40px;
+    z-index: 1;
+  }
+}
