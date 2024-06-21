@@ -1,26 +1,19 @@
 import { create } from 'zustand';
 
-import type {
-  GetProductFieldResponse,
-  GetProductSizeOptionResponse,
-  GetProductTypeResponse,
-} from '@/api';
+import type { GetProductFieldResponse, GetProductTypeResponse } from '@/api';
 
-import { getProductField, getProductSizeOption, getProductType } from '@/api';
+import { getProductField, getProductType } from '@/api';
 
 type ProductType = GetProductTypeResponse[0];
-type ProductSize = GetProductSizeOptionResponse[0];
 type ProductField = GetProductFieldResponse[0];
 
 interface ProductState {
   typeList: ProductType[];
-  sizeList: ProductSize[];
   fieldMap: Map<string, ProductField[]>;
 }
 
 interface ProductStore extends ProductState {
   fetchProductType: () => Promise<void>;
-  fetchProductSize: () => Promise<void>;
   fetchProjectField: (code: string) => Promise<void>;
 }
 
@@ -33,11 +26,6 @@ export const useProductStore = create<ProductStore>((set, get) => ({
     if (typeList.length) return;
     const res = await getProductType();
     set({ typeList: res.data });
-  },
-  fetchProductSize: async () => {
-    if (get().sizeList.length) return;
-    const res = await getProductSizeOption();
-    set({ sizeList: res.data });
   },
   /**
    * 获取服饰信息字段

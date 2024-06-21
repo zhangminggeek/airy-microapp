@@ -17,7 +17,8 @@ import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
-  const { id } = useRouter().params;
+  const { id, productId } = useRouter().params;
+  const [form] = Form.useForm();
 
   // 是否允许出售
   const [allowSell, setAllowSell] = useState<boolean>(false);
@@ -25,6 +26,10 @@ const Page = () => {
   const [allowLease, setAllowLease] = useState<boolean>(false);
 
   useEffect(() => {
+    if (productId) {
+      form.setFieldsValue({ productId: Number(productId) });
+    }
+
     return () => {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
     };
@@ -42,6 +47,7 @@ const Page = () => {
   return (
     <BasicLayout title={`${id ? '编辑' : '发布'}商品`} back>
       <Form
+        form={form}
         divider
         footer={
           <Button formType="submit" type="primary" size="xlarge" block>
@@ -57,9 +63,8 @@ const Page = () => {
             deliveryMethod: deliveryMethod[0],
             quality: quality[0],
           };
-          console.log('onfinish', values, params);
           if (id) {
-            // ...
+            // TODO: 编辑
           } else {
             await create(params);
           }

@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import type { GetProductPageResponse } from '@/api';
 import type { ActionType } from '@/components/List';
 
 import { getProductPage } from '@/api';
@@ -37,15 +36,6 @@ const Page = () => {
     const productTypeCode = typeList?.[currentIndex]?.code;
     actionRef.current?.refresh({ productTypeCode, name: keyword });
   });
-
-  // 计算产品数量
-  const getProductCount = (
-    inventory: GetProductPageResponse['list'][0]['inventory'],
-  ) => {
-    return inventory?.reduce((pre, cur) => {
-      return pre + cur.count;
-    }, 0);
-  };
 
   return (
     <BasicLayout title="服饰管理" back fill safeArea={false}>
@@ -107,9 +97,6 @@ const Page = () => {
                       </View>
                       <View className={styles['card-body-content']}>
                         <Text className={styles.no}>{item.no}</Text>
-                        <Text
-                          className={styles.count}
-                        >{`${getProductCount(item.inventory)}件`}</Text>
                         <View className={styles.lease}>
                           <IconFont name={IconRentOutlined} size={16} />
                           {item.leaseCount}

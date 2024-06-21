@@ -60,7 +60,7 @@ const Page = () => {
           {
             no: data?.product?.no,
             productTypeName: data?.product?.productType?.name,
-            inventory: data?.product?.inventory,
+            size: data?.product?.size,
           },
         )}
         footer={

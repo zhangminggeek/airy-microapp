@@ -49,6 +49,6 @@ export enum TabsEnum {
 }
 
 export const tabsMap = new Map([
-  [TabsEnum['最新发布'], { label: '最新发布', value: TabsEnum['最新发布'] }],
-  [TabsEnum['最多收藏'], { label: '最多收藏', value: TabsEnum['最多收藏'] }],
+  [TabsEnum['最新发布'], { text: '最新发布', value: TabsEnum['最新发布'] }],
+  [TabsEnum['最多收藏'], { text: '最多收藏', value: TabsEnum['最多收藏'] }],
 ]);

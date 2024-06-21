@@ -3468,18 +3468,9 @@ export interface PostProductRequest {
    */
   typeCode: string
   /**
-   * 库存信息
+   * 服饰尺寸
    */
-  inventory: {
-    /**
-     * 服饰尺码id
-     */
-    sizeId: number
-    /**
-     * 服饰数量
-     */
-    count: number
-  }[]
+  size: number
   /**
    * 其他信息
    */
@@ -3587,18 +3578,9 @@ export interface PutProductRequest {
    */
   typeCode: string
   /**
-   * 库存信息
+   * 服饰尺寸
    */
-  inventory: {
-    /**
-     * 服饰尺码id
-     */
-    sizeId: number
-    /**
-     * 服饰数量
-     */
-    count: number
-  }[]
+  size: number
   /**
    * 其他信息
    */
@@ -3751,6 +3733,10 @@ export interface GetProductPageResponse {
      */
     typeCode: string
     /**
+     * 服饰尺码
+     */
+    size: number
+    /**
      * 描述
      */
     description?: string
@@ -3774,36 +3760,6 @@ export interface GetProductPageResponse {
        * 服饰图片地址
        */
       url: string
-    }[]
-    /**
-     * 库存
-     */
-    inventory: {
-      /**
-       * 库存数据id
-       */
-      id: number
-      /**
-       * 服饰尺码id
-       */
-      sizeId: number
-      /**
-       * 服饰数量
-       */
-      count: number
-      /**
-       * 尺码信息
-       */
-      size: {
-        /**
-         * 尺码id
-         */
-        id: number
-        /**
-         * 尺码
-         */
-        name: string
-      }
     }[]
   }[]
 }
@@ -3983,6 +3939,10 @@ export interface GetProductIdResponse {
    */
   typeCode: string
   /**
+   * 服饰尺码
+   */
+  size: number
+  /**
    * 描述
    */
   description?: string
@@ -4023,36 +3983,6 @@ export interface GetProductIdResponse {
      * 服饰图片地址
      */
     url: string
-  }[]
-  /**
-   * 库存
-   */
-  inventory: {
-    /**
-     * 库存数据id
-     */
-    id: number
-    /**
-     * 服饰尺码id
-     */
-    sizeId: number
-    /**
-     * 服饰数量
-     */
-    count: number
-    /**
-     * 尺码信息
-     */
-    size: {
-      /**
-       * 尺码id
-       */
-      id: number
-      /**
-       * 尺码
-       */
-      name: string
-    }
   }[]
   /**
    * 标签
@@ -4277,82 +4207,6 @@ export const getProductType = /*#__PURE__*/ (requestData?: GetProductTypeRequest
 }
 
 getProductType.requestConfig = getProductTypeRequestConfig
-
-/**
- * 接口 获取服饰尺码选项 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/size/option`
- */
-export interface GetProductSizeOptionRequest {}
-
-/**
- * 接口 获取服饰尺码选项 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/size/option`
- */
-export type GetProductSizeOptionResponse = {
-  /**
-   * 尺码id
-   */
-  id: number
-  /**
-   * 尺码
-   */
-  name: string
-}[]
-
-/**
- * 接口 获取服饰尺码选项 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/size/option`
- */
-type GetProductSizeOptionRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/size/option', 'data', string, string, true>
->
-
-/**
- * 接口 获取服饰尺码选项 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/size/option`
- */
-const getProductSizeOptionRequestConfig: GetProductSizeOptionRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/product/size/option',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getProductSizeOption',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 获取服饰尺码选项 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/size/option`
- */
-export const getProductSizeOption = /*#__PURE__*/ (
-  requestData?: GetProductSizeOptionRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetProductSizeOptionResponse>(prepare(getProductSizeOptionRequestConfig, requestData), ...args)
-}
-
-getProductSizeOption.requestConfig = getProductSizeOptionRequestConfig
 
 /**
  * 接口 获取服饰展示的信息字段 的 **请求类型**
@@ -5266,6 +5120,10 @@ export interface GetMarketIdResponse {
      */
     typeCode: string
     /**
+     * 服饰尺码
+     */
+    size: number
+    /**
      * 描述
      */
     description?: string
@@ -5306,36 +5164,6 @@ export interface GetMarketIdResponse {
        * 服饰图片地址
        */
       url: string
-    }[]
-    /**
-     * 库存
-     */
-    inventory: {
-      /**
-       * 库存数据id
-       */
-      id: number
-      /**
-       * 服饰尺码id
-       */
-      sizeId: number
-      /**
-       * 服饰数量
-       */
-      count: number
-      /**
-       * 尺码信息
-       */
-      size: {
-        /**
-         * 尺码id
-         */
-        id: number
-        /**
-         * 尺码
-         */
-        name: string
-      }
     }[]
     /**
      * 标签

@@ -10,6 +10,7 @@ export interface Option {
   field: string;
   render?: (v: any) => ReactNode;
   col?: number;
+  enums?: Map<any, { text: string; [key: string]: any }>;
 }
 
 interface DescriptionsProps {
@@ -30,9 +31,16 @@ const Descriptions: FC<DescriptionsProps> = ({
   options = [],
   data,
 }) => {
-  const renderContent = (value: any, render: Option['render']) => {
-    const ret = render ? render(value) : value;
-    return ret ?? EMPTY_TEXT;
+  const renderContent = (option: Option) => {
+    const { render, enums, field } = option;
+    const value = data?.[field];
+    if (render) {
+      return render(value);
+    }
+    if (enums) {
+      return enums.get(value)?.text;
+    }
+    return value ?? EMPTY_TEXT;
   };
 
   return (
@@ -51,7 +59,7 @@ const Descriptions: FC<DescriptionsProps> = ({
             ) : null}
           </View>
           <View className={`${PREFIX_CLS}-item-content`}>
-            {renderContent(data?.[item.field], item.render)}
+            {renderContent(item)}
           </View>
         </View>
       ))}

@@ -12,6 +12,7 @@ import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
 
+// TODO: 补充历史信息
 const Page = () => {
   const { id } = useRouter().params;
 
@@ -76,7 +77,7 @@ const Page = () => {
           {
             no: data?.no,
             productTypeName: data?.productType?.name,
-            inventory: data?.inventory,
+            size: data?.size,
           },
         )}
         footer={

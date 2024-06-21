@@ -3,11 +3,11 @@ import { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
 import ProductFieldPicker from './ProductFieldPicker';
-import ProductInventoryPicker from './ProductInventoryPicker';
 import ProductTypePicker from './ProductTypePicker';
 
 import { getProductId, getTag, postProduct, putProduct } from '@/api';
-import { FormSection, TagChecker, Upload } from '@/components';
+import { FormSection, Picker, TagChecker, Upload } from '@/components';
+import { productSizeMap } from '@/constants/product';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -44,7 +44,7 @@ const Page = () => {
         no,
         brand,
         typeCode,
-        inventory,
+        size,
         fieldList,
         tagList,
         description,
@@ -56,10 +56,7 @@ const Page = () => {
         no,
         brand,
         typeCode,
-        inventory: inventory?.map((item) => ({
-          sizeId: item.sizeId,
-          count: item.count,
-        })),
+        size,
         tagIdList: tagList.map((item) => item.tagId),
         description,
       };
@@ -156,24 +153,14 @@ const Page = () => {
             />
           </Form.Item>
           <Form.Item
-            label="数量"
-            name="inventory"
+            label="尺码"
+            name="size"
             trigger="onConfirm"
+            getValueFromEvent={(...args) => args[1]}
             validateTrigger="onConfirm"
-            rules={[
-              { required: true, message: '请输入商品数量' },
-              {
-                validator(_, value: any) {
-                  if (value?.every((item) => item.count === 0)) {
-                    return false;
-                  }
-                  return true;
-                },
-                message: '请输入商品数量',
-              },
-            ]}
+            rules={[{ required: true, message: '请输入商品尺码' }]}
           >
-            <ProductInventoryPicker />
+            <Picker options={Array.from(productSizeMap.values())} />
           </Form.Item>
           {currentCode
             ? Array.from(fieldMap.get(currentCode) ?? [])?.map((item) => (

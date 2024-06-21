@@ -60,7 +60,7 @@ const Page = () => {
           }}
         >
           {tabs.map((item) => (
-            <Tabs.TabPane key={item.value} title={item.label} />
+            <Tabs.TabPane key={item.value} title={item.text} />
           ))}
         </Tabs>
         <List
