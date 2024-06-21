@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro';
 import { Component, PropsWithChildren } from 'react';
 
+import './assets/iconfont/iconfont.css';
 import './app.scss';
 
 class App extends Component<PropsWithChildren> {

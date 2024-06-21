@@ -14,6 +14,7 @@ export default {
     'pages/market/index/index',
     'pages/market/action/index',
     'pages/market/action/result/index',
+    'pages/market/detail/index',
     // 求购
     'pages/requirement/index',
     // 我的

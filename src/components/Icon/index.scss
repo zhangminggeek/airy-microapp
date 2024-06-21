@@ -1,0 +1,21 @@
+@import '../../styles/var.scss';
+@import '../../styles/mixins.scss';
+
+.m-icon {
+  @include flex-center(column);
+  color: $text-color-base;
+
+  &-primary {
+    .m-icon-font {
+      color: $color-primary;
+    }
+  }
+
+  &-with-title {
+    gap: 8px;
+
+    .m-icon-title {
+      font-size: $font-size-xsmall;
+    }
+  }
+}

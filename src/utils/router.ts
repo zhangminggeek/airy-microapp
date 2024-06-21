@@ -16,6 +16,7 @@ export class RouterUtil {
     '/pages/user/register/code/index',
     '/pages/user/register/result/index',
     '/pages/market/index/index',
+    '/pages/market/detail/index',
   ];
 
   /**

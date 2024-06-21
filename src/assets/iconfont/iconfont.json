@@ -1,0 +1,198 @@
+{
+  "id": "4593602",
+  "name": "airy",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "16592860",
+      "name": "MobileOutlined",
+      "font_class": "MobileOutlined",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "16592864",
+      "name": "PhoneOutlined",
+      "font_class": "PhoneOutlined",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "16593809",
+      "name": "DeleteOutlined",
+      "font_class": "DeleteOutlined",
+      "unicode": "e6cc",
+      "unicode_decimal": 59084
+    },
+    {
+      "icon_id": "16593810",
+      "name": "CloseOutlined",
+      "font_class": "CloseOutlined",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "16593813",
+      "name": "PlusOutlined",
+      "font_class": "PlusOutlined",
+      "unicode": "e6d0",
+      "unicode_decimal": 59088
+    },
+    {
+      "icon_id": "16593821",
+      "name": "DoubleUpOutlined",
+      "font_class": "DoubleUpOutlined",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "16593822",
+      "name": "DoubleDownOutlined",
+      "font_class": "DoubleDownOutlined",
+      "unicode": "e6d7",
+      "unicode_decimal": 59095
+    },
+    {
+      "icon_id": "16593823",
+      "name": "LeftOutlined",
+      "font_class": "LeftOutlined",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "16593824",
+      "name": "DownOutlined",
+      "font_class": "DownOutlined",
+      "unicode": "e6d9",
+      "unicode_decimal": 59097
+    },
+    {
+      "icon_id": "16593825",
+      "name": "UpOutlined",
+      "font_class": "UpOutlined",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
+      "icon_id": "16593826",
+      "name": "RightOutlined",
+      "font_class": "RightOutlined",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "17049328",
+      "name": "DownFilled",
+      "font_class": "DownFilled",
+      "unicode": "e6e6",
+      "unicode_decimal": 59110
+    },
+    {
+      "icon_id": "17161299",
+      "name": "SuccessFilled",
+      "font_class": "SuccessFilled",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "18344250",
+      "name": "NewFilled",
+      "font_class": "NewFilled",
+      "unicode": "e743",
+      "unicode_decimal": 59203
+    },
+    {
+      "icon_id": "18849223",
+      "name": "FilterFilled",
+      "font_class": "FilterFilled",
+      "unicode": "e72b",
+      "unicode_decimal": 59179
+    },
+    {
+      "icon_id": "23230832",
+      "name": "DeletionOutlined",
+      "font_class": "DeletionOutlined",
+      "unicode": "e78d",
+      "unicode_decimal": 59277
+    },
+    {
+      "icon_id": "32805582",
+      "name": "EnvironmentOutlined ",
+      "font_class": "EnvironmentOutlined",
+      "unicode": "1066a",
+      "unicode_decimal": 67178
+    },
+    {
+      "icon_id": "35452636",
+      "name": "AliPayFilled",
+      "font_class": "AliPayFilled",
+      "unicode": "e8b8",
+      "unicode_decimal": 59576
+    },
+    {
+      "icon_id": "35503147",
+      "name": "WechatFilled",
+      "font_class": "WechatFilled",
+      "unicode": "e8cb",
+      "unicode_decimal": 59595
+    },
+    {
+      "icon_id": "35503148",
+      "name": "WechatPayFilled",
+      "font_class": "WechatPayFilled",
+      "unicode": "e8ce",
+      "unicode_decimal": 59598
+    },
+    {
+      "icon_id": "36289668",
+      "name": "LoveOutlined",
+      "font_class": "LoveOutlined",
+      "unicode": "e91c",
+      "unicode_decimal": 59676
+    },
+    {
+      "icon_id": "36289669",
+      "name": "ShareOneOutlined",
+      "font_class": "ShareOneOutlined",
+      "unicode": "e91d",
+      "unicode_decimal": 59677
+    },
+    {
+      "icon_id": "36289670",
+      "name": "LoveFilled",
+      "font_class": "LoveFilled",
+      "unicode": "e91e",
+      "unicode_decimal": 59678
+    },
+    {
+      "icon_id": "38306069",
+      "name": "QingCOutlined",
+      "font_class": "QingCOutlined",
+      "unicode": "e9c2",
+      "unicode_decimal": 59842
+    },
+    {
+      "icon_id": "39799857",
+      "name": "UnionPayMulticolored",
+      "font_class": "UnionPayMulticolored",
+      "unicode": "ea11",
+      "unicode_decimal": 59921
+    },
+    {
+      "icon_id": "40398407",
+      "name": "LianJFilled",
+      "font_class": "LianJFilled",
+      "unicode": "ea34",
+      "unicode_decimal": 59956
+    },
+    {
+      "icon_id": "40711750",
+      "name": "RentOutlined",
+      "font_class": "RentOutlined",
+      "unicode": "ea3e",
+      "unicode_decimal": 59966
+    }
+  ]
+}

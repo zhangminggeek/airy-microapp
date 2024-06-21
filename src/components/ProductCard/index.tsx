@@ -19,6 +19,7 @@ interface ProductCardProps {
   leasePrice?: string;
   sellingPrice?: string;
   favorites?: number;
+  onClick?: () => void;
 }
 
 const PREFIX_CLS = 'm-product-card';
@@ -31,6 +32,7 @@ const ProductCard: FC<ProductCardProps> = ({
   leasePrice,
   sellingPrice,
   favorites = 0,
+  onClick,
 }) => {
   const _sellingPrice = useMemo(() => {
     if (!sellingPrice) return;
@@ -39,7 +41,7 @@ const ProductCard: FC<ProductCardProps> = ({
   }, [sellingPrice]);
 
   return (
-    <View className={classnames(PREFIX_CLS, clasName)}>
+    <View className={classnames(PREFIX_CLS, clasName)} onClick={onClick}>
       <View className={`${PREFIX_CLS}-header`}>
         <Image
           className={`${PREFIX_CLS}-image`}

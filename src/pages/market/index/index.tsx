@@ -12,6 +12,7 @@ import { InputSearch, List, ProductCard } from '@/components';
 import { OSS_PREFIX } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { BasicLayout } from '@/layouts';
+import { RouterUtil } from '@/utils';
 
 const tabs = Array.from(tabsMap.values());
 
@@ -74,11 +75,16 @@ const Page = () => {
             <ProductCard
               key={item.id}
               image={item.product?.picList?.[0]?.url}
-              title={item.description}
+              title={item.title}
               tagList={item.product?.tagList?.map((item) => item.tag.name)}
               leasePrice={item.leasePrice}
               sellingPrice={item.sellingPrice}
               favorites={item.favorities}
+              onClick={() => {
+                RouterUtil.navigateTo('/pages/market/detail/index', {
+                  id: item.id,
+                });
+              }}
             />
           )}
         />

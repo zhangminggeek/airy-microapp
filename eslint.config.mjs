@@ -54,4 +54,7 @@ export default [
       'no-unused-vars': 'off',
     },
   },
+  {
+    ignores: ['src/assets/iconfont/**/*'],
+  },
 ];

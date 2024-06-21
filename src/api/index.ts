@@ -4652,7 +4652,7 @@ export interface GetMarketRequest {
   /**
    * 产品描述
    */
-  description?: string
+  title?: string
   /**
    * 产品类型
    */
@@ -4711,7 +4711,11 @@ export interface GetMarketResponse {
      */
     productId: number
     /**
-     * 产品描述
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
      */
     description: string
     /**
@@ -4847,7 +4851,7 @@ type GetMarketRequestConfig = Readonly<
     '/market',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'description' | 'productTypeCode' | 'companyId' | 'status' | 'order',
+    'pageNum' | 'pageSize' | 'title' | 'productTypeCode' | 'companyId' | 'status' | 'order',
     false
   >
 >
@@ -4869,7 +4873,7 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_9,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'description', 'productTypeCode', 'companyId', 'status', 'order'],
+  queryNames: ['pageNum', 'pageSize', 'title', 'productTypeCode', 'companyId', 'status', 'order'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
@@ -5174,13 +5178,271 @@ export interface GetMarketIdResponse {
    */
   updateTime: string
   /**
-   * 二手市场出售/借调服饰id
+   * 数据id
    */
   id: number
   /**
-   * 二手市场出售/借调服饰
+   * 公司id
    */
-  market: string
+  companyId: number
+  /**
+   * 公司收货地址id
+   */
+  companyAddressId?: number
+  /**
+   * 服饰id
+   */
+  productId: number
+  /**
+   * 商品标题
+   */
+  title: string
+  /**
+   * 商品描述
+   */
+  description: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  deliveryMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
+   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+   */
+  status: number
+  /**
+   * 服饰信息
+   */
+  product: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 服饰id
+     */
+    id: number
+    /**
+     * 服饰名称
+     */
+    name: string
+    /**
+     * 服饰编号
+     */
+    no?: string
+    /**
+     * 服饰品牌
+     */
+    brand?: string
+    /**
+     * 服饰类型
+     */
+    typeCode: string
+    /**
+     * 描述
+     */
+    description?: string
+    /**
+     * 租赁次数
+     */
+    leaseCount: number
+    /**
+     * 产品类型
+     */
+    productType: {
+      /**
+       * 类型id
+       */
+      id: number
+      /**
+       * 类型名称
+       */
+      name: string
+      /**
+       * 类型编码
+       */
+      code: string
+    }
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+    /**
+     * 库存
+     */
+    inventory: {
+      /**
+       * 库存数据id
+       */
+      id: number
+      /**
+       * 服饰尺码id
+       */
+      sizeId: number
+      /**
+       * 服饰数量
+       */
+      count: number
+      /**
+       * 尺码信息
+       */
+      size: {
+        /**
+         * 尺码id
+         */
+        id: number
+        /**
+         * 尺码
+         */
+        name: string
+      }
+    }[]
+    /**
+     * 标签
+     */
+    tagList: {
+      /**
+       * id
+       */
+      id: number
+      /**
+       * 标签id
+       */
+      tagId: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 标签
+       */
+      tag: {
+        /**
+         * 标签id
+         */
+        id: number
+        /**
+         * 标签名称
+         */
+        name: string
+        /**
+         * 用途, 1:服饰标签
+         */
+        use: number
+      }
+    }[]
+    /**
+     * 其他字段信息
+     */
+    fieldList: {
+      /**
+       * 选项id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 字段key
+       */
+      fieldKey: string
+      /**
+       * 字段的值(该字段选项的id)
+       */
+      fieldValue: number
+      /**
+       * 字段key信息
+       */
+      fieldKeyInfo: {
+        /**
+         * 字段id
+         */
+        id: number
+        /**
+         * 字段key
+         */
+        key: string
+        /**
+         * 字段名
+         */
+        name: string
+        /**
+         * 服饰类型编码
+         */
+        prodectTypeCode: string
+      }
+      /**
+       * 字段值信息
+       */
+      fieldValueInfo: {
+        /**
+         * 选项id
+         */
+        id: number
+        /**
+         * 选项名
+         */
+        name: string
+        /**
+         * 字段key
+         */
+        fieldKey: string
+        /**
+         * 服饰类型编码
+         */
+        prodectTypeCode: string
+      }
+    }[]
+  }
+  /**
+   * 被收藏数
+   */
+  favorities: number
+  /**
+   * 当前用户是否已收藏
+   */
+  isFavorited: boolean
 }
 
 /**
@@ -5230,5 +5492,81 @@ export const getMarketId = /*#__PURE__*/ (requestData: GetMarketIdRequest, ...ar
 }
 
 getMarketId.requestConfig = getMarketIdRequestConfig
+
+/**
+ * 接口 切换收藏状态 的 **请求类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/favorite`
+ */
+export interface PostMarketFavoriteRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+  /**
+   * 是否收藏
+   */
+  isFavorited: boolean
+}
+
+/**
+ * 接口 切换收藏状态 的 **返回类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/favorite`
+ */
+export type PostMarketFavoriteResponse = any
+
+/**
+ * 接口 切换收藏状态 的 **请求配置的类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/favorite`
+ */
+type PostMarketFavoriteRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/favorite', 'data', string, string, false>
+>
+
+/**
+ * 接口 切换收藏状态 的 **请求配置**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/favorite`
+ */
+const postMarketFavoriteRequestConfig: PostMarketFavoriteRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
+  path: '/market/favorite',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_9,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postMarketFavorite',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 切换收藏状态 的 **请求函数**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/favorite`
+ */
+export const postMarketFavorite = /*#__PURE__*/ (
+  requestData: PostMarketFavoriteRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostMarketFavoriteResponse>(prepare(postMarketFavoriteRequestConfig, requestData), ...args)
+}
+
+postMarketFavorite.requestConfig = postMarketFavoriteRequestConfig
 
 /* prettier-ignore-end */

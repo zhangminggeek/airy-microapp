@@ -1,0 +1,12 @@
+@import '../../../styles/var.scss';
+
+.m-product-selling-price {
+  display: flex;
+  align-items: baseline;
+  color: $color-primary;
+  font-size: $font-size-small;
+
+  &-integer {
+    font-size: $font-size-large;
+  }
+}

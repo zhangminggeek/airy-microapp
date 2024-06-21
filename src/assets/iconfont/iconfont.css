@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'iconfont'; /* Project id 4593602 */
+  src:
+    url('iconfont.woff2?t=1718937510488') format('woff2'),
+    url('iconfont.woff?t=1718937510488') format('woff'),
+    url('iconfont.ttf?t=1718937510488') format('truetype');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-MobileOutlined:before {
+  content: '\e673';
+}
+
+.icon-PhoneOutlined:before {
+  content: '\e677';
+}
+
+.icon-DeleteOutlined:before {
+  content: '\e6cc';
+}
+
+.icon-CloseOutlined:before {
+  content: '\e6cd';
+}
+
+.icon-PlusOutlined:before {
+  content: '\e6d0';
+}
+
+.icon-DoubleUpOutlined:before {
+  content: '\e6d6';
+}
+
+.icon-DoubleDownOutlined:before {
+  content: '\e6d7';
+}
+
+.icon-LeftOutlined:before {
+  content: '\e6d8';
+}
+
+.icon-DownOutlined:before {
+  content: '\e6d9';
+}
+
+.icon-UpOutlined:before {
+  content: '\e6da';
+}
+
+.icon-RightOutlined:before {
+  content: '\e6db';
+}
+
+.icon-DownFilled:before {
+  content: '\e6e6';
+}
+
+.icon-SuccessFilled:before {
+  content: '\e6bd';
+}
+
+.icon-NewFilled:before {
+  content: '\e743';
+}
+
+.icon-FilterFilled:before {
+  content: '\e72b';
+}
+
+.icon-DeletionOutlined:before {
+  content: '\e78d';
+}
+
+.icon-EnvironmentOutlined:before {
+  content: '\1066a';
+}
+
+.icon-AliPayFilled:before {
+  content: '\e8b8';
+}
+
+.icon-WechatFilled:before {
+  content: '\e8cb';
+}
+
+.icon-WechatPayFilled:before {
+  content: '\e8ce';
+}
+
+.icon-LoveOutlined:before {
+  content: '\e91c';
+}
+
+.icon-ShareOneOutlined:before {
+  content: '\e91d';
+}
+
+.icon-LoveFilled:before {
+  content: '\e91e';
+}
+
+.icon-QingCOutlined:before {
+  content: '\e9c2';
+}
+
+.icon-UnionPayMulticolored:before {
+  content: '\ea11';
+}
+
+.icon-LianJFilled:before {
+  content: '\ea34';
+}
+
+.icon-RentOutlined:before {
+  content: '\ea3e';
+}

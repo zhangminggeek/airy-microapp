@@ -67,11 +67,11 @@ const Page = () => {
       >
         <FormSection>
           <Form.Item
-            name="desc"
+            name="title"
             noStyle
-            rules={[{ required: true, message: '请输入商品描述' }]}
+            rules={[{ required: true, message: '请输入商品标题' }]}
           >
-            <TextArea placeholder="描述一下宝贝品牌，详情等" maxLength={200} />
+            <TextArea placeholder="请输入商品标题" maxLength={200} />
           </Form.Item>
           <Form.Item
             name="productId"
@@ -79,6 +79,11 @@ const Page = () => {
             rules={[{ required: true, message: '请选择商品' }]}
           >
             <ProductPicker />
+          </Form.Item>
+        </FormSection>
+        <FormSection title="描述">
+          <Form.Item name="description" noStyle>
+            <TextArea placeholder="请输入描述" maxLength={255} />
           </Form.Item>
         </FormSection>
         <FormSection title="出售/借调">

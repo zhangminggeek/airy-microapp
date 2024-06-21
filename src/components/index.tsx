@@ -8,6 +8,7 @@ import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
 import FormSection from './FormSection';
+import Icon from './Icon';
 import InputCode from './InputCode';
 import InputNumber from './InputNumber';
 import InputPassword from './InputPassword';
@@ -17,6 +18,7 @@ import List from './List';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
+import Product from './Product';
 import ProductCard from './ProductCard';
 import ProductField from './ProductField';
 import ProductPicture from './ProductPicture';
@@ -30,7 +32,6 @@ import Title from './Title';
 import Upload from './Upload';
 
 export {
-  // 基础组件
   ActionSheet,
   AddressCard,
   Affix,
@@ -41,6 +42,7 @@ export {
   EditableCell,
   Empty,
   FormSection,
+  Icon,
   InputCode,
   InputNumber,
   InputPassword,
@@ -50,6 +52,7 @@ export {
   ModalForm,
   Picker,
   PickerView,
+  Product,
   ProductCard,
   ProductField,
   ProductPicture,
