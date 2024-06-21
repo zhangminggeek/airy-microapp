@@ -101,7 +101,9 @@ const Page = () => {
             <Button
               type="primary"
               onClick={() => {
-                RouterUtil.navigateTo('/pages/dress/action/index', { id });
+                RouterUtil.navigateTo('/packageDress/pages/action/index', {
+                  id,
+                });
               }}
             >
               编辑

@@ -20,16 +20,22 @@ export default {
     // 我的
     'pages/user/index/index',
     'pages/user/published/index',
-    // 服装管理
-    'pages/dress/management/index',
-    'pages/dress/action/index',
-    'pages/dress/detail/index',
-    'pages/dress/select/index',
   ],
   subpackages: [
     {
+      // 地址管理
       root: 'packageAddress',
       pages: ['pages/management/index', 'pages/action/index'],
+    },
+    {
+      // 服装管理
+      root: 'packageDress',
+      pages: [
+        'pages/management/index',
+        'pages/action/index',
+        'pages/detail/index',
+        'pages/select/index',
+      ],
     },
   ],
   window: {

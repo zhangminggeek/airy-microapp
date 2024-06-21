@@ -87,9 +87,10 @@ const Page = () => {
                     key={item.id}
                     className={styles.card}
                     onClick={() => {
-                      RouterUtil.navigateTo('/pages/dress/detail/index', {
-                        id: item.id,
-                      });
+                      RouterUtil.navigateTo(
+                        '/packageDress/pages/detail/index',
+                        { id: item.id },
+                      );
                     }}
                   >
                     <View className={styles['card-header']}>
@@ -124,7 +125,7 @@ const Page = () => {
       </View>
       <Affix
         onClick={() => {
-          RouterUtil.navigateTo('/pages/dress/action/index');
+          RouterUtil.navigateTo('/packageDress/pages/action/index');
         }}
       />
     </BasicLayout>

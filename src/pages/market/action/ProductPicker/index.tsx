@@ -54,7 +54,7 @@ const ProductPicker: FC<ProductPickerProps> = ({ value, onChange }) => {
           <View
             className={styles.btn}
             onClick={() => {
-              RouterUtil.navigateTo('/pages/dress/select/index');
+              RouterUtil.navigateTo('/packageDress/pages/select/index');
             }}
           >
             <Add className={styles['btn-icon']} size={24} />

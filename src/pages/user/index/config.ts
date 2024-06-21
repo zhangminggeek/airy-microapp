@@ -20,7 +20,7 @@ export const shopConfig = [
   {
     icon: IconDressManagement,
     name: '服饰管理',
-    to: '/pages/dress/management/index',
+    to: '/packageDress/pages/management/index',
   },
   { icon: IconEmployeeManagement, name: '员工管理', to: '' },
   { icon: IconShopManagement, name: '店铺信息', to: '' },
