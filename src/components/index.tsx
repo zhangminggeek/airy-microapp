@@ -19,9 +19,6 @@ import ModalForm from './ModalForm';
 import Picker from './Picker';
 import PickerView from './PickerView';
 import Product from './Product';
-import ProductCard from './ProductCard';
-import ProductField from './ProductField';
-import ProductPicture from './ProductPicture';
 import RegionPicker from './RegionPicker';
 import Result from './Result';
 import Section from './Section';
@@ -53,9 +50,6 @@ export {
   Picker,
   PickerView,
   Product,
-  ProductCard,
-  ProductField,
-  ProductPicture,
   RegionPicker,
   Result,
   Section,

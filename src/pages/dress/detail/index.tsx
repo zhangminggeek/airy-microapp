@@ -1,4 +1,4 @@
-import { Button, SafeArea } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow, useRouter } from '@tarojs/taro';
 
@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 import type { GetProductIdRequest, GetProductIdResponse } from '@/api';
 
 import { deleteProductId, getProductId } from '@/api';
-import { ActionSheet, ProductField, ProductPicture, Tag } from '@/components';
+import { ActionSheet, Product } from '@/components';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -58,58 +58,57 @@ const Page = () => {
 
   return (
     <BasicLayout title="详情" back fill safeArea={false}>
-      <ProductPicture images={data?.picList?.map((item) => item.url)} />
-      <View className={styles.header}>
-        <View className={styles.name}>{data?.name}</View>
-        <View className={styles.other}>
-          <View className={styles['tag-group']}>
-            {data?.tagList?.map((item) => (
-              <Tag key={item.tagId} type="primary">
-                {item.tag.name}
-              </Tag>
-            ))}
+      <Product.Detail
+        images={data?.picList?.map((item) => item.url)}
+        tagList={data?.tagList?.map((item) => item.tag.name)}
+        title={data?.name}
+        desc={data?.description}
+        extra={`已租${data?.leaseCount ?? 0}次`}
+        fieldList={data?.fieldList?.map(({ fieldKeyInfo }) => ({
+          label: fieldKeyInfo?.name,
+          field: fieldKeyInfo?.key,
+        }))}
+        fieldData={data?.fieldList?.reduce(
+          (prev, cur) => {
+            prev[cur.fieldKey] = cur.fieldValueInfo.name;
+            return prev;
+          },
+          {
+            no: data?.no,
+            productTypeName: data?.productType?.name,
+            inventory: data?.inventory,
+          },
+        )}
+        footer={
+          <View className={styles.footer}>
+            <ActionSheet
+              options={[
+                { key: 'sell', name: '转二手' },
+                { key: 'delete', name: '删除', danger: true },
+              ]}
+              onSelect={(item) => {
+                if (item.key === 'sell') {
+                  RouterUtil.navigateTo('/pages/market/action/index', {
+                    productId: id,
+                  });
+                } else if (item.key === 'delete') {
+                  open();
+                }
+              }}
+            >
+              <Text className={styles.more}>更多</Text>
+            </ActionSheet>
+            <Button
+              type="primary"
+              onClick={() => {
+                RouterUtil.navigateTo('/pages/dress/action/index', { id });
+              }}
+            >
+              编辑
+            </Button>
           </View>
-          <Text className={styles.lease}>已租{data?.leaseCount}次</Text>
-        </View>
-        <View className={styles.desc}>{data?.description}</View>
-      </View>
-      <View className={styles.body}>
-        <ProductField
-          fieldList={data?.fieldList?.map(({ fieldKeyInfo }) => ({
-            label: fieldKeyInfo?.name,
-            field: fieldKeyInfo?.key,
-          }))}
-          data={data}
-        />
-      </View>
-      <View className={styles.footer}>
-        <View className={styles['footer-content']}>
-          <ActionSheet
-            options={[
-              { key: 'sell', name: '转二手' },
-              { key: 'delete', name: '删除', danger: true },
-            ]}
-            onSelect={(item) => {
-              if (item.key === 'sell') {
-                // TODO: 跳转创建二手页
-              } else if (item.key === 'delete') {
-                open();
-              }
-            }}
-          >
-            <Text className={styles.more}>更多</Text>
-          </ActionSheet>
-          <Button
-            type="primary"
-            onClick={() => {
-              RouterUtil.navigateTo('/pages/dress/action/index', { id });
-            }}
-          >
-            编辑
-          </Button>
-        </View>
-        <SafeArea position="bottom" />
-      </View>
+        }
+      />
       {renderDialog()}
     </BasicLayout>
   );

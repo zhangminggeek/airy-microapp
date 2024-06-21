@@ -8,7 +8,7 @@ import styles from './index.module.scss';
 import type { ActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
-import { InputSearch, List, ProductCard } from '@/components';
+import { InputSearch, List, Product } from '@/components';
 import { OSS_PREFIX } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { BasicLayout } from '@/layouts';
@@ -72,7 +72,7 @@ const Page = () => {
             order: tabs[currentIndex].value,
           }}
           renderItem={(item) => (
-            <ProductCard
+            <Product.Card
               key={item.id}
               image={item.product?.picList?.[0]?.url}
               title={item.title}

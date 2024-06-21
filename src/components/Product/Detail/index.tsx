@@ -1,5 +1,5 @@
 import { SafeArea } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import { ROOT_PREFIX_CLS } from '../constants';
@@ -40,11 +40,11 @@ const ProductDetail: FC<ProductDetailProps> = ({
   sellingPrice,
   leasePrice,
   tagList = [],
-  favorites = 0,
   title,
   desc,
   fieldList = [],
   fieldData,
+  extra,
   footer,
 }) => {
   return (
@@ -56,9 +56,9 @@ const ProductDetail: FC<ProductDetailProps> = ({
             {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
             {leasePrice ? <LeasePrice value={leasePrice} /> : null}
           </Space>
-          <Text className={`${PREFIX_CLS}-header-top-extra`}>
-            {favorites}人收藏
-          </Text>
+          {extra ? (
+            <View className={`${PREFIX_CLS}-header-top-extra`}>{extra}</View>
+          ) : null}
         </View>
         {tagList?.length ? (
           <View className={`${PREFIX_CLS}-header-tag-group`}>

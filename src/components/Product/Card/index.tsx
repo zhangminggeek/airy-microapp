@@ -4,6 +4,8 @@ import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useMemo } from 'react';
 
+import { ROOT_PREFIX_CLS } from '../constants';
+
 import type { CSSProperties, FC } from 'react';
 
 import { Space, Tag } from '@/components';
@@ -22,7 +24,7 @@ interface ProductCardProps {
   onClick?: () => void;
 }
 
-const PREFIX_CLS = 'm-product-card';
+const PREFIX_CLS = `${ROOT_PREFIX_CLS}-card`;
 
 const ProductCard: FC<ProductCardProps> = ({
   clasName,

@@ -44,7 +44,7 @@ const Page = () => {
         images={data?.product?.picList?.map((item) => item.url)}
         sellingPrice={data?.sellingPrice}
         leasePrice={data?.leasePrice}
-        favorites={data?.favorities}
+        extra={`${data?.favorities ?? 0}人收藏`}
         tagList={data?.product?.tagList?.map((item) => item.tag.name)}
         title={data?.title}
         desc={data?.description}
@@ -95,6 +95,7 @@ const Page = () => {
               </Button>
             </Space>
             <Space size={16}>
+              {/* TODO: 跳转 */}
               {data?.allowLease ? <Button size="large">借调</Button> : null}
               {data?.allowSell ? (
                 <Button type="primary" size="large">
