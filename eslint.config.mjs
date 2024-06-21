@@ -55,6 +55,6 @@ export default [
     },
   },
   {
-    ignores: ['src/assets/iconfont/**/*'],
+    ignores: ['src/assets/iconfont/**/*', 'src/api/**/*'],
   },
 ];
