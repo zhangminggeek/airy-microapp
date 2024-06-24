@@ -5,7 +5,7 @@ import { CSSProperties, FC } from 'react';
 
 import './index.scss';
 
-interface IconProps {
+export interface IconProps {
   className?: string;
   style?: CSSProperties;
   name: string;

@@ -1,4 +1,3 @@
-import { IconFont } from '@nutui/icons-react-taro';
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
@@ -9,8 +8,7 @@ import styles from './index.module.scss';
 import type { ActionType } from '@/components/List';
 
 import { getProductPage } from '@/api';
-import IconRentOutlined from '@/assets/icons/rent_outlined.svg';
-import { Affix, InputSearch, List } from '@/components';
+import { Affix, Icon, InputSearch, List } from '@/components';
 import { BasicLayout } from '@/layouts';
 import { useProductStore } from '@/models/product';
 import { RouterUtil } from '@/utils';
@@ -98,7 +96,7 @@ const Page = () => {
                       <View className={styles['card-body-content']}>
                         <Text className={styles.no}>{item.no}</Text>
                         <View className={styles.lease}>
-                          <IconFont name={IconRentOutlined} size={16} />
+                          <Icon name="RentOutlined" size={16} />
                           {item.leaseCount}
                         </View>
                       </View>

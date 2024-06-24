@@ -1,4 +1,3 @@
-import { IconFont } from '@nutui/icons-react-taro';
 import {
   Button,
   Checkbox,
@@ -18,8 +17,7 @@ import styles from './index.module.scss';
 import type { GetProductResponse } from '@/api';
 
 import { getProduct, getProductType } from '@/api';
-import IconRentOutlined from '@/assets/icons/rent_outlined.svg';
-import { InputSearch, Space } from '@/components';
+import { Icon, InputSearch, Space } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -101,7 +99,7 @@ const Page = () => {
                   <View className={styles['item-content-desc']}>
                     <Text>{item.no}</Text>
                     <Space size={4}>
-                      <IconFont name={IconRentOutlined} size={16} />
+                      <Icon name="RentOutlined" size={16} />
                       <Text>{item.leaseCount}</Text>
                     </Space>
                   </View>

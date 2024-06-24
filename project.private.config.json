@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/market/action/result/index",
+          "pathName": "pages/market/action/result/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/published/index",
           "pathName": "pages/user/published/index",
           "query": "",

@@ -1,12 +1,12 @@
-import { IconFont } from '@nutui/icons-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useMemo } from 'react';
 
-import type { IconFontConfig } from '@nutui/icons-react-taro';
+import type { IconProps } from '@/components/Icon';
 import type { CSSProperties, FC, ReactNode } from 'react';
 
 import IconSuccessFilled from '@/assets/icons/success_filled.svg';
+import { Icon } from '@/components';
 
 import './index.scss';
 
@@ -33,7 +33,7 @@ const Result: FC<ResultProps> = ({
 }) => {
   const renderIcon = useMemo(() => {
     if (icon) return icon;
-    const config: IconFontConfig = {};
+    const config: IconProps = {} as any;
     switch (status) {
       case 'success':
         config.name = IconSuccessFilled;
@@ -41,7 +41,7 @@ const Result: FC<ResultProps> = ({
       default:
         break;
     }
-    return <IconFont {...config} size={56} />;
+    return <Icon {...config} size={56} />;
   }, [status, icon]);
 
   return (
