@@ -64,6 +64,7 @@ const Page = () => {
           ))}
         </Tabs>
         <List
+          fill
           actionRef={actionRef}
           request={getMarket}
           params={{

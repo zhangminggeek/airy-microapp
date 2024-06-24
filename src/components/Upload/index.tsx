@@ -115,7 +115,6 @@ const Upload: FC<UploadProps> = ({
   const handleDelete = (index: number) => {
     const ret = [...value];
     ret.splice(index, 1);
-    console.log('handleDelete', ret);
     onChange?.(ret);
   };
 

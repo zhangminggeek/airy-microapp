@@ -4601,9 +4601,17 @@ export interface GetMarketResponse {
      */
     quality: number
     /**
-     * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
      */
     status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
     /**
      * 服饰信息
      */
@@ -4861,21 +4869,49 @@ postMarket.requestConfig = postMarketRequestConfig
  */
 export interface PutMarketRequest {
   /**
+   * 公司收货id
+   */
+  companyAddressId?: number
+  /**
+   * 产品id
+   */
+  productId: number
+  /**
+   * 产品描述
+   */
+  description: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  deliveryMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
    * 二手市场出售/借调服饰id
    */
   id: number
-  /**
-   * 二手市场出售/借调服饰
-   */
-  market: string
-  /**
-   * 密码（明文）
-   */
-  password: string
-  /**
-   * 微信用户唯一标识
-   */
-  openid?: string
 }
 
 /**
@@ -4935,73 +4971,332 @@ export const putMarket = /*#__PURE__*/ (requestData: PutMarketRequest, ...args: 
 putMarket.requestConfig = putMarketRequestConfig
 
 /**
- * 接口 删除二手市场出售\/借调服饰 的 **请求类型**
+ * 接口 获取我发布的服饰列表 的 **请求类型**
  *
  * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market`
+ * @请求头 `GET /market/my/published`
  */
-export interface DeleteMarketRequest {
+export interface GetMarketMyPublishedRequest {
   /**
-   * 二手市场出售/借调服饰id
+   * 页码
    */
-  id: string
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+   */
+  status?: string
 }
 
 /**
- * 接口 删除二手市场出售\/借调服饰 的 **返回类型**
+ * 接口 获取我发布的服饰列表 的 **返回类型**
  *
  * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market`
+ * @请求头 `GET /market/my/published`
  */
-export type DeleteMarketResponse = any
+export interface GetMarketMyPublishedResponse {
+  /**
+   * 总数
+   */
+  total: number
+  /**
+   * 列表
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    deliveryMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+      /**
+       * 标签
+       */
+      tagList: {
+        /**
+         * id
+         */
+        id: number
+        /**
+         * 标签id
+         */
+        tagId: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 标签
+         */
+        tag: {
+          /**
+           * 标签id
+           */
+          id: number
+          /**
+           * 标签名称
+           */
+          name: string
+          /**
+           * 用途, 1:服饰标签
+           */
+          use: number
+        }
+      }[]
+    }
+    /**
+     * 被收藏数
+     */
+    favorities: number
+  }[]
+}
 
 /**
- * 接口 删除二手市场出售\/借调服饰 的 **请求配置的类型**
+ * 接口 获取我发布的服饰列表 的 **请求配置的类型**
  *
  * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market`
+ * @请求头 `GET /market/my/published`
  */
-type DeleteMarketRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, 'id', false>
+type GetMarketMyPublishedRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/market/my/published',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'status',
+    false
+  >
 >
 
 /**
- * 接口 删除二手市场出售\/借调服饰 的 **请求配置**
+ * 接口 获取我发布的服饰列表 的 **请求配置**
  *
  * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market`
+ * @请求头 `GET /market/my/published`
  */
-const deleteMarketRequestConfig: DeleteMarketRequestConfig = /*#__PURE__*/ {
+const getMarketMyPublishedRequestConfig: GetMarketMyPublishedRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_9,
   devUrl: devUrl_0_0_0_9,
   prodUrl: prodUrl_0_0_0_9,
-  path: '/market',
-  method: Method.DELETE,
+  path: '/market/my/published',
+  method: Method.GET,
   requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_9,
   paramNames: [],
-  queryNames: ['id'],
+  queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'deleteMarket',
+  requestFunctionName: 'getMarketMyPublished',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 删除二手市场出售\/借调服饰 的 **请求函数**
+ * 接口 获取我发布的服饰列表 的 **请求函数**
  *
  * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market`
+ * @请求头 `GET /market/my/published`
  */
-export const deleteMarket = /*#__PURE__*/ (requestData: DeleteMarketRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteMarketResponse>(prepare(deleteMarketRequestConfig, requestData), ...args)
+export const getMarketMyPublished = /*#__PURE__*/ (
+  requestData: GetMarketMyPublishedRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetMarketMyPublishedResponse>(prepare(getMarketMyPublishedRequestConfig, requestData), ...args)
 }
 
-deleteMarket.requestConfig = deleteMarketRequestConfig
+getMarketMyPublished.requestConfig = getMarketMyPublishedRequestConfig
+
+/**
+ * 接口 更新二手市场出售\/借调服饰状态 的 **请求类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `PUT /market/status`
+ */
+export interface PutMarketStatusRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+  /**
+   * 状态
+   */
+  status: number
+}
+
+/**
+ * 接口 更新二手市场出售\/借调服饰状态 的 **返回类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `PUT /market/status`
+ */
+export type PutMarketStatusResponse = any
+
+/**
+ * 接口 更新二手市场出售\/借调服饰状态 的 **请求配置的类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `PUT /market/status`
+ */
+type PutMarketStatusRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/status', 'data', string, string, false>
+>
+
+/**
+ * 接口 更新二手市场出售\/借调服饰状态 的 **请求配置**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `PUT /market/status`
+ */
+const putMarketStatusRequestConfig: PutMarketStatusRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
+  path: '/market/status',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_9,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putMarketStatus',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 更新二手市场出售\/借调服饰状态 的 **请求函数**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `PUT /market/status`
+ */
+export const putMarketStatus = /*#__PURE__*/ (requestData: PutMarketStatusRequest, ...args: UserRequestRestArgs) => {
+  return request<PutMarketStatusResponse>(prepare(putMarketStatusRequestConfig, requestData), ...args)
+}
+
+putMarketStatus.requestConfig = putMarketStatusRequestConfig
 
 /**
  * 接口 获取二手市场出售\/借调服饰信息 的 **请求类型**
@@ -5084,9 +5379,17 @@ export interface GetMarketIdResponse {
    */
   quality: number
   /**
-   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+   * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
    */
   status: number
+  /**
+   * 审批结论
+   */
+  remark?: string
+  /**
+   * 是否被删除
+   */
+  isDeleted: boolean
   /**
    * 服饰信息
    */
@@ -5320,6 +5623,147 @@ export const getMarketId = /*#__PURE__*/ (requestData: GetMarketIdRequest, ...ar
 }
 
 getMarketId.requestConfig = getMarketIdRequestConfig
+
+/**
+ * 接口 删除二手市场出售\/借调服饰 的 **请求类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/{id}`
+ */
+export interface DeleteMarketIdRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: string
+}
+
+/**
+ * 接口 删除二手市场出售\/借调服饰 的 **返回类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/{id}`
+ */
+export type DeleteMarketIdResponse = any
+
+/**
+ * 接口 删除二手市场出售\/借调服饰 的 **请求配置的类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/{id}`
+ */
+type DeleteMarketIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 删除二手市场出售\/借调服饰 的 **请求配置**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/{id}`
+ */
+const deleteMarketIdRequestConfig: DeleteMarketIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
+  path: '/market/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_9,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteMarketId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 删除二手市场出售\/借调服饰 的 **请求函数**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/{id}`
+ */
+export const deleteMarketId = /*#__PURE__*/ (requestData: DeleteMarketIdRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteMarketIdResponse>(prepare(deleteMarketIdRequestConfig, requestData), ...args)
+}
+
+deleteMarketId.requestConfig = deleteMarketIdRequestConfig
+
+/**
+ * 接口 取消审核 的 **请求类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/audit/{id}`
+ */
+export interface DeleteMarketAuditIdRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: string
+}
+
+/**
+ * 接口 取消审核 的 **返回类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/audit/{id}`
+ */
+export type DeleteMarketAuditIdResponse = any
+
+/**
+ * 接口 取消审核 的 **请求配置的类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/audit/{id}`
+ */
+type DeleteMarketAuditIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/audit/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 取消审核 的 **请求配置**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/audit/{id}`
+ */
+const deleteMarketAuditIdRequestConfig: DeleteMarketAuditIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
+  path: '/market/audit/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_9,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteMarketAuditId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 取消审核 的 **请求函数**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `DELETE /market/audit/{id}`
+ */
+export const deleteMarketAuditId = /*#__PURE__*/ (
+  requestData: DeleteMarketAuditIdRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<DeleteMarketAuditIdResponse>(prepare(deleteMarketAuditIdRequestConfig, requestData), ...args)
+}
+
+deleteMarketAuditId.requestConfig = deleteMarketAuditIdRequestConfig
 
 /**
  * 接口 切换收藏状态 的 **请求类型**

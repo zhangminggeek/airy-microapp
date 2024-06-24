@@ -1,17 +1,19 @@
 .m-list {
+  &.nut-infiniteloading {
+    box-sizing: border-box;
+  }
+
   &-multicolumn {
     .nut-infinite-container {
-      // column-count: 2;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 24px 0;
-
-      // & > view {
-      //   break-inside: avoid;
-      //   margin-bottom: 24px;
-      // }
     }
+  }
+
+  &:not(.m-list-fill) {
+    padding: 24px;
   }
 
   .nut-infinite-bottom {

@@ -2,9 +2,10 @@ import { Follow } from '@nutui/icons-react-taro';
 import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
-import { useMemo } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../constants';
+import LeasePrice from '../LeasePrice';
+import SellingPrice from '../SellingPrice';
 
 import type { CSSProperties, FC } from 'react';
 
@@ -12,7 +13,7 @@ import { Space, Tag } from '@/components';
 
 import './index.scss';
 
-interface ProductCardProps {
+interface CardProps {
   clasName?: string;
   style?: CSSProperties;
   image?: string;
@@ -26,7 +27,7 @@ interface ProductCardProps {
 
 const PREFIX_CLS = `${ROOT_PREFIX_CLS}-card`;
 
-const ProductCard: FC<ProductCardProps> = ({
+const Card: FC<CardProps> = ({
   clasName,
   image,
   title,
@@ -36,12 +37,6 @@ const ProductCard: FC<ProductCardProps> = ({
   favorites = 0,
   onClick,
 }) => {
-  const _sellingPrice = useMemo(() => {
-    if (!sellingPrice) return;
-    const [integer, decimal] = Number(sellingPrice).toFixed(2).split('.');
-    return [integer, decimal];
-  }, [sellingPrice]);
-
   return (
     <View className={classnames(PREFIX_CLS, clasName)} onClick={onClick}>
       <View className={`${PREFIX_CLS}-header`}>
@@ -65,28 +60,8 @@ const ProductCard: FC<ProductCardProps> = ({
           </View>
         ) : null}
         <View className={`${PREFIX_CLS}-content-info`}>
-          {leasePrice ? (
-            <View className={`${PREFIX_CLS}-content-info-lease`}>
-              <View className={`${PREFIX_CLS}-content-info-lease-icon`}>
-                借
-              </View>
-              <View
-                className={`${PREFIX_CLS}-content-info-lease-text`}
-              >{`¥${leasePrice}`}</View>
-            </View>
-          ) : null}
-          {_sellingPrice ? (
-            <View className={`${PREFIX_CLS}-content-info-sell`}>
-              <View className={`${PREFIX_CLS}-content-info-sell-unit`}>¥</View>
-              <View className={`${PREFIX_CLS}-content-info-sell-integer`}>
-                {_sellingPrice[0]}
-              </View>
-              <View className={`${PREFIX_CLS}-content-info-sell-point`}>.</View>
-              <View className={`${PREFIX_CLS}-content-info-sell-fractional`}>
-                {_sellingPrice[1]}
-              </View>
-            </View>
-          ) : null}
+          {leasePrice ? <LeasePrice value={leasePrice} /> : null}
+          {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
           <Space className={`${PREFIX_CLS}-content-info-favorites`} size={4}>
             <Follow size={12} />
             <View>{favorites}</View>
@@ -97,4 +72,4 @@ const ProductCard: FC<ProductCardProps> = ({
   );
 };
 
-export default ProductCard;
+export default Card;

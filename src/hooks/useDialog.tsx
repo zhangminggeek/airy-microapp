@@ -32,7 +32,6 @@ export const useDialog = <P extends Record<string, any> = any>({
   const open = (props?: OpenParams<P>) => {
     const { params: p, ...restProps } = props ?? {};
     params.current = p;
-    console.log('props', restProps);
     Dialog.open(id, { ...restProps });
   };
 

@@ -1,0 +1,21 @@
+@import '../../../styles/var.scss';
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+
+  .favorite {
+    font-size: $font-size-small;
+
+    &-count {
+      color: $color-primary;
+      margin-right: 4px;
+    }
+
+    &-text {
+      color: $text-color-secondary;
+    }
+  }
+}

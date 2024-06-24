@@ -1,6 +1,6 @@
 import { InfiniteLoading } from '@nutui/nutui-react-taro';
 import classnames from 'classnames';
-import { useEffect, useImperativeHandle, useState } from 'react';
+import { useImperativeHandle, useState } from 'react';
 
 import type { FunctionType } from '@/hooks/useRequest';
 import type { PaginationParams, PaginationResponse } from '@/interfaces/base';
@@ -8,7 +8,7 @@ import type { InfiniteLoadingProps } from '@nutui/nutui-react-taro';
 import type { ReactNode, Ref } from 'react';
 
 import { DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE } from '@/constants';
-import { useRequest } from '@/hooks';
+import { useDeepCompareEffect, useRequest } from '@/hooks';
 
 import './index.scss';
 
@@ -20,6 +20,7 @@ export interface ActionType<P = any> {
 
 interface ListProps<R = any, P = any, U extends PaginationParams<P> = any>
   extends Partial<InfiniteLoadingProps> {
+  fill?: boolean;
   column?: 1 | 2;
   actionRef?: Ref<ActionType<P>>;
   params?: ParamWithoutPaginationParams<P>;
@@ -31,6 +32,7 @@ const PREFIX_CLS = 'm-list';
 
 const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
   className,
+  fill = false,
   column = 2,
   actionRef,
   params,
@@ -44,6 +46,9 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     },
   }));
 
+  // 请求参数
+  const [innerParams, setInnerParams] =
+    useState<ParamWithoutPaginationParams<P>>();
   // 用于渲染列表的数据
   const [list, setList] = useState<R[]>([]);
   // 当前页码
@@ -52,7 +57,8 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
   // 数据总量
   const [total, setTotal] = useState<number>(0);
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
+    setInnerParams(params);
     fetchData({ ...params, pageNum: `${DEFAULT_PAGE_NUM}` } as any);
   }, [params]);
 
@@ -74,6 +80,7 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     const params = {
       pageNum: `${currentPageNum}`,
       pageSize: `${DEFAULT_PAGE_SIZE}`,
+      ...innerParams,
       ...p,
     } as unknown as U;
     await run(params);
@@ -83,7 +90,10 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     <InfiniteLoading
       className={classnames(
         PREFIX_CLS,
-        { [`${PREFIX_CLS}-multicolumn`]: column === 2 },
+        {
+          [`${PREFIX_CLS}-multicolumn`]: column === 2,
+          [`${PREFIX_CLS}-fill`]: fill,
+        },
         className,
       )}
       hasMore={total > list?.length}

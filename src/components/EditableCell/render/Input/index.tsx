@@ -52,7 +52,6 @@ const CustomInput: FC<CustomInputProps> = ({
             className={classnames(`${PREFIX_CLS}-input`, className)}
             value={innerValue}
             onChange={(v) => {
-              console.log('onChange', v);
               setInnerValue(v);
               origanOnChange?.(v);
             }}

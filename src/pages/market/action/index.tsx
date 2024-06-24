@@ -7,7 +7,7 @@ import ProductPicker from './ProductPicker';
 
 import type { PostMarketRequest } from '@/api';
 
-import { postMarket } from '@/api';
+import { getMarketId, postMarket, putMarket } from '@/api';
 import { FormSection, InputNumber, TagChecker } from '@/components';
 import { MarkrtMethod } from '@/constants/market';
 import { DeliveryMethod, ProductQuality } from '@/constants/product';
@@ -26,6 +26,10 @@ const Page = () => {
   const [allowLease, setAllowLease] = useState<boolean>(false);
 
   useEffect(() => {
+    if (id) {
+      fetchDetail({ id });
+    }
+
     if (productId) {
       form.setFieldsValue({ productId: Number(productId) });
     }
@@ -35,8 +39,58 @@ const Page = () => {
     };
   }, []);
 
+  // 获取详情
+  const { run: fetchDetail } = useRequest(getMarketId, {
+    manual: true,
+    onSuccess(data) {
+      const {
+        title,
+        productId,
+        description,
+        allowSell,
+        allowLease,
+        sellingPrice,
+        leasePrice,
+        leaseDeposit,
+        companyAddressId,
+        deliveryMethod,
+        quality,
+      } = data;
+      const method: MarkrtMethod[] = [];
+      if (allowSell) {
+        method.push(MarkrtMethod['出售']);
+        setAllowSell(true);
+      }
+      if (allowLease) {
+        method.push(MarkrtMethod['借调']);
+        setAllowLease(true);
+      }
+      form.setFieldsValue({
+        title,
+        productId,
+        description,
+        method,
+        sellingPrice,
+        leasePrice,
+        leaseDeposit,
+        companyAddressId,
+        deliveryMethod: [deliveryMethod],
+        quality: [quality],
+      });
+    },
+  });
+
   // 发布
   const { run: create } = useRequest(postMarket, {
+    manual: true,
+    onSuccess() {
+      Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
+      RouterUtil.navigateTo('/pages/market/action/result/index');
+    },
+  });
+
+  // 编辑
+  const { run: update } = useRequest(putMarket, {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
@@ -64,7 +118,7 @@ const Page = () => {
             quality: quality[0],
           };
           if (id) {
-            // TODO: 编辑
+            await update({ ...params, id: Number(id) });
           } else {
             await create(params);
           }
