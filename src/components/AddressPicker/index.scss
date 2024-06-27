@@ -1,0 +1,34 @@
+@import '../../styles/var.scss';
+
+.m-address-picker {
+  &-empty {
+    display: flex;
+    align-items: center;
+    padding: 28px 32px;
+    background-color: #fff;
+
+    &-text {
+      flex: 1;
+      font-size: $font-size-base;
+      color: $text-color-main;
+      font-weight: 500;
+    }
+
+    &-icon {
+      color: $text-color-placeholder;
+    }
+  }
+
+  &-popup {
+    &-content {
+      height: 60vh;
+      overflow-y: auto;
+
+      &-item {
+        &-active {
+          background-color: $color-secondary;
+        }
+      }
+    }
+  }
+}

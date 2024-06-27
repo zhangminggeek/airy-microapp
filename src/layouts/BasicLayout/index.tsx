@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
+import { TAB_PAGE } from '@/constants';
 import { RouterUtil } from '@/utils';
 import { ShareWrapper } from '@/wrappers';
 
@@ -19,7 +20,7 @@ interface BasicLayoutProps {
   children?: ReactNode;
   title?: ReactNode;
   fill?: boolean;
-  back?: boolean;
+  back?: boolean | string;
   transparent?: boolean;
   loading?: boolean;
   share?: boolean;
@@ -74,7 +75,15 @@ const BasicLayout: FC<BasicLayoutProps> = ({
           <ArrowLeft
             className={`${PREFIX_CLS}-header-icon`}
             onClick={() => {
-              RouterUtil.navigateBack();
+              if (typeof back === 'string') {
+                if (TAB_PAGE.includes(back)) {
+                  RouterUtil.switchTab(back);
+                } else {
+                  RouterUtil.navigateTo(back);
+                }
+              } else {
+                RouterUtil.navigateBack();
+              }
             }}
           />
         )}

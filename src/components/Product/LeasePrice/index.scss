@@ -2,22 +2,24 @@
 @import '../../../styles/mixins.scss';
 
 .m-product-lease-price {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  height: 44px;
+  width: auto;
+  height: 36px;
   border-radius: 8px;
   overflow: hidden;
   font-size: $font-size-small;
+  background-color: #f2f1ff;
 
-  &-icon {
-    @include flex-center;
-    width: 50px;
-    height: 100%;
-    font-weight: 400;
-    font-style: italic;
-    color: #fff;
-    background-color: #8475ff;
-  }
+  // &-icon {
+  //   @include flex-center;
+  //   width: 50px;
+  //   height: 100%;
+  //   font-weight: 400;
+  //   font-style: italic;
+  //   color: #fff;
+  //   background-color: #8475ff;
+  // }
 
   &-text {
     display: flex;
@@ -26,6 +28,5 @@
     padding: 0 16px;
     font-weight: 600;
     color: #8475ff;
-    background-color: #f2f1ff;
   }
 }

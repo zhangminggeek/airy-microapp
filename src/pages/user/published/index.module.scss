@@ -1,6 +1,17 @@
 @import '../../../styles/var.scss';
 
-.footer {
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .body {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.brief-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;

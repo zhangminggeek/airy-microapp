@@ -17,9 +17,16 @@ const CaptchaLogin = () => {
   // 登录
   const { run } = useRequest(postAccountLoginCode, {
     manual: true,
-    onSuccess(data) {
-      Taro.setStorageSync(StorageKey.TOKEN, data);
-      RouterUtil.navigateTo('/pages/security/index');
+    async onSuccess(data, params) {
+      const { token, bind } = data;
+      Taro.setStorageSync(StorageKey.TOKEN, token);
+      if (bind) {
+        RouterUtil.navigateTo('/pages/security/index');
+      } else {
+        RouterUtil.navigateTo('/pages/user/bind/index', {
+          account: params?.account,
+        });
+      }
     },
   });
 

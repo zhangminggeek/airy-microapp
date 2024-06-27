@@ -60,8 +60,16 @@ const Card: FC<CardProps> = ({
           </View>
         ) : null}
         <View className={`${PREFIX_CLS}-content-info`}>
-          {leasePrice ? <LeasePrice value={leasePrice} /> : null}
-          {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
+          {leasePrice ? (
+            <View className={`${PREFIX_CLS}-content-info-lease`}>
+              <LeasePrice value={leasePrice} />
+            </View>
+          ) : null}
+          {sellingPrice ? (
+            <View className={`${PREFIX_CLS}-content-info-selling`}>
+              <SellingPrice value={sellingPrice} />
+            </View>
+          ) : null}
           <Space className={`${PREFIX_CLS}-content-info-favorites`} size={4}>
             <Follow size={12} />
             <View>{favorites}</View>

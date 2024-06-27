@@ -1,6 +1,6 @@
 import { Button, Checkbox, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
 
@@ -8,43 +8,82 @@ import styles from './index.module.scss';
 
 import type { CSSProperties } from 'react';
 
-import { postAccountLoginWechat } from '@/api';
+import { postAccountLoginWechatPhone } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Link } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil, Toast } from '@/utils';
+import { RouterUtil, Toast, WeChatUtil } from '@/utils';
 
 const Page = () => {
   // 是否已阅读协议
   const [hasRead, setHasRead] = useState<boolean>(false);
+  // 是否通过微信静默登录
+  const [hasLogined, setHasLogined] = useState<boolean>(false);
+
+  useDidShow(async () => {
+    const res = await WeChatUtil.loginForWeChat();
+    setHasLogined(res);
+  });
 
   // 微信授权手机号登录
-  const { run } = useRequest(postAccountLoginWechat, {
+  const { run } = useRequest(postAccountLoginWechatPhone, {
     manual: true,
-    onSuccess(data) {
-      Taro.setStorageSync(StorageKey.TOKEN, data);
+    async onSuccess(data) {
+      const { token, account } = data;
+      Taro.setStorageSync(StorageKey.TOKEN, token);
+      await WeChatUtil.bindOpenId(account);
       RouterUtil.navigateTo('/pages/security/index');
     },
   });
 
   // 根据是否阅读协议，决定按钮是否可用
   const buttonConfig = useMemo(() => {
-    return hasRead
+    if (!hasRead) {
+      return {
+        onClick() {
+          Toast.info('请先阅读并同意《用户隐私协议》');
+          return;
+        },
+      };
+    }
+
+    console.log(
+      'button config',
+      hasLogined
+        ? {
+            onClick() {
+              RouterUtil.navigateTo('/pages/security/index');
+            },
+          }
+        : {
+            'open-type': 'getPhoneNumber',
+            onGetPhoneNumber(e) {
+              const { code } = e.detail;
+              if (code) {
+                run({ code: e.detail.code });
+              }
+            },
+          },
+    );
+
+    return hasLogined
       ? {
-          'open-type': 'getPhoneNumber',
-          onGetPhoneNumber(e) {
-            run({ code: e.detail.code });
+          onClick() {
+            RouterUtil.navigateTo('/pages/security/index');
           },
         }
       : {
-          onClick() {
-            Toast.info('请先阅读并同意《用户隐私协议》');
-            return;
+          'open-type': 'getPhoneNumber',
+          onGetPhoneNumber(e) {
+            const { code } = e.detail;
+            if (code) {
+              run({ code: e.detail.code });
+            }
           },
         };
-  }, [hasRead]);
+  }, [hasRead, hasLogined]);
 
   return (
     <BasicLayout className={styles.container} fill transparent>

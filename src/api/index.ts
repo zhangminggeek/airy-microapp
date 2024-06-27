@@ -212,48 +212,36 @@ export const getOrder = /*#__PURE__*/ (requestData?: GetOrderRequest, ...args: U
 getOrder.requestConfig = getOrderRequestConfig
 
 /**
- * 接口 服饰上架订单 的 **请求类型**
+ * 接口 创建订单 的 **请求类型**
  *
  * @分类 订单
  * @请求头 `POST /order`
  */
 export interface PostOrderRequest {
   /**
-   * 产品id
+   * market id
    */
-  productId: number
+  id: number
   /**
-   * 是否允许出售, 0:否 1:是
+   * 订单类型 1:出售 2:借调
    */
-  allowOrder: number
+  type: number
   /**
-   * 是否允许借调, 0:否 1:是
+   * 收货地址id
    */
-  allowSecondments: number
+  buyerAddressId: number
   /**
-   * 出售价
+   * 借调开始时间
    */
-  orderPrice?: number
+  leaseStartDate?: string
   /**
-   * 借调价
+   * 借调结束时间
    */
-  secondmentsPrice?: number
-  /**
-   * 借调押金
-   */
-  orderDeposit?: number
-  /**
-   * 发货方式, 1:包邮 2:到付 3:自提
-   */
-  deliveryMethod: number
-  /**
-   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-   */
-  quality: number
+  leaseEndDate?: string
 }
 
 /**
- * 接口 服饰上架订单 的 **返回类型**
+ * 接口 创建订单 的 **返回类型**
  *
  * @分类 订单
  * @请求头 `POST /order`
@@ -261,7 +249,7 @@ export interface PostOrderRequest {
 export type PostOrderResponse = number
 
 /**
- * 接口 服饰上架订单 的 **请求配置的类型**
+ * 接口 创建订单 的 **请求配置的类型**
  *
  * @分类 订单
  * @请求头 `POST /order`
@@ -271,7 +259,7 @@ type PostOrderRequestConfig = Readonly<
 >
 
 /**
- * 接口 服饰上架订单 的 **请求配置**
+ * 接口 创建订单 的 **请求配置**
  *
  * @分类 订单
  * @请求头 `POST /order`
@@ -297,7 +285,7 @@ const postOrderRequestConfig: PostOrderRequestConfig = /*#__PURE__*/ {
 }
 
 /**
- * 接口 服饰上架订单 的 **请求函数**
+ * 接口 创建订单 的 **请求函数**
  *
  * @分类 订单
  * @请求头 `POST /order`
@@ -1969,7 +1957,7 @@ export const getAccountSaltAccount = /*#__PURE__*/ (
 getAccountSaltAccount.requestConfig = getAccountSaltAccountRequestConfig
 
 /**
- * 接口 登录 的 **请求类型**
+ * 接口 密码登录 的 **请求类型**
  *
  * @分类 账号
  * @请求头 `POST /account/login`
@@ -1990,15 +1978,24 @@ export interface PostAccountLoginRequest {
 }
 
 /**
- * 接口 登录 的 **返回类型**
+ * 接口 密码登录 的 **返回类型**
  *
  * @分类 账号
  * @请求头 `POST /account/login`
  */
-export type PostAccountLoginResponse = string
+export interface PostAccountLoginResponse {
+  /**
+   * 登录凭证
+   */
+  token: string
+  /**
+   * 是否绑定openid
+   */
+  bind: boolean
+}
 
 /**
- * 接口 登录 的 **请求配置的类型**
+ * 接口 密码登录 的 **请求配置的类型**
  *
  * @分类 账号
  * @请求头 `POST /account/login`
@@ -2008,7 +2005,7 @@ type PostAccountLoginRequestConfig = Readonly<
 >
 
 /**
- * 接口 登录 的 **请求配置**
+ * 接口 密码登录 的 **请求配置**
  *
  * @分类 账号
  * @请求头 `POST /account/login`
@@ -2034,7 +2031,7 @@ const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__
 }
 
 /**
- * 接口 登录 的 **请求函数**
+ * 接口 密码登录 的 **请求函数**
  *
  * @分类 账号
  * @请求头 `POST /account/login`
@@ -2152,7 +2149,16 @@ export interface PostAccountLoginCodeRequest {
  * @分类 账号
  * @请求头 `POST /account/login/code`
  */
-export type PostAccountLoginCodeResponse = string
+export interface PostAccountLoginCodeResponse {
+  /**
+   * 登录凭证
+   */
+  token: string
+  /**
+   * 是否绑定openid
+   */
+  bind: boolean
+}
 
 /**
  * 接口 短信验证码登录 的 **请求配置的类型**
@@ -2206,6 +2212,90 @@ export const postAccountLoginCode = /*#__PURE__*/ (
 postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
 
 /**
+ * 接口 使用微信绑定的手机号登录 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat/phone`
+ */
+export interface PostAccountLoginWechatPhoneRequest {
+  /**
+   * 微信获取手机号接口code
+   */
+  code: string
+}
+
+/**
+ * 接口 使用微信绑定的手机号登录 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat/phone`
+ */
+export interface PostAccountLoginWechatPhoneResponse {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 鉴权凭证
+   */
+  token: string
+}
+
+/**
+ * 接口 使用微信绑定的手机号登录 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat/phone`
+ */
+type PostAccountLoginWechatPhoneRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat/phone', 'data', string, string, false>
+>
+
+/**
+ * 接口 使用微信绑定的手机号登录 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat/phone`
+ */
+const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/account/login/wechat/phone',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLoginWechatPhone',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 使用微信绑定的手机号登录 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/login/wechat/phone`
+ */
+export const postAccountLoginWechatPhone = /*#__PURE__*/ (
+  requestData: PostAccountLoginWechatPhoneRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountLoginWechatPhoneResponse>(
+    prepare(postAccountLoginWechatPhoneRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postAccountLoginWechatPhone.requestConfig = postAccountLoginWechatPhoneRequestConfig
+
+/**
  * 接口 微信授权登录 的 **请求类型**
  *
  * @分类 账号
@@ -2213,7 +2303,7 @@ postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
  */
 export interface PostAccountLoginWechatRequest {
   /**
-   * 微信获取手机号接口code
+   * 微信授权登录code
    */
   code: string
 }
@@ -2276,6 +2366,82 @@ export const postAccountLoginWechat = /*#__PURE__*/ (
 }
 
 postAccountLoginWechat.requestConfig = postAccountLoginWechatRequestConfig
+
+/**
+ * 接口 账号绑定openid 的 **请求类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/bind/openid`
+ */
+export interface PostAccountBindOpenidRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 微信授权登录code
+   */
+  code: string
+}
+
+/**
+ * 接口 账号绑定openid 的 **返回类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/bind/openid`
+ */
+export type PostAccountBindOpenidResponse = any
+
+/**
+ * 接口 账号绑定openid 的 **请求配置的类型**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/bind/openid`
+ */
+type PostAccountBindOpenidRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/bind/openid', 'data', string, string, false>
+>
+
+/**
+ * 接口 账号绑定openid 的 **请求配置**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/bind/openid`
+ */
+const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/account/bind/openid',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountBindOpenid',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 账号绑定openid 的 **请求函数**
+ *
+ * @分类 账号
+ * @请求头 `POST /account/bind/openid`
+ */
+export const postAccountBindOpenid = /*#__PURE__*/ (
+  requestData: PostAccountBindOpenidRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountBindOpenidResponse>(prepare(postAccountBindOpenidRequestConfig, requestData), ...args)
+}
+
+postAccountBindOpenid.requestConfig = postAccountBindOpenidRequestConfig
 
 /**
  * 接口 获取账号信息 的 **请求类型**

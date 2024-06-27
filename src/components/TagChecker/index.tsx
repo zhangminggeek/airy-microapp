@@ -10,7 +10,7 @@ const PREFIX_CLS = 'm-tag-checker';
 interface TagCheckerProps<V extends string | number = number> {
   className?: string;
   style?: CSSProperties;
-  options: Array<{ label: string; value: V }>;
+  options: Array<{ text: string; value: V }>;
   multiple?: boolean;
   value?: V[];
   onChange?: (value?: V[]) => void;
@@ -47,7 +47,7 @@ const TagChecker = <V extends string | number>({
             handleChange(item.value);
           }}
         >
-          {item.label}
+          {item.text}
         </View>
       ))}
     </View>

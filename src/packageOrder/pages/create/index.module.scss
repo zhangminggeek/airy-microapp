@@ -1,0 +1,55 @@
+@import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
+
+.section-product {
+  :global {
+    .m-title.m-section-header {
+      margin-bottom: 0;
+    }
+
+    .m-cell-main {
+      padding: 32px 0;
+    }
+  }
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 144px auto;
+  column-gap: 24px;
+
+  &-image {
+    grid-row: 1 / span 2;
+  }
+
+  &-title {
+    font-size: $font-size-base;
+    color: $text-color-main;
+    font-weight: 500;
+    @include ellipsis(2);
+  }
+
+  &-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footer {
+  &-price {
+    font-size: $font-size-large;
+    color: $text-color-base;
+
+    :global {
+      .m-product-selling-price {
+        font-size: $font-size-base;
+      }
+
+      .m-product-selling-price-integer {
+        font-size: 48px;
+        font-weight: 600;
+      }
+    }
+  }
+}

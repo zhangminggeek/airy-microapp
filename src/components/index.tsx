@@ -1,8 +1,10 @@
 import ActionSheet from './ActionSheet';
 import AddressCard from './AddressCard';
+import AddressPicker from './AddressPicker';
 import Affix from './Affix';
 import Avatar from './Avatar';
 import CalenderPicker from './CalendarPicker';
+import Cell from './Cell';
 import CodeInput from './CodeInput';
 import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
@@ -16,6 +18,7 @@ import InputSearch from './InputSearch';
 import Link from './Link';
 import List from './List';
 import ModalForm from './ModalForm';
+import PageFooter from './PageFooter';
 import Picker from './Picker';
 import PickerView from './PickerView';
 import Product from './Product';
@@ -31,9 +34,11 @@ import Upload from './Upload';
 export {
   ActionSheet,
   AddressCard,
+  AddressPicker,
   Affix,
   Avatar,
   CalenderPicker,
+  Cell,
   CodeInput,
   Descriptions,
   EditableCell,
@@ -47,6 +52,7 @@ export {
   Link,
   List,
   ModalForm,
+  PageFooter,
   Picker,
   PickerView,
   Product,

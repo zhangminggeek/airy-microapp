@@ -1,4 +1,4 @@
-import { Button, Popup } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { useDidShow, useRouter, useShareAppMessage } from '@tarojs/taro';
 
@@ -6,11 +6,15 @@ import styles from './index.module.scss';
 
 import { getMarketId, postMarketFavorite } from '@/api';
 import { Icon, Product, Space } from '@/components';
+import { OrderType } from '@/constants/order';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
+import { RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
+  const { info } = useUserStore((state) => state);
 
   useShareAppMessage(() => {
     // 来自页面转发分享
@@ -94,19 +98,40 @@ const Page = () => {
                 <Icon name="PhoneOutlined" title="联系商家" />
               </Button>
             </Space>
-            <Space size={16}>
-              {/* TODO: 跳转 */}
-              {data?.allowLease ? <Button size="large">借调</Button> : null}
-              {data?.allowSell ? (
-                <Button type="primary" size="large">
-                  购买
-                </Button>
-              ) : null}
-            </Space>
+            {info?.companyId !== data?.companyId && (
+              <Space size={16}>
+                {data?.allowLease ? (
+                  <Button
+                    size="large"
+                    onClick={() => {
+                      RouterUtil.navigateTo(
+                        '/packageOrder/pages/create/index',
+                        { id, type: OrderType['借调'] },
+                      );
+                    }}
+                  >
+                    借调
+                  </Button>
+                ) : null}
+                {data?.allowSell ? (
+                  <Button
+                    type="primary"
+                    size="large"
+                    onClick={() => {
+                      RouterUtil.navigateTo(
+                        '/packageOrder/pages/create/index',
+                        { id, type: OrderType['出售'] },
+                      );
+                    }}
+                  >
+                    购买
+                  </Button>
+                ) : null}
+              </Space>
+            )}
           </View>
         }
       />
-      <Popup></Popup>
     </BasicLayout>
   );
 };

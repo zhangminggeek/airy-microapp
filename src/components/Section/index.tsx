@@ -10,6 +10,7 @@ import './index.scss';
 export interface SectionProps {
   className?: string;
   style?: CSSProperties;
+  fill?: boolean;
   title?: string;
   extra?: ReactNode;
   children?: ReactNode;
@@ -20,12 +21,20 @@ const PREFIX_CLS = 'm-section';
 const Section: FC<SectionProps> = ({
   className,
   style,
+  fill = false,
   title,
   extra,
   children,
 }) => {
   return (
-    <View className={classnames(PREFIX_CLS, className)} style={style}>
+    <View
+      className={classnames(
+        PREFIX_CLS,
+        { [`${PREFIX_CLS}-fill`]: fill },
+        className,
+      )}
+      style={style}
+    >
       {title ? (
         <Title className={`${PREFIX_CLS}-header`} extra={extra}>
           {title}

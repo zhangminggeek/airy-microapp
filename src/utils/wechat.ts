@@ -2,25 +2,27 @@ import Taro from '@tarojs/taro';
 
 import { Toast } from './toast';
 
-import { postAccountLoginWechat } from '@/api';
+import { postAccountBindOpenid, postAccountLoginWechat } from '@/api';
 import { StorageKey } from '@/constants/storage';
 
 export class WeChatUtil {
   /**
    * 微信登录
-   * @returns 登录成功后的用户 token
+   * @params phone 手机号
    */
-  static async loginForWeChat() {
+  static async loginForWeChat(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       Taro.login({
         async success(res) {
           const { code } = res;
           if (code) {
-            // 发起网络请求
-            const { data } = await postAccountLoginWechat({ code });
-            Taro.setStorageSync(StorageKey.TOKEN, data);
-            resolve(data);
-            resolve(undefined);
+            // 获取用户 openid
+            const res = await postAccountLoginWechat({ code });
+            if (!res.data) {
+              Taro.setStorageSync(StorageKey.TOKEN, res.data);
+              resolve(false);
+            }
+            resolve(true);
           } else {
             Toast.info('微信登录失败, 请稍后重试');
             reject();
@@ -28,6 +30,31 @@ export class WeChatUtil {
         },
         fail() {
           Toast.info('微信登录失败, 请稍后重试');
+          reject();
+        },
+      });
+    });
+  }
+
+  /**
+   * 绑定账号和openid
+   * @param account 账号
+   */
+  static async bindOpenId(account: string) {
+    return new Promise((resolve, reject) => {
+      Taro.login({
+        async success(res) {
+          const { code } = res;
+          if (code) {
+            await postAccountBindOpenid({ account, code });
+            resolve(undefined);
+          } else {
+            Toast.info('绑定微信失败, 请稍后重试');
+            reject();
+          }
+        },
+        fail() {
+          Toast.info('绑定微信失败, 请稍后重试');
           reject();
         },
       });

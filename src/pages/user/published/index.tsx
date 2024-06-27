@@ -225,43 +225,47 @@ const Page = () => {
 
   return (
     <BasicLayout title="我发布的" back fill>
-      <Tabs
-        value={currentIndex}
-        onChange={(index: number) => {
-          setCurrentIndex(index);
-        }}
-      >
-        {tabs.map((item) => (
-          <Tabs.TabPane key={item.value} title={item.title} />
-        ))}
-      </Tabs>
-      <List
-        actionRef={actionRef}
-        request={getMarketMyPublished}
-        params={{ status: tabs[currentIndex].value }}
-        column={1}
-        renderItem={(item) => (
-          <Product.Brief
-            key={item.id}
-            image={item.product?.picList?.[0]?.url}
-            title={item.title}
-            desc={item.description}
-            leasePrice={item.leasePrice}
-            sellingPrice={item.sellingPrice}
-            footer={
-              <View className={styles.footer}>
-                <View>{tabs[currentIndex].extra?.(item)}</View>
-                <Space size={12}>{tabs[currentIndex].actions(item)}</Space>
-              </View>
-            }
-            onClick={() => {
-              RouterUtil.navigateTo('/pages/market/detail/index', {
-                id: item.id,
-              });
-            }}
+      <View className={styles.content}>
+        <Tabs
+          value={currentIndex}
+          onChange={(index: number) => {
+            setCurrentIndex(index);
+          }}
+        >
+          {tabs.map((item) => (
+            <Tabs.TabPane key={item.value} title={item.title} />
+          ))}
+        </Tabs>
+        <View className={styles.body}>
+          <List
+            actionRef={actionRef}
+            request={getMarketMyPublished}
+            params={{ status: tabs[currentIndex].value }}
+            column={1}
+            renderItem={(item) => (
+              <Product.Brief
+                key={item.id}
+                image={item.product?.picList?.[0]?.url}
+                title={item.title}
+                desc={item.description}
+                leasePrice={item.leasePrice}
+                sellingPrice={item.sellingPrice}
+                footer={
+                  <View className={styles['brief-footer']}>
+                    <View>{tabs[currentIndex].extra?.(item)}</View>
+                    <Space size={12}>{tabs[currentIndex].actions(item)}</Space>
+                  </View>
+                }
+                onClick={() => {
+                  RouterUtil.navigateTo('/pages/market/detail/index', {
+                    id: item.id,
+                  });
+                }}
+              />
+            )}
           />
-        )}
-      />
+        </View>
+      </View>
       <Affix
         onClick={() => {
           RouterUtil.navigateTo('/pages/market/action/index');

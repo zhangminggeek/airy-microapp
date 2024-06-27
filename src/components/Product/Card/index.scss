@@ -34,49 +34,13 @@
     &-info {
       display: grid;
       grid-template-columns: 1fr auto;
-      grid-template-rows: repeat(2, auto);
-      row-gap: 8px;
       column-gap: 16px;
       margin-top: 16px;
 
-      &-lease {
+      &-lease,
+      &-selling {
         display: flex;
         align-items: center;
-        height: 44px;
-        border-radius: 8px;
-        overflow: hidden;
-        font-size: $font-size-small;
-
-        &-icon {
-          @include flex-center;
-          width: 50px;
-          height: 100%;
-          font-weight: 400;
-          font-style: italic;
-          color: #fff;
-          background-color: #8475ff;
-        }
-
-        &-text {
-          display: flex;
-          align-items: center;
-          height: 100%;
-          padding: 0 16px;
-          font-weight: 600;
-          color: #8475ff;
-          background-color: #f2f1ff;
-        }
-      }
-
-      &-sell {
-        display: flex;
-        align-items: baseline;
-        color: $color-primary;
-        font-size: $font-size-small;
-
-        &-integer {
-          font-size: $font-size-large;
-        }
       }
 
       &-favorites {

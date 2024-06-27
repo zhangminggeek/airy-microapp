@@ -46,6 +46,8 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     },
   }));
 
+  // 是否正在请求中
+  const [loading, setLoading] = useState(false);
   // 请求参数
   const [innerParams, setInnerParams] =
     useState<ParamWithoutPaginationParams<P>>();
@@ -77,13 +79,21 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     },
   });
   const fetchData = async (p?: Partial<U>) => {
+    if (loading) return;
+    setLoading(true);
     const params = {
       pageNum: `${currentPageNum}`,
       pageSize: `${DEFAULT_PAGE_SIZE}`,
       ...innerParams,
       ...p,
     } as unknown as U;
-    await run(params);
+    try {
+      await run(params);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

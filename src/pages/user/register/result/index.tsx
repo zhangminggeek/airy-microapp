@@ -1,17 +1,10 @@
 import { Button } from '@nutui/nutui-react-taro';
-import Taro, { useDidShow } from '@tarojs/taro';
 
 import { Result } from '@/components';
-import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
-  useDidShow(() => {
-    // 清空之前的注册信息
-    Taro.removeStorageSync(StorageKey.COMPANY_RESIGTER_INFO);
-  });
-
   return (
     <BasicLayout transparent>
       <Result

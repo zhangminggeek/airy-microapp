@@ -44,13 +44,6 @@ export const productSizeMap = new Map([
   [ProductSize['10XL'], { text: '10XL', value: ProductSize['10XL'] }],
 ]);
 
-// 快递方式
-export enum DeliveryMethod {
-  '包邮' = 1,
-  '到付' = 2,
-  '自提' = 3,
-}
-
 // 新旧程度
 export enum ProductQuality {
   '全新' = 1,
@@ -58,3 +51,19 @@ export enum ProductQuality {
   '轻微使用痕迹' = 3,
   '明显使用痕迹' = 4,
 }
+
+export const productQualityMap = new Map([
+  [ProductQuality['全新'], { text: '全新', value: ProductQuality['全新'] }],
+  [
+    ProductQuality['几乎全新'],
+    { text: '几乎全新', value: ProductQuality['几乎全新'] },
+  ],
+  [
+    ProductQuality['轻微使用痕迹'],
+    { text: '轻微使用痕迹', value: ProductQuality['轻微使用痕迹'] },
+  ],
+  [
+    ProductQuality['明显使用痕迹'],
+    { text: '明显使用痕迹', value: ProductQuality['明显使用痕迹'] },
+  ],
+]);

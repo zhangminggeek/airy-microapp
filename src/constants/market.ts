@@ -3,6 +3,11 @@ export enum MarkrtMethod {
   '借调' = 2,
 }
 
+export const marketMethodMap = new Map([
+  [MarkrtMethod['出售'], { text: '出售', value: MarkrtMethod['出售'] }],
+  [MarkrtMethod['借调'], { text: '借调', value: MarkrtMethod['借调'] }],
+]);
+
 export enum MarketProductStatus {
   '审核中' = 1,
   '在售' = 2,
@@ -37,4 +42,17 @@ export const productStatusMap = new Map([
     MarketProductStatus['已下架'],
     { text: '已下架', value: MarketProductStatus['已下架'] },
   ],
+]);
+
+// 快递方式
+export enum DeliveryMethod {
+  '包邮' = 1,
+  '到付' = 2,
+  '自提' = 3,
+}
+
+export const deliveryMethodMap = new Map([
+  [DeliveryMethod['包邮'], { text: '包邮', value: DeliveryMethod['包邮'] }],
+  [DeliveryMethod['到付'], { text: '到付', value: DeliveryMethod['到付'] }],
+  [DeliveryMethod['自提'], { text: '自提', value: DeliveryMethod['自提'] }],
 ]);

@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 import type { IconProps } from '@/components/Icon';
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import IconSuccessFilled from '@/assets/icons/success_filled.svg';
 import { Icon } from '@/components';
 
 import './index.scss';
@@ -36,7 +35,7 @@ const Result: FC<ResultProps> = ({
     const config: IconProps = {} as any;
     switch (status) {
       case 'success':
-        config.name = IconSuccessFilled;
+        config.name = 'SuccessFilled';
         break;
       default:
         break;

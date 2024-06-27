@@ -2,15 +2,23 @@ import { Button, Form, TextArea } from '@nutui/nutui-react-taro';
 import Taro, { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
-import AddressPicker from './AddressPicker';
 import ProductPicker from './ProductPicker';
 
 import type { PostMarketRequest } from '@/api';
 
 import { getMarketId, postMarket, putMarket } from '@/api';
-import { FormSection, InputNumber, TagChecker } from '@/components';
-import { MarkrtMethod } from '@/constants/market';
-import { DeliveryMethod, ProductQuality } from '@/constants/product';
+import {
+  AddressPicker,
+  FormSection,
+  InputNumber,
+  TagChecker,
+} from '@/components';
+import {
+  deliveryMethodMap,
+  marketMethodMap,
+  MarkrtMethod,
+} from '@/constants/market';
+import { productQualityMap } from '@/constants/product';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -152,10 +160,7 @@ const Page = () => {
             rules={[{ required: true, message: '请选择上架方式' }]}
           >
             <TagChecker
-              options={[
-                { label: '出售', value: MarkrtMethod['出售'] },
-                { label: '借调', value: MarkrtMethod['借调'] },
-              ]}
+              options={Array.from(marketMethodMap.values())}
               multiple
               onChange={(v) => {
                 setAllowSell(v?.includes(MarkrtMethod['出售']) ?? false);
@@ -200,7 +205,7 @@ const Page = () => {
               noStyle
               rules={[{ required: true, message: '请选择返还地址' }]}
             >
-              <AddressPicker />
+              <AddressPicker placeholder="请选择返还地址" />
             </Form.Item>
           </FormSection>
         )}
@@ -210,13 +215,7 @@ const Page = () => {
             noStyle
             rules={[{ required: true, message: '请选择发货方式' }]}
           >
-            <TagChecker
-              options={[
-                { label: '包邮', value: DeliveryMethod['包邮'] },
-                { label: '到付', value: DeliveryMethod['到付'] },
-                { label: '自提', value: DeliveryMethod['自提'] },
-              ]}
-            />
+            <TagChecker options={Array.from(deliveryMethodMap.values())} />
           </Form.Item>
         </FormSection>
         <FormSection title="新旧程度">
@@ -225,20 +224,7 @@ const Page = () => {
             noStyle
             rules={[{ required: true, message: '请选择新旧程度' }]}
           >
-            <TagChecker
-              options={[
-                { label: '全新', value: ProductQuality['全新'] },
-                { label: '几乎全新', value: ProductQuality['几乎全新'] },
-                {
-                  label: '轻微使用痕迹',
-                  value: ProductQuality['轻微使用痕迹'],
-                },
-                {
-                  label: '明显使用痕迹',
-                  value: ProductQuality['明显使用痕迹'],
-                },
-              ]}
-            />
+            <TagChecker options={Array.from(productQualityMap.values())} />
           </Form.Item>
         </FormSection>
       </Form>

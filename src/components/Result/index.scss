@@ -9,7 +9,9 @@
 
   &-success {
     .m-result-icon {
-      color: $color-primary;
+      .m-icon {
+        color: $color-primary;
+      }
     }
   }
 

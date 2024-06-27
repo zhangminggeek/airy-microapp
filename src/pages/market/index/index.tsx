@@ -1,5 +1,6 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import { useRef, useState } from 'react';
 
 import { productTypeOptions, tabsMap } from './config';
@@ -23,6 +24,12 @@ const Page = () => {
   const [keyword, setKeyword] = useState<string>('');
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    await actionRef.current?.refresh();
+    stopPullDownRefresh();
+  });
 
   return (
     <BasicLayout
@@ -64,7 +71,6 @@ const Page = () => {
           ))}
         </Tabs>
         <List
-          fill
           actionRef={actionRef}
           request={getMarket}
           params={{
@@ -88,6 +94,7 @@ const Page = () => {
               }}
             />
           )}
+          fill
         />
       </View>
     </BasicLayout>

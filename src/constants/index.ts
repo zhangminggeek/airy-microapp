@@ -18,3 +18,9 @@ export const DEFAULT_PAGE_SIZE = 20;
 export const OSS_PREFIX = `https://front.jiuworker.com/${PROJECT_NAME}/${process.env.OSS_ENV}`;
 // OSS superKey
 export const OSS_SUPER_KEY = 'upload';
+
+export const TAB_PAGE = [
+  '/pages/market/index/index',
+  '/pages/requirement/index',
+  '/pages/user/index/index',
+];

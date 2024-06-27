@@ -182,7 +182,7 @@ const Page = () => {
           <Form.Item name="tagIdList" noStyle>
             <TagChecker
               options={tagList?.map((item) => ({
-                label: item.name,
+                text: item.name,
                 value: item.id,
               }))}
               multiple

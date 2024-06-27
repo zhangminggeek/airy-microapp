@@ -1,0 +1,7 @@
+.m-cell-group {
+  & > .m-cell:last-child {
+    .m-cell-divider {
+      display: none;
+    }
+  }
+}

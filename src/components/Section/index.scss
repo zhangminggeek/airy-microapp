@@ -1,12 +1,16 @@
 @import '../../styles/var.scss';
 
 .m-section {
-  padding: 32px;
   border-radius: 24px;
   background-color: #fff;
+  overflow: hidden;
 
   & + & {
     margin-top: 24px;
+  }
+
+  &:not(.m-section-fill) {
+    padding: 32px;
   }
 
   &-header {

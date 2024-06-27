@@ -6,6 +6,7 @@ export default {
     // 登录
     'pages/user/login/index',
     'pages/user/login/other/index',
+    'pages/user/login/bind/index',
     // 注册
     'pages/user/register/index',
     'pages/user/register/code/index',
@@ -36,6 +37,11 @@ export default {
         'pages/detail/index',
         'pages/select/index',
       ],
+    },
+    {
+      // 订单管理
+      root: 'packageOrder',
+      pages: ['pages/create/index'],
     },
   ],
   window: {

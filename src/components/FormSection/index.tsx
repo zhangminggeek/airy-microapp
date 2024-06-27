@@ -7,27 +7,17 @@ import { Section } from '@/components';
 
 import './index.scss';
 
-interface FormSectionProps extends SectionProps {
-  fill?: boolean;
-}
+interface FormSectionProps extends SectionProps {}
 
 const PREFIX_CLS = 'm-form-section';
 
 const FormSection: FC<FormSectionProps> = ({
   className,
   children,
-  fill = false,
   ...rest
 }) => {
   return (
-    <Section
-      className={classnames(
-        PREFIX_CLS,
-        { [`${PREFIX_CLS}-fill`]: fill },
-        className,
-      )}
-      {...rest}
-    >
+    <Section className={classnames(PREFIX_CLS, className)} {...rest}>
       {children}
     </Section>
   );

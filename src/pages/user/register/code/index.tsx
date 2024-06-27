@@ -47,6 +47,7 @@ const Page = () => {
   const { run: register } = useRequest(postCompanyRegister, {
     manual: true,
     onSuccess() {
+      Taro.removeStorageSync(StorageKey.COMPANY_RESIGTER_INFO);
       RouterUtil.navigateTo('/pages/user/register/result/index');
     },
   });
