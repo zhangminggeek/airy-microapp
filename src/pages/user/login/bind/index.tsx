@@ -1,13 +1,17 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import { useRouter } from '@tarojs/taro';
 import classnames from 'classnames';
 
 import styles from './index.module.scss';
 
 import { Icon, Space } from '@/components';
 import { BasicLayout } from '@/layouts';
+import { RouterUtil, Toast, WeChatUtil } from '@/utils';
 
 const Page = () => {
+  const { account } = useRouter().params;
+
   return (
     <BasicLayout back>
       <View className={styles.content}>
@@ -28,6 +32,12 @@ const Page = () => {
           size="xlarge"
           block
           icon={<Icon name="WechatFilled" size={24} />}
+          onClick={async () => {
+            if (!account) return;
+            await WeChatUtil.bindOpenId(account);
+            Toast.success('绑定成功');
+            RouterUtil.navigateTo('/pages/security/index');
+          }}
         >
           绑定微信号
         </Button>

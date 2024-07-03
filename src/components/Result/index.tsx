@@ -1,3 +1,4 @@
+import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useMemo } from 'react';
@@ -17,6 +18,10 @@ interface ResultProps {
   title?: ReactNode;
   desc?: ReactNode;
   extra?: ReactNode;
+  okText?: ReactNode;
+  cancelText?: ReactNode;
+  onOk?: () => void;
+  onCancel?: () => void;
 }
 
 const PREFIX_CLS = 'm-result';
@@ -29,8 +34,12 @@ const Result: FC<ResultProps> = ({
   title,
   desc,
   extra,
+  okText,
+  cancelText,
+  onOk,
+  onCancel,
 }) => {
-  const renderIcon = useMemo(() => {
+  const _icon = useMemo(() => {
     if (icon) return icon;
     const config: IconProps = {} as any;
     switch (status) {
@@ -43,6 +52,41 @@ const Result: FC<ResultProps> = ({
     return <Icon {...config} size={56} />;
   }, [status, icon]);
 
+  const _extra = useMemo(() => {
+    if (extra) return extra;
+    if (!okText && !cancelText) return null;
+    const isMultiple = (okText ? 1 : 0) + (cancelText ? 1 : 0) > 1;
+    return (
+      <View
+        className={classnames(`${PREFIX_CLS}-extra-space`, {
+          [`${PREFIX_CLS}-extra-space-multiple`]: isMultiple,
+        })}
+      >
+        {cancelText ? (
+          <Button
+            className={`${PREFIX_CLS}-extra-btn`}
+            size={isMultiple ? 'large' : 'xlarge'}
+            block
+            onClick={onCancel}
+          >
+            {cancelText}
+          </Button>
+        ) : null}
+        {okText ? (
+          <Button
+            className={`${PREFIX_CLS}-extra-btn`}
+            type="primary"
+            size={isMultiple ? 'large' : 'xlarge'}
+            block
+            onClick={onOk}
+          >
+            {okText}
+          </Button>
+        ) : null}
+      </View>
+    );
+  }, [extra, okText, cancelText, onOk, onCancel]);
+
   return (
     <View
       className={classnames(
@@ -52,10 +96,10 @@ const Result: FC<ResultProps> = ({
       )}
       style={style}
     >
-      <View className={`${PREFIX_CLS}-icon`}>{renderIcon}</View>
+      <View className={`${PREFIX_CLS}-icon`}>{_icon}</View>
       <View className={`${PREFIX_CLS}-title`}>{title}</View>
       {desc ? <View className={`${PREFIX_CLS}-desc`}>{desc}</View> : null}
-      {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
+      {_extra ? <View className={`${PREFIX_CLS}-extra`}>{_extra}</View> : null}
     </View>
   );
 };

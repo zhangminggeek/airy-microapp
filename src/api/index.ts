@@ -246,7 +246,24 @@ export interface PostOrderRequest {
  * @分类 订单
  * @请求头 `POST /order`
  */
-export type PostOrderResponse = number
+export interface PostOrderResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
 
 /**
  * 接口 创建订单 的 **请求配置的类型**
@@ -303,18 +320,6 @@ postOrder.requestConfig = postOrderRequestConfig
  * @请求头 `PUT /order`
  */
 export interface PutOrderRequest {
-  /**
-   * 订单id
-   */
-  id: number
-  /**
-   * 订单
-   */
-  order: string
-  /**
-   * 密码（明文）
-   */
-  password: string
   /**
    * 微信用户唯一标识
    */

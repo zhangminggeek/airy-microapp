@@ -21,6 +21,7 @@ export default {
     // 我的
     'pages/user/index/index',
     'pages/user/published/index',
+    'pages/user/bought/index',
   ],
   subpackages: [
     {
@@ -41,7 +42,7 @@ export default {
     {
       // 订单管理
       root: 'packageOrder',
-      pages: ['pages/create/index'],
+      pages: ['pages/create/index', 'pages/create/result/index'],
     },
   ],
   window: {

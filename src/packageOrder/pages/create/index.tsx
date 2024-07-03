@@ -1,6 +1,6 @@
 import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import { useDidShow, useRouter } from '@tarojs/taro';
+import { requestPayment, useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
 import { useMemo, useState } from 'react';
 
@@ -48,7 +48,26 @@ const Page = () => {
   const { data, run: fetchDetail } = useRequest(getMarketId, { manual: true });
 
   // 创建订单
-  const { run: create } = useRequest(postOrder, { manual: true });
+  const { run: create } = useRequest(postOrder, {
+    manual: true,
+    onSuccess(data) {
+      const { timestamp, nonceStr, pkg, paySign } = data;
+      requestPayment({
+        timeStamp: timestamp.toString(),
+        nonceStr,
+        package: pkg,
+        signType: 'RSA',
+        paySign,
+        success(res) {
+          console.log(res);
+          Toast.success('支付成功');
+        },
+        fail(err) {
+          console.log(err);
+        },
+      });
+    },
+  });
 
   const info = useMemo(() => {
     const _type = Number(type);

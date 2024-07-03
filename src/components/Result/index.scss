@@ -1,11 +1,12 @@
 @import '../../styles/var.scss';
+@import '../../styles/mixins.scss';
 
 .m-result {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 64px 0;
+  padding: 192px 0;
 
   &-success {
     .m-result-icon {
@@ -13,9 +14,6 @@
         color: $color-primary;
       }
     }
-  }
-
-  &-icon {
   }
 
   &-title {
@@ -27,12 +25,29 @@
 
   &-desc {
     font-size: $font-size-base;
-    color: $text-color-base;
+    color: $text-color-secondary;
     margin-top: 16px;
   }
 
   &-extra {
     width: 100%;
     margin-top: 112px;
+
+    &-space {
+      @include flex-center;
+      gap: 32px;
+
+      &-multiple {
+        .m-result-extra-btn {
+          width: 256px;
+        }
+      }
+
+      :not(.m-result-extra-space-multiple) {
+        .m-result-extra-btn {
+          flex: 1;
+        }
+      }
+    }
   }
 }

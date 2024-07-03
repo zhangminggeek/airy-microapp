@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageOrder/pages/create/result/index",
+          "pathName": "packageOrder/pages/create/result/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/login/bind/index",
           "pathName": "pages/user/login/bind/index",
           "query": "",

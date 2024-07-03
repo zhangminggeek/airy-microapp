@@ -60,4 +60,17 @@ export class WeChatUtil {
       });
     });
   }
+
+  /**
+   * 生成支付签名
+   * @param options 签名参数
+   * @returns 签名
+   */
+  static async generatePaySign(options: {
+    timeStamp: string;
+    nonceStr: string;
+    package: string;
+  }) {
+    options;
+  }
 }
