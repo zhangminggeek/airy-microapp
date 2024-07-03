@@ -1,6 +1,7 @@
 import { Result } from '@/components';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
+
 const Page = () => {
   return (
     <BasicLayout back>

@@ -65,7 +65,11 @@ const AddressCard: FC<AddressCardProps> = ({
       <View className={`${PREFIX_CLS}-content`}>
         <View className={`${PREFIX_CLS}-content-title`}>
           {isDefault && (
-            <Tag className={`${PREFIX_CLS}-content-title-tag`} type="primary">
+            <Tag
+              className={`${PREFIX_CLS}-content-title-tag`}
+              type="primary"
+              plain
+            >
               默认
             </Tag>
           )}

@@ -53,7 +53,7 @@ const Card: FC<CardProps> = ({
         {tagList?.length ? (
           <View className={`${PREFIX_CLS}-content-tag-group`}>
             {tagList?.map((item, index) => (
-              <Tag type="primary" key={index}>
+              <Tag key={index} type="primary" plain>
                 {item}
               </Tag>
             ))}

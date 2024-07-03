@@ -1,5 +1,4 @@
-import { Dialog } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
+import { ConfigProvider, Dialog } from '@nutui/nutui-react-taro';
 import { useRef } from 'react';
 
 import type { DialogProps } from '@nutui/nutui-react-taro';
@@ -42,27 +41,27 @@ export const useDialog = <P extends Record<string, any> = any>({
 
   const renderDialog = () => {
     return (
-      <Dialog
-        id={id}
-        lockScroll={lockScroll}
-        onConfirm={(e) => {
-          onConfirm?.(e, params.current);
-          close();
+      <ConfigProvider
+        theme={{
+          '--nutui-dialog-content-text-align': center ? 'center' : 'left',
         }}
-        onCancel={() => {
-          onCancel?.();
-          close();
-        }}
-        {...rest}
       >
-        <View
-          style={
-            center ? { display: 'flex', justifyContent: 'center' } : undefined
-          }
+        <Dialog
+          id={id}
+          lockScroll={lockScroll}
+          onConfirm={(e) => {
+            onConfirm?.(e, params.current);
+            close();
+          }}
+          onCancel={() => {
+            onCancel?.();
+            close();
+          }}
+          {...rest}
         >
           {content}
-        </View>
-      </Dialog>
+        </Dialog>
+      </ConfigProvider>
     );
   };
 

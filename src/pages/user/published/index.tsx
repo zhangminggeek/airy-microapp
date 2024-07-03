@@ -15,7 +15,7 @@ import {
   getMarketMyPublished,
   putMarketStatus,
 } from '@/api';
-import { Affix, List, Product, Space } from '@/components';
+import { Affix, List, Product, Space, Tag } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -96,6 +96,13 @@ const Page = () => {
         deleteMarket({ id: params.id });
       },
     });
+
+  const { renderDialog: renderDialogRemrk, open: openDialogRemark } = useDialog(
+    {
+      id: 'dialog-remark',
+      hideCancelButton: true,
+    },
+  );
 
   const tabs: TabOption[] = [
     {
@@ -197,6 +204,18 @@ const Page = () => {
     {
       title: '未通过',
       value: MarketProductStatus['未通过'],
+      extra: (item) => (
+        <Tag
+          className={styles.remark}
+          type="warning"
+          border={false}
+          onClick={() => {
+            openDialogRemark({ content: item.remark });
+          }}
+        >
+          {item.remark}
+        </Tag>
+      ),
       actions: (item) => [
         <Button
           key="del"
@@ -252,8 +271,12 @@ const Page = () => {
                 sellingPrice={item.sellingPrice}
                 footer={
                   <View className={styles['brief-footer']}>
-                    <View>{tabs[currentIndex].extra?.(item)}</View>
-                    <Space size={12}>{tabs[currentIndex].actions(item)}</Space>
+                    <View className={styles['brief-footer-extra']}>
+                      {tabs[currentIndex].extra?.(item)}
+                    </View>
+                    <Space className={styles['brief-footer-actions']} size={12}>
+                      {tabs[currentIndex].actions?.(item)}
+                    </Space>
                   </View>
                 }
                 onClick={() => {
@@ -273,6 +296,7 @@ const Page = () => {
       />
       {renderDialogTakeDown()}
       {renderDialogDelete()}
+      {renderDialogRemrk()}
     </BasicLayout>
   );
 };

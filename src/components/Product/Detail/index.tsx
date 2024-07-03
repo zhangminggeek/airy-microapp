@@ -67,6 +67,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
                 key={index}
                 className={`${PREFIX_CLS}-header-tag`}
                 type="primary"
+                plain
               >
                 {item}
               </Tag>

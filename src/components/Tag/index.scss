@@ -1,16 +1,33 @@
 @import '../../styles/var.scss';
 
 .m-tag {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
   border-radius: 4px;
-  padding: 2px 8px;
+  padding: 4px 8px;
   font-size: $font-size-small;
   line-height: 1em;
 
+  &:not(.m-tag-plain) {
+    &.m-tag-warning {
+      background-color: rgba($color-warning, 0.1);
+    }
+  }
+
+  &.m-tag-border {
+    &.m-tag-primary {
+      border: 2px solid $color-primary;
+    }
+
+    &.m-tag-warning {
+      border: 2px solid $color-warning;
+    }
+  }
+
   &-primary {
     color: $color-primary;
-    border: 2px solid $color-primary;
+  }
+
+  &-warning {
+    color: $color-warning;
   }
 }
