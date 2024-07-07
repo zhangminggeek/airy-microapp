@@ -1,5 +1,5 @@
 import { Image } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import { ROOT_PREFIX_CLS } from '../constants';
@@ -8,18 +8,22 @@ import SellingPrice from '../SellingPrice';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
+import ImageBorrow from '@/assets/icons/borrow.png';
 import { Space } from '@/components';
+import { OrderType } from '@/constants/order';
 
 import './index.scss';
 
 interface BriefProps {
   clasName?: string;
   style?: CSSProperties;
+  type?: number;
   image?: string;
   title?: string;
   desc?: string;
   leasePrice?: string;
   sellingPrice?: string;
+  total?: string;
   footer?: ReactNode;
   onClick?: () => void;
 }
@@ -28,11 +32,13 @@ const PREFIX_CLS = `${ROOT_PREFIX_CLS}-brief`;
 
 const Brief: FC<BriefProps> = ({
   clasName,
+  type,
   image,
   title,
   desc,
   leasePrice,
   sellingPrice,
+  total,
   footer,
   onClick,
 }) => {
@@ -47,16 +53,38 @@ const Brief: FC<BriefProps> = ({
           height={72}
         />
         <View className={`${PREFIX_CLS}-body-content`}>
-          <View className={`${PREFIX_CLS}-body-content-title`}>{title}</View>
+          <View className={`${PREFIX_CLS}-body-content-title`}>
+            {type === OrderType['借调'] && (
+              <Image
+                className={`${PREFIX_CLS}-icon`}
+                src={ImageBorrow}
+                width={18}
+                height={18}
+              />
+            )}
+            <View className={`${PREFIX_CLS}-body-content-title-text`}>
+              {title}
+            </View>
+          </View>
           {desc ? (
             <View className={`${PREFIX_CLS}-body-content-desc`}>{desc}</View>
           ) : null}
-          <View className={`${PREFIX_CLS}-body-content-price`}>
-            <Space size={16}>
-              {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
-              {leasePrice ? <LeasePrice value={leasePrice} /> : null}
-            </Space>
-          </View>
+          {sellingPrice || leasePrice ? (
+            <View className={`${PREFIX_CLS}-body-content-price`}>
+              <Space size={16}>
+                {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
+                {leasePrice ? <LeasePrice value={leasePrice} /> : null}
+              </Space>
+            </View>
+          ) : null}
+          {total ? (
+            <View className={`${PREFIX_CLS}-body-content-total`}>
+              <Space>
+                <Text>实付:</Text>
+                <SellingPrice value={total} />
+              </Space>
+            </View>
+          ) : null}
         </View>
       </View>
       {footer ? (

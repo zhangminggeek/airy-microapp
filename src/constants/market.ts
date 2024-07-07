@@ -45,14 +45,14 @@ export const productStatusMap = new Map([
 ]);
 
 // 快递方式
-export enum DeliveryMethod {
+export enum ExpressMethod {
   '包邮' = 1,
   '到付' = 2,
   '自提' = 3,
 }
 
-export const deliveryMethodMap = new Map([
-  [DeliveryMethod['包邮'], { text: '包邮', value: DeliveryMethod['包邮'] }],
-  [DeliveryMethod['到付'], { text: '到付', value: DeliveryMethod['到付'] }],
-  [DeliveryMethod['自提'], { text: '自提', value: DeliveryMethod['自提'] }],
+export const expressMethodMap = new Map([
+  [ExpressMethod['包邮'], { text: '包邮', value: ExpressMethod['包邮'] }],
+  [ExpressMethod['到付'], { text: '到付', value: ExpressMethod['到付'] }],
+  [ExpressMethod['自提'], { text: '自提', value: ExpressMethod['自提'] }],
 ]);

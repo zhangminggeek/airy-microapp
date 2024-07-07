@@ -28,8 +28,8 @@ export const shopConfig = [
 
 export const marketConfig = [
   { icon: IconMyRelease, name: '我发布的', to: '/pages/user/published/index' },
-  { icon: IconMyPurchase, name: '我的购买', to: '' },
-  { icon: IconMySold, name: '我卖出的', to: '' },
+  { icon: IconMyPurchase, name: '我的购买', to: '/pages/user/bought/index' },
+  { icon: IconMySold, name: '我卖出的', to: '/pages/user/sold/index' },
   { icon: IconMyRequirement, name: '我求购的', to: '' },
   { icon: IconMyFavorite, name: '我的收藏', to: '' },
 ];

@@ -22,6 +22,7 @@ export default {
     'pages/user/index/index',
     'pages/user/published/index',
     'pages/user/bought/index',
+    'pages/user/sold/index',
   ],
   subpackages: [
     {

@@ -131,85 +131,634 @@ const prodUrl_0_0_0_1 = '' as any
 const dataKey_0_0_0_1 = 'data' as any
 
 /**
- * 接口 获取订单列表 的 **请求类型**
+ * 接口 获取我购买的订单列表 的 **请求类型**
  *
  * @分类 订单
- * @请求头 `GET /order`
+ * @请求头 `GET /order/bought`
  */
-export interface GetOrderRequest {}
-
-/**
- * 接口 获取订单列表 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `GET /order`
- */
-export interface GetOrderResponse {
+export interface GetOrderBoughtRequest {
   /**
-   * 创建时间
+   * 页码
    */
-  createTime: string
+  pageNum: string
   /**
-   * 修改时间
+   * 分页条数
    */
-  updateTime: string
+  pageSize: string
   /**
-   * 订单id
+   * 订单状态
    */
-  id: number
-  /**
-   * 订单
-   */
-  order: string
+  status?: string
 }
 
 /**
- * 接口 获取订单列表 的 **请求配置的类型**
+ * 接口 获取我购买的订单列表 的 **返回类型**
  *
  * @分类 订单
- * @请求头 `GET /order`
+ * @请求头 `GET /order/bought`
  */
-type GetOrderRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, string, true>
+export interface GetOrderBoughtResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 订单id
+     */
+    id: number
+    /**
+     * 订单号
+     */
+    no: string
+    /**
+     * 微信支付系统生成的订单号
+     */
+    transactionId?: string
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 订单类型 1:出售 2:借调
+     */
+    type: number
+    /**
+     * 购买人的公司id
+     */
+    buyerId: number
+    /**
+     * 收货地址id
+     */
+    buyerAddressId: number
+    /**
+     * 出售人的公司id
+     */
+    sellerId: number
+    /**
+     * 返还收货地址id
+     */
+    sellerAddressId?: number
+    /**
+     * 借调开始日期
+     */
+    leaseStartDate?: string
+    /**
+     * 借调结束日期
+     */
+    leaseEndDate?: string
+    /**
+     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+     */
+    status: number
+    /**
+     * 发货快递id
+     */
+    expressDeliveryId?: number
+    /**
+     * 返还快递id
+     */
+    expressReturnId?: number
+    /**
+     * 二手市场商品信息
+     */
+    market?: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 数据id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 公司收货地址id
+       */
+      companyAddressId?: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 商品标题
+       */
+      title: string
+      /**
+       * 商品描述
+       */
+      description: string
+      /**
+       * 是否允许出售, 0:否 1:是
+       */
+      allowSell: boolean
+      /**
+       * 是否允许借调, 0:否 1:是
+       */
+      allowLease: boolean
+      /**
+       * 出售价
+       */
+      sellingPrice?: string
+      /**
+       * 借调价
+       */
+      leasePrice?: string
+      /**
+       * 借调押金
+       */
+      leaseDeposit?: string
+      /**
+       * 发货方式, 1:包邮 2:到付 3:自提
+       */
+      expressMethod: number
+      /**
+       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+       */
+      quality: number
+      /**
+       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+       */
+      status: number
+      /**
+       * 审批结论
+       */
+      remark?: string
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 二手市场商品信息
+       */
+      product?: {
+        /**
+         * 创建时间
+         */
+        createTime: string
+        /**
+         * 修改时间
+         */
+        updateTime: string
+        /**
+         * 服饰id
+         */
+        id: number
+        /**
+         * 服饰名称
+         */
+        name: string
+        /**
+         * 服饰编号
+         */
+        no?: string
+        /**
+         * 服饰品牌
+         */
+        brand?: string
+        /**
+         * 服饰类型
+         */
+        typeCode: string
+        /**
+         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+         */
+        size: number
+        /**
+         * 描述
+         */
+        description?: string
+        /**
+         * 租赁次数
+         */
+        leaseCount: number
+        /**
+         * 公司id
+         */
+        companyId: number
+        /**
+         * 添加用户id
+         */
+        userId: number
+        /**
+         * 服饰状态 1:正常 2:已出售 3:借调中
+         */
+        status: number
+        /**
+         * 是否被删除
+         */
+        isDeleted: boolean
+        /**
+         * 图片
+         */
+        picList: {
+          /**
+           * 服饰图片id
+           */
+          id: number
+          /**
+           * 服饰id
+           */
+          productId: number
+          /**
+           * 服饰图片地址
+           */
+          url: string
+        }[]
+      }
+    }
+  }[]
+}
+
+/**
+ * 接口 获取我购买的订单列表 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `GET /order/bought`
+ */
+type GetOrderBoughtRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/order/bought',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'status',
+    false
+  >
 >
 
 /**
- * 接口 获取订单列表 的 **请求配置**
+ * 接口 获取我购买的订单列表 的 **请求配置**
  *
  * @分类 订单
- * @请求头 `GET /order`
+ * @请求头 `GET /order/bought`
  */
-const getOrderRequestConfig: GetOrderRequestConfig = /*#__PURE__*/ {
+const getOrderBoughtRequestConfig: GetOrderBoughtRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/order',
+  path: '/order/bought',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_1,
   paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
+  queryNames: ['pageNum', 'pageSize', 'status'],
+  requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getOrder',
+  requestFunctionName: 'getOrderBought',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取订单列表 的 **请求函数**
+ * 接口 获取我购买的订单列表 的 **请求函数**
  *
  * @分类 订单
- * @请求头 `GET /order`
+ * @请求头 `GET /order/bought`
  */
-export const getOrder = /*#__PURE__*/ (requestData?: GetOrderRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOrderResponse>(prepare(getOrderRequestConfig, requestData), ...args)
+export const getOrderBought = /*#__PURE__*/ (requestData: GetOrderBoughtRequest, ...args: UserRequestRestArgs) => {
+  return request<GetOrderBoughtResponse>(prepare(getOrderBoughtRequestConfig, requestData), ...args)
 }
 
-getOrder.requestConfig = getOrderRequestConfig
+getOrderBought.requestConfig = getOrderBoughtRequestConfig
+
+/**
+ * 接口 获取我卖出的订单列表 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `GET /order/sold`
+ */
+export interface GetOrderSoldRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 订单状态
+   */
+  status?: string
+}
+
+/**
+ * 接口 获取我卖出的订单列表 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `GET /order/sold`
+ */
+export interface GetOrderSoldResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 订单id
+     */
+    id: number
+    /**
+     * 订单号
+     */
+    no: string
+    /**
+     * 微信支付系统生成的订单号
+     */
+    transactionId?: string
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 订单类型 1:出售 2:借调
+     */
+    type: number
+    /**
+     * 购买人的公司id
+     */
+    buyerId: number
+    /**
+     * 收货地址id
+     */
+    buyerAddressId: number
+    /**
+     * 出售人的公司id
+     */
+    sellerId: number
+    /**
+     * 返还收货地址id
+     */
+    sellerAddressId?: number
+    /**
+     * 借调开始日期
+     */
+    leaseStartDate?: string
+    /**
+     * 借调结束日期
+     */
+    leaseEndDate?: string
+    /**
+     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+     */
+    status: number
+    /**
+     * 发货快递id
+     */
+    expressDeliveryId?: number
+    /**
+     * 返还快递id
+     */
+    expressReturnId?: number
+    /**
+     * 二手市场商品信息
+     */
+    market?: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 数据id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 公司收货地址id
+       */
+      companyAddressId?: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 商品标题
+       */
+      title: string
+      /**
+       * 商品描述
+       */
+      description: string
+      /**
+       * 是否允许出售, 0:否 1:是
+       */
+      allowSell: boolean
+      /**
+       * 是否允许借调, 0:否 1:是
+       */
+      allowLease: boolean
+      /**
+       * 出售价
+       */
+      sellingPrice?: string
+      /**
+       * 借调价
+       */
+      leasePrice?: string
+      /**
+       * 借调押金
+       */
+      leaseDeposit?: string
+      /**
+       * 发货方式, 1:包邮 2:到付 3:自提
+       */
+      expressMethod: number
+      /**
+       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+       */
+      quality: number
+      /**
+       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+       */
+      status: number
+      /**
+       * 审批结论
+       */
+      remark?: string
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 二手市场商品信息
+       */
+      product?: {
+        /**
+         * 创建时间
+         */
+        createTime: string
+        /**
+         * 修改时间
+         */
+        updateTime: string
+        /**
+         * 服饰id
+         */
+        id: number
+        /**
+         * 服饰名称
+         */
+        name: string
+        /**
+         * 服饰编号
+         */
+        no?: string
+        /**
+         * 服饰品牌
+         */
+        brand?: string
+        /**
+         * 服饰类型
+         */
+        typeCode: string
+        /**
+         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+         */
+        size: number
+        /**
+         * 描述
+         */
+        description?: string
+        /**
+         * 租赁次数
+         */
+        leaseCount: number
+        /**
+         * 公司id
+         */
+        companyId: number
+        /**
+         * 添加用户id
+         */
+        userId: number
+        /**
+         * 服饰状态 1:正常 2:已出售 3:借调中
+         */
+        status: number
+        /**
+         * 是否被删除
+         */
+        isDeleted: boolean
+        /**
+         * 图片
+         */
+        picList: {
+          /**
+           * 服饰图片id
+           */
+          id: number
+          /**
+           * 服饰id
+           */
+          productId: number
+          /**
+           * 服饰图片地址
+           */
+          url: string
+        }[]
+      }
+    }
+  }[]
+}
+
+/**
+ * 接口 获取我卖出的订单列表 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `GET /order/sold`
+ */
+type GetOrderSoldRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/order/sold',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'status',
+    false
+  >
+>
+
+/**
+ * 接口 获取我卖出的订单列表 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `GET /order/sold`
+ */
+const getOrderSoldRequestConfig: GetOrderSoldRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/sold',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderSold',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取我卖出的订单列表 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `GET /order/sold`
+ */
+export const getOrderSold = /*#__PURE__*/ (requestData: GetOrderSoldRequest, ...args: UserRequestRestArgs) => {
+  return request<GetOrderSoldResponse>(prepare(getOrderSoldRequestConfig, requestData), ...args)
+}
+
+getOrderSold.requestConfig = getOrderSoldRequestConfig
 
 /**
  * 接口 创建订单 的 **请求类型**
@@ -314,75 +863,6 @@ export const postOrder = /*#__PURE__*/ (requestData: PostOrderRequest, ...args: 
 postOrder.requestConfig = postOrderRequestConfig
 
 /**
- * 接口 更新订单 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `PUT /order`
- */
-export interface PutOrderRequest {
-  /**
-   * 微信用户唯一标识
-   */
-  openid?: string
-}
-
-/**
- * 接口 更新订单 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `PUT /order`
- */
-export type PutOrderResponse = any
-
-/**
- * 接口 更新订单 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `PUT /order`
- */
-type PutOrderRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, string, false>
->
-
-/**
- * 接口 更新订单 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `PUT /order`
- */
-const putOrderRequestConfig: PutOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
-  path: '/order',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putOrder',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 更新订单 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `PUT /order`
- */
-export const putOrder = /*#__PURE__*/ (requestData: PutOrderRequest, ...args: UserRequestRestArgs) => {
-  return request<PutOrderResponse>(prepare(putOrderRequestConfig, requestData), ...args)
-}
-
-putOrder.requestConfig = putOrderRequestConfig
-
-/**
  * 接口 删除订单 的 **请求类型**
  *
  * @分类 订单
@@ -450,6 +930,374 @@ export const deleteOrder = /*#__PURE__*/ (requestData: DeleteOrderRequest, ...ar
 }
 
 deleteOrder.requestConfig = deleteOrderRequestConfig
+
+/**
+ * 接口 支付订单 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay`
+ */
+export interface PostOrderPayRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+/**
+ * 接口 支付订单 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay`
+ */
+export interface PostOrderPayResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
+
+/**
+ * 接口 支付订单 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay`
+ */
+type PostOrderPayRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay', 'data', string, string, false>
+>
+
+/**
+ * 接口 支付订单 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay`
+ */
+const postOrderPayRequestConfig: PostOrderPayRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/pay',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderPay',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 支付订单 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay`
+ */
+export const postOrderPay = /*#__PURE__*/ (requestData: PostOrderPayRequest, ...args: UserRequestRestArgs) => {
+  return request<PostOrderPayResponse>(prepare(postOrderPayRequestConfig, requestData), ...args)
+}
+
+postOrderPay.requestConfig = postOrderPayRequestConfig
+
+/**
+ * 接口 支付结果通知 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/notice/wechat`
+ */
+export interface PostOrderPayNoticeWechatRequest {
+  /**
+   * 通知的唯一ID
+   */
+  id?: string
+  /**
+   * 通知创建的时间
+   */
+  create_time?: string
+  /**
+   * 通知的类型，支付成功通知的类型为TRANSACTION.SUCCESS
+   */
+  event_type?: string
+  /**
+   * 通知的资源数据类型，支付成功通知为encrypt-resource
+   */
+  resource_type?: string
+  /**
+   * 通知资源数据
+   */
+  resource?: {
+    /**
+     * 对开启结果数据进行加密的加密算法，目前只支持AEAD_AES_256_GCM
+     */
+    algorithm?: string
+    /**
+     * Base64编码后的开启/停用结果数据密文
+     */
+    ciphertext?: string
+    /**
+     * 附加数据
+     */
+    associated_data?: string
+    /**
+     * 原始回调类型，为transaction
+     */
+    original_type?: string
+    /**
+     * 加密使用的随机串
+     */
+    nonce?: string
+  }
+  /**
+   * 回调摘要
+   */
+  summary?: string
+}
+
+/**
+ * 接口 支付结果通知 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/notice/wechat`
+ */
+export interface PostOrderPayNoticeWechatResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
+
+/**
+ * 接口 支付结果通知 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/notice/wechat`
+ */
+type PostOrderPayNoticeWechatRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/notice/wechat', 'data', string, string, false>
+>
+
+/**
+ * 接口 支付结果通知 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/notice/wechat`
+ */
+const postOrderPayNoticeWechatRequestConfig: PostOrderPayNoticeWechatRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/pay/notice/wechat',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderPayNoticeWechat',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 支付结果通知 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/notice/wechat`
+ */
+export const postOrderPayNoticeWechat = /*#__PURE__*/ (
+  requestData: PostOrderPayNoticeWechatRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderPayNoticeWechatResponse>(prepare(postOrderPayNoticeWechatRequestConfig, requestData), ...args)
+}
+
+postOrderPayNoticeWechat.requestConfig = postOrderPayNoticeWechatRequestConfig
+
+/**
+ * 接口 买家修改订单状态 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/buyer`
+ */
+export interface PutOrderStatusBuyerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 订单状态
+   */
+  status: number
+}
+
+/**
+ * 接口 买家修改订单状态 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/buyer`
+ */
+export type PutOrderStatusBuyerResponse = any
+
+/**
+ * 接口 买家修改订单状态 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/buyer`
+ */
+type PutOrderStatusBuyerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/status/buyer', 'data', string, string, false>
+>
+
+/**
+ * 接口 买家修改订单状态 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/buyer`
+ */
+const putOrderStatusBuyerRequestConfig: PutOrderStatusBuyerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/status/buyer',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putOrderStatusBuyer',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 买家修改订单状态 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/buyer`
+ */
+export const putOrderStatusBuyer = /*#__PURE__*/ (
+  requestData: PutOrderStatusBuyerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutOrderStatusBuyerResponse>(prepare(putOrderStatusBuyerRequestConfig, requestData), ...args)
+}
+
+putOrderStatusBuyer.requestConfig = putOrderStatusBuyerRequestConfig
+
+/**
+ * 接口 卖家修改订单状态 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/seller`
+ */
+export interface PutOrderStatusSellerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 订单状态
+   */
+  status: number
+}
+
+/**
+ * 接口 卖家修改订单状态 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/seller`
+ */
+export type PutOrderStatusSellerResponse = any
+
+/**
+ * 接口 卖家修改订单状态 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/seller`
+ */
+type PutOrderStatusSellerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/status/seller', 'data', string, string, false>
+>
+
+/**
+ * 接口 卖家修改订单状态 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/seller`
+ */
+const putOrderStatusSellerRequestConfig: PutOrderStatusSellerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/status/seller',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putOrderStatusSeller',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 卖家修改订单状态 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `PUT /order/status/seller`
+ */
+export const putOrderStatusSeller = /*#__PURE__*/ (
+  requestData: PutOrderStatusSellerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutOrderStatusSellerResponse>(prepare(putOrderStatusSellerRequestConfig, requestData), ...args)
+}
+
+putOrderStatusSeller.requestConfig = putOrderStatusSellerRequestConfig
 
 /**
  * 接口 获取订单信息 的 **请求类型**
@@ -3545,6 +4393,10 @@ export type GetProductResponse = {
    */
   leaseCount: number
   /**
+   * 服饰状态 1:正常 2:已售出 3:借调中
+   */
+  status: number
+  /**
    * 图片
    */
   picList: {
@@ -3916,6 +4768,10 @@ export interface GetProductPageResponse {
      */
     leaseCount: number
     /**
+     * 服饰状态 1:正常 2:已售出 3:借调中
+     */
+    status: number
+    /**
      * 图片
      */
     picList: {
@@ -4121,6 +4977,10 @@ export interface GetProductIdResponse {
    * 租赁次数
    */
   leaseCount: number
+  /**
+   * 服饰状态 1:正常 2:已售出 3:借调中
+   */
+  status: number
   /**
    * 产品类型
    */
@@ -4704,11 +5564,11 @@ export interface GetMarketRequest {
  */
 export interface GetMarketResponse {
   /**
-   * 总数
+   * 数据总条数
    */
   total: number
   /**
-   * 列表
+   * 数据
    */
   list: {
     /**
@@ -4766,7 +5626,7 @@ export interface GetMarketResponse {
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
-    deliveryMethod: number
+    expressMethod: number
     /**
      * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
      */
@@ -4969,7 +5829,7 @@ export interface PostMarketRequest {
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
-  deliveryMethod: number
+  expressMethod: number
   /**
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
@@ -5074,7 +5934,7 @@ export interface PutMarketRequest {
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
-  deliveryMethod: number
+  expressMethod: number
   /**
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
@@ -5170,11 +6030,11 @@ export interface GetMarketMyPublishedRequest {
  */
 export interface GetMarketMyPublishedResponse {
   /**
-   * 总数
+   * 数据总条数
    */
   total: number
   /**
-   * 列表
+   * 数据
    */
   list: {
     /**
@@ -5232,7 +6092,7 @@ export interface GetMarketMyPublishedResponse {
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
-    deliveryMethod: number
+    expressMethod: number
     /**
      * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
      */
@@ -5544,7 +6404,7 @@ export interface GetMarketIdResponse {
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
-  deliveryMethod: number
+  expressMethod: number
   /**
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
@@ -5605,6 +6465,10 @@ export interface GetMarketIdResponse {
      * 租赁次数
      */
     leaseCount: number
+    /**
+     * 服饰状态 1:正常 2:已售出 3:借调中
+     */
+    status: number
     /**
      * 产品类型
      */

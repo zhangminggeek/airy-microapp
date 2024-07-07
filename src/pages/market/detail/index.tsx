@@ -26,6 +26,7 @@ const Page = () => {
   });
 
   useDidShow(() => {
+    console.log('info', info);
     if (id) {
       run({ id });
     }
@@ -68,37 +69,37 @@ const Page = () => {
           },
         )}
         footer={
-          <View className={styles.footer}>
-            <Space size={20}>
-              <Icon
-                name={data?.isFavorited ? 'LoveFilled' : 'LoveOutlined'}
-                type={data?.isFavorited ? 'primary' : 'default'}
-                title="收藏"
-                onClick={() => {
-                  toggleFavorite({
-                    id: Number(id),
-                    isFavorited: !data?.isFavorited,
-                  });
-                }}
-              />
-              <Button
-                className={styles['icon-btn']}
-                openType="share"
-                fill="none"
-                shape="square"
-              >
-                <Icon name="ShareOneOutlined" title="分享" />
-              </Button>
-              <Button
-                className={styles['icon-btn']}
-                openType="contact"
-                fill="none"
-                shape="square"
-              >
-                <Icon name="PhoneOutlined" title="联系商家" />
-              </Button>
-            </Space>
-            {info?.companyId !== data?.companyId && (
+          info?.companyId !== data?.companyId ? (
+            <View className={styles.footer}>
+              <Space size={20}>
+                <Icon
+                  name={data?.isFavorited ? 'LoveFilled' : 'LoveOutlined'}
+                  type={data?.isFavorited ? 'primary' : 'default'}
+                  title="收藏"
+                  onClick={() => {
+                    toggleFavorite({
+                      id: Number(id),
+                      isFavorited: !data?.isFavorited,
+                    });
+                  }}
+                />
+                <Button
+                  className={styles['icon-btn']}
+                  openType="share"
+                  fill="none"
+                  shape="square"
+                >
+                  <Icon name="ShareOneOutlined" title="分享" />
+                </Button>
+                <Button
+                  className={styles['icon-btn']}
+                  openType="contact"
+                  fill="none"
+                  shape="square"
+                >
+                  <Icon name="PhoneOutlined" title="联系商家" />
+                </Button>
+              </Space>
               <Space size={16}>
                 {data?.allowLease ? (
                   <Button
@@ -128,8 +129,8 @@ const Page = () => {
                   </Button>
                 ) : null}
               </Space>
-            )}
-          </View>
+            </View>
+          ) : null
         }
       />
     </BasicLayout>

@@ -21,11 +21,11 @@ import {
   Space,
 } from '@/components';
 import { DATE_FORMAT } from '@/constants';
-import { deliveryMethodMap } from '@/constants/market';
+import { expressMethodMap } from '@/constants/market';
 import { OrderType } from '@/constants/order';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { Toast } from '@/utils';
+import { RouterUtil, Toast } from '@/utils';
 
 interface PageParams {
   id: string; // market 表 id
@@ -58,9 +58,9 @@ const Page = () => {
         package: pkg,
         signType: 'RSA',
         paySign,
-        success(res) {
-          console.log(res);
+        success() {
           Toast.success('支付成功');
+          RouterUtil.navigateTo('/packageOrder/pages/create/result/index');
         },
         fail(err) {
           console.log(err);
@@ -77,11 +77,13 @@ const Page = () => {
       price:
         _type === OrderType['出售'] ? data?.sellingPrice : data?.leasePrice,
       deposit: data?.leaseDeposit,
-      delivery: deliveryMethodMap.get(data?.deliveryMethod)?.text,
+      express: expressMethodMap.get(data?.expressMethod)?.text,
       total:
         _type === OrderType['出售']
           ? data?.sellingPrice
-          : Big(data?.leasePrice ?? 0).plus(data?.leaseDeposit ?? 0),
+          : Big(data?.leasePrice ?? 0)
+              .plus(data?.leaseDeposit ?? 0)
+              .toString(),
     };
   }, [type, data]);
 
@@ -149,12 +151,12 @@ const Page = () => {
                   col: 2,
                   hidden: info.type === OrderType['出售'],
                 },
-                { label: '运费', field: 'delivery', col: 2 },
+                { label: '运费', field: 'express', col: 2 },
               ]}
               data={{
                 price: info.price,
                 deposit: info.deposit,
-                delivery: info.delivery,
+                express: info.express,
               }}
               align="right"
               colon={false}
@@ -173,7 +175,7 @@ const Page = () => {
       <PageFooter className={styles.footer}>
         <Space className={styles['footer-price']}>
           <Text>实付</Text>
-          <Product.SellingPrice value={info?.price} />
+          <Product.SellingPrice value={info?.total} />
         </Space>
         <Button
           type="primary"

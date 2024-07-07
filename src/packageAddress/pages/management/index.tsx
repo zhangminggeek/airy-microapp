@@ -23,7 +23,7 @@ const Page = () => {
   const { run: toggle } = useRequest(putAddressDefault, {
     manual: true,
     onSuccess() {
-      Toast.info('切换成功');
+      Toast.success('切换成功');
       run();
     },
   });

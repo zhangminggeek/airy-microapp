@@ -40,6 +40,7 @@ const Card: FC<CardProps> = ({
         src={pic}
         width={80}
         height={80}
+        mode="aspectFill"
       />
       <View className={styles['card-name']}>{name}</View>
       <View className={styles['card-desc']}>{desc}</View>

@@ -1,0 +1,33 @@
+@import '../../../../styles/var.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 0;
+
+  .title {
+    font-size: $font-size-large;
+    color: $text-color-main;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  .desc {
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    font-weight: 400;
+    margin-bottom: 64px;
+    text-align: center;
+
+    .paragraph {
+      & + & {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  .btn {
+    width: 400px;
+  }
+}

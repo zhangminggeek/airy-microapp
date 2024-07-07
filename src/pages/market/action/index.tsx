@@ -14,7 +14,7 @@ import {
   TagChecker,
 } from '@/components';
 import {
-  deliveryMethodMap,
+  expressMethodMap,
   marketMethodMap,
   MarkrtMethod,
 } from '@/constants/market';
@@ -61,7 +61,7 @@ const Page = () => {
         leasePrice,
         leaseDeposit,
         companyAddressId,
-        deliveryMethod,
+        expressMethod,
         quality,
       } = data;
       const method: MarkrtMethod[] = [];
@@ -82,7 +82,7 @@ const Page = () => {
         leasePrice,
         leaseDeposit,
         companyAddressId,
-        deliveryMethod: [deliveryMethod],
+        expressMethod: [expressMethod],
         quality: [quality],
       });
     },
@@ -117,12 +117,12 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          const { method, deliveryMethod, quality, ...rest } = values;
+          const { method, expressMethod, quality, ...rest } = values;
           const params: PostMarketRequest = {
             ...rest,
             allowSell: method?.includes(MarkrtMethod['出售']),
             allowLease: method?.includes(MarkrtMethod['借调']),
-            deliveryMethod: deliveryMethod[0],
+            expressMethod: expressMethod[0],
             quality: quality[0],
           };
           if (id) {
@@ -211,11 +211,11 @@ const Page = () => {
         )}
         <FormSection title="发货方式">
           <Form.Item
-            name="deliveryMethod"
+            name="expressMethod"
             noStyle
             rules={[{ required: true, message: '请选择发货方式' }]}
           >
-            <TagChecker options={Array.from(deliveryMethodMap.values())} />
+            <TagChecker options={Array.from(expressMethodMap.values())} />
           </Form.Item>
         </FormSection>
         <FormSection title="新旧程度">
