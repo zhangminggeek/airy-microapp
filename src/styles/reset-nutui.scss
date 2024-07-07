@@ -17,6 +17,11 @@
     border-color: transparent;
     opacity: 0.4;
   }
+
+  &.nut-button-solid.nut-button-disabled {
+    color: $text-color-base;
+    background-color: $background-color-disabled;
+  }
 }
 
 // Form
@@ -97,5 +102,19 @@
     font-size: $font-size-small;
     color: $text-color-secondary;
     font-weight: 400;
+  }
+}
+
+// input
+.nut-input {
+  .input-placeholder {
+    color: $text-color-placeholder;
+  }
+}
+
+// textarea
+.nut-textarea {
+  .textarea-placeholder {
+    color: $text-color-placeholder;
   }
 }

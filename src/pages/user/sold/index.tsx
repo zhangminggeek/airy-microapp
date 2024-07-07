@@ -16,7 +16,7 @@ import type { ReactNode } from 'react';
 
 import { getOrderSold } from '@/api';
 import { List, Product, Space } from '@/components';
-import { OrderStatus, OrderType } from '@/constants/order';
+import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
@@ -45,8 +45,19 @@ const Page = () => {
     {
       title: '待发货',
       value: OrderStatus['待发货'],
-      actions: () => [
-        <Button key="deliver" type="primary" size="small" onClick={() => {}}>
+      actions: (item) => [
+        <Button
+          key="deliver"
+          type="primary"
+          size="small"
+          onClick={() => {
+            RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
+              id: item.id,
+              addressId: item.buyerAddressId,
+              type: OrderExpressType['发货'],
+            });
+          }}
+        >
           去发货
         </Button>,
       ],

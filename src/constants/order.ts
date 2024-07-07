@@ -34,3 +34,8 @@ export const orderStatusMap = new Map([
   [OrderStatus['已完成'], { value: OrderStatus['已完成'], text: '已完成' }],
   [OrderStatus['已取消'], { value: OrderStatus['已取消'], text: '已取消' }],
 ]);
+
+export enum OrderExpressType {
+  '发货' = 1,
+  '返还' = 2,
+}

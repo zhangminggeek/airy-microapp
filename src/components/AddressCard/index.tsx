@@ -1,12 +1,11 @@
 import { ArrowRight } from '@nutui/icons-react-taro';
 import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
-import { useEffect, useMemo } from 'react';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { Tag } from '@/components';
-import { useGlobalStore } from '@/models';
+import { useAddress } from '@/hooks';
 
 import './index.scss';
 
@@ -41,20 +40,7 @@ const AddressCard: FC<AddressCardProps> = ({
   footer,
   onClick,
 }) => {
-  const { administrativeCodeTree, fetchAdministrativeCode } = useGlobalStore(
-    (state) => state,
-  );
-
-  useEffect(() => {
-    fetchAdministrativeCode();
-  }, []);
-
-  const _address = useMemo(() => {
-    const p = administrativeCodeTree?.find((item) => item.code === province);
-    const c = p?.children?.find((item) => item.code === city);
-    const a = c?.children?.find((item) => item.code === area);
-    return `${p?.name}${c?.name}${a?.name}${address}`;
-  }, [province, city, area, address, administrativeCodeTree]);
+  const { address: _address } = useAddress({ province, city, area, address });
 
   return (
     <View

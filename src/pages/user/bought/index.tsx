@@ -16,9 +16,14 @@ import type { GetOrderBoughtResponse } from '@/api';
 import type { ActionType } from '@/components/List';
 import type { ReactNode } from 'react';
 
-import { getOrderBought, postOrderPay, putOrderStatusBuyer } from '@/api';
+import {
+  getOrderBought,
+  postOrderCancel,
+  postOrderPay,
+  postOrderReceive,
+} from '@/api';
 import { List, Product, Space } from '@/components';
-import { OrderStatus, OrderType } from '@/constants/order';
+import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -38,21 +43,31 @@ const Page = () => {
     useState<boolean>(false);
 
   useDidShow(() => {
-    actionRef.current?.refresh({ status: tabs[currentIndex].value });
+    refreshList();
   });
 
   // 下拉刷新
   usePullDownRefresh(async () => {
-    await actionRef.current?.refresh({ status: tabs[currentIndex].value });
+    await refreshList();
     stopPullDownRefresh();
   });
 
   // 修改订单状态
-  const { run: changeStatus } = useRequest(putOrderStatusBuyer, {
+  const { run: cancel } = useRequest(postOrderCancel, {
     manual: true,
     onSuccess() {
       Toast.success('操作成功');
-      actionRef.current?.refresh();
+      refreshList();
+    },
+  });
+
+  // 修改订单状态
+  const { run: receive } = useRequest(postOrderReceive, {
+    manual: true,
+    onSuccess() {
+      Toast.success('收货成功');
+      console.log('receive success');
+      refreshList();
     },
   });
 
@@ -69,7 +84,7 @@ const Page = () => {
         paySign,
         success() {
           Toast.success('支付成功');
-          actionRef.current?.refresh();
+          refreshList();
         },
         fail(err) {
           console.log(err);
@@ -84,27 +99,25 @@ const Page = () => {
       id: 'dialog-cancel',
       content: '确定取消该订单吗？',
       onConfirm: (_, params) => {
-        changeStatus({
-          id: params.id,
-          status: OrderStatus['已取消'],
-        });
+        cancel({ id: params.id });
       },
     });
 
   // 确认收货二次确认
   const {
-    renderDialog: renderDialogConfirmReceipt,
-    open: openDialogConfirmReceipt,
+    renderDialog: renderDialogConfirmReceive,
+    open: openDialogConfirmReceive,
   } = useDialog({
-    id: 'dialog-confirm-receipt',
+    id: 'dialog-confirm-receive',
     content: '确认收到货了吗？',
     onConfirm: (_, params) => {
-      changeStatus({
-        id: params.id,
-        status: OrderStatus['已完成'],
-      });
+      receive({ id: params.id });
     },
   });
+
+  const refreshList = async () => {
+    await actionRef.current?.refresh({ status: tabs[currentIndex].value });
+  };
 
   const tabs: TabOption[] = [
     {
@@ -156,7 +169,7 @@ const Page = () => {
           type="primary"
           size="small"
           onClick={() => {
-            openDialogConfirmReceipt({ params: { id: `${item.id}` } });
+            openDialogConfirmReceive({ params: { id: `${item.id}` } });
           }}
         >
           确认收货
@@ -166,12 +179,28 @@ const Page = () => {
     {
       title: '返还退押',
       value: OrderStatus['返还退押'],
-      actions: () => [
-        // TODO: 待开发
-        <Button key="return" size="small" onClick={() => {}}>
-          返还发货
-        </Button>,
-      ],
+      actions: (item) =>
+        item.expressReturnId
+          ? [
+              <Button key="return-waiting" size="small" fill="solid" disabled>
+                退押中
+              </Button>,
+            ]
+          : [
+              <Button
+                key="return"
+                size="small"
+                onClick={() => {
+                  RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
+                    id: item.id,
+                    addressId: item.sellerAddressId,
+                    type: OrderExpressType['返还'],
+                  });
+                }}
+              >
+                返还发货
+              </Button>,
+            ],
     },
     { title: '已完成', value: OrderStatus['已完成'] },
     { title: '已取消', value: OrderStatus['已取消'] },
@@ -199,6 +228,7 @@ const Page = () => {
             renderItem={(item) => (
               <Product.Brief
                 key={item.id}
+                type={item.type}
                 image={item.market?.product?.picList?.[0]?.url}
                 title={item.market?.title}
                 desc={item.market?.description}
@@ -238,7 +268,7 @@ const Page = () => {
         }}
       />
       {renderDialogCancel()}
-      {renderDialogConfirmReceipt()}
+      {renderDialogConfirmReceive()}
     </BasicLayout>
   );
 };

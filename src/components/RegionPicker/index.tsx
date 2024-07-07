@@ -1,12 +1,13 @@
 import { Cascader } from '@nutui/nutui-react-taro';
 import classnames from 'classnames';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import type { CascaderNode } from '@/interfaces/components';
 import type { AdministrativeCode } from '@/models/global';
 import type { CSSProperties, FC } from 'react';
 
 import { PickerView } from '@/components';
+import { useAddress } from '@/hooks';
 import { useGlobalStore } from '@/models';
 
 type ValueType = [string, string, string];
@@ -28,31 +29,23 @@ const RegionPicker: FC<RegionPickerProps> = ({
 }) => {
   const {
     administrativeCodeMap,
-    administrativeCodeTree,
     fetchAdministrativeCode,
     saveAdministrativeCode,
   } = useGlobalStore((state) => state);
 
   const [visible, setVisible] = useState<boolean>(false);
 
-  const text = useMemo(() => {
-    if (!value?.length) {
-      return;
-    }
-    const [provinceCode, cityCode, areaCode] = value || [];
-    const province = administrativeCodeTree.find(
-      (item) => item.code === provinceCode,
-    );
-    const city = province?.children?.find((item) => item.code === cityCode);
-    const area = city?.children?.find((item) => item.code === areaCode);
-    return [province?.name, city?.name, area?.name];
-  }, [value, administrativeCodeTree]);
+  const { address } = useAddress({
+    province: value?.[0],
+    city: value?.[1],
+    area: value?.[2],
+  });
 
   return (
     <PickerView
       className={classnames(PREFIX_CLS, className)}
       style={style}
-      text={text}
+      text={address}
       onClick={() => {
         setVisible(true);
       }}

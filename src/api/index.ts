@@ -932,6 +932,75 @@ export const deleteOrder = /*#__PURE__*/ (requestData: DeleteOrderRequest, ...ar
 deleteOrder.requestConfig = deleteOrderRequestConfig
 
 /**
+ * 接口 确认收货 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/cancel`
+ */
+export interface PostOrderCancelRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+/**
+ * 接口 确认收货 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/cancel`
+ */
+export type PostOrderCancelResponse = any
+
+/**
+ * 接口 确认收货 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/cancel`
+ */
+type PostOrderCancelRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/cancel', 'data', string, string, false>
+>
+
+/**
+ * 接口 确认收货 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/cancel`
+ */
+const postOrderCancelRequestConfig: PostOrderCancelRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/cancel',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderCancel',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 确认收货 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/cancel`
+ */
+export const postOrderCancel = /*#__PURE__*/ (requestData: PostOrderCancelRequest, ...args: UserRequestRestArgs) => {
+  return request<PostOrderCancelResponse>(prepare(postOrderCancelRequestConfig, requestData), ...args)
+}
+
+postOrderCancel.requestConfig = postOrderCancelRequestConfig
+
+/**
  * 接口 支付订单 的 **请求类型**
  *
  * @分类 订单
@@ -1148,52 +1217,56 @@ export const postOrderPayNoticeWechat = /*#__PURE__*/ (
 postOrderPayNoticeWechat.requestConfig = postOrderPayNoticeWechatRequestConfig
 
 /**
- * 接口 买家修改订单状态 的 **请求类型**
+ * 接口 订单发货 的 **请求类型**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/buyer`
+ * @请求头 `POST /order/express/deliver`
  */
-export interface PutOrderStatusBuyerRequest {
+export interface PostOrderExpressDeliverRequest {
   /**
    * 订单id
    */
   id: number
   /**
-   * 订单状态
+   * 快递单号
    */
-  status: number
+  no: string
+  /**
+   * 备注
+   */
+  remark?: string
 }
 
 /**
- * 接口 买家修改订单状态 的 **返回类型**
+ * 接口 订单发货 的 **返回类型**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/buyer`
+ * @请求头 `POST /order/express/deliver`
  */
-export type PutOrderStatusBuyerResponse = any
+export type PostOrderExpressDeliverResponse = any
 
 /**
- * 接口 买家修改订单状态 的 **请求配置的类型**
+ * 接口 订单发货 的 **请求配置的类型**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/buyer`
+ * @请求头 `POST /order/express/deliver`
  */
-type PutOrderStatusBuyerRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/status/buyer', 'data', string, string, false>
+type PostOrderExpressDeliverRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/deliver', 'data', string, string, false>
 >
 
 /**
- * 接口 买家修改订单状态 的 **请求配置**
+ * 接口 订单发货 的 **请求配置**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/buyer`
+ * @请求头 `POST /order/express/deliver`
  */
-const putOrderStatusBuyerRequestConfig: PutOrderStatusBuyerRequestConfig = /*#__PURE__*/ {
+const postOrderExpressDeliverRequestConfig: PostOrderExpressDeliverRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/order/status/buyer',
-  method: Method.PUT,
+  path: '/order/express/deliver',
+  method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
@@ -1203,73 +1276,77 @@ const putOrderStatusBuyerRequestConfig: PutOrderStatusBuyerRequestConfig = /*#__
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putOrderStatusBuyer',
+  requestFunctionName: 'postOrderExpressDeliver',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 买家修改订单状态 的 **请求函数**
+ * 接口 订单发货 的 **请求函数**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/buyer`
+ * @请求头 `POST /order/express/deliver`
  */
-export const putOrderStatusBuyer = /*#__PURE__*/ (
-  requestData: PutOrderStatusBuyerRequest,
+export const postOrderExpressDeliver = /*#__PURE__*/ (
+  requestData: PostOrderExpressDeliverRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<PutOrderStatusBuyerResponse>(prepare(putOrderStatusBuyerRequestConfig, requestData), ...args)
+  return request<PostOrderExpressDeliverResponse>(prepare(postOrderExpressDeliverRequestConfig, requestData), ...args)
 }
 
-putOrderStatusBuyer.requestConfig = putOrderStatusBuyerRequestConfig
+postOrderExpressDeliver.requestConfig = postOrderExpressDeliverRequestConfig
 
 /**
- * 接口 卖家修改订单状态 的 **请求类型**
+ * 接口 返还发货 的 **请求类型**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/seller`
+ * @请求头 `POST /order/express/return`
  */
-export interface PutOrderStatusSellerRequest {
+export interface PostOrderExpressReturnRequest {
   /**
    * 订单id
    */
   id: number
   /**
-   * 订单状态
+   * 快递单号
    */
-  status: number
+  no: string
+  /**
+   * 备注
+   */
+  remark?: string
 }
 
 /**
- * 接口 卖家修改订单状态 的 **返回类型**
+ * 接口 返还发货 的 **返回类型**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/seller`
+ * @请求头 `POST /order/express/return`
  */
-export type PutOrderStatusSellerResponse = any
+export type PostOrderExpressReturnResponse = any
 
 /**
- * 接口 卖家修改订单状态 的 **请求配置的类型**
+ * 接口 返还发货 的 **请求配置的类型**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/seller`
+ * @请求头 `POST /order/express/return`
  */
-type PutOrderStatusSellerRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/status/seller', 'data', string, string, false>
+type PostOrderExpressReturnRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/return', 'data', string, string, false>
 >
 
 /**
- * 接口 卖家修改订单状态 的 **请求配置**
+ * 接口 返还发货 的 **请求配置**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/seller`
+ * @请求头 `POST /order/express/return`
  */
-const putOrderStatusSellerRequestConfig: PutOrderStatusSellerRequestConfig = /*#__PURE__*/ {
+const postOrderExpressReturnRequestConfig: PostOrderExpressReturnRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/order/status/seller',
-  method: Method.PUT,
+  path: '/order/express/return',
+  method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
@@ -1279,25 +1356,94 @@ const putOrderStatusSellerRequestConfig: PutOrderStatusSellerRequestConfig = /*#
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putOrderStatusSeller',
+  requestFunctionName: 'postOrderExpressReturn',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 卖家修改订单状态 的 **请求函数**
+ * 接口 返还发货 的 **请求函数**
  *
  * @分类 订单
- * @请求头 `PUT /order/status/seller`
+ * @请求头 `POST /order/express/return`
  */
-export const putOrderStatusSeller = /*#__PURE__*/ (
-  requestData: PutOrderStatusSellerRequest,
+export const postOrderExpressReturn = /*#__PURE__*/ (
+  requestData: PostOrderExpressReturnRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<PutOrderStatusSellerResponse>(prepare(putOrderStatusSellerRequestConfig, requestData), ...args)
+  return request<PostOrderExpressReturnResponse>(prepare(postOrderExpressReturnRequestConfig, requestData), ...args)
 }
 
-putOrderStatusSeller.requestConfig = putOrderStatusSellerRequestConfig
+postOrderExpressReturn.requestConfig = postOrderExpressReturnRequestConfig
+
+/**
+ * 接口 确认收货 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive`
+ */
+export interface PostOrderReceiveRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+/**
+ * 接口 确认收货 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive`
+ */
+export type PostOrderReceiveResponse = any
+
+/**
+ * 接口 确认收货 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive`
+ */
+type PostOrderReceiveRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive', 'data', string, string, false>
+>
+
+/**
+ * 接口 确认收货 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive`
+ */
+const postOrderReceiveRequestConfig: PostOrderReceiveRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/receive',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderReceive',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 确认收货 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive`
+ */
+export const postOrderReceive = /*#__PURE__*/ (requestData: PostOrderReceiveRequest, ...args: UserRequestRestArgs) => {
+  return request<PostOrderReceiveResponse>(prepare(postOrderReceiveRequestConfig, requestData), ...args)
+}
+
+postOrderReceive.requestConfig = postOrderReceiveRequestConfig
 
 /**
  * 接口 获取订单信息 的 **请求类型**
@@ -4078,6 +4224,147 @@ export const putAddress = /*#__PURE__*/ (requestData: PutAddressRequest, ...args
 putAddress.requestConfig = putAddressRequestConfig
 
 /**
+ * 接口 切换默认地址 的 **请求类型**
+ *
+ * @分类 地址
+ * @请求头 `PUT /address/default`
+ */
+export interface PutAddressDefaultRequest {
+  /**
+   * 地址id
+   */
+  id: number
+}
+
+/**
+ * 接口 切换默认地址 的 **返回类型**
+ *
+ * @分类 地址
+ * @请求头 `PUT /address/default`
+ */
+export type PutAddressDefaultResponse = any
+
+/**
+ * 接口 切换默认地址 的 **请求配置的类型**
+ *
+ * @分类 地址
+ * @请求头 `PUT /address/default`
+ */
+type PutAddressDefaultRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/default', 'data', string, string, false>
+>
+
+/**
+ * 接口 切换默认地址 的 **请求配置**
+ *
+ * @分类 地址
+ * @请求头 `PUT /address/default`
+ */
+const putAddressDefaultRequestConfig: PutAddressDefaultRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/address/default',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putAddressDefault',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 切换默认地址 的 **请求函数**
+ *
+ * @分类 地址
+ * @请求头 `PUT /address/default`
+ */
+export const putAddressDefault = /*#__PURE__*/ (
+  requestData: PutAddressDefaultRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutAddressDefaultResponse>(prepare(putAddressDefaultRequestConfig, requestData), ...args)
+}
+
+putAddressDefault.requestConfig = putAddressDefaultRequestConfig
+
+/**
+ * 接口 删除地址 的 **请求类型**
+ *
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
+ */
+export interface DeleteAddressIdRequest {
+  /**
+   * 地址id
+   */
+  id: string
+}
+
+/**
+ * 接口 删除地址 的 **返回类型**
+ *
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
+ */
+export type DeleteAddressIdResponse = any
+
+/**
+ * 接口 删除地址 的 **请求配置的类型**
+ *
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
+ */
+type DeleteAddressIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 删除地址 的 **请求配置**
+ *
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
+ */
+const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/address/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteAddressId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 删除地址 的 **请求函数**
+ *
+ * @分类 地址
+ * @请求头 `DELETE /address/{id}`
+ */
+export const deleteAddressId = /*#__PURE__*/ (requestData: DeleteAddressIdRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteAddressIdResponse>(prepare(deleteAddressIdRequestConfig, requestData), ...args)
+}
+
+deleteAddressId.requestConfig = deleteAddressIdRequestConfig
+
+/**
  * 接口 获取地址信息 的 **请求类型**
  *
  * @分类 地址
@@ -4194,147 +4481,6 @@ export const getAddressId = /*#__PURE__*/ (requestData: GetAddressIdRequest, ...
 }
 
 getAddressId.requestConfig = getAddressIdRequestConfig
-
-/**
- * 接口 删除地址 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
-export interface DeleteAddressIdRequest {
-  /**
-   * 地址id
-   */
-  id: string
-}
-
-/**
- * 接口 删除地址 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
-export type DeleteAddressIdResponse = any
-
-/**
- * 接口 删除地址 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
-type DeleteAddressIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 删除地址 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
-const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
-  path: '/address/{id}',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteAddressId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 删除地址 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
-export const deleteAddressId = /*#__PURE__*/ (requestData: DeleteAddressIdRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteAddressIdResponse>(prepare(deleteAddressIdRequestConfig, requestData), ...args)
-}
-
-deleteAddressId.requestConfig = deleteAddressIdRequestConfig
-
-/**
- * 接口 切换默认地址 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
-export interface PutAddressDefaultRequest {
-  /**
-   * 地址id
-   */
-  id: number
-}
-
-/**
- * 接口 切换默认地址 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
-export type PutAddressDefaultResponse = any
-
-/**
- * 接口 切换默认地址 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
-type PutAddressDefaultRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/default', 'data', string, string, false>
->
-
-/**
- * 接口 切换默认地址 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
-const putAddressDefaultRequestConfig: PutAddressDefaultRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
-  path: '/address/default',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putAddressDefault',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 切换默认地址 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
-export const putAddressDefault = /*#__PURE__*/ (
-  requestData: PutAddressDefaultRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PutAddressDefaultResponse>(prepare(putAddressDefaultRequestConfig, requestData), ...args)
-}
-
-putAddressDefault.requestConfig = putAddressDefaultRequestConfig
 
 const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_7 = '' as any
