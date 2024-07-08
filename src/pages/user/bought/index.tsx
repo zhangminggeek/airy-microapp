@@ -20,7 +20,7 @@ import {
   getOrderBought,
   postOrderCancel,
   postOrderPay,
-  postOrderReceive,
+  postOrderReceiveBuyer,
 } from '@/api';
 import { List, Product, Space } from '@/components';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
@@ -61,8 +61,8 @@ const Page = () => {
     },
   });
 
-  // 修改订单状态
-  const { run: receive } = useRequest(postOrderReceive, {
+  // 买家确认收货
+  const { run: receive } = useRequest(postOrderReceiveBuyer, {
     manual: true,
     onSuccess() {
       Toast.success('收货成功');
@@ -252,8 +252,9 @@ const Page = () => {
                   ) : null
                 }
                 onClick={() => {
-                  RouterUtil.navigateTo('/pages/market/detail/index', {
+                  RouterUtil.navigateTo('/packageOrder/pages/detail/index', {
                     id: item.id,
+                    owner: 'buyer',
                   });
                 }}
               />

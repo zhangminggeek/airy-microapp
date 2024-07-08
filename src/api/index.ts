@@ -231,9 +231,17 @@ export interface GetOrderBoughtResponse {
      */
     expressReturnId?: number
     /**
+     * 退还押金
+     */
+    depositRefund?: number
+    /**
+     * 退还押金备注
+     */
+    depositRefundRemark?: string
+    /**
      * 二手市场商品信息
      */
-    market?: {
+    market: {
       /**
        * 创建时间
        */
@@ -307,9 +315,9 @@ export interface GetOrderBoughtResponse {
        */
       isDeleted: boolean
       /**
-       * 二手市场商品信息
+       * 服饰信息
        */
-      product?: {
+      product: {
         /**
          * 创建时间
          */
@@ -546,9 +554,17 @@ export interface GetOrderSoldResponse {
      */
     expressReturnId?: number
     /**
+     * 退还押金
+     */
+    depositRefund?: number
+    /**
+     * 退还押金备注
+     */
+    depositRefundRemark?: string
+    /**
      * 二手市场商品信息
      */
-    market?: {
+    market: {
       /**
        * 创建时间
        */
@@ -622,9 +638,9 @@ export interface GetOrderSoldResponse {
        */
       isDeleted: boolean
       /**
-       * 二手市场商品信息
+       * 服饰信息
        */
-      product?: {
+      product: {
         /**
          * 创建时间
          */
@@ -1377,12 +1393,12 @@ export const postOrderExpressReturn = /*#__PURE__*/ (
 postOrderExpressReturn.requestConfig = postOrderExpressReturnRequestConfig
 
 /**
- * 接口 确认收货 的 **请求类型**
+ * 接口 买家确认收货 的 **请求类型**
  *
  * @分类 订单
- * @请求头 `POST /order/receive`
+ * @请求头 `POST /order/receive/buyer`
  */
-export interface PostOrderReceiveRequest {
+export interface PostOrderReceiveBuyerRequest {
   /**
    * 订单id
    */
@@ -1390,34 +1406,34 @@ export interface PostOrderReceiveRequest {
 }
 
 /**
- * 接口 确认收货 的 **返回类型**
+ * 接口 买家确认收货 的 **返回类型**
  *
  * @分类 订单
- * @请求头 `POST /order/receive`
+ * @请求头 `POST /order/receive/buyer`
  */
-export type PostOrderReceiveResponse = any
+export type PostOrderReceiveBuyerResponse = any
 
 /**
- * 接口 确认收货 的 **请求配置的类型**
+ * 接口 买家确认收货 的 **请求配置的类型**
  *
  * @分类 订单
- * @请求头 `POST /order/receive`
+ * @请求头 `POST /order/receive/buyer`
  */
-type PostOrderReceiveRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive', 'data', string, string, false>
+type PostOrderReceiveBuyerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/buyer', 'data', string, string, false>
 >
 
 /**
- * 接口 确认收货 的 **请求配置**
+ * 接口 买家确认收货 的 **请求配置**
  *
  * @分类 订单
- * @请求头 `POST /order/receive`
+ * @请求头 `POST /order/receive/buyer`
  */
-const postOrderReceiveRequestConfig: PostOrderReceiveRequestConfig = /*#__PURE__*/ {
+const postOrderReceiveBuyerRequestConfig: PostOrderReceiveBuyerRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/order/receive',
+  path: '/order/receive/buyer',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -1428,22 +1444,105 @@ const postOrderReceiveRequestConfig: PostOrderReceiveRequestConfig = /*#__PURE__
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderReceive',
+  requestFunctionName: 'postOrderReceiveBuyer',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 确认收货 的 **请求函数**
+ * 接口 买家确认收货 的 **请求函数**
  *
  * @分类 订单
- * @请求头 `POST /order/receive`
+ * @请求头 `POST /order/receive/buyer`
  */
-export const postOrderReceive = /*#__PURE__*/ (requestData: PostOrderReceiveRequest, ...args: UserRequestRestArgs) => {
-  return request<PostOrderReceiveResponse>(prepare(postOrderReceiveRequestConfig, requestData), ...args)
+export const postOrderReceiveBuyer = /*#__PURE__*/ (
+  requestData: PostOrderReceiveBuyerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderReceiveBuyerResponse>(prepare(postOrderReceiveBuyerRequestConfig, requestData), ...args)
 }
 
-postOrderReceive.requestConfig = postOrderReceiveRequestConfig
+postOrderReceiveBuyer.requestConfig = postOrderReceiveBuyerRequestConfig
+
+/**
+ * 接口 卖家确认收货 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive/seller`
+ */
+export interface PostOrderReceiveSellerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 退还押金金额
+   */
+  amount: number
+  /**
+   * 退还押金备注
+   */
+  depositRefundRemark?: string
+}
+
+/**
+ * 接口 卖家确认收货 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive/seller`
+ */
+export type PostOrderReceiveSellerResponse = any
+
+/**
+ * 接口 卖家确认收货 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive/seller`
+ */
+type PostOrderReceiveSellerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/seller', 'data', string, string, false>
+>
+
+/**
+ * 接口 卖家确认收货 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive/seller`
+ */
+const postOrderReceiveSellerRequestConfig: PostOrderReceiveSellerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/receive/seller',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderReceiveSeller',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 卖家确认收货 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/receive/seller`
+ */
+export const postOrderReceiveSeller = /*#__PURE__*/ (
+  requestData: PostOrderReceiveSellerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderReceiveSellerResponse>(prepare(postOrderReceiveSellerRequestConfig, requestData), ...args)
+}
+
+postOrderReceiveSeller.requestConfig = postOrderReceiveSellerRequestConfig
 
 /**
  * 接口 获取订单信息 的 **请求类型**
@@ -1478,9 +1577,429 @@ export interface GetOrderIdResponse {
    */
   id: number
   /**
-   * 订单
+   * 订单号
    */
-  order: string
+  no: string
+  /**
+   * 微信支付系统生成的订单号
+   */
+  transactionId?: string
+  /**
+   * 二手市场商品id
+   */
+  marketId: number
+  /**
+   * 订单类型 1:出售 2:借调
+   */
+  type: number
+  /**
+   * 购买人的公司id
+   */
+  buyerId: number
+  /**
+   * 收货地址id
+   */
+  buyerAddressId: number
+  /**
+   * 出售人的公司id
+   */
+  sellerId: number
+  /**
+   * 返还收货地址id
+   */
+  sellerAddressId?: number
+  /**
+   * 借调开始日期
+   */
+  leaseStartDate?: string
+  /**
+   * 借调结束日期
+   */
+  leaseEndDate?: string
+  /**
+   * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+   */
+  status: number
+  /**
+   * 发货快递id
+   */
+  expressDeliveryId?: number
+  /**
+   * 返还快递id
+   */
+  expressReturnId?: number
+  /**
+   * 退还押金
+   */
+  depositRefund?: number
+  /**
+   * 退还押金备注
+   */
+  depositRefundRemark?: string
+  /**
+   * 二手市场商品信息
+   */
+  market: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    expressMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 服饰id
+       */
+      id: number
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+       */
+      size: number
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 添加用户id
+       */
+      userId: number
+      /**
+       * 服饰状态 1:正常 2:已出售 3:借调中
+       */
+      status: number
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+    }
+  }
+  /**
+   * 买家信息
+   */
+  buyer: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
+    /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系电话
+     */
+    contactPhone: string
+    /**
+     * 省
+     */
+    province: string
+    /**
+     * 市
+     */
+    city: string
+    /**
+     * 区
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 账户余额
+     */
+    balance: number
+  }
+  /**
+   * 买家收货地址
+   */
+  buyerAddress: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 地址id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 收件人
+     */
+    recipient: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 省code
+     */
+    province: string
+    /**
+     * 市code
+     */
+    city: string
+    /**
+     * 区code
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 是否为默认地址
+     */
+    isDefault: boolean
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+  }
+  /**
+   * 卖家收货地址
+   */
+  sellerAddress: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 地址id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 收件人
+     */
+    recipient: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 省code
+     */
+    province: string
+    /**
+     * 市code
+     */
+    city: string
+    /**
+     * 区code
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 是否为默认地址
+     */
+    isDefault: boolean
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+  }
+  /**
+   * 快递发货信息
+   */
+  expressDelivery: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 快递单id
+     */
+    id: number
+    /**
+     * 快递单号
+     */
+    no: string
+    /**
+     * 备注
+     */
+    remark?: string
+  }
+  /**
+   * 快递返还信息
+   */
+  expressReturn: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 快递单id
+     */
+    id: number
+    /**
+     * 快递单号
+     */
+    no: string
+    /**
+     * 备注
+     */
+    remark?: string
+  }
 }
 
 /**

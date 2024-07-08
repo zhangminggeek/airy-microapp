@@ -46,7 +46,9 @@ export default {
       pages: [
         'pages/create/index',
         'pages/create/result/index',
+        'pages/detail/index',
         'pages/deliver/index',
+        'pages/return/index',
       ],
     },
   ],

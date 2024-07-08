@@ -66,8 +66,16 @@ const Page = () => {
     {
       title: '待返回',
       value: OrderStatus['返还退押'],
-      actions: () => [
-        <Button key="return" size="small" onClick={() => {}}>
+      actions: (item) => [
+        <Button
+          key="return"
+          size="small"
+          onClick={() => {
+            RouterUtil.navigateTo('/packageOrder/pages/return/index', {
+              id: item.id,
+            });
+          }}
+        >
           确认返还
         </Button>,
       ],
@@ -122,8 +130,9 @@ const Page = () => {
                   ) : null
                 }
                 onClick={() => {
-                  RouterUtil.navigateTo('/pages/market/detail/index', {
+                  RouterUtil.navigateTo('/packageOrder/pages/detail/index', {
                     id: item.id,
+                    owner: 'seller',
                   });
                 }}
               />
