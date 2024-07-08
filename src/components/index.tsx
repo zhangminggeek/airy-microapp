@@ -19,6 +19,7 @@ import Link from './Link';
 import List from './List';
 import ModalForm from './ModalForm';
 import PageFooter from './PageFooter';
+import PaymentPicker from './PaymentPicker';
 import Picker from './Picker';
 import PickerView from './PickerView';
 import Product from './Product';
@@ -53,6 +54,7 @@ export {
   List,
   ModalForm,
   PageFooter,
+  PaymentPicker,
   Picker,
   PickerView,
   Product,

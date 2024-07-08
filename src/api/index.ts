@@ -811,24 +811,7 @@ export interface PostOrderRequest {
  * @分类 订单
  * @请求头 `POST /order`
  */
-export interface PostOrderResponse {
-  /**
-   * 时间戳
-   */
-  timestamp: number
-  /**
-   * 随机字符串
-   */
-  nonceStr: string
-  /**
-   * 下单接口返回的prepay_id参数值
-   */
-  pkg: string
-  /**
-   * 签名
-   */
-  paySign: string
-}
+export type PostOrderResponse = number
 
 /**
  * 接口 创建订单 的 **请求配置的类型**
@@ -1017,12 +1000,12 @@ export const postOrderCancel = /*#__PURE__*/ (requestData: PostOrderCancelReques
 postOrderCancel.requestConfig = postOrderCancelRequestConfig
 
 /**
- * 接口 支付订单 的 **请求类型**
+ * 接口 余额支付订单 的 **请求类型**
  *
  * @分类 订单
- * @请求头 `POST /order/pay`
+ * @请求头 `POST /order/pay/balance`
  */
-export interface PostOrderPayRequest {
+export interface PostOrderPayBalanceRequest {
   /**
    * 订单id
    */
@@ -1030,12 +1013,12 @@ export interface PostOrderPayRequest {
 }
 
 /**
- * 接口 支付订单 的 **返回类型**
+ * 接口 余额支付订单 的 **返回类型**
  *
  * @分类 订单
- * @请求头 `POST /order/pay`
+ * @请求头 `POST /order/pay/balance`
  */
-export interface PostOrderPayResponse {
+export interface PostOrderPayBalanceResponse {
   /**
    * 时间戳
    */
@@ -1055,26 +1038,26 @@ export interface PostOrderPayResponse {
 }
 
 /**
- * 接口 支付订单 的 **请求配置的类型**
+ * 接口 余额支付订单 的 **请求配置的类型**
  *
  * @分类 订单
- * @请求头 `POST /order/pay`
+ * @请求头 `POST /order/pay/balance`
  */
-type PostOrderPayRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay', 'data', string, string, false>
+type PostOrderPayBalanceRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/balance', 'data', string, string, false>
 >
 
 /**
- * 接口 支付订单 的 **请求配置**
+ * 接口 余额支付订单 的 **请求配置**
  *
  * @分类 订单
- * @请求头 `POST /order/pay`
+ * @请求头 `POST /order/pay/balance`
  */
-const postOrderPayRequestConfig: PostOrderPayRequestConfig = /*#__PURE__*/ {
+const postOrderPayBalanceRequestConfig: PostOrderPayBalanceRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/order/pay',
+  path: '/order/pay/balance',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -1085,30 +1068,122 @@ const postOrderPayRequestConfig: PostOrderPayRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderPay',
+  requestFunctionName: 'postOrderPayBalance',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 支付订单 的 **请求函数**
+ * 接口 余额支付订单 的 **请求函数**
  *
  * @分类 订单
- * @请求头 `POST /order/pay`
+ * @请求头 `POST /order/pay/balance`
  */
-export const postOrderPay = /*#__PURE__*/ (requestData: PostOrderPayRequest, ...args: UserRequestRestArgs) => {
-  return request<PostOrderPayResponse>(prepare(postOrderPayRequestConfig, requestData), ...args)
+export const postOrderPayBalance = /*#__PURE__*/ (
+  requestData: PostOrderPayBalanceRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderPayBalanceResponse>(prepare(postOrderPayBalanceRequestConfig, requestData), ...args)
 }
 
-postOrderPay.requestConfig = postOrderPayRequestConfig
+postOrderPayBalance.requestConfig = postOrderPayBalanceRequestConfig
+
+/**
+ * 接口 微信支付订单 的 **请求类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/wechat`
+ */
+export interface PostOrderPayWechatRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+/**
+ * 接口 微信支付订单 的 **返回类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/wechat`
+ */
+export interface PostOrderPayWechatResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
+
+/**
+ * 接口 微信支付订单 的 **请求配置的类型**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/wechat`
+ */
+type PostOrderPayWechatRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat', 'data', string, string, false>
+>
+
+/**
+ * 接口 微信支付订单 的 **请求配置**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/wechat`
+ */
+const postOrderPayWechatRequestConfig: PostOrderPayWechatRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/order/pay/wechat',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderPayWechat',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 微信支付订单 的 **请求函数**
+ *
+ * @分类 订单
+ * @请求头 `POST /order/pay/wechat`
+ */
+export const postOrderPayWechat = /*#__PURE__*/ (
+  requestData: PostOrderPayWechatRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderPayWechatResponse>(prepare(postOrderPayWechatRequestConfig, requestData), ...args)
+}
+
+postOrderPayWechat.requestConfig = postOrderPayWechatRequestConfig
 
 /**
  * 接口 支付结果通知 的 **请求类型**
  *
  * @分类 订单
- * @请求头 `POST /order/pay/notice/wechat`
+ * @请求头 `POST /order/pay/wechat/notice`
  */
-export interface PostOrderPayNoticeWechatRequest {
+export interface PostOrderPayWechatNoticeRequest {
   /**
    * 通知的唯一ID
    */
@@ -1160,9 +1235,9 @@ export interface PostOrderPayNoticeWechatRequest {
  * 接口 支付结果通知 的 **返回类型**
  *
  * @分类 订单
- * @请求头 `POST /order/pay/notice/wechat`
+ * @请求头 `POST /order/pay/wechat/notice`
  */
-export interface PostOrderPayNoticeWechatResponse {
+export interface PostOrderPayWechatNoticeResponse {
   /**
    * 时间戳
    */
@@ -1185,23 +1260,23 @@ export interface PostOrderPayNoticeWechatResponse {
  * 接口 支付结果通知 的 **请求配置的类型**
  *
  * @分类 订单
- * @请求头 `POST /order/pay/notice/wechat`
+ * @请求头 `POST /order/pay/wechat/notice`
  */
-type PostOrderPayNoticeWechatRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/notice/wechat', 'data', string, string, false>
+type PostOrderPayWechatNoticeRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat/notice', 'data', string, string, false>
 >
 
 /**
  * 接口 支付结果通知 的 **请求配置**
  *
  * @分类 订单
- * @请求头 `POST /order/pay/notice/wechat`
+ * @请求头 `POST /order/pay/wechat/notice`
  */
-const postOrderPayNoticeWechatRequestConfig: PostOrderPayNoticeWechatRequestConfig = /*#__PURE__*/ {
+const postOrderPayWechatNoticeRequestConfig: PostOrderPayWechatNoticeRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/order/pay/notice/wechat',
+  path: '/order/pay/wechat/notice',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -1212,7 +1287,7 @@ const postOrderPayNoticeWechatRequestConfig: PostOrderPayNoticeWechatRequestConf
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderPayNoticeWechat',
+  requestFunctionName: 'postOrderPayWechatNotice',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
@@ -1221,16 +1296,16 @@ const postOrderPayNoticeWechatRequestConfig: PostOrderPayNoticeWechatRequestConf
  * 接口 支付结果通知 的 **请求函数**
  *
  * @分类 订单
- * @请求头 `POST /order/pay/notice/wechat`
+ * @请求头 `POST /order/pay/wechat/notice`
  */
-export const postOrderPayNoticeWechat = /*#__PURE__*/ (
-  requestData: PostOrderPayNoticeWechatRequest,
+export const postOrderPayWechatNotice = /*#__PURE__*/ (
+  requestData: PostOrderPayWechatNoticeRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<PostOrderPayNoticeWechatResponse>(prepare(postOrderPayNoticeWechatRequestConfig, requestData), ...args)
+  return request<PostOrderPayWechatNoticeResponse>(prepare(postOrderPayWechatNoticeRequestConfig, requestData), ...args)
 }
 
-postOrderPayNoticeWechat.requestConfig = postOrderPayNoticeWechatRequestConfig
+postOrderPayWechatNotice.requestConfig = postOrderPayWechatNoticeRequestConfig
 
 /**
  * 接口 订单发货 的 **请求类型**
@@ -2056,20 +2131,20 @@ const prodUrl_0_0_0_2 = '' as any
 const dataKey_0_0_0_2 = 'data' as any
 
 /**
- * 接口 获取公司列表 的 **请求类型**
+ * 接口 获取当前公司详情 的 **请求类型**
  *
  * @分类 公司
- * @请求头 `GET /company`
+ * @请求头 `GET /company/self`
  */
-export interface GetCompanyRequest {}
+export interface GetCompanySelfRequest {}
 
 /**
- * 接口 获取公司列表 的 **返回类型**
+ * 接口 获取当前公司详情 的 **返回类型**
  *
  * @分类 公司
- * @请求头 `GET /company`
+ * @请求头 `GET /company/self`
  */
-export interface GetCompanyResponse {
+export interface GetCompanySelfResponse {
   /**
    * 创建时间
    */
@@ -2083,32 +2158,64 @@ export interface GetCompanyResponse {
    */
   id: number
   /**
-   * 公司
+   * 公司名称
    */
-  company: string
+  name: string
+  /**
+   * 状态, 0:禁用 1:正常 2:待审核
+   */
+  status: number
+  /**
+   * 联系人
+   */
+  contacts: string
+  /**
+   * 联系电话
+   */
+  contactPhone: string
+  /**
+   * 省
+   */
+  province: string
+  /**
+   * 市
+   */
+  city: string
+  /**
+   * 区
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 账户余额
+   */
+  balance: number
 }
 
 /**
- * 接口 获取公司列表 的 **请求配置的类型**
+ * 接口 获取当前公司详情 的 **请求配置的类型**
  *
  * @分类 公司
- * @请求头 `GET /company`
+ * @请求头 `GET /company/self`
  */
-type GetCompanyRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, string, true>
+type GetCompanySelfRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/self', 'data', string, string, true>
 >
 
 /**
- * 接口 获取公司列表 的 **请求配置**
+ * 接口 获取当前公司详情 的 **请求配置**
  *
  * @分类 公司
- * @请求头 `GET /company`
+ * @请求头 `GET /company/self`
  */
-const getCompanyRequestConfig: GetCompanyRequestConfig = /*#__PURE__*/ {
+const getCompanySelfRequestConfig: GetCompanySelfRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_2,
   devUrl: devUrl_0_0_0_2,
   prodUrl: prodUrl_0_0_0_2,
-  path: '/company',
+  path: '/company/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
@@ -2119,22 +2226,122 @@ const getCompanyRequestConfig: GetCompanyRequestConfig = /*#__PURE__*/ {
   requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getCompany',
+  requestFunctionName: 'getCompanySelf',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
 /**
- * 接口 获取公司列表 的 **请求函数**
+ * 接口 获取当前公司详情 的 **请求函数**
  *
  * @分类 公司
- * @请求头 `GET /company`
+ * @请求头 `GET /company/self`
  */
-export const getCompany = /*#__PURE__*/ (requestData?: GetCompanyRequest, ...args: UserRequestRestArgs) => {
-  return request<GetCompanyResponse>(prepare(getCompanyRequestConfig, requestData), ...args)
+export const getCompanySelf = /*#__PURE__*/ (requestData?: GetCompanySelfRequest, ...args: UserRequestRestArgs) => {
+  return request<GetCompanySelfResponse>(prepare(getCompanySelfRequestConfig, requestData), ...args)
 }
 
-getCompany.requestConfig = getCompanyRequestConfig
+getCompanySelf.requestConfig = getCompanySelfRequestConfig
+
+/**
+ * 接口 创建公司 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+export interface PostCompanyRegisterRequest {
+  /**
+   * 公司名称
+   */
+  name: string
+  /**
+   * 联系人
+   */
+  contacts: string
+  /**
+   * 联系电话
+   */
+  contactPhone: string
+  /**
+   * 省编码
+   */
+  province: string
+  /**
+   * 市编码
+   */
+  city: string
+  /**
+   * 区编码
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 营业执照
+   */
+  licenses: string[]
+}
+
+/**
+ * 接口 创建公司 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+export type PostCompanyRegisterResponse = any
+
+/**
+ * 接口 创建公司 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+type PostCompanyRegisterRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/register', 'data', string, string, false>
+>
+
+/**
+ * 接口 创建公司 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+const postCompanyRegisterRequestConfig: PostCompanyRegisterRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/register',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyRegister',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 创建公司 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/register`
+ */
+export const postCompanyRegister = /*#__PURE__*/ (
+  requestData: PostCompanyRegisterRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyRegisterResponse>(prepare(postCompanyRegisterRequestConfig, requestData), ...args)
+}
+
+postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
 
 /**
  * 接口 更新公司 的 **请求类型**
@@ -2285,192 +2492,6 @@ export const deleteCompany = /*#__PURE__*/ (requestData: DeleteCompanyRequest, .
 }
 
 deleteCompany.requestConfig = deleteCompanyRequestConfig
-
-/**
- * 接口 获取公司信息 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
-export interface GetCompanyIdRequest {
-  /**
-   * 公司id
-   */
-  id: string
-}
-
-/**
- * 接口 获取公司信息 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
-export interface GetCompanyIdResponse {
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 公司id
-   */
-  id: number
-  /**
-   * 公司
-   */
-  company: string
-}
-
-/**
- * 接口 获取公司信息 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
-type GetCompanyIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/{id}', 'data', 'id', string, false>
->
-
-/**
- * 接口 获取公司信息 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
-const getCompanyIdRequestConfig: GetCompanyIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/company/{id}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getCompanyId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 获取公司信息 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
-export const getCompanyId = /*#__PURE__*/ (requestData: GetCompanyIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetCompanyIdResponse>(prepare(getCompanyIdRequestConfig, requestData), ...args)
-}
-
-getCompanyId.requestConfig = getCompanyIdRequestConfig
-
-/**
- * 接口 创建公司 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
-export interface PostCompanyRegisterRequest {
-  /**
-   * 公司名称
-   */
-  name: string
-  /**
-   * 联系人
-   */
-  contacts: string
-  /**
-   * 联系电话
-   */
-  contactPhone: string
-  /**
-   * 省编码
-   */
-  province: string
-  /**
-   * 市编码
-   */
-  city: string
-  /**
-   * 区编码
-   */
-  area: string
-  /**
-   * 地址
-   */
-  address: string
-  /**
-   * 营业执照
-   */
-  licenses: string[]
-}
-
-/**
- * 接口 创建公司 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
-export type PostCompanyRegisterResponse = any
-
-/**
- * 接口 创建公司 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
-type PostCompanyRegisterRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/register', 'data', string, string, false>
->
-
-/**
- * 接口 创建公司 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
-const postCompanyRegisterRequestConfig: PostCompanyRegisterRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
-  path: '/company/register',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postCompanyRegister',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-/**
- * 接口 创建公司 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
-export const postCompanyRegister = /*#__PURE__*/ (
-  requestData: PostCompanyRegisterRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostCompanyRegisterResponse>(prepare(postCompanyRegisterRequestConfig, requestData), ...args)
-}
-
-postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
 
 /**
  * 接口 审核公司 的 **请求类型**

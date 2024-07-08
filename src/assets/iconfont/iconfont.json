@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "17068563",
+      "name": "CheckOutlined",
+      "font_class": "CheckOutlined",
+      "unicode": "e6fb",
+      "unicode_decimal": 59131
+    },
+    {
+      "icon_id": "35452650",
+      "name": "IncomeFilled",
+      "font_class": "IncomeFilled",
+      "unicode": "e8c6",
+      "unicode_decimal": 59590
+    },
+    {
       "icon_id": "16593549",
       "name": "CopyOutlined",
       "font_class": "CopyOutlined",

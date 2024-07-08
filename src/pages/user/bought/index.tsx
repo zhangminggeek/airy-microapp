@@ -19,28 +19,36 @@ import type { ReactNode } from 'react';
 import {
   getOrderBought,
   postOrderCancel,
-  postOrderPay,
+  postOrderPayBalance,
+  postOrderPayWechat,
   postOrderReceiveBuyer,
 } from '@/api';
-import { List, Product, Space } from '@/components';
+import { List, PaymentPicker, Product, Space } from '@/components';
+import { PaymentType } from '@/constants/company';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
 
+type OrderInfo = GetOrderBoughtResponse['list'][0];
+
 interface TabOption {
   title: string;
   value: OrderStatus;
-  actions?: (item: GetOrderBoughtResponse['list'][0]) => ReactNode[];
+  actions?: (item: OrderInfo) => ReactNode[];
 }
 
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  // 当前操作的订单
+  const [currentOrder, setCurrentOrder] = useState<OrderInfo>();
   // 是否显示客服 popup
   const [showCustomerServicePopup, setShowCustomerServicePopup] =
     useState<boolean>(false);
+  // 是否显示支付方式 popup
+  const [showPaymentPicker, setShowPaymentPicker] = useState<boolean>(false);
 
   useDidShow(() => {
     refreshList();
@@ -66,13 +74,21 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Toast.success('收货成功');
-      console.log('receive success');
       refreshList();
     },
   });
 
-  // 支付订单
-  const { run: payOrder } = useRequest(postOrderPay, {
+  // 微信支付订单
+  const { run: payOrderViaBalance } = useRequest(postOrderPayBalance, {
+    manual: true,
+    onSuccess() {
+      Toast.success('支付成功');
+      refreshList();
+    },
+  });
+
+  // 微信支付订单
+  const { run: payOrderViaWechat } = useRequest(postOrderPayWechat, {
     manual: true,
     onSuccess(data) {
       const { timestamp, nonceStr, pkg, paySign } = data;
@@ -138,7 +154,8 @@ const Page = () => {
           type="primary"
           size="small"
           onClick={() => {
-            payOrder({ id: item.id });
+            setCurrentOrder(item);
+            setShowPaymentPicker(true);
           }}
         >
           付款
@@ -266,6 +283,29 @@ const Page = () => {
         visible={showCustomerServicePopup}
         onClose={() => {
           setShowCustomerServicePopup(false);
+        }}
+      />
+
+      <PaymentPicker
+        visible={showPaymentPicker}
+        amount={
+          currentOrder?.type === OrderType['出售']
+            ? currentOrder?.market?.sellingPrice
+            : Big(currentOrder?.market?.leasePrice ?? 0)
+                .plus(currentOrder?.market?.leaseDeposit ?? 0)
+                .toString()
+        }
+        onConfirm={async (v) => {
+          setShowPaymentPicker(false);
+          if (!currentOrder) return;
+          if (v === PaymentType['余额']) {
+            payOrderViaBalance({ id: currentOrder.id });
+          } else if (v === PaymentType['微信支付']) {
+            payOrderViaWechat({ id: currentOrder.id });
+          }
+        }}
+        onClose={() => {
+          setShowPaymentPicker(false);
         }}
       />
       {renderDialogCancel()}

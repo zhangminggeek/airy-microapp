@@ -9,18 +9,25 @@ import styles from './index.module.scss';
 import type { PostOrderRequest } from '@/api';
 import type { Dayjs } from 'dayjs';
 
-import { getMarketId, postOrder } from '@/api';
+import {
+  getMarketId,
+  postOrder,
+  postOrderPayBalance,
+  postOrderPayWechat,
+} from '@/api';
 import {
   AddressPicker,
   CalenderPicker,
   Cell,
   Descriptions,
   PageFooter,
+  PaymentPicker,
   Product,
   Section,
   Space,
 } from '@/components';
 import { DATE_FORMAT } from '@/constants';
+import { PaymentType } from '@/constants/company';
 import { expressMethodMap } from '@/constants/market';
 import { OrderType } from '@/constants/order';
 import { useRequest } from '@/hooks';
@@ -39,6 +46,8 @@ const Page = () => {
   const [addressId, setAddressId] = useState<number>();
   // 借调日期
   const [leaseDate, setLeaseDate] = useState<[Dayjs, Dayjs]>();
+  // 是否显示支付方式选择弹框
+  const [showPaymentPicker, setShowPaymentPicker] = useState<boolean>(false);
 
   useDidShow(() => {
     fetchDetail({ id });
@@ -48,7 +57,18 @@ const Page = () => {
   const { data, run: fetchDetail } = useRequest(getMarketId, { manual: true });
 
   // 创建订单
-  const { run: create } = useRequest(postOrder, {
+  const { run: create } = useRequest(postOrder, { manual: true });
+
+  // 余额支付订单
+  const { run: payOrderViaBalance } = useRequest(postOrderPayBalance, {
+    manual: true,
+    onSuccess() {
+      RouterUtil.navigateTo('/packageOrder/pages/create/result/index');
+    },
+  });
+
+  // 微信支付订单
+  const { run: payOrderViaWechat } = useRequest(postOrderPayWechat, {
     manual: true,
     onSuccess(data) {
       const { timestamp, nonceStr, pkg, paySign } = data;
@@ -59,7 +79,6 @@ const Page = () => {
         signType: 'RSA',
         paySign,
         success() {
-          Toast.success('支付成功');
           RouterUtil.navigateTo('/packageOrder/pages/create/result/index');
         },
         fail(err) {
@@ -185,25 +204,43 @@ const Page = () => {
               Toast.info('请选择收货地址');
               return;
             }
-            const params: PostOrderRequest = {
-              id: Number(id),
-              type: info.type,
-              buyerAddressId: addressId,
-            };
             if (info.type === OrderType['借调']) {
               if (!leaseDate?.length) {
                 Toast.info('请选择借调时间');
                 return;
               }
-              params.leaseStartDate = leaseDate[0].format(DATE_FORMAT);
-              params.leaseEndDate = leaseDate[1].format(DATE_FORMAT);
             }
-            create(params);
+            setShowPaymentPicker(true);
           }}
         >
           确认{info.title}
         </Button>
       </PageFooter>
+      <PaymentPicker
+        visible={showPaymentPicker}
+        amount={info.total}
+        onConfirm={async (v) => {
+          setShowPaymentPicker(false);
+          const params: PostOrderRequest = {
+            id: Number(id),
+            type: info.type,
+            buyerAddressId: addressId!,
+          };
+          if (info.type === OrderType['借调']) {
+            params.leaseStartDate = leaseDate?.[0].format(DATE_FORMAT);
+            params.leaseEndDate = leaseDate?.[1].format(DATE_FORMAT);
+          }
+          const { data: orderId } = await create(params);
+          if (v === PaymentType['余额']) {
+            payOrderViaBalance({ id: orderId });
+          } else if (v === PaymentType['微信支付']) {
+            payOrderViaWechat({ id: orderId });
+          }
+        }}
+        onClose={() => {
+          setShowPaymentPicker(false);
+        }}
+      />
     </BasicLayout>
   );
 };

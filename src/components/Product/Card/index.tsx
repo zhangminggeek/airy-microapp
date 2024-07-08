@@ -10,6 +10,7 @@ import SellingPrice from '../SellingPrice';
 import type { CSSProperties, FC } from 'react';
 
 import { Space, Tag } from '@/components';
+import { ProductStatus, productStatusMap } from '@/constants/product';
 
 import './index.scss';
 
@@ -22,6 +23,7 @@ interface CardProps {
   leasePrice?: string;
   sellingPrice?: string;
   favorites?: number;
+  status?: number;
   onClick?: () => void;
 }
 
@@ -35,6 +37,7 @@ const Card: FC<CardProps> = ({
   leasePrice,
   sellingPrice,
   favorites = 0,
+  status = ProductStatus['正常'],
   onClick,
 }) => {
   return (
@@ -76,6 +79,13 @@ const Card: FC<CardProps> = ({
           </Space>
         </View>
       </View>
+      {status !== ProductStatus['正常'] ? (
+        <View className={`${PREFIX_CLS}-mask`}>
+          <View className={`${PREFIX_CLS}-mask-tag`}>
+            {productStatusMap.get(status)?.text}
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 };

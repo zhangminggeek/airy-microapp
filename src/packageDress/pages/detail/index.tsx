@@ -8,6 +8,7 @@ import type { GetProductIdRequest, GetProductIdResponse } from '@/api';
 
 import { deleteProductId, getProductId } from '@/api';
 import { ActionSheet, Product } from '@/components';
+import { ProductStatus } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -81,35 +82,37 @@ const Page = () => {
           },
         )}
         footer={
-          <View className={styles.footer}>
-            <ActionSheet
-              options={[
-                { key: 'sell', name: '转二手' },
-                { key: 'delete', name: '删除', danger: true },
-              ]}
-              onSelect={(item) => {
-                if (item.key === 'sell') {
-                  RouterUtil.navigateTo('/pages/market/action/index', {
-                    productId: id,
+          data?.status === ProductStatus['正常'] ? (
+            <View className={styles.footer}>
+              <ActionSheet
+                options={[
+                  { key: 'sell', name: '转二手' },
+                  { key: 'delete', name: '删除', danger: true },
+                ]}
+                onSelect={(item) => {
+                  if (item.key === 'sell') {
+                    RouterUtil.navigateTo('/pages/market/action/index', {
+                      productId: id,
+                    });
+                  } else if (item.key === 'delete') {
+                    open();
+                  }
+                }}
+              >
+                <Text className={styles.more}>更多</Text>
+              </ActionSheet>
+              <Button
+                type="primary"
+                onClick={() => {
+                  RouterUtil.navigateTo('/packageDress/pages/action/index', {
+                    id,
                   });
-                } else if (item.key === 'delete') {
-                  open();
-                }
-              }}
-            >
-              <Text className={styles.more}>更多</Text>
-            </ActionSheet>
-            <Button
-              type="primary"
-              onClick={() => {
-                RouterUtil.navigateTo('/packageDress/pages/action/index', {
-                  id,
-                });
-              }}
-            >
-              编辑
-            </Button>
-          </View>
+                }}
+              >
+                编辑
+              </Button>
+            </View>
+          ) : null
         }
       />
       {renderDialog()}
