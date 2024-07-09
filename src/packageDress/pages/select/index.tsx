@@ -18,6 +18,7 @@ import type { GetProductResponse } from '@/api';
 
 import { getProduct, getProductType } from '@/api';
 import { Icon, InputSearch, Space } from '@/components';
+import { ProductStatus } from '@/constants/product';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -34,7 +35,9 @@ const Page = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>();
 
   // 产品列表
-  const { data, loading } = useRequest(getProduct);
+  const { data, loading } = useRequest(getProduct, {
+    defaultParams: { status: ProductStatus['正常'] },
+  });
 
   // 产品列表
   const { data: typeList } = useRequest(getProductType);

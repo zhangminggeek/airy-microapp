@@ -1,0 +1,20 @@
+@import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .body {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.brief-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 24px 0;
+}

@@ -20,7 +20,7 @@ const PasswordLogin = () => {
       if (bind) {
         RouterUtil.navigateTo('/pages/security/index');
       } else {
-        RouterUtil.navigateTo('/pages/user/bind/index', {
+        RouterUtil.navigateTo('/pages/user/login/bind/index', {
           account: params?.account,
         });
       }

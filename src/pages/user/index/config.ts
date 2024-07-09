@@ -31,7 +31,7 @@ export const marketConfig = [
   { icon: IconMyPurchase, name: '我的购买', to: '/pages/user/bought/index' },
   { icon: IconMySold, name: '我卖出的', to: '/pages/user/sold/index' },
   { icon: IconMyRequirement, name: '我求购的', to: '' },
-  { icon: IconMyFavorite, name: '我的收藏', to: '' },
+  { icon: IconMyFavorite, name: '我的收藏', to: '/pages/user/favorite/index' },
 ];
 
 export const settingConfig = [

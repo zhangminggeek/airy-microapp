@@ -17,7 +17,7 @@ export enum MarketProductStatus {
   '已下架' = 6,
 }
 
-export const productStatusMap = new Map([
+export const marketProductStatusMap = new Map([
   [
     MarketProductStatus['审核中'],
     { text: '审核中', value: MarketProductStatus['审核中'] },

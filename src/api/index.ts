@@ -6943,6 +6943,257 @@ export const getMarketMyPublished = /*#__PURE__*/ (
 getMarketMyPublished.requestConfig = getMarketMyPublishedRequestConfig
 
 /**
+ * 接口 获取我收藏的服饰列表 的 **请求类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `GET /market/my/favorite`
+ */
+export interface GetMarketMyFavoriteRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+}
+
+/**
+ * 接口 获取我收藏的服饰列表 的 **返回类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `GET /market/my/favorite`
+ */
+export interface GetMarketMyFavoriteResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    expressMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+      /**
+       * 标签
+       */
+      tagList: {
+        /**
+         * id
+         */
+        id: number
+        /**
+         * 标签id
+         */
+        tagId: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 标签
+         */
+        tag: {
+          /**
+           * 标签id
+           */
+          id: number
+          /**
+           * 标签名称
+           */
+          name: string
+          /**
+           * 用途, 1:服饰标签
+           */
+          use: number
+        }
+      }[]
+    }
+    /**
+     * 被收藏数
+     */
+    favorities: number
+  }[]
+}
+
+/**
+ * 接口 获取我收藏的服饰列表 的 **请求配置的类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `GET /market/my/favorite`
+ */
+type GetMarketMyFavoriteRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/market/my/favorite',
+    'data',
+    string,
+    'pageNum' | 'pageSize',
+    false
+  >
+>
+
+/**
+ * 接口 获取我收藏的服饰列表 的 **请求配置**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `GET /market/my/favorite`
+ */
+const getMarketMyFavoriteRequestConfig: GetMarketMyFavoriteRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
+  path: '/market/my/favorite',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_9,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getMarketMyFavorite',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取我收藏的服饰列表 的 **请求函数**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `GET /market/my/favorite`
+ */
+export const getMarketMyFavorite = /*#__PURE__*/ (
+  requestData: GetMarketMyFavoriteRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetMarketMyFavoriteResponse>(prepare(getMarketMyFavoriteRequestConfig, requestData), ...args)
+}
+
+getMarketMyFavorite.requestConfig = getMarketMyFavoriteRequestConfig
+
+/**
  * 接口 更新二手市场出售\/借调服饰状态 的 **请求类型**
  *
  * @分类 二手市场出售/借调服饰

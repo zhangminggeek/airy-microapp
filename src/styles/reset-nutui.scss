@@ -19,8 +19,9 @@
   }
 
   &.nut-button-solid.nut-button-disabled {
-    color: $text-color-base;
+    color: $text-color-disabled;
     background-color: $background-color-disabled;
+    border-color: $background-color-disabled;
   }
 }
 
