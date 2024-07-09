@@ -2566,6 +2566,363 @@ export const postCompanyAudit = /*#__PURE__*/ (requestData: PostCompanyAuditRequ
 
 postCompanyAudit.requestConfig = postCompanyAuditRequestConfig
 
+/**
+ * 接口 获取当前公司收款账户 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment`
+ */
+export interface GetCompanyPaymentRequest {}
+
+/**
+ * 接口 获取当前公司收款账户 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment`
+ */
+export type GetCompanyPaymentResponse = {
+  /**
+   * 收款账户id
+   */
+  id: number
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 收款账户类型 1:银行卡 2:支付宝
+   */
+  type: number
+  /**
+   * 姓名
+   */
+  owner: string
+  /**
+   * 账号/卡号
+   */
+  account: string
+  /**
+   * 手机号
+   */
+  phone?: string
+  /**
+   * 银行名称
+   */
+  bankName?: string
+}[]
+
+/**
+ * 接口 获取当前公司收款账户 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment`
+ */
+type GetCompanyPaymentRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment', 'data', string, string, true>
+>
+
+/**
+ * 接口 获取当前公司收款账户 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment`
+ */
+const getCompanyPaymentRequestConfig: GetCompanyPaymentRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/payment',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyPayment',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取当前公司收款账户 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment`
+ */
+export const getCompanyPayment = /*#__PURE__*/ (
+  requestData?: GetCompanyPaymentRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyPaymentResponse>(prepare(getCompanyPaymentRequestConfig, requestData), ...args)
+}
+
+getCompanyPayment.requestConfig = getCompanyPaymentRequestConfig
+
+/**
+ * 接口 绑定收款账户 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/payment`
+ */
+export interface PostCompanyPaymentRequest {
+  /**
+   * 收款账户类型 1:银行卡 2:支付宝
+   */
+  type: number
+  /**
+   * 姓名
+   */
+  owner: string
+  /**
+   * 账号/卡号
+   */
+  account: string
+  /**
+   * 手机号
+   */
+  phone?: string
+  /**
+   * 银行名称
+   */
+  bankName?: string
+}
+
+/**
+ * 接口 绑定收款账户 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/payment`
+ */
+export type PostCompanyPaymentResponse = any
+
+/**
+ * 接口 绑定收款账户 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/payment`
+ */
+type PostCompanyPaymentRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment', 'data', string, string, false>
+>
+
+/**
+ * 接口 绑定收款账户 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/payment`
+ */
+const postCompanyPaymentRequestConfig: PostCompanyPaymentRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/payment',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyPayment',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 绑定收款账户 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/payment`
+ */
+export const postCompanyPayment = /*#__PURE__*/ (
+  requestData: PostCompanyPaymentRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyPaymentResponse>(prepare(postCompanyPaymentRequestConfig, requestData), ...args)
+}
+
+postCompanyPayment.requestConfig = postCompanyPaymentRequestConfig
+
+/**
+ * 接口 获取收款账户详情 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment/{id}`
+ */
+export interface GetCompanyPaymentIdRequest {
+  /**
+   * 收款账户id
+   */
+  id: string
+}
+
+/**
+ * 接口 获取收款账户详情 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment/{id}`
+ */
+export interface GetCompanyPaymentIdResponse {
+  /**
+   * 收款账户id
+   */
+  id: number
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 收款账户类型 1:银行卡 2:支付宝
+   */
+  type: number
+  /**
+   * 姓名
+   */
+  owner: string
+  /**
+   * 账号/卡号
+   */
+  account: string
+  /**
+   * 手机号
+   */
+  phone?: string
+  /**
+   * 银行名称
+   */
+  bankName?: string
+}
+
+/**
+ * 接口 获取收款账户详情 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment/{id}`
+ */
+type GetCompanyPaymentIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 获取收款账户详情 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment/{id}`
+ */
+const getCompanyPaymentIdRequestConfig: GetCompanyPaymentIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/payment/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyPaymentId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取收款账户详情 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/payment/{id}`
+ */
+export const getCompanyPaymentId = /*#__PURE__*/ (
+  requestData: GetCompanyPaymentIdRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyPaymentIdResponse>(prepare(getCompanyPaymentIdRequestConfig, requestData), ...args)
+}
+
+getCompanyPaymentId.requestConfig = getCompanyPaymentIdRequestConfig
+
+/**
+ * 接口 绑定收款账户 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company/payment/{id}`
+ */
+export interface DeleteCompanyPaymentIdRequest {
+  /**
+   * 收款账户id
+   */
+  id: string
+}
+
+/**
+ * 接口 绑定收款账户 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company/payment/{id}`
+ */
+export type DeleteCompanyPaymentIdResponse = any
+
+/**
+ * 接口 绑定收款账户 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company/payment/{id}`
+ */
+type DeleteCompanyPaymentIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 绑定收款账户 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company/payment/{id}`
+ */
+const deleteCompanyPaymentIdRequestConfig: DeleteCompanyPaymentIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/payment/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteCompanyPaymentId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 绑定收款账户 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `DELETE /company/payment/{id}`
+ */
+export const deleteCompanyPaymentId = /*#__PURE__*/ (
+  requestData: DeleteCompanyPaymentIdRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<DeleteCompanyPaymentIdResponse>(prepare(deleteCompanyPaymentIdRequestConfig, requestData), ...args)
+}
+
+deleteCompanyPaymentId.requestConfig = deleteCompanyPaymentIdRequestConfig
+
 const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_3 = '' as any
 const prodUrl_0_0_0_3 = '' as any
@@ -2939,6 +3296,59 @@ export interface GetUserSelfResponse {
    */
   roleId: number
   /**
+   * 公司信息
+   */
+  company: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
+    /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系电话
+     */
+    contactPhone: string
+    /**
+     * 省
+     */
+    province: string
+    /**
+     * 市
+     */
+    city: string
+    /**
+     * 区
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 账户余额
+     */
+    balance: number
+  }
+  /**
    * 角色名称
    */
   roleName: string
@@ -3048,6 +3458,59 @@ export interface GetUserIdResponse {
    * 角色id
    */
   roleId: number
+  /**
+   * 公司信息
+   */
+  company: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
+    /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系电话
+     */
+    contactPhone: string
+    /**
+     * 省
+     */
+    province: string
+    /**
+     * 市
+     */
+    city: string
+    /**
+     * 区
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 账户余额
+     */
+    balance: number
+  }
   /**
    * 角色名称
    */
@@ -5033,7 +5496,12 @@ const dataKey_0_0_0_7 = 'data' as any
  * @分类 服饰
  * @请求头 `GET /product`
  */
-export interface GetProductRequest {}
+export interface GetProductRequest {
+  /**
+   * 服饰状态 1:正常 2:已出售 3:借调中
+   */
+  status?: string
+}
 
 /**
  * 接口 获取未上架的服饰列表 的 **返回类型**
@@ -5108,7 +5576,7 @@ export type GetProductResponse = {
  * @请求头 `GET /product`
  */
 type GetProductRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, string, true>
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, 'status', false>
 >
 
 /**
@@ -5128,8 +5596,8 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_7,
   paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
+  queryNames: ['status'],
+  requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
   requestFunctionName: 'getProduct',
@@ -5143,7 +5611,7 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
  * @分类 服饰
  * @请求头 `GET /product`
  */
-export const getProduct = /*#__PURE__*/ (requestData?: GetProductRequest, ...args: UserRequestRestArgs) => {
+export const getProduct = /*#__PURE__*/ (requestData: GetProductRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductResponse>(prepare(getProductRequestConfig, requestData), ...args)
 }
 
@@ -5396,6 +5864,10 @@ export interface GetProductPageRequest {
    * 服饰名称
    */
   name?: string
+  /**
+   * 服饰状态 1:正常 2:已出售 3:借调中
+   */
+  status?: string
 }
 
 /**
@@ -5491,7 +5963,7 @@ type GetProductPageRequestConfig = Readonly<
     '/product/page',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'productTypeCode' | 'name',
+    'pageNum' | 'pageSize' | 'productTypeCode' | 'name' | 'status',
     false
   >
 >
@@ -5513,7 +5985,7 @@ const getProductPageRequestConfig: GetProductPageRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_7,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name'],
+  queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name', 'status'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},

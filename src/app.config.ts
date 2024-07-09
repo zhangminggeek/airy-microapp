@@ -27,9 +27,14 @@ export default {
   ],
   subpackages: [
     {
-      // 地址管理
-      root: 'packageAddress',
-      pages: ['pages/management/index', 'pages/action/index'],
+      // 公司管理
+      root: 'packageCompany',
+      pages: [
+        'pages/address/management/index',
+        'pages/address/action/index',
+        'pages/payment/management/index',
+        'pages/payment/action/index',
+      ],
     },
     {
       // 服装管理

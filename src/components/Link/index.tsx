@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
+import type { ITouchEvent } from '@tarojs/components';
 import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { RouterUtil } from '@/utils';
@@ -14,7 +15,7 @@ interface LinkProps {
   block?: boolean;
   disabled?: boolean;
   children?: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: ITouchEvent) => void;
 }
 
 const PREFIX_CLS = 'm-link';
@@ -28,12 +29,12 @@ const Link: FC<LinkProps> = ({
   children,
   onClick,
 }) => {
-  const handleClick = () => {
+  const handleClick = (e: ITouchEvent) => {
     if (disabled) return;
     if (to) {
       RouterUtil.navigateTo(to);
     }
-    onClick?.();
+    onClick?.(e);
   };
 
   return (

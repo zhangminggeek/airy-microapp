@@ -36,7 +36,7 @@ const Page = () => {
 
   // 产品列表
   const { data, loading } = useRequest(getProduct, {
-    defaultParams: { status: ProductStatus['正常'] },
+    defaultParams: { status: `${ProductStatus['正常']}` },
   });
 
   // 产品列表

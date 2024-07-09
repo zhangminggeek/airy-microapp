@@ -1,3 +1,21 @@
+// 公司收款账户
+export enum CompanyPaymentType {
+  '银行卡' = 1,
+  '支付宝' = 2,
+}
+
+export const companyPaymentTypeMap = new Map([
+  [
+    CompanyPaymentType['银行卡'],
+    { text: '银行卡', value: CompanyPaymentType['银行卡'] },
+  ],
+  [
+    CompanyPaymentType['支付宝'],
+    { text: '支付宝', value: CompanyPaymentType['支付宝'] },
+  ],
+]);
+
+// 支付方式
 export enum PaymentType {
   '余额' = 1,
   '微信支付' = 2,

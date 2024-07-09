@@ -38,9 +38,13 @@ export const settingConfig = [
   {
     icon: IconAddressManagement,
     name: '地址管理',
-    to: '/packageAddress/pages/management/index',
+    to: '/packageCompany/pages/address/management/index',
   },
-  { icon: IconReceivingAccount, name: '收款账户', to: '' },
+  {
+    icon: IconReceivingAccount,
+    name: '收款账户',
+    to: '/packageCompany/pages/payment/management/index',
+  },
   { icon: IconWeChatNotice, name: '微信通知', to: '' },
   { icon: IconProtocolGuide, name: '协议指南', to: '' },
   { icon: IconOnlineCustomerService, name: '在线客服', to: '' },

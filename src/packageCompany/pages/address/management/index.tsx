@@ -80,7 +80,7 @@ const Page = () => {
                   size="mini"
                   onClick={() => {
                     RouterUtil.navigateTo(
-                      '/packageAddress/pages/action/index',
+                      '/packageCompany/pages/address/action/index',
                       { id: item.id },
                     );
                   }}
@@ -109,7 +109,7 @@ const Page = () => {
           size="xlarge"
           block
           onClick={() => {
-            RouterUtil.navigateTo('/packageAddress/pages/action/index');
+            RouterUtil.navigateTo('/packageCompany/pages/address/action/index');
           }}
         >
           新增收货地址
