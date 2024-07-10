@@ -58,9 +58,7 @@ const Page = () => {
             owner={payments.union?.owner}
             account={payments.union?.account}
             onRemove={() => {
-              console.log(payments.union);
               open({ params: { id: `${payments.union?.id}` } });
-              // deletePayment({ id: `${payments.union?.id}` });
             }}
           />
         ) : (

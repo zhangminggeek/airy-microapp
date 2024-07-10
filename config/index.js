@@ -54,6 +54,9 @@ const config = {
         },
       },
     },
+    miniCssExtractPluginOption: {
+      ignoreOrder: true,
+    },
     lazyCodeLoading: 'requiredComponents',
   },
   h5: {

@@ -11,6 +11,7 @@ interface InputNumberProps {
   prefix?: ReactNode;
   suffix?: ReactNode;
   value?: string;
+  placeholder?: string;
   onChange?: (value?: string) => void;
 }
 
@@ -22,13 +23,16 @@ const InputNumber: FC<InputNumberProps> = ({
   prefix,
   suffix,
   value,
+  placeholder,
   onChange,
 }) => {
   return (
     <View className={classnames(PREFIX_CLS, className)} style={style}>
       {prefix}
       <Input
+        className={`${PREFIX_CLS}-input`}
         type="digit"
+        placeholder={placeholder}
         value={value}
         onInput={(e) => {
           onChange?.(e.detail.value);

@@ -34,6 +34,9 @@ export default {
         'pages/address/action/index',
         'pages/payment/management/index',
         'pages/payment/action/index',
+        'pages/withdraw/index/index',
+        'pages/withdraw/result/index',
+        'pages/withdraw/record/index',
       ],
     },
     {

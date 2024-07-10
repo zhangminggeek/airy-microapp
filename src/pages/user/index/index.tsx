@@ -9,6 +9,7 @@ import styles from './index.module.scss';
 import ImageLogo from '@/assets/logo.svg';
 import { Section, Space } from '@/components';
 import { BasicLayout } from '@/layouts';
+import { RouterUtil } from '@/utils';
 
 const Page = () => {
   return (
@@ -31,6 +32,11 @@ const Page = () => {
             className={styles['account-header-btn']}
             type="primary"
             size="small"
+            onClick={() => {
+              RouterUtil.navigateTo(
+                '/packageCompany/pages/withdraw/index/index',
+              );
+            }}
           >
             提现
           </Button>

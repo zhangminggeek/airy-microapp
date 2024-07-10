@@ -1,0 +1,63 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .body {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.list {
+  :global {
+    .nut-infinite-container {
+      padding: 0 32px;
+      background-color: #fff;
+    }
+  }
+  .record {
+    padding: 24px 0;
+
+    & + .record {
+      border-top: 2px solid $border-color-base;
+    }
+
+    &-content {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    &-info {
+      flex: 1;
+
+      &-title {
+        font-size: $font-size-large;
+        color: $text-color-main;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      &-time {
+        font-size: $font-size-small;
+        color: $text-color-secondary;
+        font-weight: 400;
+      }
+
+      &-remark {
+        font-size: $font-size-small;
+        color: $color-primary;
+        font-weight: 400;
+      }
+    }
+
+    &-amount {
+      font-size: $font-size-large;
+      color: $text-color-main;
+      font-weight: 500;
+    }
+  }
+}

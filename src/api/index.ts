@@ -2923,6 +2923,213 @@ export const deleteCompanyPaymentId = /*#__PURE__*/ (
 
 deleteCompanyPaymentId.requestConfig = deleteCompanyPaymentIdRequestConfig
 
+/**
+ * 接口 获取提现记录列表 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/withdraw`
+ */
+export interface GetCompanyWithdrawRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 状态 1:审核中 2:待转账 3:已完成 4:已拒绝 5:已取消
+   */
+  status?: string
+}
+
+/**
+ * 接口 获取提现记录列表 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/withdraw`
+ */
+export interface GetCompanyWithdrawResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 收款账户id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 提现方式 1:银行卡 2:支付宝
+     */
+    type: number
+    /**
+     * 提现金额
+     */
+    amount: number
+    /**
+     * 提现金额
+     */
+    status: number
+    /**
+     * 拒绝理由
+     */
+    remark?: string
+  }[]
+}
+
+/**
+ * 接口 获取提现记录列表 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/withdraw`
+ */
+type GetCompanyWithdrawRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/company/withdraw',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'status',
+    false
+  >
+>
+
+/**
+ * 接口 获取提现记录列表 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/withdraw`
+ */
+const getCompanyWithdrawRequestConfig: GetCompanyWithdrawRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/withdraw',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyWithdraw',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取提现记录列表 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/withdraw`
+ */
+export const getCompanyWithdraw = /*#__PURE__*/ (
+  requestData: GetCompanyWithdrawRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyWithdrawResponse>(prepare(getCompanyWithdrawRequestConfig, requestData), ...args)
+}
+
+getCompanyWithdraw.requestConfig = getCompanyWithdrawRequestConfig
+
+/**
+ * 接口 提现 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/withdraw`
+ */
+export interface PostCompanyWithdrawRequest {
+  /**
+   * 提现方式
+   */
+  type: number
+  /**
+   * 提现金额
+   */
+  amount: number
+}
+
+/**
+ * 接口 提现 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/withdraw`
+ */
+export type PostCompanyWithdrawResponse = number
+
+/**
+ * 接口 提现 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/withdraw`
+ */
+type PostCompanyWithdrawRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/withdraw', 'data', string, string, false>
+>
+
+/**
+ * 接口 提现 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/withdraw`
+ */
+const postCompanyWithdrawRequestConfig: PostCompanyWithdrawRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/withdraw',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyWithdraw',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 提现 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/withdraw`
+ */
+export const postCompanyWithdraw = /*#__PURE__*/ (
+  requestData: PostCompanyWithdrawRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyWithdrawResponse>(prepare(postCompanyWithdrawRequestConfig, requestData), ...args)
+}
+
+postCompanyWithdraw.requestConfig = postCompanyWithdrawRequestConfig
+
 const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_3 = '' as any
 const prodUrl_0_0_0_3 = '' as any

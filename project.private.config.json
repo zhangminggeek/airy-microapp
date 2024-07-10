@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageCompany/pages/withdraw/result/index",
+          "pathName": "packageCompany/pages/withdraw/result/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/bought/index",
           "pathName": "pages/user/bought/index",
           "query": "",

@@ -1,0 +1,105 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
+.container {
+  .notice {
+    :global {
+      .nut-noticebar-box {
+        color: $color-primary;
+        background-color: $color-secondary;
+      }
+    }
+  }
+
+  .content {
+    padding: 24px;
+
+    .balance {
+      position: relative;
+      @include flex-center(column);
+      height: 224px;
+
+      &-title {
+        font-size: $font-size-base;
+        color: $text-color-secondary;
+        font-weight: 400;
+        text-align: center;
+      }
+
+      &-value {
+        font-size: 56px;
+        color: $text-color-main;
+        font-weight: 600;
+      }
+
+      &-btn {
+        position: absolute;
+        top: 8px;
+        right: 0;
+        color: $text-color-secondary;
+      }
+    }
+
+    .method,
+    .amount {
+      :global {
+        .m-title.m-section-header {
+          margin-bottom: 24px;
+        }
+      }
+    }
+
+    .method {
+      .option {
+        &-item {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          padding: 32px 0;
+
+          & + .option-item {
+            border-top: 2px solid $border-color-base;
+          }
+
+          &-content {
+            flex: 1;
+
+            &-name {
+              font-size: $font-size-large;
+              color: $text-color-main;
+              font-weight: 400;
+            }
+
+            &-account {
+              font-size: $font-size-base;
+              color: $text-color-secondary;
+              font-weight: 400;
+              margin-top: 4px;
+            }
+          }
+
+          &-btn {
+            color: $text-color-secondary;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .amount {
+      .checker {
+        margin-bottom: 24px;
+      }
+
+      .input {
+        padding: 16px 32px;
+        border: 2px solid $border-color-base;
+        border-radius: 38px;
+      }
+    }
+
+    .btn {
+      margin-top: 80px;
+    }
+  }
+}

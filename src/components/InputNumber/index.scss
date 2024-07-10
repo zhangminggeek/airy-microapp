@@ -1,5 +1,16 @@
+@import '../../styles/var.scss';
+
 .m-input-number {
   display: flex;
   align-items: center;
   gap: 16px;
+
+  &-input {
+    flex: 1;
+  }
+
+  .input-placeholder {
+    font-size: $font-size-base;
+    color: $text-color-placeholder;
+  }
 }
