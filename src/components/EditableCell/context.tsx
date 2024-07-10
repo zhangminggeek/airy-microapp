@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 
 interface ContextProps {
+  title: string;
   name: string;
   editable: boolean;
   value?: any;
@@ -8,6 +9,7 @@ interface ContextProps {
 }
 
 export const Context = createContext<ContextProps>({
+  title: '',
   name: '',
   editable: true,
   value: undefined,

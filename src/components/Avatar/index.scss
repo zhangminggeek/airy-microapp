@@ -1,31 +1,21 @@
+@import '../../styles/var.scss';
+@import '../../styles/mixins.scss';
+
 .m-avatar.nut-avatar {
+  &.m-avatar-image {
+    background: transparent;
+  }
+
+  &:not(.m-avatar-image) {
+    background-image: linear-gradient(
+      90deg,
+      $color-primary 0%,
+      $color-primary-gradient 100%
+    );
+  }
+
   .text {
-    display: flex;
-    justify-content: space-between;
-    text-align: justify;
-    text-align-last: justify;
-    flex-wrap: wrap;
-
-    .m-avatar-text-item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: justify;
-      text-align-last: justify;
-      white-space: nowrap;
-
-      &-1 {
-        flex-basis: 100%;
-      }
-
-      &-2,
-      &-4 {
-        flex-basis: 50%;
-      }
-
-      &-3 {
-        flex-basis: 33%;
-      }
-    }
+    @include flex-center;
+    color: #fff;
   }
 }

@@ -1887,9 +1887,13 @@ export interface GetOrderIdResponse {
      */
     name: string
     /**
-     * 状态, 0:禁用 1:正常 2:待审核
+     * 公司LOGO
      */
-    status: number
+    logo?: string
+    /**
+     * 简介
+     */
+    intro?: string
     /**
      * 联系人
      */
@@ -1918,6 +1922,10 @@ export interface GetOrderIdResponse {
      * 账户余额
      */
     balance: number
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
   }
   /**
    * 买家收货地址
@@ -2162,9 +2170,13 @@ export interface GetCompanySelfResponse {
    */
   name: string
   /**
-   * 状态, 0:禁用 1:正常 2:待审核
+   * 公司LOGO
    */
-  status: number
+  logo?: string
+  /**
+   * 简介
+   */
+  intro?: string
   /**
    * 联系人
    */
@@ -2193,6 +2205,10 @@ export interface GetCompanySelfResponse {
    * 账户余额
    */
   balance: number
+  /**
+   * 状态, 0:禁用 1:正常 2:待审核
+   */
+  status: number
 }
 
 /**
@@ -2254,6 +2270,10 @@ export interface PostCompanyRegisterRequest {
    * 公司名称
    */
   name: string
+  /**
+   * 公司LOGO
+   */
+  logo?: string
   /**
    * 联系人
    */
@@ -2351,21 +2371,13 @@ postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
  */
 export interface PutCompanyRequest {
   /**
-   * 公司id
+   * 公司LOGO
    */
-  id: number
+  logo?: string
   /**
-   * 公司
+   * 简介
    */
-  company: string
-  /**
-   * 密码（明文）
-   */
-  password: string
-  /**
-   * 微信用户唯一标识
-   */
-  openid?: string
+  intro?: string
 }
 
 /**
@@ -2991,6 +3003,10 @@ export interface GetCompanyWithdrawResponse {
      * 拒绝理由
      */
     remark?: string
+    /**
+     * 附件
+     */
+    file?: string
   }[]
 }
 
@@ -3523,9 +3539,13 @@ export interface GetUserSelfResponse {
      */
     name: string
     /**
-     * 状态, 0:禁用 1:正常 2:待审核
+     * 公司LOGO
      */
-    status: number
+    logo?: string
+    /**
+     * 简介
+     */
+    intro?: string
     /**
      * 联系人
      */
@@ -3554,6 +3574,10 @@ export interface GetUserSelfResponse {
      * 账户余额
      */
     balance: number
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
   }
   /**
    * 角色名称
@@ -3686,9 +3710,13 @@ export interface GetUserIdResponse {
      */
     name: string
     /**
-     * 状态, 0:禁用 1:正常 2:待审核
+     * 公司LOGO
      */
-    status: number
+    logo?: string
+    /**
+     * 简介
+     */
+    intro?: string
     /**
      * 联系人
      */
@@ -3717,6 +3745,10 @@ export interface GetUserIdResponse {
      * 账户余额
      */
     balance: number
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
   }
   /**
    * 角色名称

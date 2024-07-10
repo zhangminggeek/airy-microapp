@@ -119,7 +119,7 @@ const Page = () => {
           <Text className={styles['register-text']}>还没有账号？</Text>
           <Link
             className={styles['register-link']}
-            to="/pages/user/register/index"
+            to="/packageCompany/pages/register/index"
           >
             去注册
           </Link>

@@ -24,6 +24,15 @@ const Page = () => {
 
   const { time, countdowning, startCountdown } = useCountdown();
 
+  useDidShow(() => {
+    const info = parseJson<CompanyInfo>(
+      Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
+      undefined,
+    );
+    setPhone(info?.contactPhone);
+    getCode({ account: info?.contactPhone });
+  });
+
   // 获取验证码
   const { run: getCode } = useRequest(getAccountRegisterCodeAccount, {
     manual: true,
@@ -48,17 +57,8 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.COMPANY_RESIGTER_INFO);
-      RouterUtil.navigateTo('/pages/user/register/result/index');
+      RouterUtil.navigateTo('/packageCompany/pages/register/result/index');
     },
-  });
-
-  useDidShow(() => {
-    const info = parseJson<CompanyInfo>(
-      Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
-      undefined,
-    );
-    setPhone(info?.contactPhone);
-    getCode({ account: info?.contactPhone });
   });
 
   return (

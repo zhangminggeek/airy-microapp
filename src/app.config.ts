@@ -7,10 +7,6 @@ export default {
     'pages/user/login/index',
     'pages/user/login/other/index',
     'pages/user/login/bind/index',
-    // 注册
-    'pages/user/register/index',
-    'pages/user/register/code/index',
-    'pages/user/register/result/index',
     // 首页
     'pages/market/index/index',
     'pages/market/action/index',
@@ -24,16 +20,27 @@ export default {
     'pages/user/bought/index',
     'pages/user/sold/index',
     'pages/user/favorite/index',
+    // 公共页
+    'pages/common/edit/index',
   ],
   subpackages: [
     {
       // 公司管理
       root: 'packageCompany',
       pages: [
+        // 注册
+        'pages/register/index',
+        'pages/register/code/index',
+        'pages/register/result/index',
+        // 设置
+        'pages/setting/index',
+        // 地址管理
         'pages/address/management/index',
         'pages/address/action/index',
+        // 收款方式
         'pages/payment/management/index',
         'pages/payment/action/index',
+        // 提现
         'pages/withdraw/index/index',
         'pages/withdraw/result/index',
         'pages/withdraw/record/index',

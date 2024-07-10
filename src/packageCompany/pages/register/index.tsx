@@ -1,4 +1,4 @@
-import { Button, Form, Input } from '@nutui/nutui-react-taro';
+import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 
@@ -20,8 +20,12 @@ const Page = () => {
       undefined,
     );
     if (info) {
-      const { province, city, area, ...rest } = info;
-      form.setFieldsValue({ ...rest, region: [province, city, area] });
+      const { province, city, area, logo, ...rest } = info;
+      form.setFieldsValue({
+        ...rest,
+        region: [province, city, area],
+        logo: [logo],
+      });
     }
   });
 
@@ -49,16 +53,15 @@ const Page = () => {
             </Button>
           }
           onFinish={async (values) => {
-            const { region, ...rest } = values;
+            const { region, logo, ...rest } = values;
             const [province, city, area] = region;
-            const params = { ...rest, province, city, area };
+            const params = { ...rest, province, city, area, logo: logo[0] };
             // 保存到本地，等后面验证手机号流程通过后使用
             Taro.setStorageSync(
               StorageKey.COMPANY_RESIGTER_INFO,
               JSON.stringify(params),
             );
-            RouterUtil.navigateTo('/pages/user/register/code/index');
-            // await run({ ...rest, province, city, area });
+            RouterUtil.navigateTo('/packageCompany/pages/register/code/index');
           }}
         >
           <Form.Item
@@ -105,6 +108,12 @@ const Page = () => {
             rules={[{ required: true, message: '请上传营业执照' }]}
           >
             <Upload />
+          </Form.Item>
+          <Form.Item label="店铺LOGO" name="logo">
+            <Upload />
+          </Form.Item>
+          <Form.Item label="简介" name="intro">
+            <TextArea maxLength={200} showCount placeholder="一句话介绍店铺" />
           </Form.Item>
         </Form>
         <View className={styles.login}>

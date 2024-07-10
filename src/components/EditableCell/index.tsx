@@ -87,6 +87,7 @@ const EditableCell: FC<EditableCellProps> = ({
         <Context.Provider
           key={name}
           value={{
+            title,
             name,
             editable,
             value: data?.[name],

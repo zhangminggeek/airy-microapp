@@ -10,7 +10,7 @@ export enum EventsKey {
 
 // 监听和关闭事件的hooks
 export const useEvents = (
-  key: EventsKey,
+  key: EventsKey | string,
   listener: (info?: any) => void,
   isUse = true,
 ) => {
@@ -29,6 +29,6 @@ export const useEvents = (
 };
 
 // 通知方法
-export const emit = (key: EventsKey, info?: any) => {
+export const emit = (key: EventsKey | string, info?: any) => {
   globalEvent.trigger(key, info);
 };

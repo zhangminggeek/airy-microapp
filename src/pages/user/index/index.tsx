@@ -1,24 +1,37 @@
-import { Button, Image } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
+import { useDidShow } from '@tarojs/taro';
 
 import AmountItem from './AmountItem';
 import { marketConfig, settingConfig, shopConfig } from './config';
 import IconItem from './IconItem';
 import styles from './index.module.scss';
 
-import ImageLogo from '@/assets/logo.svg';
-import { Section, Space } from '@/components';
+import { getCompanySelf } from '@/api';
+import { Avatar, Icon, Section, Space } from '@/components';
+import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
+  useDidShow(() => {
+    run();
+  });
+
+  const { data, run } = useRequest(getCompanySelf, { manual: true });
+
   return (
     <BasicLayout
       className={styles.container}
       title={
-        <Space>
-          <Image src={ImageLogo} width={32} height={32} />
-          <Text>AIRYBLUE 婚纱礼服</Text>
+        <Space
+          onClick={() => {
+            RouterUtil.navigateTo('/packageCompany/pages/setting/index');
+          }}
+        >
+          <Avatar src={data?.logo} name={data?.name} size="32" />
+          <Text>{data?.name}</Text>
+          <Icon name="RightOutlined" size={16} />
         </Space>
       }
       transparent
@@ -26,7 +39,7 @@ const Page = () => {
       <Section className={styles.account}>
         <View className={styles['account-header']}>
           <AmountItem title="总资产(元)" fontSize={28}>
-            111
+            {data?.balance ?? 0}
           </AmountItem>
           <Button
             className={styles['account-header-btn']}
@@ -42,10 +55,10 @@ const Page = () => {
           </Button>
         </View>
         <View className={styles['account-body']}>
-          <AmountItem title="今日预约" fontSize={20}>
+          <AmountItem title="关注" fontSize={20}>
             111
           </AmountItem>
-          <AmountItem title="今日订单" fontSize={20}>
+          <AmountItem title="粉丝" fontSize={20}>
             111
           </AmountItem>
           <AmountItem title="今日收入" fontSize={20}>

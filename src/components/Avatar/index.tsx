@@ -1,5 +1,4 @@
 import { Avatar as NutAvatar } from '@nutui/nutui-react-taro';
-import { Text } from '@tarojs/components';
 import classnames from 'classnames';
 import { useMemo } from 'react';
 
@@ -8,7 +7,7 @@ import type { FC } from 'react';
 
 import './index.scss';
 
-interface AvatarProps extends Partial<NutAvatarProps> {
+export interface AvatarProps extends Partial<NutAvatarProps> {
   name?: string;
   defaultImage?: string;
 }
@@ -37,31 +36,18 @@ const Avatar: FC<AvatarProps> = ({
     if (src) return null;
     // 如果不存在文字，不显示内容
     if (!name) return null;
-    // 如果存在文字，只显示前4个字符
-    const abbr = name.slice(0, 4);
-    return abbr.split('').map((s, index) => (
-      <Text
-        className={classnames(
-          `${PREFIX_CLS}-text-item`,
-          `${PREFIX_CLS}-text-item-${abbr.length}`,
-        )}
-        key={index}
-      >
-        {s}
-      </Text>
-    ));
+    // 如果存在文字，只显示第一个字符
+    return name.slice(0, 1);
   }, [src, name]);
-
-  const _background = useMemo(() => {
-    if (_src) return 'transparent';
-    return background ?? '#eee';
-  }, [_src, background]);
 
   return (
     <NutAvatar
-      className={classnames(PREFIX_CLS, className)}
+      className={classnames(
+        PREFIX_CLS,
+        { [`${PREFIX_CLS}-image`]: _src },
+        className,
+      )}
       src={_src}
-      background={_background}
       {...rest}
     >
       {_children}

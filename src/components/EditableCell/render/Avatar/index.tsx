@@ -1,4 +1,3 @@
-import { Avatar, type AvatarProps } from '@nutui/nutui-react-taro';
 import { Button } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
@@ -8,8 +7,10 @@ import { PREFIX_CLS } from '../../constants';
 import { Context } from '../../context';
 import Wrapper from '../Wrapper';
 
+import type { AvatarProps } from '@/components/Avatar';
 import type { FC } from 'react';
 
+import { Avatar } from '@/components';
 import { useOSSStore } from '@/models';
 import { Toast } from '@/utils';
 

@@ -12,9 +12,9 @@ export class RouterUtil {
     '/pages/security/index',
     '/pages/user/login/index',
     '/pages/user/login/other/index',
-    '/pages/user/register/index',
-    '/pages/user/register/code/index',
-    '/pages/user/register/result/index',
+    '/packageCompany/pages/register/index',
+    '/packageCompany/pages/register/code/index',
+    '/packageCompany/pages/register/result/index',
     '/pages/market/index/index',
     '/pages/market/detail/index',
   ];
