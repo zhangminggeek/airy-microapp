@@ -1,10 +1,6 @@
 import { Button, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import {
-  stopPullDownRefresh,
-  useDidShow,
-  usePullDownRefresh,
-} from '@tarojs/taro';
+import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import Big from 'big.js';
 import { useRef, useState } from 'react';
 
@@ -30,10 +26,6 @@ const Page = () => {
   const actionRef = useRef<ActionType>(null);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  useDidShow(() => {
-    actionRef.current?.refresh({ status: tabs[currentIndex].value });
-  });
 
   // 下拉刷新
   usePullDownRefresh(async () => {

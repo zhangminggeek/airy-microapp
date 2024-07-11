@@ -1,6 +1,7 @@
 import { InfiniteLoading } from '@nutui/nutui-react-taro';
+import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
-import { useImperativeHandle, useState } from 'react';
+import { useImperativeHandle, useRef, useState } from 'react';
 
 import type { FunctionType } from '@/hooks/useRequest';
 import type { PaginationParams, PaginationResponse } from '@/interfaces/base';
@@ -22,6 +23,7 @@ interface ListProps<R = any, P = any, U extends PaginationParams<P> = any>
   extends Partial<InfiniteLoadingProps> {
   fill?: boolean;
   column?: 1 | 2;
+  requestOnInit?: boolean;
   actionRef?: Ref<ActionType<P>>;
   params?: ParamWithoutPaginationParams<P>;
   request: FunctionType<U, PaginationResponse<R>>;
@@ -34,6 +36,7 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
   className,
   fill = false,
   column = 2,
+  requestOnInit = true,
   actionRef,
   params,
   request,
@@ -46,8 +49,10 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     },
   }));
 
+  const loading = useRef<boolean>(false);
+
   // 是否正在请求中
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   // 请求参数
   const [innerParams, setInnerParams] =
     useState<ParamWithoutPaginationParams<P>>();
@@ -58,6 +63,12 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     useState<number>(DEFAULT_PAGE_NUM);
   // 数据总量
   const [total, setTotal] = useState<number>(0);
+
+  useDidShow(() => {
+    if (requestOnInit) {
+      fetchData({ ...params, pageNum: `${DEFAULT_PAGE_NUM}` } as any);
+    }
+  });
 
   useDeepCompareEffect(() => {
     setInnerParams(params);
@@ -79,8 +90,8 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     },
   });
   const fetchData = async (p?: Partial<U>) => {
-    if (loading) return;
-    setLoading(true);
+    if (loading.current) return;
+    loading.current = true;
     const params = {
       pageNum: `${currentPageNum}`,
       pageSize: `${DEFAULT_PAGE_SIZE}`,
@@ -92,7 +103,7 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      loading.current = false;
     }
   };
 

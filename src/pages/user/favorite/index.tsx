@@ -1,10 +1,6 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import {
-  stopPullDownRefresh,
-  useDidShow,
-  usePullDownRefresh,
-} from '@tarojs/taro';
+import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import { useRef } from 'react';
 
 import styles from './index.module.scss';
@@ -19,10 +15,6 @@ import { RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
-
-  useDidShow(() => {
-    actionRef.current?.refresh();
-  });
 
   // 下拉刷新
   usePullDownRefresh(async () => {

@@ -62,10 +62,22 @@ const Page = () => {
           <AmountItem title="今日售出" fontSize={20}>
             {data?.saleVolumeToday ?? 0}
           </AmountItem>
-          <AmountItem title="关注" fontSize={20}>
+          <AmountItem
+            title="关注"
+            fontSize={20}
+            onClick={() => {
+              RouterUtil.navigateTo('/packageCompany/pages/followee/index');
+            }}
+          >
             {data?.follewedCount ?? 0}
           </AmountItem>
-          <AmountItem title="粉丝" fontSize={20}>
+          <AmountItem
+            title="粉丝"
+            fontSize={20}
+            onClick={() => {
+              RouterUtil.navigateTo('/packageCompany/pages/fans/index');
+            }}
+          >
             {data?.fansCount ?? 0}
           </AmountItem>
         </View>

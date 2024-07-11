@@ -2276,6 +2276,296 @@ export const getCompanySelf = /*#__PURE__*/ (requestData?: GetCompanySelfRequest
 getCompanySelf.requestConfig = getCompanySelfRequestConfig
 
 /**
+ * 接口 获取粉丝列表（分页） 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/fans`
+ */
+export interface GetCompanyFansRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+}
+
+/**
+ * 接口 获取粉丝列表（分页） 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/fans`
+ */
+export interface GetCompanyFansResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 公司LOGO
+     */
+    logo?: string
+    /**
+     * 简介
+     */
+    intro?: string
+    /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系电话
+     */
+    contactPhone: string
+    /**
+     * 省
+     */
+    province: string
+    /**
+     * 市
+     */
+    city: string
+    /**
+     * 区
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 账户余额
+     */
+    balance: number
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
+  }[]
+}
+
+/**
+ * 接口 获取粉丝列表（分页） 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/fans`
+ */
+type GetCompanyFansRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/fans', 'data', string, 'pageNum' | 'pageSize', false>
+>
+
+/**
+ * 接口 获取粉丝列表（分页） 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/fans`
+ */
+const getCompanyFansRequestConfig: GetCompanyFansRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/fans',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyFans',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取粉丝列表（分页） 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/fans`
+ */
+export const getCompanyFans = /*#__PURE__*/ (requestData: GetCompanyFansRequest, ...args: UserRequestRestArgs) => {
+  return request<GetCompanyFansResponse>(prepare(getCompanyFansRequestConfig, requestData), ...args)
+}
+
+getCompanyFans.requestConfig = getCompanyFansRequestConfig
+
+/**
+ * 接口 获取关注列表（分页） 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/followee`
+ */
+export interface GetCompanyFolloweeRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+}
+
+/**
+ * 接口 获取关注列表（分页） 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/followee`
+ */
+export interface GetCompanyFolloweeResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 公司LOGO
+     */
+    logo?: string
+    /**
+     * 简介
+     */
+    intro?: string
+    /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系电话
+     */
+    contactPhone: string
+    /**
+     * 省
+     */
+    province: string
+    /**
+     * 市
+     */
+    city: string
+    /**
+     * 区
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 账户余额
+     */
+    balance: number
+    /**
+     * 状态, 0:禁用 1:正常 2:待审核
+     */
+    status: number
+  }[]
+}
+
+/**
+ * 接口 获取关注列表（分页） 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/followee`
+ */
+type GetCompanyFolloweeRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/company/followee',
+    'data',
+    string,
+    'pageNum' | 'pageSize',
+    false
+  >
+>
+
+/**
+ * 接口 获取关注列表（分页） 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/followee`
+ */
+const getCompanyFolloweeRequestConfig: GetCompanyFolloweeRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/followee',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyFollowee',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取关注列表（分页） 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/followee`
+ */
+export const getCompanyFollowee = /*#__PURE__*/ (
+  requestData: GetCompanyFolloweeRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyFolloweeResponse>(prepare(getCompanyFolloweeRequestConfig, requestData), ...args)
+}
+
+getCompanyFollowee.requestConfig = getCompanyFolloweeRequestConfig
+
+/**
  * 接口 创建公司 的 **请求类型**
  *
  * @分类 公司

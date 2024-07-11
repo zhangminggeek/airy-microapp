@@ -3,7 +3,6 @@ import { View } from '@tarojs/components';
 import {
   requestPayment,
   stopPullDownRefresh,
-  useDidShow,
   usePullDownRefresh,
 } from '@tarojs/taro';
 import Big from 'big.js';
@@ -49,10 +48,6 @@ const Page = () => {
     useState<boolean>(false);
   // 是否显示支付方式 popup
   const [showPaymentPicker, setShowPaymentPicker] = useState<boolean>(false);
-
-  useDidShow(() => {
-    refreshList();
-  });
 
   // 下拉刷新
   usePullDownRefresh(async () => {

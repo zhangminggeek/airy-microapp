@@ -1,6 +1,5 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import { useDidShow } from '@tarojs/taro';
 import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
@@ -28,13 +27,6 @@ const Page = () => {
   useEffect(() => {
     fetchProductType();
   }, []);
-
-  // 返回该页时需要重新请求数据
-  useDidShow(() => {
-    if (!typeList?.length) return;
-    const productTypeCode = typeList?.[currentIndex]?.code;
-    actionRef.current?.refresh({ productTypeCode, name: keyword });
-  });
 
   return (
     <BasicLayout title="服饰管理" back fill safeArea={false}>

@@ -46,6 +46,10 @@ export default {
         'pages/withdraw/index/index',
         'pages/withdraw/result/index',
         'pages/withdraw/record/index',
+        // 我的关注
+        'pages/followee/index',
+        // 我的粉丝
+        'pages/fans/index',
       ],
     },
     {

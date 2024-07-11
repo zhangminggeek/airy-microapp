@@ -1,11 +1,9 @@
 import { Button, Tabs } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow, useRouter, useShareAppMessage } from '@tarojs/taro';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
-
-import type { ActionType } from '@/components/List';
 
 import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
 import { Avatar, Icon, List, Product, Space } from '@/components';
@@ -19,7 +17,6 @@ import { RouterUtil } from '@/utils';
 const Page = () => {
   const { id } = useRouter().params;
   const { info } = useUserStore((state) => state);
-  const actionRef = useRef<ActionType>(null);
 
   const [tabIndex, setTabIndex] = useState<number>(0);
 
@@ -130,7 +127,6 @@ const Page = () => {
         </Tabs>
         <View className={styles.list}>
           <List
-            actionRef={actionRef}
             request={getMarket}
             params={{
               status: MarketProductStatus['在售'],

@@ -1,10 +1,6 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import {
-  stopPullDownRefresh,
-  useDidShow,
-  usePullDownRefresh,
-} from '@tarojs/taro';
+import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import { useRef, useState } from 'react';
 
 import { productTypeOptions, tabsMap } from './config';
@@ -28,14 +24,6 @@ const Page = () => {
   const [keyword, setKeyword] = useState<string>('');
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  useDidShow(() => {
-    actionRef.current?.refresh({
-      status: MarketProductStatus['在售'],
-      description: keyword,
-      order: tabs[currentIndex].value,
-    });
-  });
 
   // 下拉刷新
   usePullDownRefresh(async () => {
