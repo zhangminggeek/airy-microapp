@@ -1,4 +1,4 @@
-import { Text, View } from '@tarojs/components';
+import { ITouchEvent, View } from '@tarojs/components';
 import classnames from 'classnames';
 import { Children, Fragment } from 'react';
 
@@ -15,7 +15,7 @@ interface SpaceProps {
   wrap?: boolean;
   block?: boolean;
   split?: boolean | ReactNode;
-  onClick?: () => void;
+  onClick?: (e: ITouchEvent) => void;
 }
 
 import './index.scss';
@@ -61,7 +61,7 @@ const Space: FC<SpaceProps> = ({
                 {split && split !== true ? (
                   split
                 ) : (
-                  <Text className={`${PREFIX_CLS}-split-divider`} />
+                  <View className={`${PREFIX_CLS}-split-divider`} />
                 )}
               </View>
             ) : null}

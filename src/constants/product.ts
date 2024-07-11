@@ -1,13 +1,24 @@
 export enum ProductType {
-  '婚纱' = 1,
-  '礼服' = 2,
-  '秀禾' = 3,
-  '西服' = 4,
-  '伴娘服' = 5,
-  '鞋子' = 6,
-  '首饰' = 7,
-  '其他' = 8,
+  '婚纱' = '1',
+  '礼服' = '2',
+  '秀禾' = '3',
+  '西服' = '4',
+  '伴娘服' = '5',
+  '鞋子' = '6',
+  '首饰' = '7',
+  '其他' = '100',
 }
+
+export const productTypeMap = new Map([
+  [ProductType['婚纱'], { text: '婚纱', value: ProductType['婚纱'] }],
+  [ProductType['礼服'], { text: '礼服', value: ProductType['礼服'] }],
+  [ProductType['秀禾'], { text: '秀禾', value: ProductType['秀禾'] }],
+  [ProductType['西服'], { text: '西服', value: ProductType['西服'] }],
+  [ProductType['伴娘服'], { text: '伴娘服', value: ProductType['伴娘服'] }],
+  [ProductType['鞋子'], { text: '鞋子', value: ProductType['鞋子'] }],
+  [ProductType['首饰'], { text: '首饰', value: ProductType['首饰'] }],
+  [ProductType['其他'], { text: '其他', value: ProductType['其他'] }],
+]);
 
 export enum ProductSize {
   '均码' = 0,

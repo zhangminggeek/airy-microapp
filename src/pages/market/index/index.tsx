@@ -102,10 +102,17 @@ const Page = () => {
               tagList={item.product?.tagList?.map((item) => item.tag.name)}
               leasePrice={item.leasePrice}
               sellingPrice={item.sellingPrice}
+              companyLogo={item.companyLogo}
+              companyName={item.companyName}
               favorites={item.favorities}
               onClick={() => {
                 RouterUtil.navigateTo('/pages/market/detail/index', {
                   id: item.id,
+                });
+              }}
+              onCompanyClick={() => {
+                RouterUtil.navigateTo('/packageCompany/pages/index/index', {
+                  id: item.companyId,
                 });
               }}
             />

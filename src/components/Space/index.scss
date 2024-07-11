@@ -5,9 +5,10 @@
   }
 
   &-split {
-    height: 100%;
+    height: 24px;
 
     &-divider {
+      height: 100%;
       border-inline-start: 4px solid #e0e0e0;
     }
   }

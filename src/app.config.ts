@@ -32,6 +32,8 @@ export default {
         'pages/register/index',
         'pages/register/code/index',
         'pages/register/result/index',
+        // 主页
+        'pages/index/index',
         // 设置
         'pages/setting/index',
         // 地址管理

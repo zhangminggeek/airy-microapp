@@ -2209,6 +2209,22 @@ export interface GetCompanySelfResponse {
    * 状态, 0:禁用 1:正常 2:待审核
    */
   status: number
+  /**
+   * 粉丝数量
+   */
+  fansCount: number
+  /**
+   * 关注数量
+   */
+  follewedCount: number
+  /**
+   * 今日销售（元）
+   */
+  saleToday: string
+  /**
+   * 今日售出（件）
+   */
+  saleVolumeToday: string
 }
 
 /**
@@ -3145,6 +3161,220 @@ export const postCompanyWithdraw = /*#__PURE__*/ (
 }
 
 postCompanyWithdraw.requestConfig = postCompanyWithdrawRequestConfig
+
+/**
+ * 接口 切换关注状态 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/follow/toggle`
+ */
+export interface PostCompanyFollowToggleRequest {
+  /**
+   * 被关注的公司id
+   */
+  id: number
+  /**
+   * 是否关注
+   */
+  isFollow: boolean
+}
+
+/**
+ * 接口 切换关注状态 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/follow/toggle`
+ */
+export type PostCompanyFollowToggleResponse = any
+
+/**
+ * 接口 切换关注状态 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/follow/toggle`
+ */
+type PostCompanyFollowToggleRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/follow/toggle', 'data', string, string, false>
+>
+
+/**
+ * 接口 切换关注状态 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/follow/toggle`
+ */
+const postCompanyFollowToggleRequestConfig: PostCompanyFollowToggleRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/follow/toggle',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyFollowToggle',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 切换关注状态 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `POST /company/follow/toggle`
+ */
+export const postCompanyFollowToggle = /*#__PURE__*/ (
+  requestData: PostCompanyFollowToggleRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyFollowToggleResponse>(prepare(postCompanyFollowToggleRequestConfig, requestData), ...args)
+}
+
+postCompanyFollowToggle.requestConfig = postCompanyFollowToggleRequestConfig
+
+/**
+ * 接口 获取公司详情 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+export interface GetCompanyIdRequest {
+  /**
+   * 公司id
+   */
+  id: string
+}
+
+/**
+ * 接口 获取公司详情 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+export interface GetCompanyIdResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司名称
+   */
+  name: string
+  /**
+   * 公司LOGO
+   */
+  logo?: string
+  /**
+   * 简介
+   */
+  intro?: string
+  /**
+   * 联系人
+   */
+  contacts: string
+  /**
+   * 联系电话
+   */
+  contactPhone: string
+  /**
+   * 省
+   */
+  province: string
+  /**
+   * 市
+   */
+  city: string
+  /**
+   * 区
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 账户余额
+   */
+  balance: number
+  /**
+   * 状态, 0:禁用 1:正常 2:待审核
+   */
+  status: number
+  /**
+   * 粉丝数量
+   */
+  fansCount: number
+  /**
+   * 是否已关注
+   */
+  follewed: boolean
+  /**
+   * 已卖出数量
+   */
+  sold: number
+}
+
+/**
+ * 接口 获取公司详情 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+type GetCompanyIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/{id}', 'data', 'id', string, false>
+>
+
+/**
+ * 接口 获取公司详情 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+const getCompanyIdRequestConfig: GetCompanyIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取公司详情 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/{id}`
+ */
+export const getCompanyId = /*#__PURE__*/ (requestData: GetCompanyIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetCompanyIdResponse>(prepare(getCompanyIdRequestConfig, requestData), ...args)
+}
+
+getCompanyId.requestConfig = getCompanyIdRequestConfig
 
 const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_3 = '' as any
@@ -7041,6 +7271,14 @@ export interface GetMarketResponse {
      */
     isDeleted: boolean
     /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
      * 服饰信息
      */
     product: {
@@ -7507,6 +7745,14 @@ export interface GetMarketMyPublishedResponse {
      */
     isDeleted: boolean
     /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
      * 服饰信息
      */
     product: {
@@ -7757,6 +8003,14 @@ export interface GetMarketMyFavoriteResponse {
      * 是否被删除
      */
     isDeleted: boolean
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
     /**
      * 服饰信息
      */

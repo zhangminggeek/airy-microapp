@@ -18,6 +18,7 @@ const Page = () => {
     run();
   });
 
+  // 获取公司信息
   const { data, run } = useRequest(getCompanySelf, { manual: true });
 
   return (
@@ -55,14 +56,17 @@ const Page = () => {
           </Button>
         </View>
         <View className={styles['account-body']}>
+          <AmountItem title="今日销售" fontSize={20}>
+            {data?.saleToday ?? '0.00'}
+          </AmountItem>
+          <AmountItem title="今日售出" fontSize={20}>
+            {data?.saleVolumeToday ?? 0}
+          </AmountItem>
           <AmountItem title="关注" fontSize={20}>
-            111
+            {data?.follewedCount ?? 0}
           </AmountItem>
           <AmountItem title="粉丝" fontSize={20}>
-            111
-          </AmountItem>
-          <AmountItem title="今日收入" fontSize={20}>
-            111
+            {data?.fansCount ?? 0}
           </AmountItem>
         </View>
       </Section>
