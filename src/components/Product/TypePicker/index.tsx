@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import type { PickerProps } from '@/components/Picker';
 
 import { Picker } from '@/components';
-import { useProductStore } from '@/models/product';
+import { useProductStore } from '@/models';
 
-interface ProductTypePickerProps extends Omit<PickerProps<string>, 'options'> {}
+interface TypePickerProps extends Omit<PickerProps<string>, 'options'> {}
 
-const ProductTypePicker = (props: ProductTypePickerProps) => {
+const TypePicker = (props: TypePickerProps) => {
   const { typeList, fetchProductType } = useProductStore((state) => state);
 
   useEffect(() => {
@@ -25,4 +25,4 @@ const ProductTypePicker = (props: ProductTypePickerProps) => {
   );
 };
 
-export default ProductTypePicker;
+export default TypePicker;

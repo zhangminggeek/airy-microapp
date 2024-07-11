@@ -91,3 +91,8 @@ export const productStatusMap = new Map([
   [ProductStatus['已售出'], { text: '已售出', value: ProductStatus['已售出'] }],
   [ProductStatus['借调中'], { text: '借调中', value: ProductStatus['S'] }],
 ]);
+
+export enum ProductSource {
+  '服装管理' = '1',
+  '相册' = '2',
+}

@@ -15,8 +15,9 @@ import {
   getMarketMyPublished,
   putMarketStatus,
 } from '@/api';
-import { Affix, List, Product, Space, Tag } from '@/components';
+import { ActionSheet, Affix, List, Product, Space, Tag } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
+import { ProductSource } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -289,11 +290,19 @@ const Page = () => {
           />
         </View>
       </View>
-      <Affix
-        onClick={() => {
-          RouterUtil.navigateTo('/pages/market/action/index');
+      <ActionSheet
+        options={[
+          { name: '从服装管理中选择', key: ProductSource['服装管理'] },
+          { name: '从相册中选择', key: ProductSource['相册'] },
+        ]}
+        onSelect={(option) => {
+          RouterUtil.navigateTo('/pages/market/action/index', {
+            source: option.key,
+          });
         }}
-      />
+      >
+        <Affix />
+      </ActionSheet>
       {renderDialogTakeDown()}
       {renderDialogDelete()}
       {renderDialogRemrk()}

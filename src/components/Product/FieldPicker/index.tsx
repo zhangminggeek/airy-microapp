@@ -7,16 +7,12 @@ import { getProductFieldOption } from '@/api';
 import { Picker } from '@/components';
 import { useRequest } from '@/hooks';
 
-interface ProductFieldPickerProps extends Omit<PickerProps, 'options'> {
+interface FieldPickerProps extends Omit<PickerProps, 'options'> {
   code: string; // 服饰类型 code
   field: string; // 字段 key
 }
 
-const ProductFieldPicker: FC<ProductFieldPickerProps> = ({
-  code,
-  field,
-  ...rest
-}) => {
+const FieldPicker: FC<FieldPickerProps> = ({ code, field, ...rest }) => {
   // 获取字段选项
   const { data, run } = useRequest(getProductFieldOption, { manual: true });
 
@@ -35,4 +31,4 @@ const ProductFieldPicker: FC<ProductFieldPickerProps> = ({
   );
 };
 
-export default ProductFieldPicker;
+export default FieldPicker;

@@ -36,6 +36,7 @@ const Page = () => {
         </Space>
       }
       transparent
+      safeArea={false}
     >
       <Section className={styles.account}>
         <View className={styles['account-header']}>

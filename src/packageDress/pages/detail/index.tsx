@@ -8,7 +8,7 @@ import type { GetProductIdRequest, GetProductIdResponse } from '@/api';
 
 import { deleteProductId, getProductId } from '@/api';
 import { ActionSheet, Product } from '@/components';
-import { ProductStatus } from '@/constants/product';
+import { ProductSource, ProductStatus } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -93,6 +93,7 @@ const Page = () => {
                   if (item.key === 'sell') {
                     RouterUtil.navigateTo('/pages/market/action/index', {
                       productId: id,
+                      source: ProductSource['服装管理'],
                     });
                   } else if (item.key === 'delete') {
                     open();

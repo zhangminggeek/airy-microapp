@@ -10,7 +10,7 @@ import { getProductPage } from '@/api';
 import { Affix, Icon, InputSearch, List } from '@/components';
 import { ProductStatus, productStatusMap } from '@/constants/product';
 import { BasicLayout } from '@/layouts';
-import { useProductStore } from '@/models/product';
+import { useProductStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {

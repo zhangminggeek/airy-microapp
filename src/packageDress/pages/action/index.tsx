@@ -2,16 +2,13 @@ import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
-import ProductFieldPicker from './ProductFieldPicker';
-import ProductTypePicker from './ProductTypePicker';
-
 import { getProductId, getTag, postProduct, putProduct } from '@/api';
-import { FormSection, Picker, TagChecker, Upload } from '@/components';
+import { FormSection, Picker, Product, TagChecker, Upload } from '@/components';
 import { productSizeMap } from '@/constants/product';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useProductStore } from '@/models/product';
+import { useProductStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
@@ -145,7 +142,7 @@ const Page = () => {
             validateTrigger="onConfirm"
             rules={[{ required: true, message: '请选择商品类型' }]}
           >
-            <ProductTypePicker
+            <Product.TypePicker
               onConfirm={async (_, code) => {
                 setCurrentCode(code);
                 await fetchProjectField(code);
@@ -173,7 +170,7 @@ const Page = () => {
                   getValueFromEvent={(...args) => args[1]}
                   validateTrigger="onConfirm"
                 >
-                  <ProductFieldPicker code={currentCode} field={item.key} />
+                  <Product.FieldPicker code={currentCode} field={item.key} />
                 </Form.Item>
               ))
             : null}

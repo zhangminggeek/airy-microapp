@@ -7720,6 +7720,10 @@ getMarket.requestConfig = getMarketRequestConfig
  */
 export interface PostMarketRequest {
   /**
+   * 名称
+   */
+  title: string
+  /**
    * 公司收货id
    */
   companyAddressId?: number
@@ -7730,7 +7734,7 @@ export interface PostMarketRequest {
   /**
    * 产品描述
    */
-  description: string
+  description?: string
   /**
    * 是否允许出售, 0:否 1:是
    */
@@ -7825,6 +7829,10 @@ postMarket.requestConfig = postMarketRequestConfig
  */
 export interface PutMarketRequest {
   /**
+   * 名称
+   */
+  title: string
+  /**
    * 公司收货id
    */
   companyAddressId?: number
@@ -7835,7 +7843,7 @@ export interface PutMarketRequest {
   /**
    * 产品描述
    */
-  description: string
+  description?: string
   /**
    * 是否允许出售, 0:否 1:是
    */
@@ -8447,6 +8455,151 @@ export const getMarketMyFavorite = /*#__PURE__*/ (
 }
 
 getMarketMyFavorite.requestConfig = getMarketMyFavoriteRequestConfig
+
+/**
+ * 接口 服饰上架二手市场出售\/借调服饰 的 **请求类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/and/product`
+ */
+export interface PostMarketAndProductRequest {
+  /**
+   * 名称
+   */
+  title: string
+  /**
+   * 公司收货id
+   */
+  companyAddressId?: number
+  /**
+   * 产品id
+   */
+  productId?: number
+  /**
+   * 产品描述
+   */
+  description?: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
+   * 服饰图片
+   */
+  picList: string[]
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 服饰类型code
+   */
+  typeCode: string
+  /**
+   * 服饰尺寸
+   */
+  size: number
+  /**
+   * 其他信息
+   */
+  fieldList?: {
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段的值(该字段选项的id)
+     */
+    fieldValue: number
+  }[]
+  /**
+   * 服饰标签
+   */
+  tagIdList?: number[]
+}
+
+/**
+ * 接口 服饰上架二手市场出售\/借调服饰 的 **返回类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/and/product`
+ */
+export type PostMarketAndProductResponse = number
+
+/**
+ * 接口 服饰上架二手市场出售\/借调服饰 的 **请求配置的类型**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/and/product`
+ */
+type PostMarketAndProductRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/and/product', 'data', string, string, false>
+>
+
+/**
+ * 接口 服饰上架二手市场出售\/借调服饰 的 **请求配置**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/and/product`
+ */
+const postMarketAndProductRequestConfig: PostMarketAndProductRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
+  path: '/market/and/product',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_9,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postMarketAndProduct',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 服饰上架二手市场出售\/借调服饰 的 **请求函数**
+ *
+ * @分类 二手市场出售/借调服饰
+ * @请求头 `POST /market/and/product`
+ */
+export const postMarketAndProduct = /*#__PURE__*/ (
+  requestData: PostMarketAndProductRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostMarketAndProductResponse>(prepare(postMarketAndProductRequestConfig, requestData), ...args)
+}
+
+postMarketAndProduct.requestConfig = postMarketAndProductRequestConfig
 
 /**
  * 接口 更新二手市场出售\/借调服饰状态 的 **请求类型**
