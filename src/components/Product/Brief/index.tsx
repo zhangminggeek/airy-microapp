@@ -21,9 +21,9 @@ interface BriefProps {
   image?: string;
   title?: string;
   desc?: string;
-  leasePrice?: string;
-  sellingPrice?: string;
-  total?: string;
+  leasePrice?: number;
+  sellingPrice?: number;
+  total?: number;
   footer?: ReactNode;
   onClick?: () => void;
 }

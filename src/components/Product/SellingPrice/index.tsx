@@ -11,7 +11,7 @@ import './index.scss';
 interface SellingPriceProps {
   className?: string;
   style?: CSSProperties;
-  value?: string;
+  value?: number;
 }
 
 const PREFIX_CLS = `${ROOT_PREFIX_CLS}-selling-price`;

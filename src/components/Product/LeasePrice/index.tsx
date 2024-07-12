@@ -13,7 +13,7 @@ import './index.scss';
 interface SellingPriceProps {
   className?: string;
   style?: CSSProperties;
-  value?: string;
+  value?: number;
   iconOnly?: boolean;
 }
 

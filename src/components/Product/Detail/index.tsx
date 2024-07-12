@@ -19,8 +19,8 @@ interface ProductDetailProps {
   className?: string;
   style?: CSSProperties;
   images?: PictureGroupProps['images'];
-  sellingPrice?: string;
-  leasePrice?: string;
+  sellingPrice?: number;
+  leasePrice?: number;
   favorites?: number;
   tagList?: string[];
   title?: string;

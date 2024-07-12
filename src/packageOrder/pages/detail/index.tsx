@@ -62,7 +62,7 @@ const Page = () => {
               ? data?.market?.sellingPrice
               : Big(data?.market?.leasePrice ?? 0)
                   .plus(data?.market?.leaseDeposit ?? 0)
-                  .toString()
+                  .toNumber()
           }
         />
         {data?.type === OrderType['借调'] ? (

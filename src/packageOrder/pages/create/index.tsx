@@ -102,7 +102,7 @@ const Page = () => {
           ? data?.sellingPrice
           : Big(data?.leasePrice ?? 0)
               .plus(data?.leaseDeposit ?? 0)
-              .toString(),
+              .toNumber(),
     };
   }, [type, data]);
 

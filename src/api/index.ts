@@ -285,15 +285,15 @@ export interface GetOrderBoughtResponse {
       /**
        * 出售价
        */
-      sellingPrice?: string
+      sellingPrice?: number
       /**
        * 借调价
        */
-      leasePrice?: string
+      leasePrice?: number
       /**
        * 借调押金
        */
-      leaseDeposit?: string
+      leaseDeposit?: number
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -608,15 +608,15 @@ export interface GetOrderSoldResponse {
       /**
        * 出售价
        */
-      sellingPrice?: string
+      sellingPrice?: number
       /**
        * 借调价
        */
-      leasePrice?: string
+      leasePrice?: number
       /**
        * 借调押金
        */
-      leaseDeposit?: string
+      leaseDeposit?: number
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -1758,15 +1758,15 @@ export interface GetOrderIdResponse {
     /**
      * 出售价
      */
-    sellingPrice?: string
+    sellingPrice?: number
     /**
      * 借调价
      */
-    leasePrice?: string
+    leasePrice?: number
     /**
      * 借调押金
      */
-    leaseDeposit?: string
+    leaseDeposit?: number
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -3240,6 +3240,141 @@ export const deleteCompanyPaymentId = /*#__PURE__*/ (
 }
 
 deleteCompanyPaymentId.requestConfig = deleteCompanyPaymentIdRequestConfig
+
+/**
+ * 接口 获取余额流水 的 **请求类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/balance`
+ */
+export interface GetCompanyBalanceRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 流水 1:收入 2:支出
+   */
+  mode?: string
+}
+
+/**
+ * 接口 获取余额流水 的 **返回类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/balance`
+ */
+export interface GetCompanyBalanceResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 余额流水id
+     */
+    id: number
+    /**
+     * 类型 1:服装出售 2:服装借出 3:服装购买 4:服装借入 5:押金 6:押金退还 7:提现
+     */
+    type: number
+    /**
+     * 收支 1:收入 2:支出
+     */
+    mode: number
+    /**
+     * 金额
+     */
+    amount: number
+    /**
+     * 金额
+     */
+    serviceCharge?: number
+    /**
+     * 拒绝理由
+     */
+    remark?: string
+    /**
+     * 公司id
+     */
+    companyId: number
+  }[]
+}
+
+/**
+ * 接口 获取余额流水 的 **请求配置的类型**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/balance`
+ */
+type GetCompanyBalanceRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/company/balance',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'mode',
+    false
+  >
+>
+
+/**
+ * 接口 获取余额流水 的 **请求配置**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/balance`
+ */
+const getCompanyBalanceRequestConfig: GetCompanyBalanceRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/company/balance',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'mode'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyBalance',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+/**
+ * 接口 获取余额流水 的 **请求函数**
+ *
+ * @分类 公司
+ * @请求头 `GET /company/balance`
+ */
+export const getCompanyBalance = /*#__PURE__*/ (
+  requestData: GetCompanyBalanceRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyBalanceResponse>(prepare(getCompanyBalanceRequestConfig, requestData), ...args)
+}
+
+getCompanyBalance.requestConfig = getCompanyBalanceRequestConfig
 
 /**
  * 接口 获取提现记录列表 的 **请求类型**
@@ -7531,15 +7666,15 @@ export interface GetMarketResponse {
     /**
      * 出售价
      */
-    sellingPrice?: string
+    sellingPrice?: number
     /**
      * 借调价
      */
-    leasePrice?: string
+    leasePrice?: number
     /**
      * 借调押金
      */
-    leaseDeposit?: string
+    leaseDeposit?: number
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -7728,10 +7863,6 @@ export interface PostMarketRequest {
    */
   companyAddressId?: number
   /**
-   * 产品id
-   */
-  productId: number
-  /**
    * 产品描述
    */
   description?: string
@@ -7746,15 +7877,15 @@ export interface PostMarketRequest {
   /**
    * 出售价
    */
-  sellingPrice?: string
+  sellingPrice?: number
   /**
    * 借调价
    */
-  leasePrice?: string
+  leasePrice?: number
   /**
    * 借调押金
    */
-  leaseDeposit?: string
+  leaseDeposit?: number
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -7763,6 +7894,10 @@ export interface PostMarketRequest {
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
   quality: number
+  /**
+   * 产品id
+   */
+  productId: number
 }
 
 /**
@@ -7837,10 +7972,6 @@ export interface PutMarketRequest {
    */
   companyAddressId?: number
   /**
-   * 产品id
-   */
-  productId: number
-  /**
    * 产品描述
    */
   description?: string
@@ -7855,15 +7986,15 @@ export interface PutMarketRequest {
   /**
    * 出售价
    */
-  sellingPrice?: string
+  sellingPrice?: number
   /**
    * 借调价
    */
-  leasePrice?: string
+  leasePrice?: number
   /**
    * 借调押金
    */
-  leaseDeposit?: string
+  leaseDeposit?: number
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -7872,6 +8003,10 @@ export interface PutMarketRequest {
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
   quality: number
+  /**
+   * 产品id
+   */
+  productId: number
   /**
    * 二手市场出售/借调服饰id
    */
@@ -8013,15 +8148,15 @@ export interface GetMarketMyPublishedResponse {
     /**
      * 出售价
      */
-    sellingPrice?: string
+    sellingPrice?: number
     /**
      * 借调价
      */
-    leasePrice?: string
+    leasePrice?: number
     /**
      * 借调押金
      */
-    leaseDeposit?: string
+    leaseDeposit?: number
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -8272,15 +8407,15 @@ export interface GetMarketMyFavoriteResponse {
     /**
      * 出售价
      */
-    sellingPrice?: string
+    sellingPrice?: number
     /**
      * 借调价
      */
-    leasePrice?: string
+    leasePrice?: number
     /**
      * 借调押金
      */
-    leaseDeposit?: string
+    leaseDeposit?: number
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -8472,10 +8607,6 @@ export interface PostMarketAndProductRequest {
    */
   companyAddressId?: number
   /**
-   * 产品id
-   */
-  productId?: number
-  /**
    * 产品描述
    */
   description?: string
@@ -8490,15 +8621,15 @@ export interface PostMarketAndProductRequest {
   /**
    * 出售价
    */
-  sellingPrice?: string
+  sellingPrice?: number
   /**
    * 借调价
    */
-  leasePrice?: string
+  leasePrice?: number
   /**
    * 借调押金
    */
-  leaseDeposit?: string
+  leaseDeposit?: number
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -8737,15 +8868,15 @@ export interface GetMarketIdResponse {
   /**
    * 出售价
    */
-  sellingPrice?: string
+  sellingPrice?: number
   /**
    * 借调价
    */
-  leasePrice?: string
+  leasePrice?: number
   /**
    * 借调押金
    */
-  leaseDeposit?: string
+  leaseDeposit?: number
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */

@@ -19,8 +19,8 @@ interface CardProps {
   image?: string;
   title?: string;
   tagList?: string[];
-  leasePrice?: string;
-  sellingPrice?: string;
+  leasePrice?: number;
+  sellingPrice?: number;
   favorites?: number;
   status?: number;
   companyLogo?: string;

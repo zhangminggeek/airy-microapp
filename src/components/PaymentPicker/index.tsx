@@ -19,7 +19,7 @@ interface PaymentPickerProps {
   className?: string;
   style?: CSSProperties;
   visible?: PopupProps['visible'];
-  amount?: string;
+  amount?: number;
   onConfirm?: (type: PaymentType) => void;
   onClose?: PopupProps['onClose'];
 }
