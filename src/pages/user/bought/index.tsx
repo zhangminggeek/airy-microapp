@@ -249,7 +249,7 @@ const Page = () => {
                     ? item.market?.sellingPrice
                     : Big(item.market?.leasePrice ?? 0)
                         .plus(item.market?.leaseDeposit ?? 0)
-                        .toNumber()
+                        .toString()
                 }
                 footer={
                   tabs[currentIndex].actions?.(item)?.length ? (
@@ -288,7 +288,7 @@ const Page = () => {
             ? currentOrder?.market?.sellingPrice
             : Big(currentOrder?.market?.leasePrice ?? 0)
                 .plus(currentOrder?.market?.leaseDeposit ?? 0)
-                .toNumber()
+                .toString()
         }
         onConfirm={async (v) => {
           setShowPaymentPicker(false);

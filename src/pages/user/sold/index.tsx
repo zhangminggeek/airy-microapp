@@ -107,7 +107,7 @@ const Page = () => {
                     ? item.market?.sellingPrice
                     : Big(item.market?.leasePrice ?? 0)
                         .plus(item.market?.leaseDeposit ?? 0)
-                        .toNumber()
+                        .toString()
                 }
                 footer={
                   tabs[currentIndex].actions?.(item)?.length ? (

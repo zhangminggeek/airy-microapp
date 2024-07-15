@@ -1,0 +1,25 @@
+@import '../../styles/var.scss';
+
+.m-filter {
+  height: 92px;
+
+  &-panel {
+    .nut-menu-container-item {
+      flex-direction: row-reverse;
+
+      & + .nut-menu-container-item {
+        border-top: 2px solid $border-color-base;
+      }
+
+      & > view:last-child {
+        flex: 1;
+      }
+
+      &.active {
+        .m-icon {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}

@@ -59,3 +59,45 @@ export const paymentTypeMap = new Map([
     { text: '微信支付', value: PaymentType['微信支付'] },
   ],
 ]);
+
+// 流水类型
+export enum BalanceRecordType {
+  '服装出售' = 1,
+  '服装借出' = 2,
+  '服装购买' = 3,
+  '服装借入' = 4,
+  '押金' = 5,
+  '押金退还' = 6,
+  '提现' = 7,
+}
+
+export const balanceRecordTypeMap = new Map([
+  [
+    BalanceRecordType['服装出售'],
+    { text: '服装出售', value: BalanceRecordType['服装出售'] },
+  ],
+  [
+    BalanceRecordType['服装借出'],
+    { text: '服装借出', value: BalanceRecordType['服装借出'] },
+  ],
+  [
+    BalanceRecordType['服装购买'],
+    { text: '服装购买', value: BalanceRecordType['服装购买'] },
+  ],
+  [
+    BalanceRecordType['服装借入'],
+    { text: '服装借入', value: BalanceRecordType['服装借入'] },
+  ],
+  [
+    BalanceRecordType['押金'],
+    { text: '押金', value: BalanceRecordType['押金'] },
+  ],
+  [
+    BalanceRecordType['押金退还'],
+    { text: '押金退还', value: BalanceRecordType['押金退还'] },
+  ],
+  [
+    BalanceRecordType['提现'],
+    { text: '提现', value: BalanceRecordType['提现'] },
+  ],
+]);

@@ -25,6 +25,27 @@ export const isNil = (val: any, allowEmptyString = true) => {
   return false;
 };
 
+type ObjectType = { [key in string]: any };
+
+/**
+ * 移除对象中无效属性（null、undefined）
+ * @public
+ * @param obj - 原对象
+ * @returns 移除无效属性后的对象
+ */
+export function removeNilKey(obj: ObjectType): ObjectType {
+  if (!obj) {
+    return {};
+  }
+  const newObj: { [key: string]: any } = {};
+  Object.keys(obj).forEach((key) => {
+    if (!isNil((obj as ObjectType)[key])) {
+      newObj[key] = (obj as ObjectType)[key];
+    }
+  });
+  return newObj;
+}
+
 /**
  * 加密
  * @param pwd 密码（明文）

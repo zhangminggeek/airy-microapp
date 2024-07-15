@@ -9,6 +9,7 @@ import CodeInput from './CodeInput';
 import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
+import Filter from './Filter';
 import FormSection from './FormSection';
 import Icon from './Icon';
 import InputCode from './InputCode';
@@ -44,6 +45,7 @@ export {
   Descriptions,
   EditableCell,
   Empty,
+  Filter,
   FormSection,
   Icon,
   InputCode,

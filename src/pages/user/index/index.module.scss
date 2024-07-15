@@ -20,16 +20,16 @@
       justify-content: space-between;
       margin-bottom: 40px;
 
+      .balance-btn {
+        color: $text-color-secondary;
+      }
+
       &-btn {
         width: 120px;
       }
     }
 
     &-body {
-      // display: grid;
-      // grid-template-columns: repeat(4, 25%);
-      // grid-column-gap: 16px;
-
       display: flex;
       justify-content: space-between;
       align-items: center;

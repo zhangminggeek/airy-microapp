@@ -40,7 +40,28 @@ const Page = () => {
     >
       <Section className={styles.account}>
         <View className={styles['account-header']}>
-          <AmountItem title="总资产(元)" fontSize={28}>
+          <AmountItem
+            title={
+              <Space>
+                余额(元)
+                <Button
+                  className={styles['balance-btn']}
+                  rightIcon={
+                    <Icon name="RightOutlined" size={14} color="#c7c7c7" />
+                  }
+                  fill="none"
+                  onClick={() => {
+                    RouterUtil.navigateTo(
+                      '/packageCompany/pages/balance/index',
+                    );
+                  }}
+                >
+                  明细
+                </Button>
+              </Space>
+            }
+            fontSize={28}
+          >
             {data?.balance ?? 0}
           </AmountItem>
           <Button

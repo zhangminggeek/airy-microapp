@@ -82,14 +82,16 @@ export const productQualityMap = new Map([
 // 产品状态
 export enum ProductStatus {
   '正常' = 1,
-  '已售出' = 2,
-  '借调中' = 3,
+  '上架中' = 2,
+  '已售出' = 3,
+  '借调中' = 4,
 }
 
 export const productStatusMap = new Map([
   [ProductStatus['正常'], { text: '正常', value: ProductStatus['正常'] }],
+  [ProductStatus['上架中'], { text: '上架中', value: ProductStatus['上架中'] }],
   [ProductStatus['已售出'], { text: '已售出', value: ProductStatus['已售出'] }],
-  [ProductStatus['借调中'], { text: '借调中', value: ProductStatus['S'] }],
+  [ProductStatus['借调中'], { text: '借调中', value: ProductStatus['借调中'] }],
 ]);
 
 export enum ProductSource {

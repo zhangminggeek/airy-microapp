@@ -6,7 +6,7 @@ import type { ITouchEvent } from '@tarojs/components';
 import type { FC, ReactNode } from 'react';
 
 interface AmountItemProps {
-  title?: string;
+  title?: ReactNode;
   fontSize?: number;
   children?: ReactNode;
   onClick?: (e: ITouchEvent) => void;

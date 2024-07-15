@@ -42,6 +42,8 @@ export default {
         // 收款方式
         'pages/payment/management/index',
         'pages/payment/action/index',
+        // 余额明细
+        'pages/balance/index',
         // 提现
         'pages/withdraw/index/index',
         'pages/withdraw/result/index',

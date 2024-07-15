@@ -233,7 +233,7 @@ export interface GetOrderBoughtResponse {
     /**
      * 退还押金
      */
-    depositRefund?: number
+    depositRefund?: string
     /**
      * 退还押金备注
      */
@@ -285,15 +285,15 @@ export interface GetOrderBoughtResponse {
       /**
        * 出售价
        */
-      sellingPrice?: number
+      sellingPrice?: string
       /**
        * 借调价
        */
-      leasePrice?: number
+      leasePrice?: string
       /**
        * 借调押金
        */
-      leaseDeposit?: number
+      leaseDeposit?: string
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -367,7 +367,7 @@ export interface GetOrderBoughtResponse {
          */
         userId: number
         /**
-         * 服饰状态 1:正常 2:已出售 3:借调中
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中
          */
         status: number
         /**
@@ -556,7 +556,7 @@ export interface GetOrderSoldResponse {
     /**
      * 退还押金
      */
-    depositRefund?: number
+    depositRefund?: string
     /**
      * 退还押金备注
      */
@@ -608,15 +608,15 @@ export interface GetOrderSoldResponse {
       /**
        * 出售价
        */
-      sellingPrice?: number
+      sellingPrice?: string
       /**
        * 借调价
        */
-      leasePrice?: number
+      leasePrice?: string
       /**
        * 借调押金
        */
-      leaseDeposit?: number
+      leaseDeposit?: string
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -690,7 +690,7 @@ export interface GetOrderSoldResponse {
          */
         userId: number
         /**
-         * 服饰状态 1:正常 2:已出售 3:借调中
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中
          */
         status: number
         /**
@@ -1553,7 +1553,7 @@ export interface PostOrderReceiveSellerRequest {
   /**
    * 退还押金金额
    */
-  amount: number
+  amount: string
   /**
    * 退还押金备注
    */
@@ -1706,7 +1706,7 @@ export interface GetOrderIdResponse {
   /**
    * 退还押金
    */
-  depositRefund?: number
+  depositRefund?: string
   /**
    * 退还押金备注
    */
@@ -1758,15 +1758,15 @@ export interface GetOrderIdResponse {
     /**
      * 出售价
      */
-    sellingPrice?: number
+    sellingPrice?: string
     /**
      * 借调价
      */
-    leasePrice?: number
+    leasePrice?: string
     /**
      * 借调押金
      */
-    leaseDeposit?: number
+    leaseDeposit?: string
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -1840,7 +1840,7 @@ export interface GetOrderIdResponse {
        */
       userId: number
       /**
-       * 服饰状态 1:正常 2:已出售 3:借调中
+       * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中
        */
       status: number
       /**
@@ -1921,7 +1921,7 @@ export interface GetOrderIdResponse {
     /**
      * 账户余额
      */
-    balance: number
+    balance: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -2204,7 +2204,7 @@ export interface GetCompanySelfResponse {
   /**
    * 账户余额
    */
-  balance: number
+  balance: string
   /**
    * 状态, 0:禁用 1:正常 2:待审核
    */
@@ -2358,7 +2358,7 @@ export interface GetCompanyFansResponse {
     /**
      * 账户余额
      */
-    balance: number
+    balance: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -2497,7 +2497,7 @@ export interface GetCompanyFolloweeResponse {
     /**
      * 账户余额
      */
-    balance: number
+    balance: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -3300,11 +3300,11 @@ export interface GetCompanyBalanceResponse {
     /**
      * 金额
      */
-    amount: number
+    amount: string
     /**
      * 金额
      */
-    serviceCharge?: number
+    serviceCharge?: string
     /**
      * 拒绝理由
      */
@@ -3435,7 +3435,7 @@ export interface GetCompanyWithdrawResponse {
     /**
      * 提现金额
      */
-    amount: number
+    amount: string
     /**
      * 提现金额
      */
@@ -3525,7 +3525,7 @@ export interface PostCompanyWithdrawRequest {
   /**
    * 提现金额
    */
-  amount: number
+  amount: string
 }
 
 /**
@@ -3734,7 +3734,7 @@ export interface GetCompanyIdResponse {
   /**
    * 账户余额
    */
-  balance: number
+  balance: string
   /**
    * 状态, 0:禁用 1:正常 2:待审核
    */
@@ -4228,7 +4228,7 @@ export interface GetUserSelfResponse {
     /**
      * 账户余额
      */
-    balance: number
+    balance: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -4399,7 +4399,7 @@ export interface GetUserIdResponse {
     /**
      * 账户余额
      */
-    balance: number
+    balance: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -7666,15 +7666,15 @@ export interface GetMarketResponse {
     /**
      * 出售价
      */
-    sellingPrice?: number
+    sellingPrice?: string
     /**
      * 借调价
      */
-    leasePrice?: number
+    leasePrice?: string
     /**
      * 借调押金
      */
-    leaseDeposit?: number
+    leaseDeposit?: string
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -7877,15 +7877,15 @@ export interface PostMarketRequest {
   /**
    * 出售价
    */
-  sellingPrice?: number
+  sellingPrice?: string
   /**
    * 借调价
    */
-  leasePrice?: number
+  leasePrice?: string
   /**
    * 借调押金
    */
-  leaseDeposit?: number
+  leaseDeposit?: string
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -7986,15 +7986,15 @@ export interface PutMarketRequest {
   /**
    * 出售价
    */
-  sellingPrice?: number
+  sellingPrice?: string
   /**
    * 借调价
    */
-  leasePrice?: number
+  leasePrice?: string
   /**
    * 借调押金
    */
-  leaseDeposit?: number
+  leaseDeposit?: string
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -8148,15 +8148,15 @@ export interface GetMarketMyPublishedResponse {
     /**
      * 出售价
      */
-    sellingPrice?: number
+    sellingPrice?: string
     /**
      * 借调价
      */
-    leasePrice?: number
+    leasePrice?: string
     /**
      * 借调押金
      */
-    leaseDeposit?: number
+    leaseDeposit?: string
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -8407,15 +8407,15 @@ export interface GetMarketMyFavoriteResponse {
     /**
      * 出售价
      */
-    sellingPrice?: number
+    sellingPrice?: string
     /**
      * 借调价
      */
-    leasePrice?: number
+    leasePrice?: string
     /**
      * 借调押金
      */
-    leaseDeposit?: number
+    leaseDeposit?: string
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -8621,15 +8621,15 @@ export interface PostMarketAndProductRequest {
   /**
    * 出售价
    */
-  sellingPrice?: number
+  sellingPrice?: string
   /**
    * 借调价
    */
-  leasePrice?: number
+  leasePrice?: string
   /**
    * 借调押金
    */
-  leaseDeposit?: number
+  leaseDeposit?: string
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -8868,15 +8868,15 @@ export interface GetMarketIdResponse {
   /**
    * 出售价
    */
-  sellingPrice?: number
+  sellingPrice?: string
   /**
    * 借调价
    */
-  leasePrice?: number
+  leasePrice?: string
   /**
    * 借调押金
    */
-  leaseDeposit?: number
+  leaseDeposit?: string
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */

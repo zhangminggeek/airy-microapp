@@ -4,7 +4,7 @@ import { Method, type RequestFunctionParams } from 'yapi-to-typescript';
 import type { BaseResponse } from '@/interfaces/base';
 
 import { StorageKey } from '@/constants/storage';
-import { RouterUtil, Toast } from '@/utils';
+import { removeNilKey, RouterUtil, Toast } from '@/utils';
 
 export const DEFAULT_TIP_MESSAGE = '请求失败，请刷新重试';
 
@@ -43,7 +43,7 @@ const request = <ResponseData>(payload: RequestFunctionParams) => {
       mode: 'cors',
       method,
       url,
-      data,
+      data: removeNilKey(data),
       header: {
         'content-type': 'application/json', // 默认值
         token: Taro.getStorageSync(StorageKey.TOKEN),
@@ -90,7 +90,7 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
       timeout: 5000,
       method,
       path: url,
-      data,
+      data: removeNilKey(data),
       header: {
         'X-WX-SERVICE': 'prod',
         'content-type': 'application/json', // 默认值

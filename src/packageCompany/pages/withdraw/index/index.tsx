@@ -175,7 +175,7 @@ const Page = () => {
               Toast.info('提现金额不能大于余额');
               return;
             }
-            withdraw({ type: method, amount: Number(amount) });
+            withdraw({ type: method, amount });
           }}
         >
           立即提现
