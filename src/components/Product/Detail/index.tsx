@@ -12,6 +12,7 @@ import PictureGroup, { type PictureGroupProps } from './PictureGroup';
 import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { Space, Tag } from '@/components';
+import { expressMethodMap } from '@/constants/market';
 
 import './index.scss';
 
@@ -22,6 +23,7 @@ interface ProductDetailProps {
   sellingPrice?: string;
   leasePrice?: string;
   favorites?: number;
+  expressMethod?: number;
   tagList?: string[];
   title?: string;
   desc?: string;
@@ -39,6 +41,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
   images,
   sellingPrice,
   leasePrice,
+  expressMethod,
   tagList = [],
   title,
   desc,
@@ -62,6 +65,11 @@ const ProductDetail: FC<ProductDetailProps> = ({
         </View>
         {tagList?.length ? (
           <View className={`${PREFIX_CLS}-header-tag-group`}>
+            {expressMethod ? (
+              <Tag className={`${PREFIX_CLS}-header-tag`} type="success" plain>
+                {expressMethodMap.get(expressMethod)?.text}
+              </Tag>
+            ) : null}
             {tagList.map((item, index) => (
               <Tag
                 key={index}

@@ -1,6 +1,35 @@
 @import '../../../styles/var.scss';
 @import '../../../styles/mixins.scss';
 
+.extra {
+  text-align: right;
+
+  .quality {
+    position: relative;
+    font-size: $font-size-small;
+    color: $text-color-main;
+    font-family: 500;
+    margin-bottom: 8px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      display: block;
+      width: 100%;
+      height: 12px;
+      background-color: rgba($color-primary, 0.4);
+    }
+  }
+
+  .favorities {
+    font-size: $font-size-small;
+    color: $text-color-secondary;
+    font-family: 400;
+  }
+}
+
 .footer {
   display: flex;
   justify-content: space-between;

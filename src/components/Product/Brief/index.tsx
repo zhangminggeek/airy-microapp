@@ -15,7 +15,7 @@ import { OrderType } from '@/constants/order';
 import './index.scss';
 
 interface BriefProps {
-  clasName?: string;
+  className?: string;
   style?: CSSProperties;
   type?: number;
   image?: string;
@@ -24,6 +24,7 @@ interface BriefProps {
   leasePrice?: string;
   sellingPrice?: string;
   total?: string;
+  header?: ReactNode;
   footer?: ReactNode;
   onClick?: () => void;
 }
@@ -31,7 +32,7 @@ interface BriefProps {
 const PREFIX_CLS = `${ROOT_PREFIX_CLS}-brief`;
 
 const Brief: FC<BriefProps> = ({
-  clasName,
+  className,
   type,
   image,
   title,
@@ -39,11 +40,13 @@ const Brief: FC<BriefProps> = ({
   leasePrice,
   sellingPrice,
   total,
+  header,
   footer,
   onClick,
 }) => {
   return (
-    <View className={classnames(PREFIX_CLS, clasName)} onClick={onClick}>
+    <View className={classnames(PREFIX_CLS, className)} onClick={onClick}>
+      {header ? <View className={`${PREFIX_CLS}-header`}>{header}</View> : null}
       <View className={`${PREFIX_CLS}-body`}>
         <Image
           className={`${PREFIX_CLS}-body-image`}

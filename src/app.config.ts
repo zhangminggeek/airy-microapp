@@ -13,12 +13,17 @@ export default {
     'pages/market/action/result/index',
     'pages/market/detail/index',
     // 求购
-    'pages/requirement/index',
+    'pages/purchase/index/index',
+    'pages/purchase/action/index',
+    'pages/purchase/action/result/index',
+    'pages/purchase/detail/index',
+    'pages/purchase/select/index',
     // 我的
     'pages/user/index/index',
     'pages/user/published/index',
     'pages/user/bought/index',
     'pages/user/sold/index',
+    'pages/user/purchase/index',
     'pages/user/favorite/index',
     // 公共页
     'pages/common/edit/index',
@@ -90,7 +95,7 @@ export default {
         selectedIconPath: 'assets/icons/my_favorite.png',
       },
       {
-        pagePath: 'pages/requirement/index',
+        pagePath: 'pages/purchase/index/index',
         text: '求购',
         iconPath: 'assets/icons/my_favorite.png',
         selectedIconPath: 'assets/icons/my_favorite.png',

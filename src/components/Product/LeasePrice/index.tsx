@@ -1,6 +1,7 @@
 import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
+import { useMemo } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../constants';
 
@@ -10,21 +11,44 @@ import ImageBorrow from '@/assets/icons/borrow.png';
 
 import './index.scss';
 
-interface SellingPriceProps {
+export interface LeasePriceProps {
   className?: string;
   style?: CSSProperties;
-  value?: string;
+  value?: string | [string | undefined, string | undefined];
   iconOnly?: boolean;
 }
 
 const PREFIX_CLS = `${ROOT_PREFIX_CLS}-lease-price`;
 
-const SellingPrice: FC<SellingPriceProps> = ({
+const LeasePrice: FC<LeasePriceProps> = ({
   className,
   style,
   value,
   iconOnly = false,
 }) => {
+  const price = useMemo(() => {
+    if (!value) return null;
+    if (Array.isArray(value)) {
+      if (value[0] && value[1]) {
+        return value.join('-');
+      } else if (value[0]) {
+        return `${value[0]}以上`;
+      } else if (value[1]) {
+        return `${value[0]}以下`;
+      } else {
+        return null;
+      }
+    } else {
+      return value;
+    }
+  }, [value]);
+
+  const content = useMemo(() => {
+    if (iconOnly) return null;
+    if (!price) return null;
+    return <View className={`${PREFIX_CLS}-text`}>¥{price}</View>;
+  }, [iconOnly, price]);
+
   return (
     <View className={classnames(`${PREFIX_CLS}`, className)} style={style}>
       <Image
@@ -33,11 +57,9 @@ const SellingPrice: FC<SellingPriceProps> = ({
         width={18}
         height={18}
       />
-      {iconOnly ? null : (
-        <View className={`${PREFIX_CLS}-text`}>{`¥${value}`}</View>
-      )}
+      {content}
     </View>
   );
 };
 
-export default SellingPrice;
+export default LeasePrice;

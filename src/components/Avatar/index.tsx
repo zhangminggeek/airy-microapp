@@ -7,9 +7,10 @@ import type { FC } from 'react';
 
 import './index.scss';
 
-export interface AvatarProps extends Partial<NutAvatarProps> {
+export interface AvatarProps extends Partial<Omit<NutAvatarProps, 'size'>> {
   name?: string;
   defaultImage?: string;
+  size?: number | string;
 }
 
 const PREFIX_CLS = 'm-avatar';
@@ -19,6 +20,7 @@ const Avatar: FC<AvatarProps> = ({
   src,
   name,
   defaultImage,
+  size,
   background,
   ...rest
 }) => {
@@ -48,6 +50,7 @@ const Avatar: FC<AvatarProps> = ({
         className,
       )}
       src={_src}
+      size={`${size}`}
       {...rest}
     >
       {_children}

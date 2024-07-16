@@ -5,7 +5,7 @@ import type { CSSProperties, FC, ReactNode } from 'react';
 
 import './index.scss';
 
-interface InputNumberProps {
+export interface InputNumberProps {
   className?: string;
   style?: CSSProperties;
   prefix?: ReactNode;

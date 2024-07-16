@@ -10,6 +10,10 @@
     margin-top: 24px;
   }
 
+  &-header {
+    border-bottom: 2px solid $border-color-base;
+  }
+
   &-body {
     display: flex;
     justify-content: flex-start;

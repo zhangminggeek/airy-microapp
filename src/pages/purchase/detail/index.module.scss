@@ -1,0 +1,84 @@
+@import '../../../styles/var.scss';
+
+.content {
+  padding: 32px;
+  background-color: #fff;
+
+  .price {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    margin-bottom: 32px;
+  }
+
+  .field {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    row-gap: 8px;
+    margin-bottom: 16px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-base;
+
+      &-label {
+        color: $text-color-secondary;
+        margin-right: 8px;
+
+        &::after {
+          content: ':';
+        }
+      }
+
+      &-content {
+        color: $text-color-main;
+      }
+    }
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: $font-size-large;
+    color: $text-color-main;
+    font-weight: 400;
+    margin-top: 32px;
+  }
+
+  .pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+  }
+}
+
+.list {
+  padding: 24px;
+  margin-bottom: 112px;
+
+  .brief-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+
+    &-time {
+      font-size: $font-size-small;
+      color: $text-color-secondary;
+      font-weight: 400;
+    }
+  }
+
+  .brief-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 24px 0;
+  }
+}

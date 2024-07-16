@@ -8,6 +8,8 @@ import { Icon } from '@/components';
 
 import './index.scss';
 
+export const IGNORE_VALUE = 'ignore';
+
 interface Field extends Partial<Omit<MenuItemProps, 'value' | 'onChange'>> {
   name: string;
 }
@@ -46,7 +48,8 @@ const Filter: FC<FilterProps> = ({
             onChange={(option) => {
               onChange?.({
                 ...value,
-                [item.name]: option.value,
+                [item.name]:
+                  option.value === IGNORE_VALUE ? undefined : option.value,
               });
             }}
           />

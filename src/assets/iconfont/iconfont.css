@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 4593602 */
   src:
-    url('iconfont.woff2?t=1720434928840') format('woff2'),
-    url('iconfont.woff?t=1720434928840') format('woff'),
-    url('iconfont.ttf?t=1720434928840') format('truetype');
+    url('iconfont.woff2?t=1721096947010') format('woff2'),
+    url('iconfont.woff?t=1721096947010') format('woff'),
+    url('iconfont.ttf?t=1721096947010') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-FormOutlined:before {
+  content: '\e661';
 }
 
 .icon-CheckOutlined:before {

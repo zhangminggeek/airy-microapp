@@ -56,3 +56,27 @@ export const expressMethodMap = new Map([
   [ExpressMethod['到付'], { text: '到付', value: ExpressMethod['到付'] }],
   [ExpressMethod['自提'], { text: '自提', value: ExpressMethod['自提'] }],
 ]);
+
+// 新旧程度
+export enum QualityState {
+  '全新' = 1,
+  '几乎全新' = 2,
+  '轻微使用痕迹' = 3,
+  '明显使用痕迹' = 4,
+}
+
+export const qualityStateMap = new Map([
+  [QualityState['全新'], { text: '全新', value: QualityState['全新'] }],
+  [
+    QualityState['几乎全新'],
+    { text: '几乎全新', value: QualityState['几乎全新'] },
+  ],
+  [
+    QualityState['轻微使用痕迹'],
+    { text: '轻微使用痕迹', value: QualityState['轻微使用痕迹'] },
+  ],
+  [
+    QualityState['明显使用痕迹'],
+    { text: '明显使用痕迹', value: QualityState['明显使用痕迹'] },
+  ],
+]);

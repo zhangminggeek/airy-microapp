@@ -1,5 +1,5 @@
 import { Button } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 import { useDidShow, useRouter, useShareAppMessage } from '@tarojs/taro';
 import { useMemo } from 'react';
 
@@ -10,6 +10,7 @@ import { Icon, Product, Space } from '@/components';
 import {
   MarketProductStatus,
   marketProductStatusMap,
+  qualityStateMap,
 } from '@/constants/market';
 import { OrderType } from '@/constants/order';
 import { useRequest } from '@/hooks';
@@ -67,7 +68,7 @@ const Page = () => {
     if (status === MarketProductStatus['在售']) {
       return (
         <Space size={16}>
-          {allowLease && (
+          {allowLease ? (
             <Button
               size="large"
               onClick={() => {
@@ -79,8 +80,8 @@ const Page = () => {
             >
               借调
             </Button>
-          )}
-          {allowSell && (
+          ) : null}
+          {allowSell ? (
             <Button
               type="primary"
               size="large"
@@ -93,7 +94,7 @@ const Page = () => {
             >
               购买
             </Button>
-          )}
+          ) : null}
         </Space>
       );
     }
@@ -106,7 +107,19 @@ const Page = () => {
         images={data?.product?.picList?.map((item) => item.url)}
         sellingPrice={data?.sellingPrice}
         leasePrice={data?.leasePrice}
-        extra={`${data?.favorities ?? 0}人收藏`}
+        extra={
+          <View className={styles.extra}>
+            {data?.quality ? (
+              <Text className={styles.quality}>
+                {qualityStateMap.get(data?.quality)?.text}
+              </Text>
+            ) : null}
+            <View
+              className={styles.favorities}
+            >{`${data?.favorities ?? 0}人收藏`}</View>
+          </View>
+        }
+        expressMethod={data?.expressMethod}
         tagList={data?.product?.tagList?.map((item) => item.tag.name)}
         title={data?.title}
         desc={data?.description}

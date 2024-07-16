@@ -40,7 +40,7 @@ import { useProductStore } from '@/models';
 import { isNil, RouterUtil } from '@/utils';
 
 const Page = () => {
-  const { id, productId, source } = useRouter().params;
+  const { id, productId, source, purchaseId } = useRouter().params;
   const [form] = Form.useForm();
 
   const { fieldMap, fetchProjectField } = useProductStore((state) => state);
@@ -122,7 +122,12 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
-      RouterUtil.navigateTo('/pages/market/action/result/index');
+      if (purchaseId) {
+        // 如果求购id存在，说明是从求购选择二手商品页面过来的，新增完要回去
+        RouterUtil.navigateBack();
+      } else {
+        RouterUtil.navigateTo('/pages/market/action/result/index');
+      }
     },
   });
 

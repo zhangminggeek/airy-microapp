@@ -13,6 +13,9 @@ export default defineConfig([
     outputFilePath: '../src/api/index.ts',
     requestFunctionFilePath: '../src/utils/request.ts',
     dataKey: 'data',
+    comment: {
+      enabled: false,
+    },
     projects: [
       {
         token: '',

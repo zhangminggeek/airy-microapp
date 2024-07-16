@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "16592736",
+      "name": "FormOutlined",
+      "font_class": "FormOutlined",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
       "icon_id": "17068563",
       "name": "CheckOutlined",
       "font_class": "CheckOutlined",

@@ -9,7 +9,7 @@ import './index.scss';
 interface TagProps {
   className?: string;
   style?: CSSProperties;
-  type: 'primary' | 'warning';
+  type: 'primary' | 'success' | 'warning';
   children?: ReactNode;
   plain?: boolean;
   border?: boolean;

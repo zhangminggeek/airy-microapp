@@ -1,0 +1,23 @@
+@import '../../../../styles/var.scss';
+
+.container {
+  .label {
+    font-size: $font-size-base;
+    color: $text-color-base;
+    font-weight: 400;
+  }
+
+  .content {
+    &-unit {
+      font-size: $font-size-base;
+      color: $color-primary;
+      font-weight: 500;
+    }
+
+    &-value {
+      font-size: 48px;
+      color: $color-primary;
+      font-weight: 600;
+    }
+  }
+}

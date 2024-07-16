@@ -6,14 +6,17 @@ import Avatar from './Avatar';
 import CalenderPicker from './CalendarPicker';
 import Cell from './Cell';
 import CodeInput from './CodeInput';
+import Company from './Company';
 import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
 import Filter from './Filter';
+import Footer from './Footer';
 import FormSection from './FormSection';
 import Icon from './Icon';
 import InputCode from './InputCode';
 import InputNumber from './InputNumber';
+import InputNumberRange from './InputNumberRange';
 import InputPassword from './InputPassword';
 import InputSearch from './InputSearch';
 import Link from './Link';
@@ -42,14 +45,17 @@ export {
   CalenderPicker,
   Cell,
   CodeInput,
+  Company,
   Descriptions,
   EditableCell,
   Empty,
   Filter,
+  Footer,
   FormSection,
   Icon,
   InputCode,
   InputNumber,
+  InputNumberRange,
   InputPassword,
   InputSearch,
   Link,

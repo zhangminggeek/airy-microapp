@@ -3,12 +3,12 @@ import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import { ROOT_PREFIX_CLS } from '../constants';
-import LeasePrice from '../LeasePrice';
-import SellingPrice from '../SellingPrice';
+import LeasePrice, { type LeasePriceProps } from '../LeasePrice';
+import SellingPrice, { type SellingPriceProps } from '../SellingPrice';
 
-import type { CSSProperties, FC } from 'react';
+import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Avatar, Icon, Space, Tag } from '@/components';
+import { Company, Icon, Space, Tag } from '@/components';
 import { ProductStatus, productStatusMap } from '@/constants/product';
 
 import './index.scss';
@@ -19,12 +19,15 @@ interface CardProps {
   image?: string;
   title?: string;
   tagList?: string[];
-  leasePrice?: string;
-  sellingPrice?: string;
-  favorites?: number;
+  leasePrice?: LeasePriceProps['value'];
+  sellingPrice?: SellingPriceProps['value'];
   status?: number;
   companyLogo?: string;
   companyName?: string;
+  extra: {
+    icon: string;
+    text?: ReactNode;
+  };
   onClick?: () => void;
   onCompanyClick?: () => void;
 }
@@ -38,10 +41,10 @@ const Card: FC<CardProps> = ({
   tagList,
   leasePrice,
   sellingPrice,
-  favorites = 0,
   status = ProductStatus['正常'],
   companyLogo,
   companyName,
+  extra,
   onClick,
   onCompanyClick,
 }) => {
@@ -72,22 +75,18 @@ const Card: FC<CardProps> = ({
           {leasePrice ? <LeasePrice value={leasePrice} /> : null}
         </View>
         <View className={`${PREFIX_CLS}-content-info`}>
-          <Space
+          <Company
             className={`${PREFIX_CLS}-content-info-company`}
-            size={4}
+            logo={companyLogo}
+            name={companyName}
             onClick={(e) => {
               e.stopPropagation();
               onCompanyClick?.();
             }}
-          >
-            <Avatar src={companyLogo} name={companyName} size="18" />
-            <View className={`${PREFIX_CLS}-content-info-company-name`}>
-              {companyName}
-            </View>
-          </Space>
+          />
           <Space className={`${PREFIX_CLS}-content-info-favorites`} size={4}>
-            <Icon name="LoveOutlined" size={12} />
-            {favorites}
+            <Icon name={extra?.icon} size={12} />
+            {extra.text}
           </Space>
         </View>
       </View>

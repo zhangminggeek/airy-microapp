@@ -8,6 +8,14 @@
   line-height: 1em;
 
   &:not(.m-tag-plain) {
+    &.m-tag-primary {
+      background-color: rgba($color-primary, 0.1);
+    }
+
+    &.m-tag-success {
+      background-color: rgba($color-success, 0.1);
+    }
+
     &.m-tag-warning {
       background-color: rgba($color-warning, 0.1);
     }
@@ -18,6 +26,10 @@
       border: 2px solid $color-primary;
     }
 
+    &.m-tag-success {
+      border: 2px solid $color-success;
+    }
+
     &.m-tag-warning {
       border: 2px solid $color-warning;
     }
@@ -25,6 +37,10 @@
 
   &-primary {
     color: $color-primary;
+  }
+
+  &-success {
+    color: $color-success;
   }
 
   &-warning {

@@ -1,0 +1,24 @@
+@import '../../../styles/var.scss';
+
+.layout {
+  background-color: #fff;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  & + & {
+    :global {
+      .m-product-brief-body {
+        border-top: 2px solid $border-color-base;
+      }
+    }
+  }
+
+  &-card {
+    flex: 1;
+    padding: 0;
+  }
+}

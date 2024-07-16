@@ -92,7 +92,7 @@ const Page = () => {
               sellingPrice={item.sellingPrice}
               companyLogo={item.companyLogo}
               companyName={item.companyName}
-              favorites={item.favorities}
+              extra={{ icon: 'LoveOutlined', text: item.favorities }}
               onClick={() => {
                 RouterUtil.navigateTo('/pages/market/detail/index', {
                   id: item.id,

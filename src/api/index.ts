@@ -31,12 +31,6 @@ const devUrl_0_0_0_0 = '' as any
 const prodUrl_0_0_0_0 = '' as any
 const dataKey_0_0_0_0 = 'data' as any
 
-/**
- * 接口 获取 oss 上传凭证 的 **请求类型**
- *
- * @分类 OSS
- * @请求头 `GET /oss/signature`
- */
 export interface GetOssSignatureRequest {
   /**
    * superKey
@@ -44,12 +38,6 @@ export interface GetOssSignatureRequest {
   superKey: string
 }
 
-/**
- * 接口 获取 oss 上传凭证 的 **返回类型**
- *
- * @分类 OSS
- * @请求头 `GET /oss/signature`
- */
 export interface GetOssSignatureResponse {
   /**
    * 由服务器端指定的Policy过期时间，格式为Unix时间戳
@@ -77,22 +65,10 @@ export interface GetOssSignatureResponse {
   dir: string
 }
 
-/**
- * 接口 获取 oss 上传凭证 的 **请求配置的类型**
- *
- * @分类 OSS
- * @请求头 `GET /oss/signature`
- */
 type GetOssSignatureRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/oss/signature', 'data', string, 'superKey', false>
 >
 
-/**
- * 接口 获取 oss 上传凭证 的 **请求配置**
- *
- * @分类 OSS
- * @请求头 `GET /oss/signature`
- */
 const getOssSignatureRequestConfig: GetOssSignatureRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_0,
   devUrl: devUrl_0_0_0_0,
@@ -113,12 +89,6 @@ const getOssSignatureRequestConfig: GetOssSignatureRequestConfig = /*#__PURE__*/
   extraInfo: {},
 }
 
-/**
- * 接口 获取 oss 上传凭证 的 **请求函数**
- *
- * @分类 OSS
- * @请求头 `GET /oss/signature`
- */
 export const getOssSignature = /*#__PURE__*/ (requestData: GetOssSignatureRequest, ...args: UserRequestRestArgs) => {
   return request<GetOssSignatureResponse>(prepare(getOssSignatureRequestConfig, requestData), ...args)
 }
@@ -130,12 +100,673 @@ const devUrl_0_0_0_1 = '' as any
 const prodUrl_0_0_0_1 = '' as any
 const dataKey_0_0_0_1 = 'data' as any
 
-/**
- * 接口 获取我购买的订单列表 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `GET /order/bought`
- */
+export interface GetPurchaseRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 产品描述
+   */
+  title?: string
+  /**
+   * 产品类型code
+   */
+  typeCode?: string
+  /**
+   * 公司id
+   */
+  companyId?: string
+  /**
+   * 服饰状态, 1:审核中 2:求购中 3:已完成 4:审核未通过
+   */
+  status?: string
+  /**
+   * 排序方式 1:最新发布 2:报价量由高到低 3:报价量由低到高
+   */
+  order?: string
+}
+
+export interface GetPurchaseResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 求购id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 标题
+     */
+    title: string
+    /**
+     * 购买
+     */
+    wantBuy: boolean
+    /**
+     * 借调
+     */
+    wantLease: boolean
+    /**
+     * 最大求购价格
+     */
+    maxPrice?: string
+    /**
+     * 最小求购价格
+     */
+    minPrice?: string
+    /**
+     * 最大求购价格
+     */
+    maxLeasePrice?: string
+    /**
+     * 最小求购价格
+     */
+    minLeasePrice?: string
+    /**
+     * 服饰类型code
+     */
+    typeCode: string
+    /**
+     * 服饰品牌
+     */
+    brand?: string
+    /**
+     * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+     */
+    size?: number
+    /**
+     * 状态 1:审核中 2:求购中 3:已完成 4:审核不通过
+     */
+    status: number
+    /**
+     * 审核不通过原因
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+    /**
+     * 标签
+     */
+    tagList: {
+      /**
+       * id
+       */
+      id: number
+      /**
+       * 标签id
+       */
+      tagId: number
+      /**
+       * 求购id
+       */
+      purchaseId: number
+      /**
+       * 标签名称
+       */
+      tagName: string
+    }[]
+    /**
+     * 报价单数量
+     */
+    quotations?: number
+  }[]
+}
+
+type GetPurchaseRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/purchase',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'title' | 'typeCode' | 'companyId' | 'status' | 'order',
+    false
+  >
+>
+
+const getPurchaseRequestConfig: GetPurchaseRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'companyId', 'status', 'order'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getPurchase',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getPurchase = /*#__PURE__*/ (requestData: GetPurchaseRequest, ...args: UserRequestRestArgs) => {
+  return request<GetPurchaseResponse>(prepare(getPurchaseRequestConfig, requestData), ...args)
+}
+
+getPurchase.requestConfig = getPurchaseRequestConfig
+
+export interface PostPurchaseRequest {
+  /**
+   * 标题
+   */
+  title: string
+  /**
+   * 服饰图片
+   */
+  picList?: string[]
+  /**
+   * 购买
+   */
+  wantBuy: boolean
+  /**
+   * 借调
+   */
+  wantLease: boolean
+  /**
+   * 最大求购价格
+   */
+  maxPrice?: string
+  /**
+   * 最小求购价格
+   */
+  minPrice?: string
+  /**
+   * 最大求购价格
+   */
+  maxLeasePrice?: string
+  /**
+   * 最小求购价格
+   */
+  minLeasePrice?: string
+  /**
+   * 服饰类型code
+   */
+  typeCode: string
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+   */
+  size?: number
+  /**
+   * 其他信息
+   */
+  fieldList?: {
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段的值(该字段选项的id)
+     */
+    fieldValue: number
+  }[]
+  /**
+   * 服饰标签
+   */
+  tagIdList?: number[]
+}
+
+export type PostPurchaseResponse = number
+
+type PostPurchaseRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase', 'data', string, string, false>
+>
+
+const postPurchaseRequestConfig: PostPurchaseRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postPurchase',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postPurchase = /*#__PURE__*/ (requestData: PostPurchaseRequest, ...args: UserRequestRestArgs) => {
+  return request<PostPurchaseResponse>(prepare(postPurchaseRequestConfig, requestData), ...args)
+}
+
+postPurchase.requestConfig = postPurchaseRequestConfig
+
+export interface PutPurchaseRequest {
+  /**
+   * 求购id
+   */
+  id: number
+  /**
+   * 求购
+   */
+  purchase: string
+  /**
+   * 密码（明文）
+   */
+  password: string
+  /**
+   * 微信用户唯一标识
+   */
+  openid?: string
+}
+
+export type PutPurchaseResponse = any
+
+type PutPurchaseRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase', 'data', string, string, false>
+>
+
+const putPurchaseRequestConfig: PutPurchaseRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putPurchase',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putPurchase = /*#__PURE__*/ (requestData: PutPurchaseRequest, ...args: UserRequestRestArgs) => {
+  return request<PutPurchaseResponse>(prepare(putPurchaseRequestConfig, requestData), ...args)
+}
+
+putPurchase.requestConfig = putPurchaseRequestConfig
+
+export interface DeletePurchaseRequest {
+  /**
+   * 求购id
+   */
+  id: string
+}
+
+export type DeletePurchaseResponse = any
+
+type DeletePurchaseRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase', 'data', string, 'id', false>
+>
+
+const deletePurchaseRequestConfig: DeletePurchaseRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deletePurchase',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const deletePurchase = /*#__PURE__*/ (requestData: DeletePurchaseRequest, ...args: UserRequestRestArgs) => {
+  return request<DeletePurchaseResponse>(prepare(deletePurchaseRequestConfig, requestData), ...args)
+}
+
+deletePurchase.requestConfig = deletePurchaseRequestConfig
+
+export interface GetPurchaseIdRequest {
+  /**
+   * 求购id
+   */
+  id: string
+}
+
+export interface GetPurchaseIdResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 求购id
+   */
+  id: number
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 标题
+   */
+  title: string
+  /**
+   * 购买
+   */
+  wantBuy: boolean
+  /**
+   * 借调
+   */
+  wantLease: boolean
+  /**
+   * 最低购买价格
+   */
+  minPrice?: string
+  /**
+   * 最高购买价格
+   */
+  maxPrice?: string
+  /**
+   * 最低借调价格
+   */
+  minLeasePrice?: string
+  /**
+   * 最高借调价格
+   */
+  maxLeasePrice?: string
+  /**
+   * 服饰类型
+   */
+  typeCode: string
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 服饰尺码
+   */
+  size?: number
+  /**
+   * 状态
+   */
+  status: number
+  /**
+   * 审批不通过原因
+   */
+  remark?: string
+  /**
+   * 图片
+   */
+  picList?: {
+    /**
+     * 图片id
+     */
+    id: number
+    /**
+     * 求购id
+     */
+    purchaseId: number
+    /**
+     * 图片地址
+     */
+    url: string
+  }[]
+  /**
+   * 标签
+   */
+  tagList?: {
+    /**
+     * 标签id
+     */
+    id: number
+    /**
+     * 标签名
+     */
+    name: string
+  }[]
+  /**
+   * 字段信息
+   */
+  fieldList?: {
+    /**
+     * 字段id
+     */
+    id: number
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段key名称
+     */
+    fieldKeyName: string
+    /**
+     * 字段值
+     */
+    fieldValue: number
+    /**
+     * 字段值名称
+     */
+    fieldValueName: string
+  }[]
+  /**
+   * 报价
+   */
+  quotationList?: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 报价单id
+     */
+    id: number
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo: string
+    /**
+     * 标题
+     */
+    title: string
+    /**
+     * 描述
+     */
+    description?: string
+    /**
+     * 借调价格
+     */
+    leasePrice?: string
+    /**
+     * 出售价格
+     */
+    sellingPrice?: string
+    /**
+     * 收藏数
+     */
+    favorites: number
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+  }[]
+}
+
+type GetPurchaseIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase/{id}', 'data', 'id', string, false>
+>
+
+const getPurchaseIdRequestConfig: GetPurchaseIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getPurchaseId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getPurchaseId = /*#__PURE__*/ (requestData: GetPurchaseIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetPurchaseIdResponse>(prepare(getPurchaseIdRequestConfig, requestData), ...args)
+}
+
+getPurchaseId.requestConfig = getPurchaseIdRequestConfig
+
+export interface PostPurchaseSendRequest {
+  /**
+   * 求购id
+   */
+  id: number
+  /**
+   * 二手市场id
+   */
+  marketIds: number[]
+}
+
+export type PostPurchaseSendResponse = any
+
+type PostPurchaseSendRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase/send', 'data', string, string, false>
+>
+
+const postPurchaseSendRequestConfig: PostPurchaseSendRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase/send',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postPurchaseSend',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postPurchaseSend = /*#__PURE__*/ (requestData: PostPurchaseSendRequest, ...args: UserRequestRestArgs) => {
+  return request<PostPurchaseSendResponse>(prepare(postPurchaseSendRequestConfig, requestData), ...args)
+}
+
+postPurchaseSend.requestConfig = postPurchaseSendRequestConfig
+
+const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_2 = '' as any
+const prodUrl_0_0_0_2 = '' as any
+const dataKey_0_0_0_2 = 'data' as any
+
 export interface GetOrderBoughtRequest {
   /**
    * 页码
@@ -151,12 +782,6 @@ export interface GetOrderBoughtRequest {
   status?: string
 }
 
-/**
- * 接口 获取我购买的订单列表 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `GET /order/bought`
- */
 export interface GetOrderBoughtResponse {
   /**
    * 数据总条数
@@ -396,12 +1021,6 @@ export interface GetOrderBoughtResponse {
   }[]
 }
 
-/**
- * 接口 获取我购买的订单列表 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `GET /order/bought`
- */
 type GetOrderBoughtRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -415,22 +1034,16 @@ type GetOrderBoughtRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取我购买的订单列表 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `GET /order/bought`
- */
 const getOrderBoughtRequestConfig: GetOrderBoughtRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/bought',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -441,24 +1054,12 @@ const getOrderBoughtRequestConfig: GetOrderBoughtRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取我购买的订单列表 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `GET /order/bought`
- */
 export const getOrderBought = /*#__PURE__*/ (requestData: GetOrderBoughtRequest, ...args: UserRequestRestArgs) => {
   return request<GetOrderBoughtResponse>(prepare(getOrderBoughtRequestConfig, requestData), ...args)
 }
 
 getOrderBought.requestConfig = getOrderBoughtRequestConfig
 
-/**
- * 接口 获取我卖出的订单列表 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `GET /order/sold`
- */
 export interface GetOrderSoldRequest {
   /**
    * 页码
@@ -474,12 +1075,6 @@ export interface GetOrderSoldRequest {
   status?: string
 }
 
-/**
- * 接口 获取我卖出的订单列表 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `GET /order/sold`
- */
 export interface GetOrderSoldResponse {
   /**
    * 数据总条数
@@ -719,12 +1314,6 @@ export interface GetOrderSoldResponse {
   }[]
 }
 
-/**
- * 接口 获取我卖出的订单列表 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `GET /order/sold`
- */
 type GetOrderSoldRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -738,22 +1327,16 @@ type GetOrderSoldRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取我卖出的订单列表 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `GET /order/sold`
- */
 const getOrderSoldRequestConfig: GetOrderSoldRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/sold',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -764,24 +1347,12 @@ const getOrderSoldRequestConfig: GetOrderSoldRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取我卖出的订单列表 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `GET /order/sold`
- */
 export const getOrderSold = /*#__PURE__*/ (requestData: GetOrderSoldRequest, ...args: UserRequestRestArgs) => {
   return request<GetOrderSoldResponse>(prepare(getOrderSoldRequestConfig, requestData), ...args)
 }
 
 getOrderSold.requestConfig = getOrderSoldRequestConfig
 
-/**
- * 接口 创建订单 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order`
- */
 export interface PostOrderRequest {
   /**
    * market id
@@ -805,40 +1376,22 @@ export interface PostOrderRequest {
   leaseEndDate?: string
 }
 
-/**
- * 接口 创建订单 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order`
- */
 export type PostOrderResponse = number
 
-/**
- * 接口 创建订单 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order`
- */
 type PostOrderRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, string, false>
 >
 
-/**
- * 接口 创建订单 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order`
- */
 const postOrderRequestConfig: PostOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -849,24 +1402,12 @@ const postOrderRequestConfig: PostOrderRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 创建订单 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order`
- */
 export const postOrder = /*#__PURE__*/ (requestData: PostOrderRequest, ...args: UserRequestRestArgs) => {
   return request<PostOrderResponse>(prepare(postOrderRequestConfig, requestData), ...args)
 }
 
 postOrder.requestConfig = postOrderRequestConfig
 
-/**
- * 接口 删除订单 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `DELETE /order`
- */
 export interface DeleteOrderRequest {
   /**
    * 订单id
@@ -874,40 +1415,22 @@ export interface DeleteOrderRequest {
   id: string
 }
 
-/**
- * 接口 删除订单 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `DELETE /order`
- */
 export type DeleteOrderResponse = any
 
-/**
- * 接口 删除订单 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `DELETE /order`
- */
 type DeleteOrderRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, 'id', false>
 >
 
-/**
- * 接口 删除订单 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `DELETE /order`
- */
 const deleteOrderRequestConfig: DeleteOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -918,24 +1441,12 @@ const deleteOrderRequestConfig: DeleteOrderRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 删除订单 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `DELETE /order`
- */
 export const deleteOrder = /*#__PURE__*/ (requestData: DeleteOrderRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteOrderResponse>(prepare(deleteOrderRequestConfig, requestData), ...args)
 }
 
 deleteOrder.requestConfig = deleteOrderRequestConfig
 
-/**
- * 接口 确认收货 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/cancel`
- */
 export interface PostOrderCancelRequest {
   /**
    * 订单id
@@ -943,40 +1454,22 @@ export interface PostOrderCancelRequest {
   id: number
 }
 
-/**
- * 接口 确认收货 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/cancel`
- */
 export type PostOrderCancelResponse = any
 
-/**
- * 接口 确认收货 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/cancel`
- */
 type PostOrderCancelRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/cancel', 'data', string, string, false>
 >
 
-/**
- * 接口 确认收货 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/cancel`
- */
 const postOrderCancelRequestConfig: PostOrderCancelRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/cancel',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -987,24 +1480,12 @@ const postOrderCancelRequestConfig: PostOrderCancelRequestConfig = /*#__PURE__*/
   extraInfo: {},
 }
 
-/**
- * 接口 确认收货 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/cancel`
- */
 export const postOrderCancel = /*#__PURE__*/ (requestData: PostOrderCancelRequest, ...args: UserRequestRestArgs) => {
   return request<PostOrderCancelResponse>(prepare(postOrderCancelRequestConfig, requestData), ...args)
 }
 
 postOrderCancel.requestConfig = postOrderCancelRequestConfig
 
-/**
- * 接口 余额支付订单 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/balance`
- */
 export interface PostOrderPayBalanceRequest {
   /**
    * 订单id
@@ -1012,12 +1493,6 @@ export interface PostOrderPayBalanceRequest {
   id: number
 }
 
-/**
- * 接口 余额支付订单 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/balance`
- */
 export interface PostOrderPayBalanceResponse {
   /**
    * 时间戳
@@ -1037,32 +1512,20 @@ export interface PostOrderPayBalanceResponse {
   paySign: string
 }
 
-/**
- * 接口 余额支付订单 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/balance`
- */
 type PostOrderPayBalanceRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/balance', 'data', string, string, false>
 >
 
-/**
- * 接口 余额支付订单 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/balance`
- */
 const postOrderPayBalanceRequestConfig: PostOrderPayBalanceRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/pay/balance',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1073,12 +1536,6 @@ const postOrderPayBalanceRequestConfig: PostOrderPayBalanceRequestConfig = /*#__
   extraInfo: {},
 }
 
-/**
- * 接口 余额支付订单 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/balance`
- */
 export const postOrderPayBalance = /*#__PURE__*/ (
   requestData: PostOrderPayBalanceRequest,
   ...args: UserRequestRestArgs
@@ -1088,12 +1545,6 @@ export const postOrderPayBalance = /*#__PURE__*/ (
 
 postOrderPayBalance.requestConfig = postOrderPayBalanceRequestConfig
 
-/**
- * 接口 微信支付订单 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat`
- */
 export interface PostOrderPayWechatRequest {
   /**
    * 订单id
@@ -1101,12 +1552,6 @@ export interface PostOrderPayWechatRequest {
   id: number
 }
 
-/**
- * 接口 微信支付订单 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat`
- */
 export interface PostOrderPayWechatResponse {
   /**
    * 时间戳
@@ -1126,32 +1571,20 @@ export interface PostOrderPayWechatResponse {
   paySign: string
 }
 
-/**
- * 接口 微信支付订单 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat`
- */
 type PostOrderPayWechatRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat', 'data', string, string, false>
 >
 
-/**
- * 接口 微信支付订单 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat`
- */
 const postOrderPayWechatRequestConfig: PostOrderPayWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/pay/wechat',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1162,12 +1595,6 @@ const postOrderPayWechatRequestConfig: PostOrderPayWechatRequestConfig = /*#__PU
   extraInfo: {},
 }
 
-/**
- * 接口 微信支付订单 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat`
- */
 export const postOrderPayWechat = /*#__PURE__*/ (
   requestData: PostOrderPayWechatRequest,
   ...args: UserRequestRestArgs
@@ -1177,12 +1604,6 @@ export const postOrderPayWechat = /*#__PURE__*/ (
 
 postOrderPayWechat.requestConfig = postOrderPayWechatRequestConfig
 
-/**
- * 接口 支付结果通知 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat/notice`
- */
 export interface PostOrderPayWechatNoticeRequest {
   /**
    * 通知的唯一ID
@@ -1231,12 +1652,6 @@ export interface PostOrderPayWechatNoticeRequest {
   summary?: string
 }
 
-/**
- * 接口 支付结果通知 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat/notice`
- */
 export interface PostOrderPayWechatNoticeResponse {
   /**
    * 时间戳
@@ -1256,32 +1671,20 @@ export interface PostOrderPayWechatNoticeResponse {
   paySign: string
 }
 
-/**
- * 接口 支付结果通知 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat/notice`
- */
 type PostOrderPayWechatNoticeRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat/notice', 'data', string, string, false>
 >
 
-/**
- * 接口 支付结果通知 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat/notice`
- */
 const postOrderPayWechatNoticeRequestConfig: PostOrderPayWechatNoticeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/pay/wechat/notice',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1292,12 +1695,6 @@ const postOrderPayWechatNoticeRequestConfig: PostOrderPayWechatNoticeRequestConf
   extraInfo: {},
 }
 
-/**
- * 接口 支付结果通知 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/pay/wechat/notice`
- */
 export const postOrderPayWechatNotice = /*#__PURE__*/ (
   requestData: PostOrderPayWechatNoticeRequest,
   ...args: UserRequestRestArgs
@@ -1307,12 +1704,6 @@ export const postOrderPayWechatNotice = /*#__PURE__*/ (
 
 postOrderPayWechatNotice.requestConfig = postOrderPayWechatNoticeRequestConfig
 
-/**
- * 接口 订单发货 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/express/deliver`
- */
 export interface PostOrderExpressDeliverRequest {
   /**
    * 订单id
@@ -1328,40 +1719,22 @@ export interface PostOrderExpressDeliverRequest {
   remark?: string
 }
 
-/**
- * 接口 订单发货 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/express/deliver`
- */
 export type PostOrderExpressDeliverResponse = any
 
-/**
- * 接口 订单发货 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/express/deliver`
- */
 type PostOrderExpressDeliverRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/deliver', 'data', string, string, false>
 >
 
-/**
- * 接口 订单发货 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/express/deliver`
- */
 const postOrderExpressDeliverRequestConfig: PostOrderExpressDeliverRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/express/deliver',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1372,12 +1745,6 @@ const postOrderExpressDeliverRequestConfig: PostOrderExpressDeliverRequestConfig
   extraInfo: {},
 }
 
-/**
- * 接口 订单发货 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/express/deliver`
- */
 export const postOrderExpressDeliver = /*#__PURE__*/ (
   requestData: PostOrderExpressDeliverRequest,
   ...args: UserRequestRestArgs
@@ -1387,12 +1754,6 @@ export const postOrderExpressDeliver = /*#__PURE__*/ (
 
 postOrderExpressDeliver.requestConfig = postOrderExpressDeliverRequestConfig
 
-/**
- * 接口 返还发货 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/express/return`
- */
 export interface PostOrderExpressReturnRequest {
   /**
    * 订单id
@@ -1408,40 +1769,22 @@ export interface PostOrderExpressReturnRequest {
   remark?: string
 }
 
-/**
- * 接口 返还发货 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/express/return`
- */
 export type PostOrderExpressReturnResponse = any
 
-/**
- * 接口 返还发货 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/express/return`
- */
 type PostOrderExpressReturnRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/return', 'data', string, string, false>
 >
 
-/**
- * 接口 返还发货 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/express/return`
- */
 const postOrderExpressReturnRequestConfig: PostOrderExpressReturnRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/express/return',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1452,12 +1795,6 @@ const postOrderExpressReturnRequestConfig: PostOrderExpressReturnRequestConfig =
   extraInfo: {},
 }
 
-/**
- * 接口 返还发货 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/express/return`
- */
 export const postOrderExpressReturn = /*#__PURE__*/ (
   requestData: PostOrderExpressReturnRequest,
   ...args: UserRequestRestArgs
@@ -1467,12 +1804,6 @@ export const postOrderExpressReturn = /*#__PURE__*/ (
 
 postOrderExpressReturn.requestConfig = postOrderExpressReturnRequestConfig
 
-/**
- * 接口 买家确认收货 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/buyer`
- */
 export interface PostOrderReceiveBuyerRequest {
   /**
    * 订单id
@@ -1480,40 +1811,22 @@ export interface PostOrderReceiveBuyerRequest {
   id: number
 }
 
-/**
- * 接口 买家确认收货 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/buyer`
- */
 export type PostOrderReceiveBuyerResponse = any
 
-/**
- * 接口 买家确认收货 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/buyer`
- */
 type PostOrderReceiveBuyerRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/buyer', 'data', string, string, false>
 >
 
-/**
- * 接口 买家确认收货 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/buyer`
- */
 const postOrderReceiveBuyerRequestConfig: PostOrderReceiveBuyerRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/receive/buyer',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1524,12 +1837,6 @@ const postOrderReceiveBuyerRequestConfig: PostOrderReceiveBuyerRequestConfig = /
   extraInfo: {},
 }
 
-/**
- * 接口 买家确认收货 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/buyer`
- */
 export const postOrderReceiveBuyer = /*#__PURE__*/ (
   requestData: PostOrderReceiveBuyerRequest,
   ...args: UserRequestRestArgs
@@ -1539,12 +1846,6 @@ export const postOrderReceiveBuyer = /*#__PURE__*/ (
 
 postOrderReceiveBuyer.requestConfig = postOrderReceiveBuyerRequestConfig
 
-/**
- * 接口 卖家确认收货 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/seller`
- */
 export interface PostOrderReceiveSellerRequest {
   /**
    * 订单id
@@ -1560,40 +1861,22 @@ export interface PostOrderReceiveSellerRequest {
   depositRefundRemark?: string
 }
 
-/**
- * 接口 卖家确认收货 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/seller`
- */
 export type PostOrderReceiveSellerResponse = any
 
-/**
- * 接口 卖家确认收货 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/seller`
- */
 type PostOrderReceiveSellerRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/seller', 'data', string, string, false>
 >
 
-/**
- * 接口 卖家确认收货 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/seller`
- */
 const postOrderReceiveSellerRequestConfig: PostOrderReceiveSellerRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/receive/seller',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1604,12 +1887,6 @@ const postOrderReceiveSellerRequestConfig: PostOrderReceiveSellerRequestConfig =
   extraInfo: {},
 }
 
-/**
- * 接口 卖家确认收货 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `POST /order/receive/seller`
- */
 export const postOrderReceiveSeller = /*#__PURE__*/ (
   requestData: PostOrderReceiveSellerRequest,
   ...args: UserRequestRestArgs
@@ -1619,12 +1896,6 @@ export const postOrderReceiveSeller = /*#__PURE__*/ (
 
 postOrderReceiveSeller.requestConfig = postOrderReceiveSellerRequestConfig
 
-/**
- * 接口 获取订单信息 的 **请求类型**
- *
- * @分类 订单
- * @请求头 `GET /order/{id}`
- */
 export interface GetOrderIdRequest {
   /**
    * 订单id
@@ -1632,12 +1903,6 @@ export interface GetOrderIdRequest {
   id: string
 }
 
-/**
- * 接口 获取订单信息 的 **返回类型**
- *
- * @分类 订单
- * @请求头 `GET /order/{id}`
- */
 export interface GetOrderIdResponse {
   /**
    * 创建时间
@@ -2085,32 +2350,20 @@ export interface GetOrderIdResponse {
   }
 }
 
-/**
- * 接口 获取订单信息 的 **请求配置的类型**
- *
- * @分类 订单
- * @请求头 `GET /order/{id}`
- */
 type GetOrderIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取订单信息 的 **请求配置**
- *
- * @分类 订单
- * @请求头 `GET /order/{id}`
- */
 const getOrderIdRequestConfig: GetOrderIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/order/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -2121,37 +2374,19 @@ const getOrderIdRequestConfig: GetOrderIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取订单信息 的 **请求函数**
- *
- * @分类 订单
- * @请求头 `GET /order/{id}`
- */
 export const getOrderId = /*#__PURE__*/ (requestData: GetOrderIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetOrderIdResponse>(prepare(getOrderIdRequestConfig, requestData), ...args)
 }
 
 getOrderId.requestConfig = getOrderIdRequestConfig
 
-const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_2 = '' as any
-const prodUrl_0_0_0_2 = '' as any
-const dataKey_0_0_0_2 = 'data' as any
+const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_3 = '' as any
+const prodUrl_0_0_0_3 = '' as any
+const dataKey_0_0_0_3 = 'data' as any
 
-/**
- * 接口 获取当前公司详情 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/self`
- */
 export interface GetCompanySelfRequest {}
 
-/**
- * 接口 获取当前公司详情 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/self`
- */
 export interface GetCompanySelfResponse {
   /**
    * 创建时间
@@ -2227,32 +2462,20 @@ export interface GetCompanySelfResponse {
   saleVolumeToday: string
 }
 
-/**
- * 接口 获取当前公司详情 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/self`
- */
 type GetCompanySelfRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/self', 'data', string, string, true>
 >
 
-/**
- * 接口 获取当前公司详情 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/self`
- */
 const getCompanySelfRequestConfig: GetCompanySelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -2263,24 +2486,12 @@ const getCompanySelfRequestConfig: GetCompanySelfRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取当前公司详情 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/self`
- */
 export const getCompanySelf = /*#__PURE__*/ (requestData?: GetCompanySelfRequest, ...args: UserRequestRestArgs) => {
   return request<GetCompanySelfResponse>(prepare(getCompanySelfRequestConfig, requestData), ...args)
 }
 
 getCompanySelf.requestConfig = getCompanySelfRequestConfig
 
-/**
- * 接口 获取粉丝列表（分页） 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/fans`
- */
 export interface GetCompanyFansRequest {
   /**
    * 页码
@@ -2292,12 +2503,6 @@ export interface GetCompanyFansRequest {
   pageSize: string
 }
 
-/**
- * 接口 获取粉丝列表（分页） 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/fans`
- */
 export interface GetCompanyFansResponse {
   /**
    * 数据总条数
@@ -2366,32 +2571,20 @@ export interface GetCompanyFansResponse {
   }[]
 }
 
-/**
- * 接口 获取粉丝列表（分页） 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/fans`
- */
 type GetCompanyFansRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/fans', 'data', string, 'pageNum' | 'pageSize', false>
 >
 
-/**
- * 接口 获取粉丝列表（分页） 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/fans`
- */
 const getCompanyFansRequestConfig: GetCompanyFansRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/fans',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize'],
   requestDataOptional: false,
@@ -2402,24 +2595,12 @@ const getCompanyFansRequestConfig: GetCompanyFansRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取粉丝列表（分页） 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/fans`
- */
 export const getCompanyFans = /*#__PURE__*/ (requestData: GetCompanyFansRequest, ...args: UserRequestRestArgs) => {
   return request<GetCompanyFansResponse>(prepare(getCompanyFansRequestConfig, requestData), ...args)
 }
 
 getCompanyFans.requestConfig = getCompanyFansRequestConfig
 
-/**
- * 接口 获取关注列表（分页） 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/followee`
- */
 export interface GetCompanyFolloweeRequest {
   /**
    * 页码
@@ -2431,12 +2612,6 @@ export interface GetCompanyFolloweeRequest {
   pageSize: string
 }
 
-/**
- * 接口 获取关注列表（分页） 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/followee`
- */
 export interface GetCompanyFolloweeResponse {
   /**
    * 数据总条数
@@ -2505,12 +2680,6 @@ export interface GetCompanyFolloweeResponse {
   }[]
 }
 
-/**
- * 接口 获取关注列表（分页） 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/followee`
- */
 type GetCompanyFolloweeRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -2524,22 +2693,16 @@ type GetCompanyFolloweeRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取关注列表（分页） 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/followee`
- */
 const getCompanyFolloweeRequestConfig: GetCompanyFolloweeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/followee',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize'],
   requestDataOptional: false,
@@ -2550,12 +2713,6 @@ const getCompanyFolloweeRequestConfig: GetCompanyFolloweeRequestConfig = /*#__PU
   extraInfo: {},
 }
 
-/**
- * 接口 获取关注列表（分页） 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/followee`
- */
 export const getCompanyFollowee = /*#__PURE__*/ (
   requestData: GetCompanyFolloweeRequest,
   ...args: UserRequestRestArgs
@@ -2565,12 +2722,6 @@ export const getCompanyFollowee = /*#__PURE__*/ (
 
 getCompanyFollowee.requestConfig = getCompanyFolloweeRequestConfig
 
-/**
- * 接口 创建公司 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
 export interface PostCompanyRegisterRequest {
   /**
    * 公司名称
@@ -2610,40 +2761,22 @@ export interface PostCompanyRegisterRequest {
   licenses: string[]
 }
 
-/**
- * 接口 创建公司 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
 export type PostCompanyRegisterResponse = any
 
-/**
- * 接口 创建公司 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
 type PostCompanyRegisterRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/register', 'data', string, string, false>
 >
 
-/**
- * 接口 创建公司 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
 const postCompanyRegisterRequestConfig: PostCompanyRegisterRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/register',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2654,12 +2787,6 @@ const postCompanyRegisterRequestConfig: PostCompanyRegisterRequestConfig = /*#__
   extraInfo: {},
 }
 
-/**
- * 接口 创建公司 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `POST /company/register`
- */
 export const postCompanyRegister = /*#__PURE__*/ (
   requestData: PostCompanyRegisterRequest,
   ...args: UserRequestRestArgs
@@ -2669,12 +2796,6 @@ export const postCompanyRegister = /*#__PURE__*/ (
 
 postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
 
-/**
- * 接口 更新公司 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `PUT /company`
- */
 export interface PutCompanyRequest {
   /**
    * 公司LOGO
@@ -2686,40 +2807,22 @@ export interface PutCompanyRequest {
   intro?: string
 }
 
-/**
- * 接口 更新公司 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `PUT /company`
- */
 export type PutCompanyResponse = any
 
-/**
- * 接口 更新公司 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `PUT /company`
- */
 type PutCompanyRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, string, false>
 >
 
-/**
- * 接口 更新公司 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `PUT /company`
- */
 const putCompanyRequestConfig: PutCompanyRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2730,24 +2833,12 @@ const putCompanyRequestConfig: PutCompanyRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 更新公司 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `PUT /company`
- */
 export const putCompany = /*#__PURE__*/ (requestData: PutCompanyRequest, ...args: UserRequestRestArgs) => {
   return request<PutCompanyResponse>(prepare(putCompanyRequestConfig, requestData), ...args)
 }
 
 putCompany.requestConfig = putCompanyRequestConfig
 
-/**
- * 接口 删除公司 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `DELETE /company`
- */
 export interface DeleteCompanyRequest {
   /**
    * 公司id
@@ -2755,40 +2846,22 @@ export interface DeleteCompanyRequest {
   id: string
 }
 
-/**
- * 接口 删除公司 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `DELETE /company`
- */
 export type DeleteCompanyResponse = any
 
-/**
- * 接口 删除公司 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `DELETE /company`
- */
 type DeleteCompanyRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, 'id', false>
 >
 
-/**
- * 接口 删除公司 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `DELETE /company`
- */
 const deleteCompanyRequestConfig: DeleteCompanyRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -2799,24 +2872,12 @@ const deleteCompanyRequestConfig: DeleteCompanyRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 删除公司 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `DELETE /company`
- */
 export const deleteCompany = /*#__PURE__*/ (requestData: DeleteCompanyRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteCompanyResponse>(prepare(deleteCompanyRequestConfig, requestData), ...args)
 }
 
 deleteCompany.requestConfig = deleteCompanyRequestConfig
 
-/**
- * 接口 审核公司 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `POST /company/audit`
- */
 export interface PostCompanyAuditRequest {
   /**
    * 公司id
@@ -2828,40 +2889,22 @@ export interface PostCompanyAuditRequest {
   status: number
 }
 
-/**
- * 接口 审核公司 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `POST /company/audit`
- */
 export type PostCompanyAuditResponse = any
 
-/**
- * 接口 审核公司 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `POST /company/audit`
- */
 type PostCompanyAuditRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/audit', 'data', string, string, false>
 >
 
-/**
- * 接口 审核公司 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `POST /company/audit`
- */
 const postCompanyAuditRequestConfig: PostCompanyAuditRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/audit',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2872,32 +2915,14 @@ const postCompanyAuditRequestConfig: PostCompanyAuditRequestConfig = /*#__PURE__
   extraInfo: {},
 }
 
-/**
- * 接口 审核公司 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `POST /company/audit`
- */
 export const postCompanyAudit = /*#__PURE__*/ (requestData: PostCompanyAuditRequest, ...args: UserRequestRestArgs) => {
   return request<PostCompanyAuditResponse>(prepare(postCompanyAuditRequestConfig, requestData), ...args)
 }
 
 postCompanyAudit.requestConfig = postCompanyAuditRequestConfig
 
-/**
- * 接口 获取当前公司收款账户 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/payment`
- */
 export interface GetCompanyPaymentRequest {}
 
-/**
- * 接口 获取当前公司收款账户 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/payment`
- */
 export type GetCompanyPaymentResponse = {
   /**
    * 收款账户id
@@ -2929,32 +2954,20 @@ export type GetCompanyPaymentResponse = {
   bankName?: string
 }[]
 
-/**
- * 接口 获取当前公司收款账户 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/payment`
- */
 type GetCompanyPaymentRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment', 'data', string, string, true>
 >
 
-/**
- * 接口 获取当前公司收款账户 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/payment`
- */
 const getCompanyPaymentRequestConfig: GetCompanyPaymentRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/payment',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -2965,12 +2978,6 @@ const getCompanyPaymentRequestConfig: GetCompanyPaymentRequestConfig = /*#__PURE
   extraInfo: {},
 }
 
-/**
- * 接口 获取当前公司收款账户 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/payment`
- */
 export const getCompanyPayment = /*#__PURE__*/ (
   requestData?: GetCompanyPaymentRequest,
   ...args: UserRequestRestArgs
@@ -2980,12 +2987,6 @@ export const getCompanyPayment = /*#__PURE__*/ (
 
 getCompanyPayment.requestConfig = getCompanyPaymentRequestConfig
 
-/**
- * 接口 绑定收款账户 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `POST /company/payment`
- */
 export interface PostCompanyPaymentRequest {
   /**
    * 收款账户类型 1:银行卡 2:支付宝
@@ -3009,40 +3010,22 @@ export interface PostCompanyPaymentRequest {
   bankName?: string
 }
 
-/**
- * 接口 绑定收款账户 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `POST /company/payment`
- */
 export type PostCompanyPaymentResponse = any
 
-/**
- * 接口 绑定收款账户 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `POST /company/payment`
- */
 type PostCompanyPaymentRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment', 'data', string, string, false>
 >
 
-/**
- * 接口 绑定收款账户 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `POST /company/payment`
- */
 const postCompanyPaymentRequestConfig: PostCompanyPaymentRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/payment',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3053,12 +3036,6 @@ const postCompanyPaymentRequestConfig: PostCompanyPaymentRequestConfig = /*#__PU
   extraInfo: {},
 }
 
-/**
- * 接口 绑定收款账户 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `POST /company/payment`
- */
 export const postCompanyPayment = /*#__PURE__*/ (
   requestData: PostCompanyPaymentRequest,
   ...args: UserRequestRestArgs
@@ -3068,12 +3045,6 @@ export const postCompanyPayment = /*#__PURE__*/ (
 
 postCompanyPayment.requestConfig = postCompanyPaymentRequestConfig
 
-/**
- * 接口 获取收款账户详情 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/payment/{id}`
- */
 export interface GetCompanyPaymentIdRequest {
   /**
    * 收款账户id
@@ -3081,12 +3052,6 @@ export interface GetCompanyPaymentIdRequest {
   id: string
 }
 
-/**
- * 接口 获取收款账户详情 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/payment/{id}`
- */
 export interface GetCompanyPaymentIdResponse {
   /**
    * 收款账户id
@@ -3118,32 +3083,20 @@ export interface GetCompanyPaymentIdResponse {
   bankName?: string
 }
 
-/**
- * 接口 获取收款账户详情 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/payment/{id}`
- */
 type GetCompanyPaymentIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取收款账户详情 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/payment/{id}`
- */
 const getCompanyPaymentIdRequestConfig: GetCompanyPaymentIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/payment/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -3154,12 +3107,6 @@ const getCompanyPaymentIdRequestConfig: GetCompanyPaymentIdRequestConfig = /*#__
   extraInfo: {},
 }
 
-/**
- * 接口 获取收款账户详情 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/payment/{id}`
- */
 export const getCompanyPaymentId = /*#__PURE__*/ (
   requestData: GetCompanyPaymentIdRequest,
   ...args: UserRequestRestArgs
@@ -3169,12 +3116,6 @@ export const getCompanyPaymentId = /*#__PURE__*/ (
 
 getCompanyPaymentId.requestConfig = getCompanyPaymentIdRequestConfig
 
-/**
- * 接口 绑定收款账户 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `DELETE /company/payment/{id}`
- */
 export interface DeleteCompanyPaymentIdRequest {
   /**
    * 收款账户id
@@ -3182,40 +3123,22 @@ export interface DeleteCompanyPaymentIdRequest {
   id: string
 }
 
-/**
- * 接口 绑定收款账户 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `DELETE /company/payment/{id}`
- */
 export type DeleteCompanyPaymentIdResponse = any
 
-/**
- * 接口 绑定收款账户 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `DELETE /company/payment/{id}`
- */
 type DeleteCompanyPaymentIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/payment/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 绑定收款账户 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `DELETE /company/payment/{id}`
- */
 const deleteCompanyPaymentIdRequestConfig: DeleteCompanyPaymentIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/payment/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -3226,12 +3149,6 @@ const deleteCompanyPaymentIdRequestConfig: DeleteCompanyPaymentIdRequestConfig =
   extraInfo: {},
 }
 
-/**
- * 接口 绑定收款账户 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `DELETE /company/payment/{id}`
- */
 export const deleteCompanyPaymentId = /*#__PURE__*/ (
   requestData: DeleteCompanyPaymentIdRequest,
   ...args: UserRequestRestArgs
@@ -3241,12 +3158,6 @@ export const deleteCompanyPaymentId = /*#__PURE__*/ (
 
 deleteCompanyPaymentId.requestConfig = deleteCompanyPaymentIdRequestConfig
 
-/**
- * 接口 获取余额流水 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/balance`
- */
 export interface GetCompanyBalanceRequest {
   /**
    * 页码
@@ -3257,17 +3168,15 @@ export interface GetCompanyBalanceRequest {
    */
   pageSize: string
   /**
+   * 类型 1:服装出售 2:服装借出 3:服装购买 4:服装借入 5:押金 6:押金退还 7:提现
+   */
+  type?: string
+  /**
    * 流水 1:收入 2:支出
    */
   mode?: string
 }
 
-/**
- * 接口 获取余额流水 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/balance`
- */
 export interface GetCompanyBalanceResponse {
   /**
    * 数据总条数
@@ -3316,12 +3225,6 @@ export interface GetCompanyBalanceResponse {
   }[]
 }
 
-/**
- * 接口 获取余额流水 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/balance`
- */
 type GetCompanyBalanceRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -3330,29 +3233,23 @@ type GetCompanyBalanceRequestConfig = Readonly<
     '/company/balance',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'mode',
+    'pageNum' | 'pageSize' | 'type' | 'mode',
     false
   >
 >
 
-/**
- * 接口 获取余额流水 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/balance`
- */
 const getCompanyBalanceRequestConfig: GetCompanyBalanceRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/balance',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'mode'],
+  queryNames: ['pageNum', 'pageSize', 'type', 'mode'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
@@ -3361,12 +3258,6 @@ const getCompanyBalanceRequestConfig: GetCompanyBalanceRequestConfig = /*#__PURE
   extraInfo: {},
 }
 
-/**
- * 接口 获取余额流水 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/balance`
- */
 export const getCompanyBalance = /*#__PURE__*/ (
   requestData: GetCompanyBalanceRequest,
   ...args: UserRequestRestArgs
@@ -3376,12 +3267,6 @@ export const getCompanyBalance = /*#__PURE__*/ (
 
 getCompanyBalance.requestConfig = getCompanyBalanceRequestConfig
 
-/**
- * 接口 获取提现记录列表 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/withdraw`
- */
 export interface GetCompanyWithdrawRequest {
   /**
    * 页码
@@ -3397,12 +3282,6 @@ export interface GetCompanyWithdrawRequest {
   status?: string
 }
 
-/**
- * 接口 获取提现记录列表 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/withdraw`
- */
 export interface GetCompanyWithdrawResponse {
   /**
    * 数据总条数
@@ -3451,12 +3330,6 @@ export interface GetCompanyWithdrawResponse {
   }[]
 }
 
-/**
- * 接口 获取提现记录列表 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/withdraw`
- */
 type GetCompanyWithdrawRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -3470,22 +3343,16 @@ type GetCompanyWithdrawRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取提现记录列表 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/withdraw`
- */
 const getCompanyWithdrawRequestConfig: GetCompanyWithdrawRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/withdraw',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -3496,12 +3363,6 @@ const getCompanyWithdrawRequestConfig: GetCompanyWithdrawRequestConfig = /*#__PU
   extraInfo: {},
 }
 
-/**
- * 接口 获取提现记录列表 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/withdraw`
- */
 export const getCompanyWithdraw = /*#__PURE__*/ (
   requestData: GetCompanyWithdrawRequest,
   ...args: UserRequestRestArgs
@@ -3511,12 +3372,6 @@ export const getCompanyWithdraw = /*#__PURE__*/ (
 
 getCompanyWithdraw.requestConfig = getCompanyWithdrawRequestConfig
 
-/**
- * 接口 提现 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `POST /company/withdraw`
- */
 export interface PostCompanyWithdrawRequest {
   /**
    * 提现方式
@@ -3528,40 +3383,22 @@ export interface PostCompanyWithdrawRequest {
   amount: string
 }
 
-/**
- * 接口 提现 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `POST /company/withdraw`
- */
 export type PostCompanyWithdrawResponse = number
 
-/**
- * 接口 提现 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `POST /company/withdraw`
- */
 type PostCompanyWithdrawRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/withdraw', 'data', string, string, false>
 >
 
-/**
- * 接口 提现 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `POST /company/withdraw`
- */
 const postCompanyWithdrawRequestConfig: PostCompanyWithdrawRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/withdraw',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3572,12 +3409,6 @@ const postCompanyWithdrawRequestConfig: PostCompanyWithdrawRequestConfig = /*#__
   extraInfo: {},
 }
 
-/**
- * 接口 提现 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `POST /company/withdraw`
- */
 export const postCompanyWithdraw = /*#__PURE__*/ (
   requestData: PostCompanyWithdrawRequest,
   ...args: UserRequestRestArgs
@@ -3587,12 +3418,6 @@ export const postCompanyWithdraw = /*#__PURE__*/ (
 
 postCompanyWithdraw.requestConfig = postCompanyWithdrawRequestConfig
 
-/**
- * 接口 切换关注状态 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `POST /company/follow/toggle`
- */
 export interface PostCompanyFollowToggleRequest {
   /**
    * 被关注的公司id
@@ -3604,40 +3429,22 @@ export interface PostCompanyFollowToggleRequest {
   isFollow: boolean
 }
 
-/**
- * 接口 切换关注状态 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `POST /company/follow/toggle`
- */
 export type PostCompanyFollowToggleResponse = any
 
-/**
- * 接口 切换关注状态 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `POST /company/follow/toggle`
- */
 type PostCompanyFollowToggleRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/follow/toggle', 'data', string, string, false>
 >
 
-/**
- * 接口 切换关注状态 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `POST /company/follow/toggle`
- */
 const postCompanyFollowToggleRequestConfig: PostCompanyFollowToggleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/follow/toggle',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3648,12 +3455,6 @@ const postCompanyFollowToggleRequestConfig: PostCompanyFollowToggleRequestConfig
   extraInfo: {},
 }
 
-/**
- * 接口 切换关注状态 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `POST /company/follow/toggle`
- */
 export const postCompanyFollowToggle = /*#__PURE__*/ (
   requestData: PostCompanyFollowToggleRequest,
   ...args: UserRequestRestArgs
@@ -3663,12 +3464,6 @@ export const postCompanyFollowToggle = /*#__PURE__*/ (
 
 postCompanyFollowToggle.requestConfig = postCompanyFollowToggleRequestConfig
 
-/**
- * 接口 获取公司详情 的 **请求类型**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
 export interface GetCompanyIdRequest {
   /**
    * 公司id
@@ -3676,12 +3471,6 @@ export interface GetCompanyIdRequest {
   id: string
 }
 
-/**
- * 接口 获取公司详情 的 **返回类型**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
 export interface GetCompanyIdResponse {
   /**
    * 创建时间
@@ -3753,32 +3542,20 @@ export interface GetCompanyIdResponse {
   sold: number
 }
 
-/**
- * 接口 获取公司详情 的 **请求配置的类型**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
 type GetCompanyIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取公司详情 的 **请求配置**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
 const getCompanyIdRequestConfig: GetCompanyIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/company/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -3789,37 +3566,19 @@ const getCompanyIdRequestConfig: GetCompanyIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取公司详情 的 **请求函数**
- *
- * @分类 公司
- * @请求头 `GET /company/{id}`
- */
 export const getCompanyId = /*#__PURE__*/ (requestData: GetCompanyIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetCompanyIdResponse>(prepare(getCompanyIdRequestConfig, requestData), ...args)
 }
 
 getCompanyId.requestConfig = getCompanyIdRequestConfig
 
-const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_3 = '' as any
-const prodUrl_0_0_0_3 = '' as any
-const dataKey_0_0_0_3 = 'data' as any
+const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_4 = '' as any
+const prodUrl_0_0_0_4 = '' as any
+const dataKey_0_0_0_4 = 'data' as any
 
-/**
- * 接口 获取用户列表 的 **请求类型**
- *
- * @分类 用户
- * @请求头 `GET /user`
- */
 export interface GetUserRequest {}
 
-/**
- * 接口 获取用户列表 的 **返回类型**
- *
- * @分类 用户
- * @请求头 `GET /user`
- */
 export type GetUserResponse = {
   /**
    * 用户id
@@ -3851,32 +3610,20 @@ export type GetUserResponse = {
   roleId: number
 }[]
 
-/**
- * 接口 获取用户列表 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `GET /user`
- */
 type GetUserRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, string, true>
 >
 
-/**
- * 接口 获取用户列表 的 **请求配置**
- *
- * @分类 用户
- * @请求头 `GET /user`
- */
 const getUserRequestConfig: GetUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
   path: '/user',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -3887,24 +3634,12 @@ const getUserRequestConfig: GetUserRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取用户列表 的 **请求函数**
- *
- * @分类 用户
- * @请求头 `GET /user`
- */
 export const getUser = /*#__PURE__*/ (requestData?: GetUserRequest, ...args: UserRequestRestArgs) => {
   return request<GetUserResponse>(prepare(getUserRequestConfig, requestData), ...args)
 }
 
 getUser.requestConfig = getUserRequestConfig
 
-/**
- * 接口 创建用户 的 **请求类型**
- *
- * @分类 用户
- * @请求头 `POST /user`
- */
 export interface PostUserRequest {
   /**
    * 姓名
@@ -3924,40 +3659,22 @@ export interface PostUserRequest {
   roleId: number
 }
 
-/**
- * 接口 创建用户 的 **返回类型**
- *
- * @分类 用户
- * @请求头 `POST /user`
- */
 export type PostUserResponse = number
 
-/**
- * 接口 创建用户 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `POST /user`
- */
 type PostUserRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, string, false>
 >
 
-/**
- * 接口 创建用户 的 **请求配置**
- *
- * @分类 用户
- * @请求头 `POST /user`
- */
 const postUserRequestConfig: PostUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
   path: '/user',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3968,24 +3685,12 @@ const postUserRequestConfig: PostUserRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 创建用户 的 **请求函数**
- *
- * @分类 用户
- * @请求头 `POST /user`
- */
 export const postUser = /*#__PURE__*/ (requestData: PostUserRequest, ...args: UserRequestRestArgs) => {
   return request<PostUserResponse>(prepare(postUserRequestConfig, requestData), ...args)
 }
 
 postUser.requestConfig = postUserRequestConfig
 
-/**
- * 接口 更新用户 的 **请求类型**
- *
- * @分类 用户
- * @请求头 `PUT /user`
- */
 export interface PutUserRequest {
   /**
    * 用户id
@@ -4005,40 +3710,22 @@ export interface PutUserRequest {
   openid?: string
 }
 
-/**
- * 接口 更新用户 的 **返回类型**
- *
- * @分类 用户
- * @请求头 `PUT /user`
- */
 export type PutUserResponse = any
 
-/**
- * 接口 更新用户 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `PUT /user`
- */
 type PutUserRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, string, false>
 >
 
-/**
- * 接口 更新用户 的 **请求配置**
- *
- * @分类 用户
- * @请求头 `PUT /user`
- */
 const putUserRequestConfig: PutUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
   path: '/user',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4049,24 +3736,12 @@ const putUserRequestConfig: PutUserRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 更新用户 的 **请求函数**
- *
- * @分类 用户
- * @请求头 `PUT /user`
- */
 export const putUser = /*#__PURE__*/ (requestData: PutUserRequest, ...args: UserRequestRestArgs) => {
   return request<PutUserResponse>(prepare(putUserRequestConfig, requestData), ...args)
 }
 
 putUser.requestConfig = putUserRequestConfig
 
-/**
- * 接口 删除用户 的 **请求类型**
- *
- * @分类 用户
- * @请求头 `DELETE /user`
- */
 export interface DeleteUserRequest {
   /**
    * 用户id
@@ -4074,40 +3749,22 @@ export interface DeleteUserRequest {
   id: string
 }
 
-/**
- * 接口 删除用户 的 **返回类型**
- *
- * @分类 用户
- * @请求头 `DELETE /user`
- */
 export type DeleteUserResponse = any
 
-/**
- * 接口 删除用户 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `DELETE /user`
- */
 type DeleteUserRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user', 'data', string, 'id', false>
 >
 
-/**
- * 接口 删除用户 的 **请求配置**
- *
- * @分类 用户
- * @请求头 `DELETE /user`
- */
 const deleteUserRequestConfig: DeleteUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
   path: '/user',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -4118,32 +3775,14 @@ const deleteUserRequestConfig: DeleteUserRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 删除用户 的 **请求函数**
- *
- * @分类 用户
- * @请求头 `DELETE /user`
- */
 export const deleteUser = /*#__PURE__*/ (requestData: DeleteUserRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteUserResponse>(prepare(deleteUserRequestConfig, requestData), ...args)
 }
 
 deleteUser.requestConfig = deleteUserRequestConfig
 
-/**
- * 接口 获取当前登录用户信息 的 **请求类型**
- *
- * @分类 用户
- * @请求头 `GET /user/self`
- */
 export interface GetUserSelfRequest {}
 
-/**
- * 接口 获取当前登录用户信息 的 **返回类型**
- *
- * @分类 用户
- * @请求头 `GET /user/self`
- */
 export interface GetUserSelfResponse {
   /**
    * 用户id
@@ -4248,32 +3887,20 @@ export interface GetUserSelfResponse {
   auth: number[]
 }
 
-/**
- * 接口 获取当前登录用户信息 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `GET /user/self`
- */
 type GetUserSelfRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user/self', 'data', string, string, true>
 >
 
-/**
- * 接口 获取当前登录用户信息 的 **请求配置**
- *
- * @分类 用户
- * @请求头 `GET /user/self`
- */
 const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
   path: '/user/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4284,24 +3911,12 @@ const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取当前登录用户信息 的 **请求函数**
- *
- * @分类 用户
- * @请求头 `GET /user/self`
- */
 export const getUserSelf = /*#__PURE__*/ (requestData?: GetUserSelfRequest, ...args: UserRequestRestArgs) => {
   return request<GetUserSelfResponse>(prepare(getUserSelfRequestConfig, requestData), ...args)
 }
 
 getUserSelf.requestConfig = getUserSelfRequestConfig
 
-/**
- * 接口 获取用户信息 的 **请求类型**
- *
- * @分类 用户
- * @请求头 `GET /user/{id}`
- */
 export interface GetUserIdRequest {
   /**
    * 用户id
@@ -4309,12 +3924,6 @@ export interface GetUserIdRequest {
   id: string
 }
 
-/**
- * 接口 获取用户信息 的 **返回类型**
- *
- * @分类 用户
- * @请求头 `GET /user/{id}`
- */
 export interface GetUserIdResponse {
   /**
    * 用户id
@@ -4419,32 +4028,20 @@ export interface GetUserIdResponse {
   auth: number[]
 }
 
-/**
- * 接口 获取用户信息 的 **请求配置的类型**
- *
- * @分类 用户
- * @请求头 `GET /user/{id}`
- */
 type GetUserIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/user/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取用户信息 的 **请求配置**
- *
- * @分类 用户
- * @请求头 `GET /user/{id}`
- */
 const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
   path: '/user/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_4,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -4455,37 +4052,19 @@ const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取用户信息 的 **请求函数**
- *
- * @分类 用户
- * @请求头 `GET /user/{id}`
- */
 export const getUserId = /*#__PURE__*/ (requestData: GetUserIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetUserIdResponse>(prepare(getUserIdRequestConfig, requestData), ...args)
 }
 
 getUserId.requestConfig = getUserIdRequestConfig
 
-const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_4 = '' as any
-const prodUrl_0_0_0_4 = '' as any
-const dataKey_0_0_0_4 = 'data' as any
+const mockUrl_0_0_0_5 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_5 = '' as any
+const prodUrl_0_0_0_5 = '' as any
+const dataKey_0_0_0_5 = 'data' as any
 
-/**
- * 接口 获取账号列表 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `GET /account`
- */
 export interface GetAccountRequest {}
 
-/**
- * 接口 获取账号列表 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `GET /account`
- */
 export interface GetAccountResponse {
   /**
    * 创建时间
@@ -4505,32 +4084,20 @@ export interface GetAccountResponse {
   account: string
 }
 
-/**
- * 接口 获取账号列表 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `GET /account`
- */
 type GetAccountRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account', 'data', string, string, true>
 >
 
-/**
- * 接口 获取账号列表 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `GET /account`
- */
 const getAccountRequestConfig: GetAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4541,24 +4108,12 @@ const getAccountRequestConfig: GetAccountRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取账号列表 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `GET /account`
- */
 export const getAccount = /*#__PURE__*/ (requestData?: GetAccountRequest, ...args: UserRequestRestArgs) => {
   return request<GetAccountResponse>(prepare(getAccountRequestConfig, requestData), ...args)
 }
 
 getAccount.requestConfig = getAccountRequestConfig
 
-/**
- * 接口 获取短信注册验证码 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `GET /account/register/code/{account}`
- */
 export interface GetAccountRegisterCodeAccountRequest {
   /**
    * 账号
@@ -4566,20 +4121,8 @@ export interface GetAccountRegisterCodeAccountRequest {
   account: string
 }
 
-/**
- * 接口 获取短信注册验证码 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `GET /account/register/code/{account}`
- */
 export type GetAccountRegisterCodeAccountResponse = any
 
-/**
- * 接口 获取短信注册验证码 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `GET /account/register/code/{account}`
- */
 type GetAccountRegisterCodeAccountRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -4593,22 +4136,16 @@ type GetAccountRegisterCodeAccountRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取短信注册验证码 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `GET /account/register/code/{account}`
- */
 const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/register/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -4619,12 +4156,6 @@ const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountR
   extraInfo: {},
 }
 
-/**
- * 接口 获取短信注册验证码 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `GET /account/register/code/{account}`
- */
 export const getAccountRegisterCodeAccount = /*#__PURE__*/ (
   requestData: GetAccountRegisterCodeAccountRequest,
   ...args: UserRequestRestArgs
@@ -4637,12 +4168,6 @@ export const getAccountRegisterCodeAccount = /*#__PURE__*/ (
 
 getAccountRegisterCodeAccount.requestConfig = getAccountRegisterCodeAccountRequestConfig
 
-/**
- * 接口 校验注册验证码 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/register/code/check`
- */
 export interface PostAccountRegisterCodeCheckRequest {
   /**
    * 账号
@@ -4654,40 +4179,22 @@ export interface PostAccountRegisterCodeCheckRequest {
   code: string
 }
 
-/**
- * 接口 校验注册验证码 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/register/code/check`
- */
 export type PostAccountRegisterCodeCheckResponse = string
 
-/**
- * 接口 校验注册验证码 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/register/code/check`
- */
 type PostAccountRegisterCodeCheckRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/register/code/check', 'data', string, string, false>
 >
 
-/**
- * 接口 校验注册验证码 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/register/code/check`
- */
 const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/register/code/check',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4698,12 +4205,6 @@ const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckReq
   extraInfo: {},
 }
 
-/**
- * 接口 校验注册验证码 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/register/code/check`
- */
 export const postAccountRegisterCodeCheck = /*#__PURE__*/ (
   requestData: PostAccountRegisterCodeCheckRequest,
   ...args: UserRequestRestArgs
@@ -4716,48 +4217,24 @@ export const postAccountRegisterCodeCheck = /*#__PURE__*/ (
 
 postAccountRegisterCodeCheck.requestConfig = postAccountRegisterCodeCheckRequestConfig
 
-/**
- * 接口 获取新盐值 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `GET /account/salt`
- */
 export interface GetAccountSaltRequest {}
 
-/**
- * 接口 获取新盐值 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `GET /account/salt`
- */
 export type GetAccountSaltResponse = string
 
-/**
- * 接口 获取新盐值 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `GET /account/salt`
- */
 type GetAccountSaltRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt', 'data', string, string, true>
 >
 
-/**
- * 接口 获取新盐值 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `GET /account/salt`
- */
 const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/salt',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4768,24 +4245,12 @@ const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取新盐值 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `GET /account/salt`
- */
 export const getAccountSalt = /*#__PURE__*/ (requestData?: GetAccountSaltRequest, ...args: UserRequestRestArgs) => {
   return request<GetAccountSaltResponse>(prepare(getAccountSaltRequestConfig, requestData), ...args)
 }
 
 getAccountSalt.requestConfig = getAccountSaltRequestConfig
 
-/**
- * 接口 获取账号盐值 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `GET /account/salt/{account}`
- */
 export interface GetAccountSaltAccountRequest {
   /**
    * 账号
@@ -4793,40 +4258,22 @@ export interface GetAccountSaltAccountRequest {
   account: string
 }
 
-/**
- * 接口 获取账号盐值 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `GET /account/salt/{account}`
- */
 export type GetAccountSaltAccountResponse = string
 
-/**
- * 接口 获取账号盐值 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `GET /account/salt/{account}`
- */
 type GetAccountSaltAccountRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt/{account}', 'data', 'account', string, false>
 >
 
-/**
- * 接口 获取账号盐值 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `GET /account/salt/{account}`
- */
 const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/salt/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -4837,12 +4284,6 @@ const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /
   extraInfo: {},
 }
 
-/**
- * 接口 获取账号盐值 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `GET /account/salt/{account}`
- */
 export const getAccountSaltAccount = /*#__PURE__*/ (
   requestData: GetAccountSaltAccountRequest,
   ...args: UserRequestRestArgs
@@ -4852,12 +4293,6 @@ export const getAccountSaltAccount = /*#__PURE__*/ (
 
 getAccountSaltAccount.requestConfig = getAccountSaltAccountRequestConfig
 
-/**
- * 接口 密码登录 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
 export interface PostAccountLoginRequest {
   /**
    * 账号
@@ -4873,12 +4308,6 @@ export interface PostAccountLoginRequest {
   salt: string
 }
 
-/**
- * 接口 密码登录 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
 export interface PostAccountLoginResponse {
   /**
    * 登录凭证
@@ -4890,32 +4319,20 @@ export interface PostAccountLoginResponse {
   bind: boolean
 }
 
-/**
- * 接口 密码登录 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
 type PostAccountLoginRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login', 'data', string, string, false>
 >
 
-/**
- * 接口 密码登录 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
 const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/login',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4926,24 +4343,12 @@ const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__
   extraInfo: {},
 }
 
-/**
- * 接口 密码登录 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/login`
- */
 export const postAccountLogin = /*#__PURE__*/ (requestData: PostAccountLoginRequest, ...args: UserRequestRestArgs) => {
   return request<PostAccountLoginResponse>(prepare(postAccountLoginRequestConfig, requestData), ...args)
 }
 
 postAccountLogin.requestConfig = postAccountLoginRequestConfig
 
-/**
- * 接口 获取短信登录验证码 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `GET /account/login/code/{account}`
- */
 export interface GetAccountLoginCodeAccountRequest {
   /**
    * 账号
@@ -4951,20 +4356,8 @@ export interface GetAccountLoginCodeAccountRequest {
   account: string
 }
 
-/**
- * 接口 获取短信登录验证码 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `GET /account/login/code/{account}`
- */
 export type GetAccountLoginCodeAccountResponse = any
 
-/**
- * 接口 获取短信登录验证码 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `GET /account/login/code/{account}`
- */
 type GetAccountLoginCodeAccountRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -4978,22 +4371,16 @@ type GetAccountLoginCodeAccountRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取短信登录验证码 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `GET /account/login/code/{account}`
- */
 const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/login/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -5004,12 +4391,6 @@ const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequest
   extraInfo: {},
 }
 
-/**
- * 接口 获取短信登录验证码 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `GET /account/login/code/{account}`
- */
 export const getAccountLoginCodeAccount = /*#__PURE__*/ (
   requestData: GetAccountLoginCodeAccountRequest,
   ...args: UserRequestRestArgs
@@ -5022,12 +4403,6 @@ export const getAccountLoginCodeAccount = /*#__PURE__*/ (
 
 getAccountLoginCodeAccount.requestConfig = getAccountLoginCodeAccountRequestConfig
 
-/**
- * 接口 短信验证码登录 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
 export interface PostAccountLoginCodeRequest {
   /**
    * 账号
@@ -5039,12 +4414,6 @@ export interface PostAccountLoginCodeRequest {
   code: string
 }
 
-/**
- * 接口 短信验证码登录 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
 export interface PostAccountLoginCodeResponse {
   /**
    * 登录凭证
@@ -5056,32 +4425,20 @@ export interface PostAccountLoginCodeResponse {
   bind: boolean
 }
 
-/**
- * 接口 短信验证码登录 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
 type PostAccountLoginCodeRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/code', 'data', string, string, false>
 >
 
-/**
- * 接口 短信验证码登录 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
 const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/login/code',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5092,12 +4449,6 @@ const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#
   extraInfo: {},
 }
 
-/**
- * 接口 短信验证码登录 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/login/code`
- */
 export const postAccountLoginCode = /*#__PURE__*/ (
   requestData: PostAccountLoginCodeRequest,
   ...args: UserRequestRestArgs
@@ -5107,12 +4458,6 @@ export const postAccountLoginCode = /*#__PURE__*/ (
 
 postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
 
-/**
- * 接口 使用微信绑定的手机号登录 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat/phone`
- */
 export interface PostAccountLoginWechatPhoneRequest {
   /**
    * 微信获取手机号接口code
@@ -5120,12 +4465,6 @@ export interface PostAccountLoginWechatPhoneRequest {
   code: string
 }
 
-/**
- * 接口 使用微信绑定的手机号登录 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat/phone`
- */
 export interface PostAccountLoginWechatPhoneResponse {
   /**
    * 账号
@@ -5137,32 +4476,20 @@ export interface PostAccountLoginWechatPhoneResponse {
   token: string
 }
 
-/**
- * 接口 使用微信绑定的手机号登录 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat/phone`
- */
 type PostAccountLoginWechatPhoneRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat/phone', 'data', string, string, false>
 >
 
-/**
- * 接口 使用微信绑定的手机号登录 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat/phone`
- */
 const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/login/wechat/phone',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5173,12 +4500,6 @@ const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneReque
   extraInfo: {},
 }
 
-/**
- * 接口 使用微信绑定的手机号登录 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat/phone`
- */
 export const postAccountLoginWechatPhone = /*#__PURE__*/ (
   requestData: PostAccountLoginWechatPhoneRequest,
   ...args: UserRequestRestArgs
@@ -5191,12 +4512,6 @@ export const postAccountLoginWechatPhone = /*#__PURE__*/ (
 
 postAccountLoginWechatPhone.requestConfig = postAccountLoginWechatPhoneRequestConfig
 
-/**
- * 接口 微信授权登录 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat`
- */
 export interface PostAccountLoginWechatRequest {
   /**
    * 微信授权登录code
@@ -5204,40 +4519,22 @@ export interface PostAccountLoginWechatRequest {
   code: string
 }
 
-/**
- * 接口 微信授权登录 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat`
- */
 export type PostAccountLoginWechatResponse = string
 
-/**
- * 接口 微信授权登录 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat`
- */
 type PostAccountLoginWechatRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat', 'data', string, string, false>
 >
 
-/**
- * 接口 微信授权登录 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat`
- */
 const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/login/wechat',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5248,12 +4545,6 @@ const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig =
   extraInfo: {},
 }
 
-/**
- * 接口 微信授权登录 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/login/wechat`
- */
 export const postAccountLoginWechat = /*#__PURE__*/ (
   requestData: PostAccountLoginWechatRequest,
   ...args: UserRequestRestArgs
@@ -5263,12 +4554,6 @@ export const postAccountLoginWechat = /*#__PURE__*/ (
 
 postAccountLoginWechat.requestConfig = postAccountLoginWechatRequestConfig
 
-/**
- * 接口 账号绑定openid 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `POST /account/bind/openid`
- */
 export interface PostAccountBindOpenidRequest {
   /**
    * 账号
@@ -5280,40 +4565,22 @@ export interface PostAccountBindOpenidRequest {
   code: string
 }
 
-/**
- * 接口 账号绑定openid 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `POST /account/bind/openid`
- */
 export type PostAccountBindOpenidResponse = any
 
-/**
- * 接口 账号绑定openid 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `POST /account/bind/openid`
- */
 type PostAccountBindOpenidRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/bind/openid', 'data', string, string, false>
 >
 
-/**
- * 接口 账号绑定openid 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `POST /account/bind/openid`
- */
 const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/bind/openid',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5324,12 +4591,6 @@ const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /
   extraInfo: {},
 }
 
-/**
- * 接口 账号绑定openid 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `POST /account/bind/openid`
- */
 export const postAccountBindOpenid = /*#__PURE__*/ (
   requestData: PostAccountBindOpenidRequest,
   ...args: UserRequestRestArgs
@@ -5339,12 +4600,6 @@ export const postAccountBindOpenid = /*#__PURE__*/ (
 
 postAccountBindOpenid.requestConfig = postAccountBindOpenidRequestConfig
 
-/**
- * 接口 获取账号信息 的 **请求类型**
- *
- * @分类 账号
- * @请求头 `GET /account/{id}`
- */
 export interface GetAccountIdRequest {
   /**
    * 账号id
@@ -5352,12 +4607,6 @@ export interface GetAccountIdRequest {
   id: string
 }
 
-/**
- * 接口 获取账号信息 的 **返回类型**
- *
- * @分类 账号
- * @请求头 `GET /account/{id}`
- */
 export interface GetAccountIdResponse {
   /**
    * 创建时间
@@ -5377,32 +4626,20 @@ export interface GetAccountIdResponse {
   account: string
 }
 
-/**
- * 接口 获取账号信息 的 **请求配置的类型**
- *
- * @分类 账号
- * @请求头 `GET /account/{id}`
- */
 type GetAccountIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取账号信息 的 **请求配置**
- *
- * @分类 账号
- * @请求头 `GET /account/{id}`
- */
 const getAccountIdRequestConfig: GetAccountIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/account/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -5413,37 +4650,19 @@ const getAccountIdRequestConfig: GetAccountIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取账号信息 的 **请求函数**
- *
- * @分类 账号
- * @请求头 `GET /account/{id}`
- */
 export const getAccountId = /*#__PURE__*/ (requestData: GetAccountIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetAccountIdResponse>(prepare(getAccountIdRequestConfig, requestData), ...args)
 }
 
 getAccountId.requestConfig = getAccountIdRequestConfig
 
-const mockUrl_0_0_0_5 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_5 = '' as any
-const prodUrl_0_0_0_5 = '' as any
-const dataKey_0_0_0_5 = 'data' as any
+const mockUrl_0_0_0_6 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_6 = '' as any
+const prodUrl_0_0_0_6 = '' as any
+const dataKey_0_0_0_6 = 'data' as any
 
-/**
- * 接口 获取角色列表 的 **请求类型**
- *
- * @分类 角色
- * @请求头 `GET /role`
- */
 export interface GetRoleRequest {}
 
-/**
- * 接口 获取角色列表 的 **返回类型**
- *
- * @分类 角色
- * @请求头 `GET /role`
- */
 export interface GetRoleResponse {
   /**
    * 创建时间
@@ -5463,32 +4682,20 @@ export interface GetRoleResponse {
   role: string
 }
 
-/**
- * 接口 获取角色列表 的 **请求配置的类型**
- *
- * @分类 角色
- * @请求头 `GET /role`
- */
 type GetRoleRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, string, true>
 >
 
-/**
- * 接口 获取角色列表 的 **请求配置**
- *
- * @分类 角色
- * @请求头 `GET /role`
- */
 const getRoleRequestConfig: GetRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/role',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -5499,24 +4706,12 @@ const getRoleRequestConfig: GetRoleRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取角色列表 的 **请求函数**
- *
- * @分类 角色
- * @请求头 `GET /role`
- */
 export const getRole = /*#__PURE__*/ (requestData?: GetRoleRequest, ...args: UserRequestRestArgs) => {
   return request<GetRoleResponse>(prepare(getRoleRequestConfig, requestData), ...args)
 }
 
 getRole.requestConfig = getRoleRequestConfig
 
-/**
- * 接口 创建角色 的 **请求类型**
- *
- * @分类 角色
- * @请求头 `POST /role`
- */
 export interface PostRoleRequest {
   /**
    * 角色名称
@@ -5524,40 +4719,22 @@ export interface PostRoleRequest {
   name: string
 }
 
-/**
- * 接口 创建角色 的 **返回类型**
- *
- * @分类 角色
- * @请求头 `POST /role`
- */
 export type PostRoleResponse = any
 
-/**
- * 接口 创建角色 的 **请求配置的类型**
- *
- * @分类 角色
- * @请求头 `POST /role`
- */
 type PostRoleRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, string, false>
 >
 
-/**
- * 接口 创建角色 的 **请求配置**
- *
- * @分类 角色
- * @请求头 `POST /role`
- */
 const postRoleRequestConfig: PostRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/role',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5568,24 +4745,12 @@ const postRoleRequestConfig: PostRoleRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 创建角色 的 **请求函数**
- *
- * @分类 角色
- * @请求头 `POST /role`
- */
 export const postRole = /*#__PURE__*/ (requestData: PostRoleRequest, ...args: UserRequestRestArgs) => {
   return request<PostRoleResponse>(prepare(postRoleRequestConfig, requestData), ...args)
 }
 
 postRole.requestConfig = postRoleRequestConfig
 
-/**
- * 接口 创建角色 的 **请求类型**
- *
- * @分类 角色
- * @请求头 `PUT /role`
- */
 export interface PutRoleRequest {
   /**
    * 角色id
@@ -5605,40 +4770,22 @@ export interface PutRoleRequest {
   openid?: string
 }
 
-/**
- * 接口 创建角色 的 **返回类型**
- *
- * @分类 角色
- * @请求头 `PUT /role`
- */
 export type PutRoleResponse = any
 
-/**
- * 接口 创建角色 的 **请求配置的类型**
- *
- * @分类 角色
- * @请求头 `PUT /role`
- */
 type PutRoleRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, string, false>
 >
 
-/**
- * 接口 创建角色 的 **请求配置**
- *
- * @分类 角色
- * @请求头 `PUT /role`
- */
 const putRoleRequestConfig: PutRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/role',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5649,24 +4796,12 @@ const putRoleRequestConfig: PutRoleRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 创建角色 的 **请求函数**
- *
- * @分类 角色
- * @请求头 `PUT /role`
- */
 export const putRole = /*#__PURE__*/ (requestData: PutRoleRequest, ...args: UserRequestRestArgs) => {
   return request<PutRoleResponse>(prepare(putRoleRequestConfig, requestData), ...args)
 }
 
 putRole.requestConfig = putRoleRequestConfig
 
-/**
- * 接口 删除角色 的 **请求类型**
- *
- * @分类 角色
- * @请求头 `DELETE /role`
- */
 export interface DeleteRoleRequest {
   /**
    * 角色id
@@ -5674,40 +4809,22 @@ export interface DeleteRoleRequest {
   id: string
 }
 
-/**
- * 接口 删除角色 的 **返回类型**
- *
- * @分类 角色
- * @请求头 `DELETE /role`
- */
 export type DeleteRoleResponse = any
 
-/**
- * 接口 删除角色 的 **请求配置的类型**
- *
- * @分类 角色
- * @请求头 `DELETE /role`
- */
 type DeleteRoleRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role', 'data', string, 'id', false>
 >
 
-/**
- * 接口 删除角色 的 **请求配置**
- *
- * @分类 角色
- * @请求头 `DELETE /role`
- */
 const deleteRoleRequestConfig: DeleteRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/role',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -5718,24 +4835,12 @@ const deleteRoleRequestConfig: DeleteRoleRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 删除角色 的 **请求函数**
- *
- * @分类 角色
- * @请求头 `DELETE /role`
- */
 export const deleteRole = /*#__PURE__*/ (requestData: DeleteRoleRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteRoleResponse>(prepare(deleteRoleRequestConfig, requestData), ...args)
 }
 
 deleteRole.requestConfig = deleteRoleRequestConfig
 
-/**
- * 接口 获取角色信息 的 **请求类型**
- *
- * @分类 角色
- * @请求头 `GET /role/{id}`
- */
 export interface GetRoleIdRequest {
   /**
    * 角色id
@@ -5743,12 +4848,6 @@ export interface GetRoleIdRequest {
   id: string
 }
 
-/**
- * 接口 获取角色信息 的 **返回类型**
- *
- * @分类 角色
- * @请求头 `GET /role/{id}`
- */
 export interface GetRoleIdResponse {
   /**
    * 创建时间
@@ -5768,32 +4867,20 @@ export interface GetRoleIdResponse {
   role: string
 }
 
-/**
- * 接口 获取角色信息 的 **请求配置的类型**
- *
- * @分类 角色
- * @请求头 `GET /role/{id}`
- */
 type GetRoleIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/role/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取角色信息 的 **请求配置**
- *
- * @分类 角色
- * @请求头 `GET /role/{id}`
- */
 const getRoleIdRequestConfig: GetRoleIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/role/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_6,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -5804,37 +4891,19 @@ const getRoleIdRequestConfig: GetRoleIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取角色信息 的 **请求函数**
- *
- * @分类 角色
- * @请求头 `GET /role/{id}`
- */
 export const getRoleId = /*#__PURE__*/ (requestData: GetRoleIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetRoleIdResponse>(prepare(getRoleIdRequestConfig, requestData), ...args)
 }
 
 getRoleId.requestConfig = getRoleIdRequestConfig
 
-const mockUrl_0_0_0_6 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_6 = '' as any
-const prodUrl_0_0_0_6 = '' as any
-const dataKey_0_0_0_6 = 'data' as any
+const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_7 = '' as any
+const prodUrl_0_0_0_7 = '' as any
+const dataKey_0_0_0_7 = 'data' as any
 
-/**
- * 接口 获取地址列表 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `GET /address`
- */
 export interface GetAddressRequest {}
 
-/**
- * 接口 获取地址列表 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `GET /address`
- */
 export type GetAddressResponse = {
   /**
    * 创建时间
@@ -5886,32 +4955,20 @@ export type GetAddressResponse = {
   isDeleted: boolean
 }[]
 
-/**
- * 接口 获取地址列表 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `GET /address`
- */
 type GetAddressRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address', 'data', string, string, true>
 >
 
-/**
- * 接口 获取地址列表 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `GET /address`
- */
 const getAddressRequestConfig: GetAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/address',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -5922,24 +4979,12 @@ const getAddressRequestConfig: GetAddressRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取地址列表 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `GET /address`
- */
 export const getAddress = /*#__PURE__*/ (requestData?: GetAddressRequest, ...args: UserRequestRestArgs) => {
   return request<GetAddressResponse>(prepare(getAddressRequestConfig, requestData), ...args)
 }
 
 getAddress.requestConfig = getAddressRequestConfig
 
-/**
- * 接口 创建地址 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `POST /address`
- */
 export interface PostAddressRequest {
   /**
    * 收件人
@@ -5971,40 +5016,22 @@ export interface PostAddressRequest {
   isDefault?: boolean
 }
 
-/**
- * 接口 创建地址 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `POST /address`
- */
 export type PostAddressResponse = number
 
-/**
- * 接口 创建地址 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `POST /address`
- */
 type PostAddressRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address', 'data', string, string, false>
 >
 
-/**
- * 接口 创建地址 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `POST /address`
- */
 const postAddressRequestConfig: PostAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/address',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6015,24 +5042,12 @@ const postAddressRequestConfig: PostAddressRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 创建地址 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `POST /address`
- */
 export const postAddress = /*#__PURE__*/ (requestData: PostAddressRequest, ...args: UserRequestRestArgs) => {
   return request<PostAddressResponse>(prepare(postAddressRequestConfig, requestData), ...args)
 }
 
 postAddress.requestConfig = postAddressRequestConfig
 
-/**
- * 接口 更新地址 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `PUT /address`
- */
 export interface PutAddressRequest {
   /**
    * 地址id
@@ -6064,40 +5079,22 @@ export interface PutAddressRequest {
   address: string
 }
 
-/**
- * 接口 更新地址 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `PUT /address`
- */
 export type PutAddressResponse = any
 
-/**
- * 接口 更新地址 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `PUT /address`
- */
 type PutAddressRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address', 'data', string, string, false>
 >
 
-/**
- * 接口 更新地址 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `PUT /address`
- */
 const putAddressRequestConfig: PutAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/address',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6108,24 +5105,12 @@ const putAddressRequestConfig: PutAddressRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 更新地址 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `PUT /address`
- */
 export const putAddress = /*#__PURE__*/ (requestData: PutAddressRequest, ...args: UserRequestRestArgs) => {
   return request<PutAddressResponse>(prepare(putAddressRequestConfig, requestData), ...args)
 }
 
 putAddress.requestConfig = putAddressRequestConfig
 
-/**
- * 接口 切换默认地址 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
 export interface PutAddressDefaultRequest {
   /**
    * 地址id
@@ -6133,40 +5118,22 @@ export interface PutAddressDefaultRequest {
   id: number
 }
 
-/**
- * 接口 切换默认地址 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
 export type PutAddressDefaultResponse = any
 
-/**
- * 接口 切换默认地址 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
 type PutAddressDefaultRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/default', 'data', string, string, false>
 >
 
-/**
- * 接口 切换默认地址 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
 const putAddressDefaultRequestConfig: PutAddressDefaultRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/address/default',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6177,12 +5144,6 @@ const putAddressDefaultRequestConfig: PutAddressDefaultRequestConfig = /*#__PURE
   extraInfo: {},
 }
 
-/**
- * 接口 切换默认地址 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `PUT /address/default`
- */
 export const putAddressDefault = /*#__PURE__*/ (
   requestData: PutAddressDefaultRequest,
   ...args: UserRequestRestArgs
@@ -6192,12 +5153,6 @@ export const putAddressDefault = /*#__PURE__*/ (
 
 putAddressDefault.requestConfig = putAddressDefaultRequestConfig
 
-/**
- * 接口 删除地址 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
 export interface DeleteAddressIdRequest {
   /**
    * 地址id
@@ -6205,40 +5160,22 @@ export interface DeleteAddressIdRequest {
   id: string
 }
 
-/**
- * 接口 删除地址 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
 export type DeleteAddressIdResponse = any
 
-/**
- * 接口 删除地址 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
 type DeleteAddressIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 删除地址 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
 const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/address/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -6249,24 +5186,12 @@ const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/
   extraInfo: {},
 }
 
-/**
- * 接口 删除地址 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `DELETE /address/{id}`
- */
 export const deleteAddressId = /*#__PURE__*/ (requestData: DeleteAddressIdRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteAddressIdResponse>(prepare(deleteAddressIdRequestConfig, requestData), ...args)
 }
 
 deleteAddressId.requestConfig = deleteAddressIdRequestConfig
 
-/**
- * 接口 获取地址信息 的 **请求类型**
- *
- * @分类 地址
- * @请求头 `GET /address/{id}`
- */
 export interface GetAddressIdRequest {
   /**
    * 地址id
@@ -6274,12 +5199,6 @@ export interface GetAddressIdRequest {
   id: string
 }
 
-/**
- * 接口 获取地址信息 的 **返回类型**
- *
- * @分类 地址
- * @请求头 `GET /address/{id}`
- */
 export interface GetAddressIdResponse {
   /**
    * 创建时间
@@ -6331,32 +5250,20 @@ export interface GetAddressIdResponse {
   isDeleted: boolean
 }
 
-/**
- * 接口 获取地址信息 的 **请求配置的类型**
- *
- * @分类 地址
- * @请求头 `GET /address/{id}`
- */
 type GetAddressIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/address/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取地址信息 的 **请求配置**
- *
- * @分类 地址
- * @请求头 `GET /address/{id}`
- */
 const getAddressIdRequestConfig: GetAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/address/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -6367,29 +5274,17 @@ const getAddressIdRequestConfig: GetAddressIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取地址信息 的 **请求函数**
- *
- * @分类 地址
- * @请求头 `GET /address/{id}`
- */
 export const getAddressId = /*#__PURE__*/ (requestData: GetAddressIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetAddressIdResponse>(prepare(getAddressIdRequestConfig, requestData), ...args)
 }
 
 getAddressId.requestConfig = getAddressIdRequestConfig
 
-const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_7 = '' as any
-const prodUrl_0_0_0_7 = '' as any
-const dataKey_0_0_0_7 = 'data' as any
+const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_8 = '' as any
+const prodUrl_0_0_0_8 = '' as any
+const dataKey_0_0_0_8 = 'data' as any
 
-/**
- * 接口 获取未上架的服饰列表 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product`
- */
 export interface GetProductRequest {
   /**
    * 服饰状态 1:正常 2:已出售 3:借调中
@@ -6397,12 +5292,6 @@ export interface GetProductRequest {
   status?: string
 }
 
-/**
- * 接口 获取未上架的服饰列表 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product`
- */
 export type GetProductResponse = {
   /**
    * 创建时间
@@ -6463,32 +5352,20 @@ export type GetProductResponse = {
   }[]
 }[]
 
-/**
- * 接口 获取未上架的服饰列表 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product`
- */
 type GetProductRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, 'status', false>
 >
 
-/**
- * 接口 获取未上架的服饰列表 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product`
- */
 const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: ['status'],
   requestDataOptional: false,
@@ -6499,24 +5376,12 @@ const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取未上架的服饰列表 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product`
- */
 export const getProduct = /*#__PURE__*/ (requestData: GetProductRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductResponse>(prepare(getProductRequestConfig, requestData), ...args)
 }
 
 getProduct.requestConfig = getProductRequestConfig
 
-/**
- * 接口 创建服饰 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `POST /product`
- */
 export interface PostProductRequest {
   /**
    * 服饰名称
@@ -6565,40 +5430,22 @@ export interface PostProductRequest {
   description?: string
 }
 
-/**
- * 接口 创建服饰 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `POST /product`
- */
 export type PostProductResponse = number
 
-/**
- * 接口 创建服饰 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `POST /product`
- */
 type PostProductRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, string, false>
 >
 
-/**
- * 接口 创建服饰 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `POST /product`
- */
 const postProductRequestConfig: PostProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6609,24 +5456,12 @@ const postProductRequestConfig: PostProductRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 创建服饰 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `POST /product`
- */
 export const postProduct = /*#__PURE__*/ (requestData: PostProductRequest, ...args: UserRequestRestArgs) => {
   return request<PostProductResponse>(prepare(postProductRequestConfig, requestData), ...args)
 }
 
 postProduct.requestConfig = postProductRequestConfig
 
-/**
- * 接口 更新服饰 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `PUT /product`
- */
 export interface PutProductRequest {
   /**
    * 服饰名称
@@ -6679,40 +5514,22 @@ export interface PutProductRequest {
   id: number
 }
 
-/**
- * 接口 更新服饰 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `PUT /product`
- */
 export type PutProductResponse = any
 
-/**
- * 接口 更新服饰 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `PUT /product`
- */
 type PutProductRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product', 'data', string, string, false>
 >
 
-/**
- * 接口 更新服饰 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `PUT /product`
- */
 const putProductRequestConfig: PutProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6723,24 +5540,12 @@ const putProductRequestConfig: PutProductRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 更新服饰 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `PUT /product`
- */
 export const putProduct = /*#__PURE__*/ (requestData: PutProductRequest, ...args: UserRequestRestArgs) => {
   return request<PutProductResponse>(prepare(putProductRequestConfig, requestData), ...args)
 }
 
 putProduct.requestConfig = putProductRequestConfig
 
-/**
- * 接口 获取服饰列表(分页) 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/page`
- */
 export interface GetProductPageRequest {
   /**
    * 页码
@@ -6764,12 +5569,6 @@ export interface GetProductPageRequest {
   status?: string
 }
 
-/**
- * 接口 获取服饰列表(分页) 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/page`
- */
 export interface GetProductPageResponse {
   /**
    * 数据总条数
@@ -6843,12 +5642,6 @@ export interface GetProductPageResponse {
   }[]
 }
 
-/**
- * 接口 获取服饰列表(分页) 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/page`
- */
 type GetProductPageRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -6862,22 +5655,16 @@ type GetProductPageRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取服饰列表(分页) 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/page`
- */
 const getProductPageRequestConfig: GetProductPageRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product/page',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name', 'status'],
   requestDataOptional: false,
@@ -6888,24 +5675,12 @@ const getProductPageRequestConfig: GetProductPageRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取服饰列表(分页) 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/page`
- */
 export const getProductPage = /*#__PURE__*/ (requestData: GetProductPageRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductPageResponse>(prepare(getProductPageRequestConfig, requestData), ...args)
 }
 
 getProductPage.requestConfig = getProductPageRequestConfig
 
-/**
- * 接口 删除服饰 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `DELETE /product/{id}`
- */
 export interface DeleteProductIdRequest {
   /**
    * 服饰id
@@ -6913,40 +5688,22 @@ export interface DeleteProductIdRequest {
   id: string
 }
 
-/**
- * 接口 删除服饰 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `DELETE /product/{id}`
- */
 export type DeleteProductIdResponse = any
 
-/**
- * 接口 删除服饰 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `DELETE /product/{id}`
- */
 type DeleteProductIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 删除服饰 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `DELETE /product/{id}`
- */
 const deleteProductIdRequestConfig: DeleteProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -6957,24 +5714,12 @@ const deleteProductIdRequestConfig: DeleteProductIdRequestConfig = /*#__PURE__*/
   extraInfo: {},
 }
 
-/**
- * 接口 删除服饰 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `DELETE /product/{id}`
- */
 export const deleteProductId = /*#__PURE__*/ (requestData: DeleteProductIdRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteProductIdResponse>(prepare(deleteProductIdRequestConfig, requestData), ...args)
 }
 
 deleteProductId.requestConfig = deleteProductIdRequestConfig
 
-/**
- * 接口 获取服饰信息 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
 export interface GetProductIdRequest {
   /**
    * 服饰id
@@ -6982,12 +5727,6 @@ export interface GetProductIdRequest {
   id: string
 }
 
-/**
- * 接口 获取服饰信息 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
 export interface GetProductIdResponse {
   /**
    * 创建时间
@@ -7166,32 +5905,20 @@ export interface GetProductIdResponse {
   }[]
 }
 
-/**
- * 接口 获取服饰信息 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
 type GetProductIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取服饰信息 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
 const getProductIdRequestConfig: GetProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -7202,32 +5929,14 @@ const getProductIdRequestConfig: GetProductIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取服饰信息 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/{id}`
- */
 export const getProductId = /*#__PURE__*/ (requestData: GetProductIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductIdResponse>(prepare(getProductIdRequestConfig, requestData), ...args)
 }
 
 getProductId.requestConfig = getProductIdRequestConfig
 
-/**
- * 接口 获取服饰类型 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/type`
- */
 export interface GetProductTypeRequest {}
 
-/**
- * 接口 获取服饰类型 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/type`
- */
 export type GetProductTypeResponse = {
   /**
    * 类型id
@@ -7243,32 +5952,20 @@ export type GetProductTypeResponse = {
   code: string
 }[]
 
-/**
- * 接口 获取服饰类型 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/type`
- */
 type GetProductTypeRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/type', 'data', string, string, true>
 >
 
-/**
- * 接口 获取服饰类型 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/type`
- */
 const getProductTypeRequestConfig: GetProductTypeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product/type',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -7279,24 +5976,12 @@ const getProductTypeRequestConfig: GetProductTypeRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取服饰类型 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/type`
- */
 export const getProductType = /*#__PURE__*/ (requestData?: GetProductTypeRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductTypeResponse>(prepare(getProductTypeRequestConfig, requestData), ...args)
 }
 
 getProductType.requestConfig = getProductTypeRequestConfig
 
-/**
- * 接口 获取服饰展示的信息字段 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/field`
- */
 export interface GetProductFieldRequest {
   /**
    * 服饰类型code
@@ -7304,12 +5989,6 @@ export interface GetProductFieldRequest {
   code: string
 }
 
-/**
- * 接口 获取服饰展示的信息字段 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/field`
- */
 export type GetProductFieldResponse = {
   /**
    * 字段id
@@ -7329,32 +6008,20 @@ export type GetProductFieldResponse = {
   prodectTypeCode: string
 }[]
 
-/**
- * 接口 获取服饰展示的信息字段 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/field`
- */
 type GetProductFieldRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/field', 'data', string, 'code', false>
 >
 
-/**
- * 接口 获取服饰展示的信息字段 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/field`
- */
 const getProductFieldRequestConfig: GetProductFieldRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product/field',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: ['code'],
   requestDataOptional: false,
@@ -7365,24 +6032,12 @@ const getProductFieldRequestConfig: GetProductFieldRequestConfig = /*#__PURE__*/
   extraInfo: {},
 }
 
-/**
- * 接口 获取服饰展示的信息字段 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/field`
- */
 export const getProductField = /*#__PURE__*/ (requestData: GetProductFieldRequest, ...args: UserRequestRestArgs) => {
   return request<GetProductFieldResponse>(prepare(getProductFieldRequestConfig, requestData), ...args)
 }
 
 getProductField.requestConfig = getProductFieldRequestConfig
 
-/**
- * 接口 获取字段选项 的 **请求类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/field/option`
- */
 export interface GetProductFieldOptionRequest {
   /**
    * 服饰类型code
@@ -7394,12 +6049,6 @@ export interface GetProductFieldOptionRequest {
   field: string
 }
 
-/**
- * 接口 获取字段选项 的 **返回类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/field/option`
- */
 export type GetProductFieldOptionResponse = {
   /**
    * 选项id
@@ -7419,12 +6068,6 @@ export type GetProductFieldOptionResponse = {
   prodectTypeCode: string
 }[]
 
-/**
- * 接口 获取字段选项 的 **请求配置的类型**
- *
- * @分类 服饰
- * @请求头 `GET /product/field/option`
- */
 type GetProductFieldOptionRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -7438,22 +6081,16 @@ type GetProductFieldOptionRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取字段选项 的 **请求配置**
- *
- * @分类 服饰
- * @请求头 `GET /product/field/option`
- */
 const getProductFieldOptionRequestConfig: GetProductFieldOptionRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/product/field/option',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: ['code', 'field'],
   requestDataOptional: false,
@@ -7464,12 +6101,6 @@ const getProductFieldOptionRequestConfig: GetProductFieldOptionRequestConfig = /
   extraInfo: {},
 }
 
-/**
- * 接口 获取字段选项 的 **请求函数**
- *
- * @分类 服饰
- * @请求头 `GET /product/field/option`
- */
 export const getProductFieldOption = /*#__PURE__*/ (
   requestData: GetProductFieldOptionRequest,
   ...args: UserRequestRestArgs
@@ -7479,17 +6110,11 @@ export const getProductFieldOption = /*#__PURE__*/ (
 
 getProductFieldOption.requestConfig = getProductFieldOptionRequestConfig
 
-const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_8 = '' as any
-const prodUrl_0_0_0_8 = '' as any
-const dataKey_0_0_0_8 = 'data' as any
+const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_9 = '' as any
+const prodUrl_0_0_0_9 = '' as any
+const dataKey_0_0_0_9 = 'data' as any
 
-/**
- * 接口 获取标签列表 的 **请求类型**
- *
- * @分类 标签
- * @请求头 `GET /tag`
- */
 export interface GetTagRequest {
   /**
    * 标签用途
@@ -7497,12 +6122,6 @@ export interface GetTagRequest {
   use: string
 }
 
-/**
- * 接口 获取标签列表 的 **返回类型**
- *
- * @分类 标签
- * @请求头 `GET /tag`
- */
 export type GetTagResponse = {
   /**
    * 标签id
@@ -7518,32 +6137,20 @@ export type GetTagResponse = {
   use: number
 }[]
 
-/**
- * 接口 获取标签列表 的 **请求配置的类型**
- *
- * @分类 标签
- * @请求头 `GET /tag`
- */
 type GetTagRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/tag', 'data', string, 'use', false>
 >
 
-/**
- * 接口 获取标签列表 的 **请求配置**
- *
- * @分类 标签
- * @请求头 `GET /tag`
- */
 const getTagRequestConfig: GetTagRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/tag',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: ['use'],
   requestDataOptional: false,
@@ -7554,29 +6161,17 @@ const getTagRequestConfig: GetTagRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取标签列表 的 **请求函数**
- *
- * @分类 标签
- * @请求头 `GET /tag`
- */
 export const getTag = /*#__PURE__*/ (requestData: GetTagRequest, ...args: UserRequestRestArgs) => {
   return request<GetTagResponse>(prepare(getTagRequestConfig, requestData), ...args)
 }
 
 getTag.requestConfig = getTagRequestConfig
 
-const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_9 = '' as any
-const prodUrl_0_0_0_9 = '' as any
-const dataKey_0_0_0_9 = 'data' as any
+const mockUrl_0_0_0_10 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_10 = '' as any
+const prodUrl_0_0_0_10 = '' as any
+const dataKey_0_0_0_10 = 'data' as any
 
-/**
- * 接口 获取二手市场出售\/借调服饰列表 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market`
- */
 export interface GetMarketRequest {
   /**
    * 页码
@@ -7608,12 +6203,6 @@ export interface GetMarketRequest {
   order?: string
 }
 
-/**
- * 接口 获取二手市场出售\/借调服饰列表 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market`
- */
 export interface GetMarketResponse {
   /**
    * 数据总条数
@@ -7790,12 +6379,6 @@ export interface GetMarketResponse {
   }[]
 }
 
-/**
- * 接口 获取二手市场出售\/借调服饰列表 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market`
- */
 type GetMarketRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -7809,22 +6392,16 @@ type GetMarketRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取二手市场出售\/借调服饰列表 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market`
- */
 const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'title', 'productTypeCode', 'companyId', 'status', 'order'],
   requestDataOptional: false,
@@ -7835,24 +6412,12 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取二手市场出售\/借调服饰列表 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market`
- */
 export const getMarket = /*#__PURE__*/ (requestData: GetMarketRequest, ...args: UserRequestRestArgs) => {
   return request<GetMarketResponse>(prepare(getMarketRequestConfig, requestData), ...args)
 }
 
 getMarket.requestConfig = getMarketRequestConfig
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market`
- */
 export interface PostMarketRequest {
   /**
    * 名称
@@ -7900,40 +6465,22 @@ export interface PostMarketRequest {
   productId: number
 }
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market`
- */
 export type PostMarketResponse = number
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market`
- */
 type PostMarketRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, false>
 >
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market`
- */
 const postMarketRequestConfig: PostMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7944,24 +6491,12 @@ const postMarketRequestConfig: PostMarketRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market`
- */
 export const postMarket = /*#__PURE__*/ (requestData: PostMarketRequest, ...args: UserRequestRestArgs) => {
   return request<PostMarketResponse>(prepare(postMarketRequestConfig, requestData), ...args)
 }
 
 postMarket.requestConfig = postMarketRequestConfig
 
-/**
- * 接口 更新二手市场出售\/借调服饰 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market`
- */
 export interface PutMarketRequest {
   /**
    * 名称
@@ -8013,40 +6548,22 @@ export interface PutMarketRequest {
   id: number
 }
 
-/**
- * 接口 更新二手市场出售\/借调服饰 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market`
- */
 export type PutMarketResponse = any
 
-/**
- * 接口 更新二手市场出售\/借调服饰 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market`
- */
 type PutMarketRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, false>
 >
 
-/**
- * 接口 更新二手市场出售\/借调服饰 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market`
- */
 const putMarketRequestConfig: PutMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8057,24 +6574,12 @@ const putMarketRequestConfig: PutMarketRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 更新二手市场出售\/借调服饰 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market`
- */
 export const putMarket = /*#__PURE__*/ (requestData: PutMarketRequest, ...args: UserRequestRestArgs) => {
   return request<PutMarketResponse>(prepare(putMarketRequestConfig, requestData), ...args)
 }
 
 putMarket.requestConfig = putMarketRequestConfig
 
-/**
- * 接口 获取我发布的服饰列表 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/published`
- */
 export interface GetMarketMyPublishedRequest {
   /**
    * 页码
@@ -8090,12 +6595,6 @@ export interface GetMarketMyPublishedRequest {
   status?: string
 }
 
-/**
- * 接口 获取我发布的服饰列表 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/published`
- */
 export interface GetMarketMyPublishedResponse {
   /**
    * 数据总条数
@@ -8272,12 +6771,6 @@ export interface GetMarketMyPublishedResponse {
   }[]
 }
 
-/**
- * 接口 获取我发布的服饰列表 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/published`
- */
 type GetMarketMyPublishedRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -8291,22 +6784,16 @@ type GetMarketMyPublishedRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取我发布的服饰列表 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/published`
- */
 const getMarketMyPublishedRequestConfig: GetMarketMyPublishedRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/my/published',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -8317,12 +6804,6 @@ const getMarketMyPublishedRequestConfig: GetMarketMyPublishedRequestConfig = /*#
   extraInfo: {},
 }
 
-/**
- * 接口 获取我发布的服饰列表 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/published`
- */
 export const getMarketMyPublished = /*#__PURE__*/ (
   requestData: GetMarketMyPublishedRequest,
   ...args: UserRequestRestArgs
@@ -8332,12 +6813,6 @@ export const getMarketMyPublished = /*#__PURE__*/ (
 
 getMarketMyPublished.requestConfig = getMarketMyPublishedRequestConfig
 
-/**
- * 接口 获取我收藏的服饰列表 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/favorite`
- */
 export interface GetMarketMyFavoriteRequest {
   /**
    * 页码
@@ -8349,12 +6824,6 @@ export interface GetMarketMyFavoriteRequest {
   pageSize: string
 }
 
-/**
- * 接口 获取我收藏的服饰列表 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/favorite`
- */
 export interface GetMarketMyFavoriteResponse {
   /**
    * 数据总条数
@@ -8531,12 +7000,6 @@ export interface GetMarketMyFavoriteResponse {
   }[]
 }
 
-/**
- * 接口 获取我收藏的服饰列表 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/favorite`
- */
 type GetMarketMyFavoriteRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
@@ -8550,22 +7013,16 @@ type GetMarketMyFavoriteRequestConfig = Readonly<
   >
 >
 
-/**
- * 接口 获取我收藏的服饰列表 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/favorite`
- */
 const getMarketMyFavoriteRequestConfig: GetMarketMyFavoriteRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/my/favorite',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize'],
   requestDataOptional: false,
@@ -8576,12 +7033,6 @@ const getMarketMyFavoriteRequestConfig: GetMarketMyFavoriteRequestConfig = /*#__
   extraInfo: {},
 }
 
-/**
- * 接口 获取我收藏的服饰列表 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/my/favorite`
- */
 export const getMarketMyFavorite = /*#__PURE__*/ (
   requestData: GetMarketMyFavoriteRequest,
   ...args: UserRequestRestArgs
@@ -8591,12 +7042,6 @@ export const getMarketMyFavorite = /*#__PURE__*/ (
 
 getMarketMyFavorite.requestConfig = getMarketMyFavoriteRequestConfig
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/and/product`
- */
 export interface PostMarketAndProductRequest {
   /**
    * 名称
@@ -8673,40 +7118,22 @@ export interface PostMarketAndProductRequest {
   tagIdList?: number[]
 }
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/and/product`
- */
 export type PostMarketAndProductResponse = number
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/and/product`
- */
 type PostMarketAndProductRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/and/product', 'data', string, string, false>
 >
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/and/product`
- */
 const postMarketAndProductRequestConfig: PostMarketAndProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/and/product',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8717,12 +7144,6 @@ const postMarketAndProductRequestConfig: PostMarketAndProductRequestConfig = /*#
   extraInfo: {},
 }
 
-/**
- * 接口 服饰上架二手市场出售\/借调服饰 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/and/product`
- */
 export const postMarketAndProduct = /*#__PURE__*/ (
   requestData: PostMarketAndProductRequest,
   ...args: UserRequestRestArgs
@@ -8732,12 +7153,6 @@ export const postMarketAndProduct = /*#__PURE__*/ (
 
 postMarketAndProduct.requestConfig = postMarketAndProductRequestConfig
 
-/**
- * 接口 更新二手市场出售\/借调服饰状态 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market/status`
- */
 export interface PutMarketStatusRequest {
   /**
    * 二手市场出售/借调服饰id
@@ -8749,40 +7164,22 @@ export interface PutMarketStatusRequest {
   status: number
 }
 
-/**
- * 接口 更新二手市场出售\/借调服饰状态 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market/status`
- */
 export type PutMarketStatusResponse = any
 
-/**
- * 接口 更新二手市场出售\/借调服饰状态 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market/status`
- */
 type PutMarketStatusRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/status', 'data', string, string, false>
 >
 
-/**
- * 接口 更新二手市场出售\/借调服饰状态 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market/status`
- */
 const putMarketStatusRequestConfig: PutMarketStatusRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/status',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8793,24 +7190,12 @@ const putMarketStatusRequestConfig: PutMarketStatusRequestConfig = /*#__PURE__*/
   extraInfo: {},
 }
 
-/**
- * 接口 更新二手市场出售\/借调服饰状态 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `PUT /market/status`
- */
 export const putMarketStatus = /*#__PURE__*/ (requestData: PutMarketStatusRequest, ...args: UserRequestRestArgs) => {
   return request<PutMarketStatusResponse>(prepare(putMarketStatusRequestConfig, requestData), ...args)
 }
 
 putMarketStatus.requestConfig = putMarketStatusRequestConfig
 
-/**
- * 接口 获取二手市场出售\/借调服饰信息 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/{id}`
- */
 export interface GetMarketIdRequest {
   /**
    * 二手市场出售/借调服饰id
@@ -8818,12 +7203,6 @@ export interface GetMarketIdRequest {
   id: string
 }
 
-/**
- * 接口 获取二手市场出售\/借调服饰信息 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/{id}`
- */
 export interface GetMarketIdResponse {
   /**
    * 创建时间
@@ -9087,32 +7466,20 @@ export interface GetMarketIdResponse {
   isFavorited: boolean
 }
 
-/**
- * 接口 获取二手市场出售\/借调服饰信息 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/{id}`
- */
 type GetMarketIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 获取二手市场出售\/借调服饰信息 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/{id}`
- */
 const getMarketIdRequestConfig: GetMarketIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -9123,24 +7490,12 @@ const getMarketIdRequestConfig: GetMarketIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 获取二手市场出售\/借调服饰信息 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `GET /market/{id}`
- */
 export const getMarketId = /*#__PURE__*/ (requestData: GetMarketIdRequest, ...args: UserRequestRestArgs) => {
   return request<GetMarketIdResponse>(prepare(getMarketIdRequestConfig, requestData), ...args)
 }
 
 getMarketId.requestConfig = getMarketIdRequestConfig
 
-/**
- * 接口 删除二手市场出售\/借调服饰 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/{id}`
- */
 export interface DeleteMarketIdRequest {
   /**
    * 二手市场出售/借调服饰id
@@ -9148,40 +7503,22 @@ export interface DeleteMarketIdRequest {
   id: string
 }
 
-/**
- * 接口 删除二手市场出售\/借调服饰 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/{id}`
- */
 export type DeleteMarketIdResponse = any
 
-/**
- * 接口 删除二手市场出售\/借调服饰 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/{id}`
- */
 type DeleteMarketIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 删除二手市场出售\/借调服饰 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/{id}`
- */
 const deleteMarketIdRequestConfig: DeleteMarketIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -9192,24 +7529,12 @@ const deleteMarketIdRequestConfig: DeleteMarketIdRequestConfig = /*#__PURE__*/ {
   extraInfo: {},
 }
 
-/**
- * 接口 删除二手市场出售\/借调服饰 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/{id}`
- */
 export const deleteMarketId = /*#__PURE__*/ (requestData: DeleteMarketIdRequest, ...args: UserRequestRestArgs) => {
   return request<DeleteMarketIdResponse>(prepare(deleteMarketIdRequestConfig, requestData), ...args)
 }
 
 deleteMarketId.requestConfig = deleteMarketIdRequestConfig
 
-/**
- * 接口 取消审核 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/audit/{id}`
- */
 export interface DeleteMarketAuditIdRequest {
   /**
    * 二手市场出售/借调服饰id
@@ -9217,40 +7542,22 @@ export interface DeleteMarketAuditIdRequest {
   id: string
 }
 
-/**
- * 接口 取消审核 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/audit/{id}`
- */
 export type DeleteMarketAuditIdResponse = any
 
-/**
- * 接口 取消审核 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/audit/{id}`
- */
 type DeleteMarketAuditIdRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/audit/{id}', 'data', 'id', string, false>
 >
 
-/**
- * 接口 取消审核 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/audit/{id}`
- */
 const deleteMarketAuditIdRequestConfig: DeleteMarketAuditIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/audit/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -9261,12 +7568,6 @@ const deleteMarketAuditIdRequestConfig: DeleteMarketAuditIdRequestConfig = /*#__
   extraInfo: {},
 }
 
-/**
- * 接口 取消审核 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `DELETE /market/audit/{id}`
- */
 export const deleteMarketAuditId = /*#__PURE__*/ (
   requestData: DeleteMarketAuditIdRequest,
   ...args: UserRequestRestArgs
@@ -9276,12 +7577,6 @@ export const deleteMarketAuditId = /*#__PURE__*/ (
 
 deleteMarketAuditId.requestConfig = deleteMarketAuditIdRequestConfig
 
-/**
- * 接口 切换收藏状态 的 **请求类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/favorite`
- */
 export interface PostMarketFavoriteRequest {
   /**
    * 二手市场出售/借调服饰id
@@ -9293,40 +7588,22 @@ export interface PostMarketFavoriteRequest {
   isFavorited: boolean
 }
 
-/**
- * 接口 切换收藏状态 的 **返回类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/favorite`
- */
 export type PostMarketFavoriteResponse = any
 
-/**
- * 接口 切换收藏状态 的 **请求配置的类型**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/favorite`
- */
 type PostMarketFavoriteRequestConfig = Readonly<
   RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/favorite', 'data', string, string, false>
 >
 
-/**
- * 接口 切换收藏状态 的 **请求配置**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/favorite`
- */
 const postMarketFavoriteRequestConfig: PostMarketFavoriteRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/market/favorite',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -9337,12 +7614,6 @@ const postMarketFavoriteRequestConfig: PostMarketFavoriteRequestConfig = /*#__PU
   extraInfo: {},
 }
 
-/**
- * 接口 切换收藏状态 的 **请求函数**
- *
- * @分类 二手市场出售/借调服饰
- * @请求头 `POST /market/favorite`
- */
 export const postMarketFavorite = /*#__PURE__*/ (
   requestData: PostMarketFavoriteRequest,
   ...args: UserRequestRestArgs

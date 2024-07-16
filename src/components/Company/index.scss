@@ -1,0 +1,9 @@
+@import '../../styles/var.scss';
+
+.m-company {
+  &-name {
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    font-weight: 400;
+  }
+}

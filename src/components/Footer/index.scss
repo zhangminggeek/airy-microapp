@@ -1,0 +1,21 @@
+@import '../../styles/var.scss';
+
+.m-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  border-top: 2px solid $background-color-base;
+  background-color: #fff;
+
+  &-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 32px;
+
+    &-extra {
+      flex: 1;
+    }
+  }
+}

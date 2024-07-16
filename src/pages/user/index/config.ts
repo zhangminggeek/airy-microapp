@@ -2,10 +2,10 @@ import IconAddressManagement from '@/assets/icons/address_management.png';
 import IconCustomerManagement from '@/assets/icons/customer_management.png';
 import IconDressManagement from '@/assets/icons/dress_management.png';
 import IconEmployeeManagement from '@/assets/icons/employee_management.png';
+import IconMyBought from '@/assets/icons/my_bought.png';
 import IconMyFavorite from '@/assets/icons/my_favorite.png';
 import IconMyPurchase from '@/assets/icons/my_purchase.png';
 import IconMyRelease from '@/assets/icons/my_release.png';
-import IconMyRequirement from '@/assets/icons/my_requirement.png';
 import IconMySold from '@/assets/icons/my_sold.png';
 import IconOnlineCustomerService from '@/assets/icons/online_customer_service.png';
 import IconOrderManagement from '@/assets/icons/order_management.png';
@@ -28,9 +28,9 @@ export const shopConfig = [
 
 export const marketConfig = [
   { icon: IconMyRelease, name: '我发布的', to: '/pages/user/published/index' },
-  { icon: IconMyPurchase, name: '我的购买', to: '/pages/user/bought/index' },
+  { icon: IconMyBought, name: '我的购买', to: '/pages/user/bought/index' },
   { icon: IconMySold, name: '我卖出的', to: '/pages/user/sold/index' },
-  { icon: IconMyRequirement, name: '我求购的', to: '' },
+  { icon: IconMyPurchase, name: '我求购的', to: '/pages/user/purchase/index' },
   { icon: IconMyFavorite, name: '我的收藏', to: '/pages/user/favorite/index' },
 ];
 
