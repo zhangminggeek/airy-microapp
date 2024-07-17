@@ -14,7 +14,27 @@
 
 .brief-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 24px 0;
+
+  &-extra {
+    &-feedback {
+      font-size: $font-size-small;
+      font-weight: 400;
+
+      &-num {
+        color: $color-primary;
+      }
+
+      &-text {
+        color: $text-color-secondary;
+      }
+    }
+
+    &-remark {
+      max-width: 400px;
+      @include ellipsis;
+    }
+  }
 }

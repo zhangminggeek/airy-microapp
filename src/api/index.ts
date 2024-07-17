@@ -118,10 +118,6 @@ export interface GetPurchaseRequest {
    */
   typeCode?: string
   /**
-   * 公司id
-   */
-  companyId?: string
-  /**
    * 服饰状态, 1:审核中 2:求购中 3:已完成 4:审核未通过
    */
   status?: string
@@ -269,7 +265,7 @@ type GetPurchaseRequestConfig = Readonly<
     '/purchase',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'title' | 'typeCode' | 'companyId' | 'status' | 'order',
+    'pageNum' | 'pageSize' | 'title' | 'typeCode' | 'status' | 'order',
     false
   >
 >
@@ -285,7 +281,7 @@ const getPurchaseRequestConfig: GetPurchaseRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_1,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'companyId', 'status', 'order'],
+  queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'status', 'order'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
@@ -398,21 +394,70 @@ postPurchase.requestConfig = postPurchaseRequestConfig
 
 export interface PutPurchaseRequest {
   /**
+   * 标题
+   */
+  title: string
+  /**
+   * 服饰图片
+   */
+  picList?: string[]
+  /**
+   * 购买
+   */
+  wantBuy: boolean
+  /**
+   * 借调
+   */
+  wantLease: boolean
+  /**
+   * 最大求购价格
+   */
+  maxPrice?: string
+  /**
+   * 最小求购价格
+   */
+  minPrice?: string
+  /**
+   * 最大求购价格
+   */
+  maxLeasePrice?: string
+  /**
+   * 最小求购价格
+   */
+  minLeasePrice?: string
+  /**
+   * 服饰类型code
+   */
+  typeCode: string
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+   */
+  size?: number
+  /**
+   * 其他信息
+   */
+  fieldList?: {
+    /**
+     * 字段key
+     */
+    fieldKey: string
+    /**
+     * 字段的值(该字段选项的id)
+     */
+    fieldValue: number
+  }[]
+  /**
+   * 服饰标签
+   */
+  tagIdList?: number[]
+  /**
    * 求购id
    */
   id: number
-  /**
-   * 求购
-   */
-  purchase: string
-  /**
-   * 密码（明文）
-   */
-  password: string
-  /**
-   * 微信用户唯一标识
-   */
-  openid?: string
 }
 
 export type PutPurchaseResponse = any
@@ -447,44 +492,201 @@ export const putPurchase = /*#__PURE__*/ (requestData: PutPurchaseRequest, ...ar
 
 putPurchase.requestConfig = putPurchaseRequestConfig
 
-export interface DeletePurchaseRequest {
+export interface GetPurchaseSelfRequest {
   /**
-   * 求购id
+   * 页码
    */
-  id: string
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 产品描述
+   */
+  title?: string
+  /**
+   * 产品类型code
+   */
+  typeCode?: string
+  /**
+   * 服饰状态, 1:审核中 2:求购中 3:已完成 4:审核未通过
+   */
+  status?: string
+  /**
+   * 排序方式 1:最新发布 2:报价量由高到低 3:报价量由低到高
+   */
+  order?: string
 }
 
-export type DeletePurchaseResponse = any
+export interface GetPurchaseSelfResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 求购id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 标题
+     */
+    title: string
+    /**
+     * 购买
+     */
+    wantBuy: boolean
+    /**
+     * 借调
+     */
+    wantLease: boolean
+    /**
+     * 最大求购价格
+     */
+    maxPrice?: string
+    /**
+     * 最小求购价格
+     */
+    minPrice?: string
+    /**
+     * 最大求购价格
+     */
+    maxLeasePrice?: string
+    /**
+     * 最小求购价格
+     */
+    minLeasePrice?: string
+    /**
+     * 服饰类型code
+     */
+    typeCode: string
+    /**
+     * 服饰品牌
+     */
+    brand?: string
+    /**
+     * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+     */
+    size?: number
+    /**
+     * 状态 1:审核中 2:求购中 3:已完成 4:审核不通过
+     */
+    status: number
+    /**
+     * 审核不通过原因
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+    /**
+     * 标签
+     */
+    tagList: {
+      /**
+       * id
+       */
+      id: number
+      /**
+       * 标签id
+       */
+      tagId: number
+      /**
+       * 求购id
+       */
+      purchaseId: number
+      /**
+       * 标签名称
+       */
+      tagName: string
+    }[]
+    /**
+     * 报价单数量
+     */
+    quotations?: number
+  }[]
+}
 
-type DeletePurchaseRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase', 'data', string, 'id', false>
+type GetPurchaseSelfRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/purchase/self',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'title' | 'typeCode' | 'status' | 'order',
+    false
+  >
 >
 
-const deletePurchaseRequestConfig: DeletePurchaseRequestConfig = /*#__PURE__*/ {
+const getPurchaseSelfRequestConfig: GetPurchaseSelfRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_1,
   devUrl: devUrl_0_0_0_1,
   prodUrl: prodUrl_0_0_0_1,
-  path: '/purchase',
-  method: Method.DELETE,
+  path: '/purchase/self',
+  method: Method.GET,
   requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_1,
   paramNames: [],
-  queryNames: ['id'],
+  queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'status', 'order'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'deletePurchase',
+  requestFunctionName: 'getPurchaseSelf',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
-export const deletePurchase = /*#__PURE__*/ (requestData: DeletePurchaseRequest, ...args: UserRequestRestArgs) => {
-  return request<DeletePurchaseResponse>(prepare(deletePurchaseRequestConfig, requestData), ...args)
+export const getPurchaseSelf = /*#__PURE__*/ (requestData: GetPurchaseSelfRequest, ...args: UserRequestRestArgs) => {
+  return request<GetPurchaseSelfResponse>(prepare(getPurchaseSelfRequestConfig, requestData), ...args)
 }
 
-deletePurchase.requestConfig = deletePurchaseRequestConfig
+getPurchaseSelf.requestConfig = getPurchaseSelfRequestConfig
 
 export interface GetPurchaseIdRequest {
   /**
@@ -719,6 +921,45 @@ export const getPurchaseId = /*#__PURE__*/ (requestData: GetPurchaseIdRequest, .
 
 getPurchaseId.requestConfig = getPurchaseIdRequestConfig
 
+export interface DeletePurchaseIdRequest {
+  /**
+   * 求购id
+   */
+  id: string
+}
+
+export type DeletePurchaseIdResponse = any
+
+type DeletePurchaseIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase/{id}', 'data', 'id', string, false>
+>
+
+const deletePurchaseIdRequestConfig: DeletePurchaseIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deletePurchaseId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const deletePurchaseId = /*#__PURE__*/ (requestData: DeletePurchaseIdRequest, ...args: UserRequestRestArgs) => {
+  return request<DeletePurchaseIdResponse>(prepare(deletePurchaseIdRequestConfig, requestData), ...args)
+}
+
+deletePurchaseId.requestConfig = deletePurchaseIdRequestConfig
+
 export interface PostPurchaseSendRequest {
   /**
    * 求购id
@@ -761,6 +1002,90 @@ export const postPurchaseSend = /*#__PURE__*/ (requestData: PostPurchaseSendRequ
 }
 
 postPurchaseSend.requestConfig = postPurchaseSendRequestConfig
+
+export interface PutPurchaseAccomplishIdRequest {
+  /**
+   * 求购id
+   */
+  id: string
+}
+
+export type PutPurchaseAccomplishIdResponse = any
+
+type PutPurchaseAccomplishIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase/accomplish/{id}', 'data', 'id', string, false>
+>
+
+const putPurchaseAccomplishIdRequestConfig: PutPurchaseAccomplishIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase/accomplish/{id}',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putPurchaseAccomplishId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putPurchaseAccomplishId = /*#__PURE__*/ (
+  requestData: PutPurchaseAccomplishIdRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutPurchaseAccomplishIdResponse>(prepare(putPurchaseAccomplishIdRequestConfig, requestData), ...args)
+}
+
+putPurchaseAccomplishId.requestConfig = putPurchaseAccomplishIdRequestConfig
+
+export interface PutPurchaseAuditCancelIdRequest {
+  /**
+   * 求购id
+   */
+  id: string
+}
+
+export type PutPurchaseAuditCancelIdResponse = any
+
+type PutPurchaseAuditCancelIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/purchase/audit/cancel/{id}', 'data', 'id', string, false>
+>
+
+const putPurchaseAuditCancelIdRequestConfig: PutPurchaseAuditCancelIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/purchase/audit/cancel/{id}',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putPurchaseAuditCancelId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putPurchaseAuditCancelId = /*#__PURE__*/ (
+  requestData: PutPurchaseAuditCancelIdRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutPurchaseAuditCancelIdResponse>(prepare(putPurchaseAuditCancelIdRequestConfig, requestData), ...args)
+}
+
+putPurchaseAuditCancelId.requestConfig = putPurchaseAuditCancelIdRequestConfig
 
 const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_2 = '' as any
@@ -2838,45 +3163,6 @@ export const putCompany = /*#__PURE__*/ (requestData: PutCompanyRequest, ...args
 }
 
 putCompany.requestConfig = putCompanyRequestConfig
-
-export interface DeleteCompanyRequest {
-  /**
-   * 公司id
-   */
-  id: string
-}
-
-export type DeleteCompanyResponse = any
-
-type DeleteCompanyRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company', 'data', string, 'id', false>
->
-
-const deleteCompanyRequestConfig: DeleteCompanyRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/company',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['id'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteCompany',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const deleteCompany = /*#__PURE__*/ (requestData: DeleteCompanyRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteCompanyResponse>(prepare(deleteCompanyRequestConfig, requestData), ...args)
-}
-
-deleteCompany.requestConfig = deleteCompanyRequestConfig
 
 export interface PostCompanyAuditRequest {
   /**

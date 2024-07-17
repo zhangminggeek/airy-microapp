@@ -8,6 +8,7 @@ import { ROOT_PREFIX_CLS } from '../constants';
 import type { CSSProperties, FC } from 'react';
 
 import ImageBorrow from '@/assets/icons/borrow.png';
+import { formatPriceRange } from '@/utils';
 
 import './index.scss';
 
@@ -27,17 +28,9 @@ const LeasePrice: FC<LeasePriceProps> = ({
   iconOnly = false,
 }) => {
   const price = useMemo(() => {
-    if (!value) return null;
+    if (!value) return '';
     if (Array.isArray(value)) {
-      if (value[0] && value[1]) {
-        return value.join('-');
-      } else if (value[0]) {
-        return `${value[0]}以上`;
-      } else if (value[1]) {
-        return `${value[0]}以下`;
-      } else {
-        return null;
-      }
+      return formatPriceRange(value);
     } else {
       return value;
     }

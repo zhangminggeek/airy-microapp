@@ -45,36 +45,34 @@ const Page = () => {
             />
           ) : null}
         </View>
-        {data?.fieldList?.length ? (
-          <View className={styles.field}>
-            {data?.typeCode ? (
-              <View className={styles['field-item']}>
-                <View className={styles['field-item-label']}>类型</View>
-                <View className={styles['field-item-content']}>
-                  {productTypeMap.get(data?.typeCode as ProductType)?.text}
-                </View>
+        <View className={styles.field}>
+          {data?.typeCode ? (
+            <View className={styles['field-item']}>
+              <View className={styles['field-item-label']}>类型</View>
+              <View className={styles['field-item-content']}>
+                {productTypeMap.get(data?.typeCode as ProductType)?.text}
               </View>
-            ) : null}
-            {!isNil(data?.size) ? (
-              <View className={styles['field-item']}>
-                <View className={styles['field-item-label']}>尺码</View>
-                <View className={styles['field-item-content']}>
-                  {productSizeMap.get(data?.size as ProductSize)?.text}
-                </View>
+            </View>
+          ) : null}
+          {!isNil(data?.size) ? (
+            <View className={styles['field-item']}>
+              <View className={styles['field-item-label']}>尺码</View>
+              <View className={styles['field-item-content']}>
+                {productSizeMap.get(data?.size as ProductSize)?.text}
               </View>
-            ) : null}
-            {data?.fieldList?.map((item) => (
-              <View className={styles['field-item']} key={item.id}>
-                <View className={styles['field-item-label']}>
-                  {item.fieldKeyName}
-                </View>
-                <View className={styles['field-item-content']}>
-                  {item.fieldValueName}
-                </View>
+            </View>
+          ) : null}
+          {data?.fieldList?.map((item) => (
+            <View className={styles['field-item']} key={item.id}>
+              <View className={styles['field-item-label']}>
+                {item.fieldKeyName}
               </View>
-            ))}
-          </View>
-        ) : null}
+              <View className={styles['field-item-content']}>
+                {item.fieldValueName}
+              </View>
+            </View>
+          ))}
+        </View>
         {data?.tagList?.length ? (
           <View className={styles.tag}>
             {data?.tagList?.map((item) => (

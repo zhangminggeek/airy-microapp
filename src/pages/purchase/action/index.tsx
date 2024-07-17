@@ -2,7 +2,7 @@ import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
-import { getMarketId, getTag, postPurchase } from '@/api';
+import { getPurchaseId, getTag, postPurchase, putPurchase } from '@/api';
 import {
   FormSection,
   InputNumberRange,
@@ -17,7 +17,7 @@ import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useProductStore } from '@/models';
-import { RouterUtil, Toast } from '@/utils';
+import { isNil, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -44,10 +44,48 @@ const Page = () => {
   });
 
   // 获取详情
-  const { run: fetchDetail } = useRequest(getMarketId, {
+  const { run: fetchDetail } = useRequest(getPurchaseId, {
     manual: true,
-    onSuccess(data) {
-      console.log(data);
+    async onSuccess(data) {
+      const {
+        title,
+        picList,
+        typeCode,
+        brand,
+        fieldList,
+        wantBuy,
+        wantLease,
+        minPrice,
+        maxPrice,
+        minLeasePrice,
+        maxLeasePrice,
+        tagList,
+      } = data;
+      await fetchProjectField(typeCode);
+      setCurrentTypeCode(typeCode);
+      const method: PurchaseMethod[] = [];
+      if (wantBuy) {
+        method.push(PurchaseMethod['购买']);
+        setWantBuy(true);
+      }
+      if (wantLease) {
+        method.push(PurchaseMethod['借调']);
+        setWantLease(true);
+      }
+      const ret: Record<string, any> = {
+        title,
+        picList: picList?.map((item) => item.url),
+        typeCode,
+        brand,
+        method,
+        price: [minPrice, maxPrice],
+        leasePrice: [minLeasePrice, maxLeasePrice],
+        tagIdList: tagList?.map((item) => item.id),
+      };
+      fieldList?.forEach((item) => {
+        ret[item.fieldKey] = item.fieldValue;
+      });
+      form.setFieldsValue(ret);
     },
   });
 
@@ -56,12 +94,21 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Toast.success('创建成功');
-      RouterUtil.navigateBack();
+      RouterUtil.navigateTo('/pages/purchase/action/result/index');
+    },
+  });
+
+  // 编辑求购
+  const { run: update } = useRequest(putPurchase, {
+    manual: true,
+    onSuccess() {
+      Toast.success('修改成功');
+      RouterUtil.navigateTo('/pages/purchase/action/result/index');
     },
   });
 
   return (
-    <BasicLayout title={`${id ? '编辑' : '发布'}商品`} back>
+    <BasicLayout title={`${id ? '编辑' : '发布'}求购`} back>
       <Form
         form={form}
         labelPosition="left"
@@ -75,24 +122,36 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          const { method, price, leasePrice, ...rest } = values;
+          const { method, price, leasePrice, picList, ...rest } = values;
+          if (!picList?.length) {
+            Toast.info('请上传求购商品图片');
+            return;
+          }
+          const fields = Array.from(fieldMap.get(currentTypeCode!) ?? []);
           const params = {
             ...rest,
-            fieldList: Array.from(fieldMap.get(currentTypeCode!) ?? [])?.map(
-              (item) => ({
+            fieldList: fields
+              ?.map((item) => ({
                 fieldKey: item.key,
                 fieldValue: values?.[item.key],
-              }),
-            ),
+              }))
+              .filter((item) => !isNil(item.fieldValue)),
             wantBuy: !!method?.includes(PurchaseMethod['购买']),
             wantLease: !!method?.includes(PurchaseMethod['借调']),
-            minPrice: price?.[0],
-            maxPrice: price?.[1],
-            minLeasePrice: leasePrice?.[0],
-            maxLeasePrice: leasePrice?.[1],
+            minPrice: isNil(price?.[0], false) ? undefined : price?.[0],
+            maxPrice: isNil(price?.[1], false) ? undefined : price?.[1],
+            minLeasePrice: isNil(leasePrice?.[0], false)
+              ? undefined
+              : leasePrice?.[0],
+            maxLeasePrice: isNil(leasePrice?.[1], false)
+              ? undefined
+              : leasePrice?.[1],
           };
+          fields.forEach((field) => {
+            delete params[field.key];
+          });
           if (id) {
-            // ...
+            update({ ...params, id });
           } else {
             create(params);
           }

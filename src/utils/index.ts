@@ -90,10 +90,30 @@ export const decode = (encryptedPwd: string, salt: string) => {
  * @param defaultData 解析失败的默认值
  * @returns json 对象
  */
-export function parseJson<T>(data: string, defaultData: T = {} as any): T {
+export const parseJson = <T>(data: string, defaultData: T = {} as any): T => {
   try {
     return data ? JSON.parse(data) : defaultData;
   } catch (err) {
     return defaultData;
   }
-}
+};
+
+/**
+ * 格式化价格显示
+ * @param range 价格范围
+ * @returns 价格文案
+ */
+export const formatPriceRange = (
+  range?: [string | undefined, string | undefined],
+) => {
+  if (!range || !Array.isArray(range)) return '';
+  if (range[0] && range[1]) {
+    return range.join('-');
+  } else if (range[0]) {
+    return `${range[0]}以上`;
+  } else if (range[1]) {
+    return `${range[1]}以下`;
+  } else {
+    return '';
+  }
+};

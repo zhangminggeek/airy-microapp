@@ -3,8 +3,8 @@ import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import { ROOT_PREFIX_CLS } from '../constants';
-import LeasePrice from '../LeasePrice';
-import SellingPrice from '../SellingPrice';
+import LeasePrice, { type LeasePriceProps } from '../LeasePrice';
+import SellingPrice, { type SellingPriceProps } from '../SellingPrice';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
@@ -21,8 +21,8 @@ interface BriefProps {
   image?: string;
   title?: string;
   desc?: string;
-  leasePrice?: string;
-  sellingPrice?: string;
+  leasePrice?: LeasePriceProps['value'];
+  sellingPrice?: SellingPriceProps['value'];
   total?: string;
   header?: ReactNode;
   footer?: ReactNode;
