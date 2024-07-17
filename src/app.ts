@@ -6,9 +6,7 @@ import './app.scss';
 
 class App extends Component<PropsWithChildren> {
   onLaunch() {
-    if (process.env.NODE_ENV === 'production') {
-      Taro.cloud.init();
-    }
+    Taro.cloud.init();
   }
 
   componentDidMount() {}

@@ -3,12 +3,11 @@ import { ImagePreview, Loading } from '@nutui/nutui-react-taro';
 import { Image, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import type { CSSProperties, FC } from 'react';
 
-import { useOSSStore } from '@/models';
+import { CLOUD_ENV_ID, OSS_DOMAIN, OSS_UPLOAD_DIR } from '@/constants';
 import { Toast } from '@/utils';
 
 import './index.scss';
@@ -38,18 +37,12 @@ const Upload: FC<UploadProps> = ({
   value = [],
   onChange,
 }) => {
-  const { signature, fetchOSSSignature } = useOSSStore();
-
   // 是否上传中
   const [uploading, setUploading] = useState<boolean>(false);
   // 是否显示预览
   const [showPreview, setShowPreview] = useState<boolean>(false);
   // 预览初始值
   const [previewInitNum, setPreviewInitNum] = useState<number>(0);
-
-  useEffect(() => {
-    fetchOSSSignature();
-  }, []);
 
   // 选择图片
   const chooseImage = async () => {
@@ -81,28 +74,22 @@ const Upload: FC<UploadProps> = ({
   // 上传前校验
   const beforeUpload = async (file: Taro.chooseImage.ImageFile) => {
     if (!checkFile(file)) return Promise.reject();
-    // 校验 signature 是否过期，过期则重新获取
-    if (!signature?.expire || dayjs().isAfter(dayjs.unix(signature?.expire))) {
-      await fetchOSSSignature();
-    }
   };
 
   // 上传图片
   const uploadImage = async (file: Taro.chooseImage.ImageFile) => {
     await beforeUpload(file);
     const filename = file.path.split('/').at(-1);
-    const key = `${signature?.dir}${filename}`;
-    Taro.uploadFile({
-      url: signature!.host,
+    const path = `${OSS_UPLOAD_DIR}/${filename}`;
+    Taro.cloud.uploadFile({
+      cloudPath: path,
       filePath: file.path,
-      name: 'file',
-      formData: {
-        ...signature,
-        key,
-        success_action_status: '200',
+      config: {
+        env: CLOUD_ENV_ID,
       },
       success() {
-        const url = `${signature!.host}/${key}`;
+        const url = `${OSS_DOMAIN}/${path}`;
+        console.log('uploadImage success', url);
         onChange?.(value.concat(url));
       },
       complete() {

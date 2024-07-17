@@ -1,7 +1,7 @@
 import { Button } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 import { PREFIX_CLS } from '../../constants';
 import { Context } from '../../context';
@@ -11,7 +11,7 @@ import type { AvatarProps } from '@/components/Avatar';
 import type { FC } from 'react';
 
 import { Avatar } from '@/components';
-import { useOSSStore } from '@/models';
+import { CLOUD_ENV_ID, OSS_DOMAIN, OSS_UPLOAD_DIR } from '@/constants';
 import { Toast } from '@/utils';
 
 import './index.scss';
@@ -21,27 +21,18 @@ export interface CustomAvatarProps extends Partial<Omit<AvatarProps, 'src'>> {}
 const CustomAvatar: FC<CustomAvatarProps> = ({ className, ...rest }) => {
   const { name, value, onChange } = useContext(Context);
 
-  const { signature, fetchOSSSignature } = useOSSStore();
-
-  useEffect(() => {
-    fetchOSSSignature();
-  }, []);
-
   // 上传图片
   const upload = (path: string) => {
     const filename = path.split('/').at(-1);
-    const key = `${signature?.dir}${filename}`;
-    Taro.uploadFile({
-      url: signature!.host,
+    const cloudPath = `${OSS_UPLOAD_DIR}/${filename}`;
+    Taro.cloud.uploadFile({
+      cloudPath,
       filePath: path,
-      name: 'file',
-      formData: {
-        ...signature,
-        key,
-        success_action_status: '200',
+      config: {
+        env: CLOUD_ENV_ID,
       },
       success() {
-        const url = `${signature!.host}/${key}`;
+        const url = `${OSS_DOMAIN}/${path}`;
         onChange?.(name, url);
       },
       fail() {

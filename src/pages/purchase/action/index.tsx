@@ -130,6 +130,7 @@ const Page = () => {
           const fields = Array.from(fieldMap.get(currentTypeCode!) ?? []);
           const params = {
             ...rest,
+            picList,
             fieldList: fields
               ?.map((item) => ({
                 fieldKey: item.key,
