@@ -83,7 +83,12 @@ export default {
     {
       // 平台相关业务
       root: 'packagePlatform',
-      pages: ['pages/feedback/index'],
+      pages: [
+        'pages/protocol/index',
+        'pages/protocol/lease/index',
+        'pages/protocol/privacy/index',
+        'pages/protocol/software/index',
+      ],
     },
   ],
   window: {

@@ -107,38 +107,18 @@ const Page = () => {
       <Section title="店铺管理">
         <View className={styles.grid}>
           {shopConfig?.map((item) => (
-            <IconItem
-              key={item.name}
-              icon={item.icon}
-              name={item.name}
-              iconSize={44}
-              to={item.to}
-            />
+            <IconItem key={item.name} {...item} iconSize={44} />
           ))}
         </View>
       </Section>
       <Section title="二手市场">
         <View className={styles.grid}>
-          {marketConfig?.map((item) => (
-            <IconItem
-              key={item.name}
-              icon={item.icon}
-              name={item.name}
-              to={item.to}
-            />
-          ))}
+          {marketConfig?.map((item) => <IconItem key={item.name} {...item} />)}
         </View>
       </Section>
       <Section title="设置">
         <View className={styles.grid}>
-          {settingConfig?.map((item) => (
-            <IconItem
-              key={item.name}
-              icon={item.icon}
-              name={item.name}
-              to={item.to}
-            />
-          ))}
+          {settingConfig?.map((item) => <IconItem key={item.name} {...item} />)}
         </View>
       </Section>
     </BasicLayout>

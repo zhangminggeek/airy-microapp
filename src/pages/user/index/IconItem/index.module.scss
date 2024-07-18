@@ -1,15 +1,22 @@
 @import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
+.btn {
+  height: auto;
+  padding: 0;
 
-  .name {
-    font-size: $font-size-small;
-    color: $text-color-base;
-    font-weight: 400;
+  :global {
+    .nut-button {
+      &-wrap {
+        @include flex-center(column);
+      }
+
+      &-text {
+        font-family: PingFangSC-Regular;
+        font-size: $font-size-small;
+        color: $text-color-base;
+        font-weight: 400;
+      }
+    }
   }
 }
