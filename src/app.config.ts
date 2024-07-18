@@ -88,6 +88,7 @@ export default {
         'pages/protocol/lease/index',
         'pages/protocol/privacy/index',
         'pages/protocol/software/index',
+        'pages/official-account/index',
       ],
     },
   ],

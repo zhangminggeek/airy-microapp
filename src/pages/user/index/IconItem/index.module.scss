@@ -5,6 +5,10 @@
   height: auto;
   padding: 0;
 
+  &::before {
+    content: none;
+  }
+
   :global {
     .nut-button {
       &-wrap {

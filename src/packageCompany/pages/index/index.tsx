@@ -9,7 +9,7 @@ import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
 import { Avatar, Icon, List, Product, Space } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
-import { useRequest } from '@/hooks';
+import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
@@ -34,6 +34,14 @@ const Page = () => {
     };
   });
 
+  const { renderDialog, open } = useDialog({
+    id: 'confirm',
+    title: '是否确认取消关注',
+    onConfirm(_, params) {
+      toggleFollow({ id: params.id, isFollow: false });
+    },
+  });
+
   // 获取公司详情
   const { data, run: fetchCompany } = useRequest(getCompanyId, {
     manual: true,
@@ -54,7 +62,7 @@ const Page = () => {
       <Button
         size="small"
         onClick={() => {
-          toggleFollow({ id: Number(id), isFollow: false });
+          open({ params: { id: companyId } });
         }}
       >
         已关注
@@ -158,6 +166,7 @@ const Page = () => {
           />
         </View>
       </View>
+      {renderDialog()}
     </BasicLayout>
   );
 };

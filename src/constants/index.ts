@@ -24,7 +24,7 @@ export const OSS_PREFIX = process.env.OSS_ENV;
 // OSS 上传文件路径
 export const OSS_UPLOAD_DIR = `${OSS_PREFIX}/upload`;
 // OSS 静态资源路径
-export const OSS_ASSETS_DIR = `${OSS_PREFIX}/assets`;
+export const OSS_ASSETS_DIR = `${OSS_DOMAIN}/${OSS_PREFIX}/assets`;
 
 export const TAB_PAGE = [
   '/pages/market/index/index',

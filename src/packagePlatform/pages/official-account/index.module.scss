@@ -1,0 +1,78 @@
+@import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .icon-group {
+    margin-top: 72px;
+
+    .icon {
+      @include flex-center;
+      width: 100px;
+      height: 100px;
+      border-radius: 24px;
+
+      &-logo {
+        background-color: $color-primary;
+      }
+
+      &-wechat {
+        background-image: linear-gradient(180deg, #69dd79 0%, #5ccb6d 100%);
+      }
+
+      &-link {
+        color: $text-color-secondary;
+      }
+
+      :global {
+        .m-icon {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .title {
+    font-size: 48px;
+    color: $text-color-main;
+    font-weight: 500;
+    margin-top: 80px;
+  }
+
+  .desc {
+    font-size: $font-size-base;
+    color: $text-color-base;
+    font-weight: 400;
+    margin-top: 16px;
+  }
+
+  .qrcode {
+    @include flex-center(column);
+    gap: 32px;
+    width: 550px;
+    height: 630px;
+    background: #fff;
+    border: 2px solid $border-color-base;
+    box-shadow:
+      0 16px 20px -10px rgba(0, 0, 0, 0.08),
+      0 32px 48px 4px rgba(0, 0, 0, 0.04),
+      0 12px 60px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 32px;
+    margin-top: 96px;
+
+    &-tip {
+      &-icon {
+        color: $text-color-main;
+      }
+
+      &-text {
+        font-size: $font-size-large;
+        color: $text-color-main;
+        font-weight: 500;
+      }
+    }
+  }
+}

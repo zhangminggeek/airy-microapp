@@ -6,7 +6,7 @@ import type { ButtonProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
 import { Icon } from '@/components';
-import { RouterUtil } from '@/utils';
+import { RouterUtil, Toast } from '@/utils';
 
 export interface IconItemProps {
   name: string;
@@ -14,6 +14,7 @@ export interface IconItemProps {
   iconSize?: number;
   openType?: ButtonProps['openType'];
   to?: string;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -23,6 +24,7 @@ const IconItem: FC<IconItemProps> = ({
   iconSize = 32,
   openType,
   to,
+  disabled = false,
   onClick,
 }) => {
   return (
@@ -32,6 +34,10 @@ const IconItem: FC<IconItemProps> = ({
       openType={openType}
       fill="none"
       onClick={() => {
+        if (disabled) {
+          Toast.info('功能正在加紧开发中，敬请期待');
+          return;
+        }
         if (to) {
           RouterUtil.navigateTo(to);
           return;

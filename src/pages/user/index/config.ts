@@ -18,15 +18,15 @@ import IconShopManagement from '@/assets/icons/shop_management.png';
 import IconWeChatNotice from '@/assets/icons/wechat_notice.png';
 
 export const shopConfig: IconItemProps[] = [
-  { icon: IconOrderManagement, name: '订单管理', to: '' },
-  { icon: IconCustomerManagement, name: '客户管理', to: '' },
   {
     icon: IconDressManagement,
     name: '服饰管理',
     to: '/packageDress/pages/management/index',
   },
-  { icon: IconEmployeeManagement, name: '员工管理', to: '' },
-  { icon: IconShopManagement, name: '店铺信息', to: '' },
+  { icon: IconOrderManagement, name: '订单管理', to: '', disabled: true },
+  { icon: IconCustomerManagement, name: '客户管理', to: '', disabled: true },
+  { icon: IconEmployeeManagement, name: '员工管理', to: '', disabled: true },
+  { icon: IconShopManagement, name: '店铺信息', to: '', disabled: true },
 ];
 
 export const marketConfig: IconItemProps[] = [
@@ -48,7 +48,11 @@ export const settingConfig: IconItemProps[] = [
     name: '收款账户',
     to: '/packageCompany/pages/payment/management/index',
   },
-  { icon: IconWeChatNotice, name: '微信通知', to: '' },
+  {
+    icon: IconWeChatNotice,
+    name: '微信通知',
+    to: '/packagePlatform/pages/official-account/index',
+  },
   {
     icon: IconProtocolGuide,
     name: '协议指南',
