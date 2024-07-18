@@ -2,6 +2,7 @@ import IconAddressManagement from '@/assets/icons/address_management.png';
 import IconCustomerManagement from '@/assets/icons/customer_management.png';
 import IconDressManagement from '@/assets/icons/dress_management.png';
 import IconEmployeeManagement from '@/assets/icons/employee_management.png';
+import IconFeedback from '@/assets/icons/feedback.png';
 import IconMyBought from '@/assets/icons/my_bought.png';
 import IconMyFavorite from '@/assets/icons/my_favorite.png';
 import IconMyPurchase from '@/assets/icons/my_purchase.png';
@@ -47,5 +48,14 @@ export const settingConfig = [
   },
   { icon: IconWeChatNotice, name: '微信通知', to: '' },
   { icon: IconProtocolGuide, name: '协议指南', to: '' },
-  { icon: IconOnlineCustomerService, name: '在线客服', to: '' },
+  {
+    icon: IconOnlineCustomerService,
+    name: '在线客服',
+    to: '',
+  },
+  {
+    icon: IconFeedback,
+    name: '问题与建议',
+    to: '/packagePlatform/pages/feedback/index',
+  },
 ];

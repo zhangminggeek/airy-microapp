@@ -80,6 +80,11 @@ export default {
         'pages/return/index',
       ],
     },
+    {
+      // 平台相关业务
+      root: 'packagePlatform',
+      pages: ['pages/feedback/index'],
+    },
   ],
   window: {
     backgroundTextStyle: 'dark',
