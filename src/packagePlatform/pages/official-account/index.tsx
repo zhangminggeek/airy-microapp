@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './index.module.scss';
 
 import { Icon, Space } from '@/components';
-import { OSS_ASSETS_DIR } from '@/constants';
+import { OSS_ASSETS_DIR_WITH_DOMAIN } from '@/constants';
 import { BasicLayout } from '@/layouts';
 
 const Page = () => {
@@ -29,7 +29,7 @@ const Page = () => {
         <View className={styles.qrcode}>
           <Image
             className={styles['qrcode-img']}
-            src={`${OSS_ASSETS_DIR}/official-account.jpg`}
+            src={`${OSS_ASSETS_DIR_WITH_DOMAIN}/official-account.jpg`}
             mode="aspectFit"
             width={176}
             height={176}
@@ -51,7 +51,7 @@ const Page = () => {
       </View>
       <ImagePreview
         visible={showPreview}
-        images={[{ src: `${OSS_ASSETS_DIR}/official-account.jpg` }]}
+        images={[{ src: `${OSS_ASSETS_DIR_WITH_DOMAIN}/official-account.jpg` }]}
         closeOnContentClick
         showMenuByLongpress
         onClose={() => {

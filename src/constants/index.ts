@@ -23,8 +23,10 @@ export const OSS_DOMAIN =
 export const OSS_PREFIX = process.env.OSS_ENV;
 // OSS 上传文件路径
 export const OSS_UPLOAD_DIR = `${OSS_PREFIX}/upload`;
+export const OSS_UPLOAD_DIR_WITH_DOMAIN = `${OSS_DOMAIN}/${OSS_UPLOAD_DIR}`;
 // OSS 静态资源路径
-export const OSS_ASSETS_DIR = `${OSS_DOMAIN}/${OSS_PREFIX}/assets`;
+export const OSS_ASSETS_DIR = `${OSS_PREFIX}/assets`;
+export const OSS_ASSETS_DIR_WITH_DOMAIN = `${OSS_DOMAIN}/${OSS_ASSETS_DIR}`;
 
 export const TAB_PAGE = [
   '/pages/market/index/index',
