@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import type { CSSProperties, FC } from 'react';
 
-import { CLOUD_ENV_ID, OSS_DOMAIN, OSS_UPLOAD_DIR } from '@/constants';
+import { useUpload } from '@/hooks';
 import { Toast } from '@/utils';
 
 import './index.scss';
@@ -37,6 +37,8 @@ const Upload: FC<UploadProps> = ({
   value = [],
   onChange,
 }) => {
+  const { upload } = useUpload();
+
   // 是否上传中
   const [uploading, setUploading] = useState<boolean>(false);
   // 是否显示预览
@@ -79,23 +81,14 @@ const Upload: FC<UploadProps> = ({
   // 上传图片
   const uploadImage = async (file: Taro.chooseImage.ImageFile) => {
     await beforeUpload(file);
-    const filename = file.path.split('/').at(-1);
-    const path = `${OSS_UPLOAD_DIR}/${filename}`;
-    Taro.cloud.uploadFile({
-      cloudPath: path,
-      filePath: file.path,
-      config: {
-        env: CLOUD_ENV_ID,
-      },
-      success() {
-        const url = `${OSS_DOMAIN}/${path}`;
-        console.log('uploadImage success', url);
-        onChange?.(value.concat(url));
-      },
-      complete() {
-        setUploading(false);
-      },
-    });
+    try {
+      const url = await upload(file.path);
+      onChange?.(value?.concat([url]));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   // 删除图片

@@ -20,7 +20,7 @@ const Avatar: FC<AvatarProps> = ({
   src,
   name,
   defaultImage,
-  size,
+  size = 40,
   background,
   ...rest
 }) => {
