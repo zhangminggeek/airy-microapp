@@ -1,7 +1,7 @@
 import { request } from '@tarojs/taro';
 import { create } from 'zustand';
 
-import { OSS_ASSETS_DIR_WITH_DOMAIN } from '@/constants';
+import { OSS_ASSETS_DIR } from '@/constants';
 
 export interface AdministrativeCode {
   name: string;
@@ -30,7 +30,7 @@ export const useGlobalStore = create<GloablStore>((set, get) => ({
     const { administrativeCodeTree } = get();
     if (administrativeCodeTree?.length) return administrativeCodeTree;
     const res = await request({
-      url: `${OSS_ASSETS_DIR_WITH_DOMAIN}/pca-code.json`,
+      url: `${OSS_ASSETS_DIR}/pca-code.json`,
       method: 'GET',
       success(result) {
         set({ administrativeCodeTree: result.data });

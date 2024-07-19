@@ -10,7 +10,7 @@ import type { ActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
 import { InputSearch, List, Product } from '@/components';
-import { OSS_ASSETS_DIR_WITH_DOMAIN } from '@/constants';
+import { OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
@@ -53,7 +53,7 @@ const Page = () => {
           <View key={item.value} className={styles['filter-item']}>
             <Image
               className={styles['filter-item-image']}
-              src={`${OSS_ASSETS_DIR_WITH_DOMAIN}/${item.imageName}`}
+              src={`${OSS_ASSETS_DIR}/${item.imageName}`}
               width={52}
               height={52}
             />
