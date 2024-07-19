@@ -31,97 +31,29 @@ const devUrl_0_0_0_0 = '' as any
 const prodUrl_0_0_0_0 = '' as any
 const dataKey_0_0_0_0 = 'data' as any
 
-export interface GetOssStsRequest {}
-
-export interface GetOssStsResponse {
-  /**
-   * 存储桶名称
-   */
-  bucket: string
-  /**
-   * 存储桶名称所在地区
-   */
-  region: string
-  /**
-   * 密钥的起始时间，是 UNIX 时间戳
-   */
-  startTime: number
-  /**
-   * 密钥的失效时间，是 UNIX 时间戳
-   */
-  expiredTime: number
-  /**
-   * 临时云 API 凭据
-   */
-  credentials: {
-    /**
-     * 临时密钥 Id，可用于计算签名
-     */
-    tmpSecretId: string
-    /**
-     * 临时密钥 Key，可用于计算签名
-     */
-    tmpSecretKey: string
-    /**
-     * 请求时需要用的 token 字符串，最终请求 COS API 时，需要放在 Header 的 x-cos-security-token 字段
-     */
-    sessionToken: string
-  }
-}
-
-type GetOssStsRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/oss/sts', 'data', string, string, true>
->
-
-const getOssStsRequestConfig: GetOssStsRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_0,
-  devUrl: devUrl_0_0_0_0,
-  prodUrl: prodUrl_0_0_0_0,
-  path: '/oss/sts',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_0,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOssSts',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOssSts = /*#__PURE__*/ (requestData?: GetOssStsRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOssStsResponse>(prepare(getOssStsRequestConfig, requestData), ...args)
-}
-
-getOssSts.requestConfig = getOssStsRequestConfig
-
-export interface GetOssPolicyRequest {
+export interface GetCommonOssPolicyRequest {
   /**
    * 文件后缀
    */
   ext: string
 }
 
-export interface GetOssPolicyResponse {
+export interface GetCommonOssPolicyResponse {
   cosHost: string
   cosKey: string
   authorization: string
   securityToken: string
 }
 
-type GetOssPolicyRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/oss/policy', 'data', string, 'ext', false>
+type GetCommonOssPolicyRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/common/oss/policy', 'data', string, 'ext', false>
 >
 
-const getOssPolicyRequestConfig: GetOssPolicyRequestConfig = /*#__PURE__*/ {
+const getCommonOssPolicyRequestConfig: GetCommonOssPolicyRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_0,
   devUrl: devUrl_0_0_0_0,
   prodUrl: prodUrl_0_0_0_0,
-  path: '/oss/policy',
+  path: '/common/oss/policy',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
@@ -132,16 +64,19 @@ const getOssPolicyRequestConfig: GetOssPolicyRequestConfig = /*#__PURE__*/ {
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getOssPolicy',
+  requestFunctionName: 'getCommonOssPolicy',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
-export const getOssPolicy = /*#__PURE__*/ (requestData: GetOssPolicyRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOssPolicyResponse>(prepare(getOssPolicyRequestConfig, requestData), ...args)
+export const getCommonOssPolicy = /*#__PURE__*/ (
+  requestData: GetCommonOssPolicyRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCommonOssPolicyResponse>(prepare(getCommonOssPolicyRequestConfig, requestData), ...args)
 }
 
-getOssPolicy.requestConfig = getOssPolicyRequestConfig
+getCommonOssPolicy.requestConfig = getCommonOssPolicyRequestConfig
 
 const mockUrl_0_0_0_1 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_1 = '' as any

@@ -17,10 +17,12 @@ import {
 } from '@/constants/product';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { isNil, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
+  const { info } = useUserStore((state) => state);
 
   useDidShow(() => {
     if (id) {
@@ -137,12 +139,14 @@ const Page = () => {
           />
         ))}
       </View>
-      <Footer
-        btnText="发送商品"
-        onConfirm={() => {
-          RouterUtil.navigateTo('/pages/purchase/select/index', { id });
-        }}
-      />
+      {info && info.companyId !== data?.companyId ? (
+        <Footer
+          btnText="发送商品"
+          onConfirm={() => {
+            RouterUtil.navigateTo('/pages/purchase/select/index', { id });
+          }}
+        />
+      ) : null}
     </BasicLayout>
   );
 };

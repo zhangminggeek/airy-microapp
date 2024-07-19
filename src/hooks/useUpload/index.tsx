@@ -4,7 +4,7 @@ import { camSafeUrlEncode, mimeTypeMap } from './utils';
 
 import type { PutFileProps } from './interfaces';
 
-import { getOssPolicy } from '@/api';
+import { getCommonOssPolicy } from '@/api';
 import { Toast } from '@/utils';
 
 export const useUpload = () => {
@@ -57,7 +57,7 @@ export const useUpload = () => {
   const upload = async (filePath: string) => {
     const fileExt = filePath.split('.').at(-1) ?? '';
     // 传入文件后缀名，服务端生成带签名的 url
-    const { data } = await getOssPolicy({ ext: fileExt });
+    const { data } = await getCommonOssPolicy({ ext: fileExt });
     // 请求用到的参数
     const host = 'https://' + data.cosHost; // 请求 url
     const key = data.cosKey; // 让服务端来决定文件名更安全
