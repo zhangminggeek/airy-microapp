@@ -14,6 +14,7 @@ import {
 } from '@/constants/market';
 import { OrderType } from '@/constants/order';
 import {
+  ProductFiledKey,
   productInfoFieldMap,
   ProductType,
   productTypeMap,
@@ -132,7 +133,7 @@ const Page = () => {
           (prev, cur) => {
             const val = productInfoFieldMap
               .get(data?.product?.typeCode as ProductType)
-              ?.find((item) => item.key === cur.fieldKey)
+              ?.get(cur.fieldKey as ProductFiledKey)
               ?.options?.find((item) => item.value)?.text;
             prev[cur.fieldKey] = val;
             return prev;

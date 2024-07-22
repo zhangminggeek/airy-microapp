@@ -53,12 +53,11 @@ const ProductDetail: FC<ProductDetailProps> = ({
   footer,
 }) => {
   const fieldList = useMemo(() => {
-    return (
-      productInfoFieldMap.get(typeCode as ProductType)?.map((item) => ({
-        field: item.key,
-        label: item.name,
-      })) ?? []
-    );
+    const product = productInfoFieldMap.get(typeCode as ProductType);
+    return Array.from(product?.entries() ?? []).map(([key, value]) => ({
+      label: value.name,
+      field: key,
+    }));
   }, [typeCode]);
 
   return (

@@ -4,7 +4,11 @@ import type { PickerProps } from '@/components/Picker';
 import type { FC } from 'react';
 
 import { Picker } from '@/components';
-import { productInfoFieldMap, ProductType } from '@/constants/product';
+import {
+  ProductFiledKey,
+  productInfoFieldMap,
+  ProductType,
+} from '@/constants/product';
 
 interface FieldPickerProps extends Omit<PickerProps, 'options'> {
   code: string; // 服饰类型 code
@@ -13,10 +17,17 @@ interface FieldPickerProps extends Omit<PickerProps, 'options'> {
 
 const FieldPicker: FC<FieldPickerProps> = ({ code, field, ...rest }) => {
   const options = useMemo(() => {
+    console.log('1', productInfoFieldMap.get(code as ProductType));
+    console.log(
+      '2',
+      productInfoFieldMap
+        .get(code as ProductType)
+        ?.get(field as ProductFiledKey),
+    );
     return (
       productInfoFieldMap
         .get(code as ProductType)
-        ?.find((item) => item.key === field)
+        ?.get(field as ProductFiledKey)
         ?.options?.map((item) => ({
           text: item.text,
           value: item.value,

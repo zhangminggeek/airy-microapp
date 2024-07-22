@@ -10,6 +10,7 @@ import { getPurchaseId } from '@/api';
 import { Company, Footer, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import {
+  ProductFiledKey,
   productInfoFieldMap,
   ProductSize,
   productSizeMap,
@@ -68,7 +69,7 @@ const Page = () => {
           {data?.fieldList?.map((item) => {
             const field = productInfoFieldMap
               .get(data?.typeCode as ProductType)
-              ?.find((i) => i.key === item.fieldKey);
+              ?.get(item.fieldKey as ProductFiledKey);
             const val = field?.options?.find(
               (i) => i.value === item.fieldValue,
             )?.text;

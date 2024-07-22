@@ -7,6 +7,7 @@ import styles from './index.module.scss';
 import { deleteProductId, getProductId } from '@/api';
 import { ActionSheet, Product } from '@/components';
 import {
+  ProductFiledKey,
   productInfoFieldMap,
   ProductSource,
   ProductStatus,
@@ -62,7 +63,7 @@ const Page = () => {
           (prev, cur) => {
             const val = productInfoFieldMap
               .get(data?.typeCode as ProductType)
-              ?.find((item) => item.key === cur.fieldKey)
+              ?.get(cur.fieldKey as ProductFiledKey)
               ?.options?.find((item) => item.value)?.text;
             prev[cur.fieldKey] = val;
             return prev;

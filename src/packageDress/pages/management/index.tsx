@@ -1,6 +1,6 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -8,14 +8,17 @@ import type { ActionType } from '@/components/List';
 
 import { getProductPage } from '@/api';
 import { Affix, Icon, InputSearch, List } from '@/components';
-import { ProductStatus, productStatusMap } from '@/constants/product';
+import {
+  ProductStatus,
+  productStatusMap,
+  productTypeMap,
+} from '@/constants/product';
 import { BasicLayout } from '@/layouts';
-import { useProductStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
-const Page = () => {
-  const { typeList, fetchProductType } = useProductStore((state) => state);
+const typeList = Array.from(productTypeMap.values());
 
+const Page = () => {
   const actionRef =
     useRef<ActionType<{ productTypeCode?: string; name?: string }>>(null);
 
@@ -23,10 +26,6 @@ const Page = () => {
   const [keyword, setKeyword] = useState<string>();
   // 当前产品分类code
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  useEffect(() => {
-    fetchProductType();
-  }, []);
 
   return (
     <BasicLayout title="服饰管理" back fill safeArea={false}>
@@ -37,7 +36,7 @@ const Page = () => {
               onSearch={(v) => {
                 setKeyword(v);
                 if (!typeList?.length) return;
-                const productTypeCode = typeList?.[currentIndex]?.code;
+                const productTypeCode = typeList?.[currentIndex]?.value;
                 actionRef.current?.refresh({ productTypeCode, name: v });
               }}
             />
@@ -49,7 +48,7 @@ const Page = () => {
             }}
           >
             {typeList.map((item) => (
-              <Tabs.TabPane key={item.code} title={item.name} />
+              <Tabs.TabPane key={item.value} title={item.text} />
             ))}
           </Tabs>
         </View>
@@ -59,7 +58,7 @@ const Page = () => {
               actionRef={actionRef}
               request={getProductPage}
               params={{
-                productTypeCode: typeList?.[currentIndex]?.code,
+                productTypeCode: typeList?.[currentIndex]?.value,
                 name: keyword,
               }}
               renderItem={(item) => {

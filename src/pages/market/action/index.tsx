@@ -27,23 +27,22 @@ import {
   MarkrtMethod,
 } from '@/constants/market';
 import {
+  productInfoFieldMap,
   ProductQuality,
   productQualityMap,
   productSizeMap,
   ProductSource,
+  ProductType,
 } from '@/constants/product';
 import { StorageKey } from '@/constants/storage';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useProductStore } from '@/models';
 import { isNil, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id, productId, source, purchaseId } = useRouter().params;
   const [form] = Form.useForm();
-
-  const { fieldMap, fetchProjectField } = useProductStore((state) => state);
 
   // 当前选中的服饰类型code
   const [currentTypeCode, setCurrentTypeCode] = useState<string>();
@@ -180,14 +179,20 @@ const Page = () => {
             if (source === ProductSource['服装管理']) {
               await create(params);
             } else {
-              params.fieldList = Array.from(
-                fieldMap.get(currentTypeCode!) ?? [],
-              )
-                .map((item) => ({
-                  fieldKey: item.key,
-                  fieldValue: values?.[item.key],
-                }))
-                .filter((item) => !isNil(item.fieldValue));
+              const fieldMap =
+                productInfoFieldMap
+                  .get(currentTypeCode as ProductType)
+                  ?.keys() ?? [];
+              const fieldList: { fieldKey: string; fieldValue: any }[] = [];
+              Array.from(fieldMap).forEach((k) => {
+                if (isNil(values?.[k])) return;
+                fieldList.push({
+                  fieldKey: k,
+                  fieldValue: values?.[k],
+                });
+                delete params[k];
+              });
+              params.fieldList = fieldList;
               await createMarketAndProduct(params);
             }
           }
@@ -236,7 +241,6 @@ const Page = () => {
               <Product.TypePicker
                 onConfirm={async (_, code) => {
                   setCurrentTypeCode(code);
-                  await fetchProjectField(code);
                 }}
               />
             </Form.Item>
@@ -329,19 +333,20 @@ const Page = () => {
               <Picker options={Array.from(productSizeMap.values())} />
             </Form.Item>
             {currentTypeCode
-              ? Array.from(fieldMap.get(currentTypeCode) ?? [])?.map((item) => (
+              ? Array.from(
+                  productInfoFieldMap
+                    .get(currentTypeCode as ProductType)
+                    ?.entries() ?? [],
+                ).map(([k, v]) => (
                   <Form.Item
-                    key={item.id}
-                    label={item.name}
-                    name={item.key}
+                    key={k}
+                    label={v.name}
+                    name={k}
                     trigger="onConfirm"
                     getValueFromEvent={(...args) => args[1]}
                     validateTrigger="onConfirm"
                   >
-                    <Product.FieldPicker
-                      code={currentTypeCode}
-                      field={item.key}
-                    />
+                    <Product.FieldPicker code={currentTypeCode} field={k} />
                   </Form.Item>
                 ))
               : null}

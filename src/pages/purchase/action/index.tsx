@@ -11,19 +11,20 @@ import {
   TagChecker,
   Upload,
 } from '@/components';
-import { productSizeMap } from '@/constants/product';
+import {
+  productInfoFieldMap,
+  productSizeMap,
+  ProductType,
+} from '@/constants/product';
 import { PurchaseMethod, purchaseMethodMap } from '@/constants/purchase';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useProductStore } from '@/models';
 import { isNil, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
   const [form] = Form.useForm();
-
-  const { fieldMap, fetchProjectField } = useProductStore((state) => state);
 
   // 当前选中的服饰类型code
   const [currentTypeCode, setCurrentTypeCode] = useState<string>();
@@ -61,7 +62,6 @@ const Page = () => {
         maxLeasePrice,
         tagList,
       } = data;
-      await fetchProjectField(typeCode);
       setCurrentTypeCode(typeCode);
       const method: PurchaseMethod[] = [];
       if (wantBuy) {
@@ -127,16 +127,9 @@ const Page = () => {
             Toast.info('请上传求购商品图片');
             return;
           }
-          const fields = Array.from(fieldMap.get(currentTypeCode!) ?? []);
           const params = {
             ...rest,
             picList,
-            fieldList: fields
-              ?.map((item) => ({
-                fieldKey: item.key,
-                fieldValue: values?.[item.key],
-              }))
-              .filter((item) => !isNil(item.fieldValue)),
             wantBuy: !!method?.includes(PurchaseMethod['购买']),
             wantLease: !!method?.includes(PurchaseMethod['借调']),
             minPrice: isNil(price?.[0], false) ? undefined : price?.[0],
@@ -148,9 +141,19 @@ const Page = () => {
               ? undefined
               : leasePrice?.[1],
           };
-          fields.forEach((field) => {
-            delete params[field.key];
+          const fieldMap =
+            productInfoFieldMap.get(currentTypeCode as ProductType)?.keys() ??
+            [];
+          const fieldList: { fieldKey: string; fieldValue: any }[] = [];
+          Array.from(fieldMap).forEach((k) => {
+            if (isNil(values?.[k])) return;
+            fieldList.push({
+              fieldKey: k,
+              fieldValue: values?.[k],
+            });
+            delete params[k];
           });
+          params.fieldList = fieldList;
           if (id) {
             update({ ...params, id });
           } else {
@@ -182,7 +185,6 @@ const Page = () => {
             <Product.TypePicker
               onConfirm={async (_, code) => {
                 setCurrentTypeCode(code);
-                await fetchProjectField(code);
               }}
             />
           </Form.Item>
@@ -199,19 +201,20 @@ const Page = () => {
             <Picker options={Array.from(productSizeMap.values())} />
           </Form.Item>
           {currentTypeCode
-            ? Array.from(fieldMap.get(currentTypeCode) ?? [])?.map((item) => (
+            ? Array.from(
+                productInfoFieldMap
+                  .get(currentTypeCode as ProductType)
+                  ?.entries() ?? [],
+              ).map(([k, v]) => (
                 <Form.Item
-                  key={item.id}
-                  label={item.name}
-                  name={item.key}
+                  key={k}
+                  label={v.name}
+                  name={k}
                   trigger="onConfirm"
                   getValueFromEvent={(...args) => args[1]}
                   validateTrigger="onConfirm"
                 >
-                  <Product.FieldPicker
-                    code={currentTypeCode}
-                    field={item.key}
-                  />
+                  <Product.FieldPicker code={currentTypeCode} field={k} />
                 </Form.Item>
               ))
             : null}

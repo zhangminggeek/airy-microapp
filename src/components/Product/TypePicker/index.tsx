@@ -1,28 +1,12 @@
-import { useEffect } from 'react';
-
 import type { PickerProps } from '@/components/Picker';
 
 import { Picker } from '@/components';
-import { useProductStore } from '@/models';
+import { productTypeMap } from '@/constants/product';
 
 interface TypePickerProps extends Omit<PickerProps<string>, 'options'> {}
 
 const TypePicker = (props: TypePickerProps) => {
-  const { typeList, fetchProductType } = useProductStore((state) => state);
-
-  useEffect(() => {
-    fetchProductType();
-  }, []);
-
-  return (
-    <Picker
-      {...props}
-      options={typeList?.map((item) => ({
-        text: item.name,
-        value: item.code,
-      }))}
-    />
-  );
+  return <Picker {...props} options={Array.from(productTypeMap.values())} />;
 };
 
 export default TypePicker;
