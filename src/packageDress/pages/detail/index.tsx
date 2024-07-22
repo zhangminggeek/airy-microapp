@@ -4,11 +4,15 @@ import { useDidShow, useRouter } from '@tarojs/taro';
 
 import styles from './index.module.scss';
 
-import type { GetProductIdRequest, GetProductIdResponse } from '@/api';
-
 import { deleteProductId, getProductId } from '@/api';
 import { ActionSheet, Product } from '@/components';
-import { ProductSource, ProductStatus } from '@/constants/product';
+import {
+  productInfoFieldMap,
+  ProductSource,
+  ProductStatus,
+  ProductType,
+  productTypeMap,
+} from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -22,21 +26,8 @@ const Page = () => {
   });
 
   // 获取服饰详情
-  const { data, run: fetchDetail } = useRequest<
-    GetProductIdResponse,
-    GetProductIdRequest,
-    GetProductIdResponse,
-    any
-  >(getProductId, {
+  const { data, run: fetchDetail } = useRequest(getProductId, {
     manual: true,
-    formatResult(res) {
-      const { data } = res;
-      const ret = { ...data, productTypeName: data?.productType?.name };
-      ret.fieldList?.forEach((item) => {
-        ret[item.fieldKey] = item.fieldValueInfo.name;
-      });
-      return ret;
-    },
   });
 
   // 删除服饰
@@ -61,23 +52,25 @@ const Page = () => {
   return (
     <BasicLayout title="详情" back fill safeArea={false}>
       <Product.Detail
+        typeCode={data?.typeCode}
         images={data?.picList?.map((item) => item.url)}
         tagList={data?.tagList?.map((item) => item.tag.name)}
         title={data?.name}
         desc={data?.description}
         extra={`已租${data?.leaseCount ?? 0}次`}
-        fieldList={data?.fieldList?.map(({ fieldKeyInfo }) => ({
-          label: fieldKeyInfo?.name,
-          field: fieldKeyInfo?.key,
-        }))}
         fieldData={data?.fieldList?.reduce(
           (prev, cur) => {
-            prev[cur.fieldKey] = cur.fieldValueInfo.name;
+            const val = productInfoFieldMap
+              .get(data?.typeCode as ProductType)
+              ?.find((item) => item.key === cur.fieldKey)
+              ?.options?.find((item) => item.value)?.text;
+            prev[cur.fieldKey] = val;
             return prev;
           },
           {
             no: data?.no,
-            productTypeName: data?.productType?.name,
+            productTypeName: productTypeMap.get(data?.typeCode as ProductType)
+              ?.text,
             size: data?.size,
           },
         )}

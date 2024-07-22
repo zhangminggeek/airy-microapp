@@ -1,6 +1,7 @@
 import { SafeArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
+import { useMemo } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../constants';
 import LeasePrice from '../LeasePrice';
@@ -13,12 +14,14 @@ import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { Space, Tag } from '@/components';
 import { expressMethodMap } from '@/constants/market';
+import { productInfoFieldMap, ProductType } from '@/constants/product';
 
 import './index.scss';
 
 interface ProductDetailProps {
   className?: string;
   style?: CSSProperties;
+  typeCode?: string;
   images?: PictureGroupProps['images'];
   sellingPrice?: string;
   leasePrice?: string;
@@ -27,7 +30,6 @@ interface ProductDetailProps {
   tagList?: string[];
   title?: string;
   desc?: string;
-  fieldList?: FieldProps['fieldList'];
   fieldData?: FieldProps['data'];
   extra?: ReactNode;
   footer?: ReactNode;
@@ -38,6 +40,7 @@ const PREFIX_CLS = `${ROOT_PREFIX_CLS}-detail`;
 const ProductDetail: FC<ProductDetailProps> = ({
   className,
   style,
+  typeCode,
   images,
   sellingPrice,
   leasePrice,
@@ -45,11 +48,19 @@ const ProductDetail: FC<ProductDetailProps> = ({
   tagList = [],
   title,
   desc,
-  fieldList = [],
   fieldData,
   extra,
   footer,
 }) => {
+  const fieldList = useMemo(() => {
+    return (
+      productInfoFieldMap.get(typeCode as ProductType)?.map((item) => ({
+        field: item.key,
+        label: item.name,
+      })) ?? []
+    );
+  }, [typeCode]);
+
   return (
     <View className={classnames(PREFIX_CLS, className)} style={style}>
       <PictureGroup images={images} />

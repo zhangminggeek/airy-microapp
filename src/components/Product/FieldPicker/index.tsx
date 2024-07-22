@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 import type { PickerProps } from '@/components/Picker';
 import type { FC } from 'react';
 
-import { getProductFieldOption } from '@/api';
 import { Picker } from '@/components';
-import { useRequest } from '@/hooks';
+import { productInfoFieldMap, ProductType } from '@/constants/product';
 
 interface FieldPickerProps extends Omit<PickerProps, 'options'> {
   code: string; // 服饰类型 code
@@ -13,22 +12,19 @@ interface FieldPickerProps extends Omit<PickerProps, 'options'> {
 }
 
 const FieldPicker: FC<FieldPickerProps> = ({ code, field, ...rest }) => {
-  // 获取字段选项
-  const { data, run } = useRequest(getProductFieldOption, { manual: true });
-
-  useEffect(() => {
-    run({ code, field });
+  const options = useMemo(() => {
+    return (
+      productInfoFieldMap
+        .get(code as ProductType)
+        ?.find((item) => item.key === field)
+        ?.options?.map((item) => ({
+          text: item.text,
+          value: item.value,
+        })) ?? []
+    );
   }, [code, field]);
 
-  return (
-    <Picker
-      {...rest}
-      options={data?.map((item) => ({
-        text: item.name,
-        value: item.id,
-      }))}
-    />
-  );
+  return <Picker {...rest} options={options} />;
 };
 
 export default FieldPicker;

@@ -10,6 +10,7 @@ import { getPurchaseId } from '@/api';
 import { Company, Footer, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import {
+  productInfoFieldMap,
   ProductSize,
   productSizeMap,
   ProductType,
@@ -64,16 +65,22 @@ const Page = () => {
               </View>
             </View>
           ) : null}
-          {data?.fieldList?.map((item) => (
-            <View className={styles['field-item']} key={item.id}>
-              <View className={styles['field-item-label']}>
-                {item.fieldKeyName}
+          {data?.fieldList?.map((item) => {
+            const field = productInfoFieldMap
+              .get(data?.typeCode as ProductType)
+              ?.find((i) => i.key === item.fieldKey);
+            const val = field?.options?.find(
+              (i) => i.value === item.fieldValue,
+            )?.text;
+            return (
+              <View className={styles['field-item']} key={item.id}>
+                <View className={styles['field-item-label']}>
+                  {field?.name}
+                </View>
+                <View className={styles['field-item-content']}>{val}</View>
               </View>
-              <View className={styles['field-item-content']}>
-                {item.fieldValueName}
-              </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
         {data?.tagList?.length ? (
           <View className={styles.tag}>

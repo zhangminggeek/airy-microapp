@@ -778,25 +778,21 @@ export interface GetPurchaseIdResponse {
    */
   fieldList?: {
     /**
-     * 字段id
+     * 选项id
      */
     id: number
+    /**
+     * 求购id
+     */
+    purchaseId: number
     /**
      * 字段key
      */
     fieldKey: string
     /**
-     * 字段key名称
-     */
-    fieldKeyName: string
-    /**
-     * 字段值
+     * 字段的值(该字段选项的id)
      */
     fieldValue: number
-    /**
-     * 字段值名称
-     */
-    fieldValueName: string
   }[]
   /**
    * 报价
@@ -6042,23 +6038,6 @@ export interface GetProductIdResponse {
    */
   status: number
   /**
-   * 产品类型
-   */
-  productType: {
-    /**
-     * 类型id
-     */
-    id: number
-    /**
-     * 类型名称
-     */
-    name: string
-    /**
-     * 类型编码
-     */
-    code: string
-  }
-  /**
    * 图片
    */
   picList: {
@@ -6129,48 +6108,6 @@ export interface GetProductIdResponse {
      * 字段的值(该字段选项的id)
      */
     fieldValue: number
-    /**
-     * 字段key信息
-     */
-    fieldKeyInfo: {
-      /**
-       * 字段id
-       */
-      id: number
-      /**
-       * 字段key
-       */
-      key: string
-      /**
-       * 字段名
-       */
-      name: string
-      /**
-       * 服饰类型编码
-       */
-      prodectTypeCode: string
-    }
-    /**
-     * 字段值信息
-     */
-    fieldValueInfo: {
-      /**
-       * 选项id
-       */
-      id: number
-      /**
-       * 选项名
-       */
-      name: string
-      /**
-       * 字段key
-       */
-      fieldKey: string
-      /**
-       * 服饰类型编码
-       */
-      prodectTypeCode: string
-    }
   }[]
 }
 
@@ -7594,23 +7531,6 @@ export interface GetMarketIdResponse {
      */
     status: number
     /**
-     * 产品类型
-     */
-    productType: {
-      /**
-       * 类型id
-       */
-      id: number
-      /**
-       * 类型名称
-       */
-      name: string
-      /**
-       * 类型编码
-       */
-      code: string
-    }
-    /**
      * 图片
      */
     picList: {
@@ -7681,48 +7601,6 @@ export interface GetMarketIdResponse {
        * 字段的值(该字段选项的id)
        */
       fieldValue: number
-      /**
-       * 字段key信息
-       */
-      fieldKeyInfo: {
-        /**
-         * 字段id
-         */
-        id: number
-        /**
-         * 字段key
-         */
-        key: string
-        /**
-         * 字段名
-         */
-        name: string
-        /**
-         * 服饰类型编码
-         */
-        prodectTypeCode: string
-      }
-      /**
-       * 字段值信息
-       */
-      fieldValueInfo: {
-        /**
-         * 选项id
-         */
-        id: number
-        /**
-         * 选项名
-         */
-        name: string
-        /**
-         * 字段key
-         */
-        fieldKey: string
-        /**
-         * 服饰类型编码
-         */
-        prodectTypeCode: string
-      }
     }[]
   }
   /**

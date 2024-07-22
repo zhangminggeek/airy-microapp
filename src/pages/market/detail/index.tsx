@@ -13,6 +13,11 @@ import {
   qualityStateMap,
 } from '@/constants/market';
 import { OrderType } from '@/constants/order';
+import {
+  productInfoFieldMap,
+  ProductType,
+  productTypeMap,
+} from '@/constants/product';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
@@ -32,7 +37,6 @@ const Page = () => {
   });
 
   useDidShow(() => {
-    console.log('info', info);
     if (id) {
       run({ id });
     }
@@ -104,6 +108,7 @@ const Page = () => {
   return (
     <BasicLayout title="详情" back fill>
       <Product.Detail
+        typeCode={data?.product?.typeCode}
         images={data?.product?.picList?.map((item) => item.url)}
         sellingPrice={data?.sellingPrice}
         leasePrice={data?.leasePrice}
@@ -123,18 +128,20 @@ const Page = () => {
         tagList={data?.product?.tagList?.map((item) => item.tag.name)}
         title={data?.title}
         desc={data?.description}
-        fieldList={data?.product?.fieldList?.map(({ fieldKeyInfo }) => ({
-          label: fieldKeyInfo?.name,
-          field: fieldKeyInfo?.key,
-        }))}
         fieldData={data?.product?.fieldList?.reduce(
           (prev, cur) => {
-            prev[cur.fieldKey] = cur.fieldValueInfo.name;
+            const val = productInfoFieldMap
+              .get(data?.product?.typeCode as ProductType)
+              ?.find((item) => item.key === cur.fieldKey)
+              ?.options?.find((item) => item.value)?.text;
+            prev[cur.fieldKey] = val;
             return prev;
           },
           {
             no: data?.product?.no,
-            productTypeName: data?.product?.productType?.name,
+            productTypeName: productTypeMap.get(
+              data?.product?.typeCode as ProductType,
+            )?.text,
             size: data?.product?.size,
           },
         )}
