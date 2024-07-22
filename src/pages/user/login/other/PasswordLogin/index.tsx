@@ -4,13 +4,19 @@ import classnames from 'classnames';
 
 import styles from './index.module.scss';
 
+import type { FC } from 'react';
+
 import { getAccountSalt, getAccountSaltAccount, postAccountLogin } from '@/api';
 import { InputPassword } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
-import { encode, RouterUtil } from '@/utils';
+import { encode, RouterUtil, Toast } from '@/utils';
 
-const PasswordLogin = () => {
+interface PasswordLoginProps {
+  hasReadProtocol?: boolean;
+}
+
+const PasswordLogin: FC<PasswordLoginProps> = ({ hasReadProtocol }) => {
   // 登录
   const { run } = useRequest(postAccountLogin, {
     manual: true,
@@ -37,6 +43,10 @@ const PasswordLogin = () => {
         </Button>
       }
       onFinish={async (values) => {
+        if (!hasReadProtocol) {
+          Toast.info('请先阅读并同意《用户隐私协议》和《软件许可使用协议》');
+          return;
+        }
         const { account, password } = values;
         try {
           const oldSalt = (await getAccountSaltAccount({ account })).data;

@@ -1,12 +1,11 @@
-import { Button, Checkbox, Image } from '@nutui/nutui-react-taro';
+import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
-
-import type { CSSProperties } from 'react';
+import Protocol from './Protocol';
 
 import { postAccountLoginWechatPhone } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
@@ -43,30 +42,11 @@ const Page = () => {
     if (!hasRead) {
       return {
         onClick() {
-          Toast.info('请先阅读并同意《用户隐私协议》');
+          Toast.info('请先阅读并同意《用户隐私协议》和《软件许可使用协议》');
           return;
         },
       };
     }
-
-    console.log(
-      'button config',
-      hasLogined
-        ? {
-            onClick() {
-              RouterUtil.navigateTo('/pages/security/index');
-            },
-          }
-        : {
-            'open-type': 'getPhoneNumber',
-            onGetPhoneNumber(e) {
-              const { code } = e.detail;
-              if (code) {
-                run({ code: e.detail.code });
-              }
-            },
-          },
-    );
 
     return hasLogined
       ? {
@@ -124,30 +104,13 @@ const Page = () => {
             去注册
           </Link>
         </View>
-        <View className={styles.action}>
-          <Checkbox
-            className={styles.protocols}
-            style={{ '--nut-icon-width': '16px' } as CSSProperties}
-            label={
-              <Text>
-                已阅读并同意
-                <Text
-                  className={styles.link}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    Taro.openPrivacyContract();
-                  }}
-                >
-                  《用户隐私协议》
-                </Text>
-              </Text>
-            }
-            checked={hasRead}
-            onChange={(val) => {
-              setHasRead(val);
-            }}
-          />
-        </View>
+        <Protocol
+          className={styles.protocol}
+          value={hasRead}
+          onChange={(v) => {
+            setHasRead(v);
+          }}
+        />
       </View>
     </BasicLayout>
   );

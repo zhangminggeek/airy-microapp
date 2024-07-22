@@ -1,0 +1,9 @@
+@import '../../../../styles/var.scss';
+
+.protocol {
+  :global {
+    .m-link {
+      font-size: $font-size-small;
+    }
+  }
+}

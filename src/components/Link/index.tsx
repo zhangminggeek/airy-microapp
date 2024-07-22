@@ -30,6 +30,7 @@ const Link: FC<LinkProps> = ({
   onClick,
 }) => {
   const handleClick = (e: ITouchEvent) => {
+    e.stopPropagation();
     if (disabled) return;
     if (to) {
       RouterUtil.navigateTo(to);

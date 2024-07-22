@@ -42,11 +42,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 252px;
+    margin-top: 64px;
 
     &-text {
       font-size: $font-size-base;
       color: $text-color-secondary;
     }
+  }
+
+  .protocol {
+    margin-top: 180px;
   }
 }

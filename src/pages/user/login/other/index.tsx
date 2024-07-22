@@ -1,5 +1,8 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
+import { useState } from 'react';
+
+import Protocol from '../Protocol';
 
 import CodeLogin from './CodeLogin';
 import styles from './index.module.scss';
@@ -9,6 +12,8 @@ import ImageLogo from '@/assets/logo.svg';
 import { BasicLayout } from '@/layouts';
 
 const Page = () => {
+  const [hasRead, setHasRead] = useState<boolean>(false);
+
   return (
     <BasicLayout
       className={styles.container}
@@ -30,12 +35,20 @@ const Page = () => {
       <View className={styles.body}>
         <Tabs className={styles.tabs}>
           <Tabs.TabPane title="密码登录">
-            <PasswordLogin />
+            <PasswordLogin hasReadProtocol={hasRead} />
           </Tabs.TabPane>
           <Tabs.TabPane title="验证码登录">
-            <CodeLogin />
+            <CodeLogin hasReadProtocol={hasRead} />
           </Tabs.TabPane>
         </Tabs>
+        <View className={styles.protocol}>
+          <Protocol
+            value={hasRead}
+            onChange={(v) => {
+              setHasRead(v);
+            }}
+          />
+        </View>
       </View>
     </BasicLayout>
   );

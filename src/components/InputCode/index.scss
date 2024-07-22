@@ -1,3 +1,5 @@
+@import '../../styles/var.scss';
+
 .m-input-code {
   display: flex;
   align-items: center;
@@ -5,5 +7,9 @@
 
   &-input {
     flex: 1;
+  }
+
+  .input-placeholder {
+    color: $text-color-placeholder;
   }
 }

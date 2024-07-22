@@ -5,13 +5,19 @@ import { useState } from 'react';
 
 import styles from './index.module.scss';
 
+import type { FC } from 'react';
+
 import { postAccountLoginCode } from '@/api';
 import { InputCode } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
-import { RouterUtil } from '@/utils';
+import { RouterUtil, Toast } from '@/utils';
 
-const CaptchaLogin = () => {
+interface CaptchaLoginProps {
+  hasReadProtocol?: boolean;
+}
+
+const CaptchaLogin: FC<CaptchaLoginProps> = ({ hasReadProtocol }) => {
   // 手机号
   const [accountValue, setAccountValue] = useState<string>();
   // 登录
@@ -40,6 +46,10 @@ const CaptchaLogin = () => {
         </Button>
       }
       onFinish={async (values) => {
+        if (!hasReadProtocol) {
+          Toast.info('请先阅读并同意《用户隐私协议》和《软件许可使用协议》');
+          return;
+        }
         await run(values);
       }}
     >

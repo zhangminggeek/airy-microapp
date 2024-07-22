@@ -1,36 +1,35 @@
-import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
+import {
+  stopPullDownRefresh,
+  usePullDownRefresh,
+  useRouter,
+} from '@tarojs/taro';
 import { useRef, useState } from 'react';
 
-import { productTypeOptions, tabsMap } from './config';
 import styles from './index.module.scss';
 
 import type { ActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
-import { InputSearch, List, Product } from '@/components';
-import { OSS_ASSETS_DIR } from '@/constants';
+import { Filter, InputSearch, List, Product } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
-const tabs = Array.from(tabsMap.values());
-
 const Page = () => {
+  // 服装类型
+  const { typeCode } = useRouter().params;
   const actionRef = useRef<ActionType>(null);
 
   // 搜索关键字
   const [keyword, setKeyword] = useState<string>('');
-  // tabs 选中索引
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // 下拉刷新
   usePullDownRefresh(async () => {
     await actionRef.current?.refresh({
       status: MarketProductStatus['在售'],
+      typeCode,
       description: keyword,
-      order: tabs[currentIndex].value,
     });
     stopPullDownRefresh();
   });
@@ -46,46 +45,32 @@ const Page = () => {
           }}
         />
       }
+      back
+      fill
       safeArea={false}
     >
-      <View className={styles.filter}>
-        {productTypeOptions.map((item) => (
-          <View key={item.value} className={styles['filter-item']}>
-            <Image
-              className={styles['filter-item-image']}
-              src={`${OSS_ASSETS_DIR}/${item.imageName}`}
-              width={52}
-              height={52}
-              onClick={() => {
-                RouterUtil.navigateTo('/pages/market/category/index', {
-                  typeCode: item.value,
-                });
-              }}
-            />
-            <View className={styles['filter-item-label']}>{item.label}</View>
-          </View>
-        ))}
-      </View>
-      <View>
-        <Tabs
-          className={styles.tabs}
-          align="left"
-          value={currentIndex}
-          onChange={(index: number) => {
-            setCurrentIndex(index);
-          }}
-        >
-          {tabs.map((item) => (
-            <Tabs.TabPane key={item.value} title={item.text} />
-          ))}
-        </Tabs>
+      <Filter
+        fields={[
+          {
+            title: '价格',
+            name: 'price',
+            options: [
+              { text: '出售价从高到低', value: 1 },
+              { text: '出售价从低到高', value: 2 },
+              { text: '借调价从高到低', value: 3 },
+              { text: '借调价从低到高', value: 4 },
+            ],
+          },
+        ]}
+      />
+      <View className={styles.body}>
         <List
           actionRef={actionRef}
           request={getMarket}
           params={{
             status: MarketProductStatus['在售'],
+            typeCode,
             description: keyword,
-            order: tabs[currentIndex].value,
           }}
           renderItem={(item) => (
             <Product.Card

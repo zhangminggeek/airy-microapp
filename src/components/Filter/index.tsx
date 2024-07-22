@@ -58,4 +58,5 @@ const Filter: FC<FilterProps> = ({
     </Menu>
   );
 };
+
 export default Filter;

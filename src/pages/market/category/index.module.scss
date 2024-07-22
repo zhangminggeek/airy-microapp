@@ -1,0 +1,14 @@
+@import '../../../styles/var.scss';
+
+.container {
+  :global {
+    .g-basic-layout-header-title {
+      padding: 0 24px 0 88px;
+      justify-content: flex-start;
+    }
+  }
+
+  .body {
+    padding: 24px;
+  }
+}
