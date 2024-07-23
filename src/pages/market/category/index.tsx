@@ -6,13 +6,16 @@ import {
 } from '@tarojs/taro';
 import { useRef, useState } from 'react';
 
+import { filterConfig } from './config';
 import styles from './index.module.scss';
+import MainFilter from './MainFilter';
 
 import type { ActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
 import { Filter, InputSearch, List, Product } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
+import { ProductType } from '@/constants/product';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
@@ -20,6 +23,8 @@ const Page = () => {
   // 服装类型
   const { typeCode } = useRouter().params;
   const actionRef = useRef<ActionType>(null);
+
+  const config = filterConfig.get(typeCode as ProductType);
 
   // 搜索关键字
   const [keyword, setKeyword] = useState<string>('');
@@ -49,6 +54,7 @@ const Page = () => {
       fill
       safeArea={false}
     >
+      {config?.main ? <MainFilter options={[]} /> : null}
       <Filter
         fields={[
           {

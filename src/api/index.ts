@@ -329,13 +329,21 @@ export interface PostPurchaseRequest {
    */
   fieldList?: {
     /**
+     * 选项id
+     */
+    id: number
+    /**
+     * 求购id
+     */
+    purchaseId: number
+    /**
      * 字段key
      */
     fieldKey: string
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
   /**
    * 服饰标签
@@ -425,13 +433,21 @@ export interface PutPurchaseRequest {
    */
   fieldList?: {
     /**
+     * 选项id
+     */
+    id: number
+    /**
+     * 求购id
+     */
+    purchaseId: number
+    /**
      * 字段key
      */
     fieldKey: string
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
   /**
    * 服饰标签
@@ -792,7 +808,7 @@ export interface GetPurchaseIdResponse {
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
   /**
    * 报价
@@ -5677,13 +5693,21 @@ export interface PostProductRequest {
    */
   fieldList?: {
     /**
+     * 选项id
+     */
+    id: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
      * 字段key
      */
     fieldKey: string
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
   /**
    * 服饰标签
@@ -5757,13 +5781,21 @@ export interface PutProductRequest {
    */
   fieldList?: {
     /**
+     * 选项id
+     */
+    id: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
      * 字段key
      */
     fieldKey: string
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
   /**
    * 服饰标签
@@ -6107,7 +6139,7 @@ export interface GetProductIdResponse {
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
 }
 
@@ -6140,181 +6172,6 @@ export const getProductId = /*#__PURE__*/ (requestData: GetProductIdRequest, ...
 }
 
 getProductId.requestConfig = getProductIdRequestConfig
-
-export interface GetProductTypeRequest {}
-
-export type GetProductTypeResponse = {
-  /**
-   * 类型id
-   */
-  id: number
-  /**
-   * 类型名称
-   */
-  name: string
-  /**
-   * 类型编码
-   */
-  code: string
-}[]
-
-type GetProductTypeRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/type', 'data', string, string, true>
->
-
-const getProductTypeRequestConfig: GetProductTypeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
-  path: '/product/type',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getProductType',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getProductType = /*#__PURE__*/ (requestData?: GetProductTypeRequest, ...args: UserRequestRestArgs) => {
-  return request<GetProductTypeResponse>(prepare(getProductTypeRequestConfig, requestData), ...args)
-}
-
-getProductType.requestConfig = getProductTypeRequestConfig
-
-export interface GetProductFieldRequest {
-  /**
-   * 服饰类型code
-   */
-  code: string
-}
-
-export type GetProductFieldResponse = {
-  /**
-   * 字段id
-   */
-  id: number
-  /**
-   * 字段key
-   */
-  key: string
-  /**
-   * 字段名
-   */
-  name: string
-  /**
-   * 服饰类型编码
-   */
-  prodectTypeCode: string
-}[]
-
-type GetProductFieldRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/product/field', 'data', string, 'code', false>
->
-
-const getProductFieldRequestConfig: GetProductFieldRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
-  path: '/product/field',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
-  paramNames: [],
-  queryNames: ['code'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getProductField',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getProductField = /*#__PURE__*/ (requestData: GetProductFieldRequest, ...args: UserRequestRestArgs) => {
-  return request<GetProductFieldResponse>(prepare(getProductFieldRequestConfig, requestData), ...args)
-}
-
-getProductField.requestConfig = getProductFieldRequestConfig
-
-export interface GetProductFieldOptionRequest {
-  /**
-   * 服饰类型code
-   */
-  code: string
-  /**
-   * 字段key
-   */
-  field: string
-}
-
-export type GetProductFieldOptionResponse = {
-  /**
-   * 选项id
-   */
-  id: number
-  /**
-   * 选项名
-   */
-  name: string
-  /**
-   * 字段key
-   */
-  fieldKey: string
-  /**
-   * 服饰类型编码
-   */
-  prodectTypeCode: string
-}[]
-
-type GetProductFieldOptionRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/product/field/option',
-    'data',
-    string,
-    'code' | 'field',
-    false
-  >
->
-
-const getProductFieldOptionRequestConfig: GetProductFieldOptionRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
-  path: '/product/field/option',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
-  paramNames: [],
-  queryNames: ['code', 'field'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getProductFieldOption',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getProductFieldOption = /*#__PURE__*/ (
-  requestData: GetProductFieldOptionRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetProductFieldOptionResponse>(prepare(getProductFieldOptionRequestConfig, requestData), ...args)
-}
-
-getProductFieldOption.requestConfig = getProductFieldOptionRequestConfig
 
 const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_9 = '' as any
@@ -7310,13 +7167,21 @@ export interface PostMarketAndProductRequest {
    */
   fieldList?: {
     /**
+     * 选项id
+     */
+    id: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
      * 字段key
      */
     fieldKey: string
     /**
      * 字段的值(该字段选项的id)
      */
-    fieldValue: number
+    fieldValue: string
   }[]
   /**
    * 服饰标签
@@ -7600,7 +7465,7 @@ export interface GetMarketIdResponse {
       /**
        * 字段的值(该字段选项的id)
        */
-      fieldValue: number
+      fieldValue: string
     }[]
   }
   /**

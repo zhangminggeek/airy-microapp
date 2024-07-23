@@ -16,15 +16,17 @@ import styles from './index.module.scss';
 
 import type { GetProductResponse } from '@/api';
 
-import { getProduct, getProductType } from '@/api';
+import { getProduct } from '@/api';
 import { Icon, InputSearch, Space } from '@/components';
-import { ProductStatus } from '@/constants/product';
+import { ProductStatus, productTypeMap } from '@/constants/product';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
 type Product = GetProductResponse['0'];
+
+const typeList = Array.from(productTypeMap.values());
 
 const Page = () => {
   // 搜索关键字
@@ -38,9 +40,6 @@ const Page = () => {
   const { data, loading } = useRequest(getProduct, {
     defaultParams: { status: `${ProductStatus['正常']}` },
   });
-
-  // 产品列表
-  const { data: typeList } = useRequest(getProductType);
 
   if (loading) {
     return <Skeleton rows={10} />;
@@ -71,11 +70,15 @@ const Page = () => {
             setCurrentIndex(v);
           }}
         >
-          {typeList?.map((item) => <TabPane key={item.id} title={item.name} />)}
+          {typeList?.map((item) => (
+            <TabPane key={item.value} title={item.text} />
+          ))}
         </Tabs>
         <View className={styles['body-content']}>
           {data
-            ?.filter((item) => item.typeCode === typeList?.[currentIndex]?.code)
+            ?.filter(
+              (item) => item.typeCode === typeList?.[currentIndex]?.value,
+            )
             ?.filter((item) => (keyword ? item.name.includes(keyword) : true))
             ?.map((item) => (
               <View
