@@ -85,7 +85,7 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
     Taro.cloud.callContainer({
       // @ts-expect-error: 确定此参数存在
       config: {
-        env: 'prod-7g0n4iff7a46e860',
+        env: 'prod-1gc7fdtuac9b3c9f',
       },
       timeout: 5000,
       method,
@@ -102,9 +102,8 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
         if (!success) {
           // 登录失效时静默登录，登录成功后重新发起请求
           if (['2001'].includes(code)) {
-            // await WeChatUtil.loginForWeChat();
-            // await request(payload);
-            // return;
+            RouterUtil.navigateTo('/pages/user/login/index');
+            return;
           }
           if (
             !NOT_DEAL_ERROR_URLS.includes(`${method.toUpperCase()} ${path}`)
