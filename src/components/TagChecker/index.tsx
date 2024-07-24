@@ -7,11 +7,12 @@ import './index.scss';
 
 const PREFIX_CLS = 'm-tag-checker';
 
-interface TagCheckerProps<V extends string | number = number> {
+export interface TagCheckerProps<V extends string | number = number> {
   className?: string;
   style?: CSSProperties;
   options: Array<{ text: string; value: V }>;
   multiple?: boolean;
+  wrap?: boolean;
   value?: V[];
   onChange?: (value?: V[]) => void;
 }
@@ -21,6 +22,7 @@ const TagChecker = <V extends string | number>({
   style,
   options = [],
   multiple = false,
+  wrap = true,
   value = [],
   onChange,
 }: TagCheckerProps<V>) => {
@@ -36,7 +38,14 @@ const TagChecker = <V extends string | number>({
   };
 
   return (
-    <View className={classnames(PREFIX_CLS, className)} style={style}>
+    <View
+      className={classnames(
+        PREFIX_CLS,
+        { [`${PREFIX_CLS}-wrap`]: wrap },
+        className,
+      )}
+      style={style}
+    >
       {options?.map((item) => (
         <View
           key={item.value}

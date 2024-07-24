@@ -27,6 +27,10 @@
 
 // Form
 .nut-form {
+  .nut-form-item-body {
+    overflow: hidden;
+  }
+
   .nut-cell-group-wrap {
     background-color: transparent;
 

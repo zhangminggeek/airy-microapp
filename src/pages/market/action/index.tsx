@@ -15,7 +15,6 @@ import {
   AddressPicker,
   FormSection,
   InputNumber,
-  Picker,
   Product,
   TagChecker,
   Upload,
@@ -30,7 +29,6 @@ import {
   productInfoFieldMap,
   ProductQuality,
   productQualityMap,
-  productSizeMap,
   ProductSource,
   ProductType,
 } from '@/constants/product';
@@ -188,7 +186,7 @@ const Page = () => {
                 if (isNil(values?.[k])) return;
                 fieldList.push({
                   fieldKey: k,
-                  fieldValue: values?.[k],
+                  fieldValue: values?.[k]?.[0],
                 });
                 delete params[k];
               });
@@ -233,14 +231,12 @@ const Page = () => {
             <Form.Item
               label="类型"
               name="typeCode"
-              trigger="onConfirm"
-              getValueFromEvent={(...args) => args[1]}
-              validateTrigger="onConfirm"
               rules={[{ required: true, message: '请选择商品类型' }]}
             >
               <Product.TypePicker
-                onConfirm={async (_, code) => {
-                  setCurrentTypeCode(code);
+                wrap={false}
+                onChange={(v) => {
+                  setCurrentTypeCode(v?.[0]);
                 }}
               />
             </Form.Item>
@@ -325,12 +321,9 @@ const Page = () => {
             <Form.Item
               label="尺码"
               name="size"
-              trigger="onConfirm"
-              getValueFromEvent={(...args) => args[1]}
-              validateTrigger="onConfirm"
               rules={[{ required: true, message: '请输入商品尺码' }]}
             >
-              <Picker options={Array.from(productSizeMap.values())} />
+              <Product.SizePicker wrap={false} />
             </Form.Item>
             {currentTypeCode
               ? Array.from(
@@ -338,14 +331,7 @@ const Page = () => {
                     .get(currentTypeCode as ProductType)
                     ?.entries() ?? [],
                 ).map(([k, v]) => (
-                  <Form.Item
-                    key={k}
-                    label={v.name}
-                    name={k}
-                    trigger="onConfirm"
-                    getValueFromEvent={(...args) => args[1]}
-                    validateTrigger="onConfirm"
-                  >
+                  <Form.Item key={k} label={v.name} name={k}>
                     <Product.FieldPicker code={currentTypeCode} field={k} />
                   </Form.Item>
                 ))

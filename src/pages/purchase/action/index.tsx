@@ -8,16 +8,11 @@ import { getPurchaseId, getTag, postPurchase, putPurchase } from '@/api';
 import {
   FormSection,
   InputNumberRange,
-  Picker,
   Product,
   TagChecker,
   Upload,
 } from '@/components';
-import {
-  productInfoFieldMap,
-  productSizeMap,
-  ProductType,
-} from '@/constants/product';
+import { productInfoFieldMap, ProductType } from '@/constants/product';
 import { PurchaseMethod, purchaseMethodMap } from '@/constants/purchase';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
@@ -29,7 +24,9 @@ const Page = () => {
   const [form] = Form.useForm();
 
   // 当前选中的服饰类型code
-  const [currentTypeCode, setCurrentTypeCode] = useState<string>();
+  const [currentTypeCode, setCurrentTypeCode] = useState<
+    ProductType | undefined
+  >(ProductType['婚纱']);
   // 是否允许出售
   const [wantBuy, setWantBuy] = useState<boolean>(true);
   // 是否允许借调
@@ -64,7 +61,7 @@ const Page = () => {
         tagList,
         bizData,
       } = data;
-      setCurrentTypeCode(typeCode);
+      setCurrentTypeCode(typeCode as ProductType);
       const method: PurchaseMethod[] = [];
       if (wantBuy) {
         method.push(PurchaseMethod['购买']);
@@ -85,7 +82,7 @@ const Page = () => {
         tagIdList: tagList?.map((item) => item.id),
       };
       parseJson<ProductBizData>(bizData, [])?.forEach((item) => {
-        ret[item.fieldKey] = item.fieldValue;
+        ret[item.fieldKey] = [item.fieldValue];
       });
       form.setFieldsValue(ret);
     },
@@ -117,6 +114,7 @@ const Page = () => {
         divider
         initialValues={{
           method: [PurchaseMethod['购买']],
+          typeCode: [ProductType['婚纱']],
         }}
         footer={
           <Button formType="submit" type="primary" size="xlarge" block>
@@ -151,7 +149,7 @@ const Page = () => {
             if (isNil(values?.[k])) return;
             fieldList.push({
               fieldKey: k,
-              fieldValue: values?.[k],
+              fieldValue: values?.[k]?.[0],
             });
             delete params[k];
           });
@@ -176,31 +174,23 @@ const Page = () => {
           </Form.Item>
         </FormSection>
         <FormSection fill>
-          <Form.Item
-            label="类型"
-            name="typeCode"
-            trigger="onConfirm"
-            getValueFromEvent={(...args) => args[1]}
-            validateTrigger="onConfirm"
-            rules={[{ required: true, message: '请选择商品类型' }]}
-          >
-            <Product.TypePicker
-              onConfirm={async (_, code) => {
-                setCurrentTypeCode(code);
-              }}
-            />
-          </Form.Item>
           <Form.Item label="品牌" name="brand">
             <Input maxLength={255} />
           </Form.Item>
           <Form.Item
-            label="尺码"
-            name="size"
-            trigger="onConfirm"
-            getValueFromEvent={(...args) => args[1]}
-            validateTrigger="onConfirm"
+            label="类型"
+            name="typeCode"
+            rules={[{ required: true, message: '请选择商品类型' }]}
           >
-            <Picker options={Array.from(productSizeMap.values())} />
+            <Product.TypePicker
+              wrap={false}
+              onChange={(v) => {
+                setCurrentTypeCode(v?.[0]);
+              }}
+            />
+          </Form.Item>
+          <Form.Item label="尺码" name="size">
+            <Product.SizePicker wrap={false} />
           </Form.Item>
           {currentTypeCode
             ? Array.from(
@@ -208,14 +198,7 @@ const Page = () => {
                   .get(currentTypeCode as ProductType)
                   ?.entries() ?? [],
               ).map(([k, v]) => (
-                <Form.Item
-                  key={k}
-                  label={v.name}
-                  name={k}
-                  trigger="onConfirm"
-                  getValueFromEvent={(...args) => args[1]}
-                  validateTrigger="onConfirm"
-                >
+                <Form.Item key={k} label={v.name} name={k}>
                   <Product.FieldPicker code={currentTypeCode} field={k} />
                 </Form.Item>
               ))

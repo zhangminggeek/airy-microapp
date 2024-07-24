@@ -3,10 +3,30 @@
 .m-tag-checker {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 16px 24px;
+  width: 100%;
+
+  &.m-tag-checker-wrap {
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+
+  &:not(.m-tag-checker-wrap) {
+    flex-wrap: nowrap;
+    gap: 24px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  // 隐藏滚动条
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
 
   &-item {
+    flex-shrink: 0;
     padding: 8px 32px;
     border-radius: 30px;
     font-size: $font-size-base;

@@ -1,29 +1,23 @@
 import { useMemo } from 'react';
 
-import type { PickerProps } from '@/components/Picker';
+import type { TagCheckerProps } from '@/components/TagChecker';
 import type { FC } from 'react';
 
-import { Picker } from '@/components';
+import { TagChecker } from '@/components';
 import {
   ProductFiledKey,
   productInfoFieldMap,
   ProductType,
 } from '@/constants/product';
 
-interface FieldPickerProps extends Omit<PickerProps, 'options'> {
+interface FieldPickerProps
+  extends Omit<TagCheckerProps<string>, 'options' | 'wrap'> {
   code: string; // 服饰类型 code
   field: string; // 字段 key
 }
 
 const FieldPicker: FC<FieldPickerProps> = ({ code, field, ...rest }) => {
   const options = useMemo(() => {
-    console.log('1', productInfoFieldMap.get(code as ProductType));
-    console.log(
-      '2',
-      productInfoFieldMap
-        .get(code as ProductType)
-        ?.get(field as ProductFiledKey),
-    );
     return (
       productInfoFieldMap
         .get(code as ProductType)
@@ -35,7 +29,7 @@ const FieldPicker: FC<FieldPickerProps> = ({ code, field, ...rest }) => {
     );
   }, [code, field]);
 
-  return <Picker {...rest} options={options} />;
+  return <TagChecker options={options} wrap={false} {...rest} />;
 };
 
 export default FieldPicker;

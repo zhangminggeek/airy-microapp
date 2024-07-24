@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageDress/pages/action/index",
+          "pathName": "packageDress/pages/action/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/purchase/index",
           "pathName": "pages/user/purchase/index",
           "query": "",
@@ -101,13 +108,6 @@
         {
           "name": "packageAddress/pages/management/index",
           "pathName": "packageAddress/pages/management/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/dress/action/index",
-          "pathName": "pages/dress/action/index",
           "query": "",
           "launchMode": "default",
           "scene": null

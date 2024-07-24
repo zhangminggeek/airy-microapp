@@ -5,12 +5,8 @@ import { useEffect, useState } from 'react';
 import type { ProductBizData } from '@/interfaces/product';
 
 import { getProductId, getTag, postProduct, putProduct } from '@/api';
-import { FormSection, Picker, Product, TagChecker, Upload } from '@/components';
-import {
-  productInfoFieldMap,
-  productSizeMap,
-  ProductType,
-} from '@/constants/product';
+import { FormSection, Product, TagChecker, Upload } from '@/components';
+import { productInfoFieldMap, ProductType } from '@/constants/product';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -21,7 +17,9 @@ const Page = () => {
   const [form] = Form.useForm();
 
   // 当前选中的服饰类型code
-  const [currentCode, setCurrentCode] = useState<string>();
+  const [currentCode, setCurrentCode] = useState<ProductType | undefined>(
+    ProductType['婚纱'],
+  );
 
   useEffect(() => {
     if (id) {
@@ -60,10 +58,10 @@ const Page = () => {
         description,
       };
       parseJson<ProductBizData>(bizData, []).forEach((item) => {
-        formData[item.fieldKey] = item.fieldValue;
+        formData[item.fieldKey] = [item.fieldValue];
       });
       form.setFieldsValue(formData);
-      setCurrentCode(typeCode);
+      setCurrentCode(typeCode as ProductType);
     },
   });
 
@@ -89,6 +87,9 @@ const Page = () => {
         form={form}
         labelPosition="left"
         divider
+        initialValues={{
+          typeCode: [ProductType['婚纱']],
+        }}
         footer={
           <Button formType="submit" type="primary" size="xlarge" block>
             保存
@@ -103,7 +104,7 @@ const Page = () => {
             if (isNil(values?.[k])) return;
             fieldList.push({
               fieldKey: k,
-              fieldValue: values?.[k],
+              fieldValue: values?.[k]?.[0],
             });
             delete data[k];
           });
@@ -143,26 +144,21 @@ const Page = () => {
           <Form.Item
             label="类型"
             name="typeCode"
-            trigger="onConfirm"
-            getValueFromEvent={(...args) => args[1]}
-            validateTrigger="onConfirm"
             rules={[{ required: true, message: '请选择商品类型' }]}
           >
             <Product.TypePicker
-              onConfirm={async (_, code) => {
-                setCurrentCode(code);
+              wrap={false}
+              onChange={(v) => {
+                setCurrentCode(v?.[0]);
               }}
             />
           </Form.Item>
           <Form.Item
             label="尺码"
             name="size"
-            trigger="onConfirm"
-            getValueFromEvent={(...args) => args[1]}
-            validateTrigger="onConfirm"
             rules={[{ required: true, message: '请输入商品尺码' }]}
           >
-            <Picker options={Array.from(productSizeMap.values())} />
+            <Product.SizePicker wrap={false} />
           </Form.Item>
           {currentCode
             ? Array.from(
@@ -175,9 +171,6 @@ const Page = () => {
                   label={v.name}
                   name={k}
                   rules={[{ required: true, message: `请选择${v.name}` }]}
-                  trigger="onConfirm"
-                  getValueFromEvent={(...args) => args[1]}
-                  validateTrigger="onConfirm"
                 >
                   <Product.FieldPicker code={currentCode} field={k} />
                 </Form.Item>

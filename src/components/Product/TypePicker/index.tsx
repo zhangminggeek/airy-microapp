@@ -1,12 +1,15 @@
-import type { PickerProps } from '@/components/Picker';
+import type { TagCheckerProps } from '@/components/TagChecker';
 
-import { Picker } from '@/components';
-import { productTypeMap } from '@/constants/product';
+import { TagChecker } from '@/components';
+import { ProductType, productTypeMap } from '@/constants/product';
 
-interface TypePickerProps extends Omit<PickerProps<string>, 'options'> {}
+interface TypePickerProps
+  extends Omit<TagCheckerProps<ProductType>, 'options'> {}
 
 const TypePicker = (props: TypePickerProps) => {
-  return <Picker {...props} options={Array.from(productTypeMap.values())} />;
+  return (
+    <TagChecker options={Array.from(productTypeMap.values())} {...props} />
+  );
 };
 
 export default TypePicker;
