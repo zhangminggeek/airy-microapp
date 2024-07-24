@@ -4,9 +4,10 @@ import {
   usePullDownRefresh,
   useRouter,
 } from '@tarojs/taro';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { filterConfig } from './config';
+import CustomFilter from './CustomFilter';
 import styles from './index.module.scss';
 import MainFilter from './MainFilter';
 
@@ -17,7 +18,7 @@ import { Filter, InputSearch, List, Product } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductType } from '@/constants/product';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil } from '@/utils';
+import { isNil, RouterUtil } from '@/utils';
 
 const Page = () => {
   // 服装类型
@@ -28,14 +29,35 @@ const Page = () => {
 
   // 搜索关键字
   const [keyword, setKeyword] = useState<string>('');
+  // 选中值
+  const [mainFilterValue, setMainFilterValue] = useState<string | number>();
+  // 选中值
+  const [tabFilterValue, setTabFilterValue] = useState<Record<string, any>>();
+  // 筛选里面的选中值
+  const [subFilterValue, setSubFilterValue] = useState<Record<string, any>>();
 
-  // 下拉刷新
-  usePullDownRefresh(async () => {
-    await actionRef.current?.refresh({
+  const params = useMemo(() => {
+    const { order, ...restTabFilterValue } = tabFilterValue ?? {};
+    const filter = Object.entries({
+      [config?.main.filed ?? '']: mainFilterValue,
+      ...restTabFilterValue,
+      ...subFilterValue,
+    })
+      .map(([k, v]) => ({ field: k, value: v }))
+      .filter((item) => !isNil(item.value));
+
+    return {
       status: MarketProductStatus['在售'],
       typeCode,
       description: keyword,
-    });
+      order,
+      filterStr: filter?.length ? JSON.stringify(filter) : undefined,
+    };
+  }, [typeCode, keyword, tabFilterValue, subFilterValue]);
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    await actionRef.current?.refresh(params);
     stopPullDownRefresh();
   });
 
@@ -54,30 +76,64 @@ const Page = () => {
       fill
       safeArea={false}
     >
-      {config?.main ? <MainFilter options={[]} /> : null}
+      {config?.main ? (
+        <MainFilter
+          options={config.main.options}
+          value={mainFilterValue}
+          onChange={(v) => {
+            setMainFilterValue(v);
+          }}
+        />
+      ) : null}
       <Filter
         fields={[
+          ...(config?.tab ?? []),
           {
-            title: '价格',
-            name: 'price',
+            title: '排序',
+            name: 'order',
             options: [
-              { text: '出售价从高到低', value: 1 },
-              { text: '出售价从低到高', value: 2 },
-              { text: '借调价从高到低', value: 3 },
-              { text: '借调价从低到高', value: 4 },
+              { text: '默认排序', value: 0 },
+              { text: '最新发布', value: 1 },
+              { text: '最多收藏', value: 2 },
+              { text: '出售价从高到低', value: 3 },
+              { text: '出售价从低到高', value: 4 },
+              { text: '借调价从高到低', value: 5 },
+              { text: '借调价从低到高', value: 6 },
             ],
+            emptyOption: false,
+            defaultValue: 0,
+          },
+          {
+            title: '筛选',
+            name: 'filter',
+            render: (ref) => {
+              return (
+                <CustomFilter
+                  typeCode={typeCode as ProductType}
+                  excludes={config?.tab?.map((item) => item.name)}
+                  onOk={(v) => {
+                    setSubFilterValue(v);
+                    ref.current?.toggle(false);
+                  }}
+                  onReset={() => {
+                    setSubFilterValue(undefined);
+                    ref.current?.toggle(false);
+                  }}
+                />
+              );
+            },
           },
         ]}
+        value={tabFilterValue}
+        onChange={(v) => {
+          setTabFilterValue(v);
+        }}
       />
       <View className={styles.body}>
         <List
           actionRef={actionRef}
           request={getMarket}
-          params={{
-            status: MarketProductStatus['在售'],
-            typeCode,
-            description: keyword,
-          }}
+          params={params}
           renderItem={(item) => (
             <Product.Card
               key={item.id}

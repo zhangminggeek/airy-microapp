@@ -2,6 +2,8 @@ import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
+import type { ProductBizData } from '@/interfaces/product';
+
 import { getPurchaseId, getTag, postPurchase, putPurchase } from '@/api';
 import {
   FormSection,
@@ -20,7 +22,7 @@ import { PurchaseMethod, purchaseMethodMap } from '@/constants/purchase';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { isNil, RouterUtil, Toast } from '@/utils';
+import { isNil, parseJson, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -53,7 +55,6 @@ const Page = () => {
         picList,
         typeCode,
         brand,
-        fieldList,
         wantBuy,
         wantLease,
         minPrice,
@@ -61,6 +62,7 @@ const Page = () => {
         minLeasePrice,
         maxLeasePrice,
         tagList,
+        bizData,
       } = data;
       setCurrentTypeCode(typeCode);
       const method: PurchaseMethod[] = [];
@@ -82,7 +84,7 @@ const Page = () => {
         leasePrice: [minLeasePrice, maxLeasePrice],
         tagIdList: tagList?.map((item) => item.id),
       };
-      fieldList?.forEach((item) => {
+      parseJson<ProductBizData>(bizData, [])?.forEach((item) => {
         ret[item.fieldKey] = item.fieldValue;
       });
       form.setFieldsValue(ret);

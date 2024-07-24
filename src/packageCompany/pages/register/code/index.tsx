@@ -24,11 +24,12 @@ const Page = () => {
 
   const { time, countdowning, startCountdown } = useCountdown();
 
+  const info = parseJson<CompanyInfo>(
+    Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
+    undefined,
+  );
+
   useDidShow(() => {
-    const info = parseJson<CompanyInfo>(
-      Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
-      undefined,
-    );
     setPhone(info?.contactPhone);
     getCode({ account: info?.contactPhone });
   });
@@ -83,6 +84,9 @@ const Page = () => {
         size="xlarge"
         disabled={countdowning}
         block
+        onClick={() => {
+          getCode({ account: info?.contactPhone });
+        }}
       >
         重新获取
       </Button>

@@ -4,21 +4,27 @@ import { Fragment, useState } from 'react';
 import styles from './index.module.scss';
 import Option from './Option';
 
-import type { FC } from 'react';
-
 import { Icon } from '@/components';
 
-interface OptionType {
+interface OptionType<V extends number | string> {
   label: string;
-  value: string;
+  value: V;
   pic: string;
 }
 
-interface MainFilterProps {
-  options: OptionType[];
+interface MainFilterProps<V extends number | string> {
+  options: Array<OptionType<V>>;
+  value?: V;
+  onChange?: (value: V) => void;
 }
 
-const MainFilter: FC<MainFilterProps> = ({ options }) => {
+const SIMPLE_SIZE = 5;
+
+const MainFilter = <V extends string | number = number>({
+  options,
+  value,
+  onChange,
+}: MainFilterProps<V>) => {
   // 是否折叠
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
@@ -26,22 +32,45 @@ const MainFilter: FC<MainFilterProps> = ({ options }) => {
     <View className={styles.filter}>
       {collapsed ? (
         <View className={styles.simple}>
-          <View>collapsed</View>
-          <View
-            onClick={() => {
-              setCollapsed(false);
-            }}
-          >
-            全部
-            <Icon name="DoubleDownOutlined" />
+          <View className={styles['option-group']}>
+            {options?.slice(0, SIMPLE_SIZE)?.map((item) => (
+              <Option
+                key={item.label}
+                label={item.label}
+                pic={item.pic}
+                active={item.value === value}
+                onClick={() => {
+                  onChange?.(item.value);
+                }}
+              />
+            ))}
           </View>
+          {options?.length > SIMPLE_SIZE ? (
+            <View
+              className={styles['simple-btn']}
+              onClick={() => {
+                setCollapsed(false);
+              }}
+            >
+              全部
+              <Icon name="DoubleDownOutlined" size={12} />
+            </View>
+          ) : null}
         </View>
       ) : (
         <Fragment>
           <View className={styles.full}>
             <View className={styles['full-content']}>
               {options.map((item) => (
-                <Option label={item.label} pic={item.pic} />
+                <Option
+                  key={item.label}
+                  label={item.label}
+                  pic={item.pic}
+                  active={item.value === value}
+                  onClick={() => {
+                    onChange?.(item.value);
+                  }}
+                />
               ))}
             </View>
             <View
@@ -51,7 +80,7 @@ const MainFilter: FC<MainFilterProps> = ({ options }) => {
               }}
             >
               点击收起
-              <Icon name="DoubleUpOutlined" />
+              <Icon name="DoubleUpOutlined" size={12} />
             </View>
           </View>
           <View className={styles.mark} />

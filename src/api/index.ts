@@ -176,6 +176,10 @@ export interface GetPurchaseResponse {
      */
     size?: number
     /**
+     * 其他信息字段
+     */
+    bizData?: string
+    /**
      * 状态 1:审核中 2:求购中 3:已完成 4:审核不通过
      */
     status: number
@@ -329,19 +333,11 @@ export interface PostPurchaseRequest {
    */
   fieldList?: {
     /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 求购id
-     */
-    purchaseId: number
-    /**
-     * 字段key
+     * 字段键名
      */
     fieldKey: string
     /**
-     * 字段的值(该字段选项的id)
+     * 字段键值
      */
     fieldValue: string
   }[]
@@ -433,19 +429,11 @@ export interface PutPurchaseRequest {
    */
   fieldList?: {
     /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 求购id
-     */
-    purchaseId: number
-    /**
-     * 字段key
+     * 字段键名
      */
     fieldKey: string
     /**
-     * 字段的值(该字段选项的id)
+     * 字段键值
      */
     fieldValue: string
   }[]
@@ -583,6 +571,10 @@ export interface GetPurchaseSelfResponse {
      * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
      */
     size?: number
+    /**
+     * 其他信息字段
+     */
+    bizData?: string
     /**
      * 状态 1:审核中 2:求购中 3:已完成 4:审核不通过
      */
@@ -792,24 +784,7 @@ export interface GetPurchaseIdResponse {
   /**
    * 字段信息
    */
-  fieldList?: {
-    /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 求购id
-     */
-    purchaseId: number
-    /**
-     * 字段key
-     */
-    fieldKey: string
-    /**
-     * 字段的值(该字段选项的id)
-     */
-    fieldValue: string
-  }[]
+  bizData?: string
   /**
    * 报价
    */
@@ -1304,6 +1279,10 @@ export interface GetOrderBoughtResponse {
          */
         leaseCount: number
         /**
+         * 其他信息字段
+         */
+        bizData?: string
+        /**
          * 公司id
          */
         companyId: number
@@ -1596,6 +1575,10 @@ export interface GetOrderSoldResponse {
          * 租赁次数
          */
         leaseCount: number
+        /**
+         * 其他信息字段
+         */
+        bizData?: string
         /**
          * 公司id
          */
@@ -2417,6 +2400,10 @@ export interface GetOrderIdResponse {
        */
       leaseCount: number
       /**
+       * 其他信息字段
+       */
+      bizData?: string
+      /**
        * 公司id
        */
       companyId: number
@@ -3158,49 +3145,6 @@ export const putCompany = /*#__PURE__*/ (requestData: PutCompanyRequest, ...args
 }
 
 putCompany.requestConfig = putCompanyRequestConfig
-
-export interface PostCompanyAuditRequest {
-  /**
-   * 公司id
-   */
-  id: number
-  /**
-   * 审核结果, 0:不通过 1:通过
-   */
-  status: number
-}
-
-export type PostCompanyAuditResponse = any
-
-type PostCompanyAuditRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/audit', 'data', string, string, false>
->
-
-const postCompanyAuditRequestConfig: PostCompanyAuditRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/company/audit',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postCompanyAudit',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postCompanyAudit = /*#__PURE__*/ (requestData: PostCompanyAuditRequest, ...args: UserRequestRestArgs) => {
-  return request<PostCompanyAuditResponse>(prepare(postCompanyAuditRequestConfig, requestData), ...args)
-}
-
-postCompanyAudit.requestConfig = postCompanyAuditRequestConfig
 
 export interface GetCompanyPaymentRequest {}
 
@@ -5611,6 +5555,10 @@ export type GetProductResponse = {
    */
   leaseCount: number
   /**
+   * 其他信息字段
+   */
+  bizData?: string
+  /**
    * 服饰状态 1:正常 2:已售出 3:借调中
    */
   status: number
@@ -5693,19 +5641,11 @@ export interface PostProductRequest {
    */
   fieldList?: {
     /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 字段key
+     * 字段键名
      */
     fieldKey: string
     /**
-     * 字段的值(该字段选项的id)
+     * 字段键值
      */
     fieldValue: string
   }[]
@@ -5781,19 +5721,11 @@ export interface PutProductRequest {
    */
   fieldList?: {
     /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 字段key
+     * 字段键名
      */
     fieldKey: string
     /**
-     * 字段的值(该字段选项的id)
+     * 字段键值
      */
     fieldValue: string
   }[]
@@ -6070,6 +6002,10 @@ export interface GetProductIdResponse {
    */
   status: number
   /**
+   * 其他信息字段
+   */
+  bizData?: string
+  /**
    * 图片
    */
   picList: {
@@ -6119,27 +6055,6 @@ export interface GetProductIdResponse {
        */
       use: number
     }
-  }[]
-  /**
-   * 其他字段信息
-   */
-  fieldList: {
-    /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 字段key
-     */
-    fieldKey: string
-    /**
-     * 字段的值(该字段选项的id)
-     */
-    fieldValue: string
   }[]
 }
 
@@ -6264,6 +6179,10 @@ export interface GetMarketRequest {
    * 排序方式 1:最新发布 2:最多收藏
    */
   order?: string
+  /**
+   * 筛选项
+   */
+  filterStr?: string
 }
 
 export interface GetMarketResponse {
@@ -6450,7 +6369,7 @@ type GetMarketRequestConfig = Readonly<
     '/market',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'title' | 'productTypeCode' | 'companyId' | 'status' | 'order',
+    'pageNum' | 'pageSize' | 'title' | 'productTypeCode' | 'companyId' | 'status' | 'order' | 'filterStr',
     false
   >
 >
@@ -6466,7 +6385,7 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_10,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'title', 'productTypeCode', 'companyId', 'status', 'order'],
+  queryNames: ['pageNum', 'pageSize', 'title', 'productTypeCode', 'companyId', 'status', 'order', 'filterStr'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
@@ -7167,19 +7086,11 @@ export interface PostMarketAndProductRequest {
    */
   fieldList?: {
     /**
-     * 选项id
-     */
-    id: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 字段key
+     * 字段键名
      */
     fieldKey: string
     /**
-     * 字段的值(该字段选项的id)
+     * 字段键值
      */
     fieldValue: string
   }[]
@@ -7396,6 +7307,10 @@ export interface GetMarketIdResponse {
      */
     status: number
     /**
+     * 其他信息字段
+     */
+    bizData?: string
+    /**
      * 图片
      */
     picList: {
@@ -7445,27 +7360,6 @@ export interface GetMarketIdResponse {
          */
         use: number
       }
-    }[]
-    /**
-     * 其他字段信息
-     */
-    fieldList: {
-      /**
-       * 选项id
-       */
-      id: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 字段key
-       */
-      fieldKey: string
-      /**
-       * 字段的值(该字段选项的id)
-       */
-      fieldValue: string
     }[]
   }
   /**

@@ -3,7 +3,11 @@
 .m-filter {
   height: 92px;
 
-  &-panel {
+  &-item {
+    .nut-menu-container-content {
+      max-height: 880px;
+    }
+
     .nut-menu-container-item {
       flex-direction: row-reverse;
 
@@ -19,6 +23,12 @@
         .m-icon {
           color: $color-primary;
         }
+      }
+    }
+
+    &-custom {
+      .nut-menu-container-content {
+        padding: 0;
       }
     }
   }

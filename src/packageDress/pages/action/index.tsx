@@ -2,6 +2,8 @@ import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { useRouter } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
+import type { ProductBizData } from '@/interfaces/product';
+
 import { getProductId, getTag, postProduct, putProduct } from '@/api';
 import { FormSection, Picker, Product, TagChecker, Upload } from '@/components';
 import {
@@ -12,7 +14,7 @@ import {
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { isNil, RouterUtil } from '@/utils';
+import { isNil, parseJson, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -43,7 +45,7 @@ const Page = () => {
         brand,
         typeCode,
         size,
-        fieldList,
+        bizData,
         tagList,
         description,
       } = data;
@@ -57,7 +59,7 @@ const Page = () => {
         tagIdList: tagList.map((item) => item.tagId),
         description,
       };
-      fieldList.forEach((item) => {
+      parseJson<ProductBizData>(bizData, []).forEach((item) => {
         formData[item.fieldKey] = item.fieldValue;
       });
       form.setFieldsValue(formData);

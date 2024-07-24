@@ -6,7 +6,6 @@ import type { Option } from '@/components/Descriptions';
 import type { CSSProperties, FC } from 'react';
 
 import { Descriptions, Section } from '@/components';
-import { productSizeMap } from '@/constants/product';
 
 import './index.scss';
 
@@ -30,7 +29,7 @@ const Field: FC<FieldProps> = ({ className, style, fieldList = [], data }) => {
         options={[
           { field: 'no', label: '编号', col: 2 },
           { field: 'productTypeName', label: '类型' },
-          { field: 'size', label: '尺码', enums: productSizeMap },
+          { field: 'size', label: '尺码' },
           ...fieldList,
         ]}
         data={data}

@@ -60,6 +60,8 @@ const ProductDetail: FC<ProductDetailProps> = ({
     }));
   }, [typeCode]);
 
+  console.log('fieldData', fieldData);
+
   return (
     <View className={classnames(PREFIX_CLS, className)} style={style}>
       <PictureGroup images={images} />

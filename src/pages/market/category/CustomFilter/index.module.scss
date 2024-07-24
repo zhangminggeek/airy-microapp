@@ -1,0 +1,20 @@
+@import '../../../../styles/var.scss';
+
+.wrapper {
+  .body {
+    padding: 32px 48px;
+
+    .field {
+      & + .field {
+        margin-top: 48px;
+      }
+
+      &-title {
+        font-size: $font-size-base;
+        color: $text-color-main;
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}

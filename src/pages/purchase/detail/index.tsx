@@ -6,6 +6,8 @@ import dayjs from 'dayjs';
 import styles from './index.module.scss';
 import PriceItem from './PriceItem';
 
+import type { ProductBizData } from '@/interfaces/product';
+
 import { getPurchaseId } from '@/api';
 import { Company, Footer, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
@@ -20,7 +22,7 @@ import {
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { isNil, RouterUtil } from '@/utils';
+import { isNil, parseJson, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -66,7 +68,7 @@ const Page = () => {
               </View>
             </View>
           ) : null}
-          {data?.fieldList?.map((item) => {
+          {parseJson<ProductBizData>(data?.bizData, [])?.map((item) => {
             const field = productInfoFieldMap
               .get(data?.typeCode as ProductType)
               ?.get(item.fieldKey as ProductFiledKey);
@@ -74,7 +76,7 @@ const Page = () => {
               (i) => i.value === item.fieldValue,
             )?.text;
             return (
-              <View className={styles['field-item']} key={item.id}>
+              <View className={styles['field-item']} key={item.fieldKey}>
                 <View className={styles['field-item-label']}>
                   {field?.name}
                 </View>

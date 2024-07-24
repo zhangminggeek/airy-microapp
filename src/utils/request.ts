@@ -31,7 +31,7 @@ function formatPath(path: string, method: Method) {
 }
 
 // 不处理错误的接口列表
-const NOT_DEAL_ERROR_URLS = ['GET /user/self'];
+const NOT_DEAL_ERROR_URLS = ['GET /user/self', 'POST /account/login/wechat'];
 
 const request = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;
@@ -92,7 +92,7 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
       path: url,
       data: removeNilKey(data),
       header: {
-        'X-WX-SERVICE': 'prod',
+        'X-WX-SERVICE': 'airy-service',
         'content-type': 'application/json', // 默认值
         token: Taro.getStorageSync(StorageKey.TOKEN),
       },

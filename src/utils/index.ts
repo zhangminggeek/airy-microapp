@@ -90,7 +90,7 @@ export const decode = (encryptedPwd: string, salt: string) => {
  * @param defaultData 解析失败的默认值
  * @returns json 对象
  */
-export const parseJson = <T>(data: string, defaultData: T = {} as any): T => {
+export const parseJson = <T>(data?: string, defaultData: T = {} as any): T => {
   try {
     return data ? JSON.parse(data) : defaultData;
   } catch (err) {

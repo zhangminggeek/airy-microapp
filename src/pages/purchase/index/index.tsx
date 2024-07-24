@@ -8,7 +8,6 @@ import type { ActionType } from '@/components/List';
 
 import { getPurchase } from '@/api';
 import { Filter, InputSearch, List, Product } from '@/components';
-import { IGNORE_VALUE } from '@/components/Filter';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { PurchaseStatus } from '@/constants/purchase';
@@ -51,11 +50,7 @@ const Page = () => {
           {
             name: 'typeCode',
             title: '类型',
-            options: [
-              { text: '不限', value: IGNORE_VALUE },
-              ...Array.from(productTypeMap.values()),
-            ],
-            defaultValue: IGNORE_VALUE,
+            options: Array.from(productTypeMap.values()),
           },
           {
             name: 'order',

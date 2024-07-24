@@ -6,7 +6,6 @@ import styles from './index.module.scss';
 
 import { getCompanyBalance } from '@/api';
 import { Filter, List } from '@/components';
-import { IGNORE_VALUE } from '@/components/Filter';
 import { DATE_TIME_FORMAT } from '@/constants';
 import { balanceRecordTypeMap } from '@/constants/company';
 import { BasicLayout } from '@/layouts';
@@ -22,11 +21,7 @@ const Page = () => {
           {
             name: 'type',
             title: '类型',
-            options: [
-              { text: '不限', value: IGNORE_VALUE },
-              ...Array.from(balanceRecordTypeMap.values()),
-            ],
-            defaultValue: IGNORE_VALUE,
+            options: Array.from(balanceRecordTypeMap.values()),
           },
         ]}
         value={condition}

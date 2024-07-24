@@ -1,5 +1,38 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
 .filter {
   position: relative;
+
+  .simple {
+    display: flex;
+    align-items: center;
+    height: 176px;
+    background-color: #fff;
+
+    .option-group {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+      padding: 16px 32px;
+    }
+
+    &-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      width: 64px;
+      height: 100%;
+      color: $text-color-base;
+      font-size: $font-size-small;
+      letter-spacing: 8px;
+      writing-mode: vertical-rl;
+      box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.08);
+    }
+  }
 
   .full {
     position: absolute;
@@ -8,6 +41,23 @@
     width: 100%;
     z-index: 1000;
     background-color: #fff;
+    border-radius: 0 0 40px 40px;
+
+    &-content {
+      display: grid;
+      grid-template-columns: repeat(5, 20%);
+      row-gap: 40px;
+      padding: 24px 0;
+    }
+
+    &-btn {
+      @include flex-center;
+      gap: 8px;
+      height: 88px;
+      color: $text-color-base;
+      font-size: $font-size-small;
+      border-top: 2px solid $border-color-base;
+    }
   }
 
   .mark {

@@ -18,11 +18,12 @@ export class WeChatUtil {
           if (code) {
             // 获取用户 openid
             const res = await postAccountLoginWechat({ code });
-            if (!res.data) {
+            if (res.data) {
               Taro.setStorageSync(StorageKey.TOKEN, res.data);
+              resolve(true);
+            } else {
               resolve(false);
             }
-            resolve(true);
           } else {
             Toast.info('微信登录失败, 请稍后重试');
             reject();

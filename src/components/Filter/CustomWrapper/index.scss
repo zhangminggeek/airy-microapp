@@ -1,0 +1,22 @@
+.m-filter-custom-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: 880px;
+
+  &-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 112px;
+    padding: 16px 32px;
+
+    &-btn {
+      width: 330px;
+    }
+  }
+}

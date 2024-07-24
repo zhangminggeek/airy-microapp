@@ -5,6 +5,8 @@ import { useMemo } from 'react';
 
 import styles from './index.module.scss';
 
+import type { ProductBizData } from '@/interfaces/product';
+
 import { getMarketId, postMarketFavorite } from '@/api';
 import { Icon, Product, Space } from '@/components';
 import {
@@ -16,13 +18,14 @@ import { OrderType } from '@/constants/order';
 import {
   ProductFiledKey,
   productInfoFieldMap,
+  productSizeMap,
   ProductType,
   productTypeMap,
 } from '@/constants/product';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { RouterUtil } from '@/utils';
+import { parseJson, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -129,12 +132,15 @@ const Page = () => {
         tagList={data?.product?.tagList?.map((item) => item.tag.name)}
         title={data?.title}
         desc={data?.description}
-        fieldData={data?.product?.fieldList?.reduce(
+        fieldData={parseJson<ProductBizData>(
+          data?.product?.bizData ?? '[]',
+          [],
+        )?.reduce(
           (prev, cur) => {
             const val = productInfoFieldMap
               .get(data?.product?.typeCode as ProductType)
               ?.get(cur.fieldKey as ProductFiledKey)
-              ?.options?.find((item) => item.value)?.text;
+              ?.options?.find((item) => cur.fieldValue === item.value)?.text;
             prev[cur.fieldKey] = val;
             return prev;
           },
@@ -143,7 +149,7 @@ const Page = () => {
             productTypeName: productTypeMap.get(
               data?.product?.typeCode as ProductType,
             )?.text,
-            size: data?.product?.size,
+            size: productSizeMap.get(data?.product?.size)?.text,
           },
         )}
         footer={

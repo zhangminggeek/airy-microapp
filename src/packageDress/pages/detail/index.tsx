@@ -4,11 +4,14 @@ import { useDidShow, useRouter } from '@tarojs/taro';
 
 import styles from './index.module.scss';
 
+import type { ProductBizData } from '@/interfaces/product';
+
 import { deleteProductId, getProductId } from '@/api';
 import { ActionSheet, Product } from '@/components';
 import {
   ProductFiledKey,
   productInfoFieldMap,
+  productSizeMap,
   ProductSource,
   ProductStatus,
   ProductType,
@@ -16,7 +19,7 @@ import {
 } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil, Toast } from '@/utils';
+import { parseJson, RouterUtil, Toast } from '@/utils';
 
 // TODO: 补充历史信息
 const Page = () => {
@@ -29,6 +32,10 @@ const Page = () => {
   // 获取服饰详情
   const { data, run: fetchDetail } = useRequest(getProductId, {
     manual: true,
+    onSuccess(d) {
+      const a = parseJson<ProductBizData>(d?.bizData ?? '', []);
+      console.log(a);
+    },
   });
 
   // 删除服饰
@@ -59,12 +66,12 @@ const Page = () => {
         title={data?.name}
         desc={data?.description}
         extra={`已租${data?.leaseCount ?? 0}次`}
-        fieldData={data?.fieldList?.reduce(
+        fieldData={parseJson<ProductBizData>(data?.bizData ?? '', [])?.reduce(
           (prev, cur) => {
             const val = productInfoFieldMap
               .get(data?.typeCode as ProductType)
               ?.get(cur.fieldKey as ProductFiledKey)
-              ?.options?.find((item) => item.value)?.text;
+              ?.options?.find((item) => item.value === cur.fieldValue)?.text;
             prev[cur.fieldKey] = val;
             return prev;
           },
@@ -72,7 +79,7 @@ const Page = () => {
             no: data?.no,
             productTypeName: productTypeMap.get(data?.typeCode as ProductType)
               ?.text,
-            size: data?.size,
+            size: productSizeMap.get(data?.size)?.text,
           },
         )}
         footer={

@@ -57,9 +57,9 @@ const Page = () => {
               width={52}
               height={52}
               onClick={() => {
-                // RouterUtil.navigateTo('/pages/market/category/index', {
-                //   typeCode: item.value,
-                // });
+                RouterUtil.navigateTo('/pages/market/category/index', {
+                  typeCode: item.value,
+                });
               }}
             />
             <View className={styles['filter-item-label']}>{item.label}</View>
