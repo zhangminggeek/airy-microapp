@@ -7135,28 +7135,24 @@ export const postMarketAndProduct = /*#__PURE__*/ (
 
 postMarketAndProduct.requestConfig = postMarketAndProductRequestConfig
 
-export interface PutMarketStatusRequest {
+export interface PutMarketShelvesOnRequest {
   /**
    * 二手市场出售/借调服饰id
    */
   id: number
-  /**
-   * 状态
-   */
-  status: number
 }
 
-export type PutMarketStatusResponse = any
+export type PutMarketShelvesOnResponse = any
 
-type PutMarketStatusRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/status', 'data', string, string, false>
+type PutMarketShelvesOnRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/shelves/on', 'data', string, string, false>
 >
 
-const putMarketStatusRequestConfig: PutMarketStatusRequestConfig = /*#__PURE__*/ {
+const putMarketShelvesOnRequestConfig: PutMarketShelvesOnRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_10,
   devUrl: devUrl_0_0_0_10,
   prodUrl: prodUrl_0_0_0_10,
-  path: '/market/status',
+  path: '/market/shelves/on',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
@@ -7167,16 +7163,61 @@ const putMarketStatusRequestConfig: PutMarketStatusRequestConfig = /*#__PURE__*/
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'putMarketStatus',
+  requestFunctionName: 'putMarketShelvesOn',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
-export const putMarketStatus = /*#__PURE__*/ (requestData: PutMarketStatusRequest, ...args: UserRequestRestArgs) => {
-  return request<PutMarketStatusResponse>(prepare(putMarketStatusRequestConfig, requestData), ...args)
+export const putMarketShelvesOn = /*#__PURE__*/ (
+  requestData: PutMarketShelvesOnRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutMarketShelvesOnResponse>(prepare(putMarketShelvesOnRequestConfig, requestData), ...args)
 }
 
-putMarketStatus.requestConfig = putMarketStatusRequestConfig
+putMarketShelvesOn.requestConfig = putMarketShelvesOnRequestConfig
+
+export interface PutMarketShelvesOffRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+}
+
+export type PutMarketShelvesOffResponse = any
+
+type PutMarketShelvesOffRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/shelves/off', 'data', string, string, false>
+>
+
+const putMarketShelvesOffRequestConfig: PutMarketShelvesOffRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
+  path: '/market/shelves/off',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_10,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putMarketShelvesOff',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putMarketShelvesOff = /*#__PURE__*/ (
+  requestData: PutMarketShelvesOffRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutMarketShelvesOffResponse>(prepare(putMarketShelvesOffRequestConfig, requestData), ...args)
+}
+
+putMarketShelvesOff.requestConfig = putMarketShelvesOffRequestConfig
 
 export interface GetMarketIdRequest {
   /**

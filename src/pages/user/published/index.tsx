@@ -13,7 +13,8 @@ import {
   deleteMarketAuditId,
   deleteMarketId,
   getMarketMyPublished,
-  putMarketStatus,
+  putMarketShelvesOff,
+  putMarketShelvesOn,
 } from '@/api';
 import { ActionSheet, Affix, List, Product, Space, Tag } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
@@ -48,11 +49,20 @@ const Page = () => {
     return {};
   });
 
-  // 切换上架服饰状态
-  const { run: changeStatus } = useRequest(putMarketStatus, {
+  // 上架
+  const { run: onShelves } = useRequest(putMarketShelvesOn, {
     manual: true,
     onSuccess() {
-      Toast.success('操作成功');
+      Toast.success('上架成功');
+      actionRef.current?.refresh();
+    },
+  });
+
+  // 下架
+  const { run: offShelves } = useRequest(putMarketShelvesOff, {
+    manual: true,
+    onSuccess() {
+      Toast.success('下架成功');
       actionRef.current?.refresh();
     },
   });
@@ -81,10 +91,7 @@ const Page = () => {
       id: 'dialog-take-down',
       content: '确定下架该服饰吗？',
       onConfirm: (_, params) => {
-        changeStatus({
-          id: params.id,
-          status: MarketProductStatus['已下架'],
-        });
+        offShelves({ id: params.id });
       },
     });
 
@@ -168,7 +175,7 @@ const Page = () => {
           key="re-listing"
           size="small"
           onClick={() => {
-            changeStatus({ id: item.id, status: MarketProductStatus['在售'] });
+            onShelves({ id: item.id });
           }}
         >
           重新上架
