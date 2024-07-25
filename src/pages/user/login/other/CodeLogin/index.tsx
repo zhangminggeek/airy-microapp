@@ -51,18 +51,20 @@ const CaptchaLogin: FC<CaptchaLoginProps> = ({
         </Button>
       }
       onFinish={async (values) => {
+        const { account, code } = values;
         if (!hasReadProtocol) {
           Toast.confirm({
             content: '请先阅读并同意《用户隐私协议》和《软件许可使用协议》',
-            confirmText: '确认阅读',
-            cancelText: '取消',
+            confirmText: '同意',
+            cancelText: '不同意',
             success() {
               onReadProtocol?.();
+              run({ account, code });
             },
           });
           return;
         }
-        await run(values);
+        await run({ account, code });
       }}
     >
       <Form.Item

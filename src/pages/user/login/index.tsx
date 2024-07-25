@@ -44,8 +44,8 @@ const Page = () => {
         onClick() {
           Toast.confirm({
             content: '请先阅读并同意《用户隐私协议》和《软件许可使用协议》',
-            confirmText: '确认阅读',
-            cancelText: '取消',
+            confirmText: '同意',
+            cancelText: '不同意',
             success() {
               setHasRead(true);
             },

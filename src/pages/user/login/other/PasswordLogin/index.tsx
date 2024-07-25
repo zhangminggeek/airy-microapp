@@ -37,6 +37,23 @@ const PasswordLogin: FC<PasswordLoginProps> = ({
     },
   });
 
+  const handleLogin = async ({
+    account,
+    password,
+  }: {
+    account: string;
+    password: string;
+  }) => {
+    try {
+      const oldSalt = (await getAccountSaltAccount({ account })).data;
+      const newSalt = (await getAccountSalt()).data;
+      const pwd = encode(password, oldSalt);
+      await run({ account, password: pwd, salt: newSalt });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Form
       className={classnames('form-large', styles.form)}
@@ -48,26 +65,20 @@ const PasswordLogin: FC<PasswordLoginProps> = ({
         </Button>
       }
       onFinish={async (values) => {
+        const { account, password } = values;
         if (!hasReadProtocol) {
           Toast.confirm({
             content: '请先阅读并同意《用户隐私协议》和《软件许可使用协议》',
-            confirmText: '确认阅读',
-            cancelText: '取消',
+            confirmText: '同意',
+            cancelText: '不同意',
             success() {
               onReadProtocol?.();
+              handleLogin({ account, password });
             },
           });
           return;
         }
-        const { account, password } = values;
-        try {
-          const oldSalt = (await getAccountSaltAccount({ account })).data;
-          const newSalt = (await getAccountSalt()).data;
-          const pwd = encode(password, oldSalt);
-          await run({ account, password: pwd, salt: newSalt });
-        } catch (err) {
-          console.log(err);
-        }
+        handleLogin({ account, password });
       }}
     >
       <Form.Item
