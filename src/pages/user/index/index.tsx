@@ -13,7 +13,7 @@ import { Avatar, Icon, Section, Space } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { RouterUtil } from '@/utils';
+import { EventUtil, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
@@ -24,8 +24,13 @@ const Page = () => {
     }
   });
 
+  EventUtil.useEvents(EventUtil.EventsKey.LOGOUT, () => {
+    // 监听退出事件，清空数据，
+    mutate(undefined);
+  });
+
   // 获取公司信息
-  const { data, run } = useRequest(getCompanySelf, { manual: true });
+  const { data, mutate, run } = useRequest(getCompanySelf, { manual: true });
 
   return (
     <BasicLayout
@@ -53,14 +58,10 @@ const Page = () => {
         <View className={styles['account-header']}>
           <AmountItem
             title={
-              <Space>
+              <Space size={32}>
                 余额(元)
-                <Button
-                  className={styles['balance-btn']}
-                  rightIcon={
-                    <Icon name="RightOutlined" size={14} color="#c7c7c7" />
-                  }
-                  fill="none"
+                <Space
+                  size={4}
                   onClick={() => {
                     RouterUtil.navigateTo(
                       '/packageCompany/pages/balance/index',
@@ -68,7 +69,8 @@ const Page = () => {
                   }}
                 >
                   明细
-                </Button>
+                  <Icon name="RightOutlined" size={14} color="#c7c7c7" />
+                </Space>
               </Space>
             }
             fontSize={28}

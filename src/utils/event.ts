@@ -5,7 +5,7 @@ const globalEvent = new Events();
 
 // 通知事件key
 export enum EventsKey {
-  ORGANIZATION_CHANGE = 'organization_change',
+  LOGOUT = 'logout',
 }
 
 // 监听和关闭事件的hooks

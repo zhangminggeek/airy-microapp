@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { BaseResponse } from '@/interfaces/base';
+import type { Dispatch, SetStateAction } from 'react';
 
 export type FunctionType<P, R> = (params: P) => Promise<BaseResponse<R>>;
 
@@ -19,6 +20,7 @@ interface BaseOpionsWithFormat<P, R, U, UU extends U>
 interface RequestResponse<P, R> {
   loading: boolean;
   data: R;
+  mutate: Dispatch<SetStateAction<any>>;
   run: (params?: P) => Promise<BaseResponse<R>>;
 }
 
@@ -69,6 +71,7 @@ export function useRequest(
   return {
     loading,
     data,
+    mutate: setData,
     run,
   };
 }

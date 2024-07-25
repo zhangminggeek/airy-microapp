@@ -99,6 +99,7 @@ export default {
   },
   tabBar: {
     selectedColor: COLOR_PRIMARY,
+    color: '#959595',
     list: [
       {
         pagePath: 'pages/market/index/index',
