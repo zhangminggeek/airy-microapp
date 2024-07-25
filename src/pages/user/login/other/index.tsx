@@ -35,10 +35,20 @@ const Page = () => {
       <View className={styles.body}>
         <Tabs className={styles.tabs}>
           <Tabs.TabPane title="密码登录">
-            <PasswordLogin hasReadProtocol={hasRead} />
+            <PasswordLogin
+              hasReadProtocol={hasRead}
+              onReadProtocol={() => {
+                setHasRead(true);
+              }}
+            />
           </Tabs.TabPane>
           <Tabs.TabPane title="验证码登录">
-            <CodeLogin hasReadProtocol={hasRead} />
+            <CodeLogin
+              hasReadProtocol={hasRead}
+              onReadProtocol={() => {
+                setHasRead(true);
+              }}
+            />
           </Tabs.TabPane>
         </Tabs>
         <View className={styles.protocol}>

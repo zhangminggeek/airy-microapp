@@ -42,7 +42,14 @@ const Page = () => {
     if (!hasRead) {
       return {
         onClick() {
-          Toast.info('请先阅读并同意《用户隐私协议》和《软件许可使用协议》');
+          Toast.confirm({
+            content: '请先阅读并同意《用户隐私协议》和《软件许可使用协议》',
+            confirmText: '确认阅读',
+            cancelText: '取消',
+            success() {
+              setHasRead(true);
+            },
+          });
           return;
         },
       };

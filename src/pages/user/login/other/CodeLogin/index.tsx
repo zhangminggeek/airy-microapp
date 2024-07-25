@@ -15,9 +15,13 @@ import { RouterUtil, Toast } from '@/utils';
 
 interface CaptchaLoginProps {
   hasReadProtocol?: boolean;
+  onReadProtocol?: () => void;
 }
 
-const CaptchaLogin: FC<CaptchaLoginProps> = ({ hasReadProtocol }) => {
+const CaptchaLogin: FC<CaptchaLoginProps> = ({
+  hasReadProtocol,
+  onReadProtocol,
+}) => {
   // 手机号
   const [accountValue, setAccountValue] = useState<string>();
   // 登录
@@ -47,7 +51,14 @@ const CaptchaLogin: FC<CaptchaLoginProps> = ({ hasReadProtocol }) => {
       }
       onFinish={async (values) => {
         if (!hasReadProtocol) {
-          Toast.info('请先阅读并同意《用户隐私协议》和《软件许可使用协议》');
+          Toast.confirm({
+            content: '请先阅读并同意《用户隐私协议》和《软件许可使用协议》',
+            confirmText: '确认阅读',
+            cancelText: '取消',
+            success() {
+              onReadProtocol?.();
+            },
+          });
           return;
         }
         await run(values);

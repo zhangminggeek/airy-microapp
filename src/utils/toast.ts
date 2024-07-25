@@ -58,7 +58,7 @@ export class Toast {
     success,
     fail,
     showCancel,
-    confirmColor = '#003C43',
+    confirmColor = '#f76793',
     ...rest
   }: Taro.showModal.Option) {
     Taro.showModal({
@@ -77,5 +77,3 @@ export class Toast {
     });
   }
 }
-
-// export default Toast;

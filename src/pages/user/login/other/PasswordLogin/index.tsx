@@ -14,9 +14,13 @@ import { encode, RouterUtil, Toast } from '@/utils';
 
 interface PasswordLoginProps {
   hasReadProtocol?: boolean;
+  onReadProtocol?: () => void;
 }
 
-const PasswordLogin: FC<PasswordLoginProps> = ({ hasReadProtocol }) => {
+const PasswordLogin: FC<PasswordLoginProps> = ({
+  hasReadProtocol,
+  onReadProtocol,
+}) => {
   // 登录
   const { run } = useRequest(postAccountLogin, {
     manual: true,
@@ -44,7 +48,14 @@ const PasswordLogin: FC<PasswordLoginProps> = ({ hasReadProtocol }) => {
       }
       onFinish={async (values) => {
         if (!hasReadProtocol) {
-          Toast.info('请先阅读并同意《用户隐私协议》和《软件许可使用协议》');
+          Toast.confirm({
+            content: '请先阅读并同意《用户隐私协议》和《软件许可使用协议》',
+            confirmText: '确认阅读',
+            cancelText: '取消',
+            success() {
+              onReadProtocol?.();
+            },
+          });
           return;
         }
         const { account, password } = values;
