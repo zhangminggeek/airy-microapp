@@ -19,6 +19,7 @@ export class RouterUtil {
     '/pages/market/detail/index',
     '/pages/purchase/index/index',
     '/pages/purchase/detail/index',
+    '/pages/user/index/index',
   ];
 
   /**

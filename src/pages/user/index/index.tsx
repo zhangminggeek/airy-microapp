@@ -8,14 +8,20 @@ import IconItem from './IconItem';
 import styles from './index.module.scss';
 
 import { getCompanySelf } from '@/api';
+import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, Section, Space } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
+  const { info } = useUserStore((state) => state);
+
   useDidShow(() => {
-    run();
+    if (info?.company) {
+      run();
+    }
   });
 
   // 获取公司信息
@@ -30,8 +36,13 @@ const Page = () => {
             RouterUtil.navigateTo('/packageCompany/pages/setting/index');
           }}
         >
-          <Avatar src={data?.logo} name={data?.name} size="32" />
-          <Text>{data?.name}</Text>
+          <Avatar
+            src={data?.logo}
+            name={data?.name}
+            defaultImage={ImageLogo}
+            size="32"
+          />
+          <Text>{data?.name ?? '登录/注册'}</Text>
           <Icon name="RightOutlined" size={16} />
         </Space>
       }
