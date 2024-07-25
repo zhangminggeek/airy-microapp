@@ -29,7 +29,7 @@ const Page = () => {
   usePullDownRefresh(async () => {
     await actionRef.current?.refresh({
       status: MarketProductStatus['在售'],
-      description: keyword,
+      title: keyword,
       order: tabs[currentIndex].value,
     });
     stopPullDownRefresh();
@@ -84,7 +84,7 @@ const Page = () => {
           request={getMarket}
           params={{
             status: MarketProductStatus['在售'],
-            description: keyword,
+            title: keyword,
             order: tabs[currentIndex].value,
           }}
           renderItem={(item) => (

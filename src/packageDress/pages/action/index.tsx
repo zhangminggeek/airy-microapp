@@ -52,14 +52,15 @@ const Page = () => {
         picList: picList.map((item) => item.url),
         no,
         brand,
-        typeCode,
-        size,
+        typeCode: [typeCode],
+        size: [size],
         tagIdList: tagList.map((item) => item.tagId),
         description,
       };
       parseJson<ProductBizData>(bizData, []).forEach((item) => {
         formData[item.fieldKey] = [item.fieldValue];
       });
+      console.log('formData', formData);
       form.setFieldsValue(formData);
       setCurrentCode(typeCode as ProductType);
     },

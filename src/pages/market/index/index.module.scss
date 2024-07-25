@@ -12,8 +12,9 @@
     display: grid;
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: repeat(2, 1fr);
-    background-color: #fff;
     padding: 8px 0;
+    border-radius: 24px;
+    background-color: #fff;
 
     &-item {
       display: flex;
@@ -36,6 +37,14 @@
     :global {
       .nut-tabs-titles {
         background-color: transparent;
+
+        &-item {
+          padding: 0;
+
+          & + .nut-tabs-titles-item {
+            margin-left: 48px;
+          }
+        }
       }
     }
   }

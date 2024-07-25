@@ -48,8 +48,8 @@ const Page = () => {
 
     return {
       status: MarketProductStatus['在售'],
-      typeCode,
-      description: keyword,
+      productTypeCode: typeCode,
+      title: keyword,
       order,
       filterStr: filter?.length ? JSON.stringify(filter) : undefined,
     };

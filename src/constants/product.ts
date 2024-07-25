@@ -492,6 +492,7 @@ export enum ProductStatus {
   '上架中' = 2,
   '已售出' = 3,
   '借调中' = 4,
+  '下架中' = 5,
 }
 
 export const productStatusMap = new Map([
