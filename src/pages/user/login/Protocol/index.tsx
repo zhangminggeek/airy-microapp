@@ -16,26 +16,27 @@ interface ProtocolProps {
 
 const Protocol: FC<ProtocolProps> = ({ className, value, onChange }) => {
   return (
-    <Checkbox
-      className={classnames(styles.protocol, className)}
-      style={{ '--nut-icon-width': '16px' } as CSSProperties}
-      label={
-        <View>
-          已阅读并同意
-          <Link to="/packagePlatform/pages/protocol/privacy/index">
-            《用户隐私协议》
-          </Link>
-          和
-          <Link to="/packagePlatform/pages/protocol/software/index">
-            《软件许可使用协议》
-          </Link>
-        </View>
-      }
-      checked={value}
-      onChange={(val) => {
-        onChange?.(val);
-      }}
-    />
+    <View className={classnames(styles.protocol, className)}>
+      <Checkbox
+        style={{ '--nut-icon-width': '16px' } as CSSProperties}
+        label={
+          <View>
+            我已阅读并同意
+            <Link to="/packagePlatform/pages/protocol/privacy/index">
+              《用户隐私协议》
+            </Link>
+            和
+            <Link to="/packagePlatform/pages/protocol/software/index">
+              《软件许可使用协议》
+            </Link>
+          </View>
+        }
+        checked={value}
+        onChange={(val) => {
+          onChange?.(val);
+        }}
+      />
+    </View>
   );
 };
 

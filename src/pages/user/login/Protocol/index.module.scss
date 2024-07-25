@@ -1,6 +1,9 @@
 @import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
 
 .protocol {
+  @include flex-center;
+
   :global {
     .m-link {
       font-size: $font-size-small;
