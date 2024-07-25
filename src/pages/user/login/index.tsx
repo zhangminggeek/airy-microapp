@@ -1,6 +1,6 @@
 import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import Taro, { useDidShow } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
 
@@ -18,13 +18,6 @@ import { RouterUtil, Toast, WeChatUtil } from '@/utils';
 const Page = () => {
   // 是否已阅读协议
   const [hasRead, setHasRead] = useState<boolean>(false);
-  // 是否通过微信静默登录
-  const [hasLogined, setHasLogined] = useState<boolean>(false);
-
-  useDidShow(async () => {
-    const res = await WeChatUtil.loginForWeChat();
-    setHasLogined(res);
-  });
 
   // 微信授权手机号登录
   const { run } = useRequest(postAccountLoginWechatPhone, {
@@ -55,22 +48,16 @@ const Page = () => {
       };
     }
 
-    return hasLogined
-      ? {
-          onClick() {
-            RouterUtil.navigateTo('/pages/security/index');
-          },
+    return {
+      'open-type': 'getPhoneNumber',
+      onGetPhoneNumber(e) {
+        const { code } = e.detail;
+        if (code) {
+          run({ code });
         }
-      : {
-          'open-type': 'getPhoneNumber',
-          onGetPhoneNumber(e) {
-            const { code } = e.detail;
-            if (code) {
-              run({ code: e.detail.code });
-            }
-          },
-        };
-  }, [hasRead, hasLogined]);
+      },
+    };
+  }, [hasRead]);
 
   return (
     <BasicLayout className={styles.container} fill transparent>
