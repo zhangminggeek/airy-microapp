@@ -10,7 +10,7 @@ interface SpaceProps {
   children?: ReactNode;
   direction?: 'horizontal' | 'vertical';
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between';
-  align?: 'start' | 'end' | 'center' | 'baseline';
+  align?: 'flex-start' | 'flex-end' | 'center' | 'baseline';
   size?: number;
   wrap?: boolean;
   block?: boolean;

@@ -22,6 +22,7 @@ import {
   ProductType,
   productTypeMap,
 } from '@/constants/product';
+import { COLOR_PRIMARY, TEXT_COLOR_BASE } from '@/constants/theme';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
@@ -156,24 +157,34 @@ const Page = () => {
           info?.companyId !== data?.companyId ? (
             <View className={styles.footer}>
               <Space size={20}>
-                <Icon
-                  name={data?.isFavorited ? 'LoveFilled' : 'LoveOutlined'}
-                  type={data?.isFavorited ? 'primary' : 'default'}
-                  title="收藏"
+                <Button
+                  className={styles['icon-btn']}
+                  fill="none"
+                  shape="square"
+                  onClick={() => {
+                    RouterUtil.navigateTo('/packageCompany/pages/index/index', {
+                      id: data?.companyId,
+                    });
+                  }}
+                >
+                  <Icon name="ShopOutlined" title="店铺" />
+                </Button>
+                <Button
+                  className={styles['icon-btn']}
+                  fill="none"
+                  shape="square"
                   onClick={() => {
                     toggleFavorite({
                       id: Number(id),
                       isFavorited: !data?.isFavorited,
                     });
                   }}
-                />
-                <Button
-                  className={styles['icon-btn']}
-                  openType="share"
-                  fill="none"
-                  shape="square"
                 >
-                  <Icon name="ShareOneOutlined" title="分享" />
+                  <Icon
+                    name={data?.isFavorited ? 'LoveFilled' : 'LoveOutlined'}
+                    color={data?.isFavorited ? COLOR_PRIMARY : TEXT_COLOR_BASE}
+                    title="收藏"
+                  />
                 </Button>
                 <Button
                   className={styles['icon-btn']}

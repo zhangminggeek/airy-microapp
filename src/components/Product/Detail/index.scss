@@ -26,10 +26,34 @@
       }
     }
 
-    &-tag-group {
+    &-secondary {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px 8px;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+
+      &-tag-group {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 8px;
+      }
+
+      &-share {
+        height: auto;
+        padding: 0;
+
+        &::before {
+          content: none;
+        }
+
+        .nut-button-text {
+          font-size: $font-size-small;
+          color: $text-color-base;
+          font-weight: 400;
+          line-height: 1em;
+        }
+      }
     }
 
     &-title {

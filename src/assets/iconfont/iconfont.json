@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "41215672",
+      "name": "ShopOutlined",
+      "font_class": "ShopOutlined",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
       "icon_id": "16592881",
       "name": "ScanOutlined",
       "font_class": "ScanOutlined",

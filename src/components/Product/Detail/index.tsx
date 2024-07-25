@@ -1,4 +1,4 @@
-import { SafeArea } from '@nutui/nutui-react-taro';
+import { Button, SafeArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useMemo } from 'react';
@@ -12,7 +12,7 @@ import PictureGroup, { type PictureGroupProps } from './PictureGroup';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Space, Tag } from '@/components';
+import { Icon, Space, Tag } from '@/components';
 import { expressMethodMap } from '@/constants/market';
 import { productInfoFieldMap, ProductType } from '@/constants/product';
 
@@ -65,7 +65,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
       <PictureGroup images={images} />
       <View className={`${PREFIX_CLS}-header`}>
         <View className={`${PREFIX_CLS}-header-top`}>
-          <Space size={16}>
+          <Space size={16} align="baseline">
             {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
             {leasePrice ? <LeasePrice value={leasePrice} /> : null}
           </Space>
@@ -73,17 +73,21 @@ const ProductDetail: FC<ProductDetailProps> = ({
             <View className={`${PREFIX_CLS}-header-top-extra`}>{extra}</View>
           ) : null}
         </View>
-        {tagList?.length ? (
-          <View className={`${PREFIX_CLS}-header-tag-group`}>
+        <View className={`${PREFIX_CLS}-header-secondary`}>
+          <View className={`${PREFIX_CLS}-header-secondary-tag-group`}>
             {expressMethod ? (
-              <Tag className={`${PREFIX_CLS}-header-tag`} type="success" plain>
+              <Tag
+                className={`${PREFIX_CLS}-header-secondary-tag`}
+                type="success"
+                plain
+              >
                 {expressMethodMap.get(expressMethod)?.text}
               </Tag>
             ) : null}
-            {tagList.map((item, index) => (
+            {tagList?.map((item, index) => (
               <Tag
                 key={index}
-                className={`${PREFIX_CLS}-header-tag`}
+                className={`${PREFIX_CLS}-header-secondary-tag`}
                 type="primary"
                 plain
               >
@@ -91,7 +95,15 @@ const ProductDetail: FC<ProductDetailProps> = ({
               </Tag>
             ))}
           </View>
-        ) : null}
+          <Button
+            className={`${PREFIX_CLS}-header-secondary-share`}
+            icon={<Icon name="ShareOneOutlined" size={14} />}
+            openType="share"
+            fill="none"
+          >
+            分享
+          </Button>
+        </View>
         <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
         {desc ? (
           <View className={`${PREFIX_CLS}-header-desc`}>{desc}</View>
