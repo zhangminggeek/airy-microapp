@@ -126,6 +126,7 @@ const Upload: FC<UploadProps> = ({
         images={value.map((src) => ({ src }))}
         defaultValue={previewInitNum}
         indicator
+        closeOnContentClick
         onClose={() => {
           setShowPreview(false);
         }}

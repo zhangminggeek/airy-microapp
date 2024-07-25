@@ -1,12 +1,12 @@
-import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { Button, Form, Input } from '@nutui/nutui-react-taro';
+import { View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 
 import styles from './index.module.scss';
 
 import type { CompanyInfo } from './interfaces';
 
-import { Link, RegionPicker, Upload } from '@/components';
+import { RegionPicker, Upload } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
@@ -41,6 +41,7 @@ const Page = () => {
         <Form
           className="form-large"
           labelPosition="left"
+          divider
           footer={
             <Button
               className={styles.btn}
@@ -112,16 +113,7 @@ const Page = () => {
           <Form.Item label="店铺LOGO" name="logo">
             <Upload />
           </Form.Item>
-          <Form.Item label="简介" name="intro">
-            <TextArea maxLength={200} showCount placeholder="一句话介绍店铺" />
-          </Form.Item>
         </Form>
-        <View className={styles.login}>
-          <Text className={styles['login-text']}>已有账号？</Text>
-          <Link className={styles['login-link']} to="/pages/user/login/index">
-            去登录
-          </Link>
-        </View>
       </View>
     </BasicLayout>
   );

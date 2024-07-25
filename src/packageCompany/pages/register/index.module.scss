@@ -5,17 +5,5 @@
 
   .content {
     padding: 0 48px;
-
-    .login {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 80px;
-
-      &-text {
-        font-size: $font-size-base;
-        color: $text-color-secondary;
-      }
-    }
   }
 }

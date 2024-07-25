@@ -41,6 +41,7 @@ const PasswordLogin: FC<PasswordLoginProps> = ({
     <Form
       className={classnames('form-large', styles.form)}
       labelPosition="left"
+      divider
       footer={
         <Button type="primary" formType="submit" size="xlarge" block>
           立即登录
