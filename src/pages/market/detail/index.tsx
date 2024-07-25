@@ -153,6 +153,7 @@ const Page = () => {
             size: productSizeMap.get(data?.product?.size)?.text,
           },
         )}
+        share
         footer={
           info?.companyId !== data?.companyId ? (
             <View className={styles.footer}>

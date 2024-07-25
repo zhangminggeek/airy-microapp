@@ -31,6 +31,7 @@ interface ProductDetailProps {
   title?: string;
   desc?: string;
   fieldData?: FieldProps['data'];
+  share?: boolean;
   extra?: ReactNode;
   footer?: ReactNode;
 }
@@ -49,6 +50,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
   title,
   desc,
   fieldData,
+  share = false,
   extra,
   footer,
 }) => {
@@ -95,14 +97,16 @@ const ProductDetail: FC<ProductDetailProps> = ({
               </Tag>
             ))}
           </View>
-          <Button
-            className={`${PREFIX_CLS}-header-secondary-share`}
-            icon={<Icon name="ShareOneOutlined" size={14} />}
-            openType="share"
-            fill="none"
-          >
-            分享
-          </Button>
+          {share ? (
+            <Button
+              className={`${PREFIX_CLS}-header-secondary-share`}
+              icon={<Icon name="ShareOneOutlined" size={14} />}
+              openType="share"
+              fill="none"
+            >
+              分享
+            </Button>
+          ) : null}
         </View>
         <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
         {desc ? (

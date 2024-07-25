@@ -209,6 +209,12 @@ const Page = () => {
                 Toast.info('请选择借调时间');
                 return;
               }
+              if (
+                leaseDate[1].endOf('d').diff(leaseDate[0].endOf('d'), 'd') >= 7
+              ) {
+                Toast.info('借调时间不允许超过7天');
+                return;
+              }
             }
             setShowPaymentPicker(true);
           }}
