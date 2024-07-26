@@ -1,4 +1,4 @@
-import { Button, Popup, SafeArea } from '@nutui/nutui-react-taro';
+import { Button, Popup } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Big from 'big.js';
 import classnames from 'classnames';
@@ -10,6 +10,7 @@ import type { CSSProperties, FC } from 'react';
 import { getCompanySelf } from '@/api';
 import { Icon } from '@/components';
 import { PaymentType } from '@/constants/company';
+import { COLOR_PRIMARY, COLOR_WECHAT } from '@/constants/theme';
 import { useRequest } from '@/hooks';
 import { isNil, Toast } from '@/utils';
 
@@ -43,14 +44,24 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
   }, [visible]);
 
   // 获取余额
-  const { data, run } = useRequest(getCompanySelf, { manual: true });
+  const { data, run } = useRequest(getCompanySelf, {
+    manual: true,
+    onSuccess(res) {
+      if (Big(amount ?? 0).lte(res?.balance ?? 0)) {
+        // 如果余额足够，优先使用余额支付
+        setPayment(PaymentType['余额']);
+      } else {
+        setPayment(PaymentType['微信支付']);
+      }
+    },
+  });
 
   const options = useMemo(() => {
     return [
       {
         name: '余额',
         icon: 'IncomeFilled',
-        color: '#F76793',
+        color: COLOR_PRIMARY,
         value: PaymentType['余额'],
         desc: data?.balance ?? 0,
         disabled: Big(amount ?? 0).gt(data?.balance ?? 0),
@@ -58,7 +69,7 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
       {
         name: '微信支付',
         icon: 'WechatPayFilled',
-        color: '#00c250',
+        color: COLOR_WECHAT,
         value: PaymentType['微信支付'],
       },
     ];
@@ -149,7 +160,6 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
           确认付款
         </Button>
       </View>
-      <SafeArea position="bottom" />
     </Popup>
   );
 };

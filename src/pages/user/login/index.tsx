@@ -23,9 +23,11 @@ const Page = () => {
   const { run } = useRequest(postAccountLoginWechatPhone, {
     manual: true,
     async onSuccess(data) {
-      const { token, account } = data;
+      const { token, account, bind } = data;
       Taro.setStorageSync(StorageKey.TOKEN, token);
-      await WeChatUtil.bindOpenId(account);
+      if (!bind) {
+        await WeChatUtil.bindOpenId(account);
+      }
       RouterUtil.navigateTo('/pages/security/index');
     },
   });

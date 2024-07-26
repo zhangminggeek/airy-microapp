@@ -3,6 +3,10 @@
 .m-filter {
   height: 92px;
 
+  .nut-menu-bar {
+    box-shadow: none;
+  }
+
   &-item {
     .nut-menu-container-content {
       max-height: 880px;

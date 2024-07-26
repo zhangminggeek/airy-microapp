@@ -56,7 +56,7 @@ const Page = () => {
           onFinish={async (values) => {
             const { region, logo, ...rest } = values;
             const [province, city, area] = region;
-            const params = { ...rest, province, city, area, logo: logo[0] };
+            const params = { ...rest, province, city, area, logo: logo?.[0] };
             // 保存到本地，等后面验证手机号流程通过后使用
             Taro.setStorageSync(
               StorageKey.COMPANY_RESIGTER_INFO,

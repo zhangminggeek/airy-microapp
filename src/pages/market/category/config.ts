@@ -11,7 +11,7 @@ export const filterConfig = new Map([
     ProductType['婚纱'],
     {
       main: {
-        filed: 'material',
+        filed: ProductFiledKey['婚纱-形状'],
         options: [
           {
             label: 'A字裙',
@@ -42,14 +42,18 @@ export const filterConfig = new Map([
       },
       tab: [
         {
-          title: '材质',
+          title: productInfoFieldMap
+            .get(ProductType['婚纱'])
+            ?.get(ProductFiledKey['婚纱-材质'])?.name,
           name: ProductFiledKey['婚纱-材质'],
           options: productInfoFieldMap
             .get(ProductType['婚纱'])
             ?.get(ProductFiledKey['婚纱-材质'])?.options,
         },
         {
-          title: '颜色',
+          title: productInfoFieldMap
+            .get(ProductType['婚纱'])
+            ?.get(ProductFiledKey['婚纱-颜色'])?.name,
           name: ProductFiledKey['婚纱-颜色'],
           options: productInfoFieldMap
             .get(ProductType['婚纱'])
@@ -62,7 +66,7 @@ export const filterConfig = new Map([
     ProductType['礼服'],
     {
       main: {
-        filed: 'color',
+        filed: ProductFiledKey['礼服-颜色'],
         options: [
           {
             label: '红色',
@@ -127,6 +131,51 @@ export const filterConfig = new Map([
           },
         ],
       },
+      tab: [
+        {
+          title: productInfoFieldMap
+            .get(ProductType['礼服'])
+            ?.get(ProductFiledKey['礼服-材质'])?.name,
+          name: ProductFiledKey['礼服-材质'],
+          options: productInfoFieldMap
+            .get(ProductType['礼服'])
+            ?.get(ProductFiledKey['礼服-材质'])?.options,
+        },
+        {
+          title: productInfoFieldMap
+            .get(ProductType['礼服'])
+            ?.get(ProductFiledKey['礼服-形状'])?.name,
+          name: ProductFiledKey['礼服-形状'],
+          options: productInfoFieldMap
+            .get(ProductType['礼服'])
+            ?.get(ProductFiledKey['礼服-形状'])?.options,
+        },
+      ],
+    },
+  ],
+  [
+    ProductType['秀禾'],
+    {
+      tab: [
+        {
+          title: productInfoFieldMap
+            .get(ProductType['秀禾'])
+            ?.get(ProductFiledKey['秀禾-颜色'])?.name,
+          name: ProductFiledKey['秀禾-颜色'],
+          options: productInfoFieldMap
+            .get(ProductType['秀禾'])
+            ?.get(ProductFiledKey['秀禾-颜色'])?.options,
+        },
+        {
+          title: productInfoFieldMap
+            .get(ProductType['秀禾'])
+            ?.get(ProductFiledKey['秀禾-类别'])?.name,
+          name: ProductFiledKey['秀禾-类别'],
+          options: productInfoFieldMap
+            .get(ProductType['秀禾'])
+            ?.get(ProductFiledKey['秀禾-类别'])?.options,
+        },
+      ],
     },
   ],
 ]);

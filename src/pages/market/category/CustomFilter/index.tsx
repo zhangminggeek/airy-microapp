@@ -6,7 +6,12 @@ import styles from './index.module.scss';
 import type { FC } from 'react';
 
 import { Filter, TagChecker } from '@/components';
-import { productInfoFieldMap, ProductType } from '@/constants/product';
+import { expressMethodMap } from '@/constants/market';
+import {
+  productInfoFieldMap,
+  productQualityMap,
+  ProductType,
+} from '@/constants/product';
 
 type ValueType = Record<string, any>;
 
@@ -29,7 +34,7 @@ const CustomFilter: FC<CustomFilterProps> = ({
   const group = useMemo(() => {
     if (!typeCode) return [];
     return Array.from(productInfoFieldMap.get(typeCode)?.entries() ?? [])
-      .filter(([k]) => !excludes.includes(k))
+      ?.filter(([k]) => !excludes.includes(k))
       ?.map(([k, v]) => ({ ...v, field: k }));
   }, [typeCode, excludes]);
 
@@ -67,6 +72,34 @@ const CustomFilter: FC<CustomFilterProps> = ({
             />
           </View>
         ))}
+        <View className={styles.field}>
+          <View className={styles['field-title']}>新旧程度</View>
+          <TagChecker
+            className={styles['field-checker']}
+            options={Array.from(productQualityMap.values())}
+            value={innerValue?.quality}
+            onChange={(v) => {
+              setInnerValue({
+                ...innerValue,
+                quality: v,
+              });
+            }}
+          />
+        </View>
+        <View className={styles.field}>
+          <View className={styles['field-title']}>快递方式</View>
+          <TagChecker
+            className={styles['field-checker']}
+            options={Array.from(expressMethodMap.values())}
+            value={innerValue?.expressMethod}
+            onChange={(v) => {
+              setInnerValue({
+                ...innerValue,
+                expressMethod: v,
+              });
+            }}
+          />
+        </View>
       </View>
     </Filter.CustomWrappwer>
   );

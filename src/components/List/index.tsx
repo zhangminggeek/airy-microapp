@@ -51,8 +51,6 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
 
   const loading = useRef<boolean>(false);
 
-  // 是否正在请求中
-  // const [loading, setLoading] = useState(false);
   // 请求参数
   const [innerParams, setInnerParams] =
     useState<ParamWithoutPaginationParams<P>>();

@@ -1291,7 +1291,7 @@ export interface GetOrderBoughtResponse {
          */
         userId: number
         /**
-         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
          */
         status: number
         /**
@@ -1588,7 +1588,7 @@ export interface GetOrderSoldResponse {
          */
         userId: number
         /**
-         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
          */
         status: number
         /**
@@ -2412,7 +2412,7 @@ export interface GetOrderIdResponse {
        */
       userId: number
       /**
-       * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中
+       * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
        */
       status: number
       /**
@@ -4699,6 +4699,10 @@ export interface PostAccountLoginWechatPhoneResponse {
    * 鉴权凭证
    */
   token: string
+  /**
+   * 是否绑定openid
+   */
+  bind: boolean
 }
 
 type PostAccountLoginWechatPhoneRequestConfig = Readonly<

@@ -5,15 +5,19 @@
 
   &-multicolumn {
     .nut-infinite-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px 0;
+      display: grid;
+      grid-template-columns: repeat(2, calc((100% - 24px) / 2));
+      column-gap: 24px;
+      row-gap: 24px;
     }
   }
 
   &:not(.m-list-fill) {
     padding: 24px;
+
+    .nut-infinite-container {
+      grid-template-columns: repeat(2, 50%);
+    }
   }
 
   .nut-infinite-bottom {

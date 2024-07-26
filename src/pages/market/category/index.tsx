@@ -39,7 +39,7 @@ const Page = () => {
   const params = useMemo(() => {
     const { order, ...restTabFilterValue } = tabFilterValue ?? {};
     const filter = Object.entries({
-      [config?.main.filed ?? '']: mainFilterValue,
+      [config?.main?.filed ?? '']: mainFilterValue,
       ...restTabFilterValue,
       ...subFilterValue,
     })
@@ -110,8 +110,12 @@ const Page = () => {
               return (
                 <CustomFilter
                   typeCode={typeCode as ProductType}
-                  excludes={config?.tab?.map((item) => item.name)}
+                  excludes={[
+                    config?.main?.filed ?? '',
+                    ...(config?.tab?.map((item) => item.name) ?? []),
+                  ].filter((item) => !!item)}
                   onOk={(v) => {
+                    console.log('filter', v);
                     setSubFilterValue(v);
                     ref.current?.toggle(false);
                   }}
