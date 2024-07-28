@@ -38,10 +38,11 @@ const Page = () => {
 
   const params = useMemo(() => {
     const { order, ...restTabFilterValue } = tabFilterValue ?? {};
-    const filter = Object.entries({
+    const { filter, ...restSubFilterValue } = subFilterValue ?? {};
+    const filterArr = Object.entries({
       [config?.main?.filed ?? '']: mainFilterValue,
       ...restTabFilterValue,
-      ...subFilterValue,
+      ...filter,
     })
       .map(([k, v]) => ({ field: k, value: v }))
       .filter((item) => !isNil(item.value));
@@ -51,7 +52,8 @@ const Page = () => {
       productTypeCode: typeCode,
       title: keyword,
       order,
-      filterStr: filter?.length ? JSON.stringify(filter) : undefined,
+      ...restSubFilterValue,
+      filterStr: filterArr?.length ? JSON.stringify(filterArr) : undefined,
     };
   }, [typeCode, keyword, tabFilterValue, subFilterValue]);
 
