@@ -122,13 +122,18 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          const { method, price, leasePrice, picList, ...rest } = values;
+          const { title, method, price, leasePrice, picList, ...rest } = values;
+          if (!title) {
+            Toast.info('请输入求购商品信息');
+            return;
+          }
           if (!picList?.length) {
             Toast.info('请上传求购商品图片');
             return;
           }
           const params = {
             ...rest,
+            title,
             picList,
             wantBuy: !!method?.includes(PurchaseMethod['购买']),
             wantLease: !!method?.includes(PurchaseMethod['借调']),
@@ -165,12 +170,8 @@ const Page = () => {
           <Form.Item name="title" noStyle>
             <TextArea placeholder="描述一下求购商品信息" maxLength={200} />
           </Form.Item>
-          <Form.Item
-            name="picList"
-            noStyle
-            rules={[{ required: true, message: '请上传商品图片' }]}
-          >
-            <Upload placeholder="添加商品图片" maxCount={4} />
+          <Form.Item name="picList" noStyle>
+            <Upload placeholder="添加图片" maxCount={4} />
           </Form.Item>
         </FormSection>
         <FormSection fill>

@@ -1,7 +1,8 @@
-import { Image, ImagePreview } from '@nutui/nutui-react-taro';
+import { Image, ImagePreview, Swiper } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../../constants';
 
@@ -16,8 +17,10 @@ export interface PictureGroupProps {
 }
 
 const PREFIX_CLS = `${ROOT_PREFIX_CLS}-detail-picture-group`;
+const windowWidth = Taro.getSystemInfoSync().windowWidth;
 
 const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
+  const swiperRef = useRef<any>(null);
   // 选中图片列表的索引值
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   // 是否显示大图预览
@@ -25,16 +28,30 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
 
   return (
     <View className={classnames(PREFIX_CLS)}>
-      <Image
-        className={`${PREFIX_CLS}-image`}
-        src={images?.[selectedIndex]}
-        width="100vw"
-        height="100vw"
-        mode="aspectFill"
-        onClick={() => {
-          setShowPreview(true);
+      <Swiper
+        ref={swiperRef}
+        height={windowWidth}
+        indicator
+        loop
+        onChange={(e) => {
+          setSelectedIndex(e.detail.current);
         }}
-      />
+      >
+        {images?.map((url, index) => (
+          <Swiper.Item key={index}>
+            <Image
+              className={`${PREFIX_CLS}-image`}
+              src={url}
+              width="100vw"
+              height="100vw"
+              mode="aspectFill"
+              onClick={() => {
+                setShowPreview(true);
+              }}
+            />
+          </Swiper.Item>
+        ))}
+      </Swiper>
       <ImagePreview
         visible={showPreview}
         images={images?.map((src) => ({ src }))}
@@ -54,6 +71,7 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
               key={index}
               onClick={() => {
                 setSelectedIndex(index);
+                swiperRef.current?.to(index);
               }}
             >
               <Image

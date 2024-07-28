@@ -7,22 +7,35 @@
 
   &-item {
     position: relative;
+    width: 144px;
+    height: 144px;
+    border: 2px solid $border-color-base;
+    border-radius: 8px;
+    overflow: hidden;
 
     &-img {
-      width: 160px;
-      height: 160px;
+      width: 100%;
+      height: 100%;
     }
 
     &-icon {
       position: absolute;
-      right: -16px;
-      top: -16px;
+      right: 0;
+      top: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 2px solid $text-color-base;
-      border-radius: 50%;
-      padding: 6px;
+      width: 32px;
+      height: 32px;
+      border-radius: 0 0 0 32px;
+      background-color: rgba(0, 0, 0, 0.8);
+
+      &-close {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        color: #fff;
+      }
     }
   }
 
@@ -30,22 +43,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 160px;
-    height: 160px;
-    border: 1px dashed $border-color-base;
-    background-color: $background-color-base;
+    width: 144px;
+    height: 144px;
+    border: 2px dashed $border-color-base;
+    border-radius: 8px;
 
     &-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 16px;
+      gap: 8px;
+    }
+
+    &-icon {
+      color: $text-color-secondary;
     }
 
     &-placeholder {
       font-size: $font-size-small;
-      color: $text-color-base;
+      color: $text-color-secondary;
     }
   }
 }

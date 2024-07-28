@@ -1,4 +1,3 @@
-import { Add, Close } from '@nutui/icons-react-taro';
 import { ImagePreview, Loading } from '@nutui/nutui-react-taro';
 import { Image, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -7,6 +6,7 @@ import { useState } from 'react';
 
 import type { CSSProperties, FC } from 'react';
 
+import { Icon } from '@/components';
 import { useUpload } from '@/hooks';
 import { Toast } from '@/utils';
 
@@ -113,11 +113,16 @@ const Upload: FC<UploadProps> = ({
           />
           <View
             className={`${PREFIX_CLS}-item-icon`}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               handleDelete(index);
             }}
           >
-            <Close size={8} color="#4A4A4A" />
+            <Icon
+              className={`${PREFIX_CLS}-item-icon-close`}
+              name="CloseOutlined"
+              size={10}
+            />
           </View>
         </View>
       ))}
@@ -137,10 +142,16 @@ const Upload: FC<UploadProps> = ({
             <Loading />
           ) : (
             <View className={`${PREFIX_CLS}-btn-content`}>
-              <Add className={`${PREFIX_CLS}-btn-icon`} />
-              <Text className={`${PREFIX_CLS}-btn-placeholder`}>
-                {placeholder}
-              </Text>
+              <Icon
+                className={`${PREFIX_CLS}-btn-icon`}
+                name="PlusOutlined"
+                size={24}
+              />
+              {placeholder ? (
+                <Text className={`${PREFIX_CLS}-btn-placeholder`}>
+                  {placeholder}
+                </Text>
+              ) : null}
             </View>
           )}
         </View>

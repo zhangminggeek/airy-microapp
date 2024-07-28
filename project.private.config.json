@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageDress/pages/management/index",
+          "pathName": "packageDress/pages/management/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageDress/pages/action/index",
           "pathName": "packageDress/pages/action/index",
           "query": "",
@@ -108,13 +115,6 @@
         {
           "name": "packageAddress/pages/management/index",
           "pathName": "packageAddress/pages/management/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/dress/management/index",
-          "pathName": "pages/dress/management/index",
           "query": "",
           "launchMode": "default",
           "scene": null

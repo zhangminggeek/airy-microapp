@@ -10,7 +10,7 @@ import { productInfoFieldMap, ProductType } from '@/constants/product';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { isNil, parseJson, RouterUtil } from '@/utils';
+import { isNil, parseJson, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -97,6 +97,15 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
+          const { name, picList } = values;
+          if (!name) {
+            Toast.info('请输入商品名称');
+            return;
+          }
+          if (!picList?.length) {
+            Toast.info('请上传商品图片');
+            return;
+          }
           const data = { ...values };
           const fieldMap =
             productInfoFieldMap.get(currentCode as ProductType)?.keys() ?? [];
@@ -118,27 +127,19 @@ const Page = () => {
         }}
       >
         <FormSection>
-          <Form.Item
-            name="name"
-            noStyle
-            rules={[{ required: true, message: '请输入商品名称' }]}
-          >
+          <Form.Item name="name" noStyle>
             <TextArea placeholder="请输入商品名称" maxLength={255} />
           </Form.Item>
-          <Form.Item
-            name="picList"
-            noStyle
-            rules={[{ required: true, message: '请上传商品图片' }]}
-          >
-            <Upload placeholder="添加商品图片" maxCount={4} />
+          <Form.Item name="picList" noStyle>
+            <Upload placeholder="添加图片" maxCount={4} />
           </Form.Item>
         </FormSection>
         <FormSection fill>
           <Form.Item label="编号" name="no">
-            <Input maxLength={8} />
+            <Input maxLength={8} placeholder="请输入" />
           </Form.Item>
           <Form.Item label="品牌" name="brand">
-            <Input maxLength={255} />
+            <Input maxLength={255} placeholder="请输入" />
           </Form.Item>
         </FormSection>
         <FormSection fill>

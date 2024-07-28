@@ -36,7 +36,7 @@ import { StorageKey } from '@/constants/storage';
 import { TagType } from '@/constants/tag';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { isNil, RouterUtil } from '@/utils';
+import { isNil, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { id, productId, source, purchaseId } = useRouter().params;
@@ -163,9 +163,20 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          const { method, expressMethod, quality, ...rest } = values;
+          const { title, picList, method, expressMethod, quality, ...rest } =
+            values;
+          if (!title) {
+            Toast.info('请输入求购商品信息');
+            return;
+          }
+          if (!picList?.length) {
+            Toast.info('请上传求购商品图片');
+            return;
+          }
           const params = {
             ...rest,
+            title,
+            picList,
             allowSell: method?.includes(MarkrtMethod['出售']),
             allowLease: method?.includes(MarkrtMethod['借调']),
             expressMethod: expressMethod[0],
@@ -197,10 +208,7 @@ const Page = () => {
         }}
       >
         <FormSection style={{ paddingTop: 0, paddingBottom: 0 }}>
-          <Form.Item
-            name="title"
-            rules={[{ required: true, message: '请输入商品标题' }]}
-          >
+          <Form.Item name="title">
             <Input placeholder="请输入商品标题" maxLength={200} />
           </Form.Item>
         </FormSection>
@@ -209,12 +217,8 @@ const Page = () => {
             <TextArea placeholder="描述一下宝贝品牌，详情等" maxLength={255} />
           </Form.Item>
           {createFromAlbum ? (
-            <Form.Item
-              name="picList"
-              noStyle
-              rules={[{ required: true, message: '请上传商品图片' }]}
-            >
-              <Upload placeholder="添加商品图片" maxCount={4} />
+            <Form.Item name="picList" noStyle>
+              <Upload placeholder="添加图片" maxCount={4} />
             </Form.Item>
           ) : (
             <Form.Item
