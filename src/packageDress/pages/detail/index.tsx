@@ -65,7 +65,6 @@ const Page = () => {
         tagList={data?.tagList?.map((item) => item.tag.name)}
         title={data?.name}
         desc={data?.description}
-        extra={`已租${data?.leaseCount ?? 0}次`}
         fieldData={parseJson<ProductBizData>(data?.bizData ?? '', [])?.reduce(
           (prev, cur) => {
             const val = productInfoFieldMap

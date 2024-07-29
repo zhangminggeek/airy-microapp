@@ -60,8 +60,28 @@
 }
 
 .list {
-  padding: 24px;
-  margin-bottom: 112px;
+  margin-top: 24px;
+  margin-bottom: 150px;
+
+  &-title {
+    font-size: $font-size-large;
+    color: $text-color-main;
+    font-weight: 600;
+    padding: 24px 32px;
+    background-color: #fff;
+  }
+
+  &-empty {
+    background-color: #fff;
+
+    :global {
+      .nut-empty-title {
+        font-size: $font-size-large;
+        color: $text-color-secondary;
+        font-size: 400;
+      }
+    }
+  }
 
   .brief-header {
     display: flex;

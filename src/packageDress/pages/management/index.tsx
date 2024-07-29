@@ -1,5 +1,5 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { useRef, useState } from 'react';
 
 import styles from './index.module.scss';
@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 import type { ActionType } from '@/components/List';
 
 import { getProductPage } from '@/api';
-import { Affix, Icon, InputSearch, List } from '@/components';
+import { Affix, InputSearch, List } from '@/components';
 import { productTypeMap } from '@/constants/product';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
@@ -80,13 +80,6 @@ const Page = () => {
                     <View className={styles['card-body']}>
                       <View className={styles['card-body-title']}>
                         {item.name}
-                      </View>
-                      <View className={styles['card-body-content']}>
-                        <Text className={styles.no}>{item.no}</Text>
-                        <View className={styles.lease}>
-                          <Icon name="RentOutlined" size={16} />
-                          {item.leaseCount}
-                        </View>
                       </View>
                     </View>
                   </View>

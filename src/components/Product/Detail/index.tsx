@@ -66,15 +66,18 @@ const ProductDetail: FC<ProductDetailProps> = ({
     <View className={classnames(PREFIX_CLS, className)} style={style}>
       <PictureGroup images={images} />
       <View className={`${PREFIX_CLS}-header`}>
-        <View className={`${PREFIX_CLS}-header-top`}>
-          <Space size={16} align="baseline">
-            {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
-            {leasePrice ? <LeasePrice value={leasePrice} /> : null}
-          </Space>
-          {extra ? (
-            <View className={`${PREFIX_CLS}-header-top-extra`}>{extra}</View>
-          ) : null}
-        </View>
+        <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
+        {sellingPrice || leasePrice || extra ? (
+          <View className={`${PREFIX_CLS}-header-top`}>
+            <Space size={16} align="baseline">
+              {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
+              {leasePrice ? <LeasePrice value={leasePrice} /> : null}
+            </Space>
+            {extra ? (
+              <View className={`${PREFIX_CLS}-header-top-extra`}>{extra}</View>
+            ) : null}
+          </View>
+        ) : null}
         <View className={`${PREFIX_CLS}-header-secondary`}>
           <View className={`${PREFIX_CLS}-header-secondary-tag-group`}>
             {expressMethod ? (
@@ -108,7 +111,6 @@ const ProductDetail: FC<ProductDetailProps> = ({
             </Button>
           ) : null}
         </View>
-        <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
         {desc ? (
           <View className={`${PREFIX_CLS}-header-desc`}>{desc}</View>
         ) : null}

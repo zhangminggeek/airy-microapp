@@ -87,17 +87,23 @@ const Page = () => {
                 >
                   编辑
                 </Button>
-                <Button
-                  className={styles['card-footer-btn']}
-                  icon={<Trash />}
-                  fill="none"
-                  size="mini"
-                  onClick={() => {
-                    open({ params: { id: item.id } });
-                  }}
-                >
-                  删除
-                </Button>
+                {data?.length > 1 ? (
+                  <Button
+                    className={styles['card-footer-btn']}
+                    icon={<Trash />}
+                    fill="none"
+                    size="mini"
+                    onClick={() => {
+                      if (item.isDefault) {
+                        Toast.info('默认地址不可删除，请先切换');
+                        return;
+                      }
+                      open({ params: { id: item.id } });
+                    }}
+                  >
+                    删除
+                  </Button>
+                ) : null}
               </View>
             </View>
           }

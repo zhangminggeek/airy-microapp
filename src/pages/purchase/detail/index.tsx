@@ -1,6 +1,6 @@
 import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import { useDidShow, useRouter } from '@tarojs/taro';
+import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
@@ -9,7 +9,7 @@ import PriceItem from './PriceItem';
 import type { ProductBizData } from '@/interfaces/product';
 
 import { getPurchaseId } from '@/api';
-import { Company, Footer, Product, Tag } from '@/components';
+import { Company, Empty, Footer, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import {
   ProductFiledKey,
@@ -23,6 +23,8 @@ import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { isNil, parseJson, RouterUtil } from '@/utils';
+
+const windowWidth = Taro.getSystemInfoSync().windowWidth;
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -102,8 +104,8 @@ const Page = () => {
                 key={item.id}
                 className={styles['pic-item']}
                 src={item.url}
-                width={343}
-                height={343}
+                width={windowWidth - 32}
+                height={windowWidth - 32}
                 mode="aspectFill"
               />
             ))}
@@ -111,43 +113,55 @@ const Page = () => {
         ) : null}
       </View>
       <View className={styles.list}>
-        {data?.quotationList?.map((item) => (
-          <Product.Brief
-            key={item.id}
-            image={item.picList?.[0]?.url}
-            title={item.title}
-            desc={item.description}
-            leasePrice={item.leasePrice}
-            sellingPrice={item.sellingPrice}
-            header={
-              <View className={styles['brief-header']}>
-                <Company logo={item.companyLogo} name={item.companyName} />
-                <Text className={styles['brief-header-time']}>
-                  {dayjs(item.createTime).format(DATE_TIME_FORMAT)}
-                </Text>
-              </View>
-            }
-            footer={
-              <View className={styles['brief-footer']}>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    RouterUtil.navigateTo('/pages/market/detail/index', {
-                      id: item.marketId,
-                    });
-                  }}
-                >
-                  查看详情
-                </Button>
-              </View>
-            }
-            onClick={() => {
-              RouterUtil.navigateTo('/pages/market/detail/index', {
-                id: item.marketId,
-              });
-            }}
+        <View className={styles['list-title']}>
+          全部商品 · {data?.quotationList?.length ?? 0}
+        </View>
+        {data?.quotationList?.length ? (
+          <View className={styles['list-content']}>
+            {data?.quotationList?.map((item) => (
+              <Product.Brief
+                key={item.id}
+                image={item.picList?.[0]?.url}
+                title={item.title}
+                desc={item.description}
+                leasePrice={item.leasePrice}
+                sellingPrice={item.sellingPrice}
+                header={
+                  <View className={styles['brief-header']}>
+                    <Company logo={item.companyLogo} name={item.companyName} />
+                    <Text className={styles['brief-header-time']}>
+                      {dayjs(item.createTime).format(DATE_TIME_FORMAT)}
+                    </Text>
+                  </View>
+                }
+                footer={
+                  <View className={styles['brief-footer']}>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        RouterUtil.navigateTo('/pages/market/detail/index', {
+                          id: item.marketId,
+                        });
+                      }}
+                    >
+                      查看详情
+                    </Button>
+                  </View>
+                }
+                onClick={() => {
+                  RouterUtil.navigateTo('/pages/market/detail/index', {
+                    id: item.marketId,
+                  });
+                }}
+              />
+            ))}
+          </View>
+        ) : (
+          <Empty
+            className={styles['list-empty']}
+            title="还没有商家发送商品呦～"
           />
-        ))}
+        )}
       </View>
       {info && info.companyId !== data?.companyId ? (
         <Footer

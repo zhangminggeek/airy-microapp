@@ -163,25 +163,40 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          const { title, picList, method, expressMethod, quality, ...rest } =
-            values;
+          const {
+            title,
+            picList,
+            productId: productIdBySelected,
+            method,
+            expressMethod,
+            quality,
+            ...rest
+          } = values;
           if (!title) {
-            Toast.info('请输入求购商品信息');
+            Toast.info('请输入商品标题');
             return;
           }
-          if (!picList?.length) {
-            Toast.info('请上传求购商品图片');
+          if (!createFromAlbum && !productIdBySelected) {
+            Toast.info('请选择商品');
+            return;
+          }
+          if (createFromAlbum && !picList?.length) {
+            Toast.info('请上传商品图片');
             return;
           }
           const params = {
             ...rest,
             title,
-            picList,
             allowSell: method?.includes(MarkrtMethod['出售']),
             allowLease: method?.includes(MarkrtMethod['借调']),
             expressMethod: expressMethod[0],
             quality: quality[0],
           };
+          if (createFromAlbum) {
+            params.picList = picList;
+          } else {
+            params.productId = productIdBySelected;
+          }
           if (id) {
             await update({ ...params, id: Number(id) });
           } else {
@@ -246,23 +261,22 @@ const Page = () => {
             </Form.Item>
           </FormSection>
         )}
-        <FormSection title="出售/借调">
+        <FormSection fill>
           <Form.Item
+            label="出售/借调"
             name="method"
-            noStyle
             rules={[{ required: true, message: '请选择上架方式' }]}
           >
             <TagChecker
               options={Array.from(marketMethodMap.values())}
               multiple
+              allowEmpty={false}
               onChange={(v) => {
                 setAllowSell(v?.includes(MarkrtMethod['出售']) ?? false);
                 setAllowLease(v?.includes(MarkrtMethod['借调']) ?? false);
               }}
             />
           </Form.Item>
-        </FormSection>
-        <FormSection fill>
           {allowSell && (
             <Form.Item
               label="出售价"
@@ -302,13 +316,16 @@ const Page = () => {
             </Form.Item>
           </FormSection>
         )}
-        <FormSection title="发货方式">
+        <FormSection fill>
           <Form.Item
+            label="发货方式"
             name="expressMethod"
-            noStyle
             rules={[{ required: true, message: '请选择发货方式' }]}
           >
-            <TagChecker options={Array.from(expressMethodMap.values())} />
+            <TagChecker
+              options={Array.from(expressMethodMap.values())}
+              allowEmpty={false}
+            />
           </Form.Item>
         </FormSection>
         <FormSection title="新旧程度">
@@ -317,7 +334,10 @@ const Page = () => {
             noStyle
             rules={[{ required: true, message: '请选择新旧程度' }]}
           >
-            <TagChecker options={Array.from(productQualityMap.values())} />
+            <TagChecker
+              options={Array.from(productQualityMap.values())}
+              allowEmpty={false}
+            />
           </Form.Item>
         </FormSection>
         {createFromAlbum && (

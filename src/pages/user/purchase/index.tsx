@@ -147,7 +147,7 @@ const Page = () => {
             type="primary"
             size="small"
             onClick={() => {
-              RouterUtil.navigateTo('/pages/purchase/deliver/index', {
+              RouterUtil.navigateTo('/pages/purchase/action/index', {
                 id: item.id,
               });
             }}

@@ -7,7 +7,7 @@ import {
   TabPane,
   Tabs,
 } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { debounce } from 'lodash';
 import { useState } from 'react';
@@ -17,7 +17,7 @@ import styles from './index.module.scss';
 import type { GetProductResponse } from '@/api';
 
 import { getProduct } from '@/api';
-import { Icon, InputSearch, Space } from '@/components';
+import { InputSearch } from '@/components';
 import { ProductStatus, productTypeMap } from '@/constants/product';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
@@ -99,16 +99,7 @@ const Page = () => {
                   <View className={styles['item-content-name']}>
                     {item.name}
                   </View>
-                  <View className={styles['item-content-desc']}>
-                    {item.description}
-                  </View>
-                  <View className={styles['item-content-desc']}>
-                    <Text>{item.no}</Text>
-                    <Space size={4}>
-                      <Icon name="RentOutlined" size={16} />
-                      <Text>{item.leaseCount}</Text>
-                    </Space>
-                  </View>
+                  <View className={styles['item-content-desc']}>{item.no}</View>
                 </View>
                 <Checkbox checked={item.id === selectedProduct?.id} />
               </View>

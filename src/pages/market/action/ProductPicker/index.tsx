@@ -44,7 +44,8 @@ const ProductPicker: FC<ProductPickerProps> = ({ value, onChange }) => {
           <Card
             pic={product?.picList?.[0]?.url}
             name={product?.name}
-            desc={product?.no}
+            desc={product?.description}
+            no={product?.no}
             closeable
             onClose={() => {
               onChange?.();

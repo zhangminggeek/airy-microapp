@@ -12,7 +12,7 @@ import { Icon, InputNumber, Section, TagChecker } from '@/components';
 import { CompanyPaymentType } from '@/constants/company';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil, Toast } from '@/utils';
+import { isValidNumber, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   // 选中的提现方式
@@ -72,6 +72,7 @@ const Page = () => {
         className={styles.notice}
         content="工作人员将会在工作日的 09:00-18:00 处理您的提现申请"
         leftIcon={null}
+        align="center"
       />
       <View className={styles.content}>
         <Section className={styles.balance}>
@@ -151,6 +152,7 @@ const Page = () => {
           <InputNumber
             className={styles.input}
             placeholder="请输入提现金额"
+            allowDecimal={false}
             value={amount}
             onChange={(v) => {
               setAmount(v);
@@ -169,6 +171,10 @@ const Page = () => {
             }
             if (!amount) {
               Toast.info('请输入提现金额');
+              return;
+            }
+            if (!isValidNumber(amount) || Big(amount ?? 0).lte(0)) {
+              Toast.info('提现金额必须为正整数');
               return;
             }
             if (Big(amount ?? 0).gt(company?.balance ?? 0)) {

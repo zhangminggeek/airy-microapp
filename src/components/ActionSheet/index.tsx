@@ -54,6 +54,7 @@ const ActionSheet: FC<ActionSheetProps> = ({
         className={classnames(PREFIX_CLS, className)}
         visible={showActionSheet}
         portal={rootDom}
+        round={false}
         options={
           options.filter(
             ({ show = true }) => show,

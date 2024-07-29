@@ -33,29 +33,14 @@
     }
 
     &-body {
-      height: 180px;
+      height: 110px;
       padding: 16px;
 
       &-title {
         @include ellipsis(2);
-        margin-bottom: 16px;
-      }
-
-      &-content {
-        display: flex;
-        gap: 32px;
-        color: $text-color-secondary;
-        font-size: $font-size-small;
-
-        .no {
-          flex: 1;
-        }
-
-        .lease {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
+        font-size: $font-size-base;
+        color: $text-color-main;
+        font-weight: 500;
       }
     }
   }

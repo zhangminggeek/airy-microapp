@@ -51,6 +51,7 @@ const Page = () => {
         title,
         picList,
         typeCode,
+        size,
         brand,
         wantBuy,
         wantLease,
@@ -75,6 +76,7 @@ const Page = () => {
         title,
         picList: picList?.map((item) => item.url),
         typeCode,
+        size: isNil(size) ? [] : [size],
         brand,
         method,
         price: [minPrice, maxPrice],
@@ -214,6 +216,7 @@ const Page = () => {
             <TagChecker
               options={Array.from(purchaseMethodMap.values())}
               multiple
+              allowEmpty={false}
               onChange={(v) => {
                 setWantBuy(v?.includes(PurchaseMethod['购买']) ?? false);
                 setWantLease(v?.includes(PurchaseMethod['借调']) ?? false);

@@ -28,7 +28,7 @@
     font-size: $font-size-base;
     color: $text-color-main;
     font-weight: 500;
-    @include ellipsis;
+    @include ellipsis(2);
   }
 
   &-desc {

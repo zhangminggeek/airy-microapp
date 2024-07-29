@@ -1,3 +1,4 @@
+import Big from 'big.js';
 import CryptoJS from 'crypto-js';
 
 import * as EventUtil from './event';
@@ -23,6 +24,20 @@ export const isNil = (val: any, allowEmptyString = true) => {
     return true;
   }
   return false;
+};
+
+/**
+ * 校验是否为有效数字
+ * @param val 值
+ * @returns 是否为有效数字
+ */
+export const isValidNumber = (val: any) => {
+  try {
+    new Big(val);
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
 
 type ObjectType = { [key in string]: any };

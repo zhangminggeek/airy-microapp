@@ -1,6 +1,21 @@
+@import '../../styles/var.scss';
+
 .m-action-sheet {
+  background-color: $background-color-base;
+
   &-view {
     display: flex;
     align-items: center;
+  }
+
+  .nut-actionsheet-item,
+  .nut-actionsheet-cancel {
+    font-size: $font-size-large;
+    color: $text-color-base;
+    line-height: 72px;
+  }
+
+  .nut-actionsheet-cancel {
+    margin-top: 16px;
   }
 }

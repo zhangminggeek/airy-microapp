@@ -10,8 +10,10 @@ export interface InputNumberProps {
   style?: CSSProperties;
   prefix?: ReactNode;
   suffix?: ReactNode;
-  value?: string;
   placeholder?: string;
+  allowNegative?: boolean;
+  allowDecimal?: boolean;
+  value?: string;
   onChange?: (value?: string) => void;
 }
 
@@ -22,8 +24,10 @@ const InputNumber: FC<InputNumberProps> = ({
   style,
   prefix,
   suffix,
-  value,
   placeholder,
+  allowNegative = false,
+  allowDecimal = true,
+  value,
   onChange,
 }) => {
   return (
@@ -31,11 +35,20 @@ const InputNumber: FC<InputNumberProps> = ({
       {prefix}
       <Input
         className={`${PREFIX_CLS}-input`}
-        type="digit"
+        type={allowDecimal ? 'digit' : 'number'}
         placeholder={placeholder}
         value={value}
         onInput={(e) => {
-          onChange?.(e.detail.value);
+          let v = e.detail.value;
+          v = v.replace(/[^\d]/g, '');
+          if (!allowNegative && v.startsWith('-')) {
+            v = v.replace('-', '');
+          }
+          if (!allowDecimal && v.includes('.')) {
+            v = v.replace('.', '');
+          }
+          onChange?.(v);
+          return v;
         }}
       />
       {suffix}
