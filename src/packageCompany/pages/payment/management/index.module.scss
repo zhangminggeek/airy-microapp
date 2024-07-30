@@ -1,5 +1,15 @@
+@import '../../../../styles/var.scss';
+
 .item {
   & + & {
     margin-top: 24px;
   }
+}
+
+.tip {
+  font-size: $font-size-base;
+  color: $text-color-secondary;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 288px;
 }
