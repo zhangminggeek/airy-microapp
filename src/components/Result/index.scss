@@ -16,6 +16,14 @@
     }
   }
 
+  &-waiting {
+    .m-result-icon {
+      .m-icon {
+        color: $color-primary;
+      }
+    }
+  }
+
   &-title {
     font-size: $font-size-xlarge;
     color: $text-color-main;

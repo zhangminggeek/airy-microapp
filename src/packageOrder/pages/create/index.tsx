@@ -70,7 +70,7 @@ const Page = () => {
   // 微信支付订单
   const { run: payOrderViaWechat } = useRequest(postOrderPayWechat, {
     manual: true,
-    onSuccess(data) {
+    onSuccess(data, params) {
       const { timestamp, nonceStr, pkg, paySign } = data;
       requestPayment({
         timeStamp: timestamp.toString(),
@@ -80,7 +80,9 @@ const Page = () => {
         paySign,
         success(res) {
           console.log('requestPayment success', res);
-          RouterUtil.navigateTo('/packageOrder/pages/create/result/index');
+          RouterUtil.navigateTo('/packageOrder/pages/create/result/index', {
+            orderId: params?.id,
+          });
         },
         fail(err) {
           console.log('requestPayment fail', err);

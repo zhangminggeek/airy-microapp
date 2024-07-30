@@ -2007,6 +2007,51 @@ export const postOrderPayWechatNotice = /*#__PURE__*/ (
 
 postOrderPayWechatNotice.requestConfig = postOrderPayWechatNoticeRequestConfig
 
+export interface GetOrderWechatPayTransactionRequest {
+  /**
+   * 订单id
+   */
+  id: string
+}
+
+export type GetOrderWechatPayTransactionResponse = boolean
+
+type GetOrderWechatPayTransactionRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/wechat/pay/transaction', 'data', string, 'id', false>
+>
+
+const getOrderWechatPayTransactionRequestConfig: GetOrderWechatPayTransactionRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
+  path: '/order/wechat/pay/transaction',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_2,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderWechatPayTransaction',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrderWechatPayTransaction = /*#__PURE__*/ (
+  requestData: GetOrderWechatPayTransactionRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetOrderWechatPayTransactionResponse>(
+    prepare(getOrderWechatPayTransactionRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getOrderWechatPayTransaction.requestConfig = getOrderWechatPayTransactionRequestConfig
+
 export interface PostOrderExpressDeliverRequest {
   /**
    * 订单id
@@ -6176,6 +6221,38 @@ export interface GetMarketRequest {
    */
   companyId?: string
   /**
+   * 允许出售
+   */
+  allowSell?: string
+  /**
+   * 允许借调
+   */
+  allowLease?: string
+  /**
+   * 最小出售价格
+   */
+  minSellingPrice?: string
+  /**
+   * 最大出售价格
+   */
+  maxSellingPrice?: string
+  /**
+   * 最小借调价格
+   */
+  minLeasePrice?: string
+  /**
+   * 最大借调价格
+   */
+  maxLeasePrice?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod?: string
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality?: string
+  /**
    * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
    */
   status?: string
@@ -6373,7 +6450,22 @@ type GetMarketRequestConfig = Readonly<
     '/market',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'title' | 'productTypeCode' | 'companyId' | 'status' | 'order' | 'filterStr',
+    | 'pageNum'
+    | 'pageSize'
+    | 'title'
+    | 'productTypeCode'
+    | 'companyId'
+    | 'allowSell'
+    | 'allowLease'
+    | 'minSellingPrice'
+    | 'maxSellingPrice'
+    | 'minLeasePrice'
+    | 'maxLeasePrice'
+    | 'expressMethod'
+    | 'quality'
+    | 'status'
+    | 'order'
+    | 'filterStr',
     false
   >
 >
@@ -6389,7 +6481,24 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_10,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'title', 'productTypeCode', 'companyId', 'status', 'order', 'filterStr'],
+  queryNames: [
+    'pageNum',
+    'pageSize',
+    'title',
+    'productTypeCode',
+    'companyId',
+    'allowSell',
+    'allowLease',
+    'minSellingPrice',
+    'maxSellingPrice',
+    'minLeasePrice',
+    'maxLeasePrice',
+    'expressMethod',
+    'quality',
+    'status',
+    'order',
+    'filterStr',
+  ],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},

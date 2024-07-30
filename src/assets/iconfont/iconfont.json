@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "37507681",
+      "name": "ShiJianFilled",
+      "font_class": "ShiJianFilled",
+      "unicode": "e97d",
+      "unicode_decimal": 59773
+    },
+    {
       "icon_id": "41215672",
       "name": "ShopOutlined",
       "font_class": "ShopOutlined",

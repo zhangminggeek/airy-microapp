@@ -13,7 +13,7 @@ import './index.scss';
 interface ResultProps {
   className?: string;
   style?: CSSProperties;
-  status?: 'success';
+  status?: 'success' | 'waiting';
   icon?: ReactNode;
   title?: ReactNode;
   desc?: ReactNode;
@@ -45,6 +45,9 @@ const Result: FC<ResultProps> = ({
     switch (status) {
       case 'success':
         config.name = 'SuccessFilled';
+        break;
+      case 'waiting':
+        config.name = 'ShiJianFilled';
         break;
       default:
         break;

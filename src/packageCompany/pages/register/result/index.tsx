@@ -7,11 +7,11 @@ const Page = () => {
     <BasicLayout transparent>
       <Result
         title="注册成功"
-        desc="请等待审核，审核需要1-3个工作日"
+        desc="账号会在几分钟内审核，请留意短信通知"
         status="success"
-        okText="确定"
+        okText="立即登录"
         onOk={() => {
-          RouterUtil.navigateTo('/pages/security/index');
+          RouterUtil.navigateTo('/pages/user/login/index');
         }}
       />
     </BasicLayout>
