@@ -16,9 +16,11 @@ import type { ActionType as ListActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
 import { Filter, InputSearch, List, Product } from '@/components';
+import { HIDE_PRICE } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductType } from '@/constants/product';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { isNil, RouterUtil } from '@/utils';
 
 const Page = () => {
@@ -26,6 +28,7 @@ const Page = () => {
   const { typeCode, from } = useRouter().params;
   const inputSearchRef = useRef<any>(null);
   const actionRef = useRef<ListActionType>(null);
+  const { info } = useUserStore((state) => state);
 
   const config = filterConfig.get(typeCode as ProductType);
 
@@ -156,8 +159,10 @@ const Page = () => {
               image={item.product?.picList?.[0]?.url}
               title={item.title}
               tagList={item.product?.tagList?.map((item) => item.tag.name)}
-              leasePrice={item.leasePrice}
-              sellingPrice={item.sellingPrice}
+              allowSell={item.allowSell}
+              allowLease={item.allowLease}
+              leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
+              sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
               companyLogo={item.companyLogo}
               companyName={item.companyName}
               extra={{ icon: 'LoveOutlined', text: item.favorities }}

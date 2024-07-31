@@ -16,6 +16,8 @@ export class RouterUtil {
     '/packageCompany/pages/register/code/index',
     '/packageCompany/pages/register/result/index',
     '/pages/market/index/index',
+    '/pages/market/search/index',
+    '/pages/market/category/index',
     '/pages/market/detail/index',
     '/pages/purchase/index/index',
     '/pages/purchase/detail/index',

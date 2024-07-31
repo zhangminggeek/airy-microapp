@@ -10,15 +10,17 @@ import type { ActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
 import { InputSearch, List, Product } from '@/components';
-import { OSS_ASSETS_DIR } from '@/constants';
+import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const tabs = Array.from(tabsMap.values());
 
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
+  const { info } = useUserStore((state) => state);
 
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -90,8 +92,10 @@ const Page = () => {
               image={item.product?.picList?.[0]?.url}
               title={item.title}
               tagList={item.product?.tagList?.map((item) => item.tag.name)}
-              leasePrice={item.leasePrice}
-              sellingPrice={item.sellingPrice}
+              allowSell={item.allowSell}
+              allowLease={item.allowLease}
+              leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
+              sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
               companyLogo={item.companyLogo}
               companyName={item.companyName}
               extra={{ icon: 'LoveOutlined', text: item.favorities }}

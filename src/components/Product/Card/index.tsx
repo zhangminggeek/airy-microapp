@@ -19,12 +19,14 @@ interface CardProps {
   image?: string;
   title?: string;
   tagList?: string[];
+  allowSell?: boolean;
+  allowLease?: boolean;
   leasePrice?: LeasePriceProps['value'];
   sellingPrice?: SellingPriceProps['value'];
   status?: number;
   companyLogo?: string;
   companyName?: string;
-  extra: {
+  extra?: {
     icon: string;
     text?: ReactNode;
   };
@@ -39,6 +41,8 @@ const Card: FC<CardProps> = ({
   image,
   title,
   tagList,
+  allowSell = false,
+  allowLease = false,
   leasePrice,
   sellingPrice,
   status = ProductStatus['正常'],
@@ -71,8 +75,8 @@ const Card: FC<CardProps> = ({
           </View>
         ) : null}
         <View className={`${PREFIX_CLS}-content-price`}>
-          {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
-          {leasePrice ? <LeasePrice value={leasePrice} /> : null}
+          {allowSell ? <SellingPrice value={sellingPrice} /> : null}
+          {allowLease ? <LeasePrice value={leasePrice} /> : null}
         </View>
         <View className={`${PREFIX_CLS}-content-info`}>
           <Company
@@ -84,10 +88,12 @@ const Card: FC<CardProps> = ({
               onCompanyClick?.();
             }}
           />
-          <Space className={`${PREFIX_CLS}-content-info-favorites`} size={4}>
-            <Icon name={extra?.icon} size={12} />
-            {extra.text}
-          </Space>
+          {extra ? (
+            <Space className={`${PREFIX_CLS}-content-info-favorites`} size={4}>
+              <Icon name={extra.icon} size={12} />
+              {extra.text}
+            </Space>
+          ) : null}
         </View>
       </View>
       {status !== ProductStatus['正常'] ? (

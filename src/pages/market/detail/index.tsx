@@ -9,6 +9,7 @@ import type { ProductBizData } from '@/interfaces/product';
 
 import { getMarketId, postMarketFavorite } from '@/api';
 import { Icon, Product, Space } from '@/components';
+import { HIDE_PRICE } from '@/constants';
 import {
   MarketProductStatus,
   marketProductStatusMap,
@@ -115,8 +116,10 @@ const Page = () => {
       <Product.Detail
         typeCode={data?.product?.typeCode}
         images={data?.product?.picList?.map((item) => item.url)}
-        sellingPrice={data?.sellingPrice}
-        leasePrice={data?.leasePrice}
+        allowSell={data?.allowSell}
+        allowLease={data?.allowLease}
+        sellingPrice={info?.account ? data?.sellingPrice : HIDE_PRICE}
+        leasePrice={info?.account ? data?.leasePrice : HIDE_PRICE}
         extra={
           <View className={styles.extra}>
             {data?.quality ? (

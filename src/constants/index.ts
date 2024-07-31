@@ -27,3 +27,5 @@ export const TAB_PAGE = [
   '/pages/requirement/index',
   '/pages/user/index/index',
 ];
+
+export const HIDE_PRICE = '??.??';

@@ -163,7 +163,7 @@ const Page = () => {
           />
         )}
       </View>
-      {info && info.companyId !== data?.companyId ? (
+      {info?.companyId !== data?.companyId ? (
         <Footer
           btnText="发送商品"
           onConfirm={() => {

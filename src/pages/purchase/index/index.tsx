@@ -8,14 +8,17 @@ import type { ActionType } from '@/components/List';
 
 import { getPurchase } from '@/api';
 import { Filter, InputSearch, List, Product } from '@/components';
+import { HIDE_PRICE } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { PurchaseStatus } from '@/constants/purchase';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
+  const { info } = useUserStore((state) => state);
 
   // 搜索关键字
   const [keyword, setKeyword] = useState<string>('');
@@ -82,19 +85,23 @@ const Page = () => {
               image={item.picList?.[0]?.url}
               title={item.title}
               tagList={item.tagList?.map((item) => item.tagName)}
+              allowLease
+              allowSell
               leasePrice={
-                item.minLeasePrice || item.maxLeasePrice
+                info?.account
                   ? [item.minLeasePrice, item.maxLeasePrice]
-                  : undefined
+                  : HIDE_PRICE
               }
               sellingPrice={
-                item.minPrice || item.maxPrice
-                  ? [item.minPrice, item.maxPrice]
-                  : undefined
+                info?.account ? [item.minPrice, item.maxPrice] : HIDE_PRICE
               }
               companyLogo={item.companyLogo}
               companyName={item.companyName}
-              extra={{ icon: 'FormOutlined', text: item.quotations }}
+              extra={
+                info?.account
+                  ? { icon: 'FormOutlined', text: item.quotations }
+                  : undefined
+              }
               onClick={() => {
                 RouterUtil.navigateTo('/pages/purchase/detail/index', {
                   id: item.id,

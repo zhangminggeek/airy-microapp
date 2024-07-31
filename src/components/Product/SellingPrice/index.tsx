@@ -6,6 +6,7 @@ import { ROOT_PREFIX_CLS } from '../constants';
 
 import type { CSSProperties, FC } from 'react';
 
+import { HIDE_PRICE } from '@/constants';
 import { formatPriceRange } from '@/utils';
 
 import './index.scss';
@@ -20,12 +21,14 @@ const PREFIX_CLS = `${ROOT_PREFIX_CLS}-selling-price`;
 
 const SellingPrice: FC<SellingPriceProps> = ({ className, style, value }) => {
   const signleValue = useMemo(() => {
+    if (value === HIDE_PRICE) return value.split('.');
     if (!value || typeof value !== 'string') return '';
     const [integer, decimal] = Number(value).toFixed(2).split('.');
     return [integer, decimal];
   }, [value]);
 
   const rangeValue = useMemo(() => {
+    if (value === HIDE_PRICE) return value;
     if (!value || !Array.isArray(value)) return '';
     return formatPriceRange(value);
   }, [value]);

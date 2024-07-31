@@ -4,8 +4,8 @@ import classnames from 'classnames';
 import { useMemo } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../constants';
-import LeasePrice from '../LeasePrice';
-import SellingPrice from '../SellingPrice';
+import LeasePrice, { type LeasePriceProps } from '../LeasePrice';
+import SellingPrice, { type SellingPriceProps } from '../SellingPrice';
 
 import Field, { type FieldProps } from './Field';
 import PictureGroup, { type PictureGroupProps } from './PictureGroup';
@@ -23,8 +23,10 @@ interface ProductDetailProps {
   style?: CSSProperties;
   typeCode?: string;
   images?: PictureGroupProps['images'];
-  sellingPrice?: string;
-  leasePrice?: string;
+  allowSell?: boolean;
+  allowLease?: boolean;
+  sellingPrice?: SellingPriceProps['value'];
+  leasePrice?: LeasePriceProps['value'];
   favorites?: number;
   expressMethod?: number;
   tagList?: string[];
@@ -43,6 +45,8 @@ const ProductDetail: FC<ProductDetailProps> = ({
   style,
   typeCode,
   images,
+  allowSell = false,
+  allowLease = false,
   sellingPrice,
   leasePrice,
   expressMethod,
@@ -70,8 +74,8 @@ const ProductDetail: FC<ProductDetailProps> = ({
         {sellingPrice || leasePrice || extra ? (
           <View className={`${PREFIX_CLS}-header-top`}>
             <Space size={16} align="baseline">
-              {sellingPrice ? <SellingPrice value={sellingPrice} /> : null}
-              {leasePrice ? <LeasePrice value={leasePrice} /> : null}
+              {allowSell ? <SellingPrice value={sellingPrice} /> : null}
+              {allowLease ? <LeasePrice value={leasePrice} /> : null}
             </Space>
             {extra ? (
               <View className={`${PREFIX_CLS}-header-top-extra`}>{extra}</View>
