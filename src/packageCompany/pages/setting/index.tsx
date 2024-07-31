@@ -54,6 +54,16 @@ const Page = () => {
               maxLength: 200,
             },
           },
+          {
+            title: '修改密码',
+            name: 'password',
+            renderConfig: {
+              renderType: 'custom',
+              onClick: () => {
+                RouterUtil.navigateTo('/pages/user/password/code/index');
+              },
+            },
+          },
         ]}
         data={{ logo: data?.logo, intro: data?.intro }}
         onChange={async (field, value) => {

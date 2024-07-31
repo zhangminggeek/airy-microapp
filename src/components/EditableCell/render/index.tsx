@@ -1,14 +1,10 @@
 import Avatar, { type CustomAvatarProps } from './Avatar';
-import Input, { type CustomInputProps } from './Input';
+import Custom, { type CustomProps } from './Custom';
 import Text, { type CustomTextProps } from './Text';
 import Textarea, { type CustomTextareaProps } from './Textarea';
 
 interface TextRenderProps extends CustomTextProps {
   renderType: 'text';
-}
-
-interface InputRenderProps extends CustomInputProps {
-  renderType: 'input';
 }
 
 interface TextareaRenderProps extends CustomTextareaProps {
@@ -19,11 +15,15 @@ interface AvatarRenderProps extends CustomAvatarProps {
   renderType: 'avatar';
 }
 
+interface CustomRenderProps extends CustomProps {
+  renderType: 'custom';
+}
+
 export type RenderContentProps =
   | AvatarRenderProps
-  | InputRenderProps
   | TextareaRenderProps
-  | TextRenderProps;
+  | TextRenderProps
+  | CustomRenderProps;
 
 const renderContent = (renderConfig: RenderContentProps) => {
   const { renderType, ...rest } = renderConfig;
@@ -31,12 +31,12 @@ const renderContent = (renderConfig: RenderContentProps) => {
   switch (renderType) {
     case 'text':
       return <Text wrapper />;
-    case 'input':
-      return <Input {...(rest as CustomInputProps)} />;
     case 'textarea':
       return <Textarea {...(rest as CustomTextareaProps)} />;
     case 'avatar':
       return <Avatar {...(rest as CustomAvatarProps)} />;
+    case 'custom':
+      return <Custom {...(rest as CustomProps)} />;
     default:
       return null;
   }

@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { PREFIX_CLS } from '../../constants';
 import { Context } from '../../context';
 
+import type { ITouchEvent } from '@tarojs/components';
 import type { FC, ReactNode } from 'react';
 
 import { Space } from '@/components';
@@ -15,7 +16,7 @@ import './index.scss';
 interface WrapperProps {
   className?: string;
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: ITouchEvent) => void;
 }
 
 const Wrapper: FC<WrapperProps> = ({ className, children, onClick }) => {
@@ -24,7 +25,10 @@ const Wrapper: FC<WrapperProps> = ({ className, children, onClick }) => {
   return (
     <View
       className={classnames(`${PREFIX_CLS}-wrapper`, className)}
-      onClick={onClick}
+      onClick={(e) => {
+        if (!editable) return;
+        onClick?.(e);
+      }}
     >
       <Space>
         {children}

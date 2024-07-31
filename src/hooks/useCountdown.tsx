@@ -34,9 +34,19 @@ export const useCountdown = ({
     timer.current = t;
   };
 
+  const stopCountdown = () => {
+    if (timer.current) {
+      clearInterval(timer.current);
+      timer.current = undefined;
+    }
+    setCountdowning(false);
+    setTime(total);
+  };
+
   return {
     time,
     countdowning,
     startCountdown,
+    stopCountdown,
   };
 };

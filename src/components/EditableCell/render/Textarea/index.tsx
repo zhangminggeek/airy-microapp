@@ -29,7 +29,7 @@ const CustomTextarea: FC<CustomTextareaProps> = ({
   return (
     <Wrapper
       onClick={() => {
-        RouterUtil.navigateTo('/pages/common/edit/index', {
+        RouterUtil.navigateTo('/packageCommon/pages/edit/index', {
           title,
           field,
           defaultValue: value,

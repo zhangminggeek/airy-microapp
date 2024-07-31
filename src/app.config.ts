@@ -21,15 +21,20 @@ export default {
     'pages/purchase/select/index',
     // 我的
     'pages/user/index/index',
+    'pages/user/password/code/index',
+    'pages/user/password/setting/index',
     'pages/user/published/index',
     'pages/user/bought/index',
     'pages/user/sold/index',
     'pages/user/purchase/index',
     'pages/user/favorite/index',
-    // 公共页
-    'pages/common/edit/index',
   ],
   subpackages: [
+    // 公共页
+    {
+      root: 'packageCommon',
+      pages: ['pages/edit/index'],
+    },
     {
       // 公司管理
       root: 'packageCompany',
