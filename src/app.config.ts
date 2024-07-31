@@ -9,6 +9,7 @@ export default {
     'pages/user/login/bind/index',
     // 首页
     'pages/market/index/index',
+    'pages/market/search/index',
     'pages/market/category/index',
     'pages/market/action/index',
     'pages/market/action/result/index',

@@ -1,0 +1,31 @@
+@import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
+
+.container {
+  background-color: #fff;
+
+  .title {
+    font-size: $font-size-xlarge;
+    color: $text-color-main;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .category {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 48px;
+
+    &-item {
+      @include flex-center(column);
+      gap: 16px;
+
+      &-name {
+        font-size: $font-size-small;
+        color: $text-color-base;
+        font-weight: 400;
+      }
+    }
+  }
+}

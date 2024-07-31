@@ -20,8 +20,6 @@ const tabs = Array.from(tabsMap.values());
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
 
-  // 搜索关键字
-  const [keyword, setKeyword] = useState<string>('');
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -29,7 +27,6 @@ const Page = () => {
   usePullDownRefresh(async () => {
     await actionRef.current?.refresh({
       status: MarketProductStatus['在售'],
-      title: keyword,
       order: tabs[currentIndex].value,
     });
     stopPullDownRefresh();
@@ -41,8 +38,9 @@ const Page = () => {
       title={
         <InputSearch
           placeholder="搜索商品"
-          onSearch={(v) => {
-            setKeyword(v ?? '');
+          disabled
+          onClick={() => {
+            RouterUtil.navigateTo('/pages/market/search/index');
           }}
         />
       }
@@ -84,7 +82,6 @@ const Page = () => {
           request={getMarket}
           params={{
             status: MarketProductStatus['在售'],
-            title: keyword,
             order: tabs[currentIndex].value,
           }}
           renderItem={(item) => (

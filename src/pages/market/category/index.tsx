@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 import {
   stopPullDownRefresh,
+  useDidShow,
   usePullDownRefresh,
   useRouter,
 } from '@tarojs/taro';
@@ -11,7 +12,7 @@ import CustomFilter from './CustomFilter';
 import styles from './index.module.scss';
 import MainFilter from './MainFilter';
 
-import type { ActionType } from '@/components/List';
+import type { ActionType as ListActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
 import { Filter, InputSearch, List, Product } from '@/components';
@@ -22,8 +23,9 @@ import { isNil, RouterUtil } from '@/utils';
 
 const Page = () => {
   // 服装类型
-  const { typeCode } = useRouter().params;
-  const actionRef = useRef<ActionType>(null);
+  const { typeCode, from } = useRouter().params;
+  const inputSearchRef = useRef<any>(null);
+  const actionRef = useRef<ListActionType>(null);
 
   const config = filterConfig.get(typeCode as ProductType);
 
@@ -35,6 +37,12 @@ const Page = () => {
   const [tabFilterValue, setTabFilterValue] = useState<Record<string, any>>();
   // 筛选里面的选中值
   const [subFilterValue, setSubFilterValue] = useState<Record<string, any>>();
+
+  useDidShow(() => {
+    if (from === 'search') {
+      inputSearchRef.current?.focus();
+    }
+  });
 
   const params = useMemo(() => {
     const { order, ...restTabFilterValue } = tabFilterValue ?? {};
@@ -68,6 +76,8 @@ const Page = () => {
       className={styles.container}
       title={
         <InputSearch
+          className={styles['input-search']}
+          ref={inputSearchRef}
           placeholder="搜索商品"
           onSearch={(v) => {
             setKeyword(v ?? '');
