@@ -112,7 +112,7 @@ const Page = () => {
   }, [data]);
 
   return (
-    <BasicLayout title="详情" back fill>
+    <BasicLayout title="详情" back fill share={false}>
       <Product.Detail
         typeCode={data?.product?.typeCode}
         images={data?.product?.picList?.map((item) => item.url)}

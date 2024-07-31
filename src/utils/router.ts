@@ -12,6 +12,7 @@ export class RouterUtil {
     '/pages/security/index',
     '/pages/user/login/index',
     '/pages/user/login/other/index',
+    '/packageCompany/pages/index/index',
     '/packageCompany/pages/register/index',
     '/packageCompany/pages/register/code/index',
     '/packageCompany/pages/register/result/index',

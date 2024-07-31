@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react';
 import styles from './index.module.scss';
 
 import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
+import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, List, Product, Space } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
@@ -30,7 +31,7 @@ const Page = () => {
     return {
       title: data?.name,
       path: `/packageCompany/pages/index/index?id=${id}`,
-      imageUrl: '',
+      imageUrl: ImageLogo,
     };
   });
 
@@ -82,7 +83,7 @@ const Page = () => {
   }, [id, info, data]);
 
   return (
-    <BasicLayout back fill>
+    <BasicLayout back fill share={false}>
       <View className={styles['header-wrapper']}>
         <View className={styles.header}>
           <View className={styles.top}>

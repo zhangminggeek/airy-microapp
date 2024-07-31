@@ -16,6 +16,7 @@ import {
   putMarketShelvesOff,
   putMarketShelvesOn,
 } from '@/api';
+import ImageLogo from '@/assets/logo.svg';
 import { ActionSheet, Affix, List, Product, Space, Tag } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductSource } from '@/constants/product';
@@ -46,7 +47,11 @@ const Page = () => {
         imageUrl: info.image,
       };
     }
-    return {};
+    return {
+      title: 'AIRYBLUE',
+      path: `/pages/security/index`,
+      imageUrl: ImageLogo,
+    };
   });
 
   // 上架
@@ -251,7 +256,7 @@ const Page = () => {
   ];
 
   return (
-    <BasicLayout title="我发布的" back fill>
+    <BasicLayout title="我发布的" back fill share={false}>
       <View className={styles.content}>
         <Tabs
           value={currentIndex}
