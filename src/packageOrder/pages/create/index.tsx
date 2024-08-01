@@ -78,8 +78,7 @@ const Page = () => {
         package: pkg,
         signType: 'RSA',
         paySign,
-        success(res) {
-          console.log('requestPayment success', res);
+        success() {
           RouterUtil.navigateTo('/packageOrder/pages/create/result/index', {
             orderId: params?.id,
           });

@@ -26,7 +26,7 @@ const Page = () => {
 
   return (
     <BasicLayout className={styles.container} back>
-      <View className={styles.title}>输入验证码</View>
+      <View className={styles.title}>设置密码</View>
       <Form
         divider
         footer={

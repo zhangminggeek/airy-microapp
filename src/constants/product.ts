@@ -344,6 +344,19 @@ export const productInfoFieldMap = new Map([
         },
       ],
       [
+        ProductFiledKey['秀禾-裙摆'],
+        {
+          name: '类别',
+          options: [
+            { text: '秀禾', value: ProductFiledOption['秀禾-裙摆-秀禾'] },
+            { text: '鱼尾', value: ProductFiledOption['秀禾-裙摆-鱼尾'] },
+            { text: '包臀', value: ProductFiledOption['秀禾-裙摆-包臀'] },
+            { text: 'A摆', value: ProductFiledOption['秀禾-裙摆-A摆'] },
+            { text: '太阳摆', value: ProductFiledOption['秀禾-裙摆-太阳摆'] },
+          ],
+        },
+      ],
+      [
         ProductFiledKey['秀禾-颜色'],
         {
           name: '颜色',
@@ -515,6 +528,7 @@ export const productStatusMap = new Map([
   [ProductStatus['上架中'], { text: '上架中', value: ProductStatus['上架中'] }],
   [ProductStatus['已售出'], { text: '已售出', value: ProductStatus['已售出'] }],
   [ProductStatus['借调中'], { text: '借调中', value: ProductStatus['借调中'] }],
+  [ProductStatus['下架中'], { text: '下架中', value: ProductStatus['下架中'] }],
 ]);
 
 export enum ProductSource {

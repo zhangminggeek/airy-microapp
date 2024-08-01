@@ -26,7 +26,7 @@ const success = (
 const waiting = <Result status="waiting" title="支付结果查询中，请稍候..." />;
 
 const Page = () => {
-  const { orderId = '90' } = useRouter().params;
+  const { orderId } = useRouter().params;
 
   // 已支付
   const [paid, setPaid] = useState<boolean>(false);

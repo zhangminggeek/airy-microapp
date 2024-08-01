@@ -14,6 +14,7 @@ import {
   productSizeMap,
   ProductSource,
   ProductStatus,
+  productStatusMap,
   ProductType,
   productTypeMap,
 } from '@/constants/product';
@@ -21,7 +22,6 @@ import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil, Toast } from '@/utils';
 
-// TODO: 补充历史信息
 const Page = () => {
   const { id } = useRouter().params;
 
@@ -82,38 +82,42 @@ const Page = () => {
           },
         )}
         footer={
-          data?.status === ProductStatus['正常'] ? (
-            <View className={styles.footer}>
-              <ActionSheet
-                options={[
-                  { key: 'sell', name: '转二手' },
-                  { key: 'delete', name: '删除', danger: true },
-                ]}
-                onSelect={(item) => {
-                  if (item.key === 'sell') {
-                    RouterUtil.navigateTo('/pages/market/action/index', {
-                      productId: id,
-                      source: ProductSource['服装管理'],
-                    });
-                  } else if (item.key === 'delete') {
-                    open();
-                  }
-                }}
-              >
-                <Text className={styles.more}>更多</Text>
-              </ActionSheet>
-              <Button
-                type="primary"
-                onClick={() => {
-                  RouterUtil.navigateTo('/packageDress/pages/action/index', {
-                    id,
+          <View className={styles.footer}>
+            <ActionSheet
+              options={[
+                { key: 'sell', name: '转二手' },
+                { key: 'delete', name: '删除', danger: true },
+              ]}
+              onSelect={(item) => {
+                if (data?.status !== ProductStatus['正常']) {
+                  Toast.info(
+                    `当前服装${productStatusMap.get(data?.status)?.text}，不可操作`,
+                  );
+                  return;
+                }
+                if (item.key === 'sell') {
+                  RouterUtil.navigateTo('/pages/market/action/index', {
+                    productId: id,
+                    source: ProductSource['服装管理'],
                   });
-                }}
-              >
-                编辑
-              </Button>
-            </View>
-          ) : null
+                } else if (item.key === 'delete') {
+                  open();
+                }
+              }}
+            >
+              <Text className={styles.more}>更多</Text>
+            </ActionSheet>
+            <Button
+              type="primary"
+              onClick={() => {
+                RouterUtil.navigateTo('/packageDress/pages/action/index', {
+                  id,
+                });
+              }}
+            >
+              编辑
+            </Button>
+          </View>
         }
       />
       {renderDialog()}

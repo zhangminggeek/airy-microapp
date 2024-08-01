@@ -40,13 +40,25 @@ const InputNumber: FC<InputNumberProps> = ({
         value={value}
         onInput={(e) => {
           let v = e.detail.value;
-          v = v.replace(/[^\d]/g, '');
-          if (!allowNegative && v.startsWith('-')) {
-            v = v.replace('-', '');
+          v = v.replace(/[^(\d-.)]/g, '');
+          // 处理负数
+          if (!allowNegative) {
+            v = v.replace(/-/g, '');
+          } else if (allowNegative && v.startsWith('-')) {
+            v = `-${v.replace(/-/g, '')}`;
           }
-          if (!allowDecimal && v.includes('.')) {
-            v = v.replace('.', '');
+          // 处理小数
+          if (allowDecimal) {
+            const parts = v.split('.');
+            if (parts.length > 2) {
+              const [integer, ...rest] = parts;
+              // 如果有多于一个小数点，重构字符串，只保留第一个小数点
+              v = `${integer}.${rest.join('')}`;
+            }
+          } else {
+            v = v.replace(/\./g, '');
           }
+          console.log('v', v);
           onChange?.(v);
           return v;
         }}

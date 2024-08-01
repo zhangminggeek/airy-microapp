@@ -3445,6 +3445,10 @@ export interface GetCompanyBalanceRequest {
    * 流水 1:收入 2:支出
    */
   mode?: string
+  /**
+   * 支付途径 1:余额 2:微信
+   */
+  payment?: string
 }
 
 export interface GetCompanyBalanceResponse {
@@ -3477,15 +3481,19 @@ export interface GetCompanyBalanceResponse {
      */
     mode: number
     /**
+     * 支付途径 1:余额 2:微信
+     */
+    payment: number
+    /**
      * 金额
      */
     amount: string
     /**
-     * 金额
+     * 手续费
      */
     serviceCharge?: string
     /**
-     * 拒绝理由
+     * 备注
      */
     remark?: string
     /**
@@ -3503,7 +3511,7 @@ type GetCompanyBalanceRequestConfig = Readonly<
     '/company/balance',
     'data',
     string,
-    'pageNum' | 'pageSize' | 'type' | 'mode',
+    'pageNum' | 'pageSize' | 'type' | 'mode' | 'payment',
     false
   >
 >
@@ -3519,7 +3527,7 @@ const getCompanyBalanceRequestConfig: GetCompanyBalanceRequestConfig = /*#__PURE
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_3,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'type', 'mode'],
+  queryNames: ['pageNum', 'pageSize', 'type', 'mode', 'payment'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},

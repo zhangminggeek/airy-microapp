@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 import { getCompanyBalance } from '@/api';
 import { Filter, List } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
-import { balanceRecordTypeMap } from '@/constants/company';
+import { balanceRecordTypeMap, paymentTypeMap } from '@/constants/company';
 import { BasicLayout } from '@/layouts';
 
 const Page = () => {
@@ -23,6 +23,11 @@ const Page = () => {
             title: '类型',
             options: Array.from(balanceRecordTypeMap.values()),
           },
+          {
+            name: 'payment',
+            title: '支付方式',
+            options: Array.from(paymentTypeMap.values()),
+          },
         ]}
         value={condition}
         onChange={(v) => {
@@ -33,15 +38,16 @@ const Page = () => {
         <List
           className={styles.list}
           column={1}
-          params={{
-            type: condition?.type === 0 ? undefined : condition?.type,
-          }}
+          params={condition}
           request={getCompanyBalance}
           renderItem={(item) => (
             <View key={item.id} className={styles.item}>
               <View className={styles.left}>
                 <View className={styles.title}>
                   {balanceRecordTypeMap.get(item.type)?.text}
+                </View>
+                <View className={styles.desc}>
+                  {paymentTypeMap.get(item.payment)?.text}
                 </View>
                 <View className={styles.desc}>
                   {dayjs(item.createTime).format(DATE_TIME_FORMAT)}

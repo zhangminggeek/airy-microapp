@@ -76,9 +76,10 @@ const Page = () => {
   // 微信支付订单
   const { run: payOrderViaBalance } = useRequest(postOrderPayBalance, {
     manual: true,
-    onSuccess() {
-      Toast.success('支付成功');
-      refreshList();
+    onSuccess(_, params) {
+      RouterUtil.navigateTo('/packageOrder/pages/create/result/index', {
+        orderId: params?.id,
+      });
     },
   });
 

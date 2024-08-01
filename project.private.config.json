@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageOrder/pages/create/result/index",
+          "pathName": "packageOrder/pages/create/result/index",
+          "query": "orderId=93",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/user/password/setting/index",
           "pathName": "pages/user/password/setting/index",
           "query": "account=15167161150",
@@ -73,13 +80,6 @@
         {
           "name": "pages/user/bought/index",
           "pathName": "pages/user/bought/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "packageOrder/pages/create/result/index",
-          "pathName": "packageOrder/pages/create/result/index",
           "query": "",
           "launchMode": "default",
           "scene": null

@@ -1,10 +1,10 @@
-import { Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import type { ITouchEvent } from '@tarojs/components';
 import type { CSSProperties, FC } from 'react';
 
-import { Avatar, Space } from '@/components';
+import { Avatar } from '@/components';
 
 import './index.scss';
 
@@ -28,11 +28,9 @@ const Company: FC<CompanyProps> = ({
   onClick,
 }) => {
   return (
-    <Space
+    <View
       className={classnames(PREFIX_CLS, className)}
       style={style}
-      size={4}
-      wrap={false}
       onClick={onClick}
     >
       <Avatar
@@ -41,8 +39,8 @@ const Company: FC<CompanyProps> = ({
         name={name}
         size={`${logoSize}`}
       />
-      <Text className={`${PREFIX_CLS}-name`}>{name}</Text>
-    </Space>
+      <View className={`${PREFIX_CLS}-name`}>{name}</View>
+    </View>
   );
 };
 

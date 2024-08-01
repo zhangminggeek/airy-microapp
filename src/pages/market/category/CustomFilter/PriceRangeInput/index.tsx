@@ -18,6 +18,7 @@ const PriceRangeInput: FC<PriceRangeInputProps> = ({ value, onChange }) => {
     <View className={styles.container}>
       <InputNumber
         className={styles.input}
+        placeholder="请输入最低价"
         value={value?.[0]}
         onChange={(v) => {
           onChange?.([v, value?.[1]]);
@@ -26,6 +27,7 @@ const PriceRangeInput: FC<PriceRangeInputProps> = ({ value, onChange }) => {
       <Text className={styles.divider}>-</Text>
       <InputNumber
         className={styles.input}
+        placeholder="请输入最高价"
         value={value?.[1]}
         onChange={(v) => {
           onChange?.([value?.[0], v]);

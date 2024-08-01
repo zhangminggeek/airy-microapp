@@ -15,6 +15,12 @@
     line-height: 72px;
   }
 
+  .nut-actionsheet-item {
+    &.danger {
+      color: $color-danger;
+    }
+  }
+
   .nut-actionsheet-cancel {
     margin-top: 16px;
   }

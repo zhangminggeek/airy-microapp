@@ -11,7 +11,7 @@ const Page = () => {
         status="success"
         okText="返回"
         onOk={() => {
-          RouterUtil.switchTab('/pages/user/published/index');
+          RouterUtil.navigateTo('/pages/user/published/index');
         }}
       />
     </BasicLayout>

@@ -1,12 +1,17 @@
 @import '../../styles/var.scss';
 
 .m-company {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   &-logo {
     position: relative;
-    z-index: 1;
+    flex-shrink: 0;
   }
 
   &-name {
+    flex: 1;
     font-size: $font-size-base;
     color: $text-color-secondary;
     font-weight: 400;

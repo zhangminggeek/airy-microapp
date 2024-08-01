@@ -91,7 +91,9 @@ const Page = () => {
           </View>
         </FormSection>
         <FormSection title="备注">
-          <TextArea />
+          <Form.Item name="depositRefundRemark" noStyle>
+            <TextArea />
+          </Form.Item>
         </FormSection>
       </Form>
     </BasicLayout>

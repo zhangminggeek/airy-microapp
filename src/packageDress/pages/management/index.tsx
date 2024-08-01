@@ -8,7 +8,11 @@ import type { ActionType } from '@/components/List';
 
 import { getProductPage } from '@/api';
 import { Affix, InputSearch, List } from '@/components';
-import { productTypeMap } from '@/constants/product';
+import {
+  ProductStatus,
+  productStatusMap,
+  productTypeMap,
+} from '@/constants/product';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
@@ -82,6 +86,14 @@ const Page = () => {
                         {item.name}
                       </View>
                     </View>
+                    {item.status === ProductStatus['已售出'] ||
+                    item.status === ProductStatus['借调中'] ? (
+                      <View className={styles['card-mask']}>
+                        <View className={styles['card-mask-tag']}>
+                          {productStatusMap.get(item.status)?.text}
+                        </View>
+                      </View>
+                    ) : null}
                   </View>
                 );
               }}
