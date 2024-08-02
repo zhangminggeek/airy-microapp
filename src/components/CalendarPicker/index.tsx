@@ -76,16 +76,17 @@ const CalenderPicker: FC<CalenderPickerProps> = ({
               onChange?.();
               return;
             }
-            onChange?.([
-              dayjs()
-                .year(Number(start[0]))
-                .month(Number(start[1]) - 1)
-                .date(Number(start[2])),
-              dayjs()
-                .year(Number(end[0]))
-                .month(Number(end[1]) - 1)
-                .date(Number(end[2])),
-            ]);
+            const _start = dayjs()
+              .year(Number(start[0]))
+              .month(Number(start[1]) - 1)
+              .date(Number(start[2]))
+              .startOf('day');
+            const _end = dayjs()
+              .year(Number(end[0]))
+              .month(Number(end[1]) - 1)
+              .date(Number(end[2]))
+              .endOf('day');
+            onChange?.([_start, _end]);
           }
         }}
         onClose={() => {

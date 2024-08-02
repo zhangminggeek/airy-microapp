@@ -2,11 +2,13 @@ import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { requestPayment, useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
+import dayjs from 'dayjs';
 import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 
 import type { PostOrderRequest } from '@/api';
+import type { DateType } from '@/components/CalendarPicker';
 import type { Dayjs } from 'dayjs';
 
 import {
@@ -44,6 +46,8 @@ const Page = () => {
 
   // 收货地址id
   const [addressId, setAddressId] = useState<number>();
+  // 借调日期选择过程中开始日期
+  const [startDate, setStartDate] = useState<Dayjs>();
   // 借调日期
   const [leaseDate, setLeaseDate] = useState<[Dayjs, Dayjs]>();
   // 是否显示支付方式选择弹框
@@ -104,7 +108,7 @@ const Page = () => {
           ? data?.sellingPrice
           : Big(data?.leasePrice ?? 0)
               .plus(data?.leaseDeposit ?? 0)
-              .toString(),
+              .toFixed(2),
     };
   }, [type, data]);
 
@@ -131,6 +135,33 @@ const Page = () => {
             <CalenderPicker
               type="range"
               value={leaseDate}
+              disableDate={(date) => {
+                if (!startDate) return false;
+                // @ts-expect-error: UI库类型错误
+                const { year, month, day } = date;
+                const d = dayjs()
+                  .year(year as number)
+                  .month((month as number) - 1)
+                  .date(day as number)
+                  .startOf('d');
+                if (
+                  d.isAfter(startDate.subtract(7, 'd')) &&
+                  d.isBefore(startDate.add(7, 'd'))
+                ) {
+                  return false;
+                }
+                return true;
+              }}
+              onDayClick={(d) => {
+                const [year, month, date] = (d[0] ?? []) as unknown as DateType;
+                setStartDate(
+                  dayjs()
+                    .year(Number(year))
+                    .month(Number(month) - 1)
+                    .date(Number(date))
+                    .startOf('d'),
+                );
+              }}
               onChange={(v: [Dayjs, Dayjs]) => {
                 setLeaseDate(v);
               }}
@@ -175,8 +206,8 @@ const Page = () => {
                 { label: '运费', field: 'express', col: 2 },
               ]}
               data={{
-                price: info.price,
-                deposit: info.deposit,
+                price: `¥${info.price}`,
+                deposit: `¥${info.deposit}`,
                 express: info.express,
               }}
               align="right"
@@ -206,17 +237,9 @@ const Page = () => {
               Toast.info('请选择收货地址');
               return;
             }
-            if (info.type === OrderType['借调']) {
-              if (!leaseDate?.length) {
-                Toast.info('请选择借调时间');
-                return;
-              }
-              if (
-                leaseDate[1].endOf('d').diff(leaseDate[0].endOf('d'), 'd') >= 7
-              ) {
-                Toast.info('借调时间不允许超过7天');
-                return;
-              }
+            if (info.type === OrderType['借调'] && !leaseDate?.length) {
+              Toast.info('请选择借调时间');
+              return;
             }
             setShowPaymentPicker(true);
           }}

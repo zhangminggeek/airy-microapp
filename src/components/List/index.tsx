@@ -42,7 +42,8 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
   request,
   renderItem,
   ...rest
-}: ListProps<R, P, U>) => {
+}: ListProps<R, P, U> &
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'onScroll'>) => {
   useImperativeHandle(actionRef, () => ({
     refresh: async (p) => {
       await fetchData({ ...p, pageNum: `${DEFAULT_PAGE_NUM}` } as unknown as U);
