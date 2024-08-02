@@ -1,9 +1,13 @@
 @import '../../../styles/var.scss';
 
+.content {
+  padding-bottom: 140px;
+}
+
 .info {
   padding: 0 32px;
 
-  .content {
+  &-content {
     padding: 24px 0;
     border-top: 2px solid $border-color-base;
   }
@@ -18,5 +22,13 @@
         font-size: $font-size-base;
       }
     }
+  }
+}
+
+.footer {
+  &-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 }

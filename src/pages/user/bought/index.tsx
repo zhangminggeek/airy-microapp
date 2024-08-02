@@ -1,33 +1,21 @@
 import { Button, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import {
-  requestPayment,
-  stopPullDownRefresh,
-  usePullDownRefresh,
-} from '@tarojs/taro';
+import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import Big from 'big.js';
 import { useRef, useState } from 'react';
 
-import CustomerServicePopup from './CustomerServicePopup';
 import styles from './index.module.scss';
+import useOrderAction from './useOrderAction';
 
 import type { GetOrderBoughtResponse } from '@/api';
 import type { ActionType } from '@/components/List';
 import type { ReactNode } from 'react';
 
-import {
-  getOrderBought,
-  postOrderCancel,
-  postOrderPayBalance,
-  postOrderPayWechat,
-  postOrderReceiveBuyer,
-} from '@/api';
-import { List, PaymentPicker, Product, Space } from '@/components';
-import { PaymentType } from '@/constants/company';
+import { getOrderBought } from '@/api';
+import { List, Product, Space } from '@/components';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
-import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil, Toast } from '@/utils';
+import { RouterUtil } from '@/utils';
 
 type OrderInfo = GetOrderBoughtResponse['list'][0];
 
@@ -43,11 +31,6 @@ const Page = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // 当前操作的订单
   const [currentOrder, setCurrentOrder] = useState<OrderInfo>();
-  // 是否显示客服 popup
-  const [showCustomerServicePopup, setShowCustomerServicePopup] =
-    useState<boolean>(false);
-  // 是否显示支付方式 popup
-  const [showPaymentPicker, setShowPaymentPicker] = useState<boolean>(false);
 
   // 下拉刷新
   usePullDownRefresh(async () => {
@@ -55,81 +38,17 @@ const Page = () => {
     stopPullDownRefresh();
   });
 
-  // 修改订单状态
-  const { run: cancel } = useRequest(postOrderCancel, {
-    manual: true,
-    onSuccess() {
-      Toast.success('操作成功');
-      refreshList();
-    },
-  });
-
-  // 买家确认收货
-  const { run: receive } = useRequest(postOrderReceiveBuyer, {
-    manual: true,
-    onSuccess() {
-      Toast.success('收货成功');
-      refreshList();
-    },
-  });
-
-  // 微信支付订单
-  const { run: payOrderViaBalance } = useRequest(postOrderPayBalance, {
-    manual: true,
-    onSuccess(_, params) {
-      RouterUtil.navigateTo('/packageOrder/pages/create/result/index', {
-        orderId: params?.id,
-      });
-    },
-  });
-
-  // 微信支付订单
-  const { run: payOrderViaWechat } = useRequest(postOrderPayWechat, {
-    manual: true,
-    onSuccess(data) {
-      const { timestamp, nonceStr, pkg, paySign } = data;
-      requestPayment({
-        timeStamp: timestamp.toString(),
-        nonceStr,
-        package: pkg,
-        signType: 'RSA',
-        paySign,
-        success() {
-          Toast.success('支付成功');
-          refreshList();
-        },
-        fail(err) {
-          console.log(err);
-        },
-      });
-    },
-  });
-
-  // 取消订单二次确认
-  const { renderDialog: renderDialogCancel, open: openDialogCancel } =
-    useDialog({
-      id: 'dialog-cancel',
-      content: '确定取消该订单吗？',
-      onConfirm: (_, params) => {
-        cancel({ id: params.id });
-      },
-    });
-
-  // 确认收货二次确认
-  const {
-    renderDialog: renderDialogConfirmReceive,
-    open: openDialogConfirmReceive,
-  } = useDialog({
-    id: 'dialog-confirm-receive',
-    content: '确认收到货了吗？',
-    onConfirm: (_, params) => {
-      receive({ id: params.id });
-    },
-  });
-
   const refreshList = async () => {
     await actionRef.current?.refresh({ status: tabs[currentIndex].value });
   };
+
+  const {
+    renderPopup,
+    setShowCustomerServicePopup,
+    openDialogConfirmReceive,
+    setShowPaymentPicker,
+    openDialogCancel,
+  } = useOrderAction({ order: currentOrder, refresh: refreshList });
 
   const tabs: TabOption[] = [
     {
@@ -275,37 +194,7 @@ const Page = () => {
           />
         </View>
       </View>
-      <CustomerServicePopup
-        visible={showCustomerServicePopup}
-        onClose={() => {
-          setShowCustomerServicePopup(false);
-        }}
-      />
-
-      <PaymentPicker
-        visible={showPaymentPicker}
-        amount={
-          currentOrder?.type === OrderType['出售']
-            ? currentOrder?.market?.sellingPrice
-            : Big(currentOrder?.market?.leasePrice ?? 0)
-                .plus(currentOrder?.market?.leaseDeposit ?? 0)
-                .toString()
-        }
-        onConfirm={async (v) => {
-          setShowPaymentPicker(false);
-          if (!currentOrder) return;
-          if (v === PaymentType['余额']) {
-            payOrderViaBalance({ id: currentOrder.id });
-          } else if (v === PaymentType['微信支付']) {
-            payOrderViaWechat({ id: currentOrder.id });
-          }
-        }}
-        onClose={() => {
-          setShowPaymentPicker(false);
-        }}
-      />
-      {renderDialogCancel()}
-      {renderDialogConfirmReceive()}
+      {renderPopup()}
     </BasicLayout>
   );
 };

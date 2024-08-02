@@ -10,8 +10,8 @@ interface FooterProps {
   className?: string;
   style?: CSSProperties;
   extra?: ReactNode;
-  actions?: ReactNode;
   btnText?: string;
+  children?: ReactNode;
   onConfirm?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -21,8 +21,8 @@ const Footer: FC<FooterProps> = ({
   className,
   style,
   extra,
-  actions,
   btnText,
+  children,
   onConfirm,
 }) => {
   return (
@@ -32,7 +32,7 @@ const Footer: FC<FooterProps> = ({
           <View className={`${PREFIX_CLS}-content-extra`}>{extra}</View>
         ) : null}
         <View className={`${PREFIX_CLS}-content-actions`}>
-          {actions ?? (
+          {children ?? (
             <Button type="primary" size="large" onClick={onConfirm}>
               {btnText}
             </Button>
