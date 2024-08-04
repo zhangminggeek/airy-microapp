@@ -9,6 +9,10 @@
     flex: 1;
   }
 
+  &-icon {
+    color: $text-color-secondary;
+  }
+
   .input-placeholder {
     color: $text-color-placeholder;
   }

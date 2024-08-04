@@ -1,4 +1,3 @@
-import { Close } from '@nutui/icons-react-taro';
 import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
@@ -6,6 +5,8 @@ import classnames from 'classnames';
 import styles from './Card.module.scss';
 
 import type { FC } from 'react';
+
+import { Icon } from '@/components';
 
 interface CardProps {
   pic?: string;
@@ -47,7 +48,11 @@ const Card: FC<CardProps> = ({
       <View className={styles['card-no']}>{no}</View>
       {closeable && (
         <View className={styles['card-close']} onClick={onClose}>
-          <Close size={10} />
+          <Icon
+            className={styles['card-close-icon']}
+            name="CloseOutlined"
+            size={10}
+          />
         </View>
       )}
     </View>

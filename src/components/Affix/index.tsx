@@ -1,10 +1,11 @@
-import { Plus } from '@nutui/icons-react-taro';
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { cloneElement } from 'react';
 
 import type { CSSProperties, FC } from 'react';
+
+import { Icon } from '@/components';
 
 interface AffixProps {
   className?: string;
@@ -25,7 +26,7 @@ const Affix: FC<AffixProps> = ({ className, style, children, onClick }) => {
         type="primary"
         size="large"
         shape="round"
-        icon={<Plus size={28} />}
+        icon={<Icon name="PlusOutlined" size={24} />}
       />
     );
     return cloneElement(content, { onClick });

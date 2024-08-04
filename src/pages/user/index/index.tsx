@@ -3,7 +3,7 @@ import { Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
 
 import AmountItem from './AmountItem';
-import { marketConfig, settingConfig, shopConfig } from './config';
+import { getShopConfig, marketConfig, settingConfig } from './config';
 import IconItem from './IconItem';
 import styles from './index.module.scss';
 
@@ -119,7 +119,7 @@ const Page = () => {
       </Section>
       <Section title="店铺管理">
         <View className={styles.grid}>
-          {shopConfig?.map((item) => (
+          {getShopConfig({ companyId: info?.companyId })?.map((item) => (
             <IconItem key={item.name} {...item} iconSize={44} />
           ))}
         </View>

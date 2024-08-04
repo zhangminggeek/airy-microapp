@@ -15,7 +15,9 @@
     }
 
     &-icon {
-      color: $text-color-placeholder;
+      .m-icon {
+        color: $text-color-placeholder;
+      }
     }
   }
 

@@ -9,6 +9,10 @@
     content: none;
   }
 
+  .icon {
+    color: $color-primary;
+  }
+
   :global {
     .nut-button {
       &-wrap {

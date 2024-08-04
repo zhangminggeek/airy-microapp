@@ -1,10 +1,11 @@
-import { ArrowRight, TriangleDown } from '@nutui/icons-react-taro';
 import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 import { Fragment, useMemo } from 'react';
 
 import type { ITouchEvent } from '@tarojs/components';
 import type { CSSProperties, FC, ReactNode } from 'react';
+
+import { Icon } from '@/components';
 
 import './index.scss';
 
@@ -51,9 +52,13 @@ const PickerView: FC<PickerViewProps> = ({
       >
         <View className={`${PREFIX_CLS}-text`}>{view}</View>
         {arrowType === 'bottom' ? (
-          <TriangleDown className={`${PREFIX_CLS}-icon`} size={14} />
+          <Icon name="DownFilled" className={`${PREFIX_CLS}-icon`} size={14} />
         ) : (
-          <ArrowRight className={`${PREFIX_CLS}-icon`} size={14} />
+          <Icon
+            name="RightOutlined"
+            className={`${PREFIX_CLS}-icon`}
+            size={14}
+          />
         )}
       </View>
       {children}

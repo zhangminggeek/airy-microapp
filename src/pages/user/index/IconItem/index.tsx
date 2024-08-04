@@ -30,7 +30,7 @@ const IconItem: FC<IconItemProps> = ({
   return (
     <Button
       className={styles.btn}
-      icon={<Icon name={icon} size={iconSize} />}
+      icon={<Icon className={styles.icon} name={icon} size={iconSize} />}
       openType={openType}
       fill="none"
       onClick={() => {

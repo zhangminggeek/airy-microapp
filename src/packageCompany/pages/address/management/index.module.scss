@@ -10,8 +10,21 @@
     justify-content: space-between;
     margin-top: 24px;
 
-    &-btn {
-      color: $text-color-secondary;
+    &-action {
+      display: flex;
+      align-items: center;
+
+      &-btn {
+        font-family: PingFangSC-Regular;
+        font-size: $font-size-small;
+
+        :global {
+          .m-icon,
+          .nut-button-text {
+            color: $text-color-secondary;
+          }
+        }
+      }
     }
   }
 }

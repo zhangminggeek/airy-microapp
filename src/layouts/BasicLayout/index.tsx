@@ -1,4 +1,3 @@
-import { ArrowLeft } from '@nutui/icons-react-taro';
 import { SafeArea, Skeleton } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { getSystemInfoSync } from '@tarojs/taro';
@@ -7,6 +6,7 @@ import { useMemo } from 'react';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
+import { Icon } from '@/components';
 import { TAB_PAGE } from '@/constants';
 import { RouterUtil } from '@/utils';
 import { ShareWrapper } from '@/wrappers';
@@ -72,8 +72,9 @@ const BasicLayout: FC<BasicLayoutProps> = ({
       />
       <View className={`${PREFIX_CLS}-header`}>
         {back && (
-          <ArrowLeft
+          <Icon
             className={`${PREFIX_CLS}-header-icon`}
+            name="LeftOutlined"
             onClick={() => {
               if (typeof back === 'string') {
                 if (TAB_PAGE.includes(back)) {

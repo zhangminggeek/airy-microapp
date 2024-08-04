@@ -1,4 +1,3 @@
-import { ArrowRight } from '@nutui/icons-react-taro';
 import { Popup } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
@@ -8,7 +7,7 @@ import type { GetAddressResponse } from '@/api';
 import type { CSSProperties, FC } from 'react';
 
 import { getAddress } from '@/api';
-import { AddressCard } from '@/components';
+import { AddressCard, Icon } from '@/components';
 import { useRequest } from '@/hooks';
 
 import './index.scss';
@@ -74,7 +73,11 @@ const AddressPicker: FC<AddressPickerProps> = ({
           }}
         >
           <View className={`${PREFIX_CLS}-empty-text`}>{placeholder}</View>
-          <ArrowRight className={`${PREFIX_CLS}-empty-icon`} size={16} />
+          <Icon
+            className={`${PREFIX_CLS}-empty-icon`}
+            name="RightOutlined"
+            size={16}
+          />
         </View>
       )}
       <Popup

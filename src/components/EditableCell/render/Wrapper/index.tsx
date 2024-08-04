@@ -1,4 +1,3 @@
-import { ArrowRight } from '@nutui/icons-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useContext } from 'react';
@@ -9,7 +8,7 @@ import { Context } from '../../context';
 import type { ITouchEvent } from '@tarojs/components';
 import type { FC, ReactNode } from 'react';
 
-import { Space } from '@/components';
+import { Icon, Space } from '@/components';
 
 import './index.scss';
 
@@ -32,7 +31,13 @@ const Wrapper: FC<WrapperProps> = ({ className, children, onClick }) => {
     >
       <Space>
         {children}
-        {editable && <ArrowRight size={12} color="#959595" />}
+        {editable && (
+          <Icon
+            className={`${PREFIX_CLS}-wrapper-icon`}
+            name="RightOutlined"
+            size={12}
+          />
+        )}
       </Space>
     </View>
   );

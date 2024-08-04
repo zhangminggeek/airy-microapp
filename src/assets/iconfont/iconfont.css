@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 4593602 */
   src:
-    url('iconfont.woff2?t=1722309959955') format('woff2'),
-    url('iconfont.woff?t=1722309959955') format('woff'),
-    url('iconfont.ttf?t=1722309959955') format('truetype');
+    url('iconfont.woff2?t=1722751574562') format('woff2'),
+    url('iconfont.woff?t=1722751574562') format('woff'),
+    url('iconfont.ttf?t=1722751574562') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,70 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-TagFilled:before {
+  content: '\e611';
+}
+
+.icon-CurrencyFilled:before {
+  content: '\e612';
+}
+
+.icon-EditOutlined:before {
+  content: '\e6c2';
+}
+
+.icon-SearchOutlined:before {
+  content: '\e6c9';
+}
+
+.icon-MessageFilled:before {
+  content: '\e60d';
+}
+
+.icon-CustomerServiceFilled:before {
+  content: '\e60e';
+}
+
+.icon-AddressFilled:before {
+  content: '\e60f';
+}
+
+.icon-ProtocolFilled:before {
+  content: '\e610';
+}
+
+.icon-IdentityVerificationFilled:before {
+  content: '\e608';
+}
+
+.icon-FeedbackFilled:before {
+  content: '\e609';
+}
+
+.icon-PaymentFilled:before {
+  content: '\e60a';
+}
+
+.icon-BagFilled:before {
+  content: '\e60b';
+}
+
+.icon-ShopFilled:before {
+  content: '\e607';
+}
+
+.icon-PlaneFilled:before {
+  content: '\e60c';
+}
+
+.icon-HideOutlined:before {
+  content: '\e6d1';
+}
+
+.icon-EyeOutlined:before {
+  content: '\e7a0';
 }
 
 .icon-ShiJianFilled:before {
@@ -140,10 +204,6 @@
 
 .icon-QingCOutlined:before {
   content: '\e9c2';
-}
-
-.icon-UnionPayMulticolored:before {
-  content: '\ea11';
 }
 
 .icon-LianJFilled:before {

@@ -1,10 +1,11 @@
-import { Eye, Marshalling } from '@nutui/icons-react-taro';
 import { Input, View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useState } from 'react';
 
 import type { InputProps } from '@tarojs/components';
 import type { FC } from 'react';
+
+import { Icon } from '@/components';
 
 import './index.scss';
 
@@ -35,19 +36,19 @@ const InputPassword: FC<InputPasswordProps> = ({
         {...rest}
       />
       {type === 'text' ? (
-        <Eye
+        <Icon
           className={`${PREFIX_CLS}-icon`}
+          name="EyeOutlined"
           size={18}
-          color="#959595"
           onClick={() => {
             setType('password');
           }}
         />
       ) : (
-        <Marshalling
+        <Icon
           className={`${PREFIX_CLS}-icon`}
+          name="HideOutlined"
           size={18}
-          color="#959595"
           onClick={() => {
             setType('text');
           }}

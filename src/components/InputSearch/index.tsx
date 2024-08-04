@@ -1,4 +1,3 @@
-import { Search } from '@nutui/icons-react-taro';
 import { Input } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
@@ -6,6 +5,8 @@ import { forwardRef, useMemo, useState } from 'react';
 
 import type { ITouchEvent } from '@tarojs/components';
 import type { CSSProperties } from 'react';
+
+import { Icon } from '@/components';
 
 import './index.scss';
 
@@ -52,7 +53,11 @@ const InputSearch = forwardRef<ActionType, InputSearchProps>(
         style={style}
         onClick={onClick}
       >
-        <Search className={`${PREFIX_CLS}-icon`} size={14} color="#4a4a4a" />
+        <Icon
+          className={`${PREFIX_CLS}-icon`}
+          name="SearchOutlined"
+          size={14}
+        />
         <Input
           ref={ref}
           className={`${PREFIX_CLS}-input`}

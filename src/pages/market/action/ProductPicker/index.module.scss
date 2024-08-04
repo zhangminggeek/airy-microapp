@@ -8,10 +8,14 @@
     width: 160px;
     height: 160px;
     border: 2px dashed $border-color-base;
-    color: $text-color-secondary;
+
+    &-icon {
+      color: $text-color-secondary;
+    }
 
     &-text {
       font-size: $font-size-small;
+      color: $text-color-secondary;
     }
   }
 }

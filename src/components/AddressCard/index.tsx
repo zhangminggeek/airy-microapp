@@ -1,10 +1,9 @@
-import { ArrowRight } from '@nutui/icons-react-taro';
 import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Tag } from '@/components';
+import { Icon, Tag } from '@/components';
 import { useAddress } from '@/hooks';
 
 import './index.scss';
@@ -65,7 +64,7 @@ const AddressCard: FC<AddressCardProps> = ({
         <View className={`${PREFIX_CLS}-content-desc`}>{_address}</View>
         {link && (
           <View className={`${PREFIX_CLS}-content-icon`}>
-            <ArrowRight size={16} color="#C7C7C7" />
+            <Icon name="RightOutlined" size={16} />
           </View>
         )}
       </View>

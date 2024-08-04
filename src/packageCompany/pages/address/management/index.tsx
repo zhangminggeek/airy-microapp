@@ -1,4 +1,3 @@
-import { Edit, Trash } from '@nutui/icons-react-taro';
 import { Button, Checkbox } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
@@ -6,7 +5,7 @@ import { useDidShow } from '@tarojs/taro';
 import styles from './index.module.scss';
 
 import { deleteAddressId, getAddress, putAddressDefault } from '@/api';
-import { AddressCard } from '@/components';
+import { AddressCard, Icon } from '@/components';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -72,10 +71,10 @@ const Page = () => {
               >
                 设为默认地址
               </Checkbox>
-              <View>
+              <View className={styles['card-footer-action']}>
                 <Button
-                  className={styles['card-footer-btn']}
-                  icon={<Edit />}
+                  className={styles['card-footer-action-btn']}
+                  icon={<Icon name="EditOutlined" size={14} />}
                   fill="none"
                   size="mini"
                   onClick={() => {
@@ -89,8 +88,8 @@ const Page = () => {
                 </Button>
                 {data?.length > 1 ? (
                   <Button
-                    className={styles['card-footer-btn']}
-                    icon={<Trash />}
+                    className={styles['card-footer-action-btn']}
+                    icon={<Icon name="DeleteOutlined" size={14} />}
                     fill="none"
                     size="mini"
                     onClick={() => {

@@ -1,4 +1,3 @@
-import { Add } from '@nutui/icons-react-taro';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 import { Fragment, useMemo } from 'react';
@@ -10,6 +9,7 @@ import type { GetProductResponse } from '@/api';
 import type { FC } from 'react';
 
 import { getProduct } from '@/api';
+import { Icon } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { parseJson, RouterUtil } from '@/utils';
@@ -58,7 +58,11 @@ const ProductPicker: FC<ProductPickerProps> = ({ value, onChange }) => {
               RouterUtil.navigateTo('/packageDress/pages/select/index');
             }}
           >
-            <Add className={styles['btn-icon']} size={24} />
+            <Icon
+              className={styles['btn-icon']}
+              name="PlusOutlined"
+              size={24}
+            />
             <Text className={styles['btn-text']}>添加宝贝</Text>
           </View>
         )}

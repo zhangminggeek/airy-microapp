@@ -6,6 +6,118 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "41329343",
+      "name": "TagFilled",
+      "font_class": "TagFilled",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "41329342",
+      "name": "CurrencyFilled",
+      "font_class": "CurrencyFilled",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "16593547",
+      "name": "EditOutlined",
+      "font_class": "EditOutlined",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "16593555",
+      "name": "SearchOutlined",
+      "font_class": "SearchOutlined",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    },
+    {
+      "icon_id": "41324779",
+      "name": "MessageFilled",
+      "font_class": "MessageFilled",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "41324778",
+      "name": "CustomerServiceFilled",
+      "font_class": "CustomerServiceFilled",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "41324777",
+      "name": "AddressFilled",
+      "font_class": "AddressFilled",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "41324776",
+      "name": "ProtocolFilled",
+      "font_class": "ProtocolFilled",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "41324785",
+      "name": "IdentityVerificationFilled",
+      "font_class": "IdentityVerificationFilled",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "41324784",
+      "name": "FeedbackFilled",
+      "font_class": "FeedbackFilled",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "41324783",
+      "name": "PaymentFilled",
+      "font_class": "PaymentFilled",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "41324782",
+      "name": "BagFilled",
+      "font_class": "BagFilled",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "41324781",
+      "name": "ShopFilled",
+      "font_class": "ShopFilled",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "41324780",
+      "name": "PlaneFilled",
+      "font_class": "PlaneFilled",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "16593814",
+      "name": "HideOutlined",
+      "font_class": "HideOutlined",
+      "unicode": "e6d1",
+      "unicode_decimal": 59089
+    },
+    {
+      "icon_id": "23690864",
+      "name": "EyeOutlined",
+      "font_class": "EyeOutlined",
+      "unicode": "e7a0",
+      "unicode_decimal": 59296
+    },
+    {
       "icon_id": "37507681",
       "name": "ShiJianFilled",
       "font_class": "ShiJianFilled",
@@ -228,13 +340,6 @@
       "font_class": "QingCOutlined",
       "unicode": "e9c2",
       "unicode_decimal": 59842
-    },
-    {
-      "icon_id": "39799857",
-      "name": "UnionPayMulticolored",
-      "font_class": "UnionPayMulticolored",
-      "unicode": "ea11",
-      "unicode_decimal": 59921
     },
     {
       "icon_id": "40398407",
