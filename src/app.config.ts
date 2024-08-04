@@ -22,6 +22,7 @@ export default {
     'pages/purchase/select/index',
     // 我的
     'pages/user/index/index',
+    'pages/user/password/verification/index',
     'pages/user/password/code/index',
     'pages/user/password/setting/index',
     'pages/user/published/index',

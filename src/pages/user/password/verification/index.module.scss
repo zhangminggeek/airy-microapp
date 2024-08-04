@@ -1,0 +1,61 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
+.content {
+  @include flex-center(column);
+  padding: 72px;
+
+  .icon {
+    color: $color-primary;
+    margin-bottom: 48px;
+  }
+
+  .title {
+    font-size: $font-size-large;
+    color: $text-color-main;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .desc {
+    width: 622px;
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    font-weight: 400;
+    text-align: center;
+  }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 32px;
+  background: #ffffff;
+  border-radius: 16px;
+
+  &-icon-prefix {
+    color: $text-color-main;
+  }
+
+  &-content {
+    flex: 1;
+  }
+
+  &-title {
+    font-size: $font-size-large;
+    color: $text-color-main;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  &-desc {
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    font-weight: 400;
+  }
+
+  &-icon-suffix {
+    color: $text-color-placeholder;
+  }
+}

@@ -48,7 +48,7 @@ type ObjectType = { [key in string]: any };
  * @param obj - 原对象
  * @returns 移除无效属性后的对象
  */
-export function removeNilKey(obj: ObjectType): ObjectType {
+export const removeNilKey = (obj: ObjectType): ObjectType => {
   if (!obj) {
     return {};
   }
@@ -59,7 +59,7 @@ export function removeNilKey(obj: ObjectType): ObjectType {
     }
   });
   return newObj;
-}
+};
 
 /**
  * 加密
@@ -131,4 +131,15 @@ export const formatPriceRange = (
   } else {
     return '';
   }
+};
+
+/**
+ * 脱敏
+ * @param val 值
+ * @returns 脱敏后的值
+ */
+export const desensitize = (val: string) => {
+  const prefix = val.substring(0, 3);
+  const suffix = val.substring(val.length - 4, val.length);
+  return `${prefix}****${suffix}`;
 };

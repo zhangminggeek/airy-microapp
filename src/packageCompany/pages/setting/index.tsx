@@ -60,7 +60,9 @@ const Page = () => {
             renderConfig: {
               renderType: 'custom',
               onClick: () => {
-                RouterUtil.navigateTo('/pages/user/password/code/index');
+                RouterUtil.navigateTo(
+                  '/pages/user/password/verification/index',
+                );
               },
             },
           },
