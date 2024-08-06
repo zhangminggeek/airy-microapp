@@ -1,4 +1,4 @@
-import { Button, Image } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 import dayjs from 'dayjs';
@@ -9,7 +9,7 @@ import PriceItem from './PriceItem';
 import type { ProductBizData } from '@/interfaces/product';
 
 import { getPurchaseId } from '@/api';
-import { Company, Empty, Footer, Product, Tag } from '@/components';
+import { Company, Empty, Footer, Media, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import {
   ProductFiledKey,
@@ -100,13 +100,14 @@ const Page = () => {
         {data?.picList?.length ? (
           <View className={styles.pic}>
             {data?.picList?.map((item) => (
-              <Image
+              <Media
                 key={item.id}
                 className={styles['pic-item']}
                 src={item.url}
                 width={windowWidth - 32}
                 height={windowWidth - 32}
-                mode="aspectFill"
+                mode="widthFix"
+                preview
               />
             ))}
           </View>

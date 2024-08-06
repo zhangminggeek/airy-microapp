@@ -42,8 +42,9 @@
 
       &-image {
         flex-shrink: 0;
+        width: 144px;
+        height: 144px;
         border-radius: 8px;
-        overflow: hidden;
       }
 
       &-content {

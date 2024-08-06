@@ -1,4 +1,3 @@
-import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
@@ -8,7 +7,7 @@ import SellingPrice, { type SellingPriceProps } from '../SellingPrice';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Company, Icon, Space, Tag } from '@/components';
+import { Company, Icon, Media, Space, Tag } from '@/components';
 import { ProductStatus, productStatusMap } from '@/constants/product';
 
 import './index.scss';
@@ -55,12 +54,11 @@ const Card: FC<CardProps> = ({
   return (
     <View className={classnames(PREFIX_CLS, clasName)} onClick={onClick}>
       <View className={`${PREFIX_CLS}-header`}>
-        <Image
-          className={`${PREFIX_CLS}-image`}
+        <Media
+          className={`${PREFIX_CLS}-header-media`}
           src={image}
           mode="aspectFill"
-          width="100%"
-          height="100%"
+          controls={false}
         />
       </View>
       <View className={`${PREFIX_CLS}-content`}>

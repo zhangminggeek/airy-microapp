@@ -1,11 +1,11 @@
-import { Button, Form, Image, TextArea } from '@nutui/nutui-react-taro';
+import { Button, Form, TextArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { useRouter } from '@tarojs/taro';
 
 import styles from './index.module.scss';
 
 import { getOrderId, postOrderReceiveSeller } from '@/api';
-import { FormSection, InputNumber, Link } from '@/components';
+import { FormSection, InputNumber, Link, Media } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -48,11 +48,9 @@ const Page = () => {
       >
         <FormSection>
           <View className={styles.product}>
-            <Image
+            <Media
               className={styles['product-image']}
               src={data?.market?.product?.picList?.[0]?.url}
-              width={64}
-              height={64}
               mode="aspectFill"
             />
             <View className={styles['product-title']}>

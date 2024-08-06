@@ -1,4 +1,4 @@
-import { Image, Tabs } from '@nutui/nutui-react-taro';
+import { Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { useRef, useState } from 'react';
 
@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 import type { ActionType } from '@/components/List';
 
 import { getProductPage } from '@/api';
-import { Affix, InputSearch, List } from '@/components';
+import { Affix, InputSearch, List, Media } from '@/components';
 import {
   ProductStatus,
   productStatusMap,
@@ -74,10 +74,9 @@ const Page = () => {
                     }}
                   >
                     <View className={styles['card-header']}>
-                      <Image
+                      <Media
+                        className={styles['card-header-image']}
                         src={item.picList?.[0]?.url}
-                        width="100%"
-                        height="100%"
                         mode="aspectFill"
                       />
                     </View>

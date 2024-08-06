@@ -24,6 +24,11 @@
       gap: 16px;
       height: 192px;
 
+      &-image {
+        width: 104px;
+        height: 104px;
+      }
+
       &-label {
         font-size: $font-size-small;
         color: $text-color-secondary;

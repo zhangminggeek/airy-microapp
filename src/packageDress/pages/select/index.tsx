@@ -1,7 +1,6 @@
 import {
   Button,
   Checkbox,
-  Image,
   SafeArea,
   Skeleton,
   TabPane,
@@ -17,7 +16,7 @@ import styles from './index.module.scss';
 import type { GetProductResponse } from '@/api';
 
 import { getProduct } from '@/api';
-import { InputSearch } from '@/components';
+import { InputSearch, Media } from '@/components';
 import { ProductStatus, productTypeMap } from '@/constants/product';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
@@ -88,12 +87,11 @@ const Page = () => {
                   setSelectedProduct(item);
                 }}
               >
-                <Image
+                <Media
                   className={styles['item-image']}
                   src={item.picList?.[0]?.url}
-                  width={72}
-                  height={72}
                   mode="aspectFill"
+                  controls={false}
                 />
                 <View className={styles['item-content']}>
                   <View className={styles['item-content-name']}>

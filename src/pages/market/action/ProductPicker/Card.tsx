@@ -1,4 +1,3 @@
-import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
@@ -6,7 +5,7 @@ import styles from './Card.module.scss';
 
 import type { FC } from 'react';
 
-import { Icon } from '@/components';
+import { Icon, Media } from '@/components';
 
 interface CardProps {
   pic?: string;
@@ -36,12 +35,11 @@ const Card: FC<CardProps> = ({
       })}
       onClick={onClick}
     >
-      <Image
+      <Media
         className={styles['card-image']}
         src={pic}
-        width={80}
-        height={80}
         mode="aspectFill"
+        controls={false}
       />
       <View className={styles['card-name']}>{name}</View>
       <View className={styles['card-desc']}>{desc}</View>

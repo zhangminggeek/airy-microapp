@@ -1,4 +1,3 @@
-import { Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 
@@ -8,8 +7,7 @@ import SellingPrice, { type SellingPriceProps } from '../SellingPrice';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import ImageBorrow from '@/assets/icons/borrow.png';
-import { Space } from '@/components';
+import { Media, Space } from '@/components';
 import { OrderType } from '@/constants/order';
 
 import './index.scss';
@@ -48,21 +46,18 @@ const Brief: FC<BriefProps> = ({
     <View className={classnames(PREFIX_CLS, className)} onClick={onClick}>
       {header ? <View className={`${PREFIX_CLS}-header`}>{header}</View> : null}
       <View className={`${PREFIX_CLS}-body`}>
-        <Image
+        <Media
           className={`${PREFIX_CLS}-body-image`}
           src={image}
           mode="aspectFill"
-          width={72}
-          height={72}
+          controls={false}
         />
         <View className={`${PREFIX_CLS}-body-content`}>
           <View className={`${PREFIX_CLS}-body-content-title`}>
             {type === OrderType['借调'] && (
-              <Image
-                className={`${PREFIX_CLS}-icon`}
-                src={ImageBorrow}
-                width={18}
-                height={18}
+              <LeasePrice
+                className={`${PREFIX_CLS}-body-content-title-icon`}
+                iconOnly
               />
             )}
             <View className={`${PREFIX_CLS}-body-content-title-text`}>

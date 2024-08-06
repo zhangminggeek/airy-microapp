@@ -21,6 +21,7 @@ import InputPassword from './InputPassword';
 import InputSearch from './InputSearch';
 import Link from './Link';
 import List from './List';
+import Media from './Media';
 import ModalForm from './ModalForm';
 import PageFooter from './PageFooter';
 import PaymentPicker from './PaymentPicker';
@@ -60,6 +61,7 @@ export {
   InputSearch,
   Link,
   List,
+  Media,
   ModalForm,
   PageFooter,
   PaymentPicker,

@@ -1,4 +1,4 @@
-import { Button, Image } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { requestPayment, useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
@@ -22,6 +22,7 @@ import {
   CalenderPicker,
   Cell,
   Descriptions,
+  Media,
   PageFooter,
   PaymentPicker,
   Product,
@@ -177,11 +178,9 @@ const Page = () => {
         <Cell.Group>
           <Cell>
             <View className={styles.product}>
-              <Image
+              <Media
                 className={styles['product-image']}
                 src={data?.product?.picList?.[0]?.url}
-                width={72}
-                height={72}
                 mode="aspectFill"
               />
               <View className={styles['product-title']}>{data?.title}</View>

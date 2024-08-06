@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "21820088",
+      "name": "PlayArrowFilled",
+      "font_class": "PlayArrowFilled",
+      "unicode": "e77a",
+      "unicode_decimal": 59258
+    },
+    {
       "icon_id": "41329343",
       "name": "TagFilled",
       "font_class": "TagFilled",

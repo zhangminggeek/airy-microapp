@@ -143,3 +143,58 @@ export const desensitize = (val: string) => {
   const suffix = val.substring(val.length - 4, val.length);
   return `${prefix}****${suffix}`;
 };
+
+/**
+ * 从url中获取文件名
+ * @param url 文件地址
+ * @returns 文件名
+ */
+export const getFilenameFromUrl = (url?: string) => {
+  try {
+    if (!url) return '';
+    return (
+      new URL(url).pathname
+        ?.split('/')
+        ?.at(-1)
+        ?.split('.')
+        ?.slice(0, -1)
+        ?.join('') ?? ''
+    );
+  } catch (err) {
+    console.log(err);
+    return '';
+  }
+};
+
+/**
+ * 获取文件后缀
+ * @param url 文件地址
+ * @returns 文件后缀
+ */
+export const getSuffixFromUrl = (url?: string, dot: boolean = false) => {
+  try {
+    if (!url) return '';
+    const suffix =
+      new URL(url).pathname?.split('.')?.at(-1)?.toLowerCase() ?? '';
+    return `${dot ? '.' : ''}${suffix}`;
+  } catch (err) {
+    console.log(err);
+    return '';
+  }
+};
+
+/**
+ * 从 url 中获取参数
+ * @param url url
+ * @param key 参数 key
+ * @returns 参数值
+ */
+export const getParamFromUrl = (url: string, key: string) => {
+  try {
+    const params = new URL(url).searchParams;
+    return params.get(key) ?? undefined;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};

@@ -1,14 +1,16 @@
-import { Image, ImagePreview, Swiper } from '@nutui/nutui-react-taro';
+import { ImagePreview, Swiper } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../../constants';
 
+import type { ImagePreviewProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
-import { Space } from '@/components';
+import { Media, Space } from '@/components';
+import { formatPreviewSrc, isVideo } from '@/components/Media/utils';
 
 import './index.scss';
 
@@ -26,6 +28,25 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
   // 是否显示大图预览
   const [showPreview, setShowPreview] = useState<boolean>(false);
 
+  const previewUrls = useMemo(() => {
+    return images?.reduce(
+      (prev, cur) => {
+        if (isVideo(cur)) {
+          const ret = formatPreviewSrc<'videos'>(cur);
+          prev.videos.push(ret);
+        } else {
+          const ret = formatPreviewSrc<'images'>(cur);
+          prev.images.push(ret);
+        }
+        return prev;
+      },
+      {
+        videos: [] as ImagePreviewProps['videos'],
+        images: [] as ImagePreviewProps['images'],
+      },
+    );
+  }, [images]);
+
   return (
     <View className={classnames(PREFIX_CLS)}>
       <Swiper
@@ -39,7 +60,7 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
       >
         {images?.map((url, index) => (
           <Swiper.Item key={index}>
-            <Image
+            <Media
               className={`${PREFIX_CLS}-image`}
               src={url}
               width="100vw"
@@ -53,10 +74,13 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
         ))}
       </Swiper>
       <ImagePreview
+        className={`${PREFIX_CLS}-preview`}
         visible={showPreview}
-        images={images?.map((src) => ({ src }))}
+        images={previewUrls?.images}
+        videos={previewUrls?.videos}
         defaultValue={selectedIndex + 1}
-        closeOnContentClick
+        closeIcon
+        closeIconPosition="bottom"
         onClose={() => {
           setShowPreview(false);
         }}
@@ -74,12 +98,10 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
                 swiperRef.current?.to(index);
               }}
             >
-              <Image
-                className={`${PREFIX_CLS}-thumbnail`}
+              <Media
+                className={`${PREFIX_CLS}-thumbnail-item-media`}
                 src={url}
                 mode="aspectFill"
-                width={48}
-                height={48}
               />
             </View>
           ))}
