@@ -140,6 +140,7 @@ const Page = () => {
                 if (!startDate) return false;
                 // @ts-expect-error: UI库类型错误
                 const { year, month, day } = date;
+                if (!year || !month || !day) return false;
                 const d = dayjs()
                   .year(year as number)
                   .month((month as number) - 1)
