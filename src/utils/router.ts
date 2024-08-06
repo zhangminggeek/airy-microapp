@@ -117,8 +117,8 @@ export class RouterUtil {
     } catch (e) {
       try {
         this.switchTab(target, params);
-      } catch (error) {
-        console.log('error', error);
+      } catch (err) {
+        console.log('err', err);
       }
     }
   }

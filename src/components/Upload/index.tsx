@@ -91,8 +91,8 @@ const Upload: FC<UploadProps> = ({
       } else {
         onChange?.(value?.concat([url]));
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     } finally {
       setUploading(false);
     }

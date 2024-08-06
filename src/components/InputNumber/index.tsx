@@ -58,7 +58,6 @@ const InputNumber: FC<InputNumberProps> = ({
           } else {
             v = v.replace(/\./g, '');
           }
-          console.log('v', v);
           onChange?.(v);
           return v;
         }}

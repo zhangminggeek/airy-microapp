@@ -49,14 +49,15 @@ const Page = () => {
 
   const params = useMemo(() => {
     const { order, ...restTabFilterValue } = tabFilterValue ?? {};
-    const { filter, ...restSubFilterValue } = subFilterValue ?? {};
+    const { filter = [], ...restSubFilterValue } = subFilterValue ?? {};
+
     const filterArr = Object.entries({
       [config?.main?.filed ?? '']: mainFilterValue,
       ...restTabFilterValue,
-      ...filter,
     })
       .map(([k, v]) => ({ field: k, value: v }))
-      .filter((item) => !isNil(item.value));
+      .filter((item) => !isNil(item.value))
+      .concat(filter);
 
     return {
       status: MarketProductStatus['在售'],
@@ -130,7 +131,6 @@ const Page = () => {
                     ...(config?.tab?.map((item) => item.name) ?? []),
                   ].filter((item) => !!item)}
                   onOk={(v) => {
-                    console.log('filter', v);
                     setSubFilterValue(v);
                     ref.current?.toggle(false);
                   }}

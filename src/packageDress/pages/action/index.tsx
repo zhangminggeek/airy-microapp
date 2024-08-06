@@ -60,7 +60,6 @@ const Page = () => {
       parseJson<ProductBizData>(bizData, []).forEach((item) => {
         formData[item.fieldKey] = [item.fieldValue];
       });
-      console.log('formData', formData);
       form.setFieldsValue(formData);
       setCurrentCode(typeCode as ProductType);
     },

@@ -74,7 +74,7 @@ const CustomFilter: FC<CustomFilterProps> = ({
         const filter: FiledType[] = [];
         for (const k in restValue) {
           if (restValue[k]?.length) {
-            filter.push({ field: k, value: restValue[k] });
+            filter.push({ field: k, value: restValue[k]?.[0] });
           }
         }
         onOk?.({ ...ret, filter });

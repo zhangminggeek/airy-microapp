@@ -32,10 +32,6 @@ const Page = () => {
   // 获取服饰详情
   const { data, run: fetchDetail } = useRequest(getProductId, {
     manual: true,
-    onSuccess(d) {
-      const a = parseJson<ProductBizData>(d?.bizData ?? '', []);
-      console.log(a);
-    },
   });
 
   // 删除服饰

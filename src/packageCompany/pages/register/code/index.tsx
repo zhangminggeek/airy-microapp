@@ -1,7 +1,7 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import Taro, { useDidShow } from '@tarojs/taro';
-import { useState } from 'react';
+import Taro from '@tarojs/taro';
+import { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -29,10 +29,10 @@ const Page = () => {
     undefined,
   );
 
-  useDidShow(() => {
+  useEffect(() => {
     setPhone(info?.contactPhone);
     getCode({ account: info?.contactPhone });
-  });
+  }, []);
 
   // 获取验证码
   const { run: getCode } = useRequest(getAccountRegisterCodeAccount, {
