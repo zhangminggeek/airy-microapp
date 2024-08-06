@@ -245,22 +245,6 @@ const Page = () => {
             </Form.Item>
           )}
         </FormSection>
-        {createFromAlbum && (
-          <FormSection fill>
-            <Form.Item
-              label="类型"
-              name="typeCode"
-              rules={[{ required: true, message: '请选择商品类型' }]}
-            >
-              <Product.TypePicker
-                wrap={false}
-                onChange={(v) => {
-                  setCurrentTypeCode(v?.[0]);
-                }}
-              />
-            </Form.Item>
-          </FormSection>
-        )}
         <FormSection fill>
           <Form.Item
             label="出售/借调"
@@ -328,20 +312,20 @@ const Page = () => {
             />
           </Form.Item>
         </FormSection>
-        <FormSection title="新旧程度">
-          <Form.Item
-            name="quality"
-            noStyle
-            rules={[{ required: true, message: '请选择新旧程度' }]}
-          >
-            <TagChecker
-              options={Array.from(productQualityMap.values())}
-              allowEmpty={false}
-            />
-          </Form.Item>
-        </FormSection>
         {createFromAlbum && (
           <FormSection fill>
+            <Form.Item
+              label="类型"
+              name="typeCode"
+              rules={[{ required: true, message: '请选择商品类型' }]}
+            >
+              <Product.TypePicker
+                wrap={false}
+                onChange={(v) => {
+                  setCurrentTypeCode(v?.[0]);
+                }}
+              />
+            </Form.Item>
             <Form.Item
               label="尺码"
               name="size"
@@ -362,6 +346,18 @@ const Page = () => {
               : null}
           </FormSection>
         )}
+        <FormSection title="新旧程度">
+          <Form.Item
+            name="quality"
+            noStyle
+            rules={[{ required: true, message: '请选择新旧程度' }]}
+          >
+            <TagChecker
+              options={Array.from(productQualityMap.values())}
+              allowEmpty={false}
+            />
+          </Form.Item>
+        </FormSection>
         {createFromAlbum && (
           <FormSection title="标签">
             <Form.Item name="tagIdList" noStyle>
