@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, List, Product, Space } from '@/components';
+import { OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
@@ -61,6 +62,7 @@ const Page = () => {
     if (companyId === info?.companyId) return null;
     return data?.follewed ? (
       <Button
+        style={{ background: '#fff', color: '#c7c7c7' }}
         size="small"
         onClick={() => {
           open({ params: { id: companyId } });
@@ -70,8 +72,9 @@ const Page = () => {
       </Button>
     ) : (
       <Button
+        style={{ background: '#fff' }}
         type="primary"
-        fill="outline"
+        fill="none"
         size="small"
         onClick={() => {
           toggleFollow({ id: Number(id), isFollow: true });
@@ -83,55 +86,63 @@ const Page = () => {
   }, [id, info, data]);
 
   return (
-    <BasicLayout back fill share={false}>
-      <View className={styles['header-wrapper']}>
-        <View className={styles.header}>
-          <View className={styles.top}>
-            <Avatar
-              className={styles.logo}
-              src={data?.logo}
-              name={data?.name}
-              size="64"
-            />
-            <View className={styles.content}>
-              <View className={styles.name}>{data?.name}</View>
-              <Space className={styles.info} split>
-                <Text className={styles['info-item']}>
-                  已卖出{data?.sold ?? 0}件
-                </Text>
-                <Text className={styles['info-item']}>
-                  {data?.fansCount ?? 0}粉丝
-                </Text>
-              </Space>
-            </View>
-            {followBtn}
+    <BasicLayout
+      className={styles.container}
+      style={{
+        background: `url(${OSS_ASSETS_DIR}/company_bg.jpg)`,
+        backgroundSize: '100% 100%',
+      }}
+      back
+      fill
+      transparent
+      share={false}
+    >
+      <View className={styles.header}>
+        <View className={styles.top}>
+          <Avatar
+            className={styles.logo}
+            src={data?.logo}
+            name={data?.name}
+            size="64"
+          />
+          <View className={styles.content}>
+            <View className={styles.name}>{data?.name}</View>
+            <Space className={styles.info} split>
+              <Text className={styles['info-item']}>
+                已卖出{data?.sold ?? 0}件
+              </Text>
+              <Text className={styles['info-item']}>
+                {data?.fansCount ?? 0}粉丝
+              </Text>
+            </Space>
           </View>
-          <View className={styles.bottom}>
-            <View className={styles.intro}>{data?.intro ?? '暂无介绍～'}</View>
-            <Button
-              icon={<Icon name="ShareOneOutlined" size={14} />}
-              size="small"
-              fill="none"
-              openType="share"
-            >
-              分享
-            </Button>
-          </View>
+          {followBtn}
         </View>
       </View>
       <View className={styles.body}>
+        <View className={styles.top}>
+          <View className={styles.intro}>{data?.intro ?? '暂无介绍～'}</View>
+          <Button
+            className={styles['btn-share']}
+            icon={<Icon name="ShareOneOutlined" size={14} />}
+            size="mini"
+            fill="none"
+            openType="share"
+          >
+            分享
+          </Button>
+        </View>
         <Tabs
           className={styles.tabs}
-          activeType="button"
           align="left"
           value={tabIndex}
           onChange={(value: number) => {
             setTabIndex(value);
           }}
         >
-          <Tabs.TabPane title="全部"></Tabs.TabPane>
+          <Tabs.TabPane title="全部" />
           {Array.from(productTypeMap.values()).map((item) => (
-            <Tabs.TabPane title={item.text}></Tabs.TabPane>
+            <Tabs.TabPane title={item.text} key={item.value} />
           ))}
         </Tabs>
         <View className={styles.list}>

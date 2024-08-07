@@ -1,20 +1,21 @@
 @import '../../../styles/var.scss';
 @import '../../../styles/mixins.scss';
 
-.header {
-  padding: 24px 0;
-  border-bottom: 2px solid $border-color-base;
-
-  &-wrapper {
-    padding: 0 24px;
-    background-color: #fff;
+.container {
+  :global {
+    .nut-safe-area {
+      background-color: #fff;
+    }
   }
+}
+
+.header {
+  padding: 24px;
 
   .top {
     display: flex;
     align-items: center;
     gap: 24px;
-    margin-bottom: 24px;
 
     .content {
       flex: 1;
@@ -28,23 +29,30 @@
       .info {
         &-item {
           font-size: $font-size-small;
-          color: $text-color-secondary;
+          color: $text-color-base;
           font-weight: 400;
         }
-
-        // :global {
-        //   .m-space-split {
-        //     height: 40px;
-        //   }
-        // }
+        :global {
+          .m-space-split-divider {
+            border-inline-start: 4rpx solid $text-color-secondary;
+          }
+        }
       }
     }
   }
+}
 
-  .bottom {
+.body {
+  background-color: #fff;
+  border-radius: 40px 40px 0 0;
+  overflow: hidden;
+  min-height: calc(100vh - 420px);
+
+  .top {
     display: flex;
     align-items: center;
     gap: 24px;
+    padding: 24px;
 
     .intro {
       flex: 1;
@@ -52,26 +60,34 @@
       color: $text-color-main;
       font-weight: 400;
     }
-  }
-}
 
-.body {
+    .btn-share {
+      background: $background-color-disabled;
+      border-radius: 12px;
+    }
+  }
+
   .tabs {
+    border-bottom: 2px solid $border-color-base;
+
     :global {
-      .nut-tabs-titles-item-text {
-        color: $text-color-base;
-        background-color: $background-color-disabled;
-        border: 2px solid $background-color-disabled;
-        border-radius: 32px;
-        padding: 8px 32px;
+      .nut-tabs-list {
+        padding: 0 16px;
       }
 
-      .nut-tabs-titles-item-active {
-        .nut-tabs-titles-item-text {
-          color: #fff;
-          background-color: $color-primary;
-          border: 2px solid $color-primary;
-        }
+      .nut-tabs-titles {
+        height: 72px;
+      }
+
+      .nut-tabs-titles-item {
+        height: 72px;
+        line-height: 72px;
+        padding: 0 24px;
+      }
+
+      .nut-tabs-titles-item-line,
+      .nut-tabs-titles-item-smile {
+        bottom: 0;
       }
     }
   }
