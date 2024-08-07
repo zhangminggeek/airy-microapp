@@ -59,6 +59,7 @@ const BasicLayout: FC<BasicLayoutProps> = ({
         {
           [`${PREFIX_CLS}-fill`]: fill,
           [`${PREFIX_CLS}-transparent`]: transparent,
+          [`${PREFIX_CLS}-back`]: back,
         },
         className,
       )}
