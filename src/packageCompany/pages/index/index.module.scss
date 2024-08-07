@@ -1,14 +1,6 @@
 @import '../../../styles/var.scss';
 @import '../../../styles/mixins.scss';
 
-.container {
-  :global {
-    .nut-safe-area {
-      background-color: #fff;
-    }
-  }
-}
-
 .header {
   padding: 24px;
 
@@ -43,10 +35,10 @@
 }
 
 .body {
+  min-height: calc(100vh - 356px);
   background-color: #fff;
   border-radius: 40px 40px 0 0;
   overflow: hidden;
-  min-height: calc(100vh - 420px);
 
   .top {
     display: flex;
@@ -85,8 +77,14 @@
         padding: 0 24px;
       }
 
+      .nut-tabs-titles-item-active {
+        color: $text-color-main;
+      }
+
       .nut-tabs-titles-item-line,
       .nut-tabs-titles-item-smile {
+        width: 56px;
+        height: 6px;
         bottom: 0;
       }
     }

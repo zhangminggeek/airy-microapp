@@ -25,6 +25,7 @@ import {
 } from '@/constants/product';
 import { COLOR_PRIMARY, TEXT_COLOR_BASE } from '@/constants/theme';
 import { useRequest } from '@/hooks';
+import { ShareType } from '@/hooks/useShare';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { parseJson, RouterUtil } from '@/utils';
@@ -37,7 +38,7 @@ const Page = () => {
     // 来自页面转发分享
     return {
       title: data?.title,
-      path: `/pages/market/detail/index?id=${id}`,
+      path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id })}`,
       imageUrl: data?.product?.picList?.[0].url,
     };
   });
@@ -112,7 +113,7 @@ const Page = () => {
   }, [data]);
 
   return (
-    <BasicLayout title="详情" back fill share={false}>
+    <BasicLayout title="详情" back fill>
       <Product.Detail
         typeCode={data?.product?.typeCode}
         images={data?.product?.picList?.map((item) => item.url)}

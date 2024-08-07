@@ -12,6 +12,7 @@ import { OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
+import { ShareType } from '@/hooks/useShare';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
@@ -31,8 +32,8 @@ const Page = () => {
     // 来自页面转发分享
     return {
       title: data?.name,
-      path: `/packageCompany/pages/index/index?id=${id}`,
-      imageUrl: ImageLogo,
+      path: `/pages/market/index/index?shareType=${ShareType.COMPANY}&shareParams=${JSON.stringify({ id })}`,
+      imageUrl: data?.logo ?? ImageLogo,
     };
   });
 
@@ -95,7 +96,7 @@ const Page = () => {
       back
       fill
       transparent
-      share={false}
+      safeArea={false}
     >
       <View className={styles.header}>
         <View className={styles.top}>

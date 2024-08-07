@@ -1,4 +1,4 @@
-import { SafeArea, Skeleton } from '@nutui/nutui-react-taro';
+import { SafeArea, Skeleton, Space } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { getSystemInfoSync } from '@tarojs/taro';
 import classnames from 'classnames';
@@ -9,7 +9,6 @@ import type { CSSProperties, FC, ReactNode } from 'react';
 import { Icon } from '@/components';
 import { TAB_PAGE } from '@/constants';
 import { RouterUtil } from '@/utils';
-import { ShareWrapper } from '@/wrappers';
 
 import './index.scss';
 
@@ -21,9 +20,9 @@ interface BasicLayoutProps {
   title?: ReactNode;
   fill?: boolean;
   back?: boolean | string;
+  home?: boolean;
   transparent?: boolean;
   loading?: boolean;
-  share?: boolean;
   safeArea?: boolean;
 }
 
@@ -38,8 +37,8 @@ const BasicLayout: FC<BasicLayoutProps> = ({
   fill = false,
   transparent = false,
   back = false,
+  home = false,
   loading = false,
-  share = true,
   safeArea = true,
 }) => {
   // 手机顶部状态栏高度
@@ -72,25 +71,36 @@ const BasicLayout: FC<BasicLayoutProps> = ({
       />
       <View className={`${PREFIX_CLS}-header`}>
         {back && (
-          <Icon
-            className={`${PREFIX_CLS}-header-icon`}
-            name="LeftOutlined"
-            onClick={() => {
-              if (typeof back === 'string') {
-                if (TAB_PAGE.includes(back)) {
-                  RouterUtil.switchTab(back);
+          <Space>
+            <Icon
+              className={`${PREFIX_CLS}-header-icon`}
+              name="LeftOutlined"
+              onClick={() => {
+                if (typeof back === 'string') {
+                  if (TAB_PAGE.includes(back)) {
+                    RouterUtil.switchTab(back);
+                  } else {
+                    RouterUtil.navigateTo(back);
+                  }
                 } else {
-                  RouterUtil.navigateTo(back);
+                  RouterUtil.navigateBack();
                 }
-              } else {
-                RouterUtil.navigateBack();
-              }
-            }}
-          />
+              }}
+            />
+            {home && (
+              <Icon
+                className={`${PREFIX_CLS}-header-icon`}
+                name="LeftOutlined"
+                onClick={() => {
+                  RouterUtil.switchTab('/pages/market/index/index');
+                }}
+              />
+            )}
+          </Space>
         )}
         <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
       </View>
-      {share ? <ShareWrapper>{content}</ShareWrapper> : content}
+      {content}
       {safeArea ? <SafeArea position="bottom" /> : null}
     </View>
   );

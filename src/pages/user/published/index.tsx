@@ -21,6 +21,7 @@ import { ActionSheet, Affix, List, Product, Space, Tag } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductSource } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
+import { ShareType } from '@/hooks/useShare';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
 
@@ -40,13 +41,14 @@ const Page = () => {
     if (from === 'button') {
       // @ts-expect-error: dataset is in target
       const info = target?.dataset;
-      // 来自页面转发分享
+      // 来自按钮转发分享
       return {
         title: info?.title,
-        path: `/pages/market/detail/index?id=${info.id}`,
+        path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id: info?.id })}`,
         imageUrl: info.image,
       };
     }
+    // 来自页面转发分享
     return {
       title: 'AIRYBLUE',
       path: `/pages/security/index`,
@@ -256,7 +258,7 @@ const Page = () => {
   ];
 
   return (
-    <BasicLayout title="我发布的" back fill share={false}>
+    <BasicLayout title="我发布的" back fill>
       <View className={styles.content}>
         <Tabs
           value={currentIndex}
