@@ -9,6 +9,7 @@ import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { Company, Icon, Media, Space, Tag } from '@/components';
 import { ProductStatus, productStatusMap } from '@/constants/product';
+import { isNil } from '@/utils';
 
 import './index.scss';
 
@@ -51,6 +52,18 @@ const Card: FC<CardProps> = ({
   onClick,
   onCompanyClick,
 }) => {
+  const showPrice = (allow: boolean, value?: any) => {
+    if (!allow) return false;
+    if (isNil(value)) return false;
+    if (typeof value === 'string' && value === '') return false;
+    if (Array.isArray(value)) {
+      if (!value.length) return false;
+      if (value.every((item) => isNil(item))) return false;
+      return true;
+    }
+    return true;
+  };
+
   return (
     <View className={classnames(PREFIX_CLS, clasName)} onClick={onClick}>
       <View className={`${PREFIX_CLS}-header`}>
@@ -73,8 +86,12 @@ const Card: FC<CardProps> = ({
           </View>
         ) : null}
         <View className={`${PREFIX_CLS}-content-price`}>
-          {allowSell ? <SellingPrice value={sellingPrice} /> : null}
-          {allowLease ? <LeasePrice value={leasePrice} /> : null}
+          {showPrice(allowSell, sellingPrice) ? (
+            <SellingPrice value={sellingPrice} />
+          ) : null}
+          {showPrice(allowLease, leasePrice) ? (
+            <LeasePrice value={leasePrice} />
+          ) : null}
         </View>
         <View className={`${PREFIX_CLS}-content-info`}>
           <Company
