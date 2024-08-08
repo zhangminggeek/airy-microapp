@@ -258,7 +258,7 @@ const Page = () => {
   ];
 
   return (
-    <BasicLayout title="我发布的" back fill>
+    <BasicLayout title="我发布的" back="/pages/user/index/index" fill>
       <View className={styles.content}>
         <Tabs
           value={currentIndex}
