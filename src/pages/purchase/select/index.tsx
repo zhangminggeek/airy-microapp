@@ -62,7 +62,6 @@ const Page = () => {
             />
           </View>
         )}
-        fill
       />
       <Footer
         btnText="发送"

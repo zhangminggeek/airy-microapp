@@ -175,7 +175,6 @@ const Page = () => {
                 }}
               />
             )}
-            fill
           />
         </View>
       </View>

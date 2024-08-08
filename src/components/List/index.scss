@@ -12,11 +12,9 @@
     }
   }
 
-  &:not(.m-list-fill) {
-    padding: 24px;
-
+  &-padding {
     .nut-infinite-container {
-      grid-template-columns: repeat(2, 50%);
+      padding: 24px;
     }
   }
 

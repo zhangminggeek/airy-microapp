@@ -106,7 +106,7 @@ const Page = () => {
                 src={item.url}
                 width={windowWidth - 32}
                 height={windowWidth - 32}
-                mode="widthFix"
+                mode="aspectFill"
                 preview
               />
             ))}

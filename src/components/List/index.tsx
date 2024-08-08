@@ -20,8 +20,8 @@ export interface ActionType<P = any> {
 }
 
 interface ListProps<R = any, P = any, U extends PaginationParams<P> = any>
-  extends Partial<InfiniteLoadingProps> {
-  fill?: boolean;
+  extends Partial<Omit<InfiniteLoadingProps, 'padding'>> {
+  padding?: boolean;
   column?: 1 | 2;
   requestOnInit?: boolean;
   actionRef?: Ref<ActionType<P>>;
@@ -34,7 +34,7 @@ const PREFIX_CLS = 'm-list';
 
 const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
   className,
-  fill = false,
+  padding = false,
   column = 2,
   requestOnInit = true,
   actionRef,
@@ -112,7 +112,7 @@ const List = <R, P extends Record<string, any>, U extends PaginationParams<P>>({
         PREFIX_CLS,
         {
           [`${PREFIX_CLS}-multicolumn`]: column === 2,
-          [`${PREFIX_CLS}-fill`]: fill,
+          [`${PREFIX_CLS}-padding`]: padding,
         },
         className,
       )}

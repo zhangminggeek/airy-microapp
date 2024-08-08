@@ -32,43 +32,39 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title="我的收藏" back fill>
-      <View className={styles.content}>
-        <View className={styles.body}>
-          <List
-            actionRef={actionRef}
-            request={getMarketMyFavorite}
-            column={1}
-            renderItem={(item) => (
-              <Product.Brief
-                key={item.id}
-                image={item.product?.picList?.[0]?.url}
-                title={item.title}
-                desc={item.description}
-                sellingPrice={item.sellingPrice}
-                leasePrice={item.leasePrice}
-                footer={
-                  <View className={styles['brief-footer']}>
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        toggle({ id: item.id, isFavorited: false });
-                      }}
-                    >
-                      取消收藏
-                    </Button>
-                  </View>
-                }
-                onClick={() => {
-                  RouterUtil.navigateTo('/pages/market/detail/index', {
-                    id: item.id,
-                  });
-                }}
-              />
-            )}
+    <BasicLayout title="我的收藏" back>
+      <List
+        actionRef={actionRef}
+        request={getMarketMyFavorite}
+        column={1}
+        renderItem={(item) => (
+          <Product.Brief
+            key={item.id}
+            image={item.product?.picList?.[0]?.url}
+            title={item.title}
+            desc={item.description}
+            sellingPrice={item.sellingPrice}
+            leasePrice={item.leasePrice}
+            footer={
+              <View className={styles['brief-footer']}>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    toggle({ id: item.id, isFavorited: false });
+                  }}
+                >
+                  取消收藏
+                </Button>
+              </View>
+            }
+            onClick={() => {
+              RouterUtil.navigateTo('/pages/market/detail/index', {
+                id: item.id,
+              });
+            }}
           />
-        </View>
-      </View>
+        )}
+      />
     </BasicLayout>
   );
 };

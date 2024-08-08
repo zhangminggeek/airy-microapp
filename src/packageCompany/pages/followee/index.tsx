@@ -61,7 +61,6 @@ const Page = () => {
             </View>
           </View>
         )}
-        fill
       />
       {renderDialog()}
     </BasicLayout>

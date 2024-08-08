@@ -30,7 +30,6 @@ const Page = () => {
             </View>
           </View>
         )}
-        fill
       />
     </BasicLayout>
   );

@@ -27,7 +27,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title="提现记录" back fill>
+    <BasicLayout title="提现记录" back>
       <View className={styles.content}>
         <View className={styles.body}>
           <List

@@ -111,7 +111,6 @@ const Page = () => {
               }}
             />
           )}
-          fill
         />
       </View>
     </BasicLayout>

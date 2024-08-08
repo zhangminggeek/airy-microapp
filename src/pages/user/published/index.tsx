@@ -301,6 +301,7 @@ const Page = () => {
                 }}
               />
             )}
+            padding
           />
         </View>
       </View>

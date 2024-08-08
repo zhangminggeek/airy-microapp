@@ -96,6 +96,7 @@ const Page = () => {
                   </View>
                 );
               }}
+              padding
             />
           ) : null}
         </View>
