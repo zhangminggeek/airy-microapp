@@ -40,7 +40,12 @@ const Filter = ({
   ...rest
 }: FilterProps) => {
   return (
-    <Menu className={classnames(PREFIX_CLS, className)} style={style} {...rest}>
+    <Menu
+      className={classnames(PREFIX_CLS, className)}
+      style={style}
+      icon={<Icon name="DownFilled" size={10} />}
+      {...rest}
+    >
       {fields?.map((item) => {
         const ref = useRef(null);
         const {

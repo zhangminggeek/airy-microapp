@@ -1,10 +1,16 @@
 @import '../../styles/var.scss';
 
 .m-filter {
-  height: 92px;
+  // height: 92px;
 
   .nut-menu-bar {
+    height: 92px;
+    line-height: 92px;
     box-shadow: none;
+
+    .nut-menu-title {
+      color: $text-color-base;
+    }
   }
 
   &-item {

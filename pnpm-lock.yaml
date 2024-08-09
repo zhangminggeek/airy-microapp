@@ -15,8 +15,8 @@ importers:
         specifier: ^1.0.4
         version: 1.0.4
       '@nutui/nutui-react-taro':
-        specifier: ^2.6.15
-        version: 2.6.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.6.16
+        version: 2.6.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tarojs/components':
         specifier: 3.6.30
         version: 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30(@tarojs/shared@3.6.30))(@tarojs/shared@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)(react@18.3.1)
@@ -1351,8 +1351,8 @@ packages:
   '@nutui/icons-react-taro@1.0.4':
     resolution: {integrity: sha512-2sDhJXJPAgatSg8dSWVYLYVvxCZo2OIWpSzVO0xkyCU0X6pWtKt7Hh26UbT9PTWaTfg9cX9xqwYvBkkxUypvSQ==}
 
-  '@nutui/nutui-react-taro@2.6.15':
-    resolution: {integrity: sha512-Yl64TQWS2tXpvliaKi0SYV1vOXsZE8yZWQv5aTXAEGhd89O46JgVGCzO4Qy3PpmTf60/RrqOfqphi61Ao/Lhyg==}
+  '@nutui/nutui-react-taro@2.6.16':
+    resolution: {integrity: sha512-edVC3dGlmNc/Fm3JQgdmwD3kTYGns5p3fYYbQ+hOh+MbnH29pgZcsPWm14z1EQkn4b0lUC04IiWe1hVUfZK3cw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
@@ -9016,7 +9016,7 @@ snapshots:
 
   '@nutui/icons-react-taro@1.0.4': {}
 
-  '@nutui/nutui-react-taro@2.6.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@nutui/nutui-react-taro@2.6.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.6
       '@nutui/icons-react-taro': 1.0.4

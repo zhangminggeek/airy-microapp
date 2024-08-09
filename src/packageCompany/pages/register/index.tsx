@@ -113,6 +113,9 @@ const Page = () => {
           <Form.Item label="店铺LOGO" name="logo">
             <Upload />
           </Form.Item>
+          <Form.Item label="邀请码" name="invitar">
+            <Input />
+          </Form.Item>
         </Form>
       </View>
     </BasicLayout>

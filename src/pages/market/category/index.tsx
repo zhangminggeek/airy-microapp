@@ -15,7 +15,7 @@ import MainFilter from './MainFilter';
 import type { ActionType as ListActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
-import { Filter, InputSearch, List, Product } from '@/components';
+import { Filter, Icon, InputSearch, List, Product } from '@/components';
 import { HIDE_PRICE } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductType } from '@/constants/product';
@@ -122,6 +122,7 @@ const Page = () => {
           {
             title: '筛选',
             name: 'filter',
+            titleIcon: <Icon name="FilterFilled" size={10} />,
             render: (ref) => {
               return (
                 <CustomFilter
