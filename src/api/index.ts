@@ -2504,6 +2504,10 @@ export interface GetOrderIdResponse {
      */
     name: string
     /**
+     * 营业执照上的公司名称
+     */
+    licenseCompanyName?: string
+    /**
      * 公司LOGO
      */
     logo?: string
@@ -2539,6 +2543,10 @@ export interface GetOrderIdResponse {
      * 账户余额
      */
     balance: string
+    /**
+     * 邀请码
+     */
+    invitationCode: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -2737,9 +2745,9 @@ const devUrl_0_0_0_3 = '' as any
 const prodUrl_0_0_0_3 = '' as any
 const dataKey_0_0_0_3 = 'data' as any
 
-export interface GetCompanySelfRequest {}
+export interface GetCompanyTemplateRequest {}
 
-export interface GetCompanySelfResponse {
+export interface GetCompanyTemplateResponse {
   /**
    * 创建时间
    */
@@ -2756,6 +2764,10 @@ export interface GetCompanySelfResponse {
    * 公司名称
    */
   name: string
+  /**
+   * 营业执照上的公司名称
+   */
+  licenseCompanyName?: string
   /**
    * 公司LOGO
    */
@@ -2792,6 +2804,128 @@ export interface GetCompanySelfResponse {
    * 账户余额
    */
   balance: string
+  /**
+   * 邀请码
+   */
+  invitationCode: string
+  /**
+   * 状态, 0:禁用 1:正常 2:待审核
+   */
+  status: number
+  /**
+   * 粉丝数量
+   */
+  fansCount: number
+  /**
+   * 关注数量
+   */
+  follewedCount: number
+  /**
+   * 今日销售（元）
+   */
+  saleToday: string
+  /**
+   * 今日售出（件）
+   */
+  saleVolumeToday: string
+}
+
+type GetCompanyTemplateRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/template', 'data', string, string, true>
+>
+
+const getCompanyTemplateRequestConfig: GetCompanyTemplateRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/company/template',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyTemplate',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getCompanyTemplate = /*#__PURE__*/ (
+  requestData?: GetCompanyTemplateRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyTemplateResponse>(prepare(getCompanyTemplateRequestConfig, requestData), ...args)
+}
+
+getCompanyTemplate.requestConfig = getCompanyTemplateRequestConfig
+
+export interface GetCompanySelfRequest {}
+
+export interface GetCompanySelfResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司名称
+   */
+  name: string
+  /**
+   * 营业执照上的公司名称
+   */
+  licenseCompanyName?: string
+  /**
+   * 公司LOGO
+   */
+  logo?: string
+  /**
+   * 简介
+   */
+  intro?: string
+  /**
+   * 联系人
+   */
+  contacts: string
+  /**
+   * 联系电话
+   */
+  contactPhone: string
+  /**
+   * 省
+   */
+  province: string
+  /**
+   * 市
+   */
+  city: string
+  /**
+   * 区
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 账户余额
+   */
+  balance: string
+  /**
+   * 邀请码
+   */
+  invitationCode: string
   /**
    * 状态, 0:禁用 1:正常 2:待审核
    */
@@ -2881,6 +3015,10 @@ export interface GetCompanyFansResponse {
      */
     name: string
     /**
+     * 营业执照上的公司名称
+     */
+    licenseCompanyName?: string
+    /**
      * 公司LOGO
      */
     logo?: string
@@ -2916,6 +3054,10 @@ export interface GetCompanyFansResponse {
      * 账户余额
      */
     balance: string
+    /**
+     * 邀请码
+     */
+    invitationCode: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -2990,6 +3132,10 @@ export interface GetCompanyFolloweeResponse {
      */
     name: string
     /**
+     * 营业执照上的公司名称
+     */
+    licenseCompanyName?: string
+    /**
      * 公司LOGO
      */
     logo?: string
@@ -3025,6 +3171,10 @@ export interface GetCompanyFolloweeResponse {
      * 账户余额
      */
     balance: string
+    /**
+     * 邀请码
+     */
+    invitationCode: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -3111,6 +3261,10 @@ export interface PostCompanyRegisterRequest {
    * 营业执照
    */
   licenses: string[]
+  /**
+   * 邀请人的邀请码
+   */
+  inviter?: string
 }
 
 export type PostCompanyRegisterResponse = any
@@ -3473,7 +3627,7 @@ export interface GetCompanyBalanceResponse {
      */
     id: number
     /**
-     * 类型 1:服装出售 2:服装借出 3:服装购买 4:服装借入 5:押金 6:押金退还 7:提现
+     * 类型 1:服装出售 2:服装借出 3:服装购买 4:服装借入 5:押金 6:押金退还 7:提现 8:邀请注册奖励
      */
     type: number
     /**
@@ -3742,6 +3896,60 @@ export const postCompanyFollowToggle = /*#__PURE__*/ (
 
 postCompanyFollowToggle.requestConfig = postCompanyFollowToggleRequestConfig
 
+export interface GetCompanyInvitationRequest {}
+
+export type GetCompanyInvitationResponse = {
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司LOGO
+   */
+  logo: string
+  /**
+   * 公司名称
+   */
+  name: string
+  /**
+   * 公司状态 1:已注册 2:完成首笔交易
+   */
+  status: number
+}[]
+
+type GetCompanyInvitationRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/invitation', 'data', string, string, true>
+>
+
+const getCompanyInvitationRequestConfig: GetCompanyInvitationRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
+  path: '/company/invitation',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_3,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyInvitation',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getCompanyInvitation = /*#__PURE__*/ (
+  requestData?: GetCompanyInvitationRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyInvitationResponse>(prepare(getCompanyInvitationRequestConfig, requestData), ...args)
+}
+
+getCompanyInvitation.requestConfig = getCompanyInvitationRequestConfig
+
 export interface GetCompanyIdRequest {
   /**
    * 公司id
@@ -3766,6 +3974,10 @@ export interface GetCompanyIdResponse {
    * 公司名称
    */
   name: string
+  /**
+   * 营业执照上的公司名称
+   */
+  licenseCompanyName?: string
   /**
    * 公司LOGO
    */
@@ -3802,6 +4014,10 @@ export interface GetCompanyIdResponse {
    * 账户余额
    */
   balance: string
+  /**
+   * 邀请码
+   */
+  invitationCode: string
   /**
    * 状态, 0:禁用 1:正常 2:待审核
    */
@@ -4111,6 +4327,10 @@ export interface GetUserSelfResponse {
      */
     name: string
     /**
+     * 营业执照上的公司名称
+     */
+    licenseCompanyName?: string
+    /**
      * 公司LOGO
      */
     logo?: string
@@ -4146,6 +4366,10 @@ export interface GetUserSelfResponse {
      * 账户余额
      */
     balance: string
+    /**
+     * 邀请码
+     */
+    invitationCode: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
@@ -4256,6 +4480,10 @@ export interface GetUserIdResponse {
      */
     name: string
     /**
+     * 营业执照上的公司名称
+     */
+    licenseCompanyName?: string
+    /**
      * 公司LOGO
      */
     logo?: string
@@ -4291,6 +4519,10 @@ export interface GetUserIdResponse {
      * 账户余额
      */
     balance: string
+    /**
+     * 邀请码
+     */
+    invitationCode: string
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */

@@ -11,6 +11,7 @@ export interface InputNumberProps {
   prefix?: ReactNode;
   suffix?: ReactNode;
   placeholder?: string;
+  decimalDigits?: number;
   allowNegative?: boolean;
   allowDecimal?: boolean;
   value?: string;
@@ -27,8 +28,10 @@ const InputNumber: FC<InputNumberProps> = ({
   placeholder,
   allowNegative = false,
   allowDecimal = true,
+  decimalDigits = 2,
   value,
   onChange,
+  ...rest
 }) => {
   return (
     <View className={classnames(PREFIX_CLS, className)} style={style}>
@@ -55,12 +58,18 @@ const InputNumber: FC<InputNumberProps> = ({
               // 如果有多于一个小数点，重构字符串，只保留第一个小数点
               v = `${integer}.${rest.join('')}`;
             }
+            // 如果小数位数超过限制，截取小数位数
+            const decimalDigitsOfValue = v.split('.')[1]?.length ?? 0;
+            if (decimalDigitsOfValue > decimalDigits) {
+              v = v.slice(0, v.length - (decimalDigitsOfValue - decimalDigits));
+            }
           } else {
             v = v.replace(/\./g, '');
           }
           onChange?.(v);
           return v;
         }}
+        {...rest}
       />
       {suffix}
     </View>

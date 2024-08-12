@@ -31,12 +31,14 @@ export class RouterUtil {
    */
   private static checkToken(path: string) {
     if (this.notReuiredTokenPageList.includes(path)) {
-      return;
+      return true;
     }
     const token = Taro.getStorageSync(StorageKey.TOKEN);
     if (!token) {
       Taro.navigateTo({ url: '/pages/user/login/index' });
+      return false;
     }
+    return true;
   }
 
   /**
@@ -60,9 +62,10 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static navigateTo(target: string, params: ParamsType = {}) {
-    this.checkToken(target);
-    const url = this.formatUrl(target, params);
-    Taro.navigateTo({ url });
+    if (this.checkToken(target)) {
+      const url = this.formatUrl(target, params);
+      Taro.navigateTo({ url });
+    }
   }
 
   /**
@@ -71,9 +74,10 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static redirectTo(target: string, params: ParamsType = {}) {
-    this.checkToken(target);
-    const url = this.formatUrl(target, params);
-    Taro.redirectTo({ url });
+    if (this.checkToken(target)) {
+      const url = this.formatUrl(target, params);
+      Taro.redirectTo({ url });
+    }
   }
 
   /**
@@ -90,9 +94,10 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static switchTab(target: string, params: ParamsType = {}) {
-    this.checkToken(target);
-    const url = this.formatUrl(target, params);
-    Taro.switchTab({ url });
+    if (this.checkToken(target)) {
+      const url = this.formatUrl(target, params);
+      Taro.switchTab({ url });
+    }
   }
 
   /**
@@ -101,9 +106,10 @@ export class RouterUtil {
    * @param params 路由参数
    */
   static reLaunch(target: string, params: ParamsType = {}) {
-    this.checkToken(target);
-    const url = this.formatUrl(target, params);
-    Taro.reLaunch({ url });
+    if (this.checkToken(target)) {
+      const url = this.formatUrl(target, params);
+      Taro.reLaunch({ url });
+    }
   }
 
   /**

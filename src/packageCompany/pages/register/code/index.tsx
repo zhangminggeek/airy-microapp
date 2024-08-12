@@ -46,10 +46,11 @@ const Page = () => {
   const { run: checkCode } = useRequest(postAccountRegisterCodeCheck, {
     manual: true,
     async onSuccess() {
-      const info = parseJson<CompanyInfo>(
+      const { invitationCode, ...rest } = parseJson<CompanyInfo>(
         Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
       );
-      await register(info);
+      const params = { ...rest, invitar: invitationCode };
+      await register(params);
     },
   });
 

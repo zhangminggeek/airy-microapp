@@ -65,6 +65,8 @@ export default {
         'pages/followee/index',
         // 我的粉丝
         'pages/fans/index',
+        // 我的粉丝
+        'pages/invitation/index',
       ],
     },
     {

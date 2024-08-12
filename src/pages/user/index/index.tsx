@@ -1,4 +1,4 @@
-import { Button } from '@nutui/nutui-react-taro';
+import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
 
@@ -10,6 +10,7 @@ import styles from './index.module.scss';
 import { getCompanySelf } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, Section, Space } from '@/components';
+import { OSS_ASSETS_DIR } from '@/constants';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
@@ -117,6 +118,15 @@ const Page = () => {
           </AmountItem>
         </View>
       </Section>
+      <Image
+        className={styles.banner}
+        src={`${OSS_ASSETS_DIR}/invitation_banner.jpg`}
+        width="100%"
+        height={72}
+        onClick={() => {
+          RouterUtil.navigateTo('/packageCompany/pages/invitation/index');
+        }}
+      />
       <Section title="店铺管理">
         <View className={styles.grid}>
           {getShopConfig({ companyId: info?.companyId })?.map((item) => (

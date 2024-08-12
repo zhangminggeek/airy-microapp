@@ -35,6 +35,12 @@
     }
   }
 
+  .banner {
+    border-radius: 144px;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 25%);

@@ -1,5 +1,6 @@
 import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import Taro, { useRouter } from '@tarojs/taro';
+import Big from 'big.js';
 import { useEffect, useMemo, useState } from 'react';
 
 import ProductPicker from './ProductPicker';
@@ -265,7 +266,21 @@ const Page = () => {
             <Form.Item
               label="出售价"
               name="sellingPrice"
-              rules={[{ required: true, message: '请输入出售价' }]}
+              rules={[
+                { required: true, message: '请输入出售价' },
+                {
+                  validator(_, value) {
+                    if (isNil(value, false)) {
+                      return Promise.reject('请输入出售价');
+                    }
+                    if (Big(value).lt(0.01)) {
+                      return Promise.reject('出售价不能小于0.01元');
+                    }
+                    return Promise.resolve(true);
+                  },
+                },
+              ]}
+              validateTrigger="onBlur"
             >
               <InputNumber prefix="¥" />
             </Form.Item>
@@ -274,7 +289,21 @@ const Page = () => {
             <Form.Item
               label="借调价"
               name="leasePrice"
-              rules={[{ required: true, message: '请输入借调价' }]}
+              rules={[
+                { required: true, message: '请输入借调价' },
+                {
+                  validator(_, value) {
+                    if (isNil(value, false)) {
+                      return Promise.reject('请输入借调价');
+                    }
+                    if (Big(value).lt(0.01)) {
+                      return Promise.reject('借调价不能小于0.01元');
+                    }
+                    return Promise.resolve(true);
+                  },
+                },
+              ]}
+              validateTrigger="onBlur"
             >
               <InputNumber prefix="¥" />
             </Form.Item>
@@ -283,7 +312,21 @@ const Page = () => {
             <Form.Item
               label="借调押金"
               name="leaseDeposit"
-              rules={[{ required: true, message: '请输入借调押金' }]}
+              rules={[
+                { required: true, message: '请输入借调押金' },
+                {
+                  validator(_, value) {
+                    if (isNil(value, false)) {
+                      return Promise.reject('请输入借调押金');
+                    }
+                    if (Big(value).lt(0.01)) {
+                      return Promise.reject('借调押金不能小于0.01元');
+                    }
+                    return Promise.resolve(true);
+                  },
+                },
+              ]}
+              validateTrigger="onBlur"
             >
               <InputNumber prefix="¥" />
             </Form.Item>

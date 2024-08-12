@@ -32,7 +32,7 @@ const Upload: FC<UploadProps> = ({
   className,
   style,
   maxCount = 1,
-  maxFileSize,
+  maxFileSize = 5 * 1024 * 1024, // 5M,
   mediaType = ['mix'],
   sourceType = ['album', 'camera'],
   placeholder,

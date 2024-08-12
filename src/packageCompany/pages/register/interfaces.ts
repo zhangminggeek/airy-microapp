@@ -8,4 +8,5 @@ export interface CompanyInfo {
   area: string;
   address: string;
   licenses: string[];
+  invitationCode?: string;
 }

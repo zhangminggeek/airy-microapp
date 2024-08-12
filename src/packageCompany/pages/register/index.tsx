@@ -1,6 +1,6 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import Taro, { useDidShow } from '@tarojs/taro';
+import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 
 import styles from './index.module.scss';
 
@@ -12,9 +12,14 @@ import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
 
 const Page = () => {
+  const { inviter } = useRouter().params;
+
   const [form] = Form.useForm();
 
   useDidShow(() => {
+    if (inviter) {
+      form.setFieldsValue({ invitationCode: inviter });
+    }
     const info = parseJson<Partial<CompanyInfo>>(
       Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
       undefined,
@@ -113,8 +118,8 @@ const Page = () => {
           <Form.Item label="店铺LOGO" name="logo">
             <Upload />
           </Form.Item>
-          <Form.Item label="邀请码" name="invitar">
-            <Input />
+          <Form.Item label="邀请码" name="invitationCode">
+            <Input disabled={!!inviter} />
           </Form.Item>
         </Form>
       </View>
