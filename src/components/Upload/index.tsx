@@ -55,9 +55,6 @@ const Upload: FC<UploadProps> = ({
         const file = result.tempFiles[0];
         uploadMedia(file);
       },
-      fail() {
-        Toast.info('获取文件失败，请重试');
-      },
     });
   };
 

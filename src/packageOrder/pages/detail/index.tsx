@@ -67,90 +67,112 @@ const Page = () => {
   });
 
   const actions = useMemo(() => {
-    let returnBtn: JSX.Element | null = null;
     if (owner === UserType['买家']) {
-      returnBtn = data?.expressReturnId ? (
-        <Button size="small" fill="solid" disabled>
-          退押中
-        </Button>
-      ) : (
-        <Button
-          size="small"
-          onClick={() => {
-            RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
-              id,
-              addressId: data?.sellerAddressId,
-              type: OrderExpressType['返还'],
-            });
-          }}
-        >
-          返还发货
-        </Button>
-      );
-    } else if (owner === UserType['卖家']) {
-      if (data?.expressReturnId) {
-        returnBtn = (
-          <Button
-            size="small"
-            onClick={() => {
-              RouterUtil.navigateTo('/packageOrder/pages/return/index', { id });
-            }}
-          >
-            确认返还
-          </Button>
-        );
-      }
-    }
-
-    return new Map([
-      [
-        OrderStatus['待付款'],
-        <Fragment>
+      return new Map([
+        [
+          OrderStatus['待付款'],
+          <Fragment>
+            <Button
+              key="cancel"
+              onClick={() => {
+                openDialogCancel({ params: { id } });
+              }}
+            >
+              取消订单
+            </Button>
+            <Button
+              key="payment"
+              type="primary"
+              onClick={() => {
+                setShowPaymentPicker(true);
+              }}
+            >
+              付款
+            </Button>
+          </Fragment>,
+        ],
+        [
+          OrderStatus['待发货'],
           <Button
             key="cancel"
+            size="small"
             onClick={() => {
-              openDialogCancel({ params: { id } });
+              setShowCustomerServicePopup(true);
             }}
           >
             取消订单
-          </Button>
+          </Button>,
+        ],
+        [
+          OrderStatus['待收货'],
           <Button
-            key="payment"
             type="primary"
+            size="small"
             onClick={() => {
-              setShowPaymentPicker(true);
+              openDialogConfirmReceive({ params: { id } });
             }}
           >
-            付款
-          </Button>
-        </Fragment>,
-      ],
-      [
-        OrderStatus['待发货'],
-        <Button
-          key="cancel"
-          size="small"
-          onClick={() => {
-            setShowCustomerServicePopup(true);
-          }}
-        >
-          取消订单
-        </Button>,
-      ],
-      [
-        OrderStatus['待收货'],
-        <Button
-          type="primary"
-          size="small"
-          onClick={() => {
-            openDialogConfirmReceive({ params: { id } });
-          }}
-        >
-          确认收货
-        </Button>,
-      ],
-      [OrderStatus['返还退押'], returnBtn],
-    ]);
+            确认收货
+          </Button>,
+        ],
+        [
+          OrderStatus['返还退押'],
+          data?.expressReturnId ? (
+            <Button size="small" fill="solid" disabled>
+              退押中
+            </Button>
+          ) : (
+            <Button
+              size="small"
+              onClick={() => {
+                RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
+                  id,
+                  addressId: data?.sellerAddressId,
+                  type: OrderExpressType['返还'],
+                });
+              }}
+            >
+              返还发货
+            </Button>
+          ),
+        ],
+      ]);
+    } else {
+      return new Map([
+        [
+          OrderStatus['待发货'],
+          <Button
+            key="deliver"
+            type="primary"
+            size="small"
+            onClick={() => {
+              RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
+                id,
+                addressId: data?.buyerAddressId,
+                type: OrderExpressType['发货'],
+              });
+            }}
+          >
+            去发货
+          </Button>,
+        ],
+        [
+          OrderStatus['返还退押'],
+          data?.expressReturnId ? (
+            <Button
+              size="small"
+              onClick={() => {
+                RouterUtil.navigateTo('/packageOrder/pages/return/index', {
+                  id,
+                });
+              }}
+            >
+              确认返还
+            </Button>
+          ) : null,
+        ],
+      ]);
+    }
   }, [id, data, owner]);
 
   const target = useMemo(() => {
