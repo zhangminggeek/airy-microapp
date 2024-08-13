@@ -1,6 +1,7 @@
 import { Button, Form, TextArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { useRouter } from '@tarojs/taro';
+import Big from 'big.js';
 
 import styles from './index.module.scss';
 
@@ -65,15 +66,17 @@ const Page = () => {
           <Form.Item
             label="押金退还"
             name="amount"
+            validateTrigger="onBlur"
             rules={[
               { required: true, message: '请输入押金退还金额' },
               {
                 validator(_, value) {
-                  const _value = Number(value);
-                  if (_value < 0) {
+                  console.log('value', value, data?.market?.leaseDeposit);
+                  const _value = Big(value);
+                  if (_value.lt(0)) {
                     return Promise.reject('押金退还金额不能小于0');
                   }
-                  if (_value > Number(data?.market?.leaseDeposit ?? 0)) {
+                  if (_value.gt(data?.market?.leaseDeposit ?? 0)) {
                     return Promise.reject('退还金额不能大于押金');
                   }
                   return Promise.resolve(true);

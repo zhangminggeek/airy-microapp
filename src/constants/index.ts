@@ -29,3 +29,8 @@ export const TAB_PAGE = [
 ];
 
 export const HIDE_PRICE = '??.??';
+
+export enum UserType {
+  '买家' = 'buyer',
+  '卖家' = 'seller',
+}

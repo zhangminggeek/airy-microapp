@@ -13,6 +13,7 @@ import type { ReactNode } from 'react';
 
 import { getOrderBought } from '@/api';
 import { List, Product, Space } from '@/components';
+import { UserType } from '@/constants';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
@@ -186,7 +187,7 @@ const Page = () => {
                 onClick={() => {
                   RouterUtil.navigateTo('/packageOrder/pages/detail/index', {
                     id: item.id,
-                    owner: 'buyer',
+                    owner: UserType['买家'],
                   });
                 }}
               />

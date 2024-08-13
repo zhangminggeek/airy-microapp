@@ -16,7 +16,7 @@ import {
   Section,
   Space,
 } from '@/components';
-import { DATE_FORMAT, DATE_TIME_FORMAT } from '@/constants';
+import { DATE_FORMAT, DATE_TIME_FORMAT, UserType } from '@/constants';
 import {
   OrderExpressType,
   OrderStatus,
@@ -29,6 +29,10 @@ import useOrderAction from '@/pages/user/bought/useOrderAction';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
+  /**
+   * @param id 订单 ID
+   * @param owner 订单拥有者 UserType
+   */
   const { id, owner } = useRouter().params;
 
   // 获取订单详情
@@ -63,6 +67,41 @@ const Page = () => {
   });
 
   const actions = useMemo(() => {
+    let returnBtn: JSX.Element | null = null;
+    if (owner === UserType['买家']) {
+      returnBtn = data?.expressReturnId ? (
+        <Button size="small" fill="solid" disabled>
+          退押中
+        </Button>
+      ) : (
+        <Button
+          size="small"
+          onClick={() => {
+            RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
+              id,
+              addressId: data?.sellerAddressId,
+              type: OrderExpressType['返还'],
+            });
+          }}
+        >
+          返还发货
+        </Button>
+      );
+    } else if (owner === UserType['卖家']) {
+      if (data?.expressReturnId) {
+        returnBtn = (
+          <Button
+            size="small"
+            onClick={() => {
+              RouterUtil.navigateTo('/packageOrder/pages/return/index', { id });
+            }}
+          >
+            确认返还
+          </Button>
+        );
+      }
+    }
+
     return new Map([
       [
         OrderStatus['待付款'],
@@ -110,37 +149,17 @@ const Page = () => {
           确认收货
         </Button>,
       ],
-      [
-        OrderStatus['返还退押'],
-        data?.expressReturnId ? (
-          <Button size="small" fill="solid" disabled>
-            退押中
-          </Button>
-        ) : (
-          <Button
-            size="small"
-            onClick={() => {
-              RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
-                id,
-                addressId: data?.sellerAddressId,
-                type: OrderExpressType['返还'],
-              });
-            }}
-          >
-            返还发货
-          </Button>
-        ),
-      ],
+      [OrderStatus['返还退押'], returnBtn],
     ]);
-  }, [id, data]);
+  }, [id, data, owner]);
 
   const target = useMemo(() => {
-    if (owner === 'buyer') {
+    if (owner === UserType['买家']) {
       return {
         consignee: `${data?.buyerAddress?.recipient ?? ''} ${data?.buyerAddress?.phone ?? ''}`,
         address: buyerAddress,
       };
-    } else if (owner === 'seller') {
+    } else if (owner === UserType['卖家']) {
       return {
         consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
         address: sellerAddress,
@@ -177,7 +196,7 @@ const Page = () => {
                       field: 'companyName',
                       label: '购买人',
                       col: 2,
-                      hidden: owner === 'buyer',
+                      hidden: owner === UserType['买家'],
                     },
                   ]}
                   data={{
@@ -325,7 +344,9 @@ const Page = () => {
       </View>
       <Footer className={styles.footer}>
         <View className={styles['footer-content']}>
-          <Button openType="contact">联系客服</Button>
+          <Button openType="contact" size="small">
+            联系客服
+          </Button>
           {actions.get(data?.status)}
         </View>
       </Footer>

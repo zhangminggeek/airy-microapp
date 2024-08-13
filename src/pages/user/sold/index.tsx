@@ -12,14 +12,18 @@ import type { ReactNode } from 'react';
 
 import { getOrderSold } from '@/api';
 import { List, Product, Space } from '@/components';
+import { UserType } from '@/constants';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
 
+type RecordType = GetOrderSoldResponse['list'][0];
+
 interface TabOption {
   title: string;
   value: OrderStatus;
-  actions?: (item: GetOrderSoldResponse['list'][0]) => ReactNode[];
+  actions?: (item: RecordType) => ReactNode[];
+  show?: (item: RecordType) => boolean;
 }
 
 const Page = () => {
@@ -53,6 +57,7 @@ const Page = () => {
           去发货
         </Button>,
       ],
+      show: () => true,
     },
     { title: '待收货', value: OrderStatus['待收货'] },
     {
@@ -71,9 +76,10 @@ const Page = () => {
           确认返还
         </Button>,
       ],
+      show: (item) => !!item.expressReturnId,
     },
-    { title: '已完成', value: OrderStatus['已完成'] },
-    { title: '已取消', value: OrderStatus['已取消'] },
+    { title: '已完成', value: OrderStatus['已完成'], show: () => true },
+    { title: '已取消', value: OrderStatus['已取消'], show: () => true },
   ];
 
   return (
@@ -110,6 +116,7 @@ const Page = () => {
                         .toString()
                 }
                 footer={
+                  tabs[currentIndex].show?.(item) &&
                   tabs[currentIndex].actions?.(item)?.length ? (
                     <View className={styles['brief-footer']}>
                       <Space
@@ -124,7 +131,7 @@ const Page = () => {
                 onClick={() => {
                   RouterUtil.navigateTo('/packageOrder/pages/detail/index', {
                     id: item.id,
-                    owner: 'seller',
+                    owner: UserType['卖家'],
                   });
                 }}
               />
