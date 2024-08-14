@@ -42,6 +42,7 @@ const Page = () => {
       back
       fill
       transparent
+      loginTip={false}
     >
       <View className={styles.content}>
         <Form

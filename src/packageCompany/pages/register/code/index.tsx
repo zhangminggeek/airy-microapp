@@ -64,7 +64,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout className={styles.container} back transparent>
+    <BasicLayout className={styles.container} back transparent loginTip={false}>
       <View className={styles.title}>输入验证码</View>
       <View className={styles.tip}>已将验证码发送至 {phone}</View>
       <CodeInput

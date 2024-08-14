@@ -13,7 +13,7 @@ const Page = () => {
   const { account } = useRouter().params;
 
   return (
-    <BasicLayout back>
+    <BasicLayout back loginTip={false}>
       <View className={styles.content}>
         <Space className={styles['icon-group']} size={20}>
           <View className={classnames(styles.icon, styles['icon-logo'])}>

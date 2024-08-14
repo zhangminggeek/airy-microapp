@@ -4,7 +4,7 @@ import { RouterUtil } from '@/utils';
 
 const Page = () => {
   return (
-    <BasicLayout transparent>
+    <BasicLayout transparent loginTip={false}>
       <Result
         title="注册成功"
         desc="账号会在几分钟内审核，请留意短信通知"

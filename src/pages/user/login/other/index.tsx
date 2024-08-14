@@ -21,6 +21,7 @@ const Page = () => {
       back
       fill
       transparent
+      loginTip={false}
       safeArea={false}
     >
       <View className={styles.header}>

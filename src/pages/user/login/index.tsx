@@ -62,7 +62,7 @@ const Page = () => {
   }, [hasRead]);
 
   return (
-    <BasicLayout className={styles.container} fill transparent>
+    <BasicLayout className={styles.container} fill transparent loginTip={false}>
       <View className={styles.content}>
         <View className={styles.brand}>
           <Image
