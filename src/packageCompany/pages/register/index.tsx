@@ -1,6 +1,6 @@
 import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import Taro, { useDidShow, useRouter } from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 
 import styles from './index.module.scss';
 
@@ -12,14 +12,15 @@ import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
 
 const Page = () => {
-  const { inviter } = useRouter().params;
-
   const [form] = Form.useForm();
 
   useDidShow(() => {
-    if (inviter) {
-      form.setFieldsValue({ invitationCode: inviter });
+    // 检查是否存在邀请码
+    const invitationCode = Taro.getStorageSync(StorageKey.INVITATION_CODE);
+    if (invitationCode) {
+      form.setFieldsValue({ invitationCode });
     }
+    // 如果从后面的步骤返回，要回填注册信息
     const info = parseJson<Partial<CompanyInfo>>(
       Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
       undefined,
@@ -119,7 +120,7 @@ const Page = () => {
             <Upload />
           </Form.Item>
           <Form.Item label="邀请码" name="invitationCode">
-            <Input disabled={!!inviter} />
+            <Input disabled />
           </Form.Item>
         </Form>
       </View>

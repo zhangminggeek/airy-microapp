@@ -11,6 +11,7 @@ import { getCompanyInvitation, getCompanySelf } from '@/api';
 import { Avatar, Icon, Space } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
 import { useRequest } from '@/hooks';
+import { ShareType } from '@/hooks/useShare';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { Toast } from '@/utils';
@@ -22,7 +23,7 @@ const Page = () => {
     // 来自页面转发分享
     return {
       title: '超值好物高质量二手婚纱尽在AIRY',
-      path: `/packageCompany/pages/register/index?inviter=${info?.companyId}`,
+      path: `/pages/market/index/index?shareType=${ShareType.INVITATION}&shareParams=${JSON.stringify({ invitationCode: info?.company?.invitationCode })}`,
       imageUrl: `${OSS_ASSETS_DIR}/invitation_share.jpg`,
     };
   });

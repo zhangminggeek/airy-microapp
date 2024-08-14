@@ -29,10 +29,9 @@ const Page = () => {
   });
 
   useShareAppMessage(() => {
-    // 来自页面转发分享
     return {
       title: data?.name,
-      path: `/pages/market/index/index?shareType=${ShareType.COMPANY}&shareParams=${JSON.stringify({ id })}`,
+      path: `/pages/market/index/index?shareType=${ShareType.COMPANY}&shareParams=${JSON.stringify({ id, invitationCode: info?.company?.invitationCode })}`,
       imageUrl: data?.logo ?? ImageLogo,
     };
   });

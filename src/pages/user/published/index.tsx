@@ -23,6 +23,7 @@ import { ProductSource } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
 import { ShareType } from '@/hooks/useShare';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { RouterUtil, Toast } from '@/utils';
 
 interface TabOption {
@@ -33,6 +34,7 @@ interface TabOption {
 }
 
 const Page = () => {
+  const { info } = useUserStore((state) => state);
   const actionRef = useRef<ActionType>(null);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -40,12 +42,12 @@ const Page = () => {
   useShareAppMessage(({ from, target }) => {
     if (from === 'button') {
       // @ts-expect-error: dataset is in target
-      const info = target?.dataset;
+      const dataset = target?.dataset;
       // 来自按钮转发分享
       return {
-        title: info?.title,
-        path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id: info?.id })}`,
-        imageUrl: info.image,
+        title: dataset?.title,
+        path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id: dataset?.id, invitationCode: info?.company?.invitationCode })}`,
+        imageUrl: dataset.image,
       };
     }
     // 来自页面转发分享

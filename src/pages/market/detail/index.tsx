@@ -38,7 +38,7 @@ const Page = () => {
     // 来自页面转发分享
     return {
       title: data?.title,
-      path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id })}`,
+      path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id, invitationCode: info?.company?.invitationCode })}`,
       imageUrl: data?.product?.picList?.[0].url,
     };
   });
