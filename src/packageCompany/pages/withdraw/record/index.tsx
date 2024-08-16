@@ -41,7 +41,7 @@ const Page = () => {
                   <View className={styles['record-info']}>
                     <View
                       className={styles['record-info-title']}
-                    >{`${companyPaymentTypeMap.get(item.status)?.text ?? ''}提现`}</View>
+                    >{`${companyPaymentTypeMap.get(item.type)?.text ?? ''}提现`}</View>
                     <View className={styles['record-info-time']}>
                       申请时间:{dayjs(item.createTime).format(DATE_TIME_FORMAT)}
                     </View>
