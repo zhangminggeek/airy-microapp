@@ -71,7 +71,7 @@ const Page = () => {
             return prev;
           },
           {
-            no: data?.no,
+            brand: data?.brand,
             productTypeName: productTypeMap.get(data?.typeCode as ProductType)
               ?.text,
             size: productSizeMap.get(data?.size)?.text,

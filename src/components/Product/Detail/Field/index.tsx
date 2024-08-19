@@ -27,7 +27,7 @@ const Field: FC<FieldProps> = ({ className, style, fieldList = [], data }) => {
     >
       <Descriptions
         options={[
-          { field: 'no', label: '编号', col: 2 },
+          { field: 'brand', label: '品牌', col: 2 },
           { field: 'productTypeName', label: '类型' },
           { field: 'size', label: '尺码' },
           ...fieldList,
