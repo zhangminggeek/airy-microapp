@@ -67,7 +67,7 @@ const Page = () => {
       ...restSubFilterValue,
       filterStr: filterArr?.length ? JSON.stringify(filterArr) : undefined,
     };
-  }, [typeCode, keyword, tabFilterValue, subFilterValue]);
+  }, [typeCode, keyword, mainFilterValue, tabFilterValue, subFilterValue]);
 
   // 下拉刷新
   usePullDownRefresh(async () => {
