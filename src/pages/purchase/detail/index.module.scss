@@ -18,10 +18,15 @@
 
     &-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       font-size: $font-size-base;
 
+      &-row {
+        grid-column: 1 / span 4;
+      }
+
       &-label {
+        flex-shrink: 0;
         color: $text-color-secondary;
         margin-right: 8px;
 

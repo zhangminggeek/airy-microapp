@@ -88,6 +88,7 @@ const Page = () => {
         leasePrice,
         leaseDeposit,
         companyAddressId,
+        product: { brand },
         expressMethod,
         quality,
       } = data;
@@ -109,6 +110,7 @@ const Page = () => {
         leasePrice,
         leaseDeposit,
         companyAddressId,
+        brand,
         expressMethod: [expressMethod],
         quality: [quality],
       });
@@ -230,7 +232,7 @@ const Page = () => {
         </FormSection>
         <FormSection>
           <Form.Item name="description" noStyle>
-            <TextArea placeholder="描述一下宝贝品牌，详情等" maxLength={255} />
+            <TextArea placeholder="描述一下宝贝详情" maxLength={255} />
           </Form.Item>
           {createFromAlbum ? (
             <Form.Item name="picList" noStyle>
@@ -387,6 +389,9 @@ const Page = () => {
                   </Form.Item>
                 ))
               : null}
+            <Form.Item label="品牌" name="brand">
+              <Input maxLength={255} />
+            </Form.Item>
           </FormSection>
         )}
         <FormSection title="新旧程度">

@@ -1,6 +1,7 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow, useRouter } from '@tarojs/taro';
+import classnames from 'classnames';
 import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
@@ -86,6 +87,19 @@ const Page = () => {
               </View>
             );
           })}
+          {data?.brand ? (
+            <View
+              className={classnames(
+                styles['field-item'],
+                styles['field-item-row'],
+              )}
+            >
+              <View className={styles['field-item-label']}>品牌</View>
+              <View className={styles['field-item-content']}>
+                {data?.brand}
+              </View>
+            </View>
+          ) : null}
         </View>
         {data?.tagList?.length ? (
           <View className={styles.tag}>

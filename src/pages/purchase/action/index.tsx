@@ -177,9 +177,6 @@ const Page = () => {
           </Form.Item>
         </FormSection>
         <FormSection fill>
-          <Form.Item label="品牌" name="brand">
-            <Input maxLength={255} />
-          </Form.Item>
           <Form.Item
             label="类型"
             name="typeCode"
@@ -206,6 +203,9 @@ const Page = () => {
                 </Form.Item>
               ))
             : null}
+          <Form.Item label="品牌" name="brand">
+            <Input maxLength={255} />
+          </Form.Item>
         </FormSection>
         <FormSection title="购买/借调">
           <Form.Item
