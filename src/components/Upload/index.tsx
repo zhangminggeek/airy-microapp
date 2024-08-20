@@ -48,12 +48,11 @@ const Upload: FC<UploadProps> = ({
   const chooseMedia = async () => {
     if (uploading) return;
     Taro.chooseMedia({
-      count: 1,
+      count: maxCount - (value?.length ?? 0),
       mediaType,
       sourceType,
       success(result) {
-        const file = result.tempFiles[0];
-        uploadMedia(file);
+        uploadMedia(result.tempFiles);
       },
     });
   };
@@ -70,24 +69,31 @@ const Upload: FC<UploadProps> = ({
 
   // 上传前校验
   const beforeUpload = async (file: Taro.chooseMedia.ChooseMedia) => {
-    if (!checkFile(file)) return Promise.reject();
+    if (!checkFile(file)) return false;
+    return true;
   };
 
   // 上传图片/视频
-  const uploadMedia = async (file: Taro.chooseMedia.ChooseMedia) => {
-    await beforeUpload(file);
+  const uploadMedia = async (files: Taro.chooseMedia.ChooseMedia[]) => {
+    const tempUrls = [...value];
     try {
       setUploading(true);
-      const url = await upload(file.tempFilePath);
-      if (file.thumbTempFilePath) {
-        // 上传视频时，同时上传缩略图，并且显示缩略图
-        const thumbUrl = await upload(file.thumbTempFilePath);
-        const filename = url.split('/').at(-1);
-        const urlWithSource = `${thumbUrl}?source=${filename}`;
-        onChange?.(value?.concat([urlWithSource]));
-      } else {
-        onChange?.(value?.concat([url]));
+      for (const file of files) {
+        const passed = beforeUpload(file);
+        if (!passed) return;
+        const url = await upload(file.tempFilePath);
+        if (file.thumbTempFilePath) {
+          // 上传视频时，同时上传缩略图，并且显示缩略图
+          const thumbUrl = await upload(file.thumbTempFilePath);
+          const filename = url.split('/').at(-1);
+          const urlWithSource = `${thumbUrl}?source=${filename}`;
+          tempUrls.push(urlWithSource);
+          onChange?.(value?.concat([urlWithSource]));
+        } else {
+          tempUrls.push(url);
+        }
       }
+      onChange?.(tempUrls);
     } catch (err) {
       console.log(err);
     } finally {

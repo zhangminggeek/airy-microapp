@@ -170,7 +170,11 @@ const Page = () => {
       >
         <FormSection>
           <Form.Item name="title" noStyle>
-            <TextArea placeholder="描述一下求购商品信息" maxLength={200} />
+            <TextArea
+              style={{ marginBottom: 20 }}
+              placeholder="描述一下求购商品信息"
+              maxLength={200}
+            />
           </Form.Item>
           <Form.Item name="picList" noStyle>
             <Upload placeholder="添加图片" maxCount={4} />

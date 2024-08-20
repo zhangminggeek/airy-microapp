@@ -232,7 +232,11 @@ const Page = () => {
         </FormSection>
         <FormSection>
           <Form.Item name="description" noStyle>
-            <TextArea placeholder="描述一下宝贝详情" maxLength={255} />
+            <TextArea
+              style={{ marginBottom: 20 }}
+              placeholder="描述一下宝贝详情"
+              maxLength={255}
+            />
           </Form.Item>
           {createFromAlbum ? (
             <Form.Item name="picList" noStyle>
