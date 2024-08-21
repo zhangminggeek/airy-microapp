@@ -8,7 +8,7 @@ import { getShopConfig, marketConfig, settingConfig } from './config';
 import IconItem from './IconItem';
 import styles from './index.module.scss';
 
-import { getCompanySelf } from '@/api';
+import { getCompanyStatistics } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, Section, Space } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
@@ -32,7 +32,9 @@ const Page = () => {
   });
 
   // 获取公司信息
-  const { data, mutate, run } = useRequest(getCompanySelf, { manual: true });
+  const { data, mutate, run } = useRequest(getCompanyStatistics, {
+    manual: true,
+  });
 
   return (
     <BasicLayout
@@ -44,12 +46,12 @@ const Page = () => {
           }}
         >
           <Avatar
-            src={data?.logo}
-            name={data?.name}
+            src={info?.company?.logo}
+            name={info?.company?.name}
             defaultImage={ImageLogo}
             size="32"
           />
-          <Text>{data?.name ?? '登录/注册'}</Text>
+          <Text>{info?.company?.name ?? '登录/注册'}</Text>
           <Icon name="RightOutlined" size={16} />
         </Space>
       }

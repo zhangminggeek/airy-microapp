@@ -4372,73 +4372,13 @@ const devUrl_0_0_0_5 = '' as any
 const prodUrl_0_0_0_5 = '' as any
 const dataKey_0_0_0_5 = 'data' as any
 
-export interface GetCompanySelfRequest {}
+export interface GetCompanyStatisticsRequest {}
 
-export interface GetCompanySelfResponse {
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 公司id
-   */
-  id: number
-  /**
-   * 公司名称
-   */
-  name: string
-  /**
-   * 营业执照上的公司名称
-   */
-  licenseCompanyName?: string
-  /**
-   * 公司LOGO
-   */
-  logo?: string
-  /**
-   * 简介
-   */
-  intro?: string
-  /**
-   * 联系人
-   */
-  contacts: string
-  /**
-   * 联系电话
-   */
-  contactPhone: string
-  /**
-   * 省
-   */
-  province: string
-  /**
-   * 市
-   */
-  city: string
-  /**
-   * 区
-   */
-  area: string
-  /**
-   * 地址
-   */
-  address: string
+export interface GetCompanyStatisticsResponse {
   /**
    * 余额
    */
   balance: string
-  /**
-   * 邀请码
-   */
-  invitationCode: string
-  /**
-   * 状态, 0:禁用 1:正常 2:待审核
-   */
-  status: number
   /**
    * 提现中的金额
    */
@@ -4461,15 +4401,15 @@ export interface GetCompanySelfResponse {
   saleVolumeToday: string
 }
 
-type GetCompanySelfRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/self', 'data', string, string, true>
+type GetCompanyStatisticsRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/statistics', 'data', string, string, true>
 >
 
-const getCompanySelfRequestConfig: GetCompanySelfRequestConfig = /*#__PURE__*/ {
+const getCompanyStatisticsRequestConfig: GetCompanyStatisticsRequestConfig = /*#__PURE__*/ {
   mockUrl: mockUrl_0_0_0_5,
   devUrl: devUrl_0_0_0_5,
   prodUrl: prodUrl_0_0_0_5,
-  path: '/company/self',
+  path: '/company/statistics',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
@@ -4480,16 +4420,19 @@ const getCompanySelfRequestConfig: GetCompanySelfRequestConfig = /*#__PURE__*/ {
   requestDataOptional: true,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getCompanySelf',
+  requestFunctionName: 'getCompanyStatistics',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
-export const getCompanySelf = /*#__PURE__*/ (requestData?: GetCompanySelfRequest, ...args: UserRequestRestArgs) => {
-  return request<GetCompanySelfResponse>(prepare(getCompanySelfRequestConfig, requestData), ...args)
+export const getCompanyStatistics = /*#__PURE__*/ (
+  requestData?: GetCompanyStatisticsRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyStatisticsResponse>(prepare(getCompanyStatisticsRequestConfig, requestData), ...args)
 }
 
-getCompanySelf.requestConfig = getCompanySelfRequestConfig
+getCompanyStatistics.requestConfig = getCompanyStatisticsRequestConfig
 
 export interface GetCompanyBalanceRequest {}
 
