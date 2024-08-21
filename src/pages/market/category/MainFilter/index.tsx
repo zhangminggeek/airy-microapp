@@ -15,7 +15,7 @@ interface OptionType<V extends number | string> {
 interface MainFilterProps<V extends number | string> {
   options: Array<OptionType<V>>;
   value?: V;
-  onChange?: (value: V) => void;
+  onChange?: (value?: V) => void;
 }
 
 const SIMPLE_SIZE = 5;
@@ -27,6 +27,14 @@ const MainFilter = <V extends string | number = number>({
 }: MainFilterProps<V>) => {
   // 是否折叠
   const [collapsed, setCollapsed] = useState<boolean>(true);
+
+  const handleClick = (v: V) => {
+    if (v === value) {
+      onChange?.();
+    } else {
+      onChange?.(v);
+    }
+  };
 
   return (
     <View className={styles.filter}>
@@ -40,7 +48,7 @@ const MainFilter = <V extends string | number = number>({
                 pic={item.pic}
                 active={item.value === value}
                 onClick={() => {
-                  onChange?.(item.value);
+                  handleClick(item.value);
                 }}
               />
             ))}
@@ -68,7 +76,7 @@ const MainFilter = <V extends string | number = number>({
                   pic={item.pic}
                   active={item.value === value}
                   onClick={() => {
-                    onChange?.(item.value);
+                    handleClick(item.value);
                   }}
                 />
               ))}
