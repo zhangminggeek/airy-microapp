@@ -80,7 +80,7 @@ const Upload: FC<UploadProps> = ({
       setUploading(true);
       for (const file of files) {
         const passed = beforeUpload(file);
-        if (!passed) return;
+        if (!passed) break;
         const url = await upload(file.tempFilePath);
         if (file.thumbTempFilePath) {
           // 上传视频时，同时上传缩略图，并且显示缩略图
@@ -88,7 +88,6 @@ const Upload: FC<UploadProps> = ({
           const filename = url.split('/').at(-1);
           const urlWithSource = `${thumbUrl}?source=${filename}`;
           tempUrls.push(urlWithSource);
-          onChange?.(value?.concat([urlWithSource]));
         } else {
           tempUrls.push(url);
         }
