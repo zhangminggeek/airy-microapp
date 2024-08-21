@@ -1,6 +1,7 @@
 import { Button, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
+import Big from 'big.js';
 
 import AmountItem from './AmountItem';
 import { getShopConfig, marketConfig, settingConfig } from './config';
@@ -76,7 +77,14 @@ const Page = () => {
             }
             fontSize={28}
           >
-            {data?.balance ?? 0}
+            <Space align="baseline">
+              <Text>{data?.balance ?? 0}</Text>
+              {Big(data?.locked ?? '0').gt(0) ? (
+                <Text style={{ fontSize: 12, color: '#e37318' }}>
+                  提现中:{data?.locked ?? 0}
+                </Text>
+              ) : null}
+            </Space>
           </AmountItem>
           <Button
             className={styles['account-header-btn']}

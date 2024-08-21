@@ -27,9 +27,16 @@
       }
 
       &-value {
+        position: relative;
         font-size: 56px;
         color: $text-color-main;
         font-weight: 600;
+
+        &-warning {
+          font-size: $font-size-small;
+          color: $color-warning;
+          text-align: center;
+        }
       }
 
       &-btn {

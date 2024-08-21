@@ -55,7 +55,8 @@
 
             &-disabled {
               .m-payment-picker-body-payment-list-item-content-name,
-              .m-payment-picker-body-payment-list-item-content-desc {
+              .m-payment-picker-body-payment-list-item-content-desc,
+              .m-payment-picker-body-payment-list-item-content-desc-warning {
                 color: $text-color-disabled;
               }
             }
@@ -70,6 +71,10 @@
               font-size: $font-size-small;
               color: $text-color-secondary;
               font-weight: 400;
+
+              &-warning {
+                color: $color-warning;
+              }
             }
           }
 

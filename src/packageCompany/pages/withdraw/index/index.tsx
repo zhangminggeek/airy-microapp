@@ -6,7 +6,11 @@ import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import { getCompanyPayment, getCompanySelf, postCompanyWithdraw } from '@/api';
+import {
+  getCompanyBalance,
+  getCompanyPayment,
+  postCompanyWithdraw,
+} from '@/api';
 import IconUnionPay from '@/assets/icons/union_pay.png';
 import { Icon, InputNumber, Section, TagChecker } from '@/components';
 import { CompanyPaymentType } from '@/constants/company';
@@ -25,12 +29,12 @@ const Page = () => {
     fetchPayments();
   });
 
-  // 获取公司信息
-  const { data: company, run: fetchCompany } = useRequest(getCompanySelf, {
+  // 获取公司余额
+  const { data, run: fetchCompany } = useRequest(getCompanyBalance, {
     manual: true,
   });
 
-  // 获取公司信息
+  // 获取公司支付方式
   const { data: payments, run: fetchPayments } = useRequest(getCompanyPayment, {
     manual: true,
   });
@@ -77,7 +81,14 @@ const Page = () => {
       <View className={styles.content}>
         <Section className={styles.balance}>
           <View className={styles['balance-title']}>余额(元)</View>
-          <View className={styles['balance-value']}>{company?.balance}</View>
+          <View className={styles['balance-value']}>
+            <View>{data?.balance}</View>
+            {Big(data?.locked ?? '0').gt(0) ? (
+              <View className={styles['balance-value-warning']}>
+                提现中:{data?.locked ?? 0}
+              </View>
+            ) : null}
+          </View>
           <Button
             className={styles['balance-btn']}
             fill="none"
@@ -177,7 +188,11 @@ const Page = () => {
               Toast.info('提现金额必须为正整数');
               return;
             }
-            if (Big(amount ?? 0).gt(company?.balance ?? 0)) {
+            if (
+              Big(data?.balance ?? '0')
+                .minus(data?.locked ?? '0')
+                .lt(amount ?? 0)
+            ) {
               Toast.info('提现金额不能大于余额');
               return;
             }

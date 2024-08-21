@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import styles from './index.module.scss';
 
-import { getCompanyBalance } from '@/api';
+import { getCompanyBalanceRecord } from '@/api';
 import { Filter, List } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import { balanceRecordTypeMap, paymentTypeMap } from '@/constants/company';
@@ -40,7 +40,7 @@ const Page = () => {
             className={styles.list}
             column={1}
             params={condition}
-            request={getCompanyBalance}
+            request={getCompanyBalanceRecord}
             renderItem={(item) => (
               <View key={item.id} className={styles.item}>
                 <View className={styles.left}>

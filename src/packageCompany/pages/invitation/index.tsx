@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { InvitationStatus } from './constants';
 import styles from './index.module.scss';
 
-import { getCompanyInvitation, getCompanySelf } from '@/api';
+import { getCompanyInvitation } from '@/api';
 import { Avatar, Icon, Space } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
 import { useRequest } from '@/hooks';
@@ -27,9 +27,6 @@ const Page = () => {
       imageUrl: `${OSS_ASSETS_DIR}/invitation_share.jpg`,
     };
   });
-
-  // 获取当前企业信息
-  const { data } = useRequest(getCompanySelf);
 
   // 获取邀请的公司列表
   const { data: invitationList } = useRequest(getCompanyInvitation);
@@ -93,13 +90,15 @@ const Page = () => {
               立即邀请
             </Button>
             <View className={styles['invitation-code']}>
-              我的邀请码：{data?.invitationCode}
+              我的邀请码：{info?.company?.invitationCode}
               <Icon
                 className={styles['invitation-code-icon']}
                 name="CopyOutlined"
                 size={14}
                 onClick={async () => {
-                  await setClipboardData({ data: data?.invitationCode });
+                  await setClipboardData({
+                    data: info?.company?.invitationCode,
+                  });
                   Toast.info('邀请码复制成功');
                 }}
               />

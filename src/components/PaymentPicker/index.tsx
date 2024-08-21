@@ -7,12 +7,12 @@ import { useEffect, useMemo, useState } from 'react';
 import type { PopupProps } from '@nutui/nutui-react-taro';
 import type { CSSProperties, FC } from 'react';
 
-import { getCompanySelf } from '@/api';
+import { getCompanyBalance } from '@/api';
 import { Icon } from '@/components';
 import { PaymentType } from '@/constants/company';
 import { COLOR_PRIMARY, COLOR_WECHAT } from '@/constants/theme';
 import { useRequest } from '@/hooks';
-import { isNil, Toast } from '@/utils';
+import { Toast } from '@/utils';
 
 import './index.scss';
 
@@ -44,10 +44,15 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
   }, [visible]);
 
   // 获取余额
-  const { data, run } = useRequest(getCompanySelf, {
+  const { data, run } = useRequest(getCompanyBalance, {
     manual: true,
     onSuccess(res) {
-      if (Big(amount ?? 0).lte(res?.balance ?? 0)) {
+      const { balance = '0', locked = '0' } = res;
+      if (
+        Big(balance)
+          .minus(locked)
+          .gte(amount ?? '0')
+      ) {
         // 如果余额足够，优先使用余额支付
         setPayment(PaymentType['余额']);
       } else {
@@ -63,8 +68,21 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
         icon: 'IncomeFilled',
         color: COLOR_PRIMARY,
         value: PaymentType['余额'],
-        desc: data?.balance ?? 0,
-        disabled: Big(amount ?? 0).gt(data?.balance ?? 0),
+        desc: (
+          <View>
+            <Text>剩余:¥{data?.balance ?? '0'}</Text>
+            {Big(data?.locked ?? '0').gt(0) ? (
+              <Text
+                className={`${PREFIX_CLS}-body-payment-list-item-content-desc-warning`}
+              >
+                (提现中:¥{data?.locked ?? '0'})
+              </Text>
+            ) : null}
+          </View>
+        ),
+        disabled: Big(data?.balance ?? '0')
+          .minus(data?.locked ?? '0')
+          .lt(amount ?? '0'),
       },
       {
         name: '微信支付',
@@ -126,11 +144,11 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
                   >
                     {item.name}
                   </View>
-                  {!isNil(item.desc) && (
+                  {item.desc && (
                     <View
                       className={`${PREFIX_CLS}-body-payment-list-item-content-desc`}
                     >
-                      {`剩余: ¥${item.desc}`}
+                      {item.desc}
                     </View>
                   )}
                 </View>

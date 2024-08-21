@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 
 import styles from './index.module.scss';
 
-import { getCompanySelf, putCompany } from '@/api';
+import { putCompany } from '@/api';
 import { EditableCell } from '@/components';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -11,15 +11,13 @@ import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
-  const { logout } = useUserStore((state) => state);
-  // 获取企业信息
-  const { data, run } = useRequest(getCompanySelf);
+  const { info, fetchUserInfo, logout } = useUserStore((state) => state);
 
   // 更新企业信息
   const { run: update } = useRequest(putCompany, {
     manual: true,
     onSuccess() {
-      run();
+      fetchUserInfo();
     },
   });
 
@@ -42,7 +40,7 @@ const Page = () => {
             name: 'logo',
             renderConfig: {
               renderType: 'avatar',
-              name: data?.name,
+              name: info?.company?.name,
             },
           },
           {
@@ -67,7 +65,7 @@ const Page = () => {
             },
           },
         ]}
-        data={{ logo: data?.logo, intro: data?.intro }}
+        data={{ logo: info?.company?.logo, intro: info?.company?.intro }}
         onChange={async (field, value) => {
           await update({ [field]: value });
         }}

@@ -83,6 +83,1501 @@ const devUrl_0_0_0_1 = '' as any
 const prodUrl_0_0_0_1 = '' as any
 const dataKey_0_0_0_1 = 'data' as any
 
+export interface GetMarketRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 产品标题或品牌
+   */
+  keyword?: string
+  /**
+   * 产品标题
+   */
+  title?: string
+  /**
+   * 产品类型
+   */
+  productTypeCode?: string
+  /**
+   * 公司id
+   */
+  companyId?: string
+  /**
+   * 允许出售
+   */
+  allowSell?: string
+  /**
+   * 允许借调
+   */
+  allowLease?: string
+  /**
+   * 最小出售价格
+   */
+  minSellingPrice?: string
+  /**
+   * 最大出售价格
+   */
+  maxSellingPrice?: string
+  /**
+   * 最小借调价格
+   */
+  minLeasePrice?: string
+  /**
+   * 最大借调价格
+   */
+  maxLeasePrice?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod?: string
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality?: string
+  /**
+   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+   */
+  status?: string
+  /**
+   * 排序方式 1:最新发布 2:最多收藏
+   */
+  order?: string
+  /**
+   * 筛选项
+   */
+  filterStr?: string
+}
+
+export interface GetMarketResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    expressMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+      /**
+       * 标签
+       */
+      tagList: {
+        /**
+         * id
+         */
+        id: number
+        /**
+         * 标签id
+         */
+        tagId: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 标签
+         */
+        tag: {
+          /**
+           * 标签id
+           */
+          id: number
+          /**
+           * 标签名称
+           */
+          name: string
+          /**
+           * 用途, 1:服饰标签
+           */
+          use: number
+        }
+      }[]
+    }
+    /**
+     * 被收藏数
+     */
+    favorities: number
+  }[]
+}
+
+type GetMarketRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/market',
+    'data',
+    string,
+    | 'pageNum'
+    | 'pageSize'
+    | 'keyword'
+    | 'title'
+    | 'productTypeCode'
+    | 'companyId'
+    | 'allowSell'
+    | 'allowLease'
+    | 'minSellingPrice'
+    | 'maxSellingPrice'
+    | 'minLeasePrice'
+    | 'maxLeasePrice'
+    | 'expressMethod'
+    | 'quality'
+    | 'status'
+    | 'order'
+    | 'filterStr',
+    false
+  >
+>
+
+const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [
+    'pageNum',
+    'pageSize',
+    'keyword',
+    'title',
+    'productTypeCode',
+    'companyId',
+    'allowSell',
+    'allowLease',
+    'minSellingPrice',
+    'maxSellingPrice',
+    'minLeasePrice',
+    'maxLeasePrice',
+    'expressMethod',
+    'quality',
+    'status',
+    'order',
+    'filterStr',
+  ],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getMarket',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getMarket = /*#__PURE__*/ (requestData: GetMarketRequest, ...args: UserRequestRestArgs) => {
+  return request<GetMarketResponse>(prepare(getMarketRequestConfig, requestData), ...args)
+}
+
+getMarket.requestConfig = getMarketRequestConfig
+
+export interface PostMarketRequest {
+  /**
+   * 名称
+   */
+  title: string
+  /**
+   * 公司收货id
+   */
+  companyAddressId?: number
+  /**
+   * 产品描述
+   */
+  description?: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
+   * 产品id
+   */
+  productId: number
+}
+
+export type PostMarketResponse = number
+
+type PostMarketRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, false>
+>
+
+const postMarketRequestConfig: PostMarketRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postMarket',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postMarket = /*#__PURE__*/ (requestData: PostMarketRequest, ...args: UserRequestRestArgs) => {
+  return request<PostMarketResponse>(prepare(postMarketRequestConfig, requestData), ...args)
+}
+
+postMarket.requestConfig = postMarketRequestConfig
+
+export interface PutMarketRequest {
+  /**
+   * 名称
+   */
+  title: string
+  /**
+   * 公司收货id
+   */
+  companyAddressId?: number
+  /**
+   * 产品描述
+   */
+  description?: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
+   * 产品id
+   */
+  productId: number
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+}
+
+export type PutMarketResponse = any
+
+type PutMarketRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, false>
+>
+
+const putMarketRequestConfig: PutMarketRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putMarket',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putMarket = /*#__PURE__*/ (requestData: PutMarketRequest, ...args: UserRequestRestArgs) => {
+  return request<PutMarketResponse>(prepare(putMarketRequestConfig, requestData), ...args)
+}
+
+putMarket.requestConfig = putMarketRequestConfig
+
+export interface GetMarketMyPublishedRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
+   */
+  status?: string
+}
+
+export interface GetMarketMyPublishedResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    expressMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+      /**
+       * 标签
+       */
+      tagList: {
+        /**
+         * id
+         */
+        id: number
+        /**
+         * 标签id
+         */
+        tagId: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 标签
+         */
+        tag: {
+          /**
+           * 标签id
+           */
+          id: number
+          /**
+           * 标签名称
+           */
+          name: string
+          /**
+           * 用途, 1:服饰标签
+           */
+          use: number
+        }
+      }[]
+    }
+    /**
+     * 被收藏数
+     */
+    favorities: number
+  }[]
+}
+
+type GetMarketMyPublishedRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/market/my/published',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'status',
+    false
+  >
+>
+
+const getMarketMyPublishedRequestConfig: GetMarketMyPublishedRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/my/published',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getMarketMyPublished',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getMarketMyPublished = /*#__PURE__*/ (
+  requestData: GetMarketMyPublishedRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetMarketMyPublishedResponse>(prepare(getMarketMyPublishedRequestConfig, requestData), ...args)
+}
+
+getMarketMyPublished.requestConfig = getMarketMyPublishedRequestConfig
+
+export interface GetMarketMyFavoriteRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+}
+
+export interface GetMarketMyFavoriteResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    expressMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 公司LOGO
+     */
+    companyLogo?: string
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型
+       */
+      typeCode: string
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+      /**
+       * 标签
+       */
+      tagList: {
+        /**
+         * id
+         */
+        id: number
+        /**
+         * 标签id
+         */
+        tagId: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 标签
+         */
+        tag: {
+          /**
+           * 标签id
+           */
+          id: number
+          /**
+           * 标签名称
+           */
+          name: string
+          /**
+           * 用途, 1:服饰标签
+           */
+          use: number
+        }
+      }[]
+    }
+    /**
+     * 被收藏数
+     */
+    favorities: number
+  }[]
+}
+
+type GetMarketMyFavoriteRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/market/my/favorite',
+    'data',
+    string,
+    'pageNum' | 'pageSize',
+    false
+  >
+>
+
+const getMarketMyFavoriteRequestConfig: GetMarketMyFavoriteRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/my/favorite',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getMarketMyFavorite',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getMarketMyFavorite = /*#__PURE__*/ (
+  requestData: GetMarketMyFavoriteRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetMarketMyFavoriteResponse>(prepare(getMarketMyFavoriteRequestConfig, requestData), ...args)
+}
+
+getMarketMyFavorite.requestConfig = getMarketMyFavoriteRequestConfig
+
+export interface PostMarketAndProductRequest {
+  /**
+   * 名称
+   */
+  title: string
+  /**
+   * 公司收货id
+   */
+  companyAddressId?: number
+  /**
+   * 产品描述
+   */
+  description?: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
+   * 服饰图片
+   */
+  picList: string[]
+  /**
+   * 服饰品牌
+   */
+  brand?: string
+  /**
+   * 服饰类型code
+   */
+  typeCode: string
+  /**
+   * 服饰尺寸
+   */
+  size: number
+  /**
+   * 其他信息
+   */
+  fieldList?: {
+    /**
+     * 字段键名
+     */
+    fieldKey: string
+    /**
+     * 字段键值
+     */
+    fieldValue: string
+  }[]
+  /**
+   * 服饰标签
+   */
+  tagIdList?: number[]
+}
+
+export type PostMarketAndProductResponse = number
+
+type PostMarketAndProductRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/and/product', 'data', string, string, false>
+>
+
+const postMarketAndProductRequestConfig: PostMarketAndProductRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/and/product',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postMarketAndProduct',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postMarketAndProduct = /*#__PURE__*/ (
+  requestData: PostMarketAndProductRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostMarketAndProductResponse>(prepare(postMarketAndProductRequestConfig, requestData), ...args)
+}
+
+postMarketAndProduct.requestConfig = postMarketAndProductRequestConfig
+
+export interface PutMarketShelvesOnRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+}
+
+export type PutMarketShelvesOnResponse = any
+
+type PutMarketShelvesOnRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/shelves/on', 'data', string, string, false>
+>
+
+const putMarketShelvesOnRequestConfig: PutMarketShelvesOnRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/shelves/on',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putMarketShelvesOn',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putMarketShelvesOn = /*#__PURE__*/ (
+  requestData: PutMarketShelvesOnRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutMarketShelvesOnResponse>(prepare(putMarketShelvesOnRequestConfig, requestData), ...args)
+}
+
+putMarketShelvesOn.requestConfig = putMarketShelvesOnRequestConfig
+
+export interface PutMarketShelvesOffRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+}
+
+export type PutMarketShelvesOffResponse = any
+
+type PutMarketShelvesOffRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/shelves/off', 'data', string, string, false>
+>
+
+const putMarketShelvesOffRequestConfig: PutMarketShelvesOffRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/shelves/off',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putMarketShelvesOff',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putMarketShelvesOff = /*#__PURE__*/ (
+  requestData: PutMarketShelvesOffRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutMarketShelvesOffResponse>(prepare(putMarketShelvesOffRequestConfig, requestData), ...args)
+}
+
+putMarketShelvesOff.requestConfig = putMarketShelvesOffRequestConfig
+
+export interface GetMarketIdRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: string
+}
+
+export interface GetMarketIdResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 数据id
+   */
+  id: number
+  /**
+   * 公司id
+   */
+  companyId: number
+  /**
+   * 公司收货地址id
+   */
+  companyAddressId?: number
+  /**
+   * 服饰id
+   */
+  productId: number
+  /**
+   * 商品标题
+   */
+  title: string
+  /**
+   * 商品描述
+   */
+  description: string
+  /**
+   * 是否允许出售, 0:否 1:是
+   */
+  allowSell: boolean
+  /**
+   * 是否允许借调, 0:否 1:是
+   */
+  allowLease: boolean
+  /**
+   * 出售价
+   */
+  sellingPrice?: string
+  /**
+   * 借调价
+   */
+  leasePrice?: string
+  /**
+   * 借调押金
+   */
+  leaseDeposit?: string
+  /**
+   * 发货方式, 1:包邮 2:到付 3:自提
+   */
+  expressMethod: number
+  /**
+   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+   */
+  quality: number
+  /**
+   * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+   */
+  status: number
+  /**
+   * 审批结论
+   */
+  remark?: string
+  /**
+   * 是否被删除
+   */
+  isDeleted: boolean
+  /**
+   * 服饰信息
+   */
+  product: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 服饰id
+     */
+    id: number
+    /**
+     * 服饰名称
+     */
+    name: string
+    /**
+     * 服饰编号
+     */
+    no?: string
+    /**
+     * 服饰品牌
+     */
+    brand?: string
+    /**
+     * 服饰类型
+     */
+    typeCode: string
+    /**
+     * 服饰尺码
+     */
+    size: number
+    /**
+     * 描述
+     */
+    description?: string
+    /**
+     * 租赁次数
+     */
+    leaseCount: number
+    /**
+     * 服饰状态 1:正常 2:已售出 3:借调中
+     */
+    status: number
+    /**
+     * 其他信息字段
+     */
+    bizData?: string
+    /**
+     * 图片
+     */
+    picList: {
+      /**
+       * 服饰图片id
+       */
+      id: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 服饰图片地址
+       */
+      url: string
+    }[]
+    /**
+     * 标签
+     */
+    tagList: {
+      /**
+       * id
+       */
+      id: number
+      /**
+       * 标签id
+       */
+      tagId: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 标签
+       */
+      tag: {
+        /**
+         * 标签id
+         */
+        id: number
+        /**
+         * 标签名称
+         */
+        name: string
+        /**
+         * 用途, 1:服饰标签
+         */
+        use: number
+      }
+    }[]
+  }
+  /**
+   * 被收藏数
+   */
+  favorities: number
+  /**
+   * 当前用户是否已收藏
+   */
+  isFavorited: boolean
+}
+
+type GetMarketIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
+>
+
+const getMarketIdRequestConfig: GetMarketIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getMarketId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getMarketId = /*#__PURE__*/ (requestData: GetMarketIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetMarketIdResponse>(prepare(getMarketIdRequestConfig, requestData), ...args)
+}
+
+getMarketId.requestConfig = getMarketIdRequestConfig
+
+export interface DeleteMarketIdRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: string
+}
+
+export type DeleteMarketIdResponse = any
+
+type DeleteMarketIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
+>
+
+const deleteMarketIdRequestConfig: DeleteMarketIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteMarketId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const deleteMarketId = /*#__PURE__*/ (requestData: DeleteMarketIdRequest, ...args: UserRequestRestArgs) => {
+  return request<DeleteMarketIdResponse>(prepare(deleteMarketIdRequestConfig, requestData), ...args)
+}
+
+deleteMarketId.requestConfig = deleteMarketIdRequestConfig
+
+export interface DeleteMarketAuditIdRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: string
+}
+
+export type DeleteMarketAuditIdResponse = any
+
+type DeleteMarketAuditIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/audit/{id}', 'data', 'id', string, false>
+>
+
+const deleteMarketAuditIdRequestConfig: DeleteMarketAuditIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/audit/{id}',
+  method: Method.DELETE,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.raw,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'deleteMarketAuditId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const deleteMarketAuditId = /*#__PURE__*/ (
+  requestData: DeleteMarketAuditIdRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<DeleteMarketAuditIdResponse>(prepare(deleteMarketAuditIdRequestConfig, requestData), ...args)
+}
+
+deleteMarketAuditId.requestConfig = deleteMarketAuditIdRequestConfig
+
+export interface PostMarketFavoriteRequest {
+  /**
+   * 二手市场出售/借调服饰id
+   */
+  id: number
+  /**
+   * 是否收藏
+   */
+  isFavorited: boolean
+}
+
+export type PostMarketFavoriteResponse = any
+
+type PostMarketFavoriteRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/favorite', 'data', string, string, false>
+>
+
+const postMarketFavoriteRequestConfig: PostMarketFavoriteRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/market/favorite',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postMarketFavorite',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postMarketFavorite = /*#__PURE__*/ (
+  requestData: PostMarketFavoriteRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostMarketFavoriteResponse>(prepare(postMarketFavoriteRequestConfig, requestData), ...args)
+}
+
+postMarketFavorite.requestConfig = postMarketFavoriteRequestConfig
+
+const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_2 = '' as any
+const prodUrl_0_0_0_2 = '' as any
+const dataKey_0_0_0_2 = 'data' as any
+
 export interface GetPurchaseRequest {
   /**
    * 页码
@@ -258,15 +1753,15 @@ type GetPurchaseRequestConfig = Readonly<
 >
 
 const getPurchaseRequestConfig: GetPurchaseRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'status', 'order'],
   requestDataOptional: false,
@@ -354,15 +1849,15 @@ type PostPurchaseRequestConfig = Readonly<
 >
 
 const postPurchaseRequestConfig: PostPurchaseRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -454,15 +1949,15 @@ type PutPurchaseRequestConfig = Readonly<
 >
 
 const putPurchaseRequestConfig: PutPurchaseRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -654,15 +2149,15 @@ type GetPurchaseSelfRequestConfig = Readonly<
 >
 
 const getPurchaseSelfRequestConfig: GetPurchaseSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'status', 'order'],
   requestDataOptional: false,
@@ -866,15 +2361,15 @@ type GetPurchaseIdRequestConfig = Readonly<
 >
 
 const getPurchaseIdRequestConfig: GetPurchaseIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -905,15 +2400,15 @@ type DeletePurchaseIdRequestConfig = Readonly<
 >
 
 const deletePurchaseIdRequestConfig: DeletePurchaseIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -948,15 +2443,15 @@ type PostPurchaseSendRequestConfig = Readonly<
 >
 
 const postPurchaseSendRequestConfig: PostPurchaseSendRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase/send',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -987,15 +2482,15 @@ type PutPurchaseAccomplishIdRequestConfig = Readonly<
 >
 
 const putPurchaseAccomplishIdRequestConfig: PutPurchaseAccomplishIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase/accomplish/{id}',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -1029,15 +2524,15 @@ type PutPurchaseAuditCancelIdRequestConfig = Readonly<
 >
 
 const putPurchaseAuditCancelIdRequestConfig: PutPurchaseAuditCancelIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/purchase/audit/cancel/{id}',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -1057,10 +2552,10 @@ export const putPurchaseAuditCancelId = /*#__PURE__*/ (
 
 putPurchaseAuditCancelId.requestConfig = putPurchaseAuditCancelIdRequestConfig
 
-const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_2 = '' as any
-const prodUrl_0_0_0_2 = '' as any
-const dataKey_0_0_0_2 = 'data' as any
+const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_3 = '' as any
+const prodUrl_0_0_0_3 = '' as any
+const dataKey_0_0_0_3 = 'data' as any
 
 export interface GetOrderBoughtRequest {
   /**
@@ -1334,15 +2829,15 @@ type GetOrderBoughtRequestConfig = Readonly<
 >
 
 const getOrderBoughtRequestConfig: GetOrderBoughtRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/bought',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -1631,15 +3126,15 @@ type GetOrderSoldRequestConfig = Readonly<
 >
 
 const getOrderSoldRequestConfig: GetOrderSoldRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/sold',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -1686,15 +3181,15 @@ type PostOrderRequestConfig = Readonly<
 >
 
 const postOrderRequestConfig: PostOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1725,15 +3220,15 @@ type DeleteOrderRequestConfig = Readonly<
 >
 
 const deleteOrderRequestConfig: DeleteOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -1764,15 +3259,15 @@ type PostOrderCancelRequestConfig = Readonly<
 >
 
 const postOrderCancelRequestConfig: PostOrderCancelRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/cancel',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1820,15 +3315,15 @@ type PostOrderPayBalanceRequestConfig = Readonly<
 >
 
 const postOrderPayBalanceRequestConfig: PostOrderPayBalanceRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/pay/balance',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1879,15 +3374,15 @@ type PostOrderPayWechatRequestConfig = Readonly<
 >
 
 const postOrderPayWechatRequestConfig: PostOrderPayWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/pay/wechat',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1979,15 +3474,15 @@ type PostOrderPayWechatNoticeRequestConfig = Readonly<
 >
 
 const postOrderPayWechatNoticeRequestConfig: PostOrderPayWechatNoticeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/pay/wechat/notice',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2021,15 +3516,15 @@ type GetOrderWechatPayTransactionRequestConfig = Readonly<
 >
 
 const getOrderWechatPayTransactionRequestConfig: GetOrderWechatPayTransactionRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/wechat/pay/transaction',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -2074,15 +3569,15 @@ type PostOrderExpressDeliverRequestConfig = Readonly<
 >
 
 const postOrderExpressDeliverRequestConfig: PostOrderExpressDeliverRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/express/deliver',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2124,15 +3619,15 @@ type PostOrderExpressReturnRequestConfig = Readonly<
 >
 
 const postOrderExpressReturnRequestConfig: PostOrderExpressReturnRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/express/return',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2166,15 +3661,15 @@ type PostOrderReceiveBuyerRequestConfig = Readonly<
 >
 
 const postOrderReceiveBuyerRequestConfig: PostOrderReceiveBuyerRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/receive/buyer',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2216,15 +3711,15 @@ type PostOrderReceiveSellerRequestConfig = Readonly<
 >
 
 const postOrderReceiveSellerRequestConfig: PostOrderReceiveSellerRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/receive/seller',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2715,15 +4210,15 @@ type GetOrderIdRequestConfig = Readonly<
 >
 
 const getOrderIdRequestConfig: GetOrderIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/order/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -2740,128 +4235,142 @@ export const getOrderId = /*#__PURE__*/ (requestData: GetOrderIdRequest, ...args
 
 getOrderId.requestConfig = getOrderIdRequestConfig
 
-const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_3 = '' as any
-const prodUrl_0_0_0_3 = '' as any
-const dataKey_0_0_0_3 = 'data' as any
+const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_4 = '' as any
+const prodUrl_0_0_0_4 = '' as any
+const dataKey_0_0_0_4 = 'data' as any
 
-export interface GetCompanyTemplateRequest {}
-
-export interface GetCompanyTemplateResponse {
+export interface PostPlatformWithdrawAuditRequest {
   /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 公司id
+   * 提现记录id
    */
   id: number
   /**
-   * 公司名称
-   */
-  name: string
-  /**
-   * 营业执照上的公司名称
-   */
-  licenseCompanyName?: string
-  /**
-   * 公司LOGO
-   */
-  logo?: string
-  /**
-   * 简介
-   */
-  intro?: string
-  /**
-   * 联系人
-   */
-  contacts: string
-  /**
-   * 联系电话
-   */
-  contactPhone: string
-  /**
-   * 省
-   */
-  province: string
-  /**
-   * 市
-   */
-  city: string
-  /**
-   * 区
-   */
-  area: string
-  /**
-   * 地址
-   */
-  address: string
-  /**
-   * 账户余额
-   */
-  balance: string
-  /**
-   * 邀请码
-   */
-  invitationCode: string
-  /**
-   * 状态, 0:禁用 1:正常 2:待审核
+   * 状态 1:审核中 2:待转账 3:已完成 4:已拒绝 5:已取消
    */
   status: number
-  /**
-   * 粉丝数量
-   */
-  fansCount: number
-  /**
-   * 关注数量
-   */
-  follewedCount: number
-  /**
-   * 今日销售（元）
-   */
-  saleToday: string
-  /**
-   * 今日售出（件）
-   */
-  saleVolumeToday: string
 }
 
-type GetCompanyTemplateRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/template', 'data', string, string, true>
+export type PostPlatformWithdrawAuditResponse = any
+
+type PostPlatformWithdrawAuditRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/platform/withdraw/audit', 'data', string, string, false>
 >
 
-const getCompanyTemplateRequestConfig: GetCompanyTemplateRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/company/template',
-  method: Method.GET,
+const postPlatformWithdrawAuditRequestConfig: PostPlatformWithdrawAuditRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/platform/withdraw/audit',
+  method: Method.POST,
   requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_4,
   paramNames: [],
   queryNames: [],
-  requestDataOptional: true,
+  requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getCompanyTemplate',
+  requestFunctionName: 'postPlatformWithdrawAudit',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
-export const getCompanyTemplate = /*#__PURE__*/ (
-  requestData?: GetCompanyTemplateRequest,
+export const postPlatformWithdrawAudit = /*#__PURE__*/ (
+  requestData: PostPlatformWithdrawAuditRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<GetCompanyTemplateResponse>(prepare(getCompanyTemplateRequestConfig, requestData), ...args)
+  return request<PostPlatformWithdrawAuditResponse>(
+    prepare(postPlatformWithdrawAuditRequestConfig, requestData),
+    ...args,
+  )
 }
 
-getCompanyTemplate.requestConfig = getCompanyTemplateRequestConfig
+postPlatformWithdrawAudit.requestConfig = postPlatformWithdrawAuditRequestConfig
+
+export interface PostPlatformOfficialAccountsEventRequest {
+  /**
+   * 开发者微信号
+   */
+  ToUserName: string
+  /**
+   * 发送方账号（一个OpenID）
+   */
+  FromUserName: string
+  /**
+   * 消息创建时间（整型）
+   */
+  CreateTime: string
+  /**
+   * 消息类型
+   */
+  MsgType: string
+  /**
+   * 消息id
+   */
+  MsgId?: number
+  /**
+   * 消息内容
+   */
+  Content?: string
+  /**
+   * 事件类型
+   */
+  Event?: string
+}
+
+export type PostPlatformOfficialAccountsEventResponse = string
+
+type PostPlatformOfficialAccountsEventRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/platform/official-accounts/event',
+    'data',
+    string,
+    string,
+    false
+  >
+>
+
+const postPlatformOfficialAccountsEventRequestConfig: PostPlatformOfficialAccountsEventRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/platform/official-accounts/event',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postPlatformOfficialAccountsEvent',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postPlatformOfficialAccountsEvent = /*#__PURE__*/ (
+  requestData: PostPlatformOfficialAccountsEventRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostPlatformOfficialAccountsEventResponse>(
+    prepare(postPlatformOfficialAccountsEventRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postPlatformOfficialAccountsEvent.requestConfig = postPlatformOfficialAccountsEventRequestConfig
+
+const mockUrl_0_0_0_5 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_5 = '' as any
+const prodUrl_0_0_0_5 = '' as any
+const dataKey_0_0_0_5 = 'data' as any
 
 export interface GetCompanySelfRequest {}
 
@@ -2919,7 +4428,7 @@ export interface GetCompanySelfResponse {
    */
   address: string
   /**
-   * 账户余额
+   * 余额
    */
   balance: string
   /**
@@ -2930,6 +4439,10 @@ export interface GetCompanySelfResponse {
    * 状态, 0:禁用 1:正常 2:待审核
    */
   status: number
+  /**
+   * 提现中的金额
+   */
+  locked: string
   /**
    * 粉丝数量
    */
@@ -2953,15 +4466,15 @@ type GetCompanySelfRequestConfig = Readonly<
 >
 
 const getCompanySelfRequestConfig: GetCompanySelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -2977,6 +4490,52 @@ export const getCompanySelf = /*#__PURE__*/ (requestData?: GetCompanySelfRequest
 }
 
 getCompanySelf.requestConfig = getCompanySelfRequestConfig
+
+export interface GetCompanyBalanceRequest {}
+
+export interface GetCompanyBalanceResponse {
+  /**
+   * 公司余额
+   */
+  balance: string
+  /**
+   * 提现中的金额
+   */
+  locked: string
+}
+
+type GetCompanyBalanceRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/balance', 'data', string, string, true>
+>
+
+const getCompanyBalanceRequestConfig: GetCompanyBalanceRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/balance',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyBalance',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getCompanyBalance = /*#__PURE__*/ (
+  requestData?: GetCompanyBalanceRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyBalanceResponse>(prepare(getCompanyBalanceRequestConfig, requestData), ...args)
+}
+
+getCompanyBalance.requestConfig = getCompanyBalanceRequestConfig
 
 export interface GetCompanyFansRequest {
   /**
@@ -3070,15 +4629,15 @@ type GetCompanyFansRequestConfig = Readonly<
 >
 
 const getCompanyFansRequestConfig: GetCompanyFansRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/fans',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize'],
   requestDataOptional: false,
@@ -3196,15 +4755,15 @@ type GetCompanyFolloweeRequestConfig = Readonly<
 >
 
 const getCompanyFolloweeRequestConfig: GetCompanyFolloweeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/followee',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize'],
   requestDataOptional: false,
@@ -3274,15 +4833,15 @@ type PostCompanyRegisterRequestConfig = Readonly<
 >
 
 const postCompanyRegisterRequestConfig: PostCompanyRegisterRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/register',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3320,15 +4879,15 @@ type PutCompanyRequestConfig = Readonly<
 >
 
 const putCompanyRequestConfig: PutCompanyRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3383,15 +4942,15 @@ type GetCompanyPaymentRequestConfig = Readonly<
 >
 
 const getCompanyPaymentRequestConfig: GetCompanyPaymentRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/payment',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -3441,15 +5000,15 @@ type PostCompanyPaymentRequestConfig = Readonly<
 >
 
 const postCompanyPaymentRequestConfig: PostCompanyPaymentRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/payment',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3512,15 +5071,15 @@ type GetCompanyPaymentIdRequestConfig = Readonly<
 >
 
 const getCompanyPaymentIdRequestConfig: GetCompanyPaymentIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/payment/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -3554,15 +5113,15 @@ type DeleteCompanyPaymentIdRequestConfig = Readonly<
 >
 
 const deleteCompanyPaymentIdRequestConfig: DeleteCompanyPaymentIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/payment/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -3582,7 +5141,7 @@ export const deleteCompanyPaymentId = /*#__PURE__*/ (
 
 deleteCompanyPaymentId.requestConfig = deleteCompanyPaymentIdRequestConfig
 
-export interface GetCompanyBalanceRequest {
+export interface GetCompanyBalanceRecordRequest {
   /**
    * 页码
    */
@@ -3605,7 +5164,7 @@ export interface GetCompanyBalanceRequest {
   payment?: string
 }
 
-export interface GetCompanyBalanceResponse {
+export interface GetCompanyBalanceRecordResponse {
   /**
    * 数据总条数
    */
@@ -3657,12 +5216,12 @@ export interface GetCompanyBalanceResponse {
   }[]
 }
 
-type GetCompanyBalanceRequestConfig = Readonly<
+type GetCompanyBalanceRecordRequestConfig = Readonly<
   RequestConfig<
     'http://127.0.0.1:50505/mock/0',
     '',
     '',
-    '/company/balance',
+    '/company/balance/record',
     'data',
     string,
     'pageNum' | 'pageSize' | 'type' | 'mode' | 'payment',
@@ -3670,34 +5229,34 @@ type GetCompanyBalanceRequestConfig = Readonly<
   >
 >
 
-const getCompanyBalanceRequestConfig: GetCompanyBalanceRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/company/balance',
+const getCompanyBalanceRecordRequestConfig: GetCompanyBalanceRecordRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/balance/record',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'type', 'mode', 'payment'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
-  requestFunctionName: 'getCompanyBalance',
+  requestFunctionName: 'getCompanyBalanceRecord',
   queryStringArrayFormat: QueryStringArrayFormat.brackets,
   extraInfo: {},
 }
 
-export const getCompanyBalance = /*#__PURE__*/ (
-  requestData: GetCompanyBalanceRequest,
+export const getCompanyBalanceRecord = /*#__PURE__*/ (
+  requestData: GetCompanyBalanceRecordRequest,
   ...args: UserRequestRestArgs
 ) => {
-  return request<GetCompanyBalanceResponse>(prepare(getCompanyBalanceRequestConfig, requestData), ...args)
+  return request<GetCompanyBalanceRecordResponse>(prepare(getCompanyBalanceRecordRequestConfig, requestData), ...args)
 }
 
-getCompanyBalance.requestConfig = getCompanyBalanceRequestConfig
+getCompanyBalanceRecord.requestConfig = getCompanyBalanceRecordRequestConfig
 
 export interface GetCompanyWithdrawRequest {
   /**
@@ -3748,7 +5307,7 @@ export interface GetCompanyWithdrawResponse {
      */
     amount: string
     /**
-     * 提现金额
+     * 状态 1:审核中 2:待转账 3:已完成 4:已拒绝 5:已取消
      */
     status: number
     /**
@@ -3776,15 +5335,15 @@ type GetCompanyWithdrawRequestConfig = Readonly<
 >
 
 const getCompanyWithdrawRequestConfig: GetCompanyWithdrawRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/withdraw',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -3822,15 +5381,15 @@ type PostCompanyWithdrawRequestConfig = Readonly<
 >
 
 const postCompanyWithdrawRequestConfig: PostCompanyWithdrawRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/withdraw',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3868,15 +5427,15 @@ type PostCompanyFollowToggleRequestConfig = Readonly<
 >
 
 const postCompanyFollowToggleRequestConfig: PostCompanyFollowToggleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/follow/toggle',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -3922,15 +5481,15 @@ type GetCompanyInvitationRequestConfig = Readonly<
 >
 
 const getCompanyInvitationRequestConfig: GetCompanyInvitationRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/invitation',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4041,15 +5600,15 @@ type GetCompanyIdRequestConfig = Readonly<
 >
 
 const getCompanyIdRequestConfig: GetCompanyIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
   path: '/company/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
+  dataKey: dataKey_0_0_0_5,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -4066,10 +5625,10 @@ export const getCompanyId = /*#__PURE__*/ (requestData: GetCompanyIdRequest, ...
 
 getCompanyId.requestConfig = getCompanyIdRequestConfig
 
-const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_4 = '' as any
-const prodUrl_0_0_0_4 = '' as any
-const dataKey_0_0_0_4 = 'data' as any
+const mockUrl_0_0_0_6 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_6 = '' as any
+const prodUrl_0_0_0_6 = '' as any
+const dataKey_0_0_0_6 = 'data' as any
 
 export interface GetUserRequest {}
 
@@ -4109,15 +5668,15 @@ type GetUserRequestConfig = Readonly<
 >
 
 const getUserRequestConfig: GetUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/user',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4160,15 +5719,15 @@ type PostUserRequestConfig = Readonly<
 >
 
 const postUserRequestConfig: PostUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/user',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4211,15 +5770,15 @@ type PutUserRequestConfig = Readonly<
 >
 
 const putUserRequestConfig: PutUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/user',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4250,15 +5809,15 @@ type DeleteUserRequestConfig = Readonly<
 >
 
 const deleteUserRequestConfig: DeleteUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/user',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -4398,15 +5957,15 @@ type GetUserSelfRequestConfig = Readonly<
 >
 
 const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/user/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_6,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4551,15 +6110,15 @@ type GetUserIdRequestConfig = Readonly<
 >
 
 const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_4,
-  devUrl: devUrl_0_0_0_4,
-  prodUrl: prodUrl_0_0_0_4,
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
   path: '/user/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_4,
+  dataKey: dataKey_0_0_0_6,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -4576,10 +6135,10 @@ export const getUserId = /*#__PURE__*/ (requestData: GetUserIdRequest, ...args: 
 
 getUserId.requestConfig = getUserIdRequestConfig
 
-const mockUrl_0_0_0_5 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_5 = '' as any
-const prodUrl_0_0_0_5 = '' as any
-const dataKey_0_0_0_5 = 'data' as any
+const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_7 = '' as any
+const prodUrl_0_0_0_7 = '' as any
+const dataKey_0_0_0_7 = 'data' as any
 
 export interface GetAccountRegisterCodeAccountRequest {
   /**
@@ -4604,15 +6163,15 @@ type GetAccountRegisterCodeAccountRequestConfig = Readonly<
 >
 
 const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/register/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -4653,15 +6212,15 @@ type PostAccountRegisterCodeCheckRequestConfig = Readonly<
 >
 
 const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/register/code/check',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4708,15 +6267,15 @@ type GetAccountChangePasswordCodeAccountRequestConfig = Readonly<
 
 const getAccountChangePasswordCodeAccountRequestConfig: GetAccountChangePasswordCodeAccountRequestConfig =
   /*#__PURE__*/ {
-    mockUrl: mockUrl_0_0_0_5,
-    devUrl: devUrl_0_0_0_5,
-    prodUrl: prodUrl_0_0_0_5,
+    mockUrl: mockUrl_0_0_0_7,
+    devUrl: devUrl_0_0_0_7,
+    prodUrl: prodUrl_0_0_0_7,
     path: '/account/change/password/code/{account}',
     method: Method.GET,
     requestHeaders: {},
     requestBodyType: RequestBodyType.query,
     responseBodyType: ResponseBodyType.raw,
-    dataKey: dataKey_0_0_0_5,
+    dataKey: dataKey_0_0_0_7,
     paramNames: ['account'],
     queryNames: [],
     requestDataOptional: false,
@@ -4766,15 +6325,15 @@ type PostAccountChangePasswordCodeCheckRequestConfig = Readonly<
 >
 
 const postAccountChangePasswordCodeCheckRequestConfig: PostAccountChangePasswordCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/change/password/code/check',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4806,15 +6365,15 @@ type GetAccountSaltRequestConfig = Readonly<
 >
 
 const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/salt',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -4845,15 +6404,15 @@ type GetAccountSaltAccountRequestConfig = Readonly<
 >
 
 const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/salt/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -4904,15 +6463,15 @@ type PostAccountLoginRequestConfig = Readonly<
 >
 
 const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -4952,15 +6511,15 @@ type GetAccountLoginCodeAccountRequestConfig = Readonly<
 >
 
 const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -5010,15 +6569,15 @@ type PostAccountLoginCodeRequestConfig = Readonly<
 >
 
 const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/code',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5065,15 +6624,15 @@ type PostAccountLoginWechatPhoneRequestConfig = Readonly<
 >
 
 const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/wechat/phone',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5110,15 +6669,15 @@ type PostAccountLoginWechatRequestConfig = Readonly<
 >
 
 const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/wechat',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5156,15 +6715,15 @@ type PostAccountBindOpenidRequestConfig = Readonly<
 >
 
 const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/bind/openid',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5206,15 +6765,15 @@ type PutAccountPasswordRequestConfig = Readonly<
 >
 
 const putAccountPasswordRequestConfig: PutAccountPasswordRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_5,
-  devUrl: devUrl_0_0_0_5,
-  prodUrl: prodUrl_0_0_0_5,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/password',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_5,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5234,10 +6793,10 @@ export const putAccountPassword = /*#__PURE__*/ (
 
 putAccountPassword.requestConfig = putAccountPasswordRequestConfig
 
-const mockUrl_0_0_0_6 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_6 = '' as any
-const prodUrl_0_0_0_6 = '' as any
-const dataKey_0_0_0_6 = 'data' as any
+const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_8 = '' as any
+const prodUrl_0_0_0_8 = '' as any
+const dataKey_0_0_0_8 = 'data' as any
 
 export interface GetRoleRequest {}
 
@@ -5265,15 +6824,15 @@ type GetRoleRequestConfig = Readonly<
 >
 
 const getRoleRequestConfig: GetRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/role',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -5304,15 +6863,15 @@ type PostRoleRequestConfig = Readonly<
 >
 
 const postRoleRequestConfig: PostRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/role',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5355,15 +6914,15 @@ type PutRoleRequestConfig = Readonly<
 >
 
 const putRoleRequestConfig: PutRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/role',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5394,15 +6953,15 @@ type DeleteRoleRequestConfig = Readonly<
 >
 
 const deleteRoleRequestConfig: DeleteRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/role',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -5450,15 +7009,15 @@ type GetRoleIdRequestConfig = Readonly<
 >
 
 const getRoleIdRequestConfig: GetRoleIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/role/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_8,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -5475,10 +7034,10 @@ export const getRoleId = /*#__PURE__*/ (requestData: GetRoleIdRequest, ...args: 
 
 getRoleId.requestConfig = getRoleIdRequestConfig
 
-const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_7 = '' as any
-const prodUrl_0_0_0_7 = '' as any
-const dataKey_0_0_0_7 = 'data' as any
+const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_9 = '' as any
+const prodUrl_0_0_0_9 = '' as any
+const dataKey_0_0_0_9 = 'data' as any
 
 export interface GetAddressRequest {}
 
@@ -5538,15 +7097,15 @@ type GetAddressRequestConfig = Readonly<
 >
 
 const getAddressRequestConfig: GetAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/address',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -5601,15 +7160,15 @@ type PostAddressRequestConfig = Readonly<
 >
 
 const postAddressRequestConfig: PostAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/address',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5664,15 +7223,15 @@ type PutAddressRequestConfig = Readonly<
 >
 
 const putAddressRequestConfig: PutAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/address',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5703,15 +7262,15 @@ type PutAddressDefaultRequestConfig = Readonly<
 >
 
 const putAddressDefaultRequestConfig: PutAddressDefaultRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/address/default',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5745,15 +7304,15 @@ type DeleteAddressIdRequestConfig = Readonly<
 >
 
 const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/address/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_9,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -5833,15 +7392,15 @@ type GetAddressIdRequestConfig = Readonly<
 >
 
 const getAddressIdRequestConfig: GetAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/address/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_9,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -5858,10 +7417,10 @@ export const getAddressId = /*#__PURE__*/ (requestData: GetAddressIdRequest, ...
 
 getAddressId.requestConfig = getAddressIdRequestConfig
 
-const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_8 = '' as any
-const prodUrl_0_0_0_8 = '' as any
-const dataKey_0_0_0_8 = 'data' as any
+const mockUrl_0_0_0_10 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_10 = '' as any
+const prodUrl_0_0_0_10 = '' as any
+const dataKey_0_0_0_10 = 'data' as any
 
 export interface GetProductRequest {
   /**
@@ -5939,15 +7498,15 @@ type GetProductRequestConfig = Readonly<
 >
 
 const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/product',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: ['status'],
   requestDataOptional: false,
@@ -6019,15 +7578,15 @@ type PostProductRequestConfig = Readonly<
 >
 
 const postProductRequestConfig: PostProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/product',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6103,15 +7662,15 @@ type PutProductRequestConfig = Readonly<
 >
 
 const putProductRequestConfig: PutProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/product',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -6238,15 +7797,15 @@ type GetProductPageRequestConfig = Readonly<
 >
 
 const getProductPageRequestConfig: GetProductPageRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/product/page',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name', 'status'],
   requestDataOptional: false,
@@ -6277,15 +7836,15 @@ type DeleteProductIdRequestConfig = Readonly<
 >
 
 const deleteProductIdRequestConfig: DeleteProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/product/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -6416,15 +7975,15 @@ type GetProductIdRequestConfig = Readonly<
 >
 
 const getProductIdRequestConfig: GetProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/product/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -6441,10 +8000,10 @@ export const getProductId = /*#__PURE__*/ (requestData: GetProductIdRequest, ...
 
 getProductId.requestConfig = getProductIdRequestConfig
 
-const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_9 = '' as any
-const prodUrl_0_0_0_9 = '' as any
-const dataKey_0_0_0_9 = 'data' as any
+const mockUrl_0_0_0_11 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_11 = '' as any
+const prodUrl_0_0_0_11 = '' as any
+const dataKey_0_0_0_11 = 'data' as any
 
 export interface GetTagRequest {
   /**
@@ -6473,15 +8032,15 @@ type GetTagRequestConfig = Readonly<
 >
 
 const getTagRequestConfig: GetTagRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/tag',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_11,
   paramNames: [],
   queryNames: ['use'],
   requestDataOptional: false,
@@ -6497,1494 +8056,5 @@ export const getTag = /*#__PURE__*/ (requestData: GetTagRequest, ...args: UserRe
 }
 
 getTag.requestConfig = getTagRequestConfig
-
-const mockUrl_0_0_0_10 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_10 = '' as any
-const prodUrl_0_0_0_10 = '' as any
-const dataKey_0_0_0_10 = 'data' as any
-
-export interface GetMarketRequest {
-  /**
-   * 页码
-   */
-  pageNum: string
-  /**
-   * 分页条数
-   */
-  pageSize: string
-  /**
-   * 产品描述
-   */
-  title?: string
-  /**
-   * 产品类型
-   */
-  productTypeCode?: string
-  /**
-   * 公司id
-   */
-  companyId?: string
-  /**
-   * 允许出售
-   */
-  allowSell?: string
-  /**
-   * 允许借调
-   */
-  allowLease?: string
-  /**
-   * 最小出售价格
-   */
-  minSellingPrice?: string
-  /**
-   * 最大出售价格
-   */
-  maxSellingPrice?: string
-  /**
-   * 最小借调价格
-   */
-  minLeasePrice?: string
-  /**
-   * 最大借调价格
-   */
-  maxLeasePrice?: string
-  /**
-   * 发货方式, 1:包邮 2:到付 3:自提
-   */
-  expressMethod?: string
-  /**
-   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-   */
-  quality?: string
-  /**
-   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
-   */
-  status?: string
-  /**
-   * 排序方式 1:最新发布 2:最多收藏
-   */
-  order?: string
-  /**
-   * 筛选项
-   */
-  filterStr?: string
-}
-
-export interface GetMarketResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 数据id
-     */
-    id: number
-    /**
-     * 公司id
-     */
-    companyId: number
-    /**
-     * 公司收货地址id
-     */
-    companyAddressId?: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 商品标题
-     */
-    title: string
-    /**
-     * 商品描述
-     */
-    description: string
-    /**
-     * 是否允许出售, 0:否 1:是
-     */
-    allowSell: boolean
-    /**
-     * 是否允许借调, 0:否 1:是
-     */
-    allowLease: boolean
-    /**
-     * 出售价
-     */
-    sellingPrice?: string
-    /**
-     * 借调价
-     */
-    leasePrice?: string
-    /**
-     * 借调押金
-     */
-    leaseDeposit?: string
-    /**
-     * 发货方式, 1:包邮 2:到付 3:自提
-     */
-    expressMethod: number
-    /**
-     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-     */
-    quality: number
-    /**
-     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-     */
-    status: number
-    /**
-     * 审批结论
-     */
-    remark?: string
-    /**
-     * 是否被删除
-     */
-    isDeleted: boolean
-    /**
-     * 公司名称
-     */
-    companyName: string
-    /**
-     * 公司LOGO
-     */
-    companyLogo?: string
-    /**
-     * 服饰信息
-     */
-    product: {
-      /**
-       * 服饰名称
-       */
-      name: string
-      /**
-       * 服饰编号
-       */
-      no?: string
-      /**
-       * 服饰品牌
-       */
-      brand?: string
-      /**
-       * 服饰类型
-       */
-      typeCode: string
-      /**
-       * 描述
-       */
-      description?: string
-      /**
-       * 租赁次数
-       */
-      leaseCount: number
-      /**
-       * 图片
-       */
-      picList: {
-        /**
-         * 服饰图片id
-         */
-        id: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 服饰图片地址
-         */
-        url: string
-      }[]
-      /**
-       * 标签
-       */
-      tagList: {
-        /**
-         * id
-         */
-        id: number
-        /**
-         * 标签id
-         */
-        tagId: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 标签
-         */
-        tag: {
-          /**
-           * 标签id
-           */
-          id: number
-          /**
-           * 标签名称
-           */
-          name: string
-          /**
-           * 用途, 1:服饰标签
-           */
-          use: number
-        }
-      }[]
-    }
-    /**
-     * 被收藏数
-     */
-    favorities: number
-  }[]
-}
-
-type GetMarketRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/market',
-    'data',
-    string,
-    | 'pageNum'
-    | 'pageSize'
-    | 'title'
-    | 'productTypeCode'
-    | 'companyId'
-    | 'allowSell'
-    | 'allowLease'
-    | 'minSellingPrice'
-    | 'maxSellingPrice'
-    | 'minLeasePrice'
-    | 'maxLeasePrice'
-    | 'expressMethod'
-    | 'quality'
-    | 'status'
-    | 'order'
-    | 'filterStr',
-    false
-  >
->
-
-const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [
-    'pageNum',
-    'pageSize',
-    'title',
-    'productTypeCode',
-    'companyId',
-    'allowSell',
-    'allowLease',
-    'minSellingPrice',
-    'maxSellingPrice',
-    'minLeasePrice',
-    'maxLeasePrice',
-    'expressMethod',
-    'quality',
-    'status',
-    'order',
-    'filterStr',
-  ],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getMarket',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getMarket = /*#__PURE__*/ (requestData: GetMarketRequest, ...args: UserRequestRestArgs) => {
-  return request<GetMarketResponse>(prepare(getMarketRequestConfig, requestData), ...args)
-}
-
-getMarket.requestConfig = getMarketRequestConfig
-
-export interface PostMarketRequest {
-  /**
-   * 名称
-   */
-  title: string
-  /**
-   * 公司收货id
-   */
-  companyAddressId?: number
-  /**
-   * 产品描述
-   */
-  description?: string
-  /**
-   * 是否允许出售, 0:否 1:是
-   */
-  allowSell: boolean
-  /**
-   * 是否允许借调, 0:否 1:是
-   */
-  allowLease: boolean
-  /**
-   * 出售价
-   */
-  sellingPrice?: string
-  /**
-   * 借调价
-   */
-  leasePrice?: string
-  /**
-   * 借调押金
-   */
-  leaseDeposit?: string
-  /**
-   * 发货方式, 1:包邮 2:到付 3:自提
-   */
-  expressMethod: number
-  /**
-   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-   */
-  quality: number
-  /**
-   * 产品id
-   */
-  productId: number
-}
-
-export type PostMarketResponse = number
-
-type PostMarketRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, false>
->
-
-const postMarketRequestConfig: PostMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postMarket',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postMarket = /*#__PURE__*/ (requestData: PostMarketRequest, ...args: UserRequestRestArgs) => {
-  return request<PostMarketResponse>(prepare(postMarketRequestConfig, requestData), ...args)
-}
-
-postMarket.requestConfig = postMarketRequestConfig
-
-export interface PutMarketRequest {
-  /**
-   * 名称
-   */
-  title: string
-  /**
-   * 公司收货id
-   */
-  companyAddressId?: number
-  /**
-   * 产品描述
-   */
-  description?: string
-  /**
-   * 是否允许出售, 0:否 1:是
-   */
-  allowSell: boolean
-  /**
-   * 是否允许借调, 0:否 1:是
-   */
-  allowLease: boolean
-  /**
-   * 出售价
-   */
-  sellingPrice?: string
-  /**
-   * 借调价
-   */
-  leasePrice?: string
-  /**
-   * 借调押金
-   */
-  leaseDeposit?: string
-  /**
-   * 发货方式, 1:包邮 2:到付 3:自提
-   */
-  expressMethod: number
-  /**
-   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-   */
-  quality: number
-  /**
-   * 产品id
-   */
-  productId: number
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: number
-}
-
-export type PutMarketResponse = any
-
-type PutMarketRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market', 'data', string, string, false>
->
-
-const putMarketRequestConfig: PutMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putMarket',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const putMarket = /*#__PURE__*/ (requestData: PutMarketRequest, ...args: UserRequestRestArgs) => {
-  return request<PutMarketResponse>(prepare(putMarketRequestConfig, requestData), ...args)
-}
-
-putMarket.requestConfig = putMarketRequestConfig
-
-export interface GetMarketMyPublishedRequest {
-  /**
-   * 页码
-   */
-  pageNum: string
-  /**
-   * 分页条数
-   */
-  pageSize: string
-  /**
-   * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
-   */
-  status?: string
-}
-
-export interface GetMarketMyPublishedResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 数据id
-     */
-    id: number
-    /**
-     * 公司id
-     */
-    companyId: number
-    /**
-     * 公司收货地址id
-     */
-    companyAddressId?: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 商品标题
-     */
-    title: string
-    /**
-     * 商品描述
-     */
-    description: string
-    /**
-     * 是否允许出售, 0:否 1:是
-     */
-    allowSell: boolean
-    /**
-     * 是否允许借调, 0:否 1:是
-     */
-    allowLease: boolean
-    /**
-     * 出售价
-     */
-    sellingPrice?: string
-    /**
-     * 借调价
-     */
-    leasePrice?: string
-    /**
-     * 借调押金
-     */
-    leaseDeposit?: string
-    /**
-     * 发货方式, 1:包邮 2:到付 3:自提
-     */
-    expressMethod: number
-    /**
-     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-     */
-    quality: number
-    /**
-     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-     */
-    status: number
-    /**
-     * 审批结论
-     */
-    remark?: string
-    /**
-     * 是否被删除
-     */
-    isDeleted: boolean
-    /**
-     * 公司名称
-     */
-    companyName: string
-    /**
-     * 公司LOGO
-     */
-    companyLogo?: string
-    /**
-     * 服饰信息
-     */
-    product: {
-      /**
-       * 服饰名称
-       */
-      name: string
-      /**
-       * 服饰编号
-       */
-      no?: string
-      /**
-       * 服饰品牌
-       */
-      brand?: string
-      /**
-       * 服饰类型
-       */
-      typeCode: string
-      /**
-       * 描述
-       */
-      description?: string
-      /**
-       * 租赁次数
-       */
-      leaseCount: number
-      /**
-       * 图片
-       */
-      picList: {
-        /**
-         * 服饰图片id
-         */
-        id: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 服饰图片地址
-         */
-        url: string
-      }[]
-      /**
-       * 标签
-       */
-      tagList: {
-        /**
-         * id
-         */
-        id: number
-        /**
-         * 标签id
-         */
-        tagId: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 标签
-         */
-        tag: {
-          /**
-           * 标签id
-           */
-          id: number
-          /**
-           * 标签名称
-           */
-          name: string
-          /**
-           * 用途, 1:服饰标签
-           */
-          use: number
-        }
-      }[]
-    }
-    /**
-     * 被收藏数
-     */
-    favorities: number
-  }[]
-}
-
-type GetMarketMyPublishedRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/market/my/published',
-    'data',
-    string,
-    'pageNum' | 'pageSize' | 'status',
-    false
-  >
->
-
-const getMarketMyPublishedRequestConfig: GetMarketMyPublishedRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/my/published',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'status'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getMarketMyPublished',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getMarketMyPublished = /*#__PURE__*/ (
-  requestData: GetMarketMyPublishedRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetMarketMyPublishedResponse>(prepare(getMarketMyPublishedRequestConfig, requestData), ...args)
-}
-
-getMarketMyPublished.requestConfig = getMarketMyPublishedRequestConfig
-
-export interface GetMarketMyFavoriteRequest {
-  /**
-   * 页码
-   */
-  pageNum: string
-  /**
-   * 分页条数
-   */
-  pageSize: string
-}
-
-export interface GetMarketMyFavoriteResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 数据id
-     */
-    id: number
-    /**
-     * 公司id
-     */
-    companyId: number
-    /**
-     * 公司收货地址id
-     */
-    companyAddressId?: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 商品标题
-     */
-    title: string
-    /**
-     * 商品描述
-     */
-    description: string
-    /**
-     * 是否允许出售, 0:否 1:是
-     */
-    allowSell: boolean
-    /**
-     * 是否允许借调, 0:否 1:是
-     */
-    allowLease: boolean
-    /**
-     * 出售价
-     */
-    sellingPrice?: string
-    /**
-     * 借调价
-     */
-    leasePrice?: string
-    /**
-     * 借调押金
-     */
-    leaseDeposit?: string
-    /**
-     * 发货方式, 1:包邮 2:到付 3:自提
-     */
-    expressMethod: number
-    /**
-     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-     */
-    quality: number
-    /**
-     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-     */
-    status: number
-    /**
-     * 审批结论
-     */
-    remark?: string
-    /**
-     * 是否被删除
-     */
-    isDeleted: boolean
-    /**
-     * 公司名称
-     */
-    companyName: string
-    /**
-     * 公司LOGO
-     */
-    companyLogo?: string
-    /**
-     * 服饰信息
-     */
-    product: {
-      /**
-       * 服饰名称
-       */
-      name: string
-      /**
-       * 服饰编号
-       */
-      no?: string
-      /**
-       * 服饰品牌
-       */
-      brand?: string
-      /**
-       * 服饰类型
-       */
-      typeCode: string
-      /**
-       * 描述
-       */
-      description?: string
-      /**
-       * 租赁次数
-       */
-      leaseCount: number
-      /**
-       * 图片
-       */
-      picList: {
-        /**
-         * 服饰图片id
-         */
-        id: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 服饰图片地址
-         */
-        url: string
-      }[]
-      /**
-       * 标签
-       */
-      tagList: {
-        /**
-         * id
-         */
-        id: number
-        /**
-         * 标签id
-         */
-        tagId: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 标签
-         */
-        tag: {
-          /**
-           * 标签id
-           */
-          id: number
-          /**
-           * 标签名称
-           */
-          name: string
-          /**
-           * 用途, 1:服饰标签
-           */
-          use: number
-        }
-      }[]
-    }
-    /**
-     * 被收藏数
-     */
-    favorities: number
-  }[]
-}
-
-type GetMarketMyFavoriteRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/market/my/favorite',
-    'data',
-    string,
-    'pageNum' | 'pageSize',
-    false
-  >
->
-
-const getMarketMyFavoriteRequestConfig: GetMarketMyFavoriteRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/my/favorite',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: ['pageNum', 'pageSize'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getMarketMyFavorite',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getMarketMyFavorite = /*#__PURE__*/ (
-  requestData: GetMarketMyFavoriteRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetMarketMyFavoriteResponse>(prepare(getMarketMyFavoriteRequestConfig, requestData), ...args)
-}
-
-getMarketMyFavorite.requestConfig = getMarketMyFavoriteRequestConfig
-
-export interface PostMarketAndProductRequest {
-  /**
-   * 名称
-   */
-  title: string
-  /**
-   * 公司收货id
-   */
-  companyAddressId?: number
-  /**
-   * 产品描述
-   */
-  description?: string
-  /**
-   * 是否允许出售, 0:否 1:是
-   */
-  allowSell: boolean
-  /**
-   * 是否允许借调, 0:否 1:是
-   */
-  allowLease: boolean
-  /**
-   * 出售价
-   */
-  sellingPrice?: string
-  /**
-   * 借调价
-   */
-  leasePrice?: string
-  /**
-   * 借调押金
-   */
-  leaseDeposit?: string
-  /**
-   * 发货方式, 1:包邮 2:到付 3:自提
-   */
-  expressMethod: number
-  /**
-   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-   */
-  quality: number
-  /**
-   * 服饰图片
-   */
-  picList: string[]
-  /**
-   * 服饰品牌
-   */
-  brand?: string
-  /**
-   * 服饰类型code
-   */
-  typeCode: string
-  /**
-   * 服饰尺寸
-   */
-  size: number
-  /**
-   * 其他信息
-   */
-  fieldList?: {
-    /**
-     * 字段键名
-     */
-    fieldKey: string
-    /**
-     * 字段键值
-     */
-    fieldValue: string
-  }[]
-  /**
-   * 服饰标签
-   */
-  tagIdList?: number[]
-}
-
-export type PostMarketAndProductResponse = number
-
-type PostMarketAndProductRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/and/product', 'data', string, string, false>
->
-
-const postMarketAndProductRequestConfig: PostMarketAndProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/and/product',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postMarketAndProduct',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postMarketAndProduct = /*#__PURE__*/ (
-  requestData: PostMarketAndProductRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostMarketAndProductResponse>(prepare(postMarketAndProductRequestConfig, requestData), ...args)
-}
-
-postMarketAndProduct.requestConfig = postMarketAndProductRequestConfig
-
-export interface PutMarketShelvesOnRequest {
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: number
-}
-
-export type PutMarketShelvesOnResponse = any
-
-type PutMarketShelvesOnRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/shelves/on', 'data', string, string, false>
->
-
-const putMarketShelvesOnRequestConfig: PutMarketShelvesOnRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/shelves/on',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putMarketShelvesOn',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const putMarketShelvesOn = /*#__PURE__*/ (
-  requestData: PutMarketShelvesOnRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PutMarketShelvesOnResponse>(prepare(putMarketShelvesOnRequestConfig, requestData), ...args)
-}
-
-putMarketShelvesOn.requestConfig = putMarketShelvesOnRequestConfig
-
-export interface PutMarketShelvesOffRequest {
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: number
-}
-
-export type PutMarketShelvesOffResponse = any
-
-type PutMarketShelvesOffRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/shelves/off', 'data', string, string, false>
->
-
-const putMarketShelvesOffRequestConfig: PutMarketShelvesOffRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/shelves/off',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putMarketShelvesOff',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const putMarketShelvesOff = /*#__PURE__*/ (
-  requestData: PutMarketShelvesOffRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PutMarketShelvesOffResponse>(prepare(putMarketShelvesOffRequestConfig, requestData), ...args)
-}
-
-putMarketShelvesOff.requestConfig = putMarketShelvesOffRequestConfig
-
-export interface GetMarketIdRequest {
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: string
-}
-
-export interface GetMarketIdResponse {
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 数据id
-   */
-  id: number
-  /**
-   * 公司id
-   */
-  companyId: number
-  /**
-   * 公司收货地址id
-   */
-  companyAddressId?: number
-  /**
-   * 服饰id
-   */
-  productId: number
-  /**
-   * 商品标题
-   */
-  title: string
-  /**
-   * 商品描述
-   */
-  description: string
-  /**
-   * 是否允许出售, 0:否 1:是
-   */
-  allowSell: boolean
-  /**
-   * 是否允许借调, 0:否 1:是
-   */
-  allowLease: boolean
-  /**
-   * 出售价
-   */
-  sellingPrice?: string
-  /**
-   * 借调价
-   */
-  leasePrice?: string
-  /**
-   * 借调押金
-   */
-  leaseDeposit?: string
-  /**
-   * 发货方式, 1:包邮 2:到付 3:自提
-   */
-  expressMethod: number
-  /**
-   * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-   */
-  quality: number
-  /**
-   * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-   */
-  status: number
-  /**
-   * 审批结论
-   */
-  remark?: string
-  /**
-   * 是否被删除
-   */
-  isDeleted: boolean
-  /**
-   * 服饰信息
-   */
-  product: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 服饰id
-     */
-    id: number
-    /**
-     * 服饰名称
-     */
-    name: string
-    /**
-     * 服饰编号
-     */
-    no?: string
-    /**
-     * 服饰品牌
-     */
-    brand?: string
-    /**
-     * 服饰类型
-     */
-    typeCode: string
-    /**
-     * 服饰尺码
-     */
-    size: number
-    /**
-     * 描述
-     */
-    description?: string
-    /**
-     * 租赁次数
-     */
-    leaseCount: number
-    /**
-     * 服饰状态 1:正常 2:已售出 3:借调中
-     */
-    status: number
-    /**
-     * 其他信息字段
-     */
-    bizData?: string
-    /**
-     * 图片
-     */
-    picList: {
-      /**
-       * 服饰图片id
-       */
-      id: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 服饰图片地址
-       */
-      url: string
-    }[]
-    /**
-     * 标签
-     */
-    tagList: {
-      /**
-       * id
-       */
-      id: number
-      /**
-       * 标签id
-       */
-      tagId: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 标签
-       */
-      tag: {
-        /**
-         * 标签id
-         */
-        id: number
-        /**
-         * 标签名称
-         */
-        name: string
-        /**
-         * 用途, 1:服饰标签
-         */
-        use: number
-      }
-    }[]
-  }
-  /**
-   * 被收藏数
-   */
-  favorities: number
-  /**
-   * 当前用户是否已收藏
-   */
-  isFavorited: boolean
-}
-
-type GetMarketIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
->
-
-const getMarketIdRequestConfig: GetMarketIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/{id}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getMarketId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getMarketId = /*#__PURE__*/ (requestData: GetMarketIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetMarketIdResponse>(prepare(getMarketIdRequestConfig, requestData), ...args)
-}
-
-getMarketId.requestConfig = getMarketIdRequestConfig
-
-export interface DeleteMarketIdRequest {
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: string
-}
-
-export type DeleteMarketIdResponse = any
-
-type DeleteMarketIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/{id}', 'data', 'id', string, false>
->
-
-const deleteMarketIdRequestConfig: DeleteMarketIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/{id}',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteMarketId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const deleteMarketId = /*#__PURE__*/ (requestData: DeleteMarketIdRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteMarketIdResponse>(prepare(deleteMarketIdRequestConfig, requestData), ...args)
-}
-
-deleteMarketId.requestConfig = deleteMarketIdRequestConfig
-
-export interface DeleteMarketAuditIdRequest {
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: string
-}
-
-export type DeleteMarketAuditIdResponse = any
-
-type DeleteMarketAuditIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/audit/{id}', 'data', 'id', string, false>
->
-
-const deleteMarketAuditIdRequestConfig: DeleteMarketAuditIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/audit/{id}',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteMarketAuditId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const deleteMarketAuditId = /*#__PURE__*/ (
-  requestData: DeleteMarketAuditIdRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<DeleteMarketAuditIdResponse>(prepare(deleteMarketAuditIdRequestConfig, requestData), ...args)
-}
-
-deleteMarketAuditId.requestConfig = deleteMarketAuditIdRequestConfig
-
-export interface PostMarketFavoriteRequest {
-  /**
-   * 二手市场出售/借调服饰id
-   */
-  id: number
-  /**
-   * 是否收藏
-   */
-  isFavorited: boolean
-}
-
-export type PostMarketFavoriteResponse = any
-
-type PostMarketFavoriteRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/market/favorite', 'data', string, string, false>
->
-
-const postMarketFavoriteRequestConfig: PostMarketFavoriteRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
-  path: '/market/favorite',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postMarketFavorite',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postMarketFavorite = /*#__PURE__*/ (
-  requestData: PostMarketFavoriteRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostMarketFavoriteResponse>(prepare(postMarketFavoriteRequestConfig, requestData), ...args)
-}
-
-postMarketFavorite.requestConfig = postMarketFavoriteRequestConfig
 
 /* prettier-ignore-end */
