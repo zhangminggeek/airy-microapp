@@ -137,7 +137,7 @@ const Page = () => {
           ),
         ],
       ]);
-    } else {
+    } else if (owner === UserType['卖家']) {
       return new Map([
         [
           OrderStatus['待发货'],
@@ -172,23 +172,10 @@ const Page = () => {
           ) : null,
         ],
       ]);
+    } else {
+      return;
     }
   }, [id, data, owner]);
-
-  const target = useMemo(() => {
-    if (owner === UserType['买家']) {
-      return {
-        consignee: `${data?.buyerAddress?.recipient ?? ''} ${data?.buyerAddress?.phone ?? ''}`,
-        address: buyerAddress,
-      };
-    } else if (owner === UserType['卖家']) {
-      return {
-        consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
-        address: sellerAddress,
-      };
-    }
-    return;
-  }, [data, owner, buyerAddress, sellerAddress]);
 
   return (
     <BasicLayout title={orderStatusMap.get(Number(data?.status))?.text} back>
@@ -234,15 +221,15 @@ const Page = () => {
             </View>
           ) : null}
           <View className={styles.info}>
-            <View className={styles.content}>
+            <View className={styles['info-content']}>
               <Descriptions
                 options={[
                   { field: 'consignee', label: '收货人', col: 2 },
                   { field: 'address', label: '收货地址', col: 2 },
                 ]}
                 data={{
-                  consignee: target?.consignee,
-                  address: target?.address,
+                  consignee: `${data?.buyerAddress?.recipient ?? ''} ${data?.buyerAddress?.phone ?? ''}`,
+                  address: buyerAddress,
                 }}
                 align="right"
               />
@@ -263,8 +250,8 @@ const Page = () => {
                   ? `¥${data?.depositRefund}`
                   : undefined,
                 depositRefundRemark: data?.depositRefundRemark,
-                time: data?.expressDelivery?.updateTime
-                  ? dayjs(data?.expressDelivery?.updateTime).format(
+                time: data?.expressReturn?.updateTime
+                  ? dayjs(data?.expressReturn?.updateTime).format(
                       DATE_TIME_FORMAT,
                     )
                   : undefined,
@@ -358,8 +345,26 @@ const Page = () => {
         ) : null}
         <Section className={styles.section} title="订单">
           <Descriptions
-            options={[{ field: 'time', label: '购买时间', col: 2 }]}
-            data={{ time: dayjs(data?.createTime).format(DATE_TIME_FORMAT) }}
+            options={[
+              { field: 'time', label: '购买时间', col: 2 },
+              {
+                field: 'consignee',
+                label: '商家联系方式',
+                col: 2,
+                hidden: data?.type === OrderType['出售'],
+              },
+              {
+                field: 'address',
+                label: '商家收货地址',
+                col: 2,
+                hidden: data?.type === OrderType['出售'],
+              },
+            ]}
+            data={{
+              time: dayjs(data?.createTime).format(DATE_TIME_FORMAT),
+              consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
+              address: sellerAddress,
+            }}
             align="right"
           />
         </Section>
@@ -369,7 +374,7 @@ const Page = () => {
           <Button openType="contact" size="small">
             联系客服
           </Button>
-          {actions.get(data?.status)}
+          {actions?.get(data?.status)}
         </View>
       </Footer>
       {renderPopup()}
