@@ -21,7 +21,7 @@ import { ActionSheet, Affix, List, Product, Space, Tag } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductSource } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
-import { ShareType } from '@/hooks/useShare';
+import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil, Toast } from '@/utils';
@@ -52,7 +52,7 @@ const Page = () => {
     }
     // 来自页面转发分享
     return {
-      title: 'AIRYBLUE',
+      title: '婚纱店之间的高效交易平台 一站式解决您的库存难题',
       path: `/pages/security/index`,
       imageUrl: ImageLogo,
     };

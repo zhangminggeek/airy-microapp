@@ -5,4 +5,4 @@ export { useDialog } from './useDialog';
 export { useInterval } from './useInterval';
 export { useRequest } from './useRequest';
 export { useUpload } from './useUpload';
-export { useShare } from './useShare';
+export { useShareEvent } from './useShareEvent';

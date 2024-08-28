@@ -25,7 +25,7 @@ import {
 } from '@/constants/product';
 import { COLOR_PRIMARY, TEXT_COLOR_BASE } from '@/constants/theme';
 import { useRequest } from '@/hooks';
-import { ShareType } from '@/hooks/useShare';
+import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { parseJson, RouterUtil } from '@/utils';

@@ -12,7 +12,7 @@ import { getMarket } from '@/api';
 import { InputSearch, List, Media, Product } from '@/components';
 import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
-import { useShare } from '@/hooks';
+import { useShareEvent } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
@@ -22,7 +22,7 @@ const tabs = Array.from(tabsMap.values());
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
   const { info } = useUserStore((state) => state);
-  useShare();
+  useShareEvent();
 
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);

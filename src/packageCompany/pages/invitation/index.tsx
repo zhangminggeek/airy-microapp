@@ -11,7 +11,7 @@ import { getCompanyInvitation } from '@/api';
 import { Avatar, Icon, Space } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
 import { useRequest } from '@/hooks';
-import { ShareType } from '@/hooks/useShare';
+import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { Toast } from '@/utils';

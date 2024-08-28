@@ -10,7 +10,7 @@ export enum ShareType {
   INVITATION = 'invitation',
 }
 
-export const useShare = () => {
+export const useShareEvent = () => {
   const { shareType, shareParams } = useRouter().params;
 
   useEffect(() => {

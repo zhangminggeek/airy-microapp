@@ -12,7 +12,7 @@ import { OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
-import { ShareType } from '@/hooks/useShare';
+import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
