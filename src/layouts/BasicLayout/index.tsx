@@ -38,10 +38,10 @@ interface BasicLayoutProps {
 const PREFIX_CLS = 'g-basic-layout';
 
 const summary = [
-  { label: '注册店铺', value: '1300+' },
-  { label: '累计成交', value: '23000+', unit: '套' },
-  { label: '平均成交时间', value: '0.5', unit: '天' },
-  { label: '好评率', value: '99.5', unit: '%' },
+  { label: '平均每日新入驻商户', value: '78' },
+  { label: '平均每日上新数量', value: '600+', unit: '套' },
+  { label: '平均成交时间', value: '3', unit: '天' },
+  { label: '好评率', value: '98', unit: '%' },
 ];
 
 const BasicLayout: FC<BasicLayoutProps> = ({

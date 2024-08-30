@@ -3206,45 +3206,6 @@ export const postOrder = /*#__PURE__*/ (requestData: PostOrderRequest, ...args: 
 
 postOrder.requestConfig = postOrderRequestConfig
 
-export interface DeleteOrderRequest {
-  /**
-   * 订单id
-   */
-  id: string
-}
-
-export type DeleteOrderResponse = any
-
-type DeleteOrderRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, 'id', false>
->
-
-const deleteOrderRequestConfig: DeleteOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order',
-  method: Method.DELETE,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.raw,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['id'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'deleteOrder',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const deleteOrder = /*#__PURE__*/ (requestData: DeleteOrderRequest, ...args: UserRequestRestArgs) => {
-  return request<DeleteOrderResponse>(prepare(deleteOrderRequestConfig, requestData), ...args)
-}
-
-deleteOrder.requestConfig = deleteOrderRequestConfig
-
 export interface PostOrderCancelRequest {
   /**
    * 订单id
@@ -4046,6 +4007,10 @@ export interface GetOrderIdResponse {
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
+    /**
+     * 是否为内部账号
+     */
+    inner: boolean
   }
   /**
    * 买家收货地址
@@ -4564,6 +4529,10 @@ export interface GetCompanyFansResponse {
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
+    /**
+     * 是否为内部账号
+     */
+    inner: boolean
   }[]
 }
 
@@ -4681,6 +4650,10 @@ export interface GetCompanyFolloweeResponse {
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
+    /**
+     * 是否为内部账号
+     */
+    inner: boolean
   }[]
 }
 
@@ -5414,9 +5387,9 @@ export type GetCompanyInvitationResponse = {
    */
   name: string
   /**
-   * 公司状态 1:已注册 2:完成首笔交易
+   * 邀请任务完成情况，第一位注册，第二位关注公众号，第三位二手市场上架服装，第四位完成首笔交易
    */
-  status: number
+  taskStatus: string
 }[]
 
 type GetCompanyInvitationRequestConfig = Readonly<
@@ -5525,6 +5498,10 @@ export interface GetCompanyIdResponse {
    */
   status: number
   /**
+   * 是否为内部账号
+   */
+  inner: boolean
+  /**
    * 粉丝数量
    */
   fansCount: number
@@ -5573,6 +5550,664 @@ const devUrl_0_0_0_6 = '' as any
 const prodUrl_0_0_0_6 = '' as any
 const dataKey_0_0_0_6 = 'data' as any
 
+export interface GetAccountRegisterCodeAccountRequest {
+  /**
+   * 账号
+   */
+  account: string
+}
+
+export type GetAccountRegisterCodeAccountResponse = any
+
+type GetAccountRegisterCodeAccountRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/account/register/code/{account}',
+    'data',
+    'account',
+    string,
+    false
+  >
+>
+
+const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/register/code/{account}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: ['account'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountRegisterCodeAccount',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getAccountRegisterCodeAccount = /*#__PURE__*/ (
+  requestData: GetAccountRegisterCodeAccountRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetAccountRegisterCodeAccountResponse>(
+    prepare(getAccountRegisterCodeAccountRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getAccountRegisterCodeAccount.requestConfig = getAccountRegisterCodeAccountRequestConfig
+
+export interface PostAccountRegisterCodeCheckRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 验证码
+   */
+  code: string
+}
+
+export type PostAccountRegisterCodeCheckResponse = string
+
+type PostAccountRegisterCodeCheckRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/register/code/check', 'data', string, string, false>
+>
+
+const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/register/code/check',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountRegisterCodeCheck',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountRegisterCodeCheck = /*#__PURE__*/ (
+  requestData: PostAccountRegisterCodeCheckRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountRegisterCodeCheckResponse>(
+    prepare(postAccountRegisterCodeCheckRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postAccountRegisterCodeCheck.requestConfig = postAccountRegisterCodeCheckRequestConfig
+
+export interface GetAccountChangePasswordCodeAccountRequest {
+  /**
+   * 账号
+   */
+  account: string
+}
+
+export type GetAccountChangePasswordCodeAccountResponse = any
+
+type GetAccountChangePasswordCodeAccountRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/account/change/password/code/{account}',
+    'data',
+    'account',
+    string,
+    false
+  >
+>
+
+const getAccountChangePasswordCodeAccountRequestConfig: GetAccountChangePasswordCodeAccountRequestConfig =
+  /*#__PURE__*/ {
+    mockUrl: mockUrl_0_0_0_6,
+    devUrl: devUrl_0_0_0_6,
+    prodUrl: prodUrl_0_0_0_6,
+    path: '/account/change/password/code/{account}',
+    method: Method.GET,
+    requestHeaders: {},
+    requestBodyType: RequestBodyType.query,
+    responseBodyType: ResponseBodyType.raw,
+    dataKey: dataKey_0_0_0_6,
+    paramNames: ['account'],
+    queryNames: [],
+    requestDataOptional: false,
+    requestDataJsonSchema: {},
+    responseDataJsonSchema: {},
+    requestFunctionName: 'getAccountChangePasswordCodeAccount',
+    queryStringArrayFormat: QueryStringArrayFormat.brackets,
+    extraInfo: {},
+  }
+
+export const getAccountChangePasswordCodeAccount = /*#__PURE__*/ (
+  requestData: GetAccountChangePasswordCodeAccountRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetAccountChangePasswordCodeAccountResponse>(
+    prepare(getAccountChangePasswordCodeAccountRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getAccountChangePasswordCodeAccount.requestConfig = getAccountChangePasswordCodeAccountRequestConfig
+
+export interface PostAccountChangePasswordCodeCheckRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 验证码
+   */
+  code: string
+}
+
+export type PostAccountChangePasswordCodeCheckResponse = string
+
+type PostAccountChangePasswordCodeCheckRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/account/change/password/code/check',
+    'data',
+    string,
+    string,
+    false
+  >
+>
+
+const postAccountChangePasswordCodeCheckRequestConfig: PostAccountChangePasswordCodeCheckRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/change/password/code/check',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountChangePasswordCodeCheck',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountChangePasswordCodeCheck = /*#__PURE__*/ (
+  requestData: PostAccountChangePasswordCodeCheckRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountChangePasswordCodeCheckResponse>(
+    prepare(postAccountChangePasswordCodeCheckRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postAccountChangePasswordCodeCheck.requestConfig = postAccountChangePasswordCodeCheckRequestConfig
+
+export interface GetAccountSaltRequest {}
+
+export type GetAccountSaltResponse = string
+
+type GetAccountSaltRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt', 'data', string, string, true>
+>
+
+const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/salt',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountSalt',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getAccountSalt = /*#__PURE__*/ (requestData?: GetAccountSaltRequest, ...args: UserRequestRestArgs) => {
+  return request<GetAccountSaltResponse>(prepare(getAccountSaltRequestConfig, requestData), ...args)
+}
+
+getAccountSalt.requestConfig = getAccountSaltRequestConfig
+
+export interface GetAccountSaltAccountRequest {
+  /**
+   * 账号
+   */
+  account: string
+}
+
+export type GetAccountSaltAccountResponse = string
+
+type GetAccountSaltAccountRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt/{account}', 'data', 'account', string, false>
+>
+
+const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/salt/{account}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: ['account'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountSaltAccount',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getAccountSaltAccount = /*#__PURE__*/ (
+  requestData: GetAccountSaltAccountRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetAccountSaltAccountResponse>(prepare(getAccountSaltAccountRequestConfig, requestData), ...args)
+}
+
+getAccountSaltAccount.requestConfig = getAccountSaltAccountRequestConfig
+
+export interface PostAccountLoginRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 密码（密文）
+   */
+  password: string
+  /**
+   * 盐值
+   */
+  salt: string
+}
+
+export interface PostAccountLoginResponse {
+  /**
+   * 登录凭证
+   */
+  token: string
+  /**
+   * 是否绑定openid
+   */
+  bind: boolean
+}
+
+type PostAccountLoginRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login', 'data', string, string, false>
+>
+
+const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/login',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLogin',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountLogin = /*#__PURE__*/ (requestData: PostAccountLoginRequest, ...args: UserRequestRestArgs) => {
+  return request<PostAccountLoginResponse>(prepare(postAccountLoginRequestConfig, requestData), ...args)
+}
+
+postAccountLogin.requestConfig = postAccountLoginRequestConfig
+
+export interface GetAccountLoginCodeAccountRequest {
+  /**
+   * 账号
+   */
+  account: string
+}
+
+export type GetAccountLoginCodeAccountResponse = any
+
+type GetAccountLoginCodeAccountRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/account/login/code/{account}',
+    'data',
+    'account',
+    string,
+    false
+  >
+>
+
+const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/login/code/{account}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: ['account'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getAccountLoginCodeAccount',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getAccountLoginCodeAccount = /*#__PURE__*/ (
+  requestData: GetAccountLoginCodeAccountRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetAccountLoginCodeAccountResponse>(
+    prepare(getAccountLoginCodeAccountRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getAccountLoginCodeAccount.requestConfig = getAccountLoginCodeAccountRequestConfig
+
+export interface PostAccountLoginCodeRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 验证码
+   */
+  code: string
+}
+
+export interface PostAccountLoginCodeResponse {
+  /**
+   * 登录凭证
+   */
+  token: string
+  /**
+   * 是否绑定openid
+   */
+  bind: boolean
+}
+
+type PostAccountLoginCodeRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/code', 'data', string, string, false>
+>
+
+const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/login/code',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLoginCode',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountLoginCode = /*#__PURE__*/ (
+  requestData: PostAccountLoginCodeRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountLoginCodeResponse>(prepare(postAccountLoginCodeRequestConfig, requestData), ...args)
+}
+
+postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
+
+export interface PostAccountLoginWechatPhoneRequest {
+  /**
+   * 微信获取手机号接口code
+   */
+  code: string
+}
+
+export interface PostAccountLoginWechatPhoneResponse {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 鉴权凭证
+   */
+  token: string
+  /**
+   * 是否绑定openid
+   */
+  bind: boolean
+}
+
+type PostAccountLoginWechatPhoneRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat/phone', 'data', string, string, false>
+>
+
+const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/login/wechat/phone',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLoginWechatPhone',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountLoginWechatPhone = /*#__PURE__*/ (
+  requestData: PostAccountLoginWechatPhoneRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountLoginWechatPhoneResponse>(
+    prepare(postAccountLoginWechatPhoneRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postAccountLoginWechatPhone.requestConfig = postAccountLoginWechatPhoneRequestConfig
+
+export interface PostAccountLoginWechatRequest {
+  /**
+   * 微信授权登录code
+   */
+  code: string
+}
+
+export type PostAccountLoginWechatResponse = string
+
+type PostAccountLoginWechatRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat', 'data', string, string, false>
+>
+
+const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/login/wechat',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountLoginWechat',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountLoginWechat = /*#__PURE__*/ (
+  requestData: PostAccountLoginWechatRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountLoginWechatResponse>(prepare(postAccountLoginWechatRequestConfig, requestData), ...args)
+}
+
+postAccountLoginWechat.requestConfig = postAccountLoginWechatRequestConfig
+
+export interface PostAccountBindOpenidRequest {
+  /**
+   * 账号
+   */
+  account: string
+  /**
+   * 微信授权登录code
+   */
+  code: string
+}
+
+export type PostAccountBindOpenidResponse = any
+
+type PostAccountBindOpenidRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/bind/openid', 'data', string, string, false>
+>
+
+const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/bind/openid',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postAccountBindOpenid',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postAccountBindOpenid = /*#__PURE__*/ (
+  requestData: PostAccountBindOpenidRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostAccountBindOpenidResponse>(prepare(postAccountBindOpenidRequestConfig, requestData), ...args)
+}
+
+postAccountBindOpenid.requestConfig = postAccountBindOpenidRequestConfig
+
+export interface PutAccountPasswordRequest {
+  /**
+   * 短信验证码
+   */
+  code: string
+  /**
+   * 新密码（密文）
+   */
+  password: string
+  /**
+   * 盐值
+   */
+  salt: string
+}
+
+export type PutAccountPasswordResponse = any
+
+type PutAccountPasswordRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/password', 'data', string, string, false>
+>
+
+const putAccountPasswordRequestConfig: PutAccountPasswordRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/account/password',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putAccountPassword',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putAccountPassword = /*#__PURE__*/ (
+  requestData: PutAccountPasswordRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PutAccountPasswordResponse>(prepare(putAccountPasswordRequestConfig, requestData), ...args)
+}
+
+putAccountPassword.requestConfig = putAccountPasswordRequestConfig
+
+const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_7 = '' as any
+const prodUrl_0_0_0_7 = '' as any
+const dataKey_0_0_0_7 = 'data' as any
+
 export interface GetUserRequest {}
 
 export type GetUserResponse = {
@@ -5611,15 +6246,15 @@ type GetUserRequestConfig = Readonly<
 >
 
 const getUserRequestConfig: GetUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/user',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -5662,15 +6297,15 @@ type PostUserRequestConfig = Readonly<
 >
 
 const postUserRequestConfig: PostUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/user',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5713,15 +6348,15 @@ type PutUserRequestConfig = Readonly<
 >
 
 const putUserRequestConfig: PutUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/user',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -5752,15 +6387,15 @@ type DeleteUserRequestConfig = Readonly<
 >
 
 const deleteUserRequestConfig: DeleteUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/user',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -5876,6 +6511,10 @@ export interface GetUserSelfResponse {
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
+    /**
+     * 是否为内部账号
+     */
+    inner: boolean
   }
   /**
    * 用户账号
@@ -5900,15 +6539,15 @@ type GetUserSelfRequestConfig = Readonly<
 >
 
 const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/user/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -6029,6 +6668,10 @@ export interface GetUserIdResponse {
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
+    /**
+     * 是否为内部账号
+     */
+    inner: boolean
   }
   /**
    * 用户账号
@@ -6053,15 +6696,15 @@ type GetUserIdRequestConfig = Readonly<
 >
 
 const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/user/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -6077,664 +6720,6 @@ export const getUserId = /*#__PURE__*/ (requestData: GetUserIdRequest, ...args: 
 }
 
 getUserId.requestConfig = getUserIdRequestConfig
-
-const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_7 = '' as any
-const prodUrl_0_0_0_7 = '' as any
-const dataKey_0_0_0_7 = 'data' as any
-
-export interface GetAccountRegisterCodeAccountRequest {
-  /**
-   * 账号
-   */
-  account: string
-}
-
-export type GetAccountRegisterCodeAccountResponse = any
-
-type GetAccountRegisterCodeAccountRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/account/register/code/{account}',
-    'data',
-    'account',
-    string,
-    false
-  >
->
-
-const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/register/code/{account}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: ['account'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getAccountRegisterCodeAccount',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getAccountRegisterCodeAccount = /*#__PURE__*/ (
-  requestData: GetAccountRegisterCodeAccountRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetAccountRegisterCodeAccountResponse>(
-    prepare(getAccountRegisterCodeAccountRequestConfig, requestData),
-    ...args,
-  )
-}
-
-getAccountRegisterCodeAccount.requestConfig = getAccountRegisterCodeAccountRequestConfig
-
-export interface PostAccountRegisterCodeCheckRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 验证码
-   */
-  code: string
-}
-
-export type PostAccountRegisterCodeCheckResponse = string
-
-type PostAccountRegisterCodeCheckRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/register/code/check', 'data', string, string, false>
->
-
-const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/register/code/check',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountRegisterCodeCheck',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountRegisterCodeCheck = /*#__PURE__*/ (
-  requestData: PostAccountRegisterCodeCheckRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountRegisterCodeCheckResponse>(
-    prepare(postAccountRegisterCodeCheckRequestConfig, requestData),
-    ...args,
-  )
-}
-
-postAccountRegisterCodeCheck.requestConfig = postAccountRegisterCodeCheckRequestConfig
-
-export interface GetAccountChangePasswordCodeAccountRequest {
-  /**
-   * 账号
-   */
-  account: string
-}
-
-export type GetAccountChangePasswordCodeAccountResponse = any
-
-type GetAccountChangePasswordCodeAccountRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/account/change/password/code/{account}',
-    'data',
-    'account',
-    string,
-    false
-  >
->
-
-const getAccountChangePasswordCodeAccountRequestConfig: GetAccountChangePasswordCodeAccountRequestConfig =
-  /*#__PURE__*/ {
-    mockUrl: mockUrl_0_0_0_7,
-    devUrl: devUrl_0_0_0_7,
-    prodUrl: prodUrl_0_0_0_7,
-    path: '/account/change/password/code/{account}',
-    method: Method.GET,
-    requestHeaders: {},
-    requestBodyType: RequestBodyType.query,
-    responseBodyType: ResponseBodyType.raw,
-    dataKey: dataKey_0_0_0_7,
-    paramNames: ['account'],
-    queryNames: [],
-    requestDataOptional: false,
-    requestDataJsonSchema: {},
-    responseDataJsonSchema: {},
-    requestFunctionName: 'getAccountChangePasswordCodeAccount',
-    queryStringArrayFormat: QueryStringArrayFormat.brackets,
-    extraInfo: {},
-  }
-
-export const getAccountChangePasswordCodeAccount = /*#__PURE__*/ (
-  requestData: GetAccountChangePasswordCodeAccountRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetAccountChangePasswordCodeAccountResponse>(
-    prepare(getAccountChangePasswordCodeAccountRequestConfig, requestData),
-    ...args,
-  )
-}
-
-getAccountChangePasswordCodeAccount.requestConfig = getAccountChangePasswordCodeAccountRequestConfig
-
-export interface PostAccountChangePasswordCodeCheckRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 验证码
-   */
-  code: string
-}
-
-export type PostAccountChangePasswordCodeCheckResponse = string
-
-type PostAccountChangePasswordCodeCheckRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/account/change/password/code/check',
-    'data',
-    string,
-    string,
-    false
-  >
->
-
-const postAccountChangePasswordCodeCheckRequestConfig: PostAccountChangePasswordCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/change/password/code/check',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountChangePasswordCodeCheck',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountChangePasswordCodeCheck = /*#__PURE__*/ (
-  requestData: PostAccountChangePasswordCodeCheckRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountChangePasswordCodeCheckResponse>(
-    prepare(postAccountChangePasswordCodeCheckRequestConfig, requestData),
-    ...args,
-  )
-}
-
-postAccountChangePasswordCodeCheck.requestConfig = postAccountChangePasswordCodeCheckRequestConfig
-
-export interface GetAccountSaltRequest {}
-
-export type GetAccountSaltResponse = string
-
-type GetAccountSaltRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt', 'data', string, string, true>
->
-
-const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/salt',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: true,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getAccountSalt',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getAccountSalt = /*#__PURE__*/ (requestData?: GetAccountSaltRequest, ...args: UserRequestRestArgs) => {
-  return request<GetAccountSaltResponse>(prepare(getAccountSaltRequestConfig, requestData), ...args)
-}
-
-getAccountSalt.requestConfig = getAccountSaltRequestConfig
-
-export interface GetAccountSaltAccountRequest {
-  /**
-   * 账号
-   */
-  account: string
-}
-
-export type GetAccountSaltAccountResponse = string
-
-type GetAccountSaltAccountRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/salt/{account}', 'data', 'account', string, false>
->
-
-const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/salt/{account}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: ['account'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getAccountSaltAccount',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getAccountSaltAccount = /*#__PURE__*/ (
-  requestData: GetAccountSaltAccountRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetAccountSaltAccountResponse>(prepare(getAccountSaltAccountRequestConfig, requestData), ...args)
-}
-
-getAccountSaltAccount.requestConfig = getAccountSaltAccountRequestConfig
-
-export interface PostAccountLoginRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 密码（密文）
-   */
-  password: string
-  /**
-   * 盐值
-   */
-  salt: string
-}
-
-export interface PostAccountLoginResponse {
-  /**
-   * 登录凭证
-   */
-  token: string
-  /**
-   * 是否绑定openid
-   */
-  bind: boolean
-}
-
-type PostAccountLoginRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login', 'data', string, string, false>
->
-
-const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/login',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountLogin',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountLogin = /*#__PURE__*/ (requestData: PostAccountLoginRequest, ...args: UserRequestRestArgs) => {
-  return request<PostAccountLoginResponse>(prepare(postAccountLoginRequestConfig, requestData), ...args)
-}
-
-postAccountLogin.requestConfig = postAccountLoginRequestConfig
-
-export interface GetAccountLoginCodeAccountRequest {
-  /**
-   * 账号
-   */
-  account: string
-}
-
-export type GetAccountLoginCodeAccountResponse = any
-
-type GetAccountLoginCodeAccountRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/account/login/code/{account}',
-    'data',
-    'account',
-    string,
-    false
-  >
->
-
-const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/login/code/{account}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: ['account'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getAccountLoginCodeAccount',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getAccountLoginCodeAccount = /*#__PURE__*/ (
-  requestData: GetAccountLoginCodeAccountRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetAccountLoginCodeAccountResponse>(
-    prepare(getAccountLoginCodeAccountRequestConfig, requestData),
-    ...args,
-  )
-}
-
-getAccountLoginCodeAccount.requestConfig = getAccountLoginCodeAccountRequestConfig
-
-export interface PostAccountLoginCodeRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 验证码
-   */
-  code: string
-}
-
-export interface PostAccountLoginCodeResponse {
-  /**
-   * 登录凭证
-   */
-  token: string
-  /**
-   * 是否绑定openid
-   */
-  bind: boolean
-}
-
-type PostAccountLoginCodeRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/code', 'data', string, string, false>
->
-
-const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/login/code',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountLoginCode',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountLoginCode = /*#__PURE__*/ (
-  requestData: PostAccountLoginCodeRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountLoginCodeResponse>(prepare(postAccountLoginCodeRequestConfig, requestData), ...args)
-}
-
-postAccountLoginCode.requestConfig = postAccountLoginCodeRequestConfig
-
-export interface PostAccountLoginWechatPhoneRequest {
-  /**
-   * 微信获取手机号接口code
-   */
-  code: string
-}
-
-export interface PostAccountLoginWechatPhoneResponse {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 鉴权凭证
-   */
-  token: string
-  /**
-   * 是否绑定openid
-   */
-  bind: boolean
-}
-
-type PostAccountLoginWechatPhoneRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat/phone', 'data', string, string, false>
->
-
-const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/login/wechat/phone',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountLoginWechatPhone',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountLoginWechatPhone = /*#__PURE__*/ (
-  requestData: PostAccountLoginWechatPhoneRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountLoginWechatPhoneResponse>(
-    prepare(postAccountLoginWechatPhoneRequestConfig, requestData),
-    ...args,
-  )
-}
-
-postAccountLoginWechatPhone.requestConfig = postAccountLoginWechatPhoneRequestConfig
-
-export interface PostAccountLoginWechatRequest {
-  /**
-   * 微信授权登录code
-   */
-  code: string
-}
-
-export type PostAccountLoginWechatResponse = string
-
-type PostAccountLoginWechatRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/login/wechat', 'data', string, string, false>
->
-
-const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/login/wechat',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountLoginWechat',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountLoginWechat = /*#__PURE__*/ (
-  requestData: PostAccountLoginWechatRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountLoginWechatResponse>(prepare(postAccountLoginWechatRequestConfig, requestData), ...args)
-}
-
-postAccountLoginWechat.requestConfig = postAccountLoginWechatRequestConfig
-
-export interface PostAccountBindOpenidRequest {
-  /**
-   * 账号
-   */
-  account: string
-  /**
-   * 微信授权登录code
-   */
-  code: string
-}
-
-export type PostAccountBindOpenidResponse = any
-
-type PostAccountBindOpenidRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/bind/openid', 'data', string, string, false>
->
-
-const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/bind/openid',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postAccountBindOpenid',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postAccountBindOpenid = /*#__PURE__*/ (
-  requestData: PostAccountBindOpenidRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostAccountBindOpenidResponse>(prepare(postAccountBindOpenidRequestConfig, requestData), ...args)
-}
-
-postAccountBindOpenid.requestConfig = postAccountBindOpenidRequestConfig
-
-export interface PutAccountPasswordRequest {
-  /**
-   * 短信验证码
-   */
-  code: string
-  /**
-   * 新密码（密文）
-   */
-  password: string
-  /**
-   * 盐值
-   */
-  salt: string
-}
-
-export type PutAccountPasswordResponse = any
-
-type PutAccountPasswordRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/account/password', 'data', string, string, false>
->
-
-const putAccountPasswordRequestConfig: PutAccountPasswordRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
-  path: '/account/password',
-  method: Method.PUT,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'putAccountPassword',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const putAccountPassword = /*#__PURE__*/ (
-  requestData: PutAccountPasswordRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PutAccountPasswordResponse>(prepare(putAccountPasswordRequestConfig, requestData), ...args)
-}
-
-putAccountPassword.requestConfig = putAccountPasswordRequestConfig
 
 const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_8 = '' as any

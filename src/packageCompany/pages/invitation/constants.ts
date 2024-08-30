@@ -1,4 +1,6 @@
-export enum InvitationStatus {
-  '完成注册' = 1,
-  '完成首笔交易' = 2,
+export enum InvitationTask {
+  '完成注册' = '1000',
+  '关注公众号' = '0100',
+  '上架服装' = '0010',
+  '完成首笔交易' = '0001',
 }

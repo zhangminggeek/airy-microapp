@@ -198,3 +198,21 @@ export const getParamFromUrl = (url: string, key: string) => {
     return undefined;
   }
 };
+
+/**
+ * 把十进制转换为二进制
+ * @param dec 需要转换的十进制数字
+ * @returns 二进制数字
+ */
+export function dec2bin(dec: number) {
+  return (dec >>> 0).toString(2);
+}
+
+/**
+ * 把二进制转换为十进制
+ * @param bin 需要转换的二进制数字
+ * @returns 十进制数字
+ */
+export function bin2dec(bin: string) {
+  return Number(parseInt(bin, 2).toString(10));
+}

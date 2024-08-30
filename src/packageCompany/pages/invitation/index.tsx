@@ -4,7 +4,7 @@ import { setClipboardData, useShareAppMessage } from '@tarojs/taro';
 import Big from 'big.js';
 import { useMemo } from 'react';
 
-import { InvitationStatus } from './constants';
+import { InvitationTask } from './constants';
 import styles from './index.module.scss';
 
 import { getCompanyInvitation } from '@/api';
@@ -14,7 +14,7 @@ import { useRequest } from '@/hooks';
 import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { Toast } from '@/utils';
+import { bin2dec, Toast } from '@/utils';
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
@@ -31,26 +31,31 @@ const Page = () => {
   // 获取邀请的公司列表
   const { data: invitationList } = useRequest(getCompanyInvitation);
 
+  // 验证是否完成任务
+  const verifyTask = (n: string, m: string) =>
+    (bin2dec(n) & bin2dec(m)) === bin2dec(m);
+
+  // 统计邀请情况
   const statistics = useMemo(() => {
+    // 邀请总数
     const total = invitationList?.length ?? 0;
-    const deal =
-      invitationList?.filter(
-        (item) => item.status === InvitationStatus['完成首笔交易'],
+    // 关注公众号
+    const followed =
+      invitationList?.filter((item) =>
+        verifyTask(item.taskStatus, InvitationTask['关注公众号']),
       )?.length ?? 0;
-    return { total, deal };
+    // 完成首笔交易
+    const deal =
+      invitationList?.filter((item) =>
+        verifyTask(item.taskStatus, InvitationTask['完成首笔交易']),
+      )?.length ?? 0;
+    return { total, followed, deal };
   }, [invitationList]);
 
   const steps = [
     { content: '分享链接至聊天群/朋友圈/好友' },
-    {
-      content: (
-        <View>
-          好友注册并<Text style={{ color: '#E01A06' }}>完成首笔</Text>
-          任意金额交易
-        </View>
-      ),
-    },
-    { content: '收到10元奖励，累计100元将自动划转至余额，可进行提现' },
+    { content: '好友注册并关注公众号即可获得5元奖励，完成首笔交易再得5元' },
+    { content: '累计50元将自动划转至余额，可进行提现' },
   ];
 
   return (
@@ -108,7 +113,11 @@ const Page = () => {
             <View className={styles['result-title']}>
               累计奖励：
               <Text className={styles['result-title-num']}>
-                ¥{Big(statistics.deal).times(10).toString()}
+                ¥
+                {Big(statistics.deal)
+                  .times(5)
+                  .plus(Big(statistics.followed).times(5))
+                  .toString()}
               </Text>
             </View>
             <View className={styles['result-statistics']}>
@@ -131,33 +140,53 @@ const Page = () => {
             </View>
           </View>
           <View className={styles.list}>
-            {invitationList?.map((item) => (
-              <View key={item.id} className={styles['list-item']}>
-                <Avatar
-                  className={styles['list-item-avatar']}
-                  src={item.logo}
-                  name={item.name}
-                />
-                <View className={styles['list-item-content']}>
-                  <View className={styles['list-item-content-info']}>
-                    <View className={styles['list-item-name']}>
-                      {item.name}
+            {invitationList?.map((item) => {
+              let award = 0;
+              if (verifyTask(item.taskStatus, InvitationTask['关注公众号'])) {
+                award += 5;
+              }
+              if (verifyTask(item.taskStatus, InvitationTask['完成首笔交易'])) {
+                award += 5;
+              }
+              return (
+                <View key={item.id} className={styles['list-item']}>
+                  <Avatar
+                    className={styles['list-item-avatar']}
+                    src={item.logo}
+                    name={item.name}
+                  />
+                  <View className={styles['list-item-content']}>
+                    <View className={styles['list-item-content-info']}>
+                      <View className={styles['list-item-name']}>
+                        {item.name}
+                      </View>
+                      <View className={styles['list-item-status']}>
+                        <Space size={12}>
+                          <Text>已注册</Text>
+                          {verifyTask(
+                            item.taskStatus,
+                            InvitationTask['关注公众号'],
+                          ) ? (
+                            <Text>已关注公众号</Text>
+                          ) : null}
+                          {verifyTask(
+                            item.taskStatus,
+                            InvitationTask['完成首笔交易'],
+                          ) ? (
+                            <Text>完成首笔交易</Text>
+                          ) : null}
+                        </Space>
+                      </View>
                     </View>
-                    <View className={styles['list-item-status']}>
-                      <Space size={12}>
-                        <Text>已注册</Text>
-                        {item.status === InvitationStatus['完成首笔交易'] ? (
-                          <Text>完成首笔交易</Text>
-                        ) : null}
-                      </Space>
-                    </View>
+                    {award ? (
+                      <View className={styles['list-item-amount']}>
+                        ¥{award}
+                      </View>
+                    ) : null}
                   </View>
-                  {item.status === InvitationStatus['完成首笔交易'] ? (
-                    <View className={styles['list-item-amount']}>¥10</View>
-                  ) : null}
                 </View>
-              </View>
-            ))}
+              );
+            })}
           </View>
         </View>
       </View>

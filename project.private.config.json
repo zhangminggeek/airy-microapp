@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageCompany/pages/register/result/index",
+          "pathName": "packageCompany/pages/register/result/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageCompany/pages/invitation/index",
           "pathName": "packageCompany/pages/invitation/index",
           "query": "",
@@ -157,13 +164,6 @@
         {
           "name": "pages/security/index",
           "pathName": "pages/security/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/user/register/result/index",
-          "pathName": "pages/user/register/result/index",
           "query": "",
           "launchMode": "default",
           "scene": null
