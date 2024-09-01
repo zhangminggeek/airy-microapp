@@ -8,7 +8,7 @@ import styles from './index.module.scss';
 import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, List, Product, Space } from '@/components';
-import { OSS_ASSETS_DIR } from '@/constants';
+import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
@@ -162,8 +162,10 @@ const Page = () => {
                 image={item.product?.picList?.[0]?.url}
                 title={item.title}
                 tagList={item.product?.tagList?.map((item) => item.tag.name)}
-                leasePrice={item.leasePrice}
-                sellingPrice={item.sellingPrice}
+                allowSell={item.allowSell}
+                allowLease={item.allowLease}
+                leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
+                sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
                 companyLogo={item.companyLogo}
                 companyName={item.companyName}
                 extra={{ icon: 'LoveOutlined', text: item.favorities }}
