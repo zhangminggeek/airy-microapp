@@ -137,16 +137,16 @@ const Page = () => {
           RouterUtil.navigateTo('/packageCompany/pages/invitation/index');
         }}
       />
+      <Section title="二手市场">
+        <View className={styles.grid}>
+          {marketConfig?.map((item) => <IconItem key={item.name} {...item} />)}
+        </View>
+      </Section>
       <Section title="店铺管理">
         <View className={styles.grid}>
           {getShopConfig({ companyId: info?.companyId })?.map((item) => (
             <IconItem key={item.name} {...item} iconSize={44} />
           ))}
-        </View>
-      </Section>
-      <Section title="二手市场">
-        <View className={styles.grid}>
-          {marketConfig?.map((item) => <IconItem key={item.name} {...item} />)}
         </View>
       </Section>
       <Section title="设置">

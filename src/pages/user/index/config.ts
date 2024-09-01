@@ -13,14 +13,6 @@ export const getShopConfig = ({
   companyId?: number;
 }): IconItemProps[] => [
   {
-    icon: IconDressManagement,
-    name: '服饰管理',
-    to: '/packageDress/pages/management/index',
-  },
-  { icon: IconOrderManagement, name: '订单管理', to: '', disabled: true },
-  { icon: IconCustomerManagement, name: '客户管理', to: '', disabled: true },
-  { icon: IconEmployeeManagement, name: '员工管理', to: '', disabled: true },
-  {
     icon: IconShopManagement,
     name: '我的店铺',
     onClick() {
@@ -33,6 +25,14 @@ export const getShopConfig = ({
       });
     },
   },
+  {
+    icon: IconDressManagement,
+    name: '服饰管理',
+    to: '/packageDress/pages/management/index',
+  },
+  { icon: IconOrderManagement, name: '订单管理', to: '', disabled: true },
+  { icon: IconCustomerManagement, name: '客户管理', to: '', disabled: true },
+  { icon: IconEmployeeManagement, name: '员工管理', to: '', disabled: true },
 ];
 
 export const marketConfig: IconItemProps[] = [
