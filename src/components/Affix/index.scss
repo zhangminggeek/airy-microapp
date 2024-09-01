@@ -1,7 +1,15 @@
 .m-affix {
   position: fixed;
   bottom: 120px;
-  right: 40px;
+
+  &-center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &:not(.m-affix-center) {
+    right: 40px;
+  }
 
   .m-affix-btn.nut-button {
     width: 112px;

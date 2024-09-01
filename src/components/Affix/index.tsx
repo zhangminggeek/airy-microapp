@@ -10,6 +10,7 @@ import { Icon } from '@/components';
 interface AffixProps {
   className?: string;
   style?: CSSProperties;
+  center?: boolean;
   children?: JSX.Element;
   onClick?: () => void;
 }
@@ -18,7 +19,13 @@ import './index.scss';
 
 const PREFIX_CLS = 'm-affix';
 
-const Affix: FC<AffixProps> = ({ className, style, children, onClick }) => {
+const Affix: FC<AffixProps> = ({
+  className,
+  style,
+  center = true,
+  children,
+  onClick,
+}) => {
   const renderContent = () => {
     const content = children ?? (
       <Button
@@ -33,7 +40,14 @@ const Affix: FC<AffixProps> = ({ className, style, children, onClick }) => {
   };
 
   return (
-    <View className={classnames(PREFIX_CLS, className)} style={style}>
+    <View
+      className={classnames(
+        PREFIX_CLS,
+        { [`${PREFIX_CLS}-center`]: center },
+        className,
+      )}
+      style={style}
+    >
       {renderContent()}
     </View>
   );
