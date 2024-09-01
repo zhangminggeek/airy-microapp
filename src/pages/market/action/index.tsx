@@ -176,8 +176,6 @@ const Page = () => {
             companyAddressId,
             ...rest
           } = values;
-          console.log('method', method);
-          console.log('companyAddressId', companyAddressId);
           if (!title) {
             Toast.info('请输入商品标题');
             return;
@@ -248,7 +246,7 @@ const Page = () => {
           </Form.Item>
           {createFromAlbum ? (
             <Form.Item name="picList" noStyle>
-              <Upload placeholder="添加图片" maxCount={4} />
+              <Upload placeholder="添加图片/视频" maxCount={4} />
             </Form.Item>
           ) : (
             <Form.Item

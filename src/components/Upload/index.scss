@@ -1,5 +1,7 @@
 @import '../../styles/var.scss';
 
+$item-size: 172px;
+
 .m-upload {
   display: flex;
   gap: 16px;
@@ -7,8 +9,8 @@
 
   &-item {
     position: relative;
-    width: 144px;
-    height: 144px;
+    width: $item-size;
+    height: $item-size;
     border: 2px solid $border-color-base;
     border-radius: 8px;
     overflow: hidden;
@@ -49,8 +51,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 144px;
-    height: 144px;
+    width: $item-size;
+    height: $item-size;
     border: 2px dashed $border-color-base;
     border-radius: 8px;
 
