@@ -35,11 +35,13 @@ const Page = () => {
   const { info } = useUserStore((state) => state);
 
   useShareAppMessage(() => {
+    const { title, product, allowSell, sellingPrice, leasePrice } = data;
+    const price = allowSell ? sellingPrice : leasePrice;
     // 来自页面转发分享
     return {
-      title: data?.title,
+      title: `¥${price}，${title}`,
       path: `/pages/market/index/index?shareType=${ShareType.MARKET}&shareParams=${JSON.stringify({ id, invitationCode: info?.company?.invitationCode })}`,
-      imageUrl: data?.product?.picList?.[0].url,
+      imageUrl: product?.picList?.[0].url,
     };
   });
 
