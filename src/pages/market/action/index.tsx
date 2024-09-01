@@ -173,8 +173,11 @@ const Page = () => {
             method,
             expressMethod,
             quality,
+            companyAddressId,
             ...rest
           } = values;
+          console.log('method', method);
+          console.log('companyAddressId', companyAddressId);
           if (!title) {
             Toast.info('请输入商品标题');
             return;
@@ -187,9 +190,14 @@ const Page = () => {
             Toast.info('请上传商品图片');
             return;
           }
+          if (method?.includes(MarkrtMethod['借调']) && !companyAddressId) {
+            Toast.info('请选择返还地址');
+            return;
+          }
           const params = {
             ...rest,
             title,
+            companyAddressId,
             allowSell: method?.includes(MarkrtMethod['出售']),
             allowLease: method?.includes(MarkrtMethod['借调']),
             expressMethod: expressMethod[0],
@@ -340,11 +348,7 @@ const Page = () => {
         </FormSection>
         {allowLease && (
           <FormSection fill>
-            <Form.Item
-              name="companyAddressId"
-              noStyle
-              rules={[{ required: true, message: '请选择返还地址' }]}
-            >
+            <Form.Item name="companyAddressId" noStyle>
               <AddressPicker placeholder="请选择返还地址" />
             </Form.Item>
           </FormSection>

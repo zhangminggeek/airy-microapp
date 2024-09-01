@@ -1,5 +1,6 @@
-import { Popup } from '@nutui/nutui-react-taro';
+import { Button, Popup } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { Fragment, useMemo, useState } from 'react';
 
@@ -9,6 +10,7 @@ import type { CSSProperties, FC } from 'react';
 import { getAddress } from '@/api';
 import { AddressCard, Icon } from '@/components';
 import { useRequest } from '@/hooks';
+import { RouterUtil } from '@/utils';
 
 import './index.scss';
 
@@ -36,8 +38,13 @@ const AddressPicker: FC<AddressPickerProps> = ({
   // 是否展示地址选择弹出层
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
+  useDidShow(() => {
+    run();
+  });
+
   // 获取地址列表
-  const { data } = useRequest(getAddress, {
+  const { data, run } = useRequest(getAddress, {
+    manual: true,
     onSuccess(data) {
       onLoad?.(data);
     },
@@ -110,6 +117,27 @@ const AddressPicker: FC<AddressPickerProps> = ({
               }}
             />
           ))}
+          <View className={`${PREFIX_CLS}-popup-content-btn-wrapper`}>
+            <Button
+              className={`${PREFIX_CLS}-popup-content-btn`}
+              type="primary"
+              fill="outline"
+              block
+              icon={
+                <Icon
+                  className={`${PREFIX_CLS}-popup-content-btn-icon`}
+                  name="PlusOutlined"
+                />
+              }
+              onClick={() => {
+                RouterUtil.navigateTo(
+                  '/packageCompany/pages/address/action/index',
+                );
+              }}
+            >
+              创建地址
+            </Button>
+          </View>
         </View>
       </Popup>
     </Fragment>

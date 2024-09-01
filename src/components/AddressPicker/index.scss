@@ -31,6 +31,17 @@
           background-color: $color-secondary;
         }
       }
+
+      &-btn {
+        &-wrapper {
+          padding: 0 32px;
+          margin-top: 48px;
+        }
+
+        .m-icon {
+          color: $color-primary;
+        }
+      }
     }
   }
 }
