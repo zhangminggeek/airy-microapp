@@ -18,6 +18,7 @@ interface ResultProps {
   title?: ReactNode;
   desc?: ReactNode;
   extra?: ReactNode;
+  footer?: ReactNode;
   okText?: ReactNode;
   cancelText?: ReactNode;
   onOk?: () => void;
@@ -34,6 +35,7 @@ const Result: FC<ResultProps> = ({
   title,
   desc,
   extra,
+  footer,
   okText,
   cancelText,
   onOk,
@@ -55,8 +57,8 @@ const Result: FC<ResultProps> = ({
     return <Icon {...config} size={56} />;
   }, [status, icon]);
 
-  const _extra = useMemo(() => {
-    if (extra) return extra;
+  const _footer = useMemo(() => {
+    if (footer) return footer;
     if (!okText && !cancelText) return null;
     const isMultiple = (okText ? 1 : 0) + (cancelText ? 1 : 0) > 1;
     return (
@@ -102,7 +104,10 @@ const Result: FC<ResultProps> = ({
       <View className={`${PREFIX_CLS}-icon`}>{_icon}</View>
       <View className={`${PREFIX_CLS}-title`}>{title}</View>
       {desc ? <View className={`${PREFIX_CLS}-desc`}>{desc}</View> : null}
-      {_extra ? <View className={`${PREFIX_CLS}-extra`}>{_extra}</View> : null}
+      {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
+      {_footer ? (
+        <View className={`${PREFIX_CLS}-footer`}>{_footer}</View>
+      ) : null}
     </View>
   );
 };

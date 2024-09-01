@@ -1,7 +1,6 @@
-import { Image, ImagePreview } from '@nutui/nutui-react-taro';
+import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
-import { useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -10,8 +9,6 @@ import { OSS_ASSETS_DIR } from '@/constants';
 import { BasicLayout } from '@/layouts';
 
 const Page = () => {
-  const [showPreview, setShowPreview] = useState<boolean>(false);
-
   return (
     <BasicLayout title="微信通知" back>
       <View className={styles.content}>
@@ -33,9 +30,7 @@ const Page = () => {
             mode="aspectFit"
             width={176}
             height={176}
-            onClick={() => {
-              setShowPreview(true);
-            }}
+            showMenuByLongpress
           />
           <Space block className={styles['qrcode-tip']}>
             <Icon
@@ -43,21 +38,10 @@ const Page = () => {
               name="ScanOutlined"
               size={20}
             />
-            <View className={styles['qrcode-tip-text']}>
-              点击预览图片后长按识别
-            </View>
+            <View className={styles['qrcode-tip-text']}>长按识别二维码</View>
           </Space>
         </View>
       </View>
-      <ImagePreview
-        visible={showPreview}
-        images={[{ src: `${OSS_ASSETS_DIR}/official-account.jpg` }]}
-        closeOnContentClick
-        showMenuByLongpress
-        onClose={() => {
-          setShowPreview(false);
-        }}
-      />
     </BasicLayout>
   );
 };

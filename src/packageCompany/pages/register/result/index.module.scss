@@ -1,0 +1,32 @@
+@import '../../../../styles/var.scss';
+@import '../../../../styles/mixins.scss';
+
+.container {
+  background-color: #fff;
+}
+
+.result {
+  padding: 60px 0;
+}
+
+.content {
+  @include flex-center(column);
+  gap: 16px;
+  width: 534px;
+  height: 558px;
+  border-radius: 16px;
+  border: 2px solid $border-color-base;
+  margin-top: 64px;
+
+  .title {
+    font-size: $font-size-small;
+    color: $text-color-base;
+    font-weight: 400;
+  }
+
+  .tip {
+    color: $text-color-main;
+    font-size: $font-size-large;
+    font-weight: 500;
+  }
+}
