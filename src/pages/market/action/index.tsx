@@ -1,4 +1,5 @@
 import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
+import { View } from '@tarojs/components';
 import Taro, { useRouter } from '@tarojs/taro';
 import Big from 'big.js';
 import { useEffect, useMemo, useState } from 'react';
@@ -246,7 +247,15 @@ const Page = () => {
           </Form.Item>
           {createFromAlbum ? (
             <Form.Item name="picList" noStyle>
-              <Upload placeholder="添加图片/视频" maxCount={4} />
+              <Upload
+                placeholder={
+                  <View>
+                    <View>添加图片</View>
+                    <View>视频</View>
+                  </View>
+                }
+                maxCount={4}
+              />
             </Form.Item>
           ) : (
             <Form.Item

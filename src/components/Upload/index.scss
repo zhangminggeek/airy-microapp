@@ -1,11 +1,15 @@
 @import '../../styles/var.scss';
 
-$item-size: 172px;
+$item-size: 144px;
 
 .m-upload {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+  width: 100%;
+
+  &-content {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
 
   &-item {
     position: relative;
@@ -71,6 +75,7 @@ $item-size: 172px;
     &-placeholder {
       font-size: $font-size-small;
       color: $text-color-secondary;
+      text-align: center;
     }
   }
 }

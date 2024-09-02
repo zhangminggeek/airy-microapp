@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 
 import type { CompanyInfo } from './interfaces';
 
-import { RegionPicker, Upload } from '@/components';
+import { RegionPicker, Space, Upload } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
@@ -115,8 +115,28 @@ const Page = () => {
             name="licenses"
             rules={[{ required: true, message: '请上传营业执照' }]}
           >
-            <Upload />
+            <Upload
+              extra={
+                <View className={styles['license-tip']}>
+                  <View>
+                    为避免非商户（婚礼行业外的个人用户）注册，请提供营业执照。您的信息将严格保密，仅用于商户验证。
+                  </View>
+                  <Space size={2}>
+                    没有营业执照怎么办？
+                    <Button
+                      className={styles['license-tip-btn']}
+                      fill="none"
+                      openType="contact"
+                      size="mini"
+                    >
+                      联系客服
+                    </Button>
+                  </Space>
+                </View>
+              }
+            />
           </Form.Item>
+
           <Form.Item label="店铺LOGO" name="logo">
             <Upload />
           </Form.Item>

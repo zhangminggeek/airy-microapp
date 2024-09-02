@@ -7,3 +7,19 @@
     padding: 0 48px;
   }
 }
+
+.license-tip {
+  font-size: $font-size-small;
+  color: $text-color-secondary;
+  font-weight: 400;
+
+  &-btn {
+    padding: 0;
+
+    :global {
+      .nut-button-wrap {
+        color: $color-primary;
+      }
+    }
+  }
+}

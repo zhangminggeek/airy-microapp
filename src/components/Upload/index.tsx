@@ -1,10 +1,10 @@
 import { Loading } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useState } from 'react';
 
-import type { CSSProperties, FC } from 'react';
+import type { CSSProperties, FC, ReactNode } from 'react';
 
 import { Icon, Media } from '@/components';
 import { useUpload } from '@/hooks';
@@ -21,7 +21,8 @@ interface UploadProps {
   maxFileSize?: number; // 最大文件大小，单位字节
   mediaType?: Array<'image' | 'video' | 'mix'>;
   sourceType?: Array<'album' | 'camera'>;
-  placeholder?: string;
+  placeholder?: ReactNode;
+  extra?: ReactNode;
   value?: ValueType;
   onChange?: (value: ValueType) => void;
 }
@@ -36,6 +37,7 @@ const Upload: FC<UploadProps> = ({
   mediaType = ['mix'],
   sourceType = ['album', 'camera'],
   placeholder,
+  extra,
   value = [],
   onChange,
 }) => {
@@ -109,48 +111,51 @@ const Upload: FC<UploadProps> = ({
 
   return (
     <View className={classnames(PREFIX_CLS, className)} style={style}>
-      {value?.map((url, index) => (
-        <View key={url} className={`${PREFIX_CLS}-item`}>
-          <Media
-            className={`${PREFIX_CLS}-item-media`}
-            src={url}
-            preview={{ url: value }}
-          />
-          <View
-            className={`${PREFIX_CLS}-item-icon`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleDelete(index);
-            }}
-          >
-            <Icon
-              className={`${PREFIX_CLS}-item-icon-close`}
-              name="CloseOutlined"
-              size={10}
+      <View className={`${PREFIX_CLS}-content`}>
+        {value?.map((url, index) => (
+          <View key={url} className={`${PREFIX_CLS}-item`}>
+            <Media
+              className={`${PREFIX_CLS}-item-media`}
+              src={url}
+              preview={{ url: value }}
             />
-          </View>
-        </View>
-      ))}
-      {value?.length < maxCount ? (
-        <View className={`${PREFIX_CLS}-btn`} onClick={chooseMedia}>
-          {uploading ? (
-            <Loading />
-          ) : (
-            <View className={`${PREFIX_CLS}-btn-content`}>
+            <View
+              className={`${PREFIX_CLS}-item-icon`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(index);
+              }}
+            >
               <Icon
-                className={`${PREFIX_CLS}-btn-icon`}
-                name="PlusOutlined"
-                size={24}
+                className={`${PREFIX_CLS}-item-icon-close`}
+                name="CloseOutlined"
+                size={10}
               />
-              {placeholder ? (
-                <Text className={`${PREFIX_CLS}-btn-placeholder`}>
-                  {placeholder}
-                </Text>
-              ) : null}
             </View>
-          )}
-        </View>
-      ) : null}
+          </View>
+        ))}
+        {value?.length < maxCount ? (
+          <View className={`${PREFIX_CLS}-btn`} onClick={chooseMedia}>
+            {uploading ? (
+              <Loading />
+            ) : (
+              <View className={`${PREFIX_CLS}-btn-content`}>
+                <Icon
+                  className={`${PREFIX_CLS}-btn-icon`}
+                  name="PlusOutlined"
+                  size={24}
+                />
+                {placeholder ? (
+                  <View className={`${PREFIX_CLS}-btn-placeholder`}>
+                    {placeholder}
+                  </View>
+                ) : null}
+              </View>
+            )}
+          </View>
+        ) : null}
+      </View>
+      {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
     </View>
   );
 };
