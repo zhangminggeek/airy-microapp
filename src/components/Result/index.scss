@@ -46,12 +46,12 @@
       gap: 32px;
 
       &-multiple {
-        .m-result-extra-btn {
+        .m-result-footer-btn {
           width: 256px;
         }
       }
 
-      :not(.m-result-extra-space-multiple) {
+      :not(.m-result-footer-space-multiple) {
         .m-result-extra-btn {
           flex: 1;
         }

@@ -63,13 +63,13 @@ const Result: FC<ResultProps> = ({
     const isMultiple = (okText ? 1 : 0) + (cancelText ? 1 : 0) > 1;
     return (
       <View
-        className={classnames(`${PREFIX_CLS}-extra-space`, {
-          [`${PREFIX_CLS}-extra-space-multiple`]: isMultiple,
+        className={classnames(`${PREFIX_CLS}-footer-space`, {
+          [`${PREFIX_CLS}-footer-space-multiple`]: isMultiple,
         })}
       >
         {cancelText ? (
           <Button
-            className={`${PREFIX_CLS}-extra-btn`}
+            className={`${PREFIX_CLS}-footer-btn`}
             size={isMultiple ? 'large' : 'xlarge'}
             block
             onClick={onCancel}
@@ -79,7 +79,7 @@ const Result: FC<ResultProps> = ({
         ) : null}
         {okText ? (
           <Button
-            className={`${PREFIX_CLS}-extra-btn`}
+            className={`${PREFIX_CLS}-footer-btn`}
             type="primary"
             size={isMultiple ? 'large' : 'xlarge'}
             block
