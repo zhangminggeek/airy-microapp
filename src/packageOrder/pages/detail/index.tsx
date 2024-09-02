@@ -8,7 +8,16 @@ import { Fragment, useMemo } from 'react';
 import styles from './index.module.scss';
 
 import { getOrderId } from '@/api';
-import { Descriptions, Footer, Product, Section, Text } from '@/components';
+import {
+  Company,
+  Descriptions,
+  Footer,
+  Icon,
+  Product,
+  Section,
+  Space,
+  Text,
+} from '@/components';
 import { DATE_FORMAT, DATE_TIME_FORMAT, UserType } from '@/constants';
 import {
   OrderExpressType,
@@ -362,6 +371,27 @@ const Page = () => {
               },
               { field: 'time', label: '购买时间', col: 2 },
               {
+                field: 'company',
+                label: '商家信息',
+                col: 2,
+                render(v) {
+                  return (
+                    <Space
+                      size={4}
+                      onClick={() => {
+                        RouterUtil.navigateTo(
+                          '/packageCompany/pages/index/index',
+                          { id: v.id },
+                        );
+                      }}
+                    >
+                      <Company logo={v?.logo} name={v?.name} block={false} />
+                      <Icon name="RightOutlined" size={14} color="#7c7c7c" />
+                    </Space>
+                  );
+                },
+              },
+              {
                 field: 'consignee',
                 label: '商家联系方式',
                 col: 2,
@@ -377,6 +407,7 @@ const Page = () => {
             data={{
               no: data?.no,
               time: dayjs(data?.createTime).format(DATE_TIME_FORMAT),
+              company: data?.seller,
               consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
               address: sellerAddress,
             }}

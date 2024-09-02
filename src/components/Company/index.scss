@@ -1,9 +1,16 @@
 @import '../../styles/var.scss';
 
 .m-company {
-  display: flex;
   align-items: center;
   gap: 8px;
+
+  &-block {
+    display: flex;
+  }
+
+  &:not(.m-company-block) {
+    display: inline-flex;
+  }
 
   &-logo {
     position: relative;

@@ -14,6 +14,7 @@ interface CompanyProps {
   logo?: string;
   logoSize?: number;
   name?: string;
+  block?: boolean;
   onClick?: (e: ITouchEvent) => void;
 }
 
@@ -25,11 +26,16 @@ const Company: FC<CompanyProps> = ({
   logo,
   logoSize = 20,
   name,
+  block = true,
   onClick,
 }) => {
   return (
     <View
-      className={classnames(PREFIX_CLS, className)}
+      className={classnames(
+        PREFIX_CLS,
+        { [`${PREFIX_CLS}-block`]: block },
+        className,
+      )}
       style={style}
       onClick={onClick}
     >

@@ -3977,13 +3977,22 @@ export interface GetOrderIdResponse {
    */
   buyer: {
     /**
-     * 创建时间
+     * 公司id
      */
-    createTime: string
+    id: number
     /**
-     * 修改时间
+     * 公司名称
      */
-    updateTime: string
+    name: string
+    /**
+     * 公司LOGO
+     */
+    logo?: string
+  }
+  /**
+   * 卖家信息
+   */
+  seller: {
     /**
      * 公司id
      */
@@ -3993,57 +4002,9 @@ export interface GetOrderIdResponse {
      */
     name: string
     /**
-     * 营业执照上的公司名称
-     */
-    licenseCompanyName?: string
-    /**
      * 公司LOGO
      */
     logo?: string
-    /**
-     * 简介
-     */
-    intro?: string
-    /**
-     * 联系人
-     */
-    contacts: string
-    /**
-     * 联系电话
-     */
-    contactPhone: string
-    /**
-     * 省
-     */
-    province: string
-    /**
-     * 市
-     */
-    city: string
-    /**
-     * 区
-     */
-    area: string
-    /**
-     * 地址
-     */
-    address: string
-    /**
-     * 账户余额
-     */
-    balance: string
-    /**
-     * 邀请码
-     */
-    invitationCode: string
-    /**
-     * 状态, 0:禁用 1:正常 2:待审核
-     */
-    status: number
-    /**
-     * 是否为内部账号
-     */
-    inner: boolean
   }
   /**
    * 买家收货地址
