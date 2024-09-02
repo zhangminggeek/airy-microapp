@@ -30,13 +30,16 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
 
   const previewUrls = useMemo(() => {
     return images?.reduce(
-      (prev, cur) => {
+      (prev, cur, index) => {
         if (isVideo(cur)) {
           const ret = formatPreviewSrc<'videos'>(cur);
-          prev.videos.push(ret);
+          prev.videos.push({
+            ...ret,
+            index,
+          });
         } else {
           const ret = formatPreviewSrc<'images'>(cur);
-          prev.images.push(ret);
+          prev.images.push({ ...ret, index });
         }
         return prev;
       },
@@ -65,7 +68,7 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
               src={url}
               width="100vw"
               height="100vw"
-              mode="aspectFill"
+              mode="aspectFit"
               onClick={() => {
                 setShowPreview(true);
               }}

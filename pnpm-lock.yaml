@@ -15,8 +15,8 @@ importers:
         specifier: ^1.0.4
         version: 1.0.4
       '@nutui/nutui-react-taro':
-        specifier: ^2.6.16
-        version: 2.6.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.6.17
+        version: 2.6.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tarojs/components':
         specifier: 3.6.30
         version: 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30(@tarojs/shared@3.6.30))(@tarojs/shared@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)(react@18.3.1)
@@ -1019,8 +1019,8 @@ packages:
     resolution: {integrity: sha512-Ja18XcETdEl5mzzACGd+DKgaGJzPTCow7EglgwTmHdwokzDFYh/MHua6lU6DV/hjF2IaOJ4oX2nqnjG7RElKOw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@7.25.0':
-    resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
+  '@babel/runtime@7.25.6':
+    resolution: {integrity: sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.24.0':
@@ -1351,8 +1351,8 @@ packages:
   '@nutui/icons-react-taro@1.0.4':
     resolution: {integrity: sha512-2sDhJXJPAgatSg8dSWVYLYVvxCZo2OIWpSzVO0xkyCU0X6pWtKt7Hh26UbT9PTWaTfg9cX9xqwYvBkkxUypvSQ==}
 
-  '@nutui/nutui-react-taro@2.6.16':
-    resolution: {integrity: sha512-edVC3dGlmNc/Fm3JQgdmwD3kTYGns5p3fYYbQ+hOh+MbnH29pgZcsPWm14z1EQkn4b0lUC04IiWe1hVUfZK3cw==}
+  '@nutui/nutui-react-taro@2.6.17':
+    resolution: {integrity: sha512-CPqLpGQOFNFHs/k+aY4wn47R3zhfvp8ejtPbKXMtUBzmzfal57OQwhW7GxPpDk4KtgdfmacaDYXTg64NgF5RLQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
@@ -7203,6 +7203,9 @@ packages:
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
+  tslib@2.7.0:
+    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
+
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
 
@@ -8695,7 +8698,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.25.0':
+  '@babel/runtime@7.25.6':
     dependencies:
       regenerator-runtime: 0.14.1
 
@@ -9016,7 +9019,7 @@ snapshots:
 
   '@nutui/icons-react-taro@1.0.4': {}
 
-  '@nutui/nutui-react-taro@2.6.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@nutui/nutui-react-taro@2.6.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.6
       '@nutui/icons-react-taro': 1.0.4
@@ -9201,7 +9204,7 @@ snapshots:
 
   '@tarojs/api@3.6.32':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.6
       '@tarojs/runtime': 3.6.32(@tarojs/shared@3.6.32)
       '@tarojs/shared': 3.6.32
 
@@ -9546,7 +9549,7 @@ snapshots:
       history: 5.3.0
       mobile-detect: 1.4.5
       query-string: 7.1.3
-      tslib: 2.6.3
+      tslib: 2.7.0
       universal-router: 8.3.0
 
   '@tarojs/runner-utils@3.6.30':
@@ -9567,7 +9570,7 @@ snapshots:
     dependencies:
       '@tarojs/shared': 3.6.32
       lodash-es: 4.17.21
-      tslib: 2.6.3
+      tslib: 2.7.0
 
   '@tarojs/service@3.6.30(@tarojs/shared@3.6.30)(@tarojs/taro@3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30(@tarojs/shared@3.6.30))(@types/react@18.3.3)(postcss@8.4.38))':
     dependencies:
@@ -9623,7 +9626,7 @@ snapshots:
       lodash-es: 4.17.21
       platform: 1.3.6
       query-string: 7.1.3
-      tslib: 2.6.3
+      tslib: 2.7.0
       whatwg-fetch: 3.6.20
     transitivePeerDependencies:
       - '@tarojs/taro'
@@ -15870,6 +15873,8 @@ snapshots:
   tslib@2.6.2: {}
 
   tslib@2.6.3: {}
+
+  tslib@2.7.0: {}
 
   tunnel-agent@0.6.0:
     dependencies:
