@@ -194,7 +194,7 @@ export interface GetMarketResponse {
     /**
      * 商品描述
      */
-    description: string
+    description?: string
     /**
      * 是否允许出售, 0:否 1:是
      */
@@ -620,7 +620,7 @@ export interface GetMarketMyPublishedResponse {
     /**
      * 商品描述
      */
-    description: string
+    description?: string
     /**
      * 是否允许出售, 0:否 1:是
      */
@@ -849,7 +849,7 @@ export interface GetMarketMyFavoriteResponse {
     /**
      * 商品描述
      */
-    description: string
+    description?: string
     /**
      * 是否允许出售, 0:否 1:是
      */
@@ -1261,7 +1261,7 @@ export interface GetMarketIdResponse {
   /**
    * 商品描述
    */
-  description: string
+  description?: string
   /**
    * 是否允许出售, 0:否 1:是
    */
@@ -1302,6 +1302,39 @@ export interface GetMarketIdResponse {
    * 是否被删除
    */
   isDeleted: boolean
+  /**
+   * 公司信息
+   */
+  company: {
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 公司LOGO
+     */
+    logo?: string
+    /**
+     * 简介
+     */
+    intro?: string
+    /**
+     * 粉丝数量
+     */
+    fansCount: number
+    /**
+     * 是否已关注
+     */
+    follewed: boolean
+    /**
+     * 已卖出数量
+     */
+    sold: number
+  }
   /**
    * 服饰信息
    */
@@ -2688,7 +2721,7 @@ export interface GetOrderBoughtResponse {
       /**
        * 商品描述
        */
-      description: string
+      description?: string
       /**
        * 是否允许出售, 0:否 1:是
        */
@@ -2985,7 +3018,7 @@ export interface GetOrderSoldResponse {
       /**
        * 商品描述
        */
-      description: string
+      description?: string
       /**
        * 是否允许出售, 0:否 1:是
        */
@@ -3815,7 +3848,7 @@ export interface GetOrderIdResponse {
     /**
      * 商品描述
      */
-    description: string
+    description?: string
     /**
      * 是否允许出售, 0:否 1:是
      */
@@ -5427,20 +5460,12 @@ getCompanyInvitation.requestConfig = getCompanyInvitationRequestConfig
 
 export interface GetCompanyIdRequest {
   /**
-   * 公司id
+   * 要查询的公司id
    */
   id: string
 }
 
 export interface GetCompanyIdResponse {
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
   /**
    * 公司id
    */
@@ -5450,10 +5475,6 @@ export interface GetCompanyIdResponse {
    */
   name: string
   /**
-   * 营业执照上的公司名称
-   */
-  licenseCompanyName?: string
-  /**
    * 公司LOGO
    */
   logo?: string
@@ -5461,46 +5482,6 @@ export interface GetCompanyIdResponse {
    * 简介
    */
   intro?: string
-  /**
-   * 联系人
-   */
-  contacts: string
-  /**
-   * 联系电话
-   */
-  contactPhone: string
-  /**
-   * 省
-   */
-  province: string
-  /**
-   * 市
-   */
-  city: string
-  /**
-   * 区
-   */
-  area: string
-  /**
-   * 地址
-   */
-  address: string
-  /**
-   * 账户余额
-   */
-  balance: string
-  /**
-   * 邀请码
-   */
-  invitationCode: string
-  /**
-   * 状态, 0:禁用 1:正常 2:待审核
-   */
-  status: number
-  /**
-   * 是否为内部账号
-   */
-  inner: boolean
   /**
    * 粉丝数量
    */

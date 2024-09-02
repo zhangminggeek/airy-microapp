@@ -159,6 +159,11 @@ const Page = () => {
             size: productSizeMap.get(data?.product?.size)?.text,
           },
         )}
+        companyId={data?.companyId}
+        companyLogo={data?.company?.logo}
+        companyName={data?.company?.name}
+        companySold={data?.company?.sold}
+        companyFans={data?.company?.fansCount}
         share
         footer={
           info?.companyId !== data?.companyId ? (

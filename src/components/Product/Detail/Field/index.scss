@@ -1,7 +1,9 @@
 @import '../../../../styles/var.scss';
 @import '../../../../styles/mixins.scss';
 
-.m-product-detail-field {
+.m-product-detail-field.m-section {
+  border-radius: 0;
+
   .m-section-header.m-title {
     margin-bottom: 24px;
   }

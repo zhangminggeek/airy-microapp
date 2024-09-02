@@ -12,9 +12,10 @@ import PictureGroup, { type PictureGroupProps } from './PictureGroup';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Icon, Space, Tag } from '@/components';
+import { Avatar, Icon, Space, Tag } from '@/components';
 import { expressMethodMap } from '@/constants/market';
 import { productInfoFieldMap, ProductType } from '@/constants/product';
+import { RouterUtil } from '@/utils';
 
 import './index.scss';
 
@@ -33,6 +34,11 @@ interface ProductDetailProps {
   title?: string;
   desc?: string;
   fieldData?: FieldProps['data'];
+  companyId?: number;
+  companyName?: string;
+  companyLogo?: string;
+  companySold?: number;
+  companyFans?: number;
   share?: boolean;
   extra?: ReactNode;
   footer?: ReactNode;
@@ -54,6 +60,11 @@ const ProductDetail: FC<ProductDetailProps> = ({
   title,
   desc,
   fieldData,
+  companyId,
+  companyName,
+  companyLogo,
+  companySold = 0,
+  companyFans = 0,
   share = false,
   extra,
   footer,
@@ -119,6 +130,36 @@ const ProductDetail: FC<ProductDetailProps> = ({
           <View className={`${PREFIX_CLS}-header-desc`}>{desc}</View>
         ) : null}
       </View>
+      {companyId ? (
+        <View className={`${PREFIX_CLS}-company`}>
+          <Avatar
+            className={`${PREFIX_CLS}-company-logo`}
+            src={companyLogo}
+            name={companyName}
+            size={36}
+          />
+          <View className={`${PREFIX_CLS}-company-content`}>
+            <View className={`${PREFIX_CLS}-company-content-title`}>
+              {companyName}
+            </View>
+            <Space className={`${PREFIX_CLS}-company-content-desc`} size={16}>
+              <View>已卖出：{companySold}</View>
+              <View>粉丝数：{companyFans}</View>
+            </Space>
+          </View>
+          <Button
+            className={`${PREFIX_CLS}-company-btn`}
+            size="mini"
+            onClick={() => {
+              RouterUtil.navigateTo('/packageCompany/pages/index/index', {
+                id: companyId,
+              });
+            }}
+          >
+            进店逛逛
+          </Button>
+        </View>
+      ) : null}
       <View className={`${PREFIX_CLS}-body`}>
         <Field fieldList={fieldList} data={fieldData} />
       </View>

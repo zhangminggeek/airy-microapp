@@ -4,6 +4,7 @@
 .m-product-detail {
   &-header {
     padding: 8px 32px 32px;
+    margin-bottom: 16px;
     background-color: #fff;
 
     &-top {
@@ -69,8 +70,39 @@
     }
   }
 
+  &-company {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 32px;
+    margin-bottom: 16px;
+    background-color: #fff;
+
+    &-logo,
+    &-btn {
+      flex-shrink: 0;
+    }
+
+    &-content {
+      flex: 1;
+
+      &-title {
+        font-size: $font-size-base;
+        color: $text-color-main;
+        font-size: 500;
+      }
+
+      &-desc {
+        font-size: $font-size-small;
+        color: $text-color-secondary;
+        font-size: 400;
+      }
+    }
+  }
+
   &-body {
-    padding: 24px 24px 200px;
+    margin-bottom: 200px;
   }
 
   &-footer {
