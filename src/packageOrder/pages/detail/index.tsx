@@ -1,6 +1,6 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { setClipboardData, useRouter } from '@tarojs/taro';
+import { useRouter } from '@tarojs/taro';
 import Big from 'big.js';
 import dayjs from 'dayjs';
 import { Fragment, useMemo } from 'react';
@@ -8,14 +8,7 @@ import { Fragment, useMemo } from 'react';
 import styles from './index.module.scss';
 
 import { getOrderId } from '@/api';
-import {
-  Descriptions,
-  Footer,
-  Icon,
-  Product,
-  Section,
-  Space,
-} from '@/components';
+import { Descriptions, Footer, Product, Section, Text } from '@/components';
 import { DATE_FORMAT, DATE_TIME_FORMAT, UserType } from '@/constants';
 import {
   OrderExpressType,
@@ -26,7 +19,7 @@ import {
 import { useAddress, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import useOrderAction from '@/pages/user/bought/useOrderAction';
-import { RouterUtil } from '@/utils';
+import { RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   /**
@@ -265,23 +258,26 @@ const Page = () => {
           <Section className={styles.section} title="返还发货">
             <Descriptions
               options={[
-                { field: 'no', label: '快递单号', col: 2 },
+                {
+                  field: 'no',
+                  label: '快递单号',
+                  col: 2,
+                  render(v) {
+                    return (
+                      <Text.Copy
+                        text={v}
+                        onCopied={() => {
+                          Toast.info('快递单号复制成功');
+                        }}
+                      />
+                    );
+                  },
+                },
                 { field: 'remark', label: '备注', col: 2 },
                 { field: 'time', label: '发货时间', col: 2 },
               ]}
               data={{
-                no: data?.expressReturn?.no ? (
-                  <Space>
-                    {data?.expressReturn?.no}
-                    <Icon
-                      name="CopyOutlined"
-                      size={16}
-                      onClick={() => {
-                        setClipboardData({ data: data?.expressReturn?.no });
-                      }}
-                    />
-                  </Space>
-                ) : undefined,
+                no: data?.expressReturn?.no,
                 remark: data?.expressReturn?.remark,
                 time: data?.expressReturn?.createTime
                   ? dayjs(data?.expressReturn?.createTime).format(
@@ -315,23 +311,26 @@ const Page = () => {
           <Section className={styles.section} title="发货">
             <Descriptions
               options={[
-                { field: 'no', label: '快递单号', col: 2 },
+                {
+                  field: 'no',
+                  label: '快递单号',
+                  col: 2,
+                  render(v) {
+                    return (
+                      <Text.Copy
+                        text={v}
+                        onCopied={() => {
+                          Toast.info('快递单号复制成功');
+                        }}
+                      />
+                    );
+                  },
+                },
                 { field: 'remark', label: '备注', col: 2 },
                 { field: 'time', label: '发货时间', col: 2 },
               ]}
               data={{
-                no: data?.expressDelivery?.no ? (
-                  <Space>
-                    {data?.expressDelivery?.no}
-                    <Icon
-                      name="CopyOutlined"
-                      size={16}
-                      onClick={() => {
-                        setClipboardData({ data: data?.expressDelivery?.no });
-                      }}
-                    />
-                  </Space>
-                ) : undefined,
+                no: data?.expressDelivery?.no,
                 remark: data?.expressDelivery?.remark,
                 time: data?.expressDelivery?.createTime
                   ? dayjs(data?.expressDelivery?.createTime).format(
@@ -346,6 +345,21 @@ const Page = () => {
         <Section className={styles.section} title="订单">
           <Descriptions
             options={[
+              {
+                field: 'no',
+                label: '订单编号',
+                col: 2,
+                render(v) {
+                  return (
+                    <Text.Copy
+                      text={v}
+                      onCopied={() => {
+                        Toast.info('订单编号复制成功');
+                      }}
+                    />
+                  );
+                },
+              },
               { field: 'time', label: '购买时间', col: 2 },
               {
                 field: 'consignee',
@@ -361,6 +375,7 @@ const Page = () => {
               },
             ]}
             data={{
+              no: data?.no,
               time: dayjs(data?.createTime).format(DATE_TIME_FORMAT),
               consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
               address: sellerAddress,

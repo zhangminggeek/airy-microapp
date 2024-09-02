@@ -34,6 +34,7 @@ import Section from './Section';
 import Space from './Space';
 import Tag from './Tag';
 import TagChecker from './TagChecker';
+import Text from './Text';
 import Title from './Title';
 import Upload from './Upload';
 
@@ -74,6 +75,7 @@ export {
   Space,
   Tag,
   TagChecker,
+  Text,
   Title,
   Upload,
 };

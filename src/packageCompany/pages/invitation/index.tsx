@@ -1,6 +1,6 @@
 import { Button, Image } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
-import { setClipboardData, useShareAppMessage } from '@tarojs/taro';
+import { View } from '@tarojs/components';
+import { useShareAppMessage } from '@tarojs/taro';
 import Big from 'big.js';
 import { useMemo } from 'react';
 
@@ -8,7 +8,7 @@ import { InvitationTask } from './constants';
 import styles from './index.module.scss';
 
 import { getCompanyInvitation } from '@/api';
-import { Avatar, Icon, Space } from '@/components';
+import { Avatar, Space, Text } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
 import { useRequest } from '@/hooks';
 import { ShareType } from '@/hooks/useShareEvent';
@@ -94,20 +94,14 @@ const Page = () => {
             >
               立即邀请
             </Button>
-            <View className={styles['invitation-code']}>
-              我的邀请码：{info?.company?.invitationCode}
-              <Icon
-                className={styles['invitation-code-icon']}
-                name="CopyOutlined"
-                size={14}
-                onClick={async () => {
-                  await setClipboardData({
-                    data: info?.company?.invitationCode,
-                  });
-                  Toast.info('邀请码复制成功');
-                }}
-              />
-            </View>
+            <Text.Copy
+              className={styles['invitation-code']}
+              text={`我的邀请码：${info?.company?.invitationCode}`}
+              value={info?.company?.invitationCode}
+              onCopied={() => {
+                Toast.info('邀请码复制成功');
+              }}
+            />
           </View>
           <View className={styles.result}>
             <View className={styles['result-title']}>
