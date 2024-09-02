@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 
 import type { CSSProperties, FC } from 'react';
 
-import { Link } from '@/components';
+import { Text } from '@/components';
 
 interface ProtocolProps {
   className?: string;
@@ -22,13 +22,13 @@ const Protocol: FC<ProtocolProps> = ({ className, value, onChange }) => {
         label={
           <View>
             我已阅读并同意
-            <Link to="/packagePlatform/pages/protocol/privacy/index">
+            <Text.Link to="/packagePlatform/pages/protocol/privacy/index">
               《用户隐私协议》
-            </Link>
+            </Text.Link>
             和
-            <Link to="/packagePlatform/pages/protocol/software/index">
+            <Text.Link to="/packagePlatform/pages/protocol/software/index">
               《软件许可使用协议》
-            </Link>
+            </Text.Link>
           </View>
         }
         checked={value}

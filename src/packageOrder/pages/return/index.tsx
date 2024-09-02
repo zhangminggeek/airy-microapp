@@ -6,7 +6,7 @@ import Big from 'big.js';
 import styles from './index.module.scss';
 
 import { getOrderId, postOrderReceiveSeller } from '@/api';
-import { FormSection, InputNumber, Link, Media } from '@/components';
+import { FormSection, InputNumber, Media, Text } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -88,7 +88,7 @@ const Page = () => {
           </Form.Item>
           <View className={styles.tip}>
             若押金与买家支付有差异，请提前协商一致，若无法协商，可申请
-            <Link>客服介入</Link>
+            <Text.Link>客服介入</Text.Link>
           </View>
         </FormSection>
         <FormSection title="备注">

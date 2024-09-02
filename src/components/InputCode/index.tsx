@@ -5,7 +5,7 @@ import type { InputProps } from '@tarojs/components';
 import type { FC } from 'react';
 
 import { getAccountLoginCodeAccount } from '@/api';
-import { Link } from '@/components';
+import { Text } from '@/components';
 import { useCountdown, useRequest } from '@/hooks';
 import { Toast } from '@/utils';
 
@@ -50,7 +50,7 @@ const InputCode: FC<InputCodeProps> = ({
         }}
         {...rest}
       />
-      <Link
+      <Text.Link
         disabled={countdowning}
         onClick={async () => {
           if (!phone || !/1\d{10}/.test(phone)) {
@@ -61,7 +61,7 @@ const InputCode: FC<InputCodeProps> = ({
         }}
       >
         {countdowning ? `(${time}s)后重新发送` : '获取验证码'}
-      </Link>
+      </Text.Link>
     </View>
   );
 };

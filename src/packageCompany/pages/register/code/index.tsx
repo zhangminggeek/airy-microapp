@@ -1,5 +1,5 @@
 import { Button } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +12,7 @@ import {
   postAccountRegisterCodeCheck,
   postCompanyRegister,
 } from '@/api';
-import { CodeInput, Link } from '@/components';
+import { CodeInput, Text } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useCountdown, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -75,7 +75,7 @@ const Page = () => {
       />
       {countdowning ? (
         <View className={styles.countdown}>
-          <Link>{`${time}s`}</Link>
+          <Text.Link>{`${time}s`}</Text.Link>
           <Text>后可重新发送</Text>
         </View>
       ) : null}

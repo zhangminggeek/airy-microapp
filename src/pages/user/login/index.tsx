@@ -1,5 +1,5 @@
 import { Button, Image } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
@@ -9,7 +9,7 @@ import Protocol from './Protocol';
 
 import { postAccountLoginWechatPhone } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
-import { Link } from '@/components';
+import { Text } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -83,22 +83,22 @@ const Page = () => {
           >
             手机号快捷登录
           </Button>
-          <Link
+          <Text.Link
             className={classnames(styles.btn, styles['btn-link'])}
             block
             to="/pages/user/login/other/index"
           >
             其他方式登录
-          </Link>
+          </Text.Link>
         </View>
         <View className={styles.register}>
           <Text className={styles['register-text']}>还没有账号？</Text>
-          <Link
+          <Text.Link
             className={styles['register-link']}
             to="/packageCompany/pages/register/index"
           >
             去注册
-          </Link>
+          </Text.Link>
         </View>
         <Protocol
           className={styles.protocol}

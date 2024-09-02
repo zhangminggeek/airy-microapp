@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 
 import type { FC } from 'react';
 
-import { Icon, Link } from '@/components';
+import { Icon, Text } from '@/components';
 
 interface PaymentProps {
   icon: string;
@@ -38,7 +38,7 @@ const Payment: FC<PaymentProps> = ({
         <View className={styles['payment-content-owner']}>{owner}</View>
         <View className={styles['payment-content-account']}>{account}</View>
       </View>
-      <Link
+      <Text.Link
         className={styles['payment-btn']}
         onClick={(e) => {
           e.stopPropagation();
@@ -46,7 +46,7 @@ const Payment: FC<PaymentProps> = ({
         }}
       >
         移除
-      </Link>
+      </Text.Link>
     </View>
   );
 };

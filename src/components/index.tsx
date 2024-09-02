@@ -19,7 +19,6 @@ import InputNumber from './InputNumber';
 import InputNumberRange from './InputNumberRange';
 import InputPassword from './InputPassword';
 import InputSearch from './InputSearch';
-import Link from './Link';
 import List from './List';
 import Media from './Media';
 import ModalForm from './ModalForm';
@@ -60,7 +59,6 @@ export {
   InputNumberRange,
   InputPassword,
   InputSearch,
-  Link,
   List,
   Media,
   ModalForm,
