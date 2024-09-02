@@ -311,7 +311,7 @@ const Page = () => {
             />
           </Section>
         ) : null}
-        {data?.status >= OrderStatus['待发货'] ? (
+        {data?.status > OrderStatus['待发货'] ? (
           <Section className={styles.section} title="发货">
             <Descriptions
               options={[
