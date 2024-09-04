@@ -1,4 +1,4 @@
-import { Tabs } from '@nutui/nutui-react-taro';
+import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import { useRef, useState } from 'react';
@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 import type { ActionType } from '@/components/List';
 
 import { getMarket } from '@/api';
-import { InputSearch, List, Media, Product } from '@/components';
+import { InputSearch, List, Product } from '@/components';
 import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { useShareEvent } from '@/hooks';
@@ -53,9 +53,12 @@ const Page = () => {
       <View className={styles.filter}>
         {productTypeOptions.map((item) => (
           <View key={item.value} className={styles['filter-item']}>
-            <Media
+            <Image
               className={styles['filter-item-image']}
+              mode="aspectFit"
               src={`${OSS_ASSETS_DIR}/${item.imageName}`}
+              width={52}
+              height={52}
               onClick={() => {
                 RouterUtil.navigateTo('/pages/market/category/index', {
                   typeCode: item.value,

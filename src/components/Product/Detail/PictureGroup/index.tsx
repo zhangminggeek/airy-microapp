@@ -68,7 +68,7 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
               src={url}
               width="100vw"
               height="100vw"
-              mode="aspectFit"
+              mode="widthFix"
               onClick={() => {
                 setShowPreview(true);
               }}
