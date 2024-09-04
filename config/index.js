@@ -81,6 +81,8 @@ const config = {
 module.exports = function (merge) {
   if (process.env.CUSTOM_ENV === 'development') {
     return merge({}, config, require('./dev'));
+  } else if (process.env.CUSTOM_ENV === 'release') {
+    return merge({}, config, require('./release'));
   }
   return merge({}, config, require('./prod'));
 };

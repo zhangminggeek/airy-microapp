@@ -11,8 +11,10 @@
   },
   "scripts": {
     "build": "cross-env CUSTOM_ENV=development taro build --type weapp",
+    "build:release": "cross-env CUSTOM_ENV=release taro build --type weapp",
     "build:production": "cross-env CUSTOM_ENV=production taro build --type weapp",
     "dev": "NODE_ENV=production npm run build -- --watch",
+    "dev:release": "NODE_ENV=release npm run build:production -- --watch",
     "dev:production": "NODE_ENV=production npm run build:production -- --watch",
     "prepare": "husky",
     "lint": "tsc --noemit --skipLibCheck && eslint 'src/**/*.{js,jsx,tsx,ts}' --quiet",

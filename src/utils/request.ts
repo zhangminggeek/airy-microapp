@@ -87,12 +87,16 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;
   const url = `${process.env.BASE_URL || ''}${formatPath(path, method)}`;
   console.log('request', url, payload);
+
+  const env =
+    process.env.NODE_ENV === 'release'
+      ? 'release-3gumdndcdaf859e0'
+      : 'prod-1gc7fdtuac9b3c9f';
+  console.log('env', env);
   return new Promise<BaseResponse<ResponseData>>((resolve, reject) => {
     Taro.cloud.callContainer({
       // @ts-expect-error: 确定此参数存在
-      config: {
-        env: 'prod-1gc7fdtuac9b3c9f',
-      },
+      config: { env },
       timeout: 5000,
       method,
       path: url,
@@ -137,6 +141,6 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
 };
 
 const _request =
-  process.env.NODE_ENV === 'production' ? requestForCloud : request;
+  process.env.NODE_ENV === 'development' ? request : requestForCloud;
 
 export default _request;
