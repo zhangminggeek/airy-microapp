@@ -119,7 +119,7 @@ const Page = () => {
   });
 
   // 发布
-  const { run: create } = useRequest(postMarket, {
+  const { run: create, loading: createLoading } = useRequest(postMarket, {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
@@ -142,7 +142,7 @@ const Page = () => {
   });
 
   // 编辑
-  const { run: update } = useRequest(putMarket, {
+  const { run: update, loading: updateLoading } = useRequest(putMarket, {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
@@ -162,7 +162,13 @@ const Page = () => {
           quality: [ProductQuality['全新']],
         }}
         footer={
-          <Button formType="submit" type="primary" size="xlarge" block>
+          <Button
+            formType="submit"
+            type="primary"
+            size="xlarge"
+            block
+            loading={createLoading || updateLoading}
+          >
             保存
           </Button>
         }
