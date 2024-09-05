@@ -4,7 +4,7 @@ import { useDidShow, useRouter } from '@tarojs/taro';
 import styles from './index.module.scss';
 
 import { getAddressId, postAddress, putAddress } from '@/api';
-import { RegionPicker } from '@/components';
+import { Picker } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
@@ -82,7 +82,7 @@ const Page = () => {
           name="region"
           rules={[{ required: true, message: '请选择收货地址' }]}
         >
-          <RegionPicker />
+          <Picker.Region />
         </Form.Item>
         <Form.Item
           label="详细地址"

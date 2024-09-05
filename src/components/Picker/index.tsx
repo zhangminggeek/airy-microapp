@@ -5,8 +5,12 @@ import {
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
 
+import AddressPicker from './AddressPicker';
+import CalendarPicker from './CalendarPicker';
 import DatePicker from './DatePicker';
+import PaymentPicker from './PaymentPicker';
 import PickerView from './PickerView';
+import RegionPicker from './RegionPicker';
 
 import type { PickerOption } from '@nutui/nutui-react-taro/dist/types/packages/picker/types';
 import type { ReactNode } from 'react';
@@ -87,6 +91,10 @@ const Picker = <V extends string | number>({
 };
 
 Picker.View = PickerView;
+Picker.Address = AddressPicker;
+Picker.Calendar = CalendarPicker;
 Picker.Date = DatePicker;
+Picker.Payment = PaymentPicker;
+Picker.Region = RegionPicker;
 
 export default Picker;

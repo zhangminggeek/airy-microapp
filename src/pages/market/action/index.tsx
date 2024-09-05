@@ -14,9 +14,9 @@ import {
   putMarket,
 } from '@/api';
 import {
-  AddressPicker,
   FormSection,
   InputNumber,
+  Picker,
   Product,
   TagChecker,
   Upload,
@@ -362,7 +362,7 @@ const Page = () => {
         {allowLease && (
           <FormSection fill>
             <Form.Item name="companyAddressId" noStyle>
-              <AddressPicker placeholder="请选择返还地址" />
+              <Picker.Address placeholder="请选择返还地址" />
             </Form.Item>
           </FormSection>
         )}

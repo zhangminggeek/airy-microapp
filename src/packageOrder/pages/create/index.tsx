@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react';
 import styles from './index.module.scss';
 
 import type { PostOrderRequest } from '@/api';
-import type { DateType } from '@/components/CalendarPicker';
+import type { DateType } from '@/components/Picker/CalendarPicker';
 import type { Dayjs } from 'dayjs';
 
 import {
@@ -18,13 +18,11 @@ import {
   postOrderPayWechat,
 } from '@/api';
 import {
-  AddressPicker,
-  CalenderPicker,
   Cell,
   Descriptions,
   Media,
   PageFooter,
-  PaymentPicker,
+  Picker,
   Product,
   Section,
   Space,
@@ -116,7 +114,7 @@ const Page = () => {
   return (
     <BasicLayout title={`确认${info.title}`} back>
       <Section fill>
-        <AddressPicker
+        <Picker.Address
           placeholder="请选择收货地址"
           value={addressId}
           onLoad={(v) => {
@@ -133,7 +131,7 @@ const Page = () => {
       {info.type === OrderType['借调'] && (
         <Section fill>
           <Cell label="借调日期">
-            <CalenderPicker
+            <Picker.Calendar
               type="range"
               value={leaseDate}
               disableDate={(date) => {
@@ -247,7 +245,7 @@ const Page = () => {
           确认{info.title}
         </Button>
       </PageFooter>
-      <PaymentPicker
+      <Picker.Payment
         visible={showPaymentPicker}
         amount={info.total}
         onConfirm={async (v) => {

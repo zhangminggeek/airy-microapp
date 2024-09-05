@@ -12,7 +12,7 @@ import {
   postOrderPayWechat,
   postOrderReceiveBuyer,
 } from '@/api';
-import { PaymentPicker } from '@/components';
+import { Picker } from '@/components';
 import { PaymentType } from '@/constants/company';
 import { OrderType } from '@/constants/order';
 import { useDialog, useRequest } from '@/hooks';
@@ -112,7 +112,7 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
           }}
         />
 
-        <PaymentPicker
+        <Picker.Payment
           visible={showPaymentPicker}
           amount={
             order?.type === OrderType['出售']

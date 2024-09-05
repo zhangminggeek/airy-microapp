@@ -2,11 +2,12 @@ import { Cascader } from '@nutui/nutui-react-taro';
 import classnames from 'classnames';
 import { useState } from 'react';
 
+import PickerView from '../PickerView';
+
 import type { CascaderNode } from '@/interfaces/components';
 import type { AdministrativeCode } from '@/models/global';
 import type { CSSProperties, FC } from 'react';
 
-import { PickerView } from '@/components';
 import { useAddress } from '@/hooks';
 import { useGlobalStore } from '@/models';
 

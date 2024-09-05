@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 
 import type { CompanyInfo } from './interfaces';
 
-import { RegionPicker, Space, Upload } from '@/components';
+import { Picker, Space, Upload } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
@@ -101,7 +101,7 @@ const Page = () => {
             name="region"
             rules={[{ required: true, message: '请选择店铺地址' }]}
           >
-            <RegionPicker />
+            <Picker.Region />
           </Form.Item>
           <Form.Item
             label="详细地址"

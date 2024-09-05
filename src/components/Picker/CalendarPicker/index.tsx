@@ -3,10 +3,11 @@ import classnames from 'classnames';
 import dayjs, { type Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
 
+import PickerView from '../PickerView';
+
 import type { CalendarProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
-import { PickerView } from '@/components';
 import { DATE_FORMAT } from '@/constants';
 
 /**
@@ -16,7 +17,7 @@ export type DateType = [string, string, string, string, string];
 
 export type ValueType = Dayjs | [Dayjs, Dayjs];
 
-interface CalenderPickerProps extends Partial<Omit<CalendarProps, 'type'>> {
+interface CalendarPickerProps extends Partial<Omit<CalendarProps, 'type'>> {
   className?: string;
   format?: string;
   type?: 'single' | 'range';
@@ -26,7 +27,7 @@ interface CalenderPickerProps extends Partial<Omit<CalendarProps, 'type'>> {
 
 const PREFIX_CLS = 'm-calender-picker';
 
-const CalenderPicker: FC<CalenderPickerProps> = ({
+const CalendarPicker: FC<CalendarPickerProps> = ({
   className,
   format = DATE_FORMAT,
   type = 'single',
@@ -98,4 +99,4 @@ const CalenderPicker: FC<CalenderPickerProps> = ({
   );
 };
 
-export default CalenderPicker;
+export default CalendarPicker;
