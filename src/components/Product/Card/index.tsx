@@ -23,6 +23,7 @@ interface CardProps {
   allowLease?: boolean;
   leasePrice?: LeasePriceProps['value'];
   sellingPrice?: SellingPriceProps['value'];
+  priceTip?: ReactNode;
   status?: number;
   companyLogo?: string;
   companyName?: string;
@@ -45,6 +46,7 @@ const Card: FC<CardProps> = ({
   allowLease = false,
   leasePrice,
   sellingPrice,
+  priceTip,
   status = ProductStatus['正常'],
   companyLogo,
   companyName,
@@ -91,6 +93,11 @@ const Card: FC<CardProps> = ({
           ) : null}
           {showPrice(allowLease, leasePrice) ? (
             <LeasePrice value={leasePrice} />
+          ) : null}
+          {priceTip ? (
+            <View className={`${PREFIX_CLS}-content-price-tip`}>
+              {priceTip}
+            </View>
           ) : null}
         </View>
         <View className={`${PREFIX_CLS}-content-info`}>

@@ -7,16 +7,6 @@ import IconOrderManagement from '@/assets/icons/order_management.png';
 import IconShopManagement from '@/assets/icons/shop_management.png';
 import { RouterUtil } from '@/utils';
 
-export const marketConfig: IconItemProps[] = [
-  { icon: 'PlaneFilled', name: '我发布的', to: '/pages/user/published/index' },
-  { icon: 'BagFilled', name: '我的购买', to: '/pages/user/bought/index' },
-  { icon: 'CurrencyFilled', name: '我卖出的', to: '/pages/user/sold/index' },
-  { icon: 'TagFilled', name: '我求购的', to: '/pages/user/purchase/index' },
-  { icon: 'LoveFilled', name: '我的收藏', to: '/pages/user/favorite/index' },
-  { icon: 'LoveFilled', name: '上新喇叭', to: '/pages/user/favorite/index' },
-  { icon: 'LoveFilled', name: '打包回收', to: '/pages/user/favorite/index' },
-];
-
 export const getShopConfig = ({
   companyId,
 }: {

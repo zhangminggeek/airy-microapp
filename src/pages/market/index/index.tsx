@@ -99,6 +99,7 @@ const Page = () => {
               allowLease={item.allowLease}
               leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
               sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
+              priceTip={info?.account ? null : '登录可见'}
               companyLogo={item.companyLogo}
               companyName={item.companyName}
               extra={{ icon: 'LoveOutlined', text: item.favorities }}

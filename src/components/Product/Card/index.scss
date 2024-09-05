@@ -43,6 +43,12 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 12px;
+
+      &-tip {
+        font-size: $font-size-xsmall;
+        color: $text-color-secondary;
+        font-weight: 400;
+      }
     }
 
     &-info {
