@@ -6,6 +6,7 @@ import type { ButtonProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
 import { Icon } from '@/components';
+import { useUserStore } from '@/models';
 import { RouterUtil, Toast } from '@/utils';
 
 export interface IconItemProps {
@@ -27,6 +28,8 @@ const IconItem: FC<IconItemProps> = ({
   disabled = false,
   onClick,
 }) => {
+  const { info } = useUserStore((state) => state);
+
   return (
     <Button
       className={styles.btn}
@@ -34,6 +37,10 @@ const IconItem: FC<IconItemProps> = ({
       openType={openType}
       fill="none"
       onClick={() => {
+        if (!info?.account) {
+          RouterUtil.navigateTo('/pages/user/login/index');
+          return;
+        }
         if (disabled) {
           Toast.info('功能正在加紧开发中，敬请期待');
           return;
