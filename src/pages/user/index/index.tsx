@@ -1,24 +1,29 @@
-import { Button, Image } from '@nutui/nutui-react-taro';
+import { Button, Dialog, Image } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
 import Big from 'big.js';
+import { useState } from 'react';
 
 import AmountItem from './AmountItem';
-import { getShopConfig, marketConfig, settingConfig } from './config';
+import { getShopConfig, settingConfig } from './config';
 import IconItem from './IconItem';
 import styles from './index.module.scss';
+
+import type { IconItemProps } from './IconItem';
 
 import { getCompanyStatistics } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, Section, Space } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
-import { useRequest } from '@/hooks';
+import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { EventUtil, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
+  // 是否显示打包回收弹框
+  const [showDialogRecycle, setShowDialogRecycle] = useState<boolean>(false);
 
   useDidShow(() => {
     if (info?.company) {
@@ -35,6 +40,45 @@ const Page = () => {
   const { data, mutate, run } = useRequest(getCompanyStatistics, {
     manual: true,
   });
+
+  // 上新提示
+  const { renderDialog: renderDialogLaunchTip, open: openDialogLaunchTip } =
+    useDialog({
+      id: 'launch-tip',
+      title: '您暂时不符合要求',
+      content: '上新通知将会通知所有关注您店铺的粉丝，要求:粉丝数>=10人',
+      hideCancelButton: true,
+    });
+
+  const marketConfig: IconItemProps[] = [
+    {
+      icon: 'PlaneFilled',
+      name: '我发布的',
+      to: '/pages/user/published/index',
+    },
+    { icon: 'BagFilled', name: '我的购买', to: '/pages/user/bought/index' },
+    { icon: 'CurrencyFilled', name: '我卖出的', to: '/pages/user/sold/index' },
+    { icon: 'TagFilled', name: '我求购的', to: '/pages/user/purchase/index' },
+    { icon: 'LoveFilled', name: '我的收藏', to: '/pages/user/favorite/index' },
+    {
+      icon: 'TrumpetFilled',
+      name: '上新喇叭',
+      onClick() {
+        if (data?.fansCount < 10) {
+          openDialogLaunchTip();
+          return;
+        }
+        RouterUtil.navigateTo('/packageCompany/pages/launch-notice/index');
+      },
+    },
+    {
+      icon: 'PackFilled',
+      name: '打包回收',
+      onClick() {
+        setShowDialogRecycle(true);
+      },
+    },
+  ];
 
   return (
     <BasicLayout
@@ -154,6 +198,41 @@ const Page = () => {
           {settingConfig?.map((item) => <IconItem key={item.name} {...item} />)}
         </View>
       </Section>
+      {/* 打包回收 */}
+      <Dialog
+        className={styles['dialog-recycle']}
+        visible={showDialogRecycle}
+        content={
+          <View className={styles['dialog-recycle-content']}>
+            <View className={styles['dialog-recycle-content-body']}>
+              如需打包回收，请联系客服
+            </View>
+            <View className={styles['dialog-recycle-content-footer']}>
+              <Button
+                className={styles['dialog-recycle-content-footer-btn']}
+                onClick={() => {
+                  setShowDialogRecycle(false);
+                }}
+              >
+                取消
+              </Button>
+              <Button
+                className={styles['dialog-recycle-content-footer-btn']}
+                type="primary"
+                openType="contact"
+                onClick={() => {
+                  setShowDialogRecycle(false);
+                }}
+              >
+                联系客服
+              </Button>
+            </View>
+          </View>
+        }
+        footer={null}
+      />
+      {/* 上新提示 */}
+      {renderDialogLaunchTip()}
     </BasicLayout>
   );
 };

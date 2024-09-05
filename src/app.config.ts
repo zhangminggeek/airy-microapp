@@ -67,6 +67,8 @@ export default {
         'pages/fans/index',
         // 我的粉丝
         'pages/invitation/index',
+        // 上新通知
+        'pages/launch-notice/index',
       ],
     },
     {

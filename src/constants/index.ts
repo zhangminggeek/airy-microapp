@@ -6,6 +6,10 @@ export const MONTH_FORMAT = 'YYYY-MM';
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 
+export const HOUR_FORMAT = 'HH';
+
+export const MINUTE_FORMAT = 'HH:mm';
+
 export const TIME_FORMAT = 'HH:mm:ss';
 
 export const DATE_TIME_FORMAT = `${DATE_FORMAT} ${TIME_FORMAT}`;

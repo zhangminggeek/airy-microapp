@@ -5,10 +5,11 @@ import {
 import classnames from 'classnames';
 import { useMemo, useState } from 'react';
 
+import DatePicker from './DatePicker';
+import PickerView from './PickerView';
+
 import type { PickerOption } from '@nutui/nutui-react-taro/dist/types/packages/picker/types';
 import type { ReactNode } from 'react';
-
-import { PickerView } from '@/components';
 
 import './index.scss';
 
@@ -84,5 +85,8 @@ const Picker = <V extends string | number>({
     </PickerView>
   );
 };
+
+Picker.View = PickerView;
+Picker.Date = DatePicker;
 
 export default Picker;

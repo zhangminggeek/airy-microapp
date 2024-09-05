@@ -1,4 +1,5 @@
 @import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
 
 .container {
   background-image: linear-gradient(
@@ -45,5 +46,32 @@
     display: grid;
     grid-template-columns: repeat(4, 25%);
     grid-row-gap: 48px;
+  }
+}
+
+.dialog-recycle {
+  :global {
+    .nut-dialog-content {
+      margin-bottom: 0;
+    }
+  }
+
+  &-content {
+    &-body {
+      color: $text-color-main;
+      font-size: $font-size-large;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    &-footer {
+      @include flex-center;
+      gap: 24px;
+
+      &-btn {
+        width: 220px;
+      }
+    }
   }
 }

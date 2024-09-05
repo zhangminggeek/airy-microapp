@@ -1,0 +1,19 @@
+@import '../../../styles/var.scss';
+
+.tip {
+  margin-bottom: 64px;
+
+  &-line {
+    font-size: $font-size-base;
+    color: $text-color-base;
+    font-weight: 400;
+    text-align: center;
+  }
+}
+
+.example {
+  font-size: $font-size-base;
+  color: $text-color-base;
+  font-weight: 400;
+  margin-top: 24px;
+}

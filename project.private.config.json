@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageCompany/pages/launch-notice/index",
+          "pathName": "packageCompany/pages/launch-notice/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageCompany/pages/register/index",
           "pathName": "packageCompany/pages/register/index",
           "query": "",
