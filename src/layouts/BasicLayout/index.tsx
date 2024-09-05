@@ -131,7 +131,7 @@ const BasicLayout: FC<BasicLayoutProps> = ({
                 height={24}
               />
               <Text className={`${PREFIX_CLS}-tip-header-brand-text`}>
-                AIRY
+                易纱集
               </Text>
             </Space>
             <View className={`${PREFIX_CLS}-tip-header-intro`}>

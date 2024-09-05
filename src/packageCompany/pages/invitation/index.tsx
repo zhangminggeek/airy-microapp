@@ -22,7 +22,7 @@ const Page = () => {
   useShareAppMessage(() => {
     // 来自页面转发分享
     return {
-      title: '超值好物高质量二手婚纱尽在AIRY',
+      title: '超值好物高质量二手婚纱尽在易纱集',
       path: `/pages/market/index/index?shareType=${ShareType.INVITATION}&shareParams=${JSON.stringify({ invitationCode: info?.company?.invitationCode })}`,
       imageUrl: `${OSS_ASSETS_DIR}/invitation_share.jpg`,
     };

@@ -31,7 +31,7 @@ const Page = () => {
           width="56px"
           height="56px"
         />
-        <Text className={styles.name}>AIRYBLUE 婚纱礼服</Text>
+        <Text className={styles.name}>易纱集</Text>
       </View>
       <View className={styles.body}>
         <Tabs className={styles.tabs}>

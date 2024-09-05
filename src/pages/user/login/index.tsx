@@ -71,7 +71,7 @@ const Page = () => {
             width="88px"
             height="88px"
           />
-          <View className={styles.name}>AIRYBLUE 婚纱礼服</View>
+          <View className={styles.name}>易纱集</View>
         </View>
         <View className={styles.login}>
           <Button
