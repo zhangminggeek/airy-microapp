@@ -1,25 +1,56 @@
 @import '../../../styles/var.scss';
 
 .container {
-  background-color: #fff;
+  background-image: linear-gradient(180deg, #faedf1 188px, #ffffff 376px);
+
+  .banner {
+    position: relative;
+    height: 220px;
+
+    &-content {
+      position: absolute;
+      top: 50%;
+      left: 32px;
+      transform: translateY(-50%);
+
+      &-title {
+        font-size: 40px;
+        color: $text-color-main;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      &-desc {
+        font-size: $font-size-small;
+        color: $text-color-secondary;
+        font-weight: 400;
+      }
+    }
+
+    &-image {
+      position: absolute;
+      top: 50%;
+      right: 32px;
+      transform: translateY(-50%);
+    }
+  }
 
   .content {
-    padding: 0 48px;
+    background-color: #fff;
+    padding: 0 32px;
+
+    .form {
+      :global {
+        .nut-cell.nut-form-item {
+          padding: 24px 0;
+        }
+      }
+    }
   }
 }
 
 .license-tip {
   font-size: $font-size-small;
-  color: $text-color-secondary;
+  color: $text-color-placeholder;
   font-weight: 400;
-
-  &-btn {
-    padding: 0;
-
-    :global {
-      .nut-button-wrap {
-        color: $color-primary;
-      }
-    }
-  }
 }

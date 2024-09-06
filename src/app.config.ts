@@ -49,6 +49,8 @@ export default {
         'pages/index/index',
         // 设置
         'pages/setting/index',
+        // 上传营业执照
+        'pages/setting/license/index',
         // 地址管理
         'pages/address/management/index',
         'pages/address/action/index',

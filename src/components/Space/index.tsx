@@ -11,7 +11,7 @@ interface SpaceProps {
   direction?: 'horizontal' | 'vertical';
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between';
   align?: 'flex-start' | 'flex-end' | 'center' | 'baseline';
-  size?: number;
+  size?: CSSProperties['gap'];
   wrap?: boolean;
   block?: boolean;
   split?: boolean | ReactNode;

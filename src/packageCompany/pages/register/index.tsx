@@ -1,4 +1,4 @@
-import { Button, Form, Input } from '@nutui/nutui-react-taro';
+import { Button, Form, Image, Input } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 import { isEmpty } from 'lodash';
@@ -8,7 +8,8 @@ import styles from './index.module.scss';
 
 import type { CompanyInfo } from './interfaces';
 
-import { Picker, Space, Upload } from '@/components';
+import { Picker, Upload } from '@/components';
+import { OSS_ASSETS_DIR } from '@/constants';
 import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
 import { parseJson, RouterUtil } from '@/utils';
@@ -41,15 +42,28 @@ const Page = () => {
   return (
     <BasicLayout
       className={styles.container}
-      title="注册"
       back
       fill
       transparent
       loginTip={false}
     >
+      <View className={styles.banner}>
+        <View className={styles['banner-content']}>
+          <View className={styles['banner-content-title']}>注册易纱集</View>
+          <View className={styles['banner-content-desc']}>
+            二手婚纱交易借调，免费婚纱店铺管理ERP
+          </View>
+        </View>
+        <Image
+          className={styles['banner-image']}
+          src={`${OSS_ASSETS_DIR}/register_banner.png`}
+          width={124}
+          height={100}
+        />
+      </View>
       <View className={styles.content}>
         <Form
-          className="form-large"
+          className={styles.form}
           form={form}
           labelPosition="left"
           divider
@@ -65,13 +79,14 @@ const Page = () => {
             </Button>
           }
           onFinish={async (values) => {
-            const { region, logo, ...rest } = values;
+            const { region, license, logo, ...rest } = values;
             const [province, city, area] = region;
             const params = {
               ...rest,
               province,
               city,
               area,
+              license: license?.[0],
               logo: logo?.[0],
             };
             if (invitationCode) {
@@ -128,29 +143,11 @@ const Page = () => {
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            label="营业执照"
-            name="licenses"
-            rules={[{ required: true, message: '请上传营业执照' }]}
-            validateTrigger="onBlur"
-          >
+          <Form.Item label="营业执照" name="license">
             <Upload
               extra={
                 <View className={styles['license-tip']}>
-                  <View>
-                    为避免非商户（婚礼行业外的个人用户）注册，请提供营业执照。您的信息将严格保密，仅用于商户验证。
-                  </View>
-                  <Space size={2}>
-                    没有营业执照怎么办？
-                    <Button
-                      className={styles['license-tip-btn']}
-                      fill="none"
-                      openType="contact"
-                      size="mini"
-                    >
-                      联系客服
-                    </Button>
-                  </Space>
+                  未认证营业执照的商家将无法使用免费店铺管理功能，且部分功能将受限.
                 </View>
               }
             />

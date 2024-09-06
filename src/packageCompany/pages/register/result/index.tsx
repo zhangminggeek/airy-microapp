@@ -14,7 +14,7 @@ const Page = () => {
       <Result
         className={styles.result}
         title="注册成功"
-        desc="账号会在几分钟内审核，请留意短信通知"
+        desc="账号初始密码为注册手机号后6位，请妥善保管"
         status="success"
         extra={
           <View className={styles.content}>

@@ -4,7 +4,7 @@ import { useShareAppMessage } from '@tarojs/taro';
 import Big from 'big.js';
 import { useMemo } from 'react';
 
-import { InvitationTask } from './constants';
+import { AWARD, InvitationTask } from './constants';
 import styles from './index.module.scss';
 
 import { getCompanyInvitation } from '@/api';
@@ -39,6 +39,11 @@ const Page = () => {
   const statistics = useMemo(() => {
     // 邀请总数
     const total = invitationList?.length ?? 0;
+    // 上传营业执照
+    const verified =
+      invitationList?.filter((item) =>
+        verifyTask(item.taskStatus, InvitationTask['上传营业执照']),
+      )?.length ?? 0;
     // 关注公众号
     const followed =
       invitationList?.filter((item) =>
@@ -49,12 +54,14 @@ const Page = () => {
       invitationList?.filter((item) =>
         verifyTask(item.taskStatus, InvitationTask['完成首笔交易']),
       )?.length ?? 0;
-    return { total, followed, deal };
+    return { total, verified, followed, deal };
   }, [invitationList]);
 
   const steps = [
     { content: '分享链接至聊天群/朋友圈/好友' },
-    { content: '好友注册并关注公众号即可获得5元奖励，完成首笔交易再得5元' },
+    {
+      content: `好友注册并上传营业执照即可获得${AWARD.get(InvitationTask['上传营业执照'])}元奖励，关注公众号再得${AWARD.get(InvitationTask['关注公众号'])}元，完成首笔交易再得${AWARD.get(InvitationTask['完成首笔交易'])}元`,
+    },
     { content: '累计50元将自动划转至余额，可进行提现' },
   ];
 
@@ -108,9 +115,22 @@ const Page = () => {
               累计奖励：
               <Text className={styles['result-title-num']}>
                 ¥
-                {Big(statistics.deal)
-                  .times(5)
-                  .plus(Big(statistics.followed).times(5))
+                {Big(0)
+                  .plus(
+                    Big(statistics.verified).times(
+                      AWARD.get(InvitationTask['上传营业执照'])!,
+                    ),
+                  )
+                  .plus(
+                    Big(statistics.followed).times(
+                      AWARD.get(InvitationTask['关注公众号'])!,
+                    ),
+                  )
+                  .plus(
+                    Big(statistics.deal).times(
+                      AWARD.get(InvitationTask['完成首笔交易'])!,
+                    ),
+                  )
                   .toString()}
               </Text>
             </View>
@@ -128,7 +148,7 @@ const Page = () => {
                   {statistics.deal}
                 </View>
                 <View className={styles['result-statistics-item-label']}>
-                  完成首笔交易
+                  完成所有任务
                 </View>
               </View>
             </View>
@@ -136,11 +156,14 @@ const Page = () => {
           <View className={styles.list}>
             {invitationList?.map((item) => {
               let award = 0;
+              if (verifyTask(item.taskStatus, InvitationTask['上传营业执照'])) {
+                award += AWARD.get(InvitationTask['上传营业执照'])!;
+              }
               if (verifyTask(item.taskStatus, InvitationTask['关注公众号'])) {
-                award += 5;
+                award += AWARD.get(InvitationTask['关注公众号'])!;
               }
               if (verifyTask(item.taskStatus, InvitationTask['完成首笔交易'])) {
-                award += 5;
+                award += AWARD.get(InvitationTask['完成首笔交易'])!;
               }
               return (
                 <View key={item.id} className={styles['list-item']}>
@@ -155,8 +178,14 @@ const Page = () => {
                         {item.name}
                       </View>
                       <View className={styles['list-item-status']}>
-                        <Space size={12}>
+                        <Space size="2px 12px">
                           <Text>已注册</Text>
+                          {verifyTask(
+                            item.taskStatus,
+                            InvitationTask['上传营业执照'],
+                          ) ? (
+                            <Text>已上传营业执照</Text>
+                          ) : null}
                           {verifyTask(
                             item.taskStatus,
                             InvitationTask['关注公众号'],

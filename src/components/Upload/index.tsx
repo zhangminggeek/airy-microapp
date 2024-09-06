@@ -21,6 +21,7 @@ interface UploadProps {
   maxFileSize?: number; // 最大文件大小，单位字节
   mediaType?: Array<'image' | 'video' | 'mix'>;
   sourceType?: Array<'album' | 'camera'>;
+  btn?: ReactNode;
   placeholder?: ReactNode;
   extra?: ReactNode;
   value?: ValueType;
@@ -36,6 +37,7 @@ const Upload: FC<UploadProps> = ({
   maxFileSize = 5 * 1024 * 1024, // 5M,
   mediaType = ['mix'],
   sourceType = ['album', 'camera'],
+  btn,
   placeholder,
   extra,
   value = [],
@@ -139,23 +141,25 @@ const Upload: FC<UploadProps> = ({
             {uploading ? (
               <Loading />
             ) : (
-              <View className={`${PREFIX_CLS}-btn-content`}>
-                <Icon
-                  className={`${PREFIX_CLS}-btn-icon`}
-                  name="PlusOutlined"
-                  size={24}
-                />
-                {placeholder ? (
-                  <View className={`${PREFIX_CLS}-btn-placeholder`}>
-                    {placeholder}
-                  </View>
-                ) : null}
-              </View>
+              btn ?? (
+                <View className={`${PREFIX_CLS}-btn-content`}>
+                  <Icon
+                    className={`${PREFIX_CLS}-btn-icon`}
+                    name="PlusOutlined"
+                    size={24}
+                  />
+                  {placeholder ? (
+                    <View className={`${PREFIX_CLS}-btn-placeholder`}>
+                      {placeholder}
+                    </View>
+                  ) : null}
+                </View>
+              )
             )}
           </View>
         ) : null}
+        {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
       </View>
-      {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
     </View>
   );
 };

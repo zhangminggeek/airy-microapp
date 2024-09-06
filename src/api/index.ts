@@ -4476,6 +4476,10 @@ export interface GetCompanyFansResponse {
      */
     name: string
     /**
+     * 营业执照
+     */
+    license?: string
+    /**
      * 营业执照上的公司名称
      */
     licenseCompanyName?: string
@@ -4601,6 +4605,10 @@ export interface GetCompanyFolloweeResponse {
      */
     name: string
     /**
+     * 营业执照
+     */
+    license?: string
+    /**
      * 营业执照上的公司名称
      */
     licenseCompanyName?: string
@@ -4707,6 +4715,10 @@ export interface PostCompanyRegisterRequest {
    */
   name: string
   /**
+   * 营业执照
+   */
+  license?: string
+  /**
    * 公司LOGO
    */
   logo?: string
@@ -4734,10 +4746,6 @@ export interface PostCompanyRegisterRequest {
    * 地址
    */
   address: string
-  /**
-   * 营业执照
-   */
-  licenses?: string[]
   /**
    * 邀请人的邀请码
    */
@@ -4778,6 +4786,48 @@ export const postCompanyRegister = /*#__PURE__*/ (
 }
 
 postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
+
+export interface PostCompanyLicenseRequest {
+  /**
+   * 营业执照
+   */
+  license: string
+}
+
+export type PostCompanyLicenseResponse = any
+
+type PostCompanyLicenseRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/license', 'data', string, string, false>
+>
+
+const postCompanyLicenseRequestConfig: PostCompanyLicenseRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/license',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyLicense',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postCompanyLicense = /*#__PURE__*/ (
+  requestData: PostCompanyLicenseRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyLicenseResponse>(prepare(postCompanyLicenseRequestConfig, requestData), ...args)
+}
+
+postCompanyLicense.requestConfig = postCompanyLicenseRequestConfig
 
 export interface PutCompanyRequest {
   /**
@@ -6277,6 +6327,10 @@ export interface PostUserRequest {
    */
   phone: string
   /**
+   * 密码(明文)
+   */
+  password?: string
+  /**
    * 角色id
    */
   roleId: number
@@ -6456,6 +6510,10 @@ export interface GetUserSelfResponse {
      */
     name: string
     /**
+     * 营业执照
+     */
+    license?: string
+    /**
      * 营业执照上的公司名称
      */
     licenseCompanyName?: string
@@ -6616,6 +6674,10 @@ export interface GetUserIdResponse {
      * 公司名称
      */
     name: string
+    /**
+     * 营业执照
+     */
+    license?: string
     /**
      * 营业执照上的公司名称
      */

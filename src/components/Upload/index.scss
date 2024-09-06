@@ -12,6 +12,7 @@ $item-size: 144px;
   }
 
   &-item {
+    flex-shrink: 0;
     position: relative;
     width: $item-size;
     height: $item-size;
@@ -52,6 +53,7 @@ $item-size: 144px;
   }
 
   &-btn {
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,5 +79,9 @@ $item-size: 144px;
       color: $text-color-secondary;
       text-align: center;
     }
+  }
+
+  &-extra {
+    flex: 1;
   }
 }

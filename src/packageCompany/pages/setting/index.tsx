@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import styles from './index.module.scss';
 
 import { putCompany } from '@/api';
-import { EditableCell } from '@/components';
+import { EditableCell, Text } from '@/components';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
@@ -50,6 +50,21 @@ const Page = () => {
               renderType: 'textarea',
               placeholder: '一句话介绍店铺',
               maxLength: 200,
+            },
+          },
+          {
+            title: '营业执照',
+            name: 'license',
+            renderConfig: {
+              renderType: 'custom',
+              children: (
+                <Text>{info?.company?.license ? '已认证' : '未认证'}</Text>
+              ),
+              onClick: () => {
+                RouterUtil.navigateTo(
+                  '/packageCompany/pages/setting/license/index',
+                );
+              },
             },
           },
           {

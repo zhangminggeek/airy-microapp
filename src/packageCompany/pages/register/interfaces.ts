@@ -7,6 +7,6 @@ export interface CompanyInfo {
   city: string;
   area: string;
   address: string;
-  licenses: string[];
+  license: string;
   invitationCode?: string;
 }
