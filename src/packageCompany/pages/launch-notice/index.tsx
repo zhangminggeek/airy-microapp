@@ -1,5 +1,6 @@
 import { Button, Form } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
 
@@ -42,9 +43,13 @@ const Page = () => {
           name="time"
           trigger="onConfirm"
           getValueFromEvent={(...args) => args[1]}
+          validateTrigger="onConfirm"
           rules={[{ required: true, message: '请选择上新时间' }]}
         >
-          <Picker.Date type="hour-minutes" />
+          <Picker.Date
+            type="datetime"
+            defaultValue={dayjs().hour(20).minute(0).second(0)}
+          />
         </Form.Item>
         <View className={styles.example}>
           示例：精品二手婚纱，低价抢购，数量有限，手慢无

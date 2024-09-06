@@ -1,6 +1,6 @@
 import { DatePicker as NutDatePicker } from '@nutui/nutui-react-taro';
 import dayjs, { Dayjs } from 'dayjs';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import PickerView from '../PickerView';
 
@@ -17,7 +17,10 @@ import {
 } from '@/constants';
 
 interface DatePickerProps
-  extends Partial<Omit<NutDatePickerProps, 'visible' | 'value' | 'onConfirm'>> {
+  extends Partial<
+    Omit<NutDatePickerProps, 'visible' | 'defaultValue' | 'value' | 'onConfirm'>
+  > {
+  defaultValue?: Dayjs;
   value?: Dayjs;
   onConfirm?: (option: PickerOption[], value: Dayjs) => void;
 }
@@ -34,16 +37,13 @@ const formatTypeMap = new Map<DatePickerProps['type'], string>([
 
 const DatePicker: FC<DatePickerProps> = ({
   type,
+  defaultValue,
   value,
   onConfirm,
   onClose,
   ...rest
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log('DatePicker', value);
-  }, [value]);
 
   const text = useMemo(() => {
     if (!value) return null;
@@ -60,6 +60,7 @@ const DatePicker: FC<DatePickerProps> = ({
       <NutDatePicker
         visible={visible}
         type={type}
+        defaultValue={defaultValue?.toDate()}
         value={value?.toDate()}
         onConfirm={(option, value) => {
           console.log('onConfirm', option, value);
