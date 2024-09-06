@@ -3,10 +3,22 @@ import { View } from '@tarojs/components';
 
 import styles from './index.module.scss';
 
+import { postCompanyLaunchNotice } from '@/api';
 import { Picker } from '@/components';
+import { DATE_TIME_FORMAT } from '@/constants';
+import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
+import { Toast } from '@/utils';
 
 const Page = () => {
+  // 上新通知
+  const { run } = useRequest(postCompanyLaunchNotice, {
+    manual: true,
+    onSuccess() {
+      Toast.success('发送成功');
+    },
+  });
+
   return (
     <BasicLayout title="上新通知" back>
       <View className={styles.tip}>
@@ -22,7 +34,7 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          console.log(values);
+          await run({ time: values.time.format(DATE_TIME_FORMAT) });
         }}
       >
         <Form.Item
@@ -30,6 +42,7 @@ const Page = () => {
           name="time"
           trigger="onConfirm"
           getValueFromEvent={(...args) => args[1]}
+          rules={[{ required: true, message: '请选择上新时间' }]}
         >
           <Picker.Date type="hour-minutes" />
         </Form.Item>

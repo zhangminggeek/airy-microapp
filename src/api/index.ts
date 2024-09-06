@@ -4520,6 +4520,10 @@ export interface GetCompanyFansResponse {
      */
     invitationCode: string
     /**
+     * 每日可使用的喇叭数量
+     */
+    trumpet: number
+    /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
@@ -4641,6 +4645,10 @@ export interface GetCompanyFolloweeResponse {
      */
     invitationCode: string
     /**
+     * 每日可使用的喇叭数量
+     */
+    trumpet: number
+    /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
@@ -4729,7 +4737,7 @@ export interface PostCompanyRegisterRequest {
   /**
    * 营业执照
    */
-  licenses: string[]
+  licenses?: string[]
   /**
    * 邀请人的邀请码
    */
@@ -5418,6 +5426,48 @@ export const getCompanyInvitation = /*#__PURE__*/ (
 }
 
 getCompanyInvitation.requestConfig = getCompanyInvitationRequestConfig
+
+export interface PostCompanyLaunchNoticeRequest {
+  /**
+   * 上新时间
+   */
+  time: string
+}
+
+export type PostCompanyLaunchNoticeResponse = any
+
+type PostCompanyLaunchNoticeRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/launch/notice', 'data', string, string, false>
+>
+
+const postCompanyLaunchNoticeRequestConfig: PostCompanyLaunchNoticeRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/launch/notice',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyLaunchNotice',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postCompanyLaunchNotice = /*#__PURE__*/ (
+  requestData: PostCompanyLaunchNoticeRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyLaunchNoticeResponse>(prepare(postCompanyLaunchNoticeRequestConfig, requestData), ...args)
+}
+
+postCompanyLaunchNotice.requestConfig = postCompanyLaunchNoticeRequestConfig
 
 export interface GetCompanyIdRequest {
   /**
@@ -6450,6 +6500,10 @@ export interface GetUserSelfResponse {
      */
     invitationCode: string
     /**
+     * 每日可使用的喇叭数量
+     */
+    trumpet: number
+    /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
     status: number
@@ -6606,6 +6660,10 @@ export interface GetUserIdResponse {
      * 邀请码
      */
     invitationCode: string
+    /**
+     * 每日可使用的喇叭数量
+     */
+    trumpet: number
     /**
      * 状态, 0:禁用 1:正常 2:待审核
      */
