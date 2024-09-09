@@ -158,7 +158,7 @@ const Page = () => {
         divider
         initialValues={{
           method: [MarkrtMethod['出售']],
-          expressMethod: [ExpressMethod['包邮']],
+          expressMethod: [ExpressMethod['到付']],
           quality: [ProductQuality['全新']],
         }}
         footer={

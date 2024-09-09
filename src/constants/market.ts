@@ -52,8 +52,8 @@ export enum ExpressMethod {
 }
 
 export const expressMethodMap = new Map([
-  [ExpressMethod['包邮'], { text: '包邮', value: ExpressMethod['包邮'] }],
   [ExpressMethod['到付'], { text: '到付', value: ExpressMethod['到付'] }],
+  [ExpressMethod['包邮'], { text: '包邮', value: ExpressMethod['包邮'] }],
   [ExpressMethod['自提'], { text: '自提', value: ExpressMethod['自提'] }],
 ]);
 
