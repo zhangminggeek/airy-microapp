@@ -1,4 +1,4 @@
-import { Button } from '@nutui/nutui-react-taro';
+import { Button, TextArea } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { requestPayment, useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
@@ -49,6 +49,8 @@ const Page = () => {
   const [startDate, setStartDate] = useState<Dayjs>();
   // 借调日期
   const [leaseDate, setLeaseDate] = useState<[Dayjs, Dayjs]>();
+  // 备注
+  const [remark, setRemark] = useState<string>();
   // 是否显示支付方式选择弹框
   const [showPaymentPicker, setShowPaymentPicker] = useState<boolean>(false);
 
@@ -222,6 +224,15 @@ const Page = () => {
           </Cell>
         </Cell.Group>
       </Section>
+      <Section className={styles['section-remark']} title="备注">
+        <TextArea
+          placeholder="请输入内容"
+          maxLength={255}
+          onChange={(v) => {
+            setRemark(v);
+          }}
+        />
+      </Section>
       <PageFooter className={styles.footer}>
         <Space className={styles['footer-price']}>
           <Text>实付</Text>
@@ -253,6 +264,7 @@ const Page = () => {
           const params: PostOrderRequest = {
             id: Number(id),
             type: info.type,
+            remark,
             buyerAddressId: addressId!,
           };
           if (info.type === OrderType['借调']) {

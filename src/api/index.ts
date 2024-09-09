@@ -2667,6 +2667,10 @@ export interface GetOrderBoughtResponse {
      */
     leaseEndDate?: string
     /**
+     * 备注
+     */
+    remark?: string
+    /**
      * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
      */
     status: number
@@ -2964,6 +2968,10 @@ export interface GetOrderSoldResponse {
      */
     leaseEndDate?: string
     /**
+     * 备注
+     */
+    remark?: string
+    /**
      * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
      */
     status: number
@@ -3205,6 +3213,10 @@ export interface PostOrderRequest {
    * 借调结束时间
    */
   leaseEndDate?: string
+  /**
+   * 备注
+   */
+  remark?: string
 }
 
 export type PostOrderResponse = number
@@ -3793,6 +3805,10 @@ export interface GetOrderIdResponse {
    * 借调结束日期
    */
   leaseEndDate?: string
+  /**
+   * 备注
+   */
+  remark?: string
   /**
    * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
    */

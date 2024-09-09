@@ -369,6 +369,7 @@ const Page = () => {
                   );
                 },
               },
+              { field: 'remark', label: '订单备注', col: 2 },
               { field: 'time', label: '购买时间', col: 2 },
               {
                 field: 'company',
@@ -406,6 +407,7 @@ const Page = () => {
             ]}
             data={{
               no: data?.no,
+              remark: data?.remark,
               time: dayjs(data?.createTime).format(DATE_TIME_FORMAT),
               company: data?.seller,
               consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
