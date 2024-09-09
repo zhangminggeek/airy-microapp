@@ -116,11 +116,7 @@ const Upload: FC<UploadProps> = ({
       <View className={`${PREFIX_CLS}-content`}>
         {value?.map((url, index) => (
           <View key={url} className={`${PREFIX_CLS}-item`}>
-            <Media
-              className={`${PREFIX_CLS}-item-media`}
-              src={url}
-              preview={{ url: value }}
-            />
+            <Media className={`${PREFIX_CLS}-item-media`} src={url} preview />
             <View
               className={`${PREFIX_CLS}-item-icon`}
               onClick={(e) => {

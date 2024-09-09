@@ -1,16 +1,15 @@
-import { ImagePreview, Swiper } from '@nutui/nutui-react-taro';
+import { Swiper } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { ROOT_PREFIX_CLS } from '../../constants';
 
-import type { ImagePreviewProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
 import { Media, Space } from '@/components';
-import { formatPreviewSrc, isVideo } from '@/components/Media/utils';
+import { getVideoUrl, isVideo } from '@/components/Media/utils';
 
 import './index.scss';
 
@@ -25,30 +24,6 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
   const swiperRef = useRef<any>(null);
   // 选中图片列表的索引值
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  // 是否显示大图预览
-  const [showPreview, setShowPreview] = useState<boolean>(false);
-
-  const previewUrls = useMemo(() => {
-    return images?.reduce(
-      (prev, cur, index) => {
-        if (isVideo(cur)) {
-          const ret = formatPreviewSrc<'videos'>(cur);
-          prev.videos.push({
-            ...ret,
-            index,
-          });
-        } else {
-          const ret = formatPreviewSrc<'images'>(cur);
-          prev.images.push({ ...ret, index });
-        }
-        return prev;
-      },
-      {
-        videos: [] as ImagePreviewProps['videos'],
-        images: [] as ImagePreviewProps['images'],
-      },
-    );
-  }, [images]);
 
   return (
     <View className={classnames(PREFIX_CLS)}>
@@ -70,24 +45,19 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
               height="100vw"
               mode="widthFix"
               onClick={() => {
-                setShowPreview(true);
+                Taro.previewMedia({
+                  sources: images?.map((url) => ({
+                    url: isVideo(url) ? getVideoUrl(url) : url,
+                    type: isVideo(url) ? 'video' : 'image',
+                    poster: isVideo(url) ? url : undefined,
+                  })),
+                  current: selectedIndex,
+                });
               }}
             />
           </Swiper.Item>
         ))}
       </Swiper>
-      <ImagePreview
-        className={`${PREFIX_CLS}-preview`}
-        visible={showPreview}
-        images={previewUrls?.images}
-        videos={previewUrls?.videos}
-        defaultValue={selectedIndex + 1}
-        closeIcon
-        closeIconPosition="bottom"
-        onClose={() => {
-          setShowPreview(false);
-        }}
-      />
       <View className={`${PREFIX_CLS}-thumbnail-group`}>
         <Space block>
           {images?.map((url, index) => (

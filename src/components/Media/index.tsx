@@ -1,21 +1,20 @@
-import { ImagePreview } from '@nutui/nutui-react-taro';
 import { Image, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 
 import { PREFIX_CLS } from './constants';
-import { formatPreviewSrc, isVideo } from './utils';
+import { isVideo } from './utils';
 
-import type { ImagePreviewProps } from '@nutui/nutui-react-taro';
 import type { ImageProps, ITouchEvent } from '@tarojs/components';
-import type { VideoContext } from '@tarojs/taro';
 import type { CSSProperties, FC } from 'react';
 
 import { Icon } from '@/components';
-import { getFilenameFromUrl, getSuffixFromUrl } from '@/utils';
+import { getSuffixFromUrl } from '@/utils';
 
 import './index.scss';
+
+type Source = Taro.previewMedia.Sources;
 
 interface MediaProps {
   className?: string;
@@ -26,11 +25,7 @@ interface MediaProps {
   showMenuByLongpress?: ImageProps['showMenuByLongpress'];
   src?: string;
   controls?: boolean;
-  preview?:
-    | boolean
-    | {
-        url: string[];
-      };
+  preview?: boolean;
   onClick?: (e: ITouchEvent) => void;
 }
 
@@ -46,61 +41,25 @@ const Media: FC<MediaProps> = ({
   preview = false,
   onClick,
 }) => {
-  const filename = getFilenameFromUrl(src);
-  const suffix = getSuffixFromUrl(src);
+  // 预览资源
+  const previewSources: Source[] = useMemo(() => {
+    if (!src) return [];
 
-  const videoContext = useRef<VideoContext>();
-
-  // 图片模式时，是否显示预览大图
-  const [showPreview, setShowPreview] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (!src || !isVideo(src)) return;
-    const context = Taro.createVideoContext(filename, this);
-    videoContext.current = context;
-  }, [src]);
-
-  // 预览图片
-  const previewUrls = useMemo(() => {
-    if (!src) {
-      return {
-        videos: [] as ImagePreviewProps['videos'],
-        images: [] as ImagePreviewProps['images'],
-      };
-    }
-
-    if (typeof preview === 'boolean') {
-      return isVideo(src)
-        ? {
-            videos: [formatPreviewSrc(src)] as ImagePreviewProps['videos'],
-            images: [] as ImagePreviewProps['images'],
-          }
-        : {
-            videos: [] as ImagePreviewProps['videos'],
-            images: [formatPreviewSrc(src)] as ImagePreviewProps['images'],
-          };
-    }
-    return preview.url?.reduce(
-      (prev, cur) => {
-        if (isVideo(cur)) {
-          const ret = formatPreviewSrc<'videos'>(cur);
-          prev.videos.push(ret);
-        } else {
-          const ret = formatPreviewSrc<'images'>(cur);
-          prev.images.push(ret);
-        }
-        return prev;
-      },
+    return [
       {
-        videos: [] as ImagePreviewProps['videos'],
-        images: [] as ImagePreviewProps['images'],
+        url: src,
+        type: isVideo(src) ? 'video' : 'image',
+        poster: isVideo(src) ? src : undefined,
       },
-    );
+    ];
   }, [src, preview]);
 
   const renderMedia = () => {
     if (!src) return null;
+
+    const suffix = getSuffixFromUrl(src);
     if (!suffix) return null;
+
     return (
       <Image
         className={`${PREFIX_CLS}-image`}
@@ -121,7 +80,7 @@ const Media: FC<MediaProps> = ({
       }}
       onClick={(e) => {
         if (preview) {
-          setShowPreview(true);
+          Taro.previewMedia({ sources: previewSources });
         }
         onClick?.(e);
       }}
@@ -132,20 +91,6 @@ const Media: FC<MediaProps> = ({
           className={`${PREFIX_CLS}-video-icon`}
           name="PlayArrowFilled"
           size={36}
-        />
-      ) : null}
-      {preview ? (
-        <ImagePreview
-          className={`${PREFIX_CLS}-preview`}
-          visible={showPreview}
-          images={previewUrls.images}
-          videos={previewUrls.videos}
-          indicator
-          closeIcon
-          closeIconPosition="bottom"
-          onClose={() => {
-            setShowPreview(false);
-          }}
         />
       ) : null}
     </View>
