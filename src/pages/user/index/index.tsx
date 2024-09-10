@@ -107,9 +107,9 @@ const Page = () => {
       name: '服饰管理',
       to: '/packageDress/pages/management/index',
     },
-    { icon: IconOrderManagement, name: '订单管理', to: '', disabled: true },
-    { icon: IconCustomerManagement, name: '客户管理', to: '', disabled: true },
-    { icon: IconEmployeeManagement, name: '员工管理', to: '', disabled: true },
+    { icon: IconOrderManagement, name: '订单管理', disabled: true },
+    { icon: IconCustomerManagement, name: '客户管理', disabled: true },
+    { icon: IconEmployeeManagement, name: '员工管理', disabled: true },
   ];
 
   const settingConfig: IconItemProps[] = [

@@ -7,7 +7,7 @@ import type { FC } from 'react';
 
 import { Icon } from '@/components';
 import { useUserStore } from '@/models';
-import { RouterUtil, Toast } from '@/utils';
+import { RouterUtil } from '@/utils';
 
 export interface IconItemProps {
   name: string;
@@ -42,7 +42,9 @@ const IconItem: FC<IconItemProps> = ({
           return;
         }
         if (disabled) {
-          Toast.info('功能正在加紧开发中，敬请期待');
+          RouterUtil.navigateTo(
+            '/packagePlatform/pages/feature-reservation/index',
+          );
           return;
         }
         if (to) {

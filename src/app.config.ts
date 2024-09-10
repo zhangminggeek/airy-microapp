@@ -98,11 +98,15 @@ export default {
       // 平台相关业务
       root: 'packagePlatform',
       pages: [
+        // 协议相关
         'pages/protocol/index',
         'pages/protocol/lease/index',
         'pages/protocol/privacy/index',
         'pages/protocol/software/index',
+        // 关注公众号
         'pages/official-account/index',
+        // 功能预约
+        'pages/feature-reservation/index',
       ],
     },
   ],
