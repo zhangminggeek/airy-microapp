@@ -159,7 +159,7 @@ const Page = () => {
         initialValues={{
           method: [MarkrtMethod['出售']],
           expressMethod: [ExpressMethod['到付']],
-          quality: [ProductQuality['全新']],
+          quality: [ProductQuality['几乎全新']],
         }}
         footer={
           <Button

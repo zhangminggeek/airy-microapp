@@ -1,4 +1,4 @@
-import { Button, TextArea } from '@nutui/nutui-react-taro';
+import { TextArea } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import { requestPayment, useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
@@ -20,8 +20,8 @@ import {
 import {
   Cell,
   Descriptions,
+  Footer,
   Media,
-  PageFooter,
   Picker,
   Product,
   Section,
@@ -233,29 +233,26 @@ const Page = () => {
           }}
         />
       </Section>
-      <PageFooter className={styles.footer}>
-        <Space className={styles['footer-price']}>
-          <Text>实付</Text>
-          <Product.SellingPrice value={info?.total} />
-        </Space>
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => {
-            if (!addressId) {
-              Toast.info('请选择收货地址');
-              return;
-            }
-            if (info.type === OrderType['借调'] && !leaseDate?.length) {
-              Toast.info('请选择借调时间');
-              return;
-            }
-            setShowPaymentPicker(true);
-          }}
-        >
-          确认{info.title}
-        </Button>
-      </PageFooter>
+      <Footer
+        extra={
+          <Space className={styles['footer-price']}>
+            <Text>实付</Text>
+            <Product.SellingPrice value={info?.total} />
+          </Space>
+        }
+        btnText={`确认${info.title}`}
+        onConfirm={() => {
+          if (!addressId) {
+            Toast.info('请选择收货地址');
+            return;
+          }
+          if (info.type === OrderType['借调'] && !leaseDate?.length) {
+            Toast.info('请选择借调时间');
+            return;
+          }
+          setShowPaymentPicker(true);
+        }}
+      />
       <Picker.Payment
         visible={showPaymentPicker}
         amount={info.total}

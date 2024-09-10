@@ -20,7 +20,6 @@ import InputSearch from './InputSearch';
 import List from './List';
 import Media from './Media';
 import ModalForm from './ModalForm';
-import PageFooter from './PageFooter';
 import Picker from './Picker';
 import Product from './Product';
 import Result from './Result';
@@ -55,7 +54,6 @@ export {
   List,
   Media,
   ModalForm,
-  PageFooter,
   Picker,
   Product,
   Result,

@@ -50,20 +50,18 @@
   }
 }
 
-.footer {
-  &-price {
-    font-size: $font-size-large;
-    color: $text-color-base;
+.footer-price {
+  font-size: $font-size-large;
+  color: $text-color-base;
 
-    :global {
-      .m-product-selling-price {
-        font-size: $font-size-base;
-      }
+  :global {
+    .m-product-selling-price {
+      font-size: $font-size-base;
+    }
 
-      .m-product-selling-price-integer {
-        font-size: 48px;
-        font-weight: 600;
-      }
+    .m-product-selling-price-integer {
+      font-size: 48px;
+      font-weight: 600;
     }
   }
 }
