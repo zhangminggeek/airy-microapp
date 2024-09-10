@@ -6,6 +6,7 @@ import type { ButtonProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
 import { Icon } from '@/components';
+import { FeatureType } from '@/constants/platform';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
@@ -16,6 +17,7 @@ export interface IconItemProps {
   openType?: ButtonProps['openType'];
   to?: string;
   disabled?: boolean;
+  featureType?: FeatureType;
   onClick?: () => void;
 }
 
@@ -26,6 +28,7 @@ const IconItem: FC<IconItemProps> = ({
   openType,
   to,
   disabled = false,
+  featureType,
   onClick,
 }) => {
   const { info } = useUserStore((state) => state);
@@ -44,6 +47,7 @@ const IconItem: FC<IconItemProps> = ({
         if (disabled) {
           RouterUtil.navigateTo(
             '/packagePlatform/pages/feature-reservation/index',
+            { type: featureType },
           );
           return;
         }

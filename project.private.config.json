@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packagePlatform/pages/feature-reservation/index",
+          "pathName": "packagePlatform/pages/feature-reservation/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageCompany/pages/register/result/index",
           "pathName": "packageCompany/pages/register/result/index",
           "query": "",

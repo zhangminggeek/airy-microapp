@@ -13,12 +13,16 @@ import type { IconItemProps } from './IconItem';
 import { getCompanyStatistics } from '@/api';
 import IconCustomerManagement from '@/assets/icons/customer_management.png';
 import IconDressManagement from '@/assets/icons/dress_management.png';
+import IconDresserManagement from '@/assets/icons/dresser_management.png';
 import IconEmployeeManagement from '@/assets/icons/employee_management.png';
 import IconOrderManagement from '@/assets/icons/order_management.png';
+import IconReservationManagement from '@/assets/icons/reservation_management.png';
+import IconScheduleAnalysis from '@/assets/icons/schedule_analysis.png';
 import IconShopManagement from '@/assets/icons/shop_management.png';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, Section, Space } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
+import { FeatureType } from '@/constants/platform';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
@@ -107,9 +111,42 @@ const Page = () => {
       name: '服饰管理',
       to: '/packageDress/pages/management/index',
     },
-    { icon: IconOrderManagement, name: '订单管理', disabled: true },
-    { icon: IconCustomerManagement, name: '客户管理', disabled: true },
-    { icon: IconEmployeeManagement, name: '员工管理', disabled: true },
+    {
+      icon: IconOrderManagement,
+      name: '订单管理',
+      disabled: true,
+      featureType: FeatureType['订单管理'],
+    },
+    {
+      icon: IconCustomerManagement,
+      name: '客户管理',
+      disabled: true,
+      featureType: FeatureType['客户管理'],
+    },
+    {
+      icon: IconEmployeeManagement,
+      name: '员工管理',
+      disabled: true,
+      featureType: FeatureType['员工管理'],
+    },
+    {
+      icon: IconReservationManagement,
+      name: '预约管理',
+      disabled: true,
+      featureType: FeatureType['预约管理'],
+    },
+    {
+      icon: IconScheduleAnalysis,
+      name: '撞档分析',
+      disabled: true,
+      featureType: FeatureType['撞档分析'],
+    },
+    {
+      icon: IconDresserManagement,
+      name: '化妆师管理',
+      disabled: true,
+      featureType: FeatureType['化妆师管理'],
+    },
   ];
 
   const settingConfig: IconItemProps[] = [

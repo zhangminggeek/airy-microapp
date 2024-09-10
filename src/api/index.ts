@@ -4264,6 +4264,51 @@ export const postPlatformWithdrawAudit = /*#__PURE__*/ (
 
 postPlatformWithdrawAudit.requestConfig = postPlatformWithdrawAuditRequestConfig
 
+export interface PostPlatformFeatureReservationRequest {
+  /**
+   * 预约功能类型
+   */
+  type: number
+}
+
+export type PostPlatformFeatureReservationResponse = any
+
+type PostPlatformFeatureReservationRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/platform/feature/reservation', 'data', string, string, false>
+>
+
+const postPlatformFeatureReservationRequestConfig: PostPlatformFeatureReservationRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/platform/feature/reservation',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postPlatformFeatureReservation',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postPlatformFeatureReservation = /*#__PURE__*/ (
+  requestData: PostPlatformFeatureReservationRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostPlatformFeatureReservationResponse>(
+    prepare(postPlatformFeatureReservationRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postPlatformFeatureReservation.requestConfig = postPlatformFeatureReservationRequestConfig
+
 export interface PostPlatformOfficialAccountsEventRequest {
   /**
    * 开发者微信号
