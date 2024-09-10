@@ -32,7 +32,11 @@ function formatPath(path: string, method: Method) {
 }
 
 // 不处理错误的接口列表
-const NOT_DEAL_ERROR_URLS = ['GET /user/self', 'POST /account/login/wechat'];
+const NOT_DEAL_ERROR_URLS = [
+  'GET /user/self',
+  'POST /account/login/wechat',
+  'POST /account/login/wechat/phone',
+];
 
 const request = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;

@@ -23,12 +23,17 @@ const Page = () => {
   const { run } = useRequest(postAccountLoginWechatPhone, {
     manual: true,
     async onSuccess(data) {
-      const { token, account, bind } = data;
-      Taro.setStorageSync(StorageKey.TOKEN, token);
-      if (!bind) {
-        await WeChatUtil.bindOpenId(account);
+      if (data) {
+        const { token, account, bind } = data;
+        Taro.setStorageSync(StorageKey.TOKEN, token);
+        if (!bind) {
+          await WeChatUtil.bindOpenId(account);
+        }
+        RouterUtil.navigateTo('/pages/security/index');
+      } else {
+        // 没注册去注册
+        RouterUtil.navigateTo('/packageCompany/pages/register/index');
       }
-      RouterUtil.navigateTo('/pages/security/index');
     },
   });
 
