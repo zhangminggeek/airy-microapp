@@ -10,7 +10,7 @@ import { OSS_ASSETS_DIR } from '@/constants';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { Toast } from '@/utils';
+import { RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const { info, fetchUserInfo } = useUserStore((state) => state);
@@ -22,7 +22,7 @@ const Page = () => {
     manual: true,
     onSuccess() {
       fetchUserInfo();
-      Toast.success('上传成功');
+      RouterUtil.navigateBack();
     },
   });
 
