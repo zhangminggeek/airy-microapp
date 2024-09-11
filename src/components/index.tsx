@@ -9,7 +9,6 @@ import Descriptions from './Descriptions';
 import EditableCell from './EditableCell';
 import Empty from './Empty';
 import Filter from './Filter';
-import Footer from './Footer';
 import FormSection from './FormSection';
 import Icon from './Icon';
 import InputCode from './InputCode';
@@ -43,7 +42,6 @@ export {
   EditableCell,
   Empty,
   Filter,
-  Footer,
   FormSection,
   Icon,
   InputCode,

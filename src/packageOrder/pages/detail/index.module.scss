@@ -25,10 +25,8 @@
   }
 }
 
-.footer {
-  &-content {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }

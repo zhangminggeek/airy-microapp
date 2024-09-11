@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './index.module.scss';
 
 import { getMarketMyPublished, postPurchaseSend } from '@/api';
-import { ActionSheet, Footer, List, Product } from '@/components';
+import { ActionSheet, List, Product } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductSource } from '@/constants/product';
 import { useRequest } from '@/hooks';
@@ -30,7 +30,37 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout className={styles.layout} title="二手商品" back>
+    <BasicLayout
+      className={styles.layout}
+      title="二手商品"
+      back
+      footer={{
+        btnText: '发送',
+        extra: (
+          <ActionSheet
+            options={[
+              { name: '从服装管理中选择', key: ProductSource['服装管理'] },
+              { name: '从相册中选择', key: ProductSource['相册'] },
+            ]}
+            onSelect={(option) => {
+              RouterUtil.navigateTo('/pages/market/action/index', {
+                source: option.key,
+                purchaseId: id,
+              });
+            }}
+          >
+            <Button size="large">新增二手商品</Button>
+          </ActionSheet>
+        ),
+        onConfirm: () => {
+          if (!selectedIds.length) {
+            Toast.info('请先选择商品');
+            return;
+          }
+          run({ id: Number(id), marketIds: selectedIds });
+        },
+      }}
+    >
       <List
         request={getMarketMyPublished}
         params={{ status: MarketProductStatus[''] }}
@@ -62,32 +92,6 @@ const Page = () => {
             />
           </View>
         )}
-      />
-      <Footer
-        btnText="发送"
-        extra={
-          <ActionSheet
-            options={[
-              { name: '从服装管理中选择', key: ProductSource['服装管理'] },
-              { name: '从相册中选择', key: ProductSource['相册'] },
-            ]}
-            onSelect={(option) => {
-              RouterUtil.navigateTo('/pages/market/action/index', {
-                source: option.key,
-                purchaseId: id,
-              });
-            }}
-          >
-            <Button size="large">新增二手商品</Button>
-          </ActionSheet>
-        }
-        onConfirm={() => {
-          if (!selectedIds.length) {
-            Toast.info('请先选择商品');
-            return;
-          }
-          run({ id: Number(id), marketIds: selectedIds });
-        }}
       />
     </BasicLayout>
   );

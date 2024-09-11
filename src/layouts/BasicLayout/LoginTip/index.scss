@@ -1,0 +1,62 @@
+@import '../../../styles/var.scss';
+
+.g-basic-layout-tip {
+  padding: 0 32px;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    gap: 24px;
+
+    &-brand {
+      flex-shrink: 0;
+      font-size: $font-size-large;
+      color: $text-color-main;
+      font-weight: 500;
+    }
+
+    &-intro {
+      font-size: $font-size-xsmall;
+      color: $text-color-main;
+      font-weight: 400;
+    }
+  }
+
+  &-divider {
+    margin: 0;
+  }
+
+  &-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    &-item {
+      text-align: center;
+
+      &-content {
+        display: flex;
+        align-items: baseline;
+        color: $color-primary;
+
+        &-value {
+          font-size: 40px;
+          font-weight: 600;
+        }
+
+        &-unit {
+          font-size: $font-size-xsmall;
+          font-weight: 400;
+        }
+      }
+
+      &-label {
+        font-size: $font-size-xsmall;
+        color: $text-color-base;
+      }
+    }
+  }
+}

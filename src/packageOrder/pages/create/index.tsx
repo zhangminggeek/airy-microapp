@@ -20,7 +20,6 @@ import {
 import {
   Cell,
   Descriptions,
-  Footer,
   Media,
   Picker,
   Product,
@@ -114,7 +113,30 @@ const Page = () => {
   }, [type, data]);
 
   return (
-    <BasicLayout title={`确认${info.title}`} back>
+    <BasicLayout
+      title={`确认${info.title}`}
+      back
+      footer={{
+        extra: (
+          <Space className={styles['footer-price']}>
+            <Text>实付</Text>
+            <Product.SellingPrice value={info?.total} />
+          </Space>
+        ),
+        btnText: `确认${info.title}`,
+        onConfirm: () => {
+          if (!addressId) {
+            Toast.info('请选择收货地址');
+            return;
+          }
+          if (info.type === OrderType['借调'] && !leaseDate?.length) {
+            Toast.info('请选择借调时间');
+            return;
+          }
+          setShowPaymentPicker(true);
+        },
+      }}
+    >
       <Section fill>
         <Picker.Address
           placeholder="请选择收货地址"
@@ -233,26 +255,6 @@ const Page = () => {
           }}
         />
       </Section>
-      <Footer
-        extra={
-          <Space className={styles['footer-price']}>
-            <Text>实付</Text>
-            <Product.SellingPrice value={info?.total} />
-          </Space>
-        }
-        btnText={`确认${info.title}`}
-        onConfirm={() => {
-          if (!addressId) {
-            Toast.info('请选择收货地址');
-            return;
-          }
-          if (info.type === OrderType['借调'] && !leaseDate?.length) {
-            Toast.info('请选择借调时间');
-            return;
-          }
-          setShowPaymentPicker(true);
-        }}
-      />
       <Picker.Payment
         visible={showPaymentPicker}
         amount={info.total}

@@ -1,18 +1,15 @@
-import {
-  Button,
-  Divider,
-  Image,
-  SafeArea,
-  Skeleton,
-} from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { SafeArea, Skeleton } from '@nutui/nutui-react-taro';
+import { View } from '@tarojs/components';
 import { getSystemInfoSync } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useMemo } from 'react';
 
+import { PREFIX_CLS } from './constants';
+import Footer, { type FooterProps } from './Footer';
+import LoginTip from './LoginTip';
+
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import ImageLogo from '@/assets/logo.svg';
 import { Icon, Space } from '@/components';
 import { TAB_PAGE } from '@/constants';
 import { useUserStore } from '@/models';
@@ -32,17 +29,9 @@ interface BasicLayoutProps {
   transparent?: boolean;
   loading?: boolean;
   loginTip?: boolean;
+  footer?: FooterProps;
   safeArea?: boolean;
 }
-
-const PREFIX_CLS = 'g-basic-layout';
-
-const summary = [
-  { label: '平均每日新入驻商户', value: '78' },
-  { label: '平均每日上新数量', value: '600+', unit: '套' },
-  { label: '平均成交时间', value: '3', unit: '天' },
-  { label: '好评率', value: '98', unit: '%' },
-];
 
 const BasicLayout: FC<BasicLayoutProps> = ({
   className,
@@ -56,11 +45,18 @@ const BasicLayout: FC<BasicLayoutProps> = ({
   home = false,
   loading = false,
   loginTip = true,
+  footer,
   safeArea = true,
 }) => {
   const { info } = useUserStore((state) => state);
   // 手机顶部状态栏高度
   const { statusBarHeight = 0 } = useMemo(() => getSystemInfoSync(), []);
+
+  // 是否显示登录提示
+  const showLoginTip = useMemo(
+    () => loginTip && !info?.account,
+    [loginTip, info],
+  );
 
   const content = (
     <Skeleton rows={10} visible={!loading}>
@@ -120,52 +116,10 @@ const BasicLayout: FC<BasicLayoutProps> = ({
         <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
       </View>
       {content}
-      {loginTip && !info?.account ? (
-        <View className={`${PREFIX_CLS}-tip`}>
-          <View className={`${PREFIX_CLS}-tip-header`}>
-            <Space className={`${PREFIX_CLS}-tip-header-brand`} size={4}>
-              <Image
-                className={`${PREFIX_CLS}-tip-header-brand-logo`}
-                src={ImageLogo}
-                width={24}
-                height={24}
-              />
-              <Text className={`${PREFIX_CLS}-tip-header-brand-text`}>
-                易纱集
-              </Text>
-            </Space>
-            <View className={`${PREFIX_CLS}-tip-header-intro`}>
-              快速处理您的二手库存，最新最好看的婚纱礼服等您购买，还有超多店铺功能免费使用
-            </View>
-            <Button
-              className={`${PREFIX_CLS}-tip-header-btn`}
-              type="primary"
-              size="small"
-              onClick={() => {
-                RouterUtil.navigateTo('/pages/user/login/index');
-              }}
-            >
-              登录
-            </Button>
-          </View>
-          <Divider className={`${PREFIX_CLS}-tip-divider`} />
-          <View className={`${PREFIX_CLS}-tip-body`}>
-            {summary.map((item) => (
-              <View key={item.label} className={`${PREFIX_CLS}-tip-body-item`}>
-                <View className={`${PREFIX_CLS}-tip-body-item-content`}>
-                  <Text className={`${PREFIX_CLS}-tip-body-item-content-value`}>
-                    {item.value}
-                  </Text>
-                  <Text className={`${PREFIX_CLS}-tip-body-item-content-unit`}>
-                    {item.unit}
-                  </Text>
-                </View>
-                <View className={`${PREFIX_CLS}-tip-body-item-label`}>
-                  {item.label}
-                </View>
-              </View>
-            ))}
-          </View>
+      {showLoginTip || footer ? (
+        <View className={`${PREFIX_CLS}-actions`}>
+          {showLoginTip ? <LoginTip /> : null}
+          {footer ? <Footer {...footer} /> : null}
         </View>
       ) : null}
       {safeArea ? <SafeArea position="bottom" /> : null}

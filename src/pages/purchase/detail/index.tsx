@@ -10,7 +10,7 @@ import PriceItem from './PriceItem';
 import type { ProductBizData } from '@/interfaces/product';
 
 import { getPurchaseId } from '@/api';
-import { Company, Empty, Footer, Media, Product, Tag } from '@/components';
+import { Company, Empty, Media, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import {
   ProductFiledKey,
@@ -41,7 +41,21 @@ const Page = () => {
   const { data, run } = useRequest(getPurchaseId, { manual: true });
 
   return (
-    <BasicLayout title="详情" back fill>
+    <BasicLayout
+      title="详情"
+      back
+      fill
+      footer={
+        info?.companyId !== data?.companyId
+          ? {
+              btnText: '发送商品',
+              onConfirm: () => {
+                RouterUtil.navigateTo('/pages/purchase/select/index', { id });
+              },
+            }
+          : undefined
+      }
+    >
       <View className={styles.content}>
         <View className={styles.price}>
           {data?.minPrice || data?.maxPrice ? (
@@ -178,14 +192,6 @@ const Page = () => {
           />
         )}
       </View>
-      {info?.companyId !== data?.companyId ? (
-        <Footer
-          btnText="发送商品"
-          onConfirm={() => {
-            RouterUtil.navigateTo('/pages/purchase/select/index', { id });
-          }}
-        />
-      ) : null}
     </BasicLayout>
   );
 };

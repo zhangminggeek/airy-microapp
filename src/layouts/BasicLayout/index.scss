@@ -61,70 +61,13 @@
     overflow-y: auto;
   }
 
-  &-tip {
+  &-actions {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100vw;
-    padding: 0 32px;
-    background-color: #ffffff;
     z-index: 9999;
-
-    &-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      gap: 24px;
-
-      &-brand {
-        flex-shrink: 0;
-        font-size: $font-size-large;
-        color: $text-color-main;
-        font-weight: 500;
-      }
-
-      &-intro {
-        font-size: $font-size-xsmall;
-        color: $text-color-main;
-        font-weight: 400;
-      }
-    }
-
-    &-divider {
-      margin: 0;
-    }
-
-    &-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-
-      &-item {
-        text-align: center;
-
-        &-content {
-          display: flex;
-          align-items: baseline;
-          color: $color-primary;
-
-          &-value {
-            font-size: 40px;
-            font-weight: 600;
-          }
-
-          &-unit {
-            font-size: $font-size-xsmall;
-            font-weight: 400;
-          }
-        }
-
-        &-label {
-          font-size: $font-size-xsmall;
-          color: $text-color-base;
-        }
-      }
-    }
+    padding-bottom: 68px;
+    background-color: #fff;
   }
 }

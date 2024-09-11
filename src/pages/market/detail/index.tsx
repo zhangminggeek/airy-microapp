@@ -115,7 +115,65 @@ const Page = () => {
   }, [data]);
 
   return (
-    <BasicLayout title="详情" back fill>
+    <BasicLayout
+      title="详情"
+      back
+      fill
+      footer={
+        info?.companyId !== data?.companyId
+          ? {
+              className: styles.footer,
+              extra: (
+                <Space size={20}>
+                  <Button
+                    className={styles['icon-btn']}
+                    fill="none"
+                    shape="square"
+                    onClick={() => {
+                      RouterUtil.navigateTo(
+                        '/packageCompany/pages/index/index',
+                        {
+                          id: data?.companyId,
+                        },
+                      );
+                    }}
+                  >
+                    <Icon name="ShopOutlined" title="店铺" />
+                  </Button>
+                  <Button
+                    className={styles['icon-btn']}
+                    fill="none"
+                    shape="square"
+                    onClick={() => {
+                      toggleFavorite({
+                        id: Number(id),
+                        isFavorited: !data?.isFavorited,
+                      });
+                    }}
+                  >
+                    <Icon
+                      name={data?.isFavorited ? 'LoveFilled' : 'LoveOutlined'}
+                      color={
+                        data?.isFavorited ? COLOR_PRIMARY : TEXT_COLOR_BASE
+                      }
+                      title="收藏"
+                    />
+                  </Button>
+                  <Button
+                    className={styles['icon-btn']}
+                    openType="contact"
+                    fill="none"
+                    shape="square"
+                  >
+                    <Icon name="PhoneOutlined" title="联系商家" />
+                  </Button>
+                </Space>
+              ),
+              children: actions,
+            }
+          : undefined
+      }
+    >
       <Product.Detail
         typeCode={data?.product?.typeCode}
         images={data?.product?.picList?.map((item) => item.url)}
@@ -165,52 +223,6 @@ const Page = () => {
         companySold={data?.company?.sold}
         companyFans={data?.company?.fansCount}
         share
-        footer={
-          info?.companyId !== data?.companyId ? (
-            <View className={styles.footer}>
-              <Space size={20}>
-                <Button
-                  className={styles['icon-btn']}
-                  fill="none"
-                  shape="square"
-                  onClick={() => {
-                    RouterUtil.navigateTo('/packageCompany/pages/index/index', {
-                      id: data?.companyId,
-                    });
-                  }}
-                >
-                  <Icon name="ShopOutlined" title="店铺" />
-                </Button>
-                <Button
-                  className={styles['icon-btn']}
-                  fill="none"
-                  shape="square"
-                  onClick={() => {
-                    toggleFavorite({
-                      id: Number(id),
-                      isFavorited: !data?.isFavorited,
-                    });
-                  }}
-                >
-                  <Icon
-                    name={data?.isFavorited ? 'LoveFilled' : 'LoveOutlined'}
-                    color={data?.isFavorited ? COLOR_PRIMARY : TEXT_COLOR_BASE}
-                    title="收藏"
-                  />
-                </Button>
-                <Button
-                  className={styles['icon-btn']}
-                  openType="contact"
-                  fill="none"
-                  shape="square"
-                >
-                  <Icon name="PhoneOutlined" title="联系商家" />
-                </Button>
-              </Space>
-              {actions}
-            </View>
-          ) : null
-        }
       />
     </BasicLayout>
   );

@@ -1,12 +1,14 @@
-import { Button, SafeArea } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
+
+import { PREFIX_CLS as ROOT_PREFIX_CLS } from '../constants';
 
 import type { CSSProperties, FC, MouseEvent, ReactNode } from 'react';
 
 import './index.scss';
 
-interface FooterProps {
+export interface FooterProps {
   className?: string;
   style?: CSSProperties;
   extra?: ReactNode;
@@ -15,7 +17,7 @@ interface FooterProps {
   onConfirm?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const PREFIX_CLS = 'm-footer';
+const PREFIX_CLS = `${ROOT_PREFIX_CLS}-footer`;
 
 const Footer: FC<FooterProps> = ({
   className,
@@ -27,19 +29,14 @@ const Footer: FC<FooterProps> = ({
 }) => {
   return (
     <View className={classnames(PREFIX_CLS, className)} style={style}>
-      <View className={`${PREFIX_CLS}-content`}>
-        {extra ? (
-          <View className={`${PREFIX_CLS}-content-extra`}>{extra}</View>
-        ) : null}
-        <View className={`${PREFIX_CLS}-content-actions`}>
-          {children ?? (
-            <Button type="primary" size="large" onClick={onConfirm}>
-              {btnText}
-            </Button>
-          )}
-        </View>
+      {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
+      <View className={`${PREFIX_CLS}-actions`}>
+        {children ?? (
+          <Button type="primary" size="large" onClick={onConfirm}>
+            {btnText}
+          </Button>
+        )}
       </View>
-      <SafeArea position="bottom" />
     </View>
   );
 };

@@ -11,7 +11,6 @@ import { getOrderId } from '@/api';
 import {
   Company,
   Descriptions,
-  Footer,
   Icon,
   Product,
   Section,
@@ -180,7 +179,20 @@ const Page = () => {
   }, [id, data, owner]);
 
   return (
-    <BasicLayout title={orderStatusMap.get(Number(data?.status))?.text} back>
+    <BasicLayout
+      title={orderStatusMap.get(Number(data?.status))?.text}
+      back
+      footer={{
+        children: (
+          <View className={styles['footer-content']}>
+            <Button openType="contact" size="small">
+              联系客服
+            </Button>
+            {actions?.get(data?.status)}
+          </View>
+        ),
+      }}
+    >
       <View className={styles.content}>
         <Section fill>
           <Product.Brief
@@ -417,14 +429,6 @@ const Page = () => {
           />
         </Section>
       </View>
-      <Footer className={styles.footer}>
-        <View className={styles['footer-content']}>
-          <Button openType="contact" size="small">
-            联系客服
-          </Button>
-          {actions?.get(data?.status)}
-        </View>
-      </Footer>
       {renderPopup()}
     </BasicLayout>
   );
