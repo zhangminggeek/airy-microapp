@@ -8,11 +8,12 @@ import styles from './index.module.scss';
 
 import type { CompanyInfo } from './interfaces';
 
+import { getCompanyRegisterPhoneCheck } from '@/api';
 import { Picker, Upload } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
 import { StorageKey } from '@/constants/storage';
 import { BasicLayout } from '@/layouts';
-import { parseJson, RouterUtil } from '@/utils';
+import { parseJson, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const [form] = Form.useForm();
@@ -34,7 +35,7 @@ const Page = () => {
       form.setFieldsValue({
         ...rest,
         region: [province, city, area],
-        logo: [logo],
+        logo: logo ? [logo] : undefined,
       });
     }
   });
@@ -79,10 +80,11 @@ const Page = () => {
             </Button>
           }
           onFinish={async (values) => {
-            const { region, license, logo, ...rest } = values;
+            const { contactPhone, region, license, logo, ...rest } = values;
             const [province, city, area] = region;
             const params = {
               ...rest,
+              contactPhone,
               province,
               city,
               area,
@@ -92,12 +94,26 @@ const Page = () => {
             if (invitationCode) {
               params.invitationCode = invitationCode;
             }
-            // 保存到本地，等后面验证手机号流程通过后使用
-            Taro.setStorageSync(
-              StorageKey.COMPANY_RESIGTER_INFO,
-              JSON.stringify(params),
-            );
-            RouterUtil.navigateTo('/packageCompany/pages/register/code/index');
+            try {
+              // 校验手机号是否被使用
+              const res = await getCompanyRegisterPhoneCheck({
+                phone: contactPhone,
+              });
+              if (res.data) {
+                Toast.info('手机号已被使用');
+                return;
+              }
+              // 保存到本地，等后面验证手机号流程通过后使用
+              Taro.setStorageSync(
+                StorageKey.COMPANY_RESIGTER_INFO,
+                JSON.stringify(params),
+              );
+              RouterUtil.navigateTo(
+                '/packageCompany/pages/register/code/index',
+              );
+            } catch (err) {
+              console.log(err);
+            }
           }}
         >
           <Form.Item

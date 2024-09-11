@@ -4770,6 +4770,60 @@ export const getCompanyFollowee = /*#__PURE__*/ (
 
 getCompanyFollowee.requestConfig = getCompanyFolloweeRequestConfig
 
+export interface GetCompanyRegisterPhoneCheckRequest {
+  /**
+   * 手机号
+   */
+  phone: string
+}
+
+export type GetCompanyRegisterPhoneCheckResponse = boolean
+
+type GetCompanyRegisterPhoneCheckRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/company/register/phone/check',
+    'data',
+    string,
+    'phone',
+    false
+  >
+>
+
+const getCompanyRegisterPhoneCheckRequestConfig: GetCompanyRegisterPhoneCheckRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/register/phone/check',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: [],
+  queryNames: ['phone'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyRegisterPhoneCheck',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getCompanyRegisterPhoneCheck = /*#__PURE__*/ (
+  requestData: GetCompanyRegisterPhoneCheckRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanyRegisterPhoneCheckResponse>(
+    prepare(getCompanyRegisterPhoneCheckRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getCompanyRegisterPhoneCheck.requestConfig = getCompanyRegisterPhoneCheckRequestConfig
+
 export interface PostCompanyRegisterRequest {
   /**
    * 公司名称
