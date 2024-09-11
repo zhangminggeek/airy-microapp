@@ -43,7 +43,7 @@ const PictureGroup: FC<PictureGroupProps> = ({ images }) => {
               src={url}
               width="100vw"
               height="100vw"
-              mode="widthFix"
+              mode="aspectFill"
               onClick={() => {
                 Taro.previewMedia({
                   sources: images?.map((url) => ({

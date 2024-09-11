@@ -72,7 +72,7 @@ const Card: FC<CardProps> = ({
         <Media
           className={`${PREFIX_CLS}-header-media`}
           src={image}
-          mode="widthFix"
+          mode="aspectFill"
           controls={false}
         />
       </View>
