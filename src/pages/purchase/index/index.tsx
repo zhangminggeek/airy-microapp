@@ -59,10 +59,13 @@ const Page = () => {
             name: 'order',
             title: '排序',
             options: [
+              { text: '默认排序', value: 0 },
               { text: '最新发布', value: 1 },
               { text: '报价量由高到低', value: 2 },
               { text: '报价量由低到高', value: 3 },
             ],
+            emptyOption: false,
+            defaultValue: 0,
           },
         ]}
         value={condition}
