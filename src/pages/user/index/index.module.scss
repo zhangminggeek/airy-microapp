@@ -41,6 +41,14 @@
     overflow: hidden;
   }
 
+  .section {
+    .title-tip {
+      font-size: $font-size-small;
+      color: $text-color-secondary;
+      font-weight: 500;
+    }
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 25%);

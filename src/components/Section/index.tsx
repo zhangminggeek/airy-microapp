@@ -11,7 +11,7 @@ export interface SectionProps {
   className?: string;
   style?: CSSProperties;
   fill?: boolean;
-  title?: string;
+  title?: ReactNode;
   extra?: ReactNode;
   children?: ReactNode;
 }

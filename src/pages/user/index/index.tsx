@@ -280,7 +280,15 @@ const Page = () => {
           {marketConfig?.map((item) => <IconItem key={item.name} {...item} />)}
         </View>
       </Section>
-      <Section title="店铺管理">
+      <Section
+        className={styles.section}
+        title={
+          <Space>
+            <View>店铺管理</View>
+            <View className={styles['title-tip']}>(限时预约免费使用)</View>
+          </Space>
+        }
+      >
         <View className={styles.grid}>
           {getShopConfig({ companyId: info?.companyId })?.map((item) => (
             <IconItem key={item.name} {...item} iconSize={44} />

@@ -49,7 +49,7 @@ const Page = () => {
           <View className={styles['title-text']}>轻松提升运营效率</View>
         </View>
         <View className={styles.desc}>
-          十月份上线，现在预约免费试用，体验所有强大功能！
+          十月份上线，现在预约免费使用，体验所有强大功能！
         </View>
         <Image
           className={styles.banner}
@@ -86,7 +86,7 @@ const Page = () => {
         </View>
         <View className={classnames(styles.section, styles.reservation)}>
           <View className={styles['reservation-title']}>
-            十月份上线，立即预约免费试用！
+            十月份上线，立即预约免费使用！
           </View>
           <View className={styles['reservation-flow']}>
             <View className={styles['reservation-flow-title']}>预约流程</View>
@@ -114,7 +114,7 @@ const Page = () => {
                   description={
                     <View>
                       <View>十月正式上线</View>
-                      <View>解锁免费试用</View>
+                      <View>解锁免费使用</View>
                     </View>
                   }
                 />
