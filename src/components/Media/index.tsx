@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { useMemo } from 'react';
 
 import { PREFIX_CLS } from './constants';
-import { isVideo } from './utils';
+import { getVideoUrl, isVideo } from './utils';
 
 import type { ImageProps, ITouchEvent } from '@tarojs/components';
 import type { CSSProperties, FC } from 'react';
@@ -47,7 +47,7 @@ const Media: FC<MediaProps> = ({
 
     return [
       {
-        url: src,
+        url: isVideo(src) ? getVideoUrl(src) : src,
         type: isVideo(src) ? 'video' : 'image',
         poster: isVideo(src) ? src : undefined,
       },

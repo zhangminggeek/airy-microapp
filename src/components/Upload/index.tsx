@@ -19,8 +19,9 @@ interface UploadProps {
   style?: CSSProperties;
   maxCount?: number; // 最大上传数量
   maxFileSize?: number; // 最大文件大小，单位字节
-  mediaType?: Array<'image' | 'video' | 'mix'>;
-  sourceType?: Array<'album' | 'camera'>;
+  mediaType?: Taro.chooseMedia.Option['mediaType'];
+  sourceType?: Taro.chooseMedia.Option['sourceType'];
+  sizeType?: Taro.chooseMedia.Option['sizeType'];
   btn?: ReactNode;
   placeholder?: ReactNode;
   extra?: ReactNode;
@@ -34,9 +35,10 @@ const Upload: FC<UploadProps> = ({
   className,
   style,
   maxCount = 1,
-  maxFileSize = 5 * 1024 * 1024, // 5M,
-  mediaType = ['mix'],
+  maxFileSize = 10 * 1024 * 1024, // 10M,
+  mediaType = ['video', 'image'],
   sourceType = ['album', 'camera'],
+  sizeType = ['original', 'compressed'],
   btn,
   placeholder,
   extra,
@@ -55,8 +57,12 @@ const Upload: FC<UploadProps> = ({
       count: maxCount - (value?.length ?? 0),
       mediaType,
       sourceType,
+      sizeType,
       success(result) {
         uploadMedia(result.tempFiles);
+      },
+      fail(res) {
+        console.log('chooseMedia fail', res);
       },
     });
   };
@@ -72,7 +78,7 @@ const Upload: FC<UploadProps> = ({
   };
 
   // 上传前校验
-  const beforeUpload = async (file: Taro.chooseMedia.ChooseMedia) => {
+  const beforeUpload = (file: Taro.chooseMedia.ChooseMedia) => {
     if (!checkFile(file)) return false;
     return true;
   };
@@ -84,6 +90,7 @@ const Upload: FC<UploadProps> = ({
       setUploading(true);
       for (const file of files) {
         const passed = beforeUpload(file);
+        console.log('passed', passed);
         if (!passed) break;
         const url = await upload(file.tempFilePath);
         if (file.thumbTempFilePath) {
