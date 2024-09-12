@@ -117,7 +117,11 @@ const BasicLayout: FC<BasicLayoutProps> = ({
       </View>
       {content}
       {showLoginTip || footer ? (
-        <View className={`${PREFIX_CLS}-actions`}>
+        <View
+          className={classnames(`${PREFIX_CLS}-actions`, {
+            [`${PREFIX_CLS}-actions-safe`]: footer, // 底部安全距离
+          })}
+        >
           {showLoginTip ? <LoginTip /> : null}
           {footer ? <Footer {...footer} /> : null}
         </View>

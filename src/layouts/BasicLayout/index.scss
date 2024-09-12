@@ -67,7 +67,10 @@
     bottom: 0;
     width: 100vw;
     z-index: 9999;
-    padding-bottom: 68px;
     background-color: #fff;
+
+    &-safe {
+      padding-bottom: 68px;
+    }
   }
 }
