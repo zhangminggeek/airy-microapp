@@ -60,7 +60,7 @@ const Page = () => {
   const steps = [
     { content: '分享链接至聊天群/朋友圈/好友' },
     {
-      content: `好友注册并上传营业执照即可获得${AWARD.get(InvitationTask['上传营业执照'])}元奖励，关注公众号再得${AWARD.get(InvitationTask['关注公众号'])}元，完成首笔交易再得${AWARD.get(InvitationTask['完成首笔交易'])}元`,
+      content: `好友注册并关注公众号即可获得${AWARD.get(InvitationTask['关注公众号'])}元，上传营业执照再得${AWARD.get(InvitationTask['上传营业执照'])}元奖励，完成首笔交易再得${AWARD.get(InvitationTask['完成首笔交易'])}元`,
     },
     { content: '累计50元将自动划转至余额，可进行提现' },
   ];
