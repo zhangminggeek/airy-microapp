@@ -138,4 +138,5 @@ export default {
       },
     ],
   },
+  lazyCodeLoading: 'requiredComponents',
 };
