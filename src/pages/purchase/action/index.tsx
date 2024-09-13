@@ -124,7 +124,8 @@ const Page = () => {
           </Button>
         }
         onFinish={async (values) => {
-          const { title, method, price, leasePrice, picList, ...rest } = values;
+          const { title, size, method, price, leasePrice, picList, ...rest } =
+            values;
           if (!title) {
             Toast.info('请输入求购商品信息');
             return;
@@ -137,6 +138,7 @@ const Page = () => {
             ...rest,
             title,
             picList,
+            size: size?.length ? size[0] : undefined,
             wantBuy: !!method?.includes(PurchaseMethod['购买']),
             wantLease: !!method?.includes(PurchaseMethod['借调']),
             minPrice: isNil(price?.[0], false) ? undefined : price?.[0],
