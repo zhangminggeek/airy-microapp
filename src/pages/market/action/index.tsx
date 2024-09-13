@@ -127,7 +127,7 @@ const Page = () => {
         // 如果求购id存在，说明是从求购选择二手商品页面过来的，新增完要回去
         RouterUtil.navigateBack();
       } else {
-        RouterUtil.navigateTo('/pages/market/action/result/index');
+        RouterUtil.redirectTo('/pages/market/action/result/index');
       }
     },
   });
@@ -137,7 +137,7 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
-      RouterUtil.navigateTo('/pages/market/action/result/index');
+      RouterUtil.redirectTo('/pages/market/action/result/index');
     },
   });
 
@@ -146,7 +146,7 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
-      RouterUtil.navigateTo('/pages/market/action/result/index');
+      RouterUtil.redirectTo('/pages/market/action/result/index');
     },
   });
 

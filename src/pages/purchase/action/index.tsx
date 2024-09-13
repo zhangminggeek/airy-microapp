@@ -95,7 +95,7 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Toast.success('创建成功');
-      RouterUtil.navigateTo('/pages/purchase/action/result/index');
+      RouterUtil.redirectTo('/pages/purchase/action/result/index');
     },
   });
 
@@ -104,7 +104,7 @@ const Page = () => {
     manual: true,
     onSuccess() {
       Toast.success('修改成功');
-      RouterUtil.navigateTo('/pages/purchase/action/result/index');
+      RouterUtil.redirectTo('/pages/purchase/action/result/index');
     },
   });
 

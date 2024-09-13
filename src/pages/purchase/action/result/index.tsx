@@ -11,7 +11,7 @@ const Page = () => {
         status="success"
         okText="返回"
         onOk={() => {
-          RouterUtil.navigateTo('/pages/user/purchase/index');
+          RouterUtil.navigateBack();
         }}
       />
     </BasicLayout>

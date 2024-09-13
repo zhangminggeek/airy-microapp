@@ -22,7 +22,7 @@ const Page = () => {
           ref.current?.setOpen(true);
         }}
         onCancel={() => {
-          RouterUtil.navigateTo('/pages/user/published/index');
+          RouterUtil.navigateBack();
         }}
       />
       <ActionSheet
