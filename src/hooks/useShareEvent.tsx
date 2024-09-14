@@ -6,6 +6,7 @@ import { parseJson, RouterUtil } from '@/utils';
 
 export enum ShareType {
   MARKET = 'market',
+  PURCHASE = 'purchase',
   COMPANY = 'company',
   INVITATION = 'invitation',
 }
@@ -27,6 +28,8 @@ export const useShareEvent = () => {
     }
     if (type === ShareType.MARKET) {
       RouterUtil.navigateTo('/pages/market/detail/index', rest);
+    } else if (type === ShareType.PURCHASE) {
+      RouterUtil.navigateTo('/pages/purchase/detail/index', rest);
     } else if (type === ShareType.COMPANY) {
       RouterUtil.navigateTo('/packageCompany/pages/index/index', rest);
     }

@@ -1,6 +1,6 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
-import Taro, { useDidShow, useRouter } from '@tarojs/taro';
+import Taro, { useDidShow, useRouter, useShareAppMessage } from '@tarojs/taro';
 import classnames from 'classnames';
 import dayjs from 'dayjs';
 
@@ -10,7 +10,7 @@ import PriceItem from './PriceItem';
 import type { ProductBizData } from '@/interfaces/product';
 
 import { getPurchaseId } from '@/api';
-import { Company, Empty, Media, Product, Tag } from '@/components';
+import { Company, Empty, Icon, Media, Product, Tag } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import {
   ProductFiledKey,
@@ -21,15 +21,30 @@ import {
   productTypeMap,
 } from '@/constants/product';
 import { useRequest } from '@/hooks';
+import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { isNil, parseJson, RouterUtil } from '@/utils';
+import { formatPriceRange, isNil, parseJson, RouterUtil } from '@/utils';
 
 const windowWidth = Taro.getSystemInfoSync().windowWidth;
 
 const Page = () => {
   const { id } = useRouter().params;
   const { info } = useUserStore((state) => state);
+
+  useShareAppMessage(() => {
+    const { title, minPrice, maxPrice, minLeasePrice, maxLeasePrice } = data;
+    const price =
+      minPrice || maxPrice
+        ? formatPriceRange([minPrice, maxPrice])
+        : formatPriceRange([minLeasePrice, maxLeasePrice]);
+    // 来自页面转发分享
+    return {
+      title: `我想要：¥${price}，${title}`,
+      path: `/pages/market/index/index?shareType=${ShareType.PURCHASE}&shareParams=${JSON.stringify({ id })}`,
+      imageUrl: data?.picList?.[0].url,
+    };
+  });
 
   useDidShow(() => {
     if (id) {
@@ -67,6 +82,15 @@ const Page = () => {
               value={[data?.minLeasePrice, data?.maxLeasePrice]}
             />
           ) : null}
+          <Button
+            className={styles['btn-share']}
+            icon={<Icon name="ShareOneOutlined" size={14} />}
+            openType="share"
+            fill="none"
+            size="small"
+          >
+            分享
+          </Button>
         </View>
         <View className={styles.field}>
           {data?.typeCode ? (

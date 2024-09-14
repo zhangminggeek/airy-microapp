@@ -6,8 +6,16 @@
 
   .price {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: 1fr 1fr 140px;
     margin-bottom: 32px;
+
+    .btn-share {
+      justify-self: end;
+      width: 120px;
+      height: 40px;
+      font-family: PingFangSC-Regular;
+      padding: 0;
+    }
   }
 
   .field {
