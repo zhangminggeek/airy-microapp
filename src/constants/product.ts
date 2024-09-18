@@ -32,8 +32,9 @@ export enum ProductFiledKey {
   '礼服-领口' = `${ProductType['礼服']}_neckband`,
   '礼服-袖子' = `${ProductType['礼服']}_sleeve`,
   '礼服-颜色' = `${ProductType['礼服']}_color`,
-  '秀禾-材质' = `${ProductType['秀禾']}_material`,
   '秀禾-类别' = `${ProductType['秀禾']}_category`,
+  '秀禾-材质' = `${ProductType['秀禾']}_material`,
+  '秀禾-款式' = `${ProductType['秀禾']}_style`,
   '秀禾-裙摆' = `${ProductType['秀禾']}_hem`,
   '秀禾-颜色' = `${ProductType['秀禾']}_color`,
   '西服-材质' = `${ProductType['西服']}_material`,
@@ -100,13 +101,15 @@ export enum ProductFiledOption {
   '礼服-颜色-灰色' = `${ProductFiledKey['礼服-颜色']}_10`,
   '礼服-颜色-彩虹' = `${ProductFiledKey['礼服-颜色']}_11`,
   '礼服-颜色-其他' = `${ProductFiledKey['礼服-颜色']}_12`,
+  '秀禾-类别-男' = `${ProductFiledKey['秀禾-类别']}_1`,
+  '秀禾-类别-女' = `${ProductFiledKey['秀禾-类别']}_2`,
   '秀禾-材质-丝绸' = `${ProductFiledKey['秀禾-材质']}_1`,
   '秀禾-材质-真丝' = `${ProductFiledKey['秀禾-材质']}_2`,
-  '秀禾-类别-龙凤褂' = `${ProductFiledKey['秀禾-类别']}_1`,
-  '秀禾-类别-秀禾' = `${ProductFiledKey['秀禾-类别']}_2`,
-  '秀禾-类别-汉服' = `${ProductFiledKey['秀禾-类别']}_3`,
-  '秀禾-类别-明制汉服' = `${ProductFiledKey['秀禾-类别']}_4`,
-  '秀禾-类别-改良汉服' = `${ProductFiledKey['秀禾-类别']}_5`,
+  '秀禾-款式-龙凤褂' = `${ProductFiledKey['秀禾-款式']}_1`,
+  '秀禾-款式-秀禾' = `${ProductFiledKey['秀禾-款式']}_2`,
+  '秀禾-款式-汉服' = `${ProductFiledKey['秀禾-款式']}_3`,
+  '秀禾-款式-明制汉服' = `${ProductFiledKey['秀禾-款式']}_4`,
+  '秀禾-款式-改良汉服' = `${ProductFiledKey['秀禾-款式']}_5`,
   '秀禾-裙摆-A摆' = `${ProductFiledKey['秀禾-裙摆']}_4`,
   '秀禾-裙摆-太阳摆' = `${ProductFiledKey['秀禾-裙摆']}_5`,
   '秀禾-颜色-红色' = `${ProductFiledKey['秀禾-颜色']}_1`,
@@ -310,6 +313,16 @@ export const productInfoFieldMap = new Map([
     ProductType['秀禾'],
     new Map([
       [
+        ProductFiledKey['秀禾-类别'],
+        {
+          name: '类别',
+          options: [
+            { text: '男', value: ProductFiledOption['秀禾-类别-男'] },
+            { text: '女', value: ProductFiledOption['秀禾-类别-女'] },
+          ],
+        },
+      ],
+      [
         ProductFiledKey['秀禾-材质'],
         {
           name: '材质',
@@ -320,20 +333,20 @@ export const productInfoFieldMap = new Map([
         },
       ],
       [
-        ProductFiledKey['秀禾-类别'],
+        ProductFiledKey['秀禾-款式'],
         {
-          name: '类别',
+          name: '款式',
           options: [
-            { text: '龙凤褂', value: ProductFiledOption['秀禾-类别-龙凤褂'] },
-            { text: '秀禾', value: ProductFiledOption['秀禾-类别-秀禾'] },
-            { text: '汉服', value: ProductFiledOption['秀禾-类别-汉服'] },
+            { text: '龙凤褂', value: ProductFiledOption['秀禾-款式-龙凤褂'] },
+            { text: '秀禾', value: ProductFiledOption['秀禾-款式-秀禾'] },
+            { text: '汉服', value: ProductFiledOption['秀禾-款式-汉服'] },
             {
               text: '明制汉服',
-              value: ProductFiledOption['秀禾-类别-明制汉服'],
+              value: ProductFiledOption['秀禾-款式-明制汉服'],
             },
             {
               text: '改良汉服',
-              value: ProductFiledOption['秀禾-类别-改良汉服'],
+              value: ProductFiledOption['秀禾-款式-改良汉服'],
             },
           ],
         },
@@ -341,7 +354,7 @@ export const productInfoFieldMap = new Map([
       [
         ProductFiledKey['秀禾-裙摆'],
         {
-          name: '类别',
+          name: '裙摆',
           options: [
             { text: 'A摆', value: ProductFiledOption['秀禾-裙摆-A摆'] },
             { text: '太阳摆', value: ProductFiledOption['秀禾-裙摆-太阳摆'] },
