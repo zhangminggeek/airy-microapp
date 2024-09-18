@@ -4416,9 +4416,13 @@ export interface GetCompanyStatisticsResponse {
    */
   saleToday: string
   /**
-   * 今日售出（件）
+   * 待收款
    */
-  saleVolumeToday: string
+  peddingAmount: string
+  /**
+   * 押金
+   */
+  peddingDeposit: string
 }
 
 type GetCompanyStatisticsRequestConfig = Readonly<

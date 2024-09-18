@@ -1,5 +1,5 @@
 import { Button, Dialog, Image } from '@nutui/nutui-react-taro';
-import { Text, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
 import Big from 'big.js';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ import IconReservationManagement from '@/assets/icons/reservation_management.png
 import IconScheduleAnalysis from '@/assets/icons/schedule_analysis.png';
 import IconShopManagement from '@/assets/icons/shop_management.png';
 import ImageLogo from '@/assets/logo.svg';
-import { Avatar, Icon, Section, Space } from '@/components';
+import { Avatar, Icon, Section, Space, Text } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
 import { FeatureType } from '@/constants/platform';
 import { useDialog, useRequest } from '@/hooks';
@@ -243,26 +243,11 @@ const Page = () => {
           <AmountItem title="今日销售" fontSize={20}>
             {data?.saleToday ?? '0.00'}
           </AmountItem>
-          <AmountItem title="今日售出" fontSize={20}>
-            {data?.saleVolumeToday ?? 0}
+          <AmountItem title="待收款" fontSize={20}>
+            {data?.peddingAmount ?? '0.00'}
           </AmountItem>
-          <AmountItem
-            title="关注"
-            fontSize={20}
-            onClick={() => {
-              RouterUtil.navigateTo('/packageCompany/pages/followee/index');
-            }}
-          >
-            {data?.follewedCount ?? 0}
-          </AmountItem>
-          <AmountItem
-            title="粉丝"
-            fontSize={20}
-            onClick={() => {
-              RouterUtil.navigateTo('/packageCompany/pages/fans/index');
-            }}
-          >
-            {data?.fansCount ?? 0}
+          <AmountItem title="押金" fontSize={20}>
+            {data?.peddingDeposit ?? '0.00'}
           </AmountItem>
         </View>
       </Section>
@@ -286,6 +271,26 @@ const Page = () => {
           <Space>
             <View>店铺管理</View>
             <View className={styles['title-tip']}>(限时预约免费使用)</View>
+          </Space>
+        }
+        extra={
+          <Space size={12}>
+            <Text.Info
+              label="关注"
+              onClick={() => {
+                RouterUtil.navigateTo('/packageCompany/pages/followee/index');
+              }}
+            >
+              {data?.follewedCount ?? 0}
+            </Text.Info>
+            <Text.Info
+              label="粉丝"
+              onClick={() => {
+                RouterUtil.navigateTo('/packageCompany/pages/fans/index');
+              }}
+            >
+              {data?.fansCount ?? 0}
+            </Text.Info>
           </Space>
         }
       >

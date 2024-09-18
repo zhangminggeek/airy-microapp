@@ -1,0 +1,20 @@
+@import '../../../styles/var.scss';
+
+.m-text-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &-label {
+    font-size: $font-size-base;
+    color: $text-color-secondary;
+    font-weight: 400;
+  }
+
+  &-content {
+    flex: 1;
+    font-size: $font-size-base;
+    color: $text-color-main;
+    font-weight: 500;
+  }
+}

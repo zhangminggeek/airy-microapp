@@ -30,9 +30,9 @@
     }
 
     &-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(3, 33%);
+      row-gap: 24px;
     }
   }
 
