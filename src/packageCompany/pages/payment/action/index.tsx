@@ -8,6 +8,7 @@ import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil, Toast } from '@/utils';
+import { PlatformAbility, PlatformAbilityWrapper } from '@/wrappers';
 
 const Page = () => {
   const { type } = useRouter().params;
@@ -30,33 +31,35 @@ const Page = () => {
 
   return (
     <BasicLayout title="收款账户" back>
-      <Form
-        form={form}
-        labelPosition="left"
-        divider
-        footer={
-          <Button type="primary" formType="submit" size="xlarge" block>
-            保存
-          </Button>
-        }
-        onFinish={(values) => {
-          run({ ...values, type: Number(type) });
-        }}
-      >
-        {fields.get(Number(type))?.map((field) => (
-          <Form.Item
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            rules={[
-              { required: field.required, message: `请输入${field.label}` },
-              ...(field.rules ?? []),
-            ]}
-          >
-            <Input disabled={field.type === 'text'} />
-          </Form.Item>
-        ))}
-      </Form>
+      <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+        <Form
+          form={form}
+          labelPosition="left"
+          divider
+          footer={
+            <Button type="primary" formType="submit" size="xlarge" block>
+              保存
+            </Button>
+          }
+          onFinish={(values) => {
+            run({ ...values, type: Number(type) });
+          }}
+        >
+          {fields.get(Number(type))?.map((field) => (
+            <Form.Item
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              rules={[
+                { required: field.required, message: `请输入${field.label}` },
+                ...(field.rules ?? []),
+              ]}
+            >
+              <Input disabled={field.type === 'text'} />
+            </Form.Item>
+          ))}
+        </Form>
+      </PlatformAbilityWrapper>
     </BasicLayout>
   );
 };

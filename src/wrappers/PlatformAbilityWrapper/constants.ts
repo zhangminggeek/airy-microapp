@@ -1,3 +1,3 @@
 export enum PlatformAbility {
-  WITHDRAW = 'withdraw',
+  PAYMENT_ACCOUNT = 'payment_account', // 收款账户
 }
