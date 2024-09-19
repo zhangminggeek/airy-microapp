@@ -1,6 +1,7 @@
 import { request } from '@tarojs/taro';
 import { create } from 'zustand';
 
+import { getPlatformAbility } from '@/api';
 import { OSS_ASSETS_DIR } from '@/constants';
 
 export interface AdministrativeCode {
@@ -10,6 +11,8 @@ export interface AdministrativeCode {
 }
 
 interface GloablState {
+  // 平台能力项（仅用于应付小程序审核）
+  platformAbility: string[];
   // 行政编码树形数据
   administrativeCodeTree: AdministrativeCode[];
   // 行政编码字典，以 code 为 key，对应 code 的行政区信息为 value
@@ -17,6 +20,8 @@ interface GloablState {
 }
 
 interface GloablStore extends GloablState {
+  // 获取平台能力项
+  fetchPlatformAbility: () => void;
   // 获取行政编码，获取全量数据并保存
   fetchAdministrativeCode: () => Promise<AdministrativeCode[]>;
   // 储存行政编码
@@ -24,8 +29,16 @@ interface GloablStore extends GloablState {
 }
 
 export const useGlobalStore = create<GloablStore>((set, get) => ({
+  platformAbility: [],
   administrativeCodeTree: [] as AdministrativeCode[],
   administrativeCodeMap: new Map(),
+  fetchPlatformAbility: async () => {
+    const res = await getPlatformAbility();
+    const ability = res.data
+      ?.filter((item) => item.enable)
+      ?.map((item) => item.name);
+    set({ platformAbility: ability });
+  },
   fetchAdministrativeCode: async () => {
     const { administrativeCodeTree } = get();
     if (administrativeCodeTree?.length) return administrativeCodeTree;

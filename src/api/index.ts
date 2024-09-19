@@ -4215,6 +4215,56 @@ const devUrl_0_0_0_4 = '' as any
 const prodUrl_0_0_0_4 = '' as any
 const dataKey_0_0_0_4 = 'data' as any
 
+export interface GetPlatformAbilityRequest {}
+
+export type GetPlatformAbilityResponse = {
+  /**
+   * 账单流水id
+   */
+  id: number
+  /**
+   * 能力项
+   */
+  name: string
+  /**
+   * 是否启用
+   */
+  enable: boolean
+}[]
+
+type GetPlatformAbilityRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/platform/ability', 'data', string, string, true>
+>
+
+const getPlatformAbilityRequestConfig: GetPlatformAbilityRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/platform/ability',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getPlatformAbility',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getPlatformAbility = /*#__PURE__*/ (
+  requestData?: GetPlatformAbilityRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetPlatformAbilityResponse>(prepare(getPlatformAbilityRequestConfig, requestData), ...args)
+}
+
+getPlatformAbility.requestConfig = getPlatformAbilityRequestConfig
+
 export interface PostPlatformWithdrawAuditRequest {
   /**
    * 提现记录id
