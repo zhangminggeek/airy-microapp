@@ -12,6 +12,7 @@ import { CompanyPaymentType } from '@/constants/company';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { Toast } from '@/utils';
+import { PlatformAbility, PlatformAbilityWrapper } from '@/wrappers';
 
 const Page = () => {
   useDidShow(() => {
@@ -50,46 +51,48 @@ const Page = () => {
 
   return (
     <BasicLayout title="收款账户" back>
-      <View>
-        <View className={styles.item}>
-          {payments.union ? (
-            <PaymentCard
-              icon={IconUnionPay}
-              name={payments.union?.bankName}
-              owner={payments.union?.owner}
-              account={payments.union?.account}
-              onRemove={() => {
-                open({ params: { id: `${payments.union?.id}` } });
-              }}
-            />
-          ) : (
-            <Empty
-              text="添加银行卡"
-              type={CompanyPaymentType['银行卡']}
-            ></Empty>
-          )}
+      <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+        <View>
+          <View className={styles.item}>
+            {payments.union ? (
+              <PaymentCard
+                icon={IconUnionPay}
+                name={payments.union?.bankName}
+                owner={payments.union?.owner}
+                account={payments.union?.account}
+                onRemove={() => {
+                  open({ params: { id: `${payments.union?.id}` } });
+                }}
+              />
+            ) : (
+              <Empty
+                text="添加银行卡"
+                type={CompanyPaymentType['银行卡']}
+              ></Empty>
+            )}
+          </View>
+          <View className={styles.item}>
+            {payments.alipay ? (
+              <PaymentCard
+                icon="AliPayFilled"
+                color="#1677FF"
+                name="支付宝"
+                owner={payments.alipay?.owner}
+                account={payments.alipay?.account}
+                onRemove={() => {
+                  deletePayment({ id: `${payments.alipay?.id}` });
+                }}
+              />
+            ) : (
+              <Empty
+                text="添加支付宝"
+                type={CompanyPaymentType['支付宝']}
+              ></Empty>
+            )}
+          </View>
         </View>
-        <View className={styles.item}>
-          {payments.alipay ? (
-            <PaymentCard
-              icon="AliPayFilled"
-              color="#1677FF"
-              name="支付宝"
-              owner={payments.alipay?.owner}
-              account={payments.alipay?.account}
-              onRemove={() => {
-                deletePayment({ id: `${payments.alipay?.id}` });
-              }}
-            />
-          ) : (
-            <Empty
-              text="添加支付宝"
-              type={CompanyPaymentType['支付宝']}
-            ></Empty>
-          )}
-        </View>
-      </View>
-      <View className={styles.tip}>仅允许添加两个收款账户</View>
+        <View className={styles.tip}>仅允许添加两个收款账户</View>
+      </PlatformAbilityWrapper>
       {renderDialog()}
     </BasicLayout>
   );

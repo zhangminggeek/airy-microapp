@@ -14,6 +14,8 @@ const PlatformAbilityWrapper: FC<PlatformAbilityWrapperProps> = ({
 }) => {
   const { platformAbility } = useGlobalStore((state) => state);
 
+  console.log('platformAbility', platformAbility);
+
   return platformAbility?.includes(name) ? (
     children
   ) : (
