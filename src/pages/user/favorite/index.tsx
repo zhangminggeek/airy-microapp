@@ -1,26 +1,19 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import { useRef } from 'react';
 
 import styles from './index.module.scss';
 
-import type { ActionType } from '@/components/List';
+import type { ActionType } from '@/components/InfiniteList';
 
 import { getMarketMyFavorite, postMarketFavorite } from '@/api';
-import { List, Product } from '@/components';
+import { InfiniteList, Product } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
   const actionRef = useRef<ActionType>(null);
-
-  // 下拉刷新
-  usePullDownRefresh(async () => {
-    await actionRef.current?.refresh();
-    stopPullDownRefresh();
-  });
 
   // 取消收藏
   const { run: toggle } = useRequest(postMarketFavorite, {
@@ -33,10 +26,9 @@ const Page = () => {
 
   return (
     <BasicLayout title="我的收藏" back>
-      <List
+      <InfiniteList
         actionRef={actionRef}
         request={getMarketMyFavorite}
-        column={1}
         renderItem={(item) => (
           <Product.Brief
             key={item.id}

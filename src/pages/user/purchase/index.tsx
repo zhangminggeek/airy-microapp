@@ -6,7 +6,7 @@ import { useRef, useState } from 'react';
 import styles from './index.module.scss';
 
 import type { GetPurchaseSelfResponse } from '@/api';
-import type { ActionType } from '@/components/List';
+import type { ActionType } from '@/components/InfiniteList';
 import type { ReactNode } from 'react';
 
 import {
@@ -15,7 +15,7 @@ import {
   putPurchaseAccomplishId,
   putPurchaseAuditCancelId,
 } from '@/api';
-import { Affix, List, Product, Space, Tag } from '@/components';
+import { Affix, InfiniteList, Product, Space, Tag } from '@/components';
 import { PurchaseStatus } from '@/constants/purchase';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -218,57 +218,54 @@ const Page = () => {
 
   return (
     <BasicLayout title="我求购的" back="/pages/user/index/index" fill>
-      <View className={styles.content}>
-        <Tabs
-          value={currentIndex}
-          onChange={(index: number) => {
-            setCurrentIndex(index);
-          }}
-        >
-          {tabs.map((item) => (
-            <Tabs.TabPane key={item.value} title={item.title} />
-          ))}
-        </Tabs>
-        <View className={styles.body}>
-          <List
-            actionRef={actionRef}
-            request={getPurchaseSelf}
-            params={{ status: tabs[currentIndex].value }}
-            column={1}
-            renderItem={(item) => (
-              <Product.Brief
-                key={item.id}
-                image={item?.picList?.[0]?.url}
-                title={item?.title}
-                leasePrice={
-                  item.minLeasePrice || item.maxLeasePrice
-                    ? [item.minLeasePrice, item.maxLeasePrice]
-                    : undefined
-                }
-                sellingPrice={
-                  item.minPrice || item.maxPrice
-                    ? [item.minPrice, item.maxPrice]
-                    : undefined
-                }
-                footer={
-                  tabs[currentIndex].extra || tabs[currentIndex].actions ? (
-                    <View className={styles['brief-footer']}>
-                      <View>{tabs[currentIndex].extra?.(item)}</View>
-                      <Space>{tabs[currentIndex].actions?.(item)}</Space>
-                    </View>
-                  ) : null
-                }
-                onClick={() => {
-                  RouterUtil.navigateTo('/pages/purchase/detail/index', {
-                    id: item.id,
-                  });
-                }}
-              />
-            )}
-            padding
+      <InfiniteList
+        actionRef={actionRef}
+        request={getPurchaseSelf}
+        params={{ status: tabs[currentIndex].value }}
+        header={
+          <Tabs
+            value={currentIndex}
+            onChange={(index: number) => {
+              setCurrentIndex(index);
+            }}
+          >
+            {tabs.map((item) => (
+              <Tabs.TabPane key={item.value} title={item.title} />
+            ))}
+          </Tabs>
+        }
+        headerFixed
+        renderItem={(item) => (
+          <Product.Brief
+            key={item.id}
+            image={item?.picList?.[0]?.url}
+            title={item?.title}
+            leasePrice={
+              item.minLeasePrice || item.maxLeasePrice
+                ? [item.minLeasePrice, item.maxLeasePrice]
+                : undefined
+            }
+            sellingPrice={
+              item.minPrice || item.maxPrice
+                ? [item.minPrice, item.maxPrice]
+                : undefined
+            }
+            footer={
+              tabs[currentIndex].extra || tabs[currentIndex].actions ? (
+                <View className={styles['brief-footer']}>
+                  <View>{tabs[currentIndex].extra?.(item)}</View>
+                  <Space>{tabs[currentIndex].actions?.(item)}</Space>
+                </View>
+              ) : null
+            }
+            onClick={() => {
+              RouterUtil.navigateTo('/pages/purchase/detail/index', {
+                id: item.id,
+              });
+            }}
           />
-        </View>
-      </View>
+        )}
+      />
       <Affix
         onClick={() => {
           RouterUtil.navigateTo('/pages/purchase/action/index');

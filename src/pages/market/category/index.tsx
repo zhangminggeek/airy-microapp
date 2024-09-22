@@ -12,10 +12,10 @@ import CustomFilter from './CustomFilter';
 import styles from './index.module.scss';
 import MainFilter from './MainFilter';
 
-import type { ActionType as ListActionType } from '@/components/List';
+import type { ActionType } from '@/components/InfiniteList';
 
 import { getMarket } from '@/api';
-import { Filter, Icon, InputSearch, List, Product } from '@/components';
+import { Filter, Icon, InfiniteList, InputSearch, Product } from '@/components';
 import { HIDE_PRICE } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductType } from '@/constants/product';
@@ -27,7 +27,7 @@ const Page = () => {
   // 服装类型
   const { typeCode, from } = useRouter().params;
   const inputSearchRef = useRef<any>(null);
-  const actionRef = useRef<ListActionType>(null);
+  const actionRef = useRef<ActionType>(null);
   const { info } = useUserStore((state) => state);
 
   const config = filterConfig.get(typeCode as ProductType);
@@ -92,95 +92,99 @@ const Page = () => {
       fill
       safeArea={false}
     >
-      {config?.main ? (
-        <MainFilter
-          options={config.main.options}
-          value={mainFilterValue}
-          onChange={(v) => {
-            setMainFilterValue(v);
-          }}
-        />
-      ) : null}
-      <Filter
-        fields={[
-          ...(config?.tab ?? []),
-          {
-            title: '排序',
-            name: 'order',
-            options: [
-              { text: '默认排序', value: 0 },
-              { text: '最新发布', value: 1 },
-              { text: '最多收藏', value: 2 },
-              { text: '出售价从高到低', value: 3 },
-              { text: '出售价从低到高', value: 4 },
-              { text: '借调价从高到低', value: 5 },
-              { text: '借调价从低到高', value: 6 },
-            ],
-            emptyOption: false,
-            defaultValue: 0,
-          },
-          {
-            title: '筛选',
-            name: 'filter',
-            titleIcon: <Icon name="FilterFilled" size={10} />,
-            render: (ref) => {
-              return (
-                <CustomFilter
-                  typeCode={typeCode as ProductType}
-                  excludes={[
-                    config?.main?.filed ?? '',
-                    ...(config?.tab?.map((item) => item.name) ?? []),
-                  ].filter((item) => !!item)}
-                  onOk={(v) => {
-                    setSubFilterValue(v);
-                    ref.current?.toggle(false);
-                  }}
-                  onReset={() => {
-                    setSubFilterValue(undefined);
-                    ref.current?.toggle(false);
-                  }}
-                />
-              );
-            },
-          },
-        ]}
-        value={tabFilterValue}
-        onChange={(v) => {
-          setTabFilterValue(v);
-        }}
-      />
-      <View className={styles.body}>
-        <List
-          actionRef={actionRef}
-          request={getMarket}
-          params={params}
-          renderItem={(item) => (
-            <Product.Card
-              key={item.id}
-              image={item.product?.picList?.[0]?.url}
-              title={item.title}
-              tagList={item.product?.tagList?.map((item) => item.tag.name)}
-              allowSell={item.allowSell}
-              allowLease={item.allowLease}
-              leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
-              sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
-              companyLogo={item.companyLogo}
-              companyName={item.companyName}
-              extra={{ icon: 'LoveOutlined', text: item.favorities }}
-              onClick={() => {
-                RouterUtil.navigateTo('/pages/market/detail/index', {
-                  id: item.id,
-                });
-              }}
-              onCompanyClick={() => {
-                RouterUtil.navigateTo('/packageCompany/pages/index/index', {
-                  id: item.companyId,
-                });
+      <InfiniteList
+        actionRef={actionRef}
+        request={getMarket}
+        params={params}
+        header={
+          <View>
+            {config?.main ? (
+              <MainFilter
+                options={config.main.options}
+                value={mainFilterValue}
+                onChange={(v) => {
+                  setMainFilterValue(v);
+                }}
+              />
+            ) : null}
+            <Filter
+              fields={[
+                ...(config?.tab ?? []),
+                {
+                  title: '排序',
+                  name: 'order',
+                  options: [
+                    { text: '默认排序', value: 0 },
+                    { text: '最新发布', value: 1 },
+                    { text: '最多收藏', value: 2 },
+                    { text: '出售价从高到低', value: 3 },
+                    { text: '出售价从低到高', value: 4 },
+                    { text: '借调价从高到低', value: 5 },
+                    { text: '借调价从低到高', value: 6 },
+                  ],
+                  emptyOption: false,
+                  defaultValue: 0,
+                },
+                {
+                  title: '筛选',
+                  name: 'filter',
+                  titleIcon: <Icon name="FilterFilled" size={10} />,
+                  render: (ref) => {
+                    return (
+                      <CustomFilter
+                        typeCode={typeCode as ProductType}
+                        excludes={[
+                          config?.main?.filed ?? '',
+                          ...(config?.tab?.map((item) => item.name) ?? []),
+                        ].filter((item) => !!item)}
+                        onOk={(v) => {
+                          setSubFilterValue(v);
+                          ref.current?.toggle(false);
+                        }}
+                        onReset={() => {
+                          setSubFilterValue(undefined);
+                          ref.current?.toggle(false);
+                        }}
+                      />
+                    );
+                  },
+                },
+              ]}
+              value={tabFilterValue}
+              onChange={(v) => {
+                setTabFilterValue(v);
               }}
             />
-          )}
-        />
-      </View>
+          </View>
+        }
+        headerFixed
+        column="multiple"
+        renderItem={(item) => (
+          <Product.Card
+            key={item.id}
+            image={item.product?.picList?.[0]?.url}
+            title={item.title}
+            tagList={item.product?.tagList?.map((item) => item.tag.name)}
+            allowSell={item.allowSell}
+            allowLease={item.allowLease}
+            leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
+            sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
+            companyLogo={item.companyLogo}
+            companyName={item.companyName}
+            extra={{ icon: 'LoveOutlined', text: item.favorities }}
+            onClick={() => {
+              RouterUtil.navigateTo('/pages/market/detail/index', {
+                id: item.id,
+              });
+            }}
+            onCompanyClick={() => {
+              RouterUtil.navigateTo('/packageCompany/pages/index/index', {
+                id: item.companyId,
+              });
+            }}
+          />
+        )}
+      />
     </BasicLayout>
   );
 };

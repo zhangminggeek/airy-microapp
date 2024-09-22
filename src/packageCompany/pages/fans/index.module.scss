@@ -1,39 +1,30 @@
 @import '../../../styles/var.scss';
 
-.list {
-  :global {
-    .nut-infinite-container {
-      background-color: #fff;
-      border-radius: 16px;
+.item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 128px;
+  padding: 0 32px;
+
+  &:not(:last-of-type) {
+    .item-content {
+      border-bottom: 2px solid $border-color-base;
     }
   }
 
-  .item {
+  &-content {
+    flex: 1;
     display: flex;
     align-items: center;
     gap: 24px;
-    height: 128px;
-    padding: 0 32px;
+    height: 100%;
+  }
 
-    &:not(:last-of-type) {
-      .item-content {
-        border-bottom: 2px solid $border-color-base;
-      }
-    }
-
-    &-content {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      height: 100%;
-    }
-
-    &-name {
-      flex: 1;
-      font-size: $font-size-base;
-      color: $text-color-main;
-      font-weight: 500;
-    }
+  &-name {
+    flex: 1;
+    font-size: $font-size-base;
+    color: $text-color-main;
+    font-weight: 500;
   }
 }

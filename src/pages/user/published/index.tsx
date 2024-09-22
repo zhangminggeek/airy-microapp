@@ -6,7 +6,7 @@ import { useRef, useState } from 'react';
 import styles from './index.module.scss';
 
 import type { GetMarketResponse } from '@/api';
-import type { ActionType } from '@/components/List';
+import type { ActionType } from '@/components/InfiniteList';
 import type { ReactNode } from 'react';
 
 import {
@@ -17,7 +17,14 @@ import {
   putMarketShelvesOn,
 } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
-import { ActionSheet, Affix, List, Product, Space, Tag } from '@/components';
+import {
+  ActionSheet,
+  Affix,
+  InfiniteList,
+  Product,
+  Space,
+  Tag,
+} from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductSource } from '@/constants/product';
 import { useDialog, useRequest } from '@/hooks';
@@ -261,52 +268,49 @@ const Page = () => {
 
   return (
     <BasicLayout title="我发布的" back="/pages/user/index/index" fill>
-      <View className={styles.content}>
-        <Tabs
-          value={currentIndex}
-          onChange={(index: number) => {
-            setCurrentIndex(index);
-          }}
-        >
-          {tabs.map((item) => (
-            <Tabs.TabPane key={item.value} title={item.title} />
-          ))}
-        </Tabs>
-        <View className={styles.body}>
-          <List
-            actionRef={actionRef}
-            request={getMarketMyPublished}
-            params={{ status: tabs[currentIndex].value }}
-            column={1}
-            renderItem={(item) => (
-              <Product.Brief
-                key={item.id}
-                image={item.product?.picList?.[0]?.url}
-                title={item.title}
-                desc={item.description}
-                leasePrice={item.leasePrice}
-                sellingPrice={item.sellingPrice}
-                footer={
-                  <View className={styles['brief-footer']}>
-                    <View className={styles['brief-footer-extra']}>
-                      {tabs[currentIndex].extra?.(item)}
-                    </View>
-                    <Space className={styles['brief-footer-actions']} size={12}>
-                      {tabs[currentIndex].actions?.(item)}
-                    </Space>
-                  </View>
-                }
-                onClick={() => {
-                  RouterUtil.navigateTo('/pages/market/detail/index', {
-                    id: item.id,
-                  });
-                }}
-              />
-            )}
-            padding
+      <InfiniteList
+        actionRef={actionRef}
+        request={getMarketMyPublished}
+        params={{ status: tabs[currentIndex].value }}
+        header={
+          <Tabs
+            value={currentIndex}
+            onChange={(index: number) => {
+              setCurrentIndex(index);
+            }}
+          >
+            {tabs.map((item) => (
+              <Tabs.TabPane key={item.value} title={item.title} />
+            ))}
+          </Tabs>
+        }
+        headerFixed
+        renderItem={(item) => (
+          <Product.Brief
+            key={item.id}
+            image={item.product?.picList?.[0]?.url}
+            title={item.title}
+            desc={item.description}
+            leasePrice={item.leasePrice}
+            sellingPrice={item.sellingPrice}
+            footer={
+              <View className={styles['brief-footer']}>
+                <View className={styles['brief-footer-extra']}>
+                  {tabs[currentIndex].extra?.(item)}
+                </View>
+                <Space className={styles['brief-footer-actions']} size={12}>
+                  {tabs[currentIndex].actions?.(item)}
+                </Space>
+              </View>
+            }
+            onClick={() => {
+              RouterUtil.navigateTo('/pages/market/detail/index', {
+                id: item.id,
+              });
+            }}
           />
-        </View>
-      </View>
+        )}
+      />
       <ActionSheet
         options={[
           { name: '从服装管理中选择', key: ProductSource['服装管理'] },

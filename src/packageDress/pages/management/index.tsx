@@ -4,10 +4,10 @@ import { useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import type { ActionType } from '@/components/List';
+import type { ActionType } from '@/components/InfiniteList';
 
 import { getProductPage } from '@/api';
-import { Affix, InputSearch, List, Media } from '@/components';
+import { Affix, InfiniteList, InputSearch, Media } from '@/components';
 import {
   ProductStatus,
   productStatusMap,
@@ -19,8 +19,7 @@ import { RouterUtil } from '@/utils';
 const typeList = Array.from(productTypeMap.values());
 
 const Page = () => {
-  const actionRef =
-    useRef<ActionType<{ productTypeCode?: string; name?: string }>>(null);
+  const actionRef = useRef<ActionType>(null);
 
   // 搜索词
   const [keyword, setKeyword] = useState<string>();
@@ -29,78 +28,72 @@ const Page = () => {
 
   return (
     <BasicLayout title="服饰管理" back fill safeArea={false}>
-      <View className={styles.content}>
-        <View className={styles.header}>
-          <View className={styles['header-search']}>
-            <InputSearch
-              onSearch={(v) => {
-                setKeyword(v);
-                if (!typeList?.length) return;
-                const productTypeCode = typeList?.[currentIndex]?.value;
-                actionRef.current?.refresh({ productTypeCode, name: v });
+      <InfiniteList
+        actionRef={actionRef}
+        request={getProductPage}
+        params={{
+          productTypeCode: typeList?.[currentIndex]?.value,
+          name: keyword,
+        }}
+        header={
+          <View className={styles.header}>
+            <View className={styles['header-search']}>
+              <InputSearch
+                onSearch={(v) => {
+                  setKeyword(v);
+                  if (!typeList?.length) return;
+                  const productTypeCode = typeList?.[currentIndex]?.value;
+                  actionRef.current?.refresh({ productTypeCode, name: v });
+                }}
+              />
+            </View>
+            <Tabs
+              value={currentIndex}
+              onChange={(index: number) => {
+                setCurrentIndex(index);
               }}
-            />
+            >
+              {typeList.map((item) => (
+                <Tabs.TabPane key={item.value} title={item.text} />
+              ))}
+            </Tabs>
           </View>
-          <Tabs
-            value={currentIndex}
-            onChange={(index: number) => {
-              setCurrentIndex(index);
-            }}
-          >
-            {typeList.map((item) => (
-              <Tabs.TabPane key={item.value} title={item.text} />
-            ))}
-          </Tabs>
-        </View>
-        <View className={styles.body}>
-          {typeList?.length ? (
-            <List
-              actionRef={actionRef}
-              request={getProductPage}
-              params={{
-                productTypeCode: typeList?.[currentIndex]?.value,
-                name: keyword,
+        }
+        headerFixed
+        column="multiple"
+        renderItem={(item) => {
+          return (
+            <View
+              key={item.id}
+              className={styles.card}
+              onClick={() => {
+                RouterUtil.navigateTo('/packageDress/pages/detail/index', {
+                  id: item.id,
+                });
               }}
-              renderItem={(item) => {
-                return (
-                  <View
-                    key={item.id}
-                    className={styles.card}
-                    onClick={() => {
-                      RouterUtil.navigateTo(
-                        '/packageDress/pages/detail/index',
-                        { id: item.id },
-                      );
-                    }}
-                  >
-                    <View className={styles['card-header']}>
-                      <Media
-                        className={styles['card-header-image']}
-                        src={item.picList?.[0]?.url}
-                        mode="aspectFill"
-                      />
-                    </View>
-                    <View className={styles['card-body']}>
-                      <View className={styles['card-body-title']}>
-                        {item.name}
-                      </View>
-                    </View>
-                    {item.status === ProductStatus['已售出'] ||
-                    item.status === ProductStatus['借调中'] ? (
-                      <View className={styles['card-mask']}>
-                        <View className={styles['card-mask-tag']}>
-                          {productStatusMap.get(item.status)?.text}
-                        </View>
-                      </View>
-                    ) : null}
+            >
+              <View className={styles['card-header']}>
+                <Media
+                  className={styles['card-header-image']}
+                  src={item.picList?.[0]?.url}
+                  mode="aspectFill"
+                />
+              </View>
+              <View className={styles['card-body']}>
+                <View className={styles['card-body-title']}>{item.name}</View>
+              </View>
+              {item.status === ProductStatus['已售出'] ||
+              item.status === ProductStatus['借调中'] ? (
+                <View className={styles['card-mask']}>
+                  <View className={styles['card-mask-tag']}>
+                    {productStatusMap.get(item.status)?.text}
                   </View>
-                );
-              }}
-              padding
-            />
-          ) : null}
-        </View>
-      </View>
+                </View>
+              ) : null}
+            </View>
+          );
+        }}
+      />
       <Affix
         onClick={() => {
           RouterUtil.navigateTo('/packageDress/pages/action/index');

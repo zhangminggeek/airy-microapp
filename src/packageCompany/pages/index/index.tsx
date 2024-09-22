@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 
 import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
-import { Avatar, Icon, List, Product, Space } from '@/components';
+import { Avatar, Icon, InfiniteList, Product, Space } from '@/components';
 import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
@@ -97,88 +97,94 @@ const Page = () => {
       transparent
       safeArea={false}
     >
-      <View className={styles.header}>
-        <View className={styles.top}>
-          <Avatar
-            className={styles.logo}
-            src={data?.logo}
-            name={data?.name}
-            size="64"
-          />
-          <View className={styles.content}>
-            <View className={styles.name}>{data?.name}</View>
-            <Space className={styles.info} split>
-              <Text className={styles['info-item']}>
-                已卖出{data?.sold ?? 0}件
-              </Text>
-              <Text className={styles['info-item']}>
-                {data?.fansCount ?? 0}粉丝
-              </Text>
-            </Space>
-          </View>
-          {followBtn}
-        </View>
-      </View>
-      <View className={styles.body}>
-        <View className={styles.top}>
-          <View className={styles.intro}>{data?.intro ?? '暂无介绍～'}</View>
-          <Button
-            className={styles['btn-share']}
-            icon={<Icon name="ShareOneOutlined" size={14} />}
-            size="mini"
-            fill="none"
-            openType="share"
-          >
-            分享
-          </Button>
-        </View>
-        <Tabs
-          className={styles.tabs}
-          align="left"
-          value={tabIndex}
-          onChange={(value: number) => {
-            setTabIndex(value);
-          }}
-        >
-          <Tabs.TabPane title="全部" />
-          {Array.from(productTypeMap.values()).map((item) => (
-            <Tabs.TabPane title={item.text} key={item.value} />
-          ))}
-        </Tabs>
-        <View className={styles.list}>
-          <List
-            request={getMarket}
-            params={{
-              status: MarketProductStatus['在售'],
-              companyId: id,
-              productTypeCode:
-                tabIndex === 0
-                  ? undefined
-                  : Array.from(productTypeMap.values())[tabIndex! - 1]?.value,
-            }}
-            renderItem={(item) => (
-              <Product.Card
-                key={item.id}
-                image={item.product?.picList?.[0]?.url}
-                title={item.title}
-                tagList={item.product?.tagList?.map((item) => item.tag.name)}
-                allowSell={item.allowSell}
-                allowLease={item.allowLease}
-                leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
-                sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
-                companyLogo={item.companyLogo}
-                companyName={item.companyName}
-                extra={{ icon: 'LoveOutlined', text: item.favorities }}
-                onClick={() => {
-                  RouterUtil.navigateTo('/pages/market/detail/index', {
-                    id: item.id,
-                  });
+      <InfiniteList
+        className={styles.list}
+        request={getMarket}
+        params={{
+          status: `${MarketProductStatus['在售']}`,
+          companyId: id,
+          productTypeCode:
+            tabIndex === 0
+              ? undefined
+              : Array.from(productTypeMap.values())[tabIndex! - 1]?.value,
+        }}
+        header={
+          <View>
+            <View className={styles.header}>
+              <View className={styles.top}>
+                <Avatar
+                  className={styles.logo}
+                  src={data?.logo}
+                  name={data?.name}
+                  size="64"
+                />
+                <View className={styles.content}>
+                  <View className={styles.name}>{data?.name}</View>
+                  <Space className={styles.info} split>
+                    <Text className={styles['info-item']}>
+                      已卖出{data?.sold ?? 0}件
+                    </Text>
+                    <Text className={styles['info-item']}>
+                      {data?.fansCount ?? 0}粉丝
+                    </Text>
+                  </Space>
+                </View>
+                {followBtn}
+              </View>
+            </View>
+            <View className={styles.body}>
+              <View className={styles.top}>
+                <View className={styles.intro}>
+                  {data?.intro ?? '暂无介绍～'}
+                </View>
+                <Button
+                  className={styles['btn-share']}
+                  icon={<Icon name="ShareOneOutlined" size={14} />}
+                  size="mini"
+                  fill="none"
+                  openType="share"
+                >
+                  分享
+                </Button>
+              </View>
+              <Tabs
+                className={styles.tabs}
+                align="left"
+                value={tabIndex}
+                onChange={(value: number) => {
+                  setTabIndex(value);
                 }}
-              />
-            )}
+              >
+                <Tabs.TabPane title="全部" />
+                {Array.from(productTypeMap.values()).map((item) => (
+                  <Tabs.TabPane title={item.text} key={item.value} />
+                ))}
+              </Tabs>
+            </View>
+          </View>
+        }
+        column="multiple"
+        renderItem={(item) => (
+          <Product.Card
+            key={item.id}
+            image={item.product?.picList?.[0]?.url}
+            title={item.title}
+            tagList={item.product?.tagList?.map((item) => item.tag.name)}
+            allowSell={item.allowSell}
+            allowLease={item.allowLease}
+            leasePrice={info?.account ? item.leasePrice : HIDE_PRICE}
+            sellingPrice={info?.account ? item.sellingPrice : HIDE_PRICE}
+            companyLogo={item.companyLogo}
+            companyName={item.companyName}
+            extra={{ icon: 'LoveOutlined', text: item.favorities }}
+            onClick={() => {
+              RouterUtil.navigateTo('/pages/market/detail/index', {
+                id: item.id,
+              });
+            }}
           />
-        </View>
-      </View>
+        )}
+      />
       {renderDialog()}
     </BasicLayout>
   );

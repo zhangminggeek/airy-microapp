@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './index.module.scss';
 
 import { getMarketMyPublished, postPurchaseSend } from '@/api';
-import { ActionSheet, List, Product } from '@/components';
+import { ActionSheet, InfiniteList, Product } from '@/components';
 import { MarketProductStatus } from '@/constants/market';
 import { ProductSource } from '@/constants/product';
 import { useRequest } from '@/hooks';
@@ -31,9 +31,10 @@ const Page = () => {
 
   return (
     <BasicLayout
-      className={styles.layout}
+      className={styles.container}
       title="二手商品"
       back
+      fill
       footer={{
         btnText: '发送',
         extra: (
@@ -61,10 +62,10 @@ const Page = () => {
         },
       }}
     >
-      <List
+      <InfiniteList
         request={getMarketMyPublished}
-        params={{ status: MarketProductStatus[''] }}
-        column={1}
+        params={{ status: `${MarketProductStatus['在售']}` }}
+        padding
         renderItem={(item) => (
           <View
             className={styles.item}

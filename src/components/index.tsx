@@ -11,12 +11,12 @@ import Empty from './Empty';
 import Filter from './Filter';
 import FormSection from './FormSection';
 import Icon from './Icon';
+import InfiniteList from './InfiniteList';
 import InputCode from './InputCode';
 import InputNumber from './InputNumber';
 import InputNumberRange from './InputNumberRange';
 import InputPassword from './InputPassword';
 import InputSearch from './InputSearch';
-import List from './List';
 import Media from './Media';
 import ModalForm from './ModalForm';
 import Picker from './Picker';
@@ -44,12 +44,12 @@ export {
   Filter,
   FormSection,
   Icon,
+  InfiniteList,
   InputCode,
   InputNumber,
   InputNumberRange,
   InputPassword,
   InputSearch,
-  List,
   Media,
   ModalForm,
   Picker,

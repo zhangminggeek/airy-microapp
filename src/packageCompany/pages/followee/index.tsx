@@ -3,9 +3,10 @@ import { useRef } from 'react';
 
 import styles from './index.module.scss';
 
+import type { ActionType } from '@/components/InfiniteList';
+
 import { getCompanyFollowee, postCompanyFollowToggle } from '@/api';
-import { Avatar, List } from '@/components';
-import { ActionType } from '@/components/List';
+import { Avatar, InfiniteList } from '@/components';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
@@ -30,12 +31,12 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title="我的关注" back>
-      <List
-        className={styles.list}
+    <BasicLayout title="我的关注" fill back>
+      <InfiniteList
         actionRef={actionRef}
-        column={1}
         request={getCompanyFollowee}
+        padding
+        combine
         renderItem={(item) => (
           <View
             key={item.id}

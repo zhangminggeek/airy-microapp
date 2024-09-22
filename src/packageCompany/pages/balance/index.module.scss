@@ -1,70 +1,48 @@
 @import '../../../styles/var.scss';
 
-.content {
+.item {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  align-items: flex-start;
+  padding: 24px 0;
 
-  .body {
+  & + .item {
+    border-top: 2px solid $border-color-base;
+  }
+
+  .left {
     flex: 1;
-    padding: 24px 32px;
-    overflow-y: auto;
 
-    .list {
-      :global {
-        .nut-infinite-container {
-          padding: 0 32px;
-          background-color: #fff;
-          border-radius: 16px;
-        }
-      }
+    .title {
+      font-size: $font-size-large;
+      color: $text-color-main;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      font-size: $font-size-small;
+      color: $text-color-secondary;
+      font-weight: 400;
     }
   }
 
-  .item {
-    display: flex;
-    align-items: flex-start;
-    padding: 24px 0;
-
-    & + & {
-      border-top: 2px solid $border-color-base;
+  .right {
+    .amount {
+      font-size: $font-size-large;
+      color: $text-color-main;
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-align: right;
     }
 
-    .left {
-      flex: 1;
+    .charge {
+      font-size: $font-size-small;
+      color: $text-color-secondary;
+      font-weight: 400;
+      text-align: right;
 
-      .title {
-        font-size: $font-size-large;
+      &-num {
         color: $text-color-main;
-        font-weight: 500;
-        margin-bottom: 8px;
-      }
-
-      .desc {
-        font-size: $font-size-small;
-        color: $text-color-secondary;
-        font-weight: 400;
-      }
-    }
-
-    .right {
-      .amount {
-        font-size: $font-size-large;
-        color: $text-color-main;
-        font-weight: 500;
-        margin-bottom: 8px;
-        text-align: right;
-      }
-
-      .charge {
-        font-size: $font-size-small;
-        color: $text-color-secondary;
-        font-weight: 400;
-        text-align: right;
-
-        &-num {
-          color: $text-color-main;
-        }
       }
     }
   }

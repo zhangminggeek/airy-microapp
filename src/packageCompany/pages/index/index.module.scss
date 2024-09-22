@@ -35,10 +35,8 @@
 }
 
 .body {
-  min-height: calc(100vh - 356px);
   background-color: #fff;
   border-radius: 40px 40px 0 0;
-  overflow: hidden;
 
   .top {
     display: flex;
@@ -89,8 +87,13 @@
       }
     }
   }
+}
 
-  .list {
-    padding: 24px;
+.list {
+  :global {
+    .m-infinite-list-body-main {
+      padding: 24px;
+      background-color: #fff;
+    }
   }
 }

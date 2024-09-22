@@ -1,12 +1,6 @@
 @import '../../../styles/var.scss';
 @import '../../../styles/mixins.scss';
 
-.content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .header {
   width: 100vw;
   background-color: #fff;
@@ -16,61 +10,55 @@
   }
 }
 
-.body {
-  flex: 1;
+.card {
+  position: relative;
   width: 100%;
-  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
 
-  .card {
-    position: relative;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 16px;
-    overflow: hidden;
+  &-header {
+    height: 340px;
 
-    &-header {
-      height: 340px;
-
-      &-image {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    &-body {
-      height: 110px;
-      padding: 16px;
-
-      &-title {
-        @include ellipsis(2);
-        font-size: $font-size-base;
-        color: $text-color-main;
-        font-weight: 500;
-      }
-    }
-
-    &-mask {
-      position: absolute;
-      top: 0;
-      left: 0;
+    &-image {
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.5);
+    }
+  }
 
-      &-tag {
-        position: absolute;
-        top: 140px;
-        left: 50%;
-        transform: translateX(-50%);
-        @include flex-center;
-        width: 136px;
-        height: 56px;
-        font-size: $font-size-small;
-        color: $text-color-base;
-        padding: 8px 32px;
-        border-radius: 32px;
-        background-color: #fff;
-      }
+  &-body {
+    height: 110px;
+    padding: 16px;
+
+    &-title {
+      @include ellipsis(2);
+      font-size: $font-size-base;
+      color: $text-color-main;
+      font-weight: 500;
+    }
+  }
+
+  &-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+
+    &-tag {
+      position: absolute;
+      top: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      @include flex-center;
+      width: 136px;
+      height: 56px;
+      font-size: $font-size-small;
+      color: $text-color-base;
+      padding: 8px 32px;
+      border-radius: 32px;
+      background-color: #fff;
     }
   }
 }
