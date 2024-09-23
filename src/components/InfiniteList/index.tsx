@@ -1,3 +1,4 @@
+import { Loading } from '@nutui/nutui-react-taro';
 import { ScrollView, Text, View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useImperativeHandle, useMemo, useRef, useState } from 'react';
@@ -161,6 +162,11 @@ const InfiniteList = <
           <View className={`${PREFIX_CLS}-body-main`}>
             {list?.map((item) => renderItem(item))}
           </View>
+          {loading ? (
+            <View className={`${PREFIX_CLS}-body-loading`}>
+              <Loading type="spinner" />
+            </View>
+          ) : null}
           {hasMore ? null : (
             <View className={`${PREFIX_CLS}-body-tip`}>
               <Text className={`${PREFIX_CLS}-body-tip-text`}>没有更多了</Text>
