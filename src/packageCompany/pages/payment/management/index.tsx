@@ -50,8 +50,8 @@ const Page = () => {
   }, [data]);
 
   return (
-    <BasicLayout title="收款账户" back>
-      <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+    <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+      <BasicLayout title="收款账户" back>
         <View>
           <View className={styles.item}>
             {payments.union ? (
@@ -92,9 +92,9 @@ const Page = () => {
           </View>
         </View>
         <View className={styles.tip}>仅允许添加两个收款账户</View>
-      </PlatformAbilityWrapper>
-      {renderDialog()}
-    </BasicLayout>
+        {renderDialog()}
+      </BasicLayout>
+    </PlatformAbilityWrapper>
   );
 };
 

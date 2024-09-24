@@ -30,8 +30,8 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title="收款账户" back>
-      <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+    <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+      <BasicLayout title="收款账户" back>
         <Form
           form={form}
           labelPosition="left"
@@ -59,8 +59,8 @@ const Page = () => {
             </Form.Item>
           ))}
         </Form>
-      </PlatformAbilityWrapper>
-    </BasicLayout>
+      </BasicLayout>
+    </PlatformAbilityWrapper>
   );
 };
 

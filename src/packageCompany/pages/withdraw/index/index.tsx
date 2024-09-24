@@ -72,8 +72,8 @@ const Page = () => {
   }, [payments]);
 
   return (
-    <BasicLayout className={styles.container} title="提现" fill back>
-      <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+    <PlatformAbilityWrapper name={PlatformAbility.PAYMENT_ACCOUNT}>
+      <BasicLayout className={styles.container} title="提现" fill back>
         <NoticeBar
           className={styles.notice}
           content="工作人员将会在工作日的 09:00-18:00 处理您的提现申请"
@@ -204,8 +204,8 @@ const Page = () => {
             立即提现
           </Button>
         </View>
-      </PlatformAbilityWrapper>
-    </BasicLayout>
+      </BasicLayout>
+    </PlatformAbilityWrapper>
   );
 };
 

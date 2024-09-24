@@ -1,6 +1,9 @@
+import { Image } from '@tarojs/components';
+
 import type { FC, ReactNode } from 'react';
 
-import { Empty } from '@/components';
+import { OSS_ASSETS_DIR } from '@/constants';
+import { BasicLayout } from '@/layouts';
 import { useGlobalStore } from '@/models';
 
 interface PlatformAbilityWrapperProps {
@@ -14,12 +17,16 @@ const PlatformAbilityWrapper: FC<PlatformAbilityWrapperProps> = ({
 }) => {
   const { platformAbility } = useGlobalStore((state) => state);
 
-  console.log('platformAbility', platformAbility);
-
   return platformAbility?.includes(name) ? (
     children
   ) : (
-    <Empty title="功能开发中" description="敬请期待～" />
+    <BasicLayout back fill safeArea={false}>
+      <Image
+        style={{ width: '100%' }}
+        src={`${OSS_ASSETS_DIR}/reservation.jpg`}
+        mode="widthFix"
+      />
+    </BasicLayout>
   );
 };
 
