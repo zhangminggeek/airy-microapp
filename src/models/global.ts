@@ -21,7 +21,7 @@ interface GloablState {
 
 interface GloablStore extends GloablState {
   // 获取平台能力项
-  fetchPlatformAbility: () => void;
+  fetchPlatformAbility: () => Promise<void>;
   // 获取行政编码，获取全量数据并保存
   fetchAdministrativeCode: () => Promise<AdministrativeCode[]>;
   // 储存行政编码
@@ -37,6 +37,7 @@ export const useGlobalStore = create<GloablStore>((set, get) => ({
     const ability = res.data
       ?.filter((item) => item.enable)
       ?.map((item) => item.name);
+    console.log('fetchPlatformAbility', ability);
     set({ platformAbility: ability });
   },
   fetchAdministrativeCode: async () => {

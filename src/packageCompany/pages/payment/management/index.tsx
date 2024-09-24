@@ -80,7 +80,7 @@ const Page = () => {
                 owner={payments.alipay?.owner}
                 account={payments.alipay?.account}
                 onRemove={() => {
-                  deletePayment({ id: `${payments.alipay?.id}` });
+                  open({ params: { id: `${payments.alipay?.id}` } });
                 }}
               />
             ) : (
