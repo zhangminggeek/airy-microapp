@@ -1,6 +1,5 @@
 import { Button, Popup } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { Fragment, useMemo, useState } from 'react';
 
@@ -37,10 +36,6 @@ const AddressPicker: FC<AddressPickerProps> = ({
 }) => {
   // 是否展示地址选择弹出层
   const [showPopup, setShowPopup] = useState<boolean>(false);
-
-  useDidShow(() => {
-    run();
-  });
 
   // 获取地址列表
   const { data, run } = useRequest(getAddress, {
@@ -93,6 +88,9 @@ const AddressPicker: FC<AddressPickerProps> = ({
         visible={showPopup}
         position="bottom"
         closeable
+        onOpen={() => {
+          run();
+        }}
         onClose={() => {
           setShowPopup(false);
         }}

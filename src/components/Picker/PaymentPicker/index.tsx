@@ -2,7 +2,7 @@ import { Button, Popup } from '@nutui/nutui-react-taro';
 import { Text, View } from '@tarojs/components';
 import Big from 'big.js';
 import classnames from 'classnames';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import type { PopupProps } from '@nutui/nutui-react-taro';
 import type { CSSProperties, FC } from 'react';
@@ -36,12 +36,6 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
   onClose,
 }) => {
   const [payment, setPayment] = useState<PaymentType>();
-
-  useEffect(() => {
-    if (visible) {
-      run();
-    }
-  }, [visible]);
 
   // 获取余额
   const { data, run } = useRequest(getCompanyBalance, {
@@ -100,6 +94,9 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
       visible={visible}
       position="bottom"
       closeable
+      onOpen={() => {
+        run();
+      }}
       onClose={onClose}
     >
       <View className={`${PREFIX_CLS}-body`}>
