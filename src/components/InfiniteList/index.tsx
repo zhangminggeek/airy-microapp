@@ -7,6 +7,7 @@ import type { FunctionType } from '@/hooks/useRequest';
 import type { PaginationParams, PaginationResponse } from '@/interfaces/base';
 import type { CSSProperties, ReactNode, Ref } from 'react';
 
+import { Empty } from '@/components';
 import { DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE } from '@/constants';
 import { useDeepCompareEffect, useRequest } from '@/hooks';
 
@@ -159,19 +160,23 @@ const InfiniteList = <
           <View className={`${PREFIX_CLS}-header`}>{header}</View>
         ) : null}
         <View className={`${PREFIX_CLS}-body`}>
-          <View className={`${PREFIX_CLS}-body-main`}>
-            {list?.map((item) => renderItem(item))}
-          </View>
+          {list?.length ? (
+            <View className={`${PREFIX_CLS}-body-main`}>
+              {list?.map((item) => renderItem(item))}
+            </View>
+          ) : (
+            <Empty title="暂无数据" />
+          )}
           {loading ? (
             <View className={`${PREFIX_CLS}-body-loading`}>
               <Loading type="spinner" />
             </View>
           ) : null}
-          {hasMore ? null : (
+          {list?.length && !hasMore ? (
             <View className={`${PREFIX_CLS}-body-tip`}>
               <Text className={`${PREFIX_CLS}-body-tip-text`}>没有更多了</Text>
             </View>
-          )}
+          ) : null}
         </View>
         {footer ? (
           <View className={`${PREFIX_CLS}-footer`}>{footer}</View>
