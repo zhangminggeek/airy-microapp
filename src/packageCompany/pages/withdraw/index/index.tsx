@@ -198,7 +198,7 @@ const Page = () => {
                 Toast.info('提现金额不能大于余额');
                 return;
               }
-              withdraw({ type: method, amount });
+              withdraw({ type: CompanyPaymentType['微信'], amount });
             }}
           >
             立即提现

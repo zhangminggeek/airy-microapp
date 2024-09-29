@@ -2,6 +2,7 @@
 export enum CompanyPaymentType {
   '银行卡' = 1,
   '支付宝' = 2,
+  '微信' = 3,
 }
 
 export const companyPaymentTypeMap = new Map([
@@ -12,6 +13,10 @@ export const companyPaymentTypeMap = new Map([
   [
     CompanyPaymentType['支付宝'],
     { text: '支付宝', value: CompanyPaymentType['支付宝'] },
+  ],
+  [
+    CompanyPaymentType['微信'],
+    { text: '微信', value: CompanyPaymentType['微信'] },
   ],
 ]);
 
