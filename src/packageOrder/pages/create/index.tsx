@@ -159,6 +159,7 @@ const Page = () => {
               type="range"
               value={leaseDate}
               disableDate={(date) => {
+                console.log('date', date);
                 if (!startDate) return false;
                 // @ts-expect-error: UI库类型错误
                 const { year, month, day } = date;
