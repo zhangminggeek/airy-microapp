@@ -47,6 +47,13 @@
     @include ellipsis;
   }
 
+  &-edit {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: $font-size-small;
+  }
+
   &-close {
     position: absolute;
     top: 0;

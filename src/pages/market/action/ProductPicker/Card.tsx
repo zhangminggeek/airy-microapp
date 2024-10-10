@@ -5,7 +5,7 @@ import styles from './Card.module.scss';
 
 import type { FC } from 'react';
 
-import { Icon, Media } from '@/components';
+import { Icon, Media, Text } from '@/components';
 
 interface CardProps {
   pic?: string;
@@ -13,8 +13,10 @@ interface CardProps {
   desc?: string;
   no?: string;
   selected?: boolean;
+  editable?: boolean;
   closeable?: boolean;
   onClick?: () => void;
+  onEdit?: () => void;
   onClose?: () => void;
 }
 
@@ -24,8 +26,10 @@ const Card: FC<CardProps> = ({
   desc,
   no,
   selected = false,
+  editable = false,
   closeable = false,
   onClick,
+  onEdit,
   onClose,
 }) => {
   return (
@@ -44,6 +48,11 @@ const Card: FC<CardProps> = ({
       <View className={styles['card-name']}>{name}</View>
       <View className={styles['card-desc']}>{desc}</View>
       <View className={styles['card-no']}>{no}</View>
+      {editable && (
+        <Text.Link className={styles['card-edit']} onClick={onEdit}>
+          编辑
+        </Text.Link>
+      )}
       {closeable && (
         <View className={styles['card-close']} onClick={onClose}>
           <Icon

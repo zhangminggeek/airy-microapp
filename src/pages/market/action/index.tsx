@@ -1,6 +1,6 @@
 import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import Taro, { useRouter } from '@tarojs/taro';
+import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -56,7 +56,7 @@ const Page = () => {
     [id, source],
   );
 
-  useEffect(() => {
+  useDidShow(() => {
     if (id) {
       fetchDetail({ id });
     }
@@ -64,7 +64,10 @@ const Page = () => {
     if (source === ProductSource['服装管理'] && productId) {
       form.setFieldsValue({ productId: Number(productId) });
     }
+  });
 
+  useEffect(() => {
+    // 离开页面时清空选中服装的缓存数据
     return () => {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
     };
@@ -269,7 +272,7 @@ const Page = () => {
               noStyle
               rules={[{ required: true, message: '请选择商品' }]}
             >
-              <ProductPicker />
+              <ProductPicker editable={!!id} />
             </Form.Item>
           )}
         </FormSection>
