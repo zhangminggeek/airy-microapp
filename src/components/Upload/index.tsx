@@ -90,7 +90,6 @@ const Upload: FC<UploadProps> = ({
       setUploading(true);
       for (const file of files) {
         const passed = beforeUpload(file);
-        console.log('passed', passed);
         if (!passed) break;
         const url = await upload(file.tempFilePath);
         if (file.thumbTempFilePath) {

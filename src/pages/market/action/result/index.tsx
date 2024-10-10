@@ -22,7 +22,7 @@ const Page = () => {
           ref.current?.setOpen(true);
         }}
         onCancel={() => {
-          RouterUtil.navigateBack();
+          RouterUtil.redirectTo('/pages/market/index');
         }}
       />
       <ActionSheet
@@ -32,7 +32,7 @@ const Page = () => {
           { name: '从相册中选择', key: ProductSource['相册'] },
         ]}
         onSelect={(option) => {
-          RouterUtil.navigateTo('/pages/market/action/index', {
+          RouterUtil.redirectTo('/pages/market/action/index', {
             source: option.key,
           });
         }}
