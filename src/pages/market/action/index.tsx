@@ -100,10 +100,14 @@ const Page = () => {
       if (allowSell) {
         method.push(MarkrtMethod['出售']);
         setAllowSell(true);
+      } else {
+        setAllowSell(false);
       }
       if (allowLease) {
         method.push(MarkrtMethod['借调']);
         setAllowLease(true);
+      } else {
+        setAllowLease(false);
       }
       form.setFieldsValue({
         title,
