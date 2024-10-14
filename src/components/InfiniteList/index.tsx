@@ -167,7 +167,7 @@ const InfiniteList = <
           ) : (
             <Empty title="暂无数据" />
           )}
-          {loading ? (
+          {loading && list?.length ? (
             <View className={`${PREFIX_CLS}-body-loading`}>
               <Loading type="spinner" />
             </View>
