@@ -29,7 +29,7 @@ interface BasicLayoutProps {
   transparent?: boolean;
   loading?: boolean;
   loginTip?: boolean;
-  footer?: FooterProps;
+  footer?: FooterProps | null;
   safeArea?: boolean;
 }
 
