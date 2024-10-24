@@ -6,7 +6,7 @@ import {
   postOrderExpressDeliver,
   postOrderExpressReturn,
 } from '@/api';
-import { Descriptions, FormSection } from '@/components';
+import { Descriptions, FormSection, Picker } from '@/components';
 import { OrderExpressType } from '@/constants/order';
 import { useAddress, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
@@ -71,6 +71,13 @@ const Page = () => {
             rules={[{ required: true, message: '请输入快递单号' }]}
           >
             <Input />
+          </Form.Item>
+          <Form.Item
+            label="快递公司"
+            name="expressCompany"
+            rules={[{ required: true, message: '请选择快递公司' }]}
+          >
+            <Picker.Delivery />
           </Form.Item>
         </FormSection>
         <FormSection title="收货信息">

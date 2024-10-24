@@ -35,6 +35,11 @@ export const orderStatusMap = new Map([
   [OrderStatus['已取消'], { value: OrderStatus['已取消'], text: '已取消' }],
 ]);
 
+export enum LogisticsType {
+  '快递' = 1,
+  '自提' = 2,
+}
+
 export enum OrderExpressType {
   '发货' = 1,
   '返还' = 2,

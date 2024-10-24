@@ -1,0 +1,107 @@
+@import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
+
+.m-delivery-picker {
+  &-popup {
+    &-view {
+      position: relative;
+
+      &-bar {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        &-item {
+          font-size: $font-size-xsmall;
+          color: $text-color-main;
+          font-weight: 500;
+          line-height: 1em;
+        }
+      }
+    }
+
+    &-content {
+      height: 1200px;
+      padding: 0 32px;
+      box-sizing: border-box;
+
+      // 隐藏滚动条
+      &::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+        color: transparent;
+      }
+
+      &-search {
+        margin-bottom: 48px;
+      }
+
+      &-common {
+        margin-bottom: 48px;
+
+        &-title {
+          font-size: $font-size-base;
+          color: $text-color-main;
+          font-weight: 500;
+          margin-bottom: 24px;
+        }
+
+        &-option {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          column-gap: 24px;
+          row-gap: 16px;
+
+          &-item {
+            @include flex-center();
+            height: 60px;
+            font-size: $font-size-base;
+            color: $text-color-base;
+            font-weight: 400;
+            background-color: $background-color-base;
+            border-radius: 30px;
+
+            &-active {
+              color: $color-primary;
+              background-color: $color-secondary;
+            }
+          }
+        }
+      }
+
+      &-option {
+        &-group {
+          & + .m-delivery-picker-popup-content-option-group {
+            margin-top: 48px;
+          }
+
+          &-title {
+            font-size: $font-size-base;
+            color: $text-color-main;
+            font-weight: 500;
+            margin-bottom: 24px;
+          }
+
+          &-list {
+            &-item {
+              padding: 24px 0;
+              font-size: $font-size-base;
+              color: $text-color-main;
+              font-weight: 400;
+              border-bottom: 2px solid $border-color-base;
+
+              &-active {
+                color: $color-primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

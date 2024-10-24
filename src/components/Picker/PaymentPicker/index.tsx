@@ -50,7 +50,7 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
         // 如果余额足够，优先使用余额支付
         setPayment(PaymentType['余额']);
       } else {
-        setPayment(PaymentType['微信支付']);
+        setPayment(PaymentType['微信']);
       }
     },
   });
@@ -82,7 +82,7 @@ const PaymentPicker: FC<PaymentPickerProps> = ({
         name: '微信支付',
         icon: 'WechatPayFilled',
         color: COLOR_WECHAT,
-        value: PaymentType['微信支付'],
+        value: PaymentType['微信'],
       },
     ];
   }, [amount, data]);

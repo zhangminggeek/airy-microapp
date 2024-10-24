@@ -1,5 +1,5 @@
-import { Input } from '@nutui/nutui-react-taro';
-import { View } from '@tarojs/components';
+// import { Input } from '@nutui/nutui-react-taro';
+import { Input, View } from '@tarojs/components';
 import classnames from 'classnames';
 import { forwardRef, useMemo, useState } from 'react';
 
@@ -63,14 +63,10 @@ const InputSearch = forwardRef<ActionType, InputSearchProps>(
           className={`${PREFIX_CLS}-input`}
           placeholder={placeholder}
           disabled={disabled}
-          clearable
-          maxLength={200}
+          maxlength={200}
           value={_value}
-          onClear={() => {
-            setInnerValue('');
-            onSearch?.('');
-          }}
-          onChange={(v) => {
+          onInput={(e) => {
+            const v = e.detail.value;
             setInnerValue(v);
             onChange?.(v);
           }}

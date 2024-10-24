@@ -126,7 +126,7 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
             if (!order) return;
             if (v === PaymentType['余额']) {
               payOrderViaBalance({ id: order.id });
-            } else if (v === PaymentType['微信支付']) {
+            } else if (v === PaymentType['微信']) {
               payOrderViaWechat({ id: order.id });
             }
           }}

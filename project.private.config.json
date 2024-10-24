@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageOrder/pages/deliver/index",
+          "pathName": "packageOrder/pages/deliver/index",
+          "query": "id=97&addressId=5&type=1",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packagePlatform/pages/feature-reservation/index",
           "pathName": "packagePlatform/pages/feature-reservation/index",
           "query": "",

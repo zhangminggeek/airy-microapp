@@ -1,6 +1,6 @@
 import { Button, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
-import { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
+import Taro, { stopPullDownRefresh, usePullDownRefresh } from '@tarojs/taro';
 import Big from 'big.js';
 import { useRef, useState } from 'react';
 
@@ -14,6 +14,7 @@ import type { ReactNode } from 'react';
 import { getOrderBought } from '@/api';
 import { InfiniteList, Product, Space } from '@/components';
 import { UserType } from '@/constants';
+import { PaymentType } from '@/constants/company';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil } from '@/utils';
@@ -102,7 +103,17 @@ const Page = () => {
           type="primary"
           size="small"
           onClick={() => {
-            openDialogConfirmReceive({ params: { id: `${item.id}` } });
+            if (item.payment === PaymentType['余额']) {
+              openDialogConfirmReceive({ params: { id: `${item.id}` } });
+            } else if (item.payment === PaymentType['微信']) {
+              Taro.openBusinessView({
+                businessType: 'weappOrderConfirm',
+                extraData: {
+                  // @ts-expect-error: https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/business-capabilities/order-shipping/order-shipping-half.html
+                  transaction_id: item.transactionId,
+                },
+              });
+            }
           }}
         >
           确认收货

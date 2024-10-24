@@ -29,7 +29,7 @@ import {
 import { DATE_FORMAT } from '@/constants';
 import { PaymentType } from '@/constants/company';
 import { expressMethodMap } from '@/constants/market';
-import { OrderType } from '@/constants/order';
+import { LogisticsType, OrderType } from '@/constants/order';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast } from '@/utils';
@@ -267,8 +267,10 @@ const Page = () => {
           const params: PostOrderRequest = {
             id: Number(id),
             type: info.type,
+            payment: v,
             remark,
             buyerAddressId: addressId!,
+            logisticsType: LogisticsType['快递'],
           };
           if (info.type === OrderType['借调']) {
             params.leaseStartDate = leaseDate?.[0].format(DATE_FORMAT);
@@ -277,7 +279,7 @@ const Page = () => {
           const { data: orderId } = await create(params);
           if (v === PaymentType['余额']) {
             payOrderViaBalance({ id: orderId });
-          } else if (v === PaymentType['微信支付']) {
+          } else if (v === PaymentType['微信']) {
             payOrderViaWechat({ id: orderId });
           }
         }}
