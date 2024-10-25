@@ -216,3 +216,12 @@ export function dec2bin(dec: number) {
 export function bin2dec(bin: string) {
   return Number(parseInt(bin, 2).toString(10));
 }
+
+/**
+ * 获取布局容器的根节点
+ * @param id 节点id
+ * @returns dom
+ */
+export function getLayoutRootDom(id: string = 'g-basic-layout') {
+  return document.getElementById(id);
+}

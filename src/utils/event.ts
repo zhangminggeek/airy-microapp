@@ -6,6 +6,7 @@ const globalEvent = new Events();
 // 通知事件key
 export enum EventsKey {
   LOGOUT = 'logout',
+  CONFIRM_RECEIPT = 'confirm_receipt',
 }
 
 // 监听和关闭事件的hooks

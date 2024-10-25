@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro';
 import { Component, PropsWithChildren } from 'react';
 
 import { getOrderWechatOrderStatus } from '@/api';
+import { EventUtil } from '@/utils';
 
 import './assets/iconfont/iconfont.css';
 import './app.scss';
@@ -19,7 +20,9 @@ class App extends Component<PropsWithChildren> {
     if (appId === 'wx1183b055aeec94d1') {
       const transactionId = extraData?.req_extradata?.transaction_id;
       if (transactionId) {
-        getOrderWechatOrderStatus({ transactionId });
+        getOrderWechatOrderStatus({ transactionId }).then(() => {
+          EventUtil.emit(EventUtil.EventsKey.CONFIRM_RECEIPT);
+        });
       }
     }
   }

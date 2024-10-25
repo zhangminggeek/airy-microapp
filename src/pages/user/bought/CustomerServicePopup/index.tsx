@@ -6,6 +6,8 @@ import styles from './index.module.scss';
 import type { PopupProps } from '@nutui/nutui-react-taro';
 import type { FC } from 'react';
 
+import { getLayoutRootDom } from '@/utils';
+
 interface CustomerServicePopupProps {
   visible: PopupProps['visible'];
   onClose: PopupProps['onClose'];
@@ -15,8 +17,17 @@ const CustomerServicePopup: FC<CustomerServicePopupProps> = ({
   visible,
   onClose,
 }) => {
+  const rootDom = getLayoutRootDom();
+
   return (
-    <Popup position="bottom" visible={visible} closeable onClose={onClose}>
+    <Popup
+      className={styles.popup}
+      position="bottom"
+      visible={visible}
+      portal={rootDom}
+      closeable
+      onClose={onClose}
+    >
       <View className={styles.content}>
         <View className={styles.title}>取消订单</View>
         <View className={styles.desc}>

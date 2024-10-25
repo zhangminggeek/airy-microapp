@@ -17,7 +17,7 @@ import { UserType } from '@/constants';
 import { PaymentType } from '@/constants/company';
 import { OrderExpressType, OrderStatus, OrderType } from '@/constants/order';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil } from '@/utils';
+import { EventUtil, RouterUtil } from '@/utils';
 
 type OrderInfo = GetOrderBoughtResponse['list'][0];
 
@@ -33,6 +33,11 @@ const Page = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   // 当前操作的订单
   const [currentOrder, setCurrentOrder] = useState<OrderInfo>();
+
+  EventUtil.useEvents(EventUtil.EventsKey.CONFIRM_RECEIPT, () => {
+    // 当接收用用户确认收货的事件后，刷新页面
+    refreshList();
+  });
 
   // 下拉刷新
   usePullDownRefresh(async () => {

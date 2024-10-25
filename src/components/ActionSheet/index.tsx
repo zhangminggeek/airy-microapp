@@ -7,6 +7,8 @@ import type { ActionSheetProps as NutActionSheetProps } from '@nutui/nutui-react
 import type { ActionSheetOption } from '@nutui/nutui-react-taro/dist/types/packages/actionsheet';
 import type { ReactNode } from 'react';
 
+import { getLayoutRootDom } from '@/utils';
+
 import './index.scss';
 
 interface Option {
@@ -55,7 +57,7 @@ const ActionSheet = forwardRef<ActionType, ActionSheetProps>(
     // 是否显示
     const [showActionSheet, setShowActionSheet] = useState<boolean>(false);
 
-    const rootDom = document.getElementById('g-basic-layout');
+    const rootDom = getLayoutRootDom();
 
     return (
       <Fragment>
