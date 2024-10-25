@@ -1,5 +1,6 @@
 import { Loading } from '@nutui/nutui-react-taro';
 import { ScrollView, Text, View } from '@tarojs/components';
+import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useImperativeHandle, useMemo, useRef, useState } from 'react';
 
@@ -59,9 +60,9 @@ const InfiniteList = <
   }));
 
   const containerRef = useRef(null);
-
   // 请求状态
-  const [loading, setLoading] = useState<boolean>(false);
+  const loading = useRef<boolean>(false);
+
   // 下拉刷行中
   const [refresherTriggered, setRefresherTriggered] = useState<boolean>(false);
   // 请求参数
@@ -74,6 +75,11 @@ const InfiniteList = <
     useState<number>(DEFAULT_PAGE_NUM);
   // 数据总量
   const [total, setTotal] = useState<number>(0);
+
+  // 初始化请求
+  useDidShow(() => {
+    loadData({ ...params, pageNum: `${DEFAULT_PAGE_NUM}` } as U);
+  });
 
   useDeepCompareEffect(() => {
     setInnerParams(params);
@@ -95,8 +101,8 @@ const InfiniteList = <
     },
   });
   const loadData = async (p?: Partial<U>) => {
-    if (loading) return;
-    setLoading(true);
+    if (loading.current) return;
+    loading.current = true;
     const params = {
       pageNum: `${currentPageNum}`,
       pageSize: `${DEFAULT_PAGE_SIZE}`,
@@ -108,7 +114,7 @@ const InfiniteList = <
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      loading.current = false;
     }
   };
 
@@ -167,7 +173,7 @@ const InfiniteList = <
           ) : (
             <Empty title="暂无数据" />
           )}
-          {loading && list?.length ? (
+          {loading.current && list?.length ? (
             <View className={`${PREFIX_CLS}-body-loading`}>
               <Loading type="spinner" />
             </View>
