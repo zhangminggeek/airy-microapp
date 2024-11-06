@@ -41,7 +41,8 @@ const NOT_DEAL_ERROR_URLS = [
 const request = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;
   const url = `${process.env.BASE_URL || ''}${formatPath(path, method)}`;
-  console.log('request', url, payload);
+  const token = Taro.getStorageSync(StorageKey.TOKEN);
+  console.log('request', url, payload, token);
   return new Promise<BaseResponse<ResponseData>>((resolve, reject) => {
     Taro.request({
       timeout: 5000,
@@ -51,7 +52,7 @@ const request = <ResponseData>(payload: RequestFunctionParams) => {
       data: removeNilKey(data),
       header: {
         'content-type': 'application/json', // 默认值
-        token: Taro.getStorageSync(StorageKey.TOKEN),
+        token,
       },
       async success(res) {
         console.log('request success', res);
@@ -90,6 +91,7 @@ const request = <ResponseData>(payload: RequestFunctionParams) => {
 const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;
   const url = `${process.env.BASE_URL || ''}${formatPath(path, method)}`;
+  const token = Taro.getStorageSync(StorageKey.TOKEN);
   console.log('request', url, payload);
 
   const env =
@@ -108,7 +110,7 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
       header: {
         'X-WX-SERVICE': 'airy-service',
         'content-type': 'application/json', // 默认值
-        token: Taro.getStorageSync(StorageKey.TOKEN),
+        token,
       },
       async success(res: any) {
         console.log('request success', res);
