@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/market/index/index",
+          "pathName": "pages/market/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageOrder/pages/deliver/index",
           "pathName": "packageOrder/pages/deliver/index",
           "query": "id=97&addressId=5&type=1",

@@ -2,6 +2,8 @@ import Taro from '@tarojs/taro';
 import { Component, PropsWithChildren } from 'react';
 
 import { getOrderWechatOrderStatus } from '@/api';
+import { StorageKey } from '@/constants/storage';
+import { useGlobalStore, useUserStore } from '@/models';
 import { EventUtil } from '@/utils';
 
 import './assets/iconfont/iconfont.css';
@@ -15,6 +17,15 @@ class App extends Component<PropsWithChildren> {
   componentDidMount() {}
 
   componentDidShow(options) {
+    // 获取平台能力
+    useGlobalStore.getState().fetchPlatformAbility();
+
+    // 获取用户信息
+    const token = Taro.getStorageSync(StorageKey.TOKEN);
+    if (token) {
+      useUserStore.getState().fetchUserInfo();
+    }
+
     const { appId, extraData } = options?.referrerInfo ?? {};
     // 微信确认收货的 appId 固定为 wx1183b055aeec94d1
     if (appId === 'wx1183b055aeec94d1') {

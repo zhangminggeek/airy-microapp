@@ -2,6 +2,8 @@ import { Button, Form, Input } from '@nutui/nutui-react-taro';
 import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 
+import useLogin from '../../useLogin';
+
 import styles from './index.module.scss';
 
 import type { FC } from 'react';
@@ -21,6 +23,7 @@ const PasswordLogin: FC<PasswordLoginProps> = ({
   hasReadProtocol,
   onReadProtocol,
 }) => {
+  const { handleLoginSuccess } = useLogin();
   // 登录
   const { run } = useRequest(postAccountLogin, {
     manual: true,
@@ -28,7 +31,7 @@ const PasswordLogin: FC<PasswordLoginProps> = ({
       const { token, bind } = data;
       Taro.setStorageSync(StorageKey.TOKEN, token);
       if (bind) {
-        RouterUtil.navigateTo('/pages/security/index');
+        handleLoginSuccess();
       } else {
         RouterUtil.navigateTo('/pages/user/login/bind/index', {
           account: params?.account,

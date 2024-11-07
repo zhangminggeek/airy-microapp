@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 import Protocol from './Protocol';
+import useLogin from './useLogin';
 
 import { postAccountLoginWechatPhone } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
@@ -16,6 +17,8 @@ import { BasicLayout } from '@/layouts';
 import { RouterUtil, Toast, WeChatUtil } from '@/utils';
 
 const Page = () => {
+  const { handleLoginSuccess } = useLogin();
+
   // 是否已阅读协议
   const [hasRead, setHasRead] = useState<boolean>(false);
 
@@ -29,7 +32,7 @@ const Page = () => {
         if (!bind) {
           await WeChatUtil.bindOpenId(account);
         }
-        RouterUtil.navigateTo('/pages/security/index');
+        handleLoginSuccess();
       } else {
         // 没注册去注册
         RouterUtil.navigateTo('/packageCompany/pages/register/index');

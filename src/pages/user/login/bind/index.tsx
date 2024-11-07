@@ -3,14 +3,17 @@ import { View } from '@tarojs/components';
 import { useRouter } from '@tarojs/taro';
 import classnames from 'classnames';
 
+import useLogin from '../useLogin';
+
 import styles from './index.module.scss';
 
 import { Icon, Space } from '@/components';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil, Toast, WeChatUtil } from '@/utils';
+import { Toast, WeChatUtil } from '@/utils';
 
 const Page = () => {
   const { account } = useRouter().params;
+  const { handleLoginBindSuccess } = useLogin();
 
   return (
     <BasicLayout back loginTip={false}>
@@ -36,7 +39,7 @@ const Page = () => {
             if (!account) return;
             await WeChatUtil.bindOpenId(account);
             Toast.success('绑定成功');
-            RouterUtil.navigateTo('/pages/security/index');
+            handleLoginBindSuccess();
           }}
         >
           绑定微信号

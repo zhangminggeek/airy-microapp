@@ -3,6 +3,8 @@ import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import { useState } from 'react';
 
+import useLogin from '../../useLogin';
+
 import styles from './index.module.scss';
 
 import type { FC } from 'react';
@@ -22,6 +24,8 @@ const CaptchaLogin: FC<CaptchaLoginProps> = ({
   hasReadProtocol,
   onReadProtocol,
 }) => {
+  const { handleLoginSuccess } = useLogin();
+
   // 手机号
   const [accountValue, setAccountValue] = useState<string>();
   // 登录
@@ -31,7 +35,7 @@ const CaptchaLogin: FC<CaptchaLoginProps> = ({
       const { token, bind } = data;
       Taro.setStorageSync(StorageKey.TOKEN, token);
       if (bind) {
-        RouterUtil.navigateTo('/pages/security/index');
+        handleLoginSuccess();
       } else {
         RouterUtil.navigateTo('/pages/user/login/bind/index', {
           account: params?.account,

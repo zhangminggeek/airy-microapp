@@ -60,7 +60,7 @@ const Page = () => {
     // 来自页面转发分享
     return {
       title: '婚纱店之间的高效交易平台 一站式解决您的库存难题',
-      path: `/pages/security/index`,
+      path: `/pages/market/index`,
       imageUrl: ImageLogo,
     };
   });

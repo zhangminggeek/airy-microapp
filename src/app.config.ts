@@ -2,7 +2,6 @@ import { COLOR_PRIMARY } from '@/constants/theme';
 
 export default {
   pages: [
-    'pages/security/index',
     // 登录
     'pages/user/login/index',
     'pages/user/login/other/index',
@@ -30,6 +29,8 @@ export default {
     'pages/user/sold/index',
     'pages/user/purchase/index',
     'pages/user/favorite/index',
+    // 中转页
+    'pages/security/index',
   ],
   subpackages: [
     // 公共页
