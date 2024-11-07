@@ -140,7 +140,10 @@ const Page = () => {
   });
 
   // 发布
-  const { run: createMarketAndProduct } = useRequest(postMarketAndProduct, {
+  const {
+    run: createMarketAndProduct,
+    loading: createMarketAndProductLoading,
+  } = useRequest(postMarketAndProduct, {
     manual: true,
     onSuccess() {
       Taro.removeStorageSync(StorageKey.PRODUCT_SELECTED);
@@ -174,7 +177,9 @@ const Page = () => {
             type="primary"
             size="xlarge"
             block
-            loading={createLoading || updateLoading}
+            loading={
+              createLoading || createMarketAndProductLoading || updateLoading
+            }
           >
             保存
           </Button>
