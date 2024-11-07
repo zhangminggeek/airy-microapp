@@ -27,7 +27,7 @@ interface DeliveryPickerProps {
 const PREFIX_CLS = 'm-delivery-picker';
 
 const commonOption = [
-  { id: 'SF', name: '顺丰' },
+  { id: 'SF', name: '顺丰速运' },
   { id: 'EMS', name: 'EMS' },
   { id: 'ZTO', name: '中通快递' },
   { id: 'STO', name: '申通快递' },

@@ -49,7 +49,7 @@ const Page = () => {
       const { invitationCode, ...rest } = parseJson<CompanyInfo>(
         Taro.getStorageSync(StorageKey.COMPANY_RESIGTER_INFO),
       );
-      const params = { ...rest, invitar: invitationCode };
+      const params = { ...rest, invitationCode };
       await register(params);
     },
   });
