@@ -92,7 +92,7 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
   const { method, path, data, ...rest } = payload;
   const url = `${process.env.BASE_URL || ''}${formatPath(path, method)}`;
   const token = Taro.getStorageSync(StorageKey.TOKEN);
-  console.log('request', url, payload);
+  console.log('request', url, payload, token);
 
   const env =
     process.env.NODE_ENV === 'release'
