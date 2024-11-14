@@ -35,12 +35,13 @@ const Page = () => {
     >
       <InfiniteList
         column="multiple"
-        request={getPurchase}
         params={{
           status: `${PurchaseStatus['求购中']}`,
           title: keyword,
           ...condition,
         }}
+        request={getPurchase}
+        requestOnShow={false}
         header={
           <Filter
             fields={[

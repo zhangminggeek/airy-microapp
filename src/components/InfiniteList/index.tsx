@@ -2,7 +2,13 @@ import { Loading } from '@nutui/nutui-react-taro';
 import { ScrollView, Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
-import { useImperativeHandle, useMemo, useRef, useState } from 'react';
+import {
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import type { FunctionType } from '@/hooks/useRequest';
 import type { PaginationParams, PaginationResponse } from '@/interfaces/base';
@@ -28,6 +34,7 @@ interface InfiniteListProps<R = any, P = Record<string, any>> {
   column?: 'single' | 'multiple';
   params?: ParamWithoutPaginationParams<P>;
   request: FunctionType<P, PaginationResponse<R>>;
+  requestOnShow?: boolean;
   renderItem: (data: R) => ReactNode;
   header?: ReactNode;
   headerFixed?: boolean;
@@ -49,6 +56,7 @@ const InfiniteList = <
   column = 'single',
   params,
   request,
+  requestOnShow = true,
   renderItem,
   header,
   headerFixed = false,
@@ -78,8 +86,12 @@ const InfiniteList = <
 
   // 初始化请求
   useDidShow(() => {
-    loadData({ ...params, pageNum: `${DEFAULT_PAGE_NUM}` } as U);
+    if (requestOnShow) {
+      loadData({ ...params, pageNum: `${DEFAULT_PAGE_NUM}` } as U);
+    }
   });
+
+  useEffect(() => {}, []);
 
   useDeepCompareEffect(() => {
     setInnerParams(params);

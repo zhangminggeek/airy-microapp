@@ -40,12 +40,12 @@ const Page = () => {
     >
       <InfiniteList
         column="multiple"
-        request={getMarket}
         params={{
           status: `${MarketProductStatus['在售']}`,
           order: `${tabs[currentIndex].value}`,
         }}
-        padding
+        request={getMarket}
+        requestOnShow={false}
         header={
           <View>
             <View className={styles.filter}>
@@ -109,6 +109,7 @@ const Page = () => {
             }}
           />
         )}
+        padding
       />
     </BasicLayout>
   );
