@@ -7,7 +7,6 @@ import CustomerServicePopup from './CustomerServicePopup';
 import type { GetOrderIdResponse } from '@/api';
 
 import {
-  postOrderCancel,
   postOrderPayBalance,
   postOrderPayWechat,
   postOrderReceiveBuyer,
@@ -30,15 +29,6 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
   // 是否显示支付方式 popup
   const [showPaymentPicker, setShowPaymentPicker] = useState<boolean>(false);
 
-  // 修改订单状态
-  const { run: cancel } = useRequest(postOrderCancel, {
-    manual: true,
-    onSuccess() {
-      Toast.success('操作成功');
-      refresh?.();
-    },
-  });
-
   // 买家确认收货
   const { run: receive } = useRequest(postOrderReceiveBuyer, {
     manual: true,
@@ -48,7 +38,7 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
     },
   });
 
-  // 微信支付订单
+  // 余额支付订单
   const { run: payOrderViaBalance } = useRequest(postOrderPayBalance, {
     manual: true,
     onSuccess(_, params) {
@@ -79,16 +69,6 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
       });
     },
   });
-
-  // 取消订单二次确认
-  const { renderDialog: renderDialogCancel, open: openDialogCancel } =
-    useDialog({
-      id: 'dialog-cancel',
-      content: '确定取消该订单吗？',
-      onConfirm: (_, params) => {
-        cancel({ id: params.id });
-      },
-    });
 
   // 确认收货二次确认
   const {
@@ -134,7 +114,6 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
             setShowPaymentPicker(false);
           }}
         />
-        {renderDialogCancel()}
         {renderDialogConfirmReceive()}
       </Fragment>
     );
@@ -145,7 +124,6 @@ const useOrderAction = ({ order, refresh }: UserOrderActionProps) => {
     setShowCustomerServicePopup,
     setShowPaymentPicker,
     openDialogConfirmReceive,
-    openDialogCancel,
   };
 };
 

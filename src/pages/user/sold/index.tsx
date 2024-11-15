@@ -33,6 +33,18 @@ const Page = () => {
       value: OrderStatus['待发货'],
       actions: (item) => [
         <Button
+          key="cancel"
+          size="small"
+          onClick={() => {
+            RouterUtil.navigateTo('/packageOrder/pages/cancel/index', {
+              id: item.id,
+              userType: UserType['卖家'],
+            });
+          }}
+        >
+          取消订单
+        </Button>,
+        <Button
           key="deliver"
           type="primary"
           size="small"

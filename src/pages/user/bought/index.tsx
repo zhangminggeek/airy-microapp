@@ -54,7 +54,6 @@ const Page = () => {
     setShowCustomerServicePopup,
     openDialogConfirmReceive,
     setShowPaymentPicker,
-    openDialogCancel,
   } = useOrderAction({ order: currentOrder, refresh: refreshList });
 
   const tabs: TabOption[] = [
@@ -66,7 +65,10 @@ const Page = () => {
           key="cancel"
           size="small"
           onClick={() => {
-            openDialogCancel({ params: { id: `${item.id}` } });
+            RouterUtil.navigateTo('/packageOrder/pages/cancel/index', {
+              id: item.id,
+              userType: UserType['买家'],
+            });
           }}
         >
           取消订单

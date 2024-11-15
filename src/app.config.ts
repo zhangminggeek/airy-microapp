@@ -93,6 +93,7 @@ export default {
         'pages/detail/index',
         'pages/deliver/index',
         'pages/return/index',
+        'pages/cancel/index',
       ],
     },
     {

@@ -59,7 +59,6 @@ const Page = () => {
     setShowCustomerServicePopup,
     openDialogConfirmReceive,
     setShowPaymentPicker,
-    openDialogCancel,
   } = useOrderAction({
     order: data,
     refresh: () => {
@@ -76,7 +75,10 @@ const Page = () => {
             <Button
               key="cancel"
               onClick={() => {
-                openDialogCancel({ params: { id } });
+                RouterUtil.navigateTo('/packageOrder/pages/cancel/index', {
+                  id,
+                  userType: owner,
+                });
               }}
             >
               取消订单
@@ -96,7 +98,6 @@ const Page = () => {
           OrderStatus['待发货'],
           <Button
             key="cancel"
-            size="small"
             onClick={() => {
               setShowCustomerServicePopup(true);
             }}
@@ -108,7 +109,6 @@ const Page = () => {
           OrderStatus['待收货'],
           <Button
             type="primary"
-            size="small"
             onClick={() => {
               openDialogConfirmReceive({ params: { id } });
             }}
@@ -119,12 +119,11 @@ const Page = () => {
         [
           OrderStatus['返还退押'],
           data?.expressReturnId ? (
-            <Button size="small" fill="solid" disabled>
+            <Button fill="solid" disabled>
               退押中
             </Button>
           ) : (
             <Button
-              size="small"
               onClick={() => {
                 RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
                   id,
@@ -145,7 +144,6 @@ const Page = () => {
           <Button
             key="deliver"
             type="primary"
-            size="small"
             onClick={() => {
               RouterUtil.navigateTo('/packageOrder/pages/deliver/index', {
                 id,
@@ -185,9 +183,7 @@ const Page = () => {
       footer={{
         children: (
           <View className={styles['footer-content']}>
-            <Button openType="contact" size="small">
-              联系客服
-            </Button>
+            <Button openType="contact">联系客服</Button>
             {actions?.get(data?.status)}
           </View>
         ),
@@ -251,7 +247,8 @@ const Page = () => {
           </View>
         </Section>
         {data?.type === OrderType['借调'] &&
-        data?.status >= OrderStatus['已完成'] ? (
+        data?.status >= OrderStatus['已完成'] &&
+        data?.status !== OrderStatus['已取消'] ? (
           <Section className={styles.section} title="确认返还">
             <Descriptions
               options={[
@@ -275,7 +272,8 @@ const Page = () => {
           </Section>
         ) : null}
         {data?.type === OrderType['借调'] &&
-        data?.status >= OrderStatus['返还退押'] ? (
+        data?.status >= OrderStatus['返还退押'] &&
+        data?.status !== OrderStatus['已取消'] ? (
           <Section className={styles.section} title="返还发货">
             <Descriptions
               options={[
@@ -310,10 +308,11 @@ const Page = () => {
             />
           </Section>
         ) : null}
-        {(data?.type === OrderType['借调'] &&
+        {((data?.type === OrderType['借调'] &&
           data?.status >= OrderStatus['返还退押']) ||
-        (data?.type === OrderType['出售'] &&
-          data?.status >= OrderStatus['已完成']) ? (
+          (data?.type === OrderType['出售'] &&
+            data?.status >= OrderStatus['已完成'])) &&
+        data?.status !== OrderStatus['已取消'] ? (
           <Section className={styles.section} title="收货">
             <Descriptions
               options={[{ field: 'time', label: '收货时间', col: 2 }]}
@@ -328,7 +327,8 @@ const Page = () => {
             />
           </Section>
         ) : null}
-        {data?.status > OrderStatus['待发货'] ? (
+        {data?.status > OrderStatus['待发货'] &&
+        data?.status !== OrderStatus['已取消'] ? (
           <Section className={styles.section} title="发货">
             <Descriptions
               options={[
@@ -416,6 +416,12 @@ const Page = () => {
                 col: 2,
                 hidden: data?.type === OrderType['出售'],
               },
+              {
+                field: 'reason',
+                label: '取消原因',
+                col: 2,
+                hidden: data?.status !== OrderStatus['已取消'],
+              },
             ]}
             data={{
               no: data?.no,
@@ -424,6 +430,7 @@ const Page = () => {
               company: data?.seller,
               consignee: `${data?.sellerAddress?.recipient ?? ''} ${data?.sellerAddress?.phone ?? ''}`,
               address: sellerAddress,
+              reason: data?.reason,
             }}
             align="right"
           />

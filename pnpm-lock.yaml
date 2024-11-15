@@ -15,8 +15,8 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5
       '@nutui/nutui-react-taro':
-        specifier: ^2.6.23
-        version: 2.6.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.7.0
+        version: 2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tarojs/components':
         specifier: 3.6.30
         version: 3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30(@tarojs/shared@3.6.30))(@tarojs/shared@3.6.30)(@types/react@18.3.3)(postcss@8.4.38)(react@18.3.1)
@@ -1019,8 +1019,8 @@ packages:
     resolution: {integrity: sha512-Ja18XcETdEl5mzzACGd+DKgaGJzPTCow7EglgwTmHdwokzDFYh/MHua6lU6DV/hjF2IaOJ4oX2nqnjG7RElKOw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@7.25.7':
-    resolution: {integrity: sha512-FjoyLe754PMiYsFaN5C94ttGiOmBNYTf6pLr4xXHAT5uctHb092PBszndLDR5XA/jghQvn4n7JMHl7dmTgbm9w==}
+  '@babel/runtime@7.26.0':
+    resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.24.0':
@@ -1351,8 +1351,11 @@ packages:
   '@nutui/icons-react-taro@1.0.5':
     resolution: {integrity: sha512-p7dCW29wASH/qQ1OaUGGKA6PRV33wDPb80+qrHnWtT40syIb0W+e92mpplbULWM01s+GYVGyUU3i8b7Iy7qfvw==}
 
-  '@nutui/nutui-react-taro@2.6.23':
-    resolution: {integrity: sha512-Dn6hRULqujw6KxM3Sb787VuHmYekpYfabnYerP6KjwWTl2TdrHUY2xnzIicpCoFFuq+EN58cO8wNzeVFgkQgNA==}
+  '@nutui/jdesign-icons-react-taro@1.0.6-beta.2':
+    resolution: {integrity: sha512-2Scz5c9o14gA7Mw5JdiEkc/KEbNlNWMcJMuqVyFVipYeeYN/118N/fvHVpocmJviN0Gc4P+u3ZB3dIQSA2j4Fw==}
+
+  '@nutui/nutui-react-taro@2.7.0':
+    resolution: {integrity: sha512-t/gXDitL5WpkjFsiOXELnIBsjihRkmEDWpCi8d+3HJsQT6c2EA5Wad5jikbRgIM+eTGiDkleo+xQRGBNNg52fQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
@@ -2216,6 +2219,9 @@ packages:
 
   abortcontroller-polyfill@1.7.5:
     resolution: {integrity: sha512-JMJ5soJWP18htbbxJjG7bG6yuI6pRhgJ0scHHTfkUjf6wjP912xZWvM+A4sJK3gqd9E8fcPbDnOefbA9Th/FIQ==}
+
+  abortcontroller-polyfill@1.7.6:
+    resolution: {integrity: sha512-Zypm+LjYdWAzvuypZvDN0smUJrhOurcuBWhhMRBExqVLRvdjp3Z9mASxKyq19K+meZMshwjjy5S0lkm388zE4Q==}
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -7203,8 +7209,8 @@ packages:
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
-  tslib@2.8.0:
-    resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
@@ -8698,7 +8704,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.25.7':
+  '@babel/runtime@7.26.0':
     dependencies:
       regenerator-runtime: 0.14.1
 
@@ -9019,10 +9025,13 @@ snapshots:
 
   '@nutui/icons-react-taro@1.0.5': {}
 
-  '@nutui/nutui-react-taro@2.6.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@nutui/jdesign-icons-react-taro@1.0.6-beta.2': {}
+
+  '@nutui/nutui-react-taro@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.6
       '@nutui/icons-react-taro': 1.0.5
+      '@nutui/jdesign-icons-react-taro': 1.0.6-beta.2
       '@nutui/touch-emulator': 1.0.0
       '@react-spring/web': 9.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@use-gesture/react': 10.2.20(react@18.3.1)
@@ -9204,7 +9213,7 @@ snapshots:
 
   '@tarojs/api@3.6.32':
     dependencies:
-      '@babel/runtime': 7.25.7
+      '@babel/runtime': 7.26.0
       '@tarojs/runtime': 3.6.32(@tarojs/shared@3.6.32)
       '@tarojs/shared': 3.6.32
 
@@ -9549,7 +9558,7 @@ snapshots:
       history: 5.3.0
       mobile-detect: 1.4.5
       query-string: 7.1.3
-      tslib: 2.8.0
+      tslib: 2.8.1
       universal-router: 8.3.0
 
   '@tarojs/runner-utils@3.6.30':
@@ -9570,7 +9579,7 @@ snapshots:
     dependencies:
       '@tarojs/shared': 3.6.32
       lodash-es: 4.17.21
-      tslib: 2.8.0
+      tslib: 2.8.1
 
   '@tarojs/service@3.6.30(@tarojs/shared@3.6.30)(@tarojs/taro@3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30(@tarojs/shared@3.6.30))(@types/react@18.3.3)(postcss@8.4.38))':
     dependencies:
@@ -9618,7 +9627,7 @@ snapshots:
       '@tarojs/router': 3.6.32(@tarojs/runtime@3.6.32(@tarojs/shared@3.6.32))(@tarojs/shared@3.6.32)(@tarojs/taro@3.6.30(@tarojs/helper@3.6.30)(@tarojs/runtime@3.6.30(@tarojs/shared@3.6.30))(@types/react@18.3.3)(postcss@8.4.38))
       '@tarojs/runtime': 3.6.32(@tarojs/shared@3.6.32)
       '@tarojs/shared': 3.6.32
-      abortcontroller-polyfill: 1.7.5
+      abortcontroller-polyfill: 1.7.6
       base64-js: 1.5.1
       ics: 3.8.1
       is-mobile: 4.0.0
@@ -9626,7 +9635,7 @@ snapshots:
       lodash-es: 4.17.21
       platform: 1.3.6
       query-string: 7.1.3
-      tslib: 2.8.0
+      tslib: 2.8.1
       whatwg-fetch: 3.6.20
     transitivePeerDependencies:
       - '@tarojs/taro'
@@ -10329,6 +10338,8 @@ snapshots:
   abab@2.0.6: {}
 
   abortcontroller-polyfill@1.7.5: {}
+
+  abortcontroller-polyfill@1.7.6: {}
 
   accepts@1.3.8:
     dependencies:
@@ -15874,7 +15885,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tslib@2.8.0: {}
+  tslib@2.8.1: {}
 
   tunnel-agent@0.6.0:
     dependencies:

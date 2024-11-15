@@ -120,6 +120,63 @@ const devUrl_0_0_0_1 = '' as any
 const prodUrl_0_0_0_1 = '' as any
 const dataKey_0_0_0_1 = 'data' as any
 
+export interface GetTagRequest {
+  /**
+   * 标签用途
+   */
+  use: string
+}
+
+export type GetTagResponse = {
+  /**
+   * 标签id
+   */
+  id: number
+  /**
+   * 标签名称
+   */
+  name: string
+  /**
+   * 用途, 1:服饰标签
+   */
+  use: number
+}[]
+
+type GetTagRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/tag', 'data', string, 'use', false>
+>
+
+const getTagRequestConfig: GetTagRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_1,
+  devUrl: devUrl_0_0_0_1,
+  prodUrl: prodUrl_0_0_0_1,
+  path: '/tag',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_1,
+  paramNames: [],
+  queryNames: ['use'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getTag',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getTag = /*#__PURE__*/ (requestData: GetTagRequest, ...args: UserRequestRestArgs) => {
+  return request<GetTagResponse>(prepare(getTagRequestConfig, requestData), ...args)
+}
+
+getTag.requestConfig = getTagRequestConfig
+
+const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_2 = '' as any
+const prodUrl_0_0_0_2 = '' as any
+const dataKey_0_0_0_2 = 'data' as any
+
 export interface GetMarketRequest {
   /**
    * 页码
@@ -397,15 +454,15 @@ type GetMarketRequestConfig = Readonly<
 >
 
 const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [
     'pageNum',
@@ -494,15 +551,15 @@ type PostMarketRequestConfig = Readonly<
 >
 
 const postMarketRequestConfig: PostMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -577,15 +634,15 @@ type PutMarketRequestConfig = Readonly<
 >
 
 const putMarketRequestConfig: PutMarketRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -807,15 +864,15 @@ type GetMarketMyPublishedRequestConfig = Readonly<
 >
 
 const getMarketMyPublishedRequestConfig: GetMarketMyPublishedRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/my/published',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
@@ -1036,15 +1093,15 @@ type GetMarketMyFavoriteRequestConfig = Readonly<
 >
 
 const getMarketMyFavoriteRequestConfig: GetMarketMyFavoriteRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/my/favorite',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize'],
   requestDataOptional: false,
@@ -1147,15 +1204,15 @@ type PostMarketAndProductRequestConfig = Readonly<
 >
 
 const postMarketAndProductRequestConfig: PostMarketAndProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/and/product',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1189,15 +1246,15 @@ type PutMarketShelvesOnRequestConfig = Readonly<
 >
 
 const putMarketShelvesOnRequestConfig: PutMarketShelvesOnRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/shelves/on',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1231,15 +1288,15 @@ type PutMarketShelvesOffRequestConfig = Readonly<
 >
 
 const putMarketShelvesOffRequestConfig: PutMarketShelvesOffRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/shelves/off',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1491,15 +1548,15 @@ type GetMarketIdRequestConfig = Readonly<
 >
 
 const getMarketIdRequestConfig: GetMarketIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -1530,15 +1587,15 @@ type DeleteMarketIdRequestConfig = Readonly<
 >
 
 const deleteMarketIdRequestConfig: DeleteMarketIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -1569,15 +1626,15 @@ type DeleteMarketAuditIdRequestConfig = Readonly<
 >
 
 const deleteMarketAuditIdRequestConfig: DeleteMarketAuditIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/audit/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -1615,15 +1672,15 @@ type PostMarketFavoriteRequestConfig = Readonly<
 >
 
 const postMarketFavoriteRequestConfig: PostMarketFavoriteRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_1,
-  devUrl: devUrl_0_0_0_1,
-  prodUrl: prodUrl_0_0_0_1,
+  mockUrl: mockUrl_0_0_0_2,
+  devUrl: devUrl_0_0_0_2,
+  prodUrl: prodUrl_0_0_0_2,
   path: '/market/favorite',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_1,
+  dataKey: dataKey_0_0_0_2,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -1643,10 +1700,10 @@ export const postMarketFavorite = /*#__PURE__*/ (
 
 postMarketFavorite.requestConfig = postMarketFavoriteRequestConfig
 
-const mockUrl_0_0_0_2 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_2 = '' as any
-const prodUrl_0_0_0_2 = '' as any
-const dataKey_0_0_0_2 = 'data' as any
+const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_3 = '' as any
+const prodUrl_0_0_0_3 = '' as any
+const dataKey_0_0_0_3 = 'data' as any
 
 export interface GetPurchaseRequest {
   /**
@@ -1823,15 +1880,15 @@ type GetPurchaseRequestConfig = Readonly<
 >
 
 const getPurchaseRequestConfig: GetPurchaseRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'status', 'order'],
   requestDataOptional: false,
@@ -1919,15 +1976,15 @@ type PostPurchaseRequestConfig = Readonly<
 >
 
 const postPurchaseRequestConfig: PostPurchaseRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2019,15 +2076,15 @@ type PutPurchaseRequestConfig = Readonly<
 >
 
 const putPurchaseRequestConfig: PutPurchaseRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2219,15 +2276,15 @@ type GetPurchaseSelfRequestConfig = Readonly<
 >
 
 const getPurchaseSelfRequestConfig: GetPurchaseSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'title', 'typeCode', 'status', 'order'],
   requestDataOptional: false,
@@ -2431,15 +2488,15 @@ type GetPurchaseIdRequestConfig = Readonly<
 >
 
 const getPurchaseIdRequestConfig: GetPurchaseIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -2470,15 +2527,15 @@ type DeletePurchaseIdRequestConfig = Readonly<
 >
 
 const deletePurchaseIdRequestConfig: DeletePurchaseIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -2513,15 +2570,15 @@ type PostPurchaseSendRequestConfig = Readonly<
 >
 
 const postPurchaseSendRequestConfig: PostPurchaseSendRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase/send',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -2552,15 +2609,15 @@ type PutPurchaseAccomplishIdRequestConfig = Readonly<
 >
 
 const putPurchaseAccomplishIdRequestConfig: PutPurchaseAccomplishIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase/accomplish/{id}',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -2594,15 +2651,15 @@ type PutPurchaseAuditCancelIdRequestConfig = Readonly<
 >
 
 const putPurchaseAuditCancelIdRequestConfig: PutPurchaseAuditCancelIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_2,
-  devUrl: devUrl_0_0_0_2,
-  prodUrl: prodUrl_0_0_0_2,
+  mockUrl: mockUrl_0_0_0_3,
+  devUrl: devUrl_0_0_0_3,
+  prodUrl: prodUrl_0_0_0_3,
   path: '/purchase/audit/cancel/{id}',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_2,
+  dataKey: dataKey_0_0_0_3,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -2621,2331 +2678,6 @@ export const putPurchaseAuditCancelId = /*#__PURE__*/ (
 }
 
 putPurchaseAuditCancelId.requestConfig = putPurchaseAuditCancelIdRequestConfig
-
-const mockUrl_0_0_0_3 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_3 = '' as any
-const prodUrl_0_0_0_3 = '' as any
-const dataKey_0_0_0_3 = 'data' as any
-
-export interface GetOrderRequest {
-  /**
-   * 页码
-   */
-  pageNum: string
-  /**
-   * 分页条数
-   */
-  pageSize: string
-  /**
-   * 订单号
-   */
-  no?: string
-  /**
-   * 出售/借调
-   */
-  type?: string
-  /**
-   * 购买人的公司id
-   */
-  buyerId?: string
-  /**
-   * 出售人的公司id
-   */
-  sellerId?: string
-  /**
-   * 订单状态
-   */
-  status?: string
-}
-
-export interface GetOrderResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 订单id
-     */
-    id: number
-    /**
-     * 订单号
-     */
-    no: string
-    /**
-     * 微信支付系统生成的订单号
-     */
-    transactionId?: string
-    /**
-     * 二手市场商品id
-     */
-    marketId: number
-    /**
-     * 订单类型 1:出售 2:借调
-     */
-    type: number
-    /**
-     * 支付方式 1:余额 2:微信
-     */
-    payment: number
-    /**
-     * 购买人的公司id
-     */
-    buyerId: number
-    /**
-     * 收货地址id
-     */
-    buyerAddressId: number
-    /**
-     * 出售人的公司id
-     */
-    sellerId: number
-    /**
-     * 返还收货地址id
-     */
-    sellerAddressId?: number
-    /**
-     * 借调开始日期
-     */
-    leaseStartDate?: string
-    /**
-     * 借调结束日期
-     */
-    leaseEndDate?: string
-    /**
-     * 备注
-     */
-    remark?: string
-    /**
-     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
-     */
-    status: number
-    /**
-     * 物流模式, 1:快递 2:自提
-     */
-    logisticsType: number
-    /**
-     * 发货快递id
-     */
-    expressDeliveryId?: number
-    /**
-     * 返还快递id
-     */
-    expressReturnId?: number
-    /**
-     * 退还押金
-     */
-    depositRefund?: string
-    /**
-     * 退还押金备注
-     */
-    depositRefundRemark?: string
-    /**
-     * 二手市场商品信息
-     */
-    market: {
-      /**
-       * 创建时间
-       */
-      createTime: string
-      /**
-       * 修改时间
-       */
-      updateTime: string
-      /**
-       * 数据id
-       */
-      id: number
-      /**
-       * 公司id
-       */
-      companyId: number
-      /**
-       * 公司收货地址id
-       */
-      companyAddressId?: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 商品标题
-       */
-      title: string
-      /**
-       * 商品描述
-       */
-      description?: string
-      /**
-       * 是否允许出售, 0:否 1:是
-       */
-      allowSell: boolean
-      /**
-       * 是否允许借调, 0:否 1:是
-       */
-      allowLease: boolean
-      /**
-       * 出售价
-       */
-      sellingPrice?: string
-      /**
-       * 借调价
-       */
-      leasePrice?: string
-      /**
-       * 借调押金
-       */
-      leaseDeposit?: string
-      /**
-       * 发货方式, 1:包邮 2:到付 3:自提
-       */
-      expressMethod: number
-      /**
-       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-       */
-      quality: number
-      /**
-       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-       */
-      status: number
-      /**
-       * 审批结论
-       */
-      remark?: string
-      /**
-       * 是否被删除
-       */
-      isDeleted: boolean
-      /**
-       * 服饰信息
-       */
-      product: {
-        /**
-         * 创建时间
-         */
-        createTime: string
-        /**
-         * 修改时间
-         */
-        updateTime: string
-        /**
-         * 服饰id
-         */
-        id: number
-        /**
-         * 服饰名称
-         */
-        name: string
-        /**
-         * 服饰编号
-         */
-        no?: string
-        /**
-         * 服饰品牌
-         */
-        brand?: string
-        /**
-         * 服饰类型
-         */
-        typeCode: string
-        /**
-         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
-         */
-        size: number
-        /**
-         * 描述
-         */
-        description?: string
-        /**
-         * 租赁次数
-         */
-        leaseCount: number
-        /**
-         * 其他信息字段
-         */
-        bizData?: string
-        /**
-         * 公司id
-         */
-        companyId: number
-        /**
-         * 添加用户id
-         */
-        userId: number
-        /**
-         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
-         */
-        status: number
-        /**
-         * 是否被删除
-         */
-        isDeleted: boolean
-        /**
-         * 图片
-         */
-        picList: {
-          /**
-           * 服饰图片id
-           */
-          id: number
-          /**
-           * 服饰id
-           */
-          productId: number
-          /**
-           * 服饰图片地址
-           */
-          url: string
-        }[]
-      }
-    }
-  }[]
-}
-
-type GetOrderRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/order',
-    'data',
-    string,
-    'pageNum' | 'pageSize' | 'no' | 'type' | 'buyerId' | 'sellerId' | 'status',
-    false
-  >
->
-
-const getOrderRequestConfig: GetOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'no', 'type', 'buyerId', 'sellerId', 'status'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrder',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOrder = /*#__PURE__*/ (requestData: GetOrderRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOrderResponse>(prepare(getOrderRequestConfig, requestData), ...args)
-}
-
-getOrder.requestConfig = getOrderRequestConfig
-
-export interface PostOrderRequest {
-  /**
-   * market id
-   */
-  id: number
-  /**
-   * 订单类型 1:出售 2:借调
-   */
-  type: number
-  /**
-   * 支付方式 1:余额 2:微信
-   */
-  payment: number
-  /**
-   * 收货地址id
-   */
-  buyerAddressId: number
-  /**
-   * 借调开始时间
-   */
-  leaseStartDate?: string
-  /**
-   * 借调结束时间
-   */
-  leaseEndDate?: string
-  /**
-   * 物流模式, 1:快递 2:自提
-   */
-  logisticsType: number
-  /**
-   * 备注
-   */
-  remark?: string
-}
-
-export type PostOrderResponse = number
-
-type PostOrderRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, string, false>
->
-
-const postOrderRequestConfig: PostOrderRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrder',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrder = /*#__PURE__*/ (requestData: PostOrderRequest, ...args: UserRequestRestArgs) => {
-  return request<PostOrderResponse>(prepare(postOrderRequestConfig, requestData), ...args)
-}
-
-postOrder.requestConfig = postOrderRequestConfig
-
-export interface GetOrderBoughtRequest {
-  /**
-   * 页码
-   */
-  pageNum: string
-  /**
-   * 分页条数
-   */
-  pageSize: string
-  /**
-   * 订单号
-   */
-  no?: string
-  /**
-   * 出售/借调
-   */
-  type?: string
-  /**
-   * 购买人的公司id
-   */
-  buyerId?: string
-  /**
-   * 出售人的公司id
-   */
-  sellerId?: string
-  /**
-   * 订单状态
-   */
-  status?: string
-}
-
-export interface GetOrderBoughtResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 订单id
-     */
-    id: number
-    /**
-     * 订单号
-     */
-    no: string
-    /**
-     * 微信支付系统生成的订单号
-     */
-    transactionId?: string
-    /**
-     * 二手市场商品id
-     */
-    marketId: number
-    /**
-     * 订单类型 1:出售 2:借调
-     */
-    type: number
-    /**
-     * 支付方式 1:余额 2:微信
-     */
-    payment: number
-    /**
-     * 购买人的公司id
-     */
-    buyerId: number
-    /**
-     * 收货地址id
-     */
-    buyerAddressId: number
-    /**
-     * 出售人的公司id
-     */
-    sellerId: number
-    /**
-     * 返还收货地址id
-     */
-    sellerAddressId?: number
-    /**
-     * 借调开始日期
-     */
-    leaseStartDate?: string
-    /**
-     * 借调结束日期
-     */
-    leaseEndDate?: string
-    /**
-     * 备注
-     */
-    remark?: string
-    /**
-     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
-     */
-    status: number
-    /**
-     * 物流模式, 1:快递 2:自提
-     */
-    logisticsType: number
-    /**
-     * 发货快递id
-     */
-    expressDeliveryId?: number
-    /**
-     * 返还快递id
-     */
-    expressReturnId?: number
-    /**
-     * 退还押金
-     */
-    depositRefund?: string
-    /**
-     * 退还押金备注
-     */
-    depositRefundRemark?: string
-    /**
-     * 二手市场商品信息
-     */
-    market: {
-      /**
-       * 创建时间
-       */
-      createTime: string
-      /**
-       * 修改时间
-       */
-      updateTime: string
-      /**
-       * 数据id
-       */
-      id: number
-      /**
-       * 公司id
-       */
-      companyId: number
-      /**
-       * 公司收货地址id
-       */
-      companyAddressId?: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 商品标题
-       */
-      title: string
-      /**
-       * 商品描述
-       */
-      description?: string
-      /**
-       * 是否允许出售, 0:否 1:是
-       */
-      allowSell: boolean
-      /**
-       * 是否允许借调, 0:否 1:是
-       */
-      allowLease: boolean
-      /**
-       * 出售价
-       */
-      sellingPrice?: string
-      /**
-       * 借调价
-       */
-      leasePrice?: string
-      /**
-       * 借调押金
-       */
-      leaseDeposit?: string
-      /**
-       * 发货方式, 1:包邮 2:到付 3:自提
-       */
-      expressMethod: number
-      /**
-       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-       */
-      quality: number
-      /**
-       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-       */
-      status: number
-      /**
-       * 审批结论
-       */
-      remark?: string
-      /**
-       * 是否被删除
-       */
-      isDeleted: boolean
-      /**
-       * 服饰信息
-       */
-      product: {
-        /**
-         * 创建时间
-         */
-        createTime: string
-        /**
-         * 修改时间
-         */
-        updateTime: string
-        /**
-         * 服饰id
-         */
-        id: number
-        /**
-         * 服饰名称
-         */
-        name: string
-        /**
-         * 服饰编号
-         */
-        no?: string
-        /**
-         * 服饰品牌
-         */
-        brand?: string
-        /**
-         * 服饰类型
-         */
-        typeCode: string
-        /**
-         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
-         */
-        size: number
-        /**
-         * 描述
-         */
-        description?: string
-        /**
-         * 租赁次数
-         */
-        leaseCount: number
-        /**
-         * 其他信息字段
-         */
-        bizData?: string
-        /**
-         * 公司id
-         */
-        companyId: number
-        /**
-         * 添加用户id
-         */
-        userId: number
-        /**
-         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
-         */
-        status: number
-        /**
-         * 是否被删除
-         */
-        isDeleted: boolean
-        /**
-         * 图片
-         */
-        picList: {
-          /**
-           * 服饰图片id
-           */
-          id: number
-          /**
-           * 服饰id
-           */
-          productId: number
-          /**
-           * 服饰图片地址
-           */
-          url: string
-        }[]
-      }
-    }
-  }[]
-}
-
-type GetOrderBoughtRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/order/bought',
-    'data',
-    string,
-    'pageNum' | 'pageSize' | 'no' | 'type' | 'buyerId' | 'sellerId' | 'status',
-    false
-  >
->
-
-const getOrderBoughtRequestConfig: GetOrderBoughtRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/bought',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'no', 'type', 'buyerId', 'sellerId', 'status'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrderBought',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOrderBought = /*#__PURE__*/ (requestData: GetOrderBoughtRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOrderBoughtResponse>(prepare(getOrderBoughtRequestConfig, requestData), ...args)
-}
-
-getOrderBought.requestConfig = getOrderBoughtRequestConfig
-
-export interface GetOrderSoldRequest {
-  /**
-   * 页码
-   */
-  pageNum: string
-  /**
-   * 分页条数
-   */
-  pageSize: string
-  /**
-   * 订单号
-   */
-  no?: string
-  /**
-   * 出售/借调
-   */
-  type?: string
-  /**
-   * 购买人的公司id
-   */
-  buyerId?: string
-  /**
-   * 出售人的公司id
-   */
-  sellerId?: string
-  /**
-   * 订单状态
-   */
-  status?: string
-}
-
-export interface GetOrderSoldResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 订单id
-     */
-    id: number
-    /**
-     * 订单号
-     */
-    no: string
-    /**
-     * 微信支付系统生成的订单号
-     */
-    transactionId?: string
-    /**
-     * 二手市场商品id
-     */
-    marketId: number
-    /**
-     * 订单类型 1:出售 2:借调
-     */
-    type: number
-    /**
-     * 支付方式 1:余额 2:微信
-     */
-    payment: number
-    /**
-     * 购买人的公司id
-     */
-    buyerId: number
-    /**
-     * 收货地址id
-     */
-    buyerAddressId: number
-    /**
-     * 出售人的公司id
-     */
-    sellerId: number
-    /**
-     * 返还收货地址id
-     */
-    sellerAddressId?: number
-    /**
-     * 借调开始日期
-     */
-    leaseStartDate?: string
-    /**
-     * 借调结束日期
-     */
-    leaseEndDate?: string
-    /**
-     * 备注
-     */
-    remark?: string
-    /**
-     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
-     */
-    status: number
-    /**
-     * 物流模式, 1:快递 2:自提
-     */
-    logisticsType: number
-    /**
-     * 发货快递id
-     */
-    expressDeliveryId?: number
-    /**
-     * 返还快递id
-     */
-    expressReturnId?: number
-    /**
-     * 退还押金
-     */
-    depositRefund?: string
-    /**
-     * 退还押金备注
-     */
-    depositRefundRemark?: string
-    /**
-     * 二手市场商品信息
-     */
-    market: {
-      /**
-       * 创建时间
-       */
-      createTime: string
-      /**
-       * 修改时间
-       */
-      updateTime: string
-      /**
-       * 数据id
-       */
-      id: number
-      /**
-       * 公司id
-       */
-      companyId: number
-      /**
-       * 公司收货地址id
-       */
-      companyAddressId?: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 商品标题
-       */
-      title: string
-      /**
-       * 商品描述
-       */
-      description?: string
-      /**
-       * 是否允许出售, 0:否 1:是
-       */
-      allowSell: boolean
-      /**
-       * 是否允许借调, 0:否 1:是
-       */
-      allowLease: boolean
-      /**
-       * 出售价
-       */
-      sellingPrice?: string
-      /**
-       * 借调价
-       */
-      leasePrice?: string
-      /**
-       * 借调押金
-       */
-      leaseDeposit?: string
-      /**
-       * 发货方式, 1:包邮 2:到付 3:自提
-       */
-      expressMethod: number
-      /**
-       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-       */
-      quality: number
-      /**
-       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-       */
-      status: number
-      /**
-       * 审批结论
-       */
-      remark?: string
-      /**
-       * 是否被删除
-       */
-      isDeleted: boolean
-      /**
-       * 服饰信息
-       */
-      product: {
-        /**
-         * 创建时间
-         */
-        createTime: string
-        /**
-         * 修改时间
-         */
-        updateTime: string
-        /**
-         * 服饰id
-         */
-        id: number
-        /**
-         * 服饰名称
-         */
-        name: string
-        /**
-         * 服饰编号
-         */
-        no?: string
-        /**
-         * 服饰品牌
-         */
-        brand?: string
-        /**
-         * 服饰类型
-         */
-        typeCode: string
-        /**
-         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
-         */
-        size: number
-        /**
-         * 描述
-         */
-        description?: string
-        /**
-         * 租赁次数
-         */
-        leaseCount: number
-        /**
-         * 其他信息字段
-         */
-        bizData?: string
-        /**
-         * 公司id
-         */
-        companyId: number
-        /**
-         * 添加用户id
-         */
-        userId: number
-        /**
-         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
-         */
-        status: number
-        /**
-         * 是否被删除
-         */
-        isDeleted: boolean
-        /**
-         * 图片
-         */
-        picList: {
-          /**
-           * 服饰图片id
-           */
-          id: number
-          /**
-           * 服饰id
-           */
-          productId: number
-          /**
-           * 服饰图片地址
-           */
-          url: string
-        }[]
-      }
-    }
-  }[]
-}
-
-type GetOrderSoldRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/order/sold',
-    'data',
-    string,
-    'pageNum' | 'pageSize' | 'no' | 'type' | 'buyerId' | 'sellerId' | 'status',
-    false
-  >
->
-
-const getOrderSoldRequestConfig: GetOrderSoldRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/sold',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['pageNum', 'pageSize', 'no', 'type', 'buyerId', 'sellerId', 'status'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrderSold',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOrderSold = /*#__PURE__*/ (requestData: GetOrderSoldRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOrderSoldResponse>(prepare(getOrderSoldRequestConfig, requestData), ...args)
-}
-
-getOrderSold.requestConfig = getOrderSoldRequestConfig
-
-export interface PostOrderCancelRequest {
-  /**
-   * 订单id
-   */
-  id: number
-}
-
-export type PostOrderCancelResponse = any
-
-type PostOrderCancelRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/cancel', 'data', string, string, false>
->
-
-const postOrderCancelRequestConfig: PostOrderCancelRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/cancel',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderCancel',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderCancel = /*#__PURE__*/ (requestData: PostOrderCancelRequest, ...args: UserRequestRestArgs) => {
-  return request<PostOrderCancelResponse>(prepare(postOrderCancelRequestConfig, requestData), ...args)
-}
-
-postOrderCancel.requestConfig = postOrderCancelRequestConfig
-
-export interface PostOrderPayBalanceRequest {
-  /**
-   * 订单id
-   */
-  id: number
-}
-
-export interface PostOrderPayBalanceResponse {
-  /**
-   * 时间戳
-   */
-  timestamp: number
-  /**
-   * 随机字符串
-   */
-  nonceStr: string
-  /**
-   * 下单接口返回的prepay_id参数值
-   */
-  pkg: string
-  /**
-   * 签名
-   */
-  paySign: string
-}
-
-type PostOrderPayBalanceRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/balance', 'data', string, string, false>
->
-
-const postOrderPayBalanceRequestConfig: PostOrderPayBalanceRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/pay/balance',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderPayBalance',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderPayBalance = /*#__PURE__*/ (
-  requestData: PostOrderPayBalanceRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderPayBalanceResponse>(prepare(postOrderPayBalanceRequestConfig, requestData), ...args)
-}
-
-postOrderPayBalance.requestConfig = postOrderPayBalanceRequestConfig
-
-export interface PostOrderPayWechatRequest {
-  /**
-   * 订单id
-   */
-  id: number
-}
-
-export interface PostOrderPayWechatResponse {
-  /**
-   * 时间戳
-   */
-  timestamp: number
-  /**
-   * 随机字符串
-   */
-  nonceStr: string
-  /**
-   * 下单接口返回的prepay_id参数值
-   */
-  pkg: string
-  /**
-   * 签名
-   */
-  paySign: string
-}
-
-type PostOrderPayWechatRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat', 'data', string, string, false>
->
-
-const postOrderPayWechatRequestConfig: PostOrderPayWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/pay/wechat',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderPayWechat',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderPayWechat = /*#__PURE__*/ (
-  requestData: PostOrderPayWechatRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderPayWechatResponse>(prepare(postOrderPayWechatRequestConfig, requestData), ...args)
-}
-
-postOrderPayWechat.requestConfig = postOrderPayWechatRequestConfig
-
-export interface GetOrderWechatOrderStatusRequest {
-  /**
-   * 微信支付订单号
-   */
-  transactionId: string
-}
-
-export interface GetOrderWechatOrderStatusResponse {
-  /**
-   * 数据总条数
-   */
-  total: number
-  /**
-   * 数据
-   */
-  list: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 订单id
-     */
-    id: number
-    /**
-     * 订单号
-     */
-    no: string
-    /**
-     * 微信支付系统生成的订单号
-     */
-    transactionId?: string
-    /**
-     * 二手市场商品id
-     */
-    marketId: number
-    /**
-     * 订单类型 1:出售 2:借调
-     */
-    type: number
-    /**
-     * 支付方式 1:余额 2:微信
-     */
-    payment: number
-    /**
-     * 购买人的公司id
-     */
-    buyerId: number
-    /**
-     * 收货地址id
-     */
-    buyerAddressId: number
-    /**
-     * 出售人的公司id
-     */
-    sellerId: number
-    /**
-     * 返还收货地址id
-     */
-    sellerAddressId?: number
-    /**
-     * 借调开始日期
-     */
-    leaseStartDate?: string
-    /**
-     * 借调结束日期
-     */
-    leaseEndDate?: string
-    /**
-     * 备注
-     */
-    remark?: string
-    /**
-     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
-     */
-    status: number
-    /**
-     * 物流模式, 1:快递 2:自提
-     */
-    logisticsType: number
-    /**
-     * 发货快递id
-     */
-    expressDeliveryId?: number
-    /**
-     * 返还快递id
-     */
-    expressReturnId?: number
-    /**
-     * 退还押金
-     */
-    depositRefund?: string
-    /**
-     * 退还押金备注
-     */
-    depositRefundRemark?: string
-    /**
-     * 二手市场商品信息
-     */
-    market: {
-      /**
-       * 创建时间
-       */
-      createTime: string
-      /**
-       * 修改时间
-       */
-      updateTime: string
-      /**
-       * 数据id
-       */
-      id: number
-      /**
-       * 公司id
-       */
-      companyId: number
-      /**
-       * 公司收货地址id
-       */
-      companyAddressId?: number
-      /**
-       * 服饰id
-       */
-      productId: number
-      /**
-       * 商品标题
-       */
-      title: string
-      /**
-       * 商品描述
-       */
-      description?: string
-      /**
-       * 是否允许出售, 0:否 1:是
-       */
-      allowSell: boolean
-      /**
-       * 是否允许借调, 0:否 1:是
-       */
-      allowLease: boolean
-      /**
-       * 出售价
-       */
-      sellingPrice?: string
-      /**
-       * 借调价
-       */
-      leasePrice?: string
-      /**
-       * 借调押金
-       */
-      leaseDeposit?: string
-      /**
-       * 发货方式, 1:包邮 2:到付 3:自提
-       */
-      expressMethod: number
-      /**
-       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-       */
-      quality: number
-      /**
-       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-       */
-      status: number
-      /**
-       * 审批结论
-       */
-      remark?: string
-      /**
-       * 是否被删除
-       */
-      isDeleted: boolean
-      /**
-       * 服饰信息
-       */
-      product: {
-        /**
-         * 创建时间
-         */
-        createTime: string
-        /**
-         * 修改时间
-         */
-        updateTime: string
-        /**
-         * 服饰id
-         */
-        id: number
-        /**
-         * 服饰名称
-         */
-        name: string
-        /**
-         * 服饰编号
-         */
-        no?: string
-        /**
-         * 服饰品牌
-         */
-        brand?: string
-        /**
-         * 服饰类型
-         */
-        typeCode: string
-        /**
-         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
-         */
-        size: number
-        /**
-         * 描述
-         */
-        description?: string
-        /**
-         * 租赁次数
-         */
-        leaseCount: number
-        /**
-         * 其他信息字段
-         */
-        bizData?: string
-        /**
-         * 公司id
-         */
-        companyId: number
-        /**
-         * 添加用户id
-         */
-        userId: number
-        /**
-         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
-         */
-        status: number
-        /**
-         * 是否被删除
-         */
-        isDeleted: boolean
-        /**
-         * 图片
-         */
-        picList: {
-          /**
-           * 服饰图片id
-           */
-          id: number
-          /**
-           * 服饰id
-           */
-          productId: number
-          /**
-           * 服饰图片地址
-           */
-          url: string
-        }[]
-      }
-    }
-  }[]
-}
-
-type GetOrderWechatOrderStatusRequestConfig = Readonly<
-  RequestConfig<
-    'http://127.0.0.1:50505/mock/0',
-    '',
-    '',
-    '/order/wechat/order/status',
-    'data',
-    string,
-    'transactionId',
-    false
-  >
->
-
-const getOrderWechatOrderStatusRequestConfig: GetOrderWechatOrderStatusRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/wechat/order/status',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['transactionId'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrderWechatOrderStatus',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOrderWechatOrderStatus = /*#__PURE__*/ (
-  requestData: GetOrderWechatOrderStatusRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetOrderWechatOrderStatusResponse>(
-    prepare(getOrderWechatOrderStatusRequestConfig, requestData),
-    ...args,
-  )
-}
-
-getOrderWechatOrderStatus.requestConfig = getOrderWechatOrderStatusRequestConfig
-
-export interface PostOrderPayWechatNoticeRequest {
-  /**
-   * 通知的唯一ID
-   */
-  id?: string
-  /**
-   * 通知创建的时间
-   */
-  create_time?: string
-  /**
-   * 通知的类型，支付成功通知的类型为TRANSACTION.SUCCESS
-   */
-  event_type?: string
-  /**
-   * 通知的资源数据类型，支付成功通知为encrypt-resource
-   */
-  resource_type?: string
-  /**
-   * 通知资源数据
-   */
-  resource?: {
-    /**
-     * 对开启结果数据进行加密的加密算法，目前只支持AEAD_AES_256_GCM
-     */
-    algorithm?: string
-    /**
-     * Base64编码后的开启/停用结果数据密文
-     */
-    ciphertext?: string
-    /**
-     * 附加数据
-     */
-    associated_data?: string
-    /**
-     * 原始回调类型，为transaction
-     */
-    original_type?: string
-    /**
-     * 加密使用的随机串
-     */
-    nonce?: string
-  }
-  /**
-   * 回调摘要
-   */
-  summary?: string
-}
-
-export interface PostOrderPayWechatNoticeResponse {
-  /**
-   * 时间戳
-   */
-  timestamp: number
-  /**
-   * 随机字符串
-   */
-  nonceStr: string
-  /**
-   * 下单接口返回的prepay_id参数值
-   */
-  pkg: string
-  /**
-   * 签名
-   */
-  paySign: string
-}
-
-type PostOrderPayWechatNoticeRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat/notice', 'data', string, string, false>
->
-
-const postOrderPayWechatNoticeRequestConfig: PostOrderPayWechatNoticeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/pay/wechat/notice',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderPayWechatNotice',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderPayWechatNotice = /*#__PURE__*/ (
-  requestData: PostOrderPayWechatNoticeRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderPayWechatNoticeResponse>(prepare(postOrderPayWechatNoticeRequestConfig, requestData), ...args)
-}
-
-postOrderPayWechatNotice.requestConfig = postOrderPayWechatNoticeRequestConfig
-
-export interface GetOrderWechatPayTransactionRequest {
-  /**
-   * 订单id
-   */
-  id: string
-}
-
-export type GetOrderWechatPayTransactionResponse = boolean
-
-type GetOrderWechatPayTransactionRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/wechat/pay/transaction', 'data', string, 'id', false>
->
-
-const getOrderWechatPayTransactionRequestConfig: GetOrderWechatPayTransactionRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/wechat/pay/transaction',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: ['id'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrderWechatPayTransaction',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOrderWechatPayTransaction = /*#__PURE__*/ (
-  requestData: GetOrderWechatPayTransactionRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<GetOrderWechatPayTransactionResponse>(
-    prepare(getOrderWechatPayTransactionRequestConfig, requestData),
-    ...args,
-  )
-}
-
-getOrderWechatPayTransaction.requestConfig = getOrderWechatPayTransactionRequestConfig
-
-export interface PostOrderExpressDeliverRequest {
-  /**
-   * 订单id
-   */
-  id: number
-  /**
-   * 快递单号
-   */
-  no: string
-  /**
-   * 快递公司
-   */
-  expressCompany: string
-  /**
-   * 备注
-   */
-  remark?: string
-}
-
-export type PostOrderExpressDeliverResponse = any
-
-type PostOrderExpressDeliverRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/deliver', 'data', string, string, false>
->
-
-const postOrderExpressDeliverRequestConfig: PostOrderExpressDeliverRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/express/deliver',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderExpressDeliver',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderExpressDeliver = /*#__PURE__*/ (
-  requestData: PostOrderExpressDeliverRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderExpressDeliverResponse>(prepare(postOrderExpressDeliverRequestConfig, requestData), ...args)
-}
-
-postOrderExpressDeliver.requestConfig = postOrderExpressDeliverRequestConfig
-
-export interface PostOrderExpressReturnRequest {
-  /**
-   * 订单id
-   */
-  id: number
-  /**
-   * 快递单号
-   */
-  no: string
-  /**
-   * 备注
-   */
-  remark?: string
-}
-
-export type PostOrderExpressReturnResponse = any
-
-type PostOrderExpressReturnRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/return', 'data', string, string, false>
->
-
-const postOrderExpressReturnRequestConfig: PostOrderExpressReturnRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/express/return',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderExpressReturn',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderExpressReturn = /*#__PURE__*/ (
-  requestData: PostOrderExpressReturnRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderExpressReturnResponse>(prepare(postOrderExpressReturnRequestConfig, requestData), ...args)
-}
-
-postOrderExpressReturn.requestConfig = postOrderExpressReturnRequestConfig
-
-export interface PostOrderReceiveBuyerRequest {
-  /**
-   * 订单id
-   */
-  id: number
-}
-
-export type PostOrderReceiveBuyerResponse = any
-
-type PostOrderReceiveBuyerRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/buyer', 'data', string, string, false>
->
-
-const postOrderReceiveBuyerRequestConfig: PostOrderReceiveBuyerRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/receive/buyer',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderReceiveBuyer',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderReceiveBuyer = /*#__PURE__*/ (
-  requestData: PostOrderReceiveBuyerRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderReceiveBuyerResponse>(prepare(postOrderReceiveBuyerRequestConfig, requestData), ...args)
-}
-
-postOrderReceiveBuyer.requestConfig = postOrderReceiveBuyerRequestConfig
-
-export interface PostOrderReceiveSellerRequest {
-  /**
-   * 订单id
-   */
-  id: number
-  /**
-   * 退还押金金额
-   */
-  amount: string
-  /**
-   * 退还押金备注
-   */
-  depositRefundRemark?: string
-}
-
-export type PostOrderReceiveSellerResponse = any
-
-type PostOrderReceiveSellerRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/seller', 'data', string, string, false>
->
-
-const postOrderReceiveSellerRequestConfig: PostOrderReceiveSellerRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/receive/seller',
-  method: Method.POST,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.json,
-  responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: [],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'postOrderReceiveSeller',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const postOrderReceiveSeller = /*#__PURE__*/ (
-  requestData: PostOrderReceiveSellerRequest,
-  ...args: UserRequestRestArgs
-) => {
-  return request<PostOrderReceiveSellerResponse>(prepare(postOrderReceiveSellerRequestConfig, requestData), ...args)
-}
-
-postOrderReceiveSeller.requestConfig = postOrderReceiveSellerRequestConfig
-
-export interface GetOrderIdRequest {
-  /**
-   * 订单id
-   */
-  id: string
-}
-
-export interface GetOrderIdResponse {
-  /**
-   * 创建时间
-   */
-  createTime: string
-  /**
-   * 修改时间
-   */
-  updateTime: string
-  /**
-   * 订单id
-   */
-  id: number
-  /**
-   * 订单号
-   */
-  no: string
-  /**
-   * 微信支付系统生成的订单号
-   */
-  transactionId?: string
-  /**
-   * 二手市场商品id
-   */
-  marketId: number
-  /**
-   * 订单类型 1:出售 2:借调
-   */
-  type: number
-  /**
-   * 支付方式 1:余额 2:微信
-   */
-  payment: number
-  /**
-   * 购买人的公司id
-   */
-  buyerId: number
-  /**
-   * 收货地址id
-   */
-  buyerAddressId: number
-  /**
-   * 出售人的公司id
-   */
-  sellerId: number
-  /**
-   * 返还收货地址id
-   */
-  sellerAddressId?: number
-  /**
-   * 借调开始日期
-   */
-  leaseStartDate?: string
-  /**
-   * 借调结束日期
-   */
-  leaseEndDate?: string
-  /**
-   * 备注
-   */
-  remark?: string
-  /**
-   * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
-   */
-  status: number
-  /**
-   * 物流模式, 1:快递 2:自提
-   */
-  logisticsType: number
-  /**
-   * 发货快递id
-   */
-  expressDeliveryId?: number
-  /**
-   * 返还快递id
-   */
-  expressReturnId?: number
-  /**
-   * 退还押金
-   */
-  depositRefund?: string
-  /**
-   * 退还押金备注
-   */
-  depositRefundRemark?: string
-  /**
-   * 二手市场商品信息
-   */
-  market: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 数据id
-     */
-    id: number
-    /**
-     * 公司id
-     */
-    companyId: number
-    /**
-     * 公司收货地址id
-     */
-    companyAddressId?: number
-    /**
-     * 服饰id
-     */
-    productId: number
-    /**
-     * 商品标题
-     */
-    title: string
-    /**
-     * 商品描述
-     */
-    description?: string
-    /**
-     * 是否允许出售, 0:否 1:是
-     */
-    allowSell: boolean
-    /**
-     * 是否允许借调, 0:否 1:是
-     */
-    allowLease: boolean
-    /**
-     * 出售价
-     */
-    sellingPrice?: string
-    /**
-     * 借调价
-     */
-    leasePrice?: string
-    /**
-     * 借调押金
-     */
-    leaseDeposit?: string
-    /**
-     * 发货方式, 1:包邮 2:到付 3:自提
-     */
-    expressMethod: number
-    /**
-     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
-     */
-    quality: number
-    /**
-     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
-     */
-    status: number
-    /**
-     * 审批结论
-     */
-    remark?: string
-    /**
-     * 是否被删除
-     */
-    isDeleted: boolean
-    /**
-     * 服饰信息
-     */
-    product: {
-      /**
-       * 创建时间
-       */
-      createTime: string
-      /**
-       * 修改时间
-       */
-      updateTime: string
-      /**
-       * 服饰id
-       */
-      id: number
-      /**
-       * 服饰名称
-       */
-      name: string
-      /**
-       * 服饰编号
-       */
-      no?: string
-      /**
-       * 服饰品牌
-       */
-      brand?: string
-      /**
-       * 服饰类型
-       */
-      typeCode: string
-      /**
-       * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
-       */
-      size: number
-      /**
-       * 描述
-       */
-      description?: string
-      /**
-       * 租赁次数
-       */
-      leaseCount: number
-      /**
-       * 其他信息字段
-       */
-      bizData?: string
-      /**
-       * 公司id
-       */
-      companyId: number
-      /**
-       * 添加用户id
-       */
-      userId: number
-      /**
-       * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
-       */
-      status: number
-      /**
-       * 是否被删除
-       */
-      isDeleted: boolean
-      /**
-       * 图片
-       */
-      picList: {
-        /**
-         * 服饰图片id
-         */
-        id: number
-        /**
-         * 服饰id
-         */
-        productId: number
-        /**
-         * 服饰图片地址
-         */
-        url: string
-      }[]
-    }
-  }
-  /**
-   * 买家信息
-   */
-  buyer: {
-    /**
-     * 公司id
-     */
-    id: number
-    /**
-     * 公司名称
-     */
-    name: string
-    /**
-     * 公司LOGO
-     */
-    logo?: string
-  }
-  /**
-   * 卖家信息
-   */
-  seller: {
-    /**
-     * 公司id
-     */
-    id: number
-    /**
-     * 公司名称
-     */
-    name: string
-    /**
-     * 公司LOGO
-     */
-    logo?: string
-  }
-  /**
-   * 买家收货地址
-   */
-  buyerAddress: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 地址id
-     */
-    id: number
-    /**
-     * 公司id
-     */
-    companyId: number
-    /**
-     * 收件人
-     */
-    recipient: string
-    /**
-     * 手机号
-     */
-    phone: string
-    /**
-     * 省code
-     */
-    province: string
-    /**
-     * 市code
-     */
-    city: string
-    /**
-     * 区code
-     */
-    area: string
-    /**
-     * 地址
-     */
-    address: string
-    /**
-     * 是否为默认地址
-     */
-    isDefault: boolean
-    /**
-     * 是否被删除
-     */
-    isDeleted: boolean
-  }
-  /**
-   * 卖家收货地址
-   */
-  sellerAddress: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 地址id
-     */
-    id: number
-    /**
-     * 公司id
-     */
-    companyId: number
-    /**
-     * 收件人
-     */
-    recipient: string
-    /**
-     * 手机号
-     */
-    phone: string
-    /**
-     * 省code
-     */
-    province: string
-    /**
-     * 市code
-     */
-    city: string
-    /**
-     * 区code
-     */
-    area: string
-    /**
-     * 地址
-     */
-    address: string
-    /**
-     * 是否为默认地址
-     */
-    isDefault: boolean
-    /**
-     * 是否被删除
-     */
-    isDeleted: boolean
-  }
-  /**
-   * 快递发货信息
-   */
-  expressDelivery: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 快递单id
-     */
-    id: number
-    /**
-     * 快递单号
-     */
-    no: string
-    /**
-     * 备注
-     */
-    remark?: string
-  }
-  /**
-   * 快递返还信息
-   */
-  expressReturn: {
-    /**
-     * 创建时间
-     */
-    createTime: string
-    /**
-     * 修改时间
-     */
-    updateTime: string
-    /**
-     * 快递单id
-     */
-    id: number
-    /**
-     * 快递单号
-     */
-    no: string
-    /**
-     * 备注
-     */
-    remark?: string
-  }
-}
-
-type GetOrderIdRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/{id}', 'data', 'id', string, false>
->
-
-const getOrderIdRequestConfig: GetOrderIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_3,
-  devUrl: devUrl_0_0_0_3,
-  prodUrl: prodUrl_0_0_0_3,
-  path: '/order/{id}',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_3,
-  paramNames: ['id'],
-  queryNames: [],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getOrderId',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getOrderId = /*#__PURE__*/ (requestData: GetOrderIdRequest, ...args: UserRequestRestArgs) => {
-  return request<GetOrderIdResponse>(prepare(getOrderIdRequestConfig, requestData), ...args)
-}
-
-getOrderId.requestConfig = getOrderIdRequestConfig
 
 const mockUrl_0_0_0_4 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_4 = '' as any
@@ -5095,6 +2827,67 @@ export const postPlatformFeatureReservation = /*#__PURE__*/ (
 }
 
 postPlatformFeatureReservation.requestConfig = postPlatformFeatureReservationRequestConfig
+
+export interface PostPlatformMicroappEventRequest {
+  /**
+   * 开发者微信号
+   */
+  ToUserName: string
+  /**
+   * 发送方账号（一个OpenID）
+   */
+  FromUserName: string
+  /**
+   * 消息创建时间（整型）
+   */
+  CreateTime: string
+  /**
+   * 消息类型
+   */
+  MsgType: string
+  /**
+   * 事件类型
+   */
+  Event?: string
+}
+
+export type PostPlatformMicroappEventResponse = string
+
+type PostPlatformMicroappEventRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/platform/microapp/event', 'data', string, string, false>
+>
+
+const postPlatformMicroappEventRequestConfig: PostPlatformMicroappEventRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_4,
+  devUrl: devUrl_0_0_0_4,
+  prodUrl: prodUrl_0_0_0_4,
+  path: '/platform/microapp/event',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_4,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postPlatformMicroappEvent',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postPlatformMicroappEvent = /*#__PURE__*/ (
+  requestData: PostPlatformMicroappEventRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostPlatformMicroappEventResponse>(
+    prepare(postPlatformMicroappEventRequestConfig, requestData),
+    ...args,
+  )
+}
+
+postPlatformMicroappEvent.requestConfig = postPlatformMicroappEventRequestConfig
 
 export interface PostPlatformOfficialAccountsEventRequest {
   /**
@@ -5984,7 +3777,7 @@ export interface PostCompanyRegisterRequest {
   /**
    * 邀请人的邀请码
    */
-  inviter?: string
+  invitationCode?: string
 }
 
 export type PostCompanyRegisterResponse = any
@@ -6682,6 +4475,60 @@ export const getCompanyWithdrawAdmin = /*#__PURE__*/ (
 
 getCompanyWithdrawAdmin.requestConfig = getCompanyWithdrawAdminRequestConfig
 
+export interface PostCompanyWithdrawAuditRequest {
+  /**
+   * 提现记录id
+   */
+  id: number
+  /**
+   * 审核结果
+   */
+  result: number
+  /**
+   * 打款凭证
+   */
+  file?: string
+  /**
+   * 备注
+   */
+  remark?: string
+}
+
+export type PostCompanyWithdrawAuditResponse = any
+
+type PostCompanyWithdrawAuditRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/withdraw/audit', 'data', string, string, false>
+>
+
+const postCompanyWithdrawAuditRequestConfig: PostCompanyWithdrawAuditRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/withdraw/audit',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyWithdrawAudit',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postCompanyWithdrawAudit = /*#__PURE__*/ (
+  requestData: PostCompanyWithdrawAuditRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyWithdrawAuditResponse>(prepare(postCompanyWithdrawAuditRequestConfig, requestData), ...args)
+}
+
+postCompanyWithdrawAudit.requestConfig = postCompanyWithdrawAuditRequestConfig
+
 export interface PostCompanyFollowToggleRequest {
   /**
    * 被关注的公司id
@@ -6897,6 +4744,2450 @@ const devUrl_0_0_0_6 = '' as any
 const prodUrl_0_0_0_6 = '' as any
 const dataKey_0_0_0_6 = 'data' as any
 
+export interface GetOrderRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 订单号
+   */
+  no?: string
+  /**
+   * 出售/借调
+   */
+  type?: string
+  /**
+   * 购买人的公司id
+   */
+  buyerId?: string
+  /**
+   * 出售人的公司id
+   */
+  sellerId?: string
+  /**
+   * 订单状态
+   */
+  status?: string
+}
+
+export interface GetOrderResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 订单id
+     */
+    id: number
+    /**
+     * 订单号
+     */
+    no: string
+    /**
+     * 微信支付系统生成的订单号
+     */
+    transactionId?: string
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 订单类型 1:出售 2:借调
+     */
+    type: number
+    /**
+     * 支付方式 1:余额 2:微信
+     */
+    payment: number
+    /**
+     * 购买人的公司id
+     */
+    buyerId: number
+    /**
+     * 收货地址id
+     */
+    buyerAddressId: number
+    /**
+     * 出售人的公司id
+     */
+    sellerId: number
+    /**
+     * 返还收货地址id
+     */
+    sellerAddressId?: number
+    /**
+     * 借调开始日期
+     */
+    leaseStartDate?: string
+    /**
+     * 借调结束日期
+     */
+    leaseEndDate?: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 取消原因
+     */
+    reason?: string
+    /**
+     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+     */
+    status: number
+    /**
+     * 物流模式, 1:快递 2:自提
+     */
+    logisticsType: number
+    /**
+     * 发货快递id
+     */
+    expressDeliveryId?: number
+    /**
+     * 返还快递id
+     */
+    expressReturnId?: number
+    /**
+     * 退还押金
+     */
+    depositRefund?: string
+    /**
+     * 退还押金备注
+     */
+    depositRefundRemark?: string
+    /**
+     * 二手市场商品信息
+     */
+    market: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 数据id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 公司收货地址id
+       */
+      companyAddressId?: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 商品标题
+       */
+      title: string
+      /**
+       * 商品描述
+       */
+      description?: string
+      /**
+       * 是否允许出售, 0:否 1:是
+       */
+      allowSell: boolean
+      /**
+       * 是否允许借调, 0:否 1:是
+       */
+      allowLease: boolean
+      /**
+       * 出售价
+       */
+      sellingPrice?: string
+      /**
+       * 借调价
+       */
+      leasePrice?: string
+      /**
+       * 借调押金
+       */
+      leaseDeposit?: string
+      /**
+       * 发货方式, 1:包邮 2:到付 3:自提
+       */
+      expressMethod: number
+      /**
+       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+       */
+      quality: number
+      /**
+       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+       */
+      status: number
+      /**
+       * 审批结论
+       */
+      remark?: string
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 服饰信息
+       */
+      product: {
+        /**
+         * 创建时间
+         */
+        createTime: string
+        /**
+         * 修改时间
+         */
+        updateTime: string
+        /**
+         * 服饰id
+         */
+        id: number
+        /**
+         * 服饰名称
+         */
+        name: string
+        /**
+         * 服饰编号
+         */
+        no?: string
+        /**
+         * 服饰品牌
+         */
+        brand?: string
+        /**
+         * 服饰类型code，1:婚纱 2:礼服 3:秀禾 4:西服 5:伴娘服 6:鞋子 7:首饰 100:其他
+         */
+        typeCode: string
+        /**
+         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+         */
+        size: number
+        /**
+         * 描述
+         */
+        description?: string
+        /**
+         * 租赁次数
+         */
+        leaseCount: number
+        /**
+         * 其他信息字段
+         */
+        bizData?: string
+        /**
+         * 公司id
+         */
+        companyId: number
+        /**
+         * 添加用户id
+         */
+        userId: number
+        /**
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
+         */
+        status: number
+        /**
+         * 是否被删除
+         */
+        isDeleted: boolean
+        /**
+         * 图片
+         */
+        picList: {
+          /**
+           * 服饰图片id
+           */
+          id: number
+          /**
+           * 服饰id
+           */
+          productId: number
+          /**
+           * 服饰图片地址
+           */
+          url: string
+        }[]
+      }
+    }
+  }[]
+}
+
+type GetOrderRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/order',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'no' | 'type' | 'buyerId' | 'sellerId' | 'status',
+    false
+  >
+>
+
+const getOrderRequestConfig: GetOrderRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'no', 'type', 'buyerId', 'sellerId', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrder',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrder = /*#__PURE__*/ (requestData: GetOrderRequest, ...args: UserRequestRestArgs) => {
+  return request<GetOrderResponse>(prepare(getOrderRequestConfig, requestData), ...args)
+}
+
+getOrder.requestConfig = getOrderRequestConfig
+
+export interface PostOrderRequest {
+  /**
+   * market id
+   */
+  id: number
+  /**
+   * 订单类型 1:出售 2:借调
+   */
+  type: number
+  /**
+   * 支付方式 1:余额 2:微信
+   */
+  payment: number
+  /**
+   * 收货地址id
+   */
+  buyerAddressId: number
+  /**
+   * 借调开始时间
+   */
+  leaseStartDate?: string
+  /**
+   * 借调结束时间
+   */
+  leaseEndDate?: string
+  /**
+   * 物流模式, 1:快递 2:自提
+   */
+  logisticsType: number
+  /**
+   * 备注
+   */
+  remark?: string
+}
+
+export type PostOrderResponse = number
+
+type PostOrderRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order', 'data', string, string, false>
+>
+
+const postOrderRequestConfig: PostOrderRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrder',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrder = /*#__PURE__*/ (requestData: PostOrderRequest, ...args: UserRequestRestArgs) => {
+  return request<PostOrderResponse>(prepare(postOrderRequestConfig, requestData), ...args)
+}
+
+postOrder.requestConfig = postOrderRequestConfig
+
+export interface GetOrderBoughtRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 订单号
+   */
+  no?: string
+  /**
+   * 出售/借调
+   */
+  type?: string
+  /**
+   * 购买人的公司id
+   */
+  buyerId?: string
+  /**
+   * 出售人的公司id
+   */
+  sellerId?: string
+  /**
+   * 订单状态
+   */
+  status?: string
+}
+
+export interface GetOrderBoughtResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 订单id
+     */
+    id: number
+    /**
+     * 订单号
+     */
+    no: string
+    /**
+     * 微信支付系统生成的订单号
+     */
+    transactionId?: string
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 订单类型 1:出售 2:借调
+     */
+    type: number
+    /**
+     * 支付方式 1:余额 2:微信
+     */
+    payment: number
+    /**
+     * 购买人的公司id
+     */
+    buyerId: number
+    /**
+     * 收货地址id
+     */
+    buyerAddressId: number
+    /**
+     * 出售人的公司id
+     */
+    sellerId: number
+    /**
+     * 返还收货地址id
+     */
+    sellerAddressId?: number
+    /**
+     * 借调开始日期
+     */
+    leaseStartDate?: string
+    /**
+     * 借调结束日期
+     */
+    leaseEndDate?: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 取消原因
+     */
+    reason?: string
+    /**
+     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+     */
+    status: number
+    /**
+     * 物流模式, 1:快递 2:自提
+     */
+    logisticsType: number
+    /**
+     * 发货快递id
+     */
+    expressDeliveryId?: number
+    /**
+     * 返还快递id
+     */
+    expressReturnId?: number
+    /**
+     * 退还押金
+     */
+    depositRefund?: string
+    /**
+     * 退还押金备注
+     */
+    depositRefundRemark?: string
+    /**
+     * 二手市场商品信息
+     */
+    market: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 数据id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 公司收货地址id
+       */
+      companyAddressId?: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 商品标题
+       */
+      title: string
+      /**
+       * 商品描述
+       */
+      description?: string
+      /**
+       * 是否允许出售, 0:否 1:是
+       */
+      allowSell: boolean
+      /**
+       * 是否允许借调, 0:否 1:是
+       */
+      allowLease: boolean
+      /**
+       * 出售价
+       */
+      sellingPrice?: string
+      /**
+       * 借调价
+       */
+      leasePrice?: string
+      /**
+       * 借调押金
+       */
+      leaseDeposit?: string
+      /**
+       * 发货方式, 1:包邮 2:到付 3:自提
+       */
+      expressMethod: number
+      /**
+       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+       */
+      quality: number
+      /**
+       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+       */
+      status: number
+      /**
+       * 审批结论
+       */
+      remark?: string
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 服饰信息
+       */
+      product: {
+        /**
+         * 创建时间
+         */
+        createTime: string
+        /**
+         * 修改时间
+         */
+        updateTime: string
+        /**
+         * 服饰id
+         */
+        id: number
+        /**
+         * 服饰名称
+         */
+        name: string
+        /**
+         * 服饰编号
+         */
+        no?: string
+        /**
+         * 服饰品牌
+         */
+        brand?: string
+        /**
+         * 服饰类型code，1:婚纱 2:礼服 3:秀禾 4:西服 5:伴娘服 6:鞋子 7:首饰 100:其他
+         */
+        typeCode: string
+        /**
+         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+         */
+        size: number
+        /**
+         * 描述
+         */
+        description?: string
+        /**
+         * 租赁次数
+         */
+        leaseCount: number
+        /**
+         * 其他信息字段
+         */
+        bizData?: string
+        /**
+         * 公司id
+         */
+        companyId: number
+        /**
+         * 添加用户id
+         */
+        userId: number
+        /**
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
+         */
+        status: number
+        /**
+         * 是否被删除
+         */
+        isDeleted: boolean
+        /**
+         * 图片
+         */
+        picList: {
+          /**
+           * 服饰图片id
+           */
+          id: number
+          /**
+           * 服饰id
+           */
+          productId: number
+          /**
+           * 服饰图片地址
+           */
+          url: string
+        }[]
+      }
+    }
+  }[]
+}
+
+type GetOrderBoughtRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/order/bought',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'no' | 'type' | 'buyerId' | 'sellerId' | 'status',
+    false
+  >
+>
+
+const getOrderBoughtRequestConfig: GetOrderBoughtRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/bought',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'no', 'type', 'buyerId', 'sellerId', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderBought',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrderBought = /*#__PURE__*/ (requestData: GetOrderBoughtRequest, ...args: UserRequestRestArgs) => {
+  return request<GetOrderBoughtResponse>(prepare(getOrderBoughtRequestConfig, requestData), ...args)
+}
+
+getOrderBought.requestConfig = getOrderBoughtRequestConfig
+
+export interface GetOrderSoldRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 订单号
+   */
+  no?: string
+  /**
+   * 出售/借调
+   */
+  type?: string
+  /**
+   * 购买人的公司id
+   */
+  buyerId?: string
+  /**
+   * 出售人的公司id
+   */
+  sellerId?: string
+  /**
+   * 订单状态
+   */
+  status?: string
+}
+
+export interface GetOrderSoldResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 订单id
+     */
+    id: number
+    /**
+     * 订单号
+     */
+    no: string
+    /**
+     * 微信支付系统生成的订单号
+     */
+    transactionId?: string
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 订单类型 1:出售 2:借调
+     */
+    type: number
+    /**
+     * 支付方式 1:余额 2:微信
+     */
+    payment: number
+    /**
+     * 购买人的公司id
+     */
+    buyerId: number
+    /**
+     * 收货地址id
+     */
+    buyerAddressId: number
+    /**
+     * 出售人的公司id
+     */
+    sellerId: number
+    /**
+     * 返还收货地址id
+     */
+    sellerAddressId?: number
+    /**
+     * 借调开始日期
+     */
+    leaseStartDate?: string
+    /**
+     * 借调结束日期
+     */
+    leaseEndDate?: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 取消原因
+     */
+    reason?: string
+    /**
+     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+     */
+    status: number
+    /**
+     * 物流模式, 1:快递 2:自提
+     */
+    logisticsType: number
+    /**
+     * 发货快递id
+     */
+    expressDeliveryId?: number
+    /**
+     * 返还快递id
+     */
+    expressReturnId?: number
+    /**
+     * 退还押金
+     */
+    depositRefund?: string
+    /**
+     * 退还押金备注
+     */
+    depositRefundRemark?: string
+    /**
+     * 二手市场商品信息
+     */
+    market: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 数据id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 公司收货地址id
+       */
+      companyAddressId?: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 商品标题
+       */
+      title: string
+      /**
+       * 商品描述
+       */
+      description?: string
+      /**
+       * 是否允许出售, 0:否 1:是
+       */
+      allowSell: boolean
+      /**
+       * 是否允许借调, 0:否 1:是
+       */
+      allowLease: boolean
+      /**
+       * 出售价
+       */
+      sellingPrice?: string
+      /**
+       * 借调价
+       */
+      leasePrice?: string
+      /**
+       * 借调押金
+       */
+      leaseDeposit?: string
+      /**
+       * 发货方式, 1:包邮 2:到付 3:自提
+       */
+      expressMethod: number
+      /**
+       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+       */
+      quality: number
+      /**
+       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+       */
+      status: number
+      /**
+       * 审批结论
+       */
+      remark?: string
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 服饰信息
+       */
+      product: {
+        /**
+         * 创建时间
+         */
+        createTime: string
+        /**
+         * 修改时间
+         */
+        updateTime: string
+        /**
+         * 服饰id
+         */
+        id: number
+        /**
+         * 服饰名称
+         */
+        name: string
+        /**
+         * 服饰编号
+         */
+        no?: string
+        /**
+         * 服饰品牌
+         */
+        brand?: string
+        /**
+         * 服饰类型code，1:婚纱 2:礼服 3:秀禾 4:西服 5:伴娘服 6:鞋子 7:首饰 100:其他
+         */
+        typeCode: string
+        /**
+         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+         */
+        size: number
+        /**
+         * 描述
+         */
+        description?: string
+        /**
+         * 租赁次数
+         */
+        leaseCount: number
+        /**
+         * 其他信息字段
+         */
+        bizData?: string
+        /**
+         * 公司id
+         */
+        companyId: number
+        /**
+         * 添加用户id
+         */
+        userId: number
+        /**
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
+         */
+        status: number
+        /**
+         * 是否被删除
+         */
+        isDeleted: boolean
+        /**
+         * 图片
+         */
+        picList: {
+          /**
+           * 服饰图片id
+           */
+          id: number
+          /**
+           * 服饰id
+           */
+          productId: number
+          /**
+           * 服饰图片地址
+           */
+          url: string
+        }[]
+      }
+    }
+  }[]
+}
+
+type GetOrderSoldRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/order/sold',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'no' | 'type' | 'buyerId' | 'sellerId' | 'status',
+    false
+  >
+>
+
+const getOrderSoldRequestConfig: GetOrderSoldRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/sold',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'no', 'type', 'buyerId', 'sellerId', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderSold',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrderSold = /*#__PURE__*/ (requestData: GetOrderSoldRequest, ...args: UserRequestRestArgs) => {
+  return request<GetOrderSoldResponse>(prepare(getOrderSoldRequestConfig, requestData), ...args)
+}
+
+getOrderSold.requestConfig = getOrderSoldRequestConfig
+
+export interface PostOrderCancelBuyerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 取消原因
+   */
+  reason: string
+}
+
+export type PostOrderCancelBuyerResponse = any
+
+type PostOrderCancelBuyerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/cancel/buyer', 'data', string, string, false>
+>
+
+const postOrderCancelBuyerRequestConfig: PostOrderCancelBuyerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/cancel/buyer',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderCancelBuyer',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderCancelBuyer = /*#__PURE__*/ (
+  requestData: PostOrderCancelBuyerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderCancelBuyerResponse>(prepare(postOrderCancelBuyerRequestConfig, requestData), ...args)
+}
+
+postOrderCancelBuyer.requestConfig = postOrderCancelBuyerRequestConfig
+
+export interface PostOrderCancelSellerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 取消原因
+   */
+  reason: string
+}
+
+export type PostOrderCancelSellerResponse = any
+
+type PostOrderCancelSellerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/cancel/seller', 'data', string, string, false>
+>
+
+const postOrderCancelSellerRequestConfig: PostOrderCancelSellerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/cancel/seller',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderCancelSeller',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderCancelSeller = /*#__PURE__*/ (
+  requestData: PostOrderCancelSellerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderCancelSellerResponse>(prepare(postOrderCancelSellerRequestConfig, requestData), ...args)
+}
+
+postOrderCancelSeller.requestConfig = postOrderCancelSellerRequestConfig
+
+export interface PostOrderCancelPlatformRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 取消原因
+   */
+  reason: string
+}
+
+export type PostOrderCancelPlatformResponse = any
+
+type PostOrderCancelPlatformRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/cancel/platform', 'data', string, string, false>
+>
+
+const postOrderCancelPlatformRequestConfig: PostOrderCancelPlatformRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/cancel/platform',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderCancelPlatform',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderCancelPlatform = /*#__PURE__*/ (
+  requestData: PostOrderCancelPlatformRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderCancelPlatformResponse>(prepare(postOrderCancelPlatformRequestConfig, requestData), ...args)
+}
+
+postOrderCancelPlatform.requestConfig = postOrderCancelPlatformRequestConfig
+
+export interface PostOrderPayBalanceRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+export interface PostOrderPayBalanceResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
+
+type PostOrderPayBalanceRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/balance', 'data', string, string, false>
+>
+
+const postOrderPayBalanceRequestConfig: PostOrderPayBalanceRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/pay/balance',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderPayBalance',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderPayBalance = /*#__PURE__*/ (
+  requestData: PostOrderPayBalanceRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderPayBalanceResponse>(prepare(postOrderPayBalanceRequestConfig, requestData), ...args)
+}
+
+postOrderPayBalance.requestConfig = postOrderPayBalanceRequestConfig
+
+export interface PostOrderPayWechatRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+export interface PostOrderPayWechatResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
+
+type PostOrderPayWechatRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat', 'data', string, string, false>
+>
+
+const postOrderPayWechatRequestConfig: PostOrderPayWechatRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/pay/wechat',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderPayWechat',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderPayWechat = /*#__PURE__*/ (
+  requestData: PostOrderPayWechatRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderPayWechatResponse>(prepare(postOrderPayWechatRequestConfig, requestData), ...args)
+}
+
+postOrderPayWechat.requestConfig = postOrderPayWechatRequestConfig
+
+export interface GetOrderWechatOrderStatusRequest {
+  /**
+   * 微信支付订单号
+   */
+  transactionId: string
+}
+
+export interface GetOrderWechatOrderStatusResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 订单id
+     */
+    id: number
+    /**
+     * 订单号
+     */
+    no: string
+    /**
+     * 微信支付系统生成的订单号
+     */
+    transactionId?: string
+    /**
+     * 二手市场商品id
+     */
+    marketId: number
+    /**
+     * 订单类型 1:出售 2:借调
+     */
+    type: number
+    /**
+     * 支付方式 1:余额 2:微信
+     */
+    payment: number
+    /**
+     * 购买人的公司id
+     */
+    buyerId: number
+    /**
+     * 收货地址id
+     */
+    buyerAddressId: number
+    /**
+     * 出售人的公司id
+     */
+    sellerId: number
+    /**
+     * 返还收货地址id
+     */
+    sellerAddressId?: number
+    /**
+     * 借调开始日期
+     */
+    leaseStartDate?: string
+    /**
+     * 借调结束日期
+     */
+    leaseEndDate?: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 取消原因
+     */
+    reason?: string
+    /**
+     * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+     */
+    status: number
+    /**
+     * 物流模式, 1:快递 2:自提
+     */
+    logisticsType: number
+    /**
+     * 发货快递id
+     */
+    expressDeliveryId?: number
+    /**
+     * 返还快递id
+     */
+    expressReturnId?: number
+    /**
+     * 退还押金
+     */
+    depositRefund?: string
+    /**
+     * 退还押金备注
+     */
+    depositRefundRemark?: string
+    /**
+     * 二手市场商品信息
+     */
+    market: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 数据id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 公司收货地址id
+       */
+      companyAddressId?: number
+      /**
+       * 服饰id
+       */
+      productId: number
+      /**
+       * 商品标题
+       */
+      title: string
+      /**
+       * 商品描述
+       */
+      description?: string
+      /**
+       * 是否允许出售, 0:否 1:是
+       */
+      allowSell: boolean
+      /**
+       * 是否允许借调, 0:否 1:是
+       */
+      allowLease: boolean
+      /**
+       * 出售价
+       */
+      sellingPrice?: string
+      /**
+       * 借调价
+       */
+      leasePrice?: string
+      /**
+       * 借调押金
+       */
+      leaseDeposit?: string
+      /**
+       * 发货方式, 1:包邮 2:到付 3:自提
+       */
+      expressMethod: number
+      /**
+       * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+       */
+      quality: number
+      /**
+       * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+       */
+      status: number
+      /**
+       * 审批结论
+       */
+      remark?: string
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 服饰信息
+       */
+      product: {
+        /**
+         * 创建时间
+         */
+        createTime: string
+        /**
+         * 修改时间
+         */
+        updateTime: string
+        /**
+         * 服饰id
+         */
+        id: number
+        /**
+         * 服饰名称
+         */
+        name: string
+        /**
+         * 服饰编号
+         */
+        no?: string
+        /**
+         * 服饰品牌
+         */
+        brand?: string
+        /**
+         * 服饰类型code，1:婚纱 2:礼服 3:秀禾 4:西服 5:伴娘服 6:鞋子 7:首饰 100:其他
+         */
+        typeCode: string
+        /**
+         * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+         */
+        size: number
+        /**
+         * 描述
+         */
+        description?: string
+        /**
+         * 租赁次数
+         */
+        leaseCount: number
+        /**
+         * 其他信息字段
+         */
+        bizData?: string
+        /**
+         * 公司id
+         */
+        companyId: number
+        /**
+         * 添加用户id
+         */
+        userId: number
+        /**
+         * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
+         */
+        status: number
+        /**
+         * 是否被删除
+         */
+        isDeleted: boolean
+        /**
+         * 图片
+         */
+        picList: {
+          /**
+           * 服饰图片id
+           */
+          id: number
+          /**
+           * 服饰id
+           */
+          productId: number
+          /**
+           * 服饰图片地址
+           */
+          url: string
+        }[]
+      }
+    }
+  }[]
+}
+
+type GetOrderWechatOrderStatusRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/order/wechat/order/status',
+    'data',
+    string,
+    'transactionId',
+    false
+  >
+>
+
+const getOrderWechatOrderStatusRequestConfig: GetOrderWechatOrderStatusRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/wechat/order/status',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: ['transactionId'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderWechatOrderStatus',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrderWechatOrderStatus = /*#__PURE__*/ (
+  requestData: GetOrderWechatOrderStatusRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetOrderWechatOrderStatusResponse>(
+    prepare(getOrderWechatOrderStatusRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getOrderWechatOrderStatus.requestConfig = getOrderWechatOrderStatusRequestConfig
+
+export interface PostOrderPayWechatNoticeRequest {
+  /**
+   * 通知的唯一ID
+   */
+  id?: string
+  /**
+   * 通知创建的时间
+   */
+  create_time?: string
+  /**
+   * 通知的类型，支付成功通知的类型为TRANSACTION.SUCCESS
+   */
+  event_type?: string
+  /**
+   * 通知的资源数据类型，支付成功通知为encrypt-resource
+   */
+  resource_type?: string
+  /**
+   * 通知资源数据
+   */
+  resource?: {
+    /**
+     * 对开启结果数据进行加密的加密算法，目前只支持AEAD_AES_256_GCM
+     */
+    algorithm?: string
+    /**
+     * Base64编码后的开启/停用结果数据密文
+     */
+    ciphertext?: string
+    /**
+     * 附加数据
+     */
+    associated_data?: string
+    /**
+     * 原始回调类型，为transaction
+     */
+    original_type?: string
+    /**
+     * 加密使用的随机串
+     */
+    nonce?: string
+  }
+  /**
+   * 回调摘要
+   */
+  summary?: string
+}
+
+export interface PostOrderPayWechatNoticeResponse {
+  /**
+   * 时间戳
+   */
+  timestamp: number
+  /**
+   * 随机字符串
+   */
+  nonceStr: string
+  /**
+   * 下单接口返回的prepay_id参数值
+   */
+  pkg: string
+  /**
+   * 签名
+   */
+  paySign: string
+}
+
+type PostOrderPayWechatNoticeRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/pay/wechat/notice', 'data', string, string, false>
+>
+
+const postOrderPayWechatNoticeRequestConfig: PostOrderPayWechatNoticeRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/pay/wechat/notice',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderPayWechatNotice',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderPayWechatNotice = /*#__PURE__*/ (
+  requestData: PostOrderPayWechatNoticeRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderPayWechatNoticeResponse>(prepare(postOrderPayWechatNoticeRequestConfig, requestData), ...args)
+}
+
+postOrderPayWechatNotice.requestConfig = postOrderPayWechatNoticeRequestConfig
+
+export interface GetOrderWechatPayTransactionRequest {
+  /**
+   * 订单id
+   */
+  id: string
+}
+
+export type GetOrderWechatPayTransactionResponse = boolean
+
+type GetOrderWechatPayTransactionRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/wechat/pay/transaction', 'data', string, 'id', false>
+>
+
+const getOrderWechatPayTransactionRequestConfig: GetOrderWechatPayTransactionRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/wechat/pay/transaction',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: ['id'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderWechatPayTransaction',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrderWechatPayTransaction = /*#__PURE__*/ (
+  requestData: GetOrderWechatPayTransactionRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetOrderWechatPayTransactionResponse>(
+    prepare(getOrderWechatPayTransactionRequestConfig, requestData),
+    ...args,
+  )
+}
+
+getOrderWechatPayTransaction.requestConfig = getOrderWechatPayTransactionRequestConfig
+
+export interface PostOrderExpressDeliverRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 快递单号
+   */
+  no: string
+  /**
+   * 快递公司
+   */
+  expressCompany: string
+  /**
+   * 备注
+   */
+  remark?: string
+}
+
+export type PostOrderExpressDeliverResponse = any
+
+type PostOrderExpressDeliverRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/deliver', 'data', string, string, false>
+>
+
+const postOrderExpressDeliverRequestConfig: PostOrderExpressDeliverRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/express/deliver',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderExpressDeliver',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderExpressDeliver = /*#__PURE__*/ (
+  requestData: PostOrderExpressDeliverRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderExpressDeliverResponse>(prepare(postOrderExpressDeliverRequestConfig, requestData), ...args)
+}
+
+postOrderExpressDeliver.requestConfig = postOrderExpressDeliverRequestConfig
+
+export interface PostOrderExpressReturnRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 快递单号
+   */
+  no: string
+  /**
+   * 备注
+   */
+  remark?: string
+}
+
+export type PostOrderExpressReturnResponse = any
+
+type PostOrderExpressReturnRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/express/return', 'data', string, string, false>
+>
+
+const postOrderExpressReturnRequestConfig: PostOrderExpressReturnRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/express/return',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderExpressReturn',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderExpressReturn = /*#__PURE__*/ (
+  requestData: PostOrderExpressReturnRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderExpressReturnResponse>(prepare(postOrderExpressReturnRequestConfig, requestData), ...args)
+}
+
+postOrderExpressReturn.requestConfig = postOrderExpressReturnRequestConfig
+
+export interface PostOrderReceiveBuyerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+}
+
+export type PostOrderReceiveBuyerResponse = any
+
+type PostOrderReceiveBuyerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/buyer', 'data', string, string, false>
+>
+
+const postOrderReceiveBuyerRequestConfig: PostOrderReceiveBuyerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/receive/buyer',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderReceiveBuyer',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderReceiveBuyer = /*#__PURE__*/ (
+  requestData: PostOrderReceiveBuyerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderReceiveBuyerResponse>(prepare(postOrderReceiveBuyerRequestConfig, requestData), ...args)
+}
+
+postOrderReceiveBuyer.requestConfig = postOrderReceiveBuyerRequestConfig
+
+export interface PostOrderReceiveSellerRequest {
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 退还押金金额
+   */
+  amount: string
+  /**
+   * 退还押金备注
+   */
+  depositRefundRemark?: string
+}
+
+export type PostOrderReceiveSellerResponse = any
+
+type PostOrderReceiveSellerRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/receive/seller', 'data', string, string, false>
+>
+
+const postOrderReceiveSellerRequestConfig: PostOrderReceiveSellerRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/receive/seller',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postOrderReceiveSeller',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postOrderReceiveSeller = /*#__PURE__*/ (
+  requestData: PostOrderReceiveSellerRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostOrderReceiveSellerResponse>(prepare(postOrderReceiveSellerRequestConfig, requestData), ...args)
+}
+
+postOrderReceiveSeller.requestConfig = postOrderReceiveSellerRequestConfig
+
+export interface GetOrderIdRequest {
+  /**
+   * 订单id
+   */
+  id: string
+}
+
+export interface GetOrderIdResponse {
+  /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
+   * 订单id
+   */
+  id: number
+  /**
+   * 订单号
+   */
+  no: string
+  /**
+   * 微信支付系统生成的订单号
+   */
+  transactionId?: string
+  /**
+   * 二手市场商品id
+   */
+  marketId: number
+  /**
+   * 订单类型 1:出售 2:借调
+   */
+  type: number
+  /**
+   * 支付方式 1:余额 2:微信
+   */
+  payment: number
+  /**
+   * 购买人的公司id
+   */
+  buyerId: number
+  /**
+   * 收货地址id
+   */
+  buyerAddressId: number
+  /**
+   * 出售人的公司id
+   */
+  sellerId: number
+  /**
+   * 返还收货地址id
+   */
+  sellerAddressId?: number
+  /**
+   * 借调开始日期
+   */
+  leaseStartDate?: string
+  /**
+   * 借调结束日期
+   */
+  leaseEndDate?: string
+  /**
+   * 备注
+   */
+  remark?: string
+  /**
+   * 取消原因
+   */
+  reason?: string
+  /**
+   * 订单状态, 1:待支付 2:待发货 3:待收货 4:待返回 5:已完成 6:已取消
+   */
+  status: number
+  /**
+   * 物流模式, 1:快递 2:自提
+   */
+  logisticsType: number
+  /**
+   * 发货快递id
+   */
+  expressDeliveryId?: number
+  /**
+   * 返还快递id
+   */
+  expressReturnId?: number
+  /**
+   * 退还押金
+   */
+  depositRefund?: string
+  /**
+   * 退还押金备注
+   */
+  depositRefundRemark?: string
+  /**
+   * 二手市场商品信息
+   */
+  market: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 数据id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 公司收货地址id
+     */
+    companyAddressId?: number
+    /**
+     * 服饰id
+     */
+    productId: number
+    /**
+     * 商品标题
+     */
+    title: string
+    /**
+     * 商品描述
+     */
+    description?: string
+    /**
+     * 是否允许出售, 0:否 1:是
+     */
+    allowSell: boolean
+    /**
+     * 是否允许借调, 0:否 1:是
+     */
+    allowLease: boolean
+    /**
+     * 出售价
+     */
+    sellingPrice?: string
+    /**
+     * 借调价
+     */
+    leasePrice?: string
+    /**
+     * 借调押金
+     */
+    leaseDeposit?: string
+    /**
+     * 发货方式, 1:包邮 2:到付 3:自提
+     */
+    expressMethod: number
+    /**
+     * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
+     */
+    quality: number
+    /**
+     * 服饰状态, 1:审核中 2:上架中 3:未通过 4:已借调 5:已出售 6:已下架
+     */
+    status: number
+    /**
+     * 审批结论
+     */
+    remark?: string
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+    /**
+     * 服饰信息
+     */
+    product: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 服饰id
+       */
+      id: number
+      /**
+       * 服饰名称
+       */
+      name: string
+      /**
+       * 服饰编号
+       */
+      no?: string
+      /**
+       * 服饰品牌
+       */
+      brand?: string
+      /**
+       * 服饰类型code，1:婚纱 2:礼服 3:秀禾 4:西服 5:伴娘服 6:鞋子 7:首饰 100:其他
+       */
+      typeCode: string
+      /**
+       * 尺码, 0:均码 1:xs 2:s 3:m 4:l 5:xl 6:xxl 7:xxxl 8:4xl 9:5xl 10:6xl 11:7xl 12:8xl 13:9xl 14:10xl
+       */
+      size: number
+      /**
+       * 描述
+       */
+      description?: string
+      /**
+       * 租赁次数
+       */
+      leaseCount: number
+      /**
+       * 其他信息字段
+       */
+      bizData?: string
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 添加用户id
+       */
+      userId: number
+      /**
+       * 服饰状态 1:正常 2:上架中 3:已出售 4:借调中 5:下架中
+       */
+      status: number
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+      /**
+       * 图片
+       */
+      picList: {
+        /**
+         * 服饰图片id
+         */
+        id: number
+        /**
+         * 服饰id
+         */
+        productId: number
+        /**
+         * 服饰图片地址
+         */
+        url: string
+      }[]
+    }
+  }
+  /**
+   * 买家信息
+   */
+  buyer: {
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 公司LOGO
+     */
+    logo?: string
+  }
+  /**
+   * 卖家信息
+   */
+  seller: {
+    /**
+     * 公司id
+     */
+    id: number
+    /**
+     * 公司名称
+     */
+    name: string
+    /**
+     * 公司LOGO
+     */
+    logo?: string
+  }
+  /**
+   * 买家收货地址
+   */
+  buyerAddress: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 地址id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 收件人
+     */
+    recipient: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 省code
+     */
+    province: string
+    /**
+     * 市code
+     */
+    city: string
+    /**
+     * 区code
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 是否为默认地址
+     */
+    isDefault: boolean
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+  }
+  /**
+   * 卖家收货地址
+   */
+  sellerAddress: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 地址id
+     */
+    id: number
+    /**
+     * 公司id
+     */
+    companyId: number
+    /**
+     * 收件人
+     */
+    recipient: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 省code
+     */
+    province: string
+    /**
+     * 市code
+     */
+    city: string
+    /**
+     * 区code
+     */
+    area: string
+    /**
+     * 地址
+     */
+    address: string
+    /**
+     * 是否为默认地址
+     */
+    isDefault: boolean
+    /**
+     * 是否被删除
+     */
+    isDeleted: boolean
+  }
+  /**
+   * 快递发货信息
+   */
+  expressDelivery: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 快递单id
+     */
+    id: number
+    /**
+     * 快递单号
+     */
+    no: string
+    /**
+     * 备注
+     */
+    remark?: string
+  }
+  /**
+   * 快递返还信息
+   */
+  expressReturn: {
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 修改时间
+     */
+    updateTime: string
+    /**
+     * 快递单id
+     */
+    id: number
+    /**
+     * 快递单号
+     */
+    no: string
+    /**
+     * 备注
+     */
+    remark?: string
+  }
+}
+
+type GetOrderIdRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/order/{id}', 'data', 'id', string, false>
+>
+
+const getOrderIdRequestConfig: GetOrderIdRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_6,
+  devUrl: devUrl_0_0_0_6,
+  prodUrl: prodUrl_0_0_0_6,
+  path: '/order/{id}',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_6,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getOrderId',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getOrderId = /*#__PURE__*/ (requestData: GetOrderIdRequest, ...args: UserRequestRestArgs) => {
+  return request<GetOrderIdResponse>(prepare(getOrderIdRequestConfig, requestData), ...args)
+}
+
+getOrderId.requestConfig = getOrderIdRequestConfig
+
+const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_7 = '' as any
+const prodUrl_0_0_0_7 = '' as any
+const dataKey_0_0_0_7 = 'data' as any
+
 export interface GetAccountRegisterCodeAccountRequest {
   /**
    * 账号
@@ -6920,15 +7211,15 @@ type GetAccountRegisterCodeAccountRequestConfig = Readonly<
 >
 
 const getAccountRegisterCodeAccountRequestConfig: GetAccountRegisterCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/register/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -6969,15 +7260,15 @@ type PostAccountRegisterCodeCheckRequestConfig = Readonly<
 >
 
 const postAccountRegisterCodeCheckRequestConfig: PostAccountRegisterCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/register/code/check',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7024,15 +7315,15 @@ type GetAccountChangePasswordCodeAccountRequestConfig = Readonly<
 
 const getAccountChangePasswordCodeAccountRequestConfig: GetAccountChangePasswordCodeAccountRequestConfig =
   /*#__PURE__*/ {
-    mockUrl: mockUrl_0_0_0_6,
-    devUrl: devUrl_0_0_0_6,
-    prodUrl: prodUrl_0_0_0_6,
+    mockUrl: mockUrl_0_0_0_7,
+    devUrl: devUrl_0_0_0_7,
+    prodUrl: prodUrl_0_0_0_7,
     path: '/account/change/password/code/{account}',
     method: Method.GET,
     requestHeaders: {},
     requestBodyType: RequestBodyType.query,
     responseBodyType: ResponseBodyType.raw,
-    dataKey: dataKey_0_0_0_6,
+    dataKey: dataKey_0_0_0_7,
     paramNames: ['account'],
     queryNames: [],
     requestDataOptional: false,
@@ -7082,15 +7373,15 @@ type PostAccountChangePasswordCodeCheckRequestConfig = Readonly<
 >
 
 const postAccountChangePasswordCodeCheckRequestConfig: PostAccountChangePasswordCodeCheckRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/change/password/code/check',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7122,15 +7413,15 @@ type GetAccountSaltRequestConfig = Readonly<
 >
 
 const getAccountSaltRequestConfig: GetAccountSaltRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/salt',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -7161,15 +7452,15 @@ type GetAccountSaltAccountRequestConfig = Readonly<
 >
 
 const getAccountSaltAccountRequestConfig: GetAccountSaltAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/salt/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -7220,15 +7511,15 @@ type PostAccountLoginRequestConfig = Readonly<
 >
 
 const postAccountLoginRequestConfig: PostAccountLoginRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7268,15 +7559,15 @@ type GetAccountLoginCodeAccountRequestConfig = Readonly<
 >
 
 const getAccountLoginCodeAccountRequestConfig: GetAccountLoginCodeAccountRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/code/{account}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: ['account'],
   queryNames: [],
   requestDataOptional: false,
@@ -7326,15 +7617,15 @@ type PostAccountLoginCodeRequestConfig = Readonly<
 >
 
 const postAccountLoginCodeRequestConfig: PostAccountLoginCodeRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/code',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7381,15 +7672,15 @@ type PostAccountLoginWechatPhoneRequestConfig = Readonly<
 >
 
 const postAccountLoginWechatPhoneRequestConfig: PostAccountLoginWechatPhoneRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/wechat/phone',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7426,15 +7717,15 @@ type PostAccountLoginWechatRequestConfig = Readonly<
 >
 
 const postAccountLoginWechatRequestConfig: PostAccountLoginWechatRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/login/wechat',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7472,15 +7763,15 @@ type PostAccountBindOpenidRequestConfig = Readonly<
 >
 
 const postAccountBindOpenidRequestConfig: PostAccountBindOpenidRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/bind/openid',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7522,15 +7813,15 @@ type PutAccountPasswordRequestConfig = Readonly<
 >
 
 const putAccountPasswordRequestConfig: PutAccountPasswordRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_6,
-  devUrl: devUrl_0_0_0_6,
-  prodUrl: prodUrl_0_0_0_6,
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
   path: '/account/password',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_6,
+  dataKey: dataKey_0_0_0_7,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7550,10 +7841,10 @@ export const putAccountPassword = /*#__PURE__*/ (
 
 putAccountPassword.requestConfig = putAccountPasswordRequestConfig
 
-const mockUrl_0_0_0_7 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_7 = '' as any
-const prodUrl_0_0_0_7 = '' as any
-const dataKey_0_0_0_7 = 'data' as any
+const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_8 = '' as any
+const prodUrl_0_0_0_8 = '' as any
+const dataKey_0_0_0_8 = 'data' as any
 
 export interface GetUserRequest {}
 
@@ -7593,15 +7884,15 @@ type GetUserRequestConfig = Readonly<
 >
 
 const getUserRequestConfig: GetUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/user',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -7648,15 +7939,15 @@ type PostUserRequestConfig = Readonly<
 >
 
 const postUserRequestConfig: PostUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/user',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7699,15 +7990,15 @@ type PutUserRequestConfig = Readonly<
 >
 
 const putUserRequestConfig: PutUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/user',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -7738,15 +8029,15 @@ type DeleteUserRequestConfig = Readonly<
 >
 
 const deleteUserRequestConfig: DeleteUserRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/user',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -7898,15 +8189,15 @@ type GetUserSelfRequestConfig = Readonly<
 >
 
 const getUserSelfRequestConfig: GetUserSelfRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/user/self',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -8063,15 +8354,15 @@ type GetUserIdRequestConfig = Readonly<
 >
 
 const getUserIdRequestConfig: GetUserIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_7,
-  devUrl: devUrl_0_0_0_7,
-  prodUrl: prodUrl_0_0_0_7,
+  mockUrl: mockUrl_0_0_0_8,
+  devUrl: devUrl_0_0_0_8,
+  prodUrl: prodUrl_0_0_0_8,
   path: '/user/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_7,
+  dataKey: dataKey_0_0_0_8,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -8088,10 +8379,10 @@ export const getUserId = /*#__PURE__*/ (requestData: GetUserIdRequest, ...args: 
 
 getUserId.requestConfig = getUserIdRequestConfig
 
-const mockUrl_0_0_0_8 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_8 = '' as any
-const prodUrl_0_0_0_8 = '' as any
-const dataKey_0_0_0_8 = 'data' as any
+const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_9 = '' as any
+const prodUrl_0_0_0_9 = '' as any
+const dataKey_0_0_0_9 = 'data' as any
 
 export interface GetRoleRequest {}
 
@@ -8119,15 +8410,15 @@ type GetRoleRequestConfig = Readonly<
 >
 
 const getRoleRequestConfig: GetRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/role',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -8158,15 +8449,15 @@ type PostRoleRequestConfig = Readonly<
 >
 
 const postRoleRequestConfig: PostRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/role',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8209,15 +8500,15 @@ type PutRoleRequestConfig = Readonly<
 >
 
 const putRoleRequestConfig: PutRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/role',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8248,15 +8539,15 @@ type DeleteRoleRequestConfig = Readonly<
 >
 
 const deleteRoleRequestConfig: DeleteRoleRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/role',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_9,
   paramNames: [],
   queryNames: ['id'],
   requestDataOptional: false,
@@ -8304,15 +8595,15 @@ type GetRoleIdRequestConfig = Readonly<
 >
 
 const getRoleIdRequestConfig: GetRoleIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_8,
-  devUrl: devUrl_0_0_0_8,
-  prodUrl: prodUrl_0_0_0_8,
+  mockUrl: mockUrl_0_0_0_9,
+  devUrl: devUrl_0_0_0_9,
+  prodUrl: prodUrl_0_0_0_9,
   path: '/role/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_8,
+  dataKey: dataKey_0_0_0_9,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -8329,10 +8620,10 @@ export const getRoleId = /*#__PURE__*/ (requestData: GetRoleIdRequest, ...args: 
 
 getRoleId.requestConfig = getRoleIdRequestConfig
 
-const mockUrl_0_0_0_9 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_9 = '' as any
-const prodUrl_0_0_0_9 = '' as any
-const dataKey_0_0_0_9 = 'data' as any
+const mockUrl_0_0_0_10 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_10 = '' as any
+const prodUrl_0_0_0_10 = '' as any
+const dataKey_0_0_0_10 = 'data' as any
 
 export interface GetAddressRequest {}
 
@@ -8392,15 +8683,15 @@ type GetAddressRequestConfig = Readonly<
 >
 
 const getAddressRequestConfig: GetAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/address',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: true,
@@ -8455,15 +8746,15 @@ type PostAddressRequestConfig = Readonly<
 >
 
 const postAddressRequestConfig: PostAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/address',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8518,15 +8809,15 @@ type PutAddressRequestConfig = Readonly<
 >
 
 const putAddressRequestConfig: PutAddressRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/address',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8557,15 +8848,15 @@ type PutAddressDefaultRequestConfig = Readonly<
 >
 
 const putAddressDefaultRequestConfig: PutAddressDefaultRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/address/default',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8599,15 +8890,15 @@ type DeleteAddressIdRequestConfig = Readonly<
 >
 
 const deleteAddressIdRequestConfig: DeleteAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/address/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -8687,15 +8978,15 @@ type GetAddressIdRequestConfig = Readonly<
 >
 
 const getAddressIdRequestConfig: GetAddressIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_9,
-  devUrl: devUrl_0_0_0_9,
-  prodUrl: prodUrl_0_0_0_9,
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
   path: '/address/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_9,
+  dataKey: dataKey_0_0_0_10,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -8712,10 +9003,10 @@ export const getAddressId = /*#__PURE__*/ (requestData: GetAddressIdRequest, ...
 
 getAddressId.requestConfig = getAddressIdRequestConfig
 
-const mockUrl_0_0_0_10 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_10 = '' as any
-const prodUrl_0_0_0_10 = '' as any
-const dataKey_0_0_0_10 = 'data' as any
+const mockUrl_0_0_0_11 = 'http://127.0.0.1:50505/mock/0' as any
+const devUrl_0_0_0_11 = '' as any
+const prodUrl_0_0_0_11 = '' as any
+const dataKey_0_0_0_11 = 'data' as any
 
 export interface GetProductRequest {
   /**
@@ -8793,15 +9084,15 @@ type GetProductRequestConfig = Readonly<
 >
 
 const getProductRequestConfig: GetProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/product',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
+  dataKey: dataKey_0_0_0_11,
   paramNames: [],
   queryNames: ['status'],
   requestDataOptional: false,
@@ -8873,15 +9164,15 @@ type PostProductRequestConfig = Readonly<
 >
 
 const postProductRequestConfig: PostProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/product',
   method: Method.POST,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
+  dataKey: dataKey_0_0_0_11,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -8957,15 +9248,15 @@ type PutProductRequestConfig = Readonly<
 >
 
 const putProductRequestConfig: PutProductRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/product',
   method: Method.PUT,
   requestHeaders: {},
   requestBodyType: RequestBodyType.json,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
+  dataKey: dataKey_0_0_0_11,
   paramNames: [],
   queryNames: [],
   requestDataOptional: false,
@@ -9092,15 +9383,15 @@ type GetProductPageRequestConfig = Readonly<
 >
 
 const getProductPageRequestConfig: GetProductPageRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/product/page',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
+  dataKey: dataKey_0_0_0_11,
   paramNames: [],
   queryNames: ['pageNum', 'pageSize', 'productTypeCode', 'name', 'status'],
   requestDataOptional: false,
@@ -9131,15 +9422,15 @@ type DeleteProductIdRequestConfig = Readonly<
 >
 
 const deleteProductIdRequestConfig: DeleteProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/product/{id}',
   method: Method.DELETE,
   requestHeaders: {},
   requestBodyType: RequestBodyType.raw,
   responseBodyType: ResponseBodyType.raw,
-  dataKey: dataKey_0_0_0_10,
+  dataKey: dataKey_0_0_0_11,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -9270,15 +9561,15 @@ type GetProductIdRequestConfig = Readonly<
 >
 
 const getProductIdRequestConfig: GetProductIdRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_10,
-  devUrl: devUrl_0_0_0_10,
-  prodUrl: prodUrl_0_0_0_10,
+  mockUrl: mockUrl_0_0_0_11,
+  devUrl: devUrl_0_0_0_11,
+  prodUrl: prodUrl_0_0_0_11,
   path: '/product/{id}',
   method: Method.GET,
   requestHeaders: {},
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_10,
+  dataKey: dataKey_0_0_0_11,
   paramNames: ['id'],
   queryNames: [],
   requestDataOptional: false,
@@ -9294,62 +9585,5 @@ export const getProductId = /*#__PURE__*/ (requestData: GetProductIdRequest, ...
 }
 
 getProductId.requestConfig = getProductIdRequestConfig
-
-const mockUrl_0_0_0_11 = 'http://127.0.0.1:50505/mock/0' as any
-const devUrl_0_0_0_11 = '' as any
-const prodUrl_0_0_0_11 = '' as any
-const dataKey_0_0_0_11 = 'data' as any
-
-export interface GetTagRequest {
-  /**
-   * 标签用途
-   */
-  use: string
-}
-
-export type GetTagResponse = {
-  /**
-   * 标签id
-   */
-  id: number
-  /**
-   * 标签名称
-   */
-  name: string
-  /**
-   * 用途, 1:服饰标签
-   */
-  use: number
-}[]
-
-type GetTagRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/tag', 'data', string, 'use', false>
->
-
-const getTagRequestConfig: GetTagRequestConfig = /*#__PURE__*/ {
-  mockUrl: mockUrl_0_0_0_11,
-  devUrl: devUrl_0_0_0_11,
-  prodUrl: prodUrl_0_0_0_11,
-  path: '/tag',
-  method: Method.GET,
-  requestHeaders: {},
-  requestBodyType: RequestBodyType.query,
-  responseBodyType: ResponseBodyType.json,
-  dataKey: dataKey_0_0_0_11,
-  paramNames: [],
-  queryNames: ['use'],
-  requestDataOptional: false,
-  requestDataJsonSchema: {},
-  responseDataJsonSchema: {},
-  requestFunctionName: 'getTag',
-  queryStringArrayFormat: QueryStringArrayFormat.brackets,
-  extraInfo: {},
-}
-
-export const getTag = /*#__PURE__*/ (requestData: GetTagRequest, ...args: UserRequestRestArgs) => {
-  return request<GetTagResponse>(prepare(getTagRequestConfig, requestData), ...args)
-}
-
-getTag.requestConfig = getTagRequestConfig
 
 /* prettier-ignore-end */
