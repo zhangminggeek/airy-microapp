@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
 
-import { getCompanyId, getMarket, postCompanyFollowToggle } from '@/api';
+import { getCompanyInfo, getMarket, postCompanyFollowToggle } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Avatar, Icon, InfiniteList, Product, Space } from '@/components';
 import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
@@ -45,7 +45,7 @@ const Page = () => {
   });
 
   // 获取公司详情
-  const { data, run: fetchCompany } = useRequest(getCompanyId, {
+  const { data, run: fetchCompany } = useRequest(getCompanyInfo, {
     manual: true,
   });
 

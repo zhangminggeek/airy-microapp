@@ -3301,6 +3301,74 @@ export const getCompanyWithPage = /*#__PURE__*/ (
 
 getCompanyWithPage.requestConfig = getCompanyWithPageRequestConfig
 
+export interface GetCompanyInfoRequest {
+  /**
+   * 要查询的公司id
+   */
+  id: string
+}
+
+export interface GetCompanyInfoResponse {
+  /**
+   * 公司id
+   */
+  id: number
+  /**
+   * 公司名称
+   */
+  name: string
+  /**
+   * 公司LOGO
+   */
+  logo?: string
+  /**
+   * 简介
+   */
+  intro?: string
+  /**
+   * 粉丝数量
+   */
+  fansCount: number
+  /**
+   * 是否已关注
+   */
+  follewed: boolean
+  /**
+   * 已卖出数量
+   */
+  sold: number
+}
+
+type GetCompanyInfoRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/info', 'data', 'id', string, false>
+>
+
+const getCompanyInfoRequestConfig: GetCompanyInfoRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/info',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: ['id'],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanyInfo',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getCompanyInfo = /*#__PURE__*/ (requestData: GetCompanyInfoRequest, ...args: UserRequestRestArgs) => {
+  return request<GetCompanyInfoResponse>(prepare(getCompanyInfoRequestConfig, requestData), ...args)
+}
+
+getCompanyInfo.requestConfig = getCompanyInfoRequestConfig
+
 export interface GetCompanyStatisticsRequest {}
 
 export interface GetCompanyStatisticsResponse {
@@ -4680,6 +4748,14 @@ export interface GetCompanyIdRequest {
 
 export interface GetCompanyIdResponse {
   /**
+   * 创建时间
+   */
+  createTime: string
+  /**
+   * 修改时间
+   */
+  updateTime: string
+  /**
    * 公司id
    */
   id: number
@@ -4687,6 +4763,14 @@ export interface GetCompanyIdResponse {
    * 公司名称
    */
   name: string
+  /**
+   * 营业执照
+   */
+  license?: string
+  /**
+   * 营业执照上的公司名称
+   */
+  licenseCompanyName?: string
   /**
    * 公司LOGO
    */
@@ -4696,17 +4780,49 @@ export interface GetCompanyIdResponse {
    */
   intro?: string
   /**
-   * 粉丝数量
+   * 联系人
    */
-  fansCount: number
+  contacts: string
   /**
-   * 是否已关注
+   * 联系电话
    */
-  follewed: boolean
+  contactPhone: string
   /**
-   * 已卖出数量
+   * 省
    */
-  sold: number
+  province: string
+  /**
+   * 市
+   */
+  city: string
+  /**
+   * 区
+   */
+  area: string
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 账户余额
+   */
+  balance: string
+  /**
+   * 邀请码
+   */
+  invitationCode: string
+  /**
+   * 每日可使用的喇叭数量
+   */
+  trumpet: number
+  /**
+   * 状态, 0:禁用 1:正常 2:待审核
+   */
+  status: number
+  /**
+   * 是否为内部账号
+   */
+  inner: boolean
 }
 
 type GetCompanyIdRequestConfig = Readonly<
@@ -6974,6 +7090,14 @@ export interface GetOrderIdResponse {
      */
     name: string
     /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系方式
+     */
+    contactPhone: string
+    /**
      * 公司LOGO
      */
     logo?: string
@@ -6990,6 +7114,14 @@ export interface GetOrderIdResponse {
      * 公司名称
      */
     name: string
+    /**
+     * 联系人
+     */
+    contacts: string
+    /**
+     * 联系方式
+     */
+    contactPhone: string
     /**
      * 公司LOGO
      */
