@@ -29,4 +29,10 @@
     color: $text-color-secondary;
     margin-bottom: 64px;
   }
+
+  .btn {
+    & + .btn {
+      margin-top: 48px;
+    }
+  }
 }

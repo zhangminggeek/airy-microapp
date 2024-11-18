@@ -3340,7 +3340,7 @@ export interface GetCompanyInfoResponse {
 }
 
 type GetCompanyInfoRequestConfig = Readonly<
-  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/info', 'data', 'id', string, false>
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/info', 'data', string, 'id', false>
 >
 
 const getCompanyInfoRequestConfig: GetCompanyInfoRequestConfig = /*#__PURE__*/ {
@@ -3353,8 +3353,8 @@ const getCompanyInfoRequestConfig: GetCompanyInfoRequestConfig = /*#__PURE__*/ {
   requestBodyType: RequestBodyType.query,
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_5,
-  paramNames: ['id'],
-  queryNames: [],
+  paramNames: [],
+  queryNames: ['id'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},

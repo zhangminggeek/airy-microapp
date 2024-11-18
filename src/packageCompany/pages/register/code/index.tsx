@@ -1,11 +1,12 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 
 import type { CompanyInfo } from '../interfaces';
+import type { ActionType } from '@/components/CodeInput';
 
 import {
   getAccountRegisterCodeAccount,
@@ -16,9 +17,11 @@ import { CodeInput, Text } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useCountdown, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { parseJson, RouterUtil } from '@/utils';
+import { parseJson, RouterUtil, Toast } from '@/utils';
 
 const Page = () => {
+  const codeInputRef = useRef<ActionType>(null);
+
   // 手机号
   const [phone, setPhone] = useState<string>('');
 
@@ -68,6 +71,7 @@ const Page = () => {
       <View className={styles.title}>输入验证码</View>
       <View className={styles.tip}>已将验证码发送至 {phone}</View>
       <CodeInput
+        ref={codeInputRef}
         className={styles.input}
         onComplete={(v) => {
           checkCode({ account: phone, code: v });
@@ -79,6 +83,27 @@ const Page = () => {
           <Text>后可重新发送</Text>
         </View>
       ) : null}
+      <Button
+        className={styles.btn}
+        fill="none"
+        block
+        onClick={() => {
+          Taro.getClipboardData({
+            success(res) {
+              const code = res.data;
+              console.log('code', code);
+              if (/^\d{4}$/.test(code)) {
+                codeInputRef.current?.setValue(code);
+                checkCode({ account: phone, code });
+              } else {
+                Toast.info('验证码格式不正确');
+              }
+            },
+          });
+        }}
+      >
+        粘贴输入
+      </Button>
       <Button
         className={styles.btn}
         type="primary"
