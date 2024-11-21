@@ -8,6 +8,10 @@
   line-height: 1em;
 
   &:not(.m-tag-plain) {
+    &.m-tag-default {
+      background-color: #fff;
+    }
+
     &.m-tag-primary {
       background-color: rgba($color-primary, 0.1);
     }
@@ -22,6 +26,10 @@
   }
 
   &.m-tag-border {
+    &.m-tag-default {
+      border: 2px solid $border-color-base;
+    }
+
     &.m-tag-primary {
       border: 2px solid $color-primary;
     }
@@ -33,6 +41,10 @@
     &.m-tag-warning {
       border: 2px solid $color-warning;
     }
+  }
+
+  &-default {
+    color: $text-color-secondary;
   }
 
   &-primary {

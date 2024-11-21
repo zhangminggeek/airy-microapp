@@ -6,10 +6,19 @@ import { productTypeOptions, tabsMap } from './config';
 import styles from './index.module.scss';
 
 import { getMarket } from '@/api';
-import { InfiniteList, InputSearch, Product } from '@/components';
+import ImageSale from '@/assets/icons/sale.jpg';
+import {
+  Icon,
+  InfiniteList,
+  InputSearch,
+  Product,
+  Space,
+  Tag,
+  Text,
+} from '@/components';
 import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
-import { useShareEvent } from '@/hooks';
+import { useRequest, useShareEvent } from '@/hooks';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
@@ -22,6 +31,11 @@ const Page = () => {
 
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  // 获取特卖区数据
+  const { data: saleData } = useRequest(getMarket, {
+    defaultParams: { onSale: '1', status: '2', pageNum: '1', pageSize: '10' },
+  });
 
   return (
     <BasicLayout
@@ -69,6 +83,56 @@ const Page = () => {
                 </View>
               ))}
             </View>
+            <View
+              className={styles.sale}
+              onClick={() => {
+                RouterUtil.navigateTo('/pages/market/sale/index');
+              }}
+            >
+              <View className={styles['sale-header']}>
+                <Space className={styles['sale-header-title']} size={4}>
+                  <Image
+                    className={styles['sale-header-title-icon']}
+                    src={ImageSale}
+                    width={20}
+                    height={20}
+                    mode="aspectFill"
+                  />
+                  <View className={styles['sale-header-title-text']}>
+                    特卖区
+                  </View>
+                  <Tag className={styles['sale-header-title-tag']}>新品</Tag>
+                </Space>
+                <Space className={styles['sale-header-action']} size={4}>
+                  <Text>查看更多</Text>
+                  <Icon name="RightOutlined" size={16} />
+                </Space>
+              </View>
+              <View className={styles['sale-body']}>
+                {saleData?.list?.slice(0, 4)?.map((item) => (
+                  <View
+                    key={item.id}
+                    className={styles['sale-body-item']}
+                    onClick={() => {
+                      RouterUtil.navigateTo('/pages/market/detail/index', {
+                        id: item.id,
+                      });
+                    }}
+                  >
+                    <Image
+                      className={styles['sale-body-item-image']}
+                      mode="aspectFill"
+                      src={item.product.picList[0]?.url}
+                      width={76}
+                      height={76}
+                    />
+                    <Product.SellingPrice
+                      value={info?.account ? item.sellingPrice : '??.??'}
+                    />
+                  </View>
+                ))}
+              </View>
+            </View>
             <Tabs
               className={styles.tabs}
               align="left"
@@ -88,6 +152,7 @@ const Page = () => {
             key={item.id}
             image={item.product?.picList?.[0]?.url}
             title={item.title}
+            onSale={!!item.onSale}
             tagList={item.product?.tagList?.map((item) => item.tag.name)}
             allowSell={item.allowSell}
             allowLease={item.allowLease}

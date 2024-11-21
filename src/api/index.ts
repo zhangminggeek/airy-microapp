@@ -235,6 +235,10 @@ export interface GetMarketRequest {
    */
   quality?: string
   /**
+   * 是否特卖, 0:否 1:是
+   */
+  onSale?: string
+  /**
    * 服饰状态, 1:审核中 2:上架中  3:未通过 4:已借调 5:已出售 6:已下架
    */
   status?: string
@@ -309,6 +313,10 @@ export interface GetMarketResponse {
      * 借调押金
      */
     leaseDeposit?: string
+    /**
+     * 是否特卖, 0:否 1:是
+     */
+    onSale: boolean
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -446,6 +454,7 @@ type GetMarketRequestConfig = Readonly<
     | 'maxLeasePrice'
     | 'expressMethod'
     | 'quality'
+    | 'onSale'
     | 'status'
     | 'order'
     | 'filterStr',
@@ -479,6 +488,7 @@ const getMarketRequestConfig: GetMarketRequestConfig = /*#__PURE__*/ {
     'maxLeasePrice',
     'expressMethod',
     'quality',
+    'onSale',
     'status',
     'order',
     'filterStr',
@@ -538,6 +548,10 @@ export interface PostMarketRequest {
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
   quality: number
+  /**
+   * 是否特卖, 0:否 1:是
+   */
+  onSale: boolean
   /**
    * 产品id
    */
@@ -617,6 +631,10 @@ export interface PutMarketRequest {
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
   quality: number
+  /**
+   * 是否特卖, 0:否 1:是
+   */
+  onSale: boolean
   /**
    * 产品id
    */
@@ -735,6 +753,10 @@ export interface GetMarketMyPublishedResponse {
      * 借调押金
      */
     leaseDeposit?: string
+    /**
+     * 是否特卖, 0:否 1:是
+     */
+    onSale: boolean
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
@@ -965,6 +987,10 @@ export interface GetMarketMyFavoriteResponse {
      */
     leaseDeposit?: string
     /**
+     * 是否特卖, 0:否 1:是
+     */
+    onSale: boolean
+    /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */
     expressMethod: number
@@ -1162,6 +1188,10 @@ export interface PostMarketAndProductRequest {
    * 新旧程度, 1:全新 2:几乎全新 3:轻微使用痕迹 4: 明显使用痕迹
    */
   quality: number
+  /**
+   * 是否特卖, 0:否 1:是
+   */
+  onSale: boolean
   /**
    * 服饰图片
    */
@@ -1376,6 +1406,10 @@ export interface GetMarketIdResponse {
    * 借调押金
    */
   leaseDeposit?: string
+  /**
+   * 是否特卖, 0:否 1:是
+   */
+  onSale: boolean
   /**
    * 发货方式, 1:包邮 2:到付 3:自提
    */
@@ -4739,6 +4773,52 @@ export const postCompanyLaunchNotice = /*#__PURE__*/ (
 
 postCompanyLaunchNotice.requestConfig = postCompanyLaunchNoticeRequestConfig
 
+export interface GetCompanySaleRuleRequest {}
+
+export interface GetCompanySaleRuleResponse {
+  /**
+   * 限购数量
+   */
+  count: number
+  /**
+   * 限购时间
+   */
+  time: string
+}
+
+type GetCompanySaleRuleRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/sale/rule', 'data', string, string, true>
+>
+
+const getCompanySaleRuleRequestConfig: GetCompanySaleRuleRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_5,
+  devUrl: devUrl_0_0_0_5,
+  prodUrl: prodUrl_0_0_0_5,
+  path: '/company/sale/rule',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_5,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: true,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getCompanySaleRule',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getCompanySaleRule = /*#__PURE__*/ (
+  requestData?: GetCompanySaleRuleRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetCompanySaleRuleResponse>(prepare(getCompanySaleRuleRequestConfig, requestData), ...args)
+}
+
+getCompanySaleRule.requestConfig = getCompanySaleRuleRequestConfig
+
 export interface GetCompanyIdRequest {
   /**
    * 要查询的公司id
@@ -5044,6 +5124,10 @@ export interface GetOrderResponse {
        * 借调押金
        */
       leaseDeposit?: string
+      /**
+       * 是否特卖, 0:否 1:是
+       */
+      onSale: boolean
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -5441,6 +5525,10 @@ export interface GetOrderBoughtResponse {
        */
       leaseDeposit?: string
       /**
+       * 是否特卖, 0:否 1:是
+       */
+      onSale: boolean
+      /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
       expressMethod: number
@@ -5769,6 +5857,10 @@ export interface GetOrderSoldResponse {
        * 借调押金
        */
       leaseDeposit?: string
+      /**
+       * 是否特卖, 0:否 1:是
+       */
+      onSale: boolean
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -6330,6 +6422,10 @@ export interface GetOrderWechatOrderStatusResponse {
        * 借调押金
        */
       leaseDeposit?: string
+      /**
+       * 是否特卖, 0:否 1:是
+       */
+      onSale: boolean
       /**
        * 发货方式, 1:包邮 2:到付 3:自提
        */
@@ -6974,6 +7070,10 @@ export interface GetOrderIdResponse {
      * 借调押金
      */
     leaseDeposit?: string
+    /**
+     * 是否特卖, 0:否 1:是
+     */
+    onSale: boolean
     /**
      * 发货方式, 1:包邮 2:到付 3:自提
      */

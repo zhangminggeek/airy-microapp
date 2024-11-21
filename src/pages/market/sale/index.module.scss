@@ -1,0 +1,41 @@
+@import '../../../styles/var.scss';
+
+.notice {
+  font-size: $font-size-base;
+  color: $text-color-secondary;
+  font-weight: 400;
+  text-align: center;
+  background-color: #fff;
+  padding: 16px 0;
+}
+
+.tabs {
+  border-bottom: 2px solid $border-color-base;
+
+  :global {
+    .nut-tabs-list {
+      padding: 0 16px;
+    }
+
+    .nut-tabs-titles {
+      height: 72px;
+    }
+
+    .nut-tabs-titles-item {
+      height: 72px;
+      line-height: 72px;
+      padding: 0 24px;
+    }
+
+    .nut-tabs-titles-item-active {
+      color: $text-color-main;
+    }
+
+    .nut-tabs-titles-item-line,
+    .nut-tabs-titles-item-smile {
+      width: 56px;
+      height: 6px;
+      bottom: 0;
+    }
+  }
+}

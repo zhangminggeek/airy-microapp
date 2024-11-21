@@ -9,7 +9,7 @@ import './index.scss';
 interface TagProps {
   className?: string;
   style?: CSSProperties;
-  type: 'primary' | 'success' | 'warning';
+  type?: 'default' | 'primary' | 'success' | 'warning';
   children?: ReactNode;
   plain?: boolean;
   border?: boolean;
@@ -21,7 +21,7 @@ const PREFIX_CLS = 'm-tag';
 const Tag: FC<TagProps> = ({
   className,
   style,
-  type,
+  type = 'default',
   plain = false,
   border = true,
   children,

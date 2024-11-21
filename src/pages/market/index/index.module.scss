@@ -12,6 +12,7 @@
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: repeat(2, 1fr);
     padding: 8px 0;
+    margin-bottom: 24px;
     border-radius: 24px;
     background-color: #fff;
 
@@ -26,6 +27,56 @@
       &-label {
         font-size: $font-size-small;
         color: $text-color-secondary;
+      }
+    }
+  }
+
+  .sale {
+    padding: 24px;
+    border-radius: 24px;
+    background-color: #fff;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+
+      &-title {
+        &-text {
+          font-size: $font-size-large;
+          color: $text-color-main;
+          font-weight: 500;
+        }
+      }
+
+      &-action {
+        font-size: $font-size-base;
+        color: $text-color-secondary;
+        font-weight: 400;
+
+        :global {
+          .m-icon {
+            color: $text-color-secondary;
+          }
+        }
+      }
+    }
+
+    &-body {
+      display: flex;
+      gap: 16px;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        &-image {
+          border-radius: 8px;
+          overflow: hidden;
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import { Button, SafeArea } from '@nutui/nutui-react-taro';
+import { Button, Image, SafeArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 import { useMemo } from 'react';
@@ -12,6 +12,7 @@ import PictureGroup, { type PictureGroupProps } from './PictureGroup';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
+import ImageSale from '@/assets/icons/sale.jpg';
 import { Avatar, Icon, Space, Tag } from '@/components';
 import { expressMethodMap } from '@/constants/market';
 import { productInfoFieldMap, ProductType } from '@/constants/product';
@@ -32,6 +33,7 @@ interface ProductDetailProps {
   expressMethod?: number;
   tagList?: string[];
   title?: string;
+  onSale?: boolean;
   desc?: string;
   fieldData?: FieldProps['data'];
   companyId?: number;
@@ -58,6 +60,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
   expressMethod,
   tagList = [],
   title,
+  onSale,
   desc,
   fieldData,
   companyId,
@@ -81,7 +84,18 @@ const ProductDetail: FC<ProductDetailProps> = ({
     <View className={classnames(PREFIX_CLS, className)} style={style}>
       <PictureGroup images={images} />
       <View className={`${PREFIX_CLS}-header`}>
-        <View className={`${PREFIX_CLS}-header-title`}>{title}</View>
+        <View className={`${PREFIX_CLS}-header-title`}>
+          {onSale ? (
+            <Image
+              className={`${PREFIX_CLS}-header-title-icon`}
+              src={ImageSale}
+              width={22}
+              height={22}
+              mode="aspectFill"
+            />
+          ) : null}
+          {title}
+        </View>
         {sellingPrice || leasePrice || extra ? (
           <View className={`${PREFIX_CLS}-header-top`}>
             <Space size={16} align="baseline">

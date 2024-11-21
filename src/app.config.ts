@@ -9,6 +9,7 @@ export default {
     'pages/market/action/index',
     'pages/market/action/result/index',
     'pages/market/detail/index',
+    'pages/market/sale/index',
     // 求购
     'pages/purchase/index/index',
     'pages/purchase/action/index',

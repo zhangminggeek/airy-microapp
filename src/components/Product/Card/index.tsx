@@ -1,3 +1,4 @@
+import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
 
@@ -7,6 +8,7 @@ import SellingPrice, { type SellingPriceProps } from '../SellingPrice';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
+import ImageSale from '@/assets/icons/sale.jpg';
 import { Company, Icon, Media, Space, Tag } from '@/components';
 import { ProductStatus, productStatusMap } from '@/constants/product';
 import { isNil } from '@/utils';
@@ -18,6 +20,7 @@ interface CardProps {
   style?: CSSProperties;
   image?: string;
   title?: string;
+  onSale?: boolean;
   tagList?: string[];
   allowSell?: boolean;
   allowLease?: boolean;
@@ -41,6 +44,7 @@ const Card: FC<CardProps> = ({
   clasName,
   image,
   title,
+  onSale,
   tagList,
   allowSell = false,
   allowLease = false,
@@ -77,7 +81,18 @@ const Card: FC<CardProps> = ({
         />
       </View>
       <View className={`${PREFIX_CLS}-content`}>
-        <View className={`${PREFIX_CLS}-content-title`}>{title}</View>
+        <View className={`${PREFIX_CLS}-content-title`}>
+          {onSale ? (
+            <Image
+              className={`${PREFIX_CLS}-content-title-icon`}
+              src={ImageSale}
+              width={18}
+              height={18}
+              mode="aspectFill"
+            />
+          ) : null}
+          {title}
+        </View>
         {tagList?.length ? (
           <View className={`${PREFIX_CLS}-content-tag-group`}>
             {tagList?.slice(0, 4)?.map((item, index) => (

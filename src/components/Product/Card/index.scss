@@ -26,6 +26,12 @@
       color: $text-color-main;
       font-weight: 500;
       @include ellipsis(2);
+
+      &-icon {
+        float: left;
+        clear: both;
+        margin-right: 8px;
+      }
     }
 
     &-tag {

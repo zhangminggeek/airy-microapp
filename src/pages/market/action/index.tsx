@@ -1,4 +1,4 @@
-import { Button, Form, Input, TextArea } from '@nutui/nutui-react-taro';
+import { Button, Form, Input, Switch, TextArea } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 import Big from 'big.js';
@@ -95,6 +95,7 @@ const Page = () => {
         product: { brand },
         expressMethod,
         quality,
+        onSale,
       } = data;
       const method: MarkrtMethod[] = [];
       if (allowSell) {
@@ -109,6 +110,7 @@ const Page = () => {
       } else {
         setAllowLease(false);
       }
+      console.log('onSale', onSale);
       form.setFieldsValue({
         title,
         productId,
@@ -121,6 +123,7 @@ const Page = () => {
         brand,
         expressMethod: [expressMethod],
         quality: [quality],
+        onSale: !!onSale,
       });
     },
   });
@@ -170,6 +173,7 @@ const Page = () => {
           method: [MarkrtMethod['出售']],
           expressMethod: [ExpressMethod['到付']],
           quality: [ProductQuality['几乎全新']],
+          onSale: false,
         }}
         footer={
           <Button
@@ -193,6 +197,7 @@ const Page = () => {
             expressMethod,
             quality,
             companyAddressId,
+            onSale,
             ...rest
           } = values;
           if (!title) {
@@ -211,6 +216,10 @@ const Page = () => {
             Toast.info('请选择返还地址');
             return;
           }
+          if (onSale && method?.includes(MarkrtMethod['借调'])) {
+            Toast.info('加入特卖区商品不允许借调');
+            return;
+          }
           const params = {
             ...rest,
             title,
@@ -219,6 +228,7 @@ const Page = () => {
             allowLease: method?.includes(MarkrtMethod['借调']),
             expressMethod: expressMethod[0],
             quality: quality[0],
+            onSale,
           };
           if (createFromAlbum) {
             params.picList = picList;
@@ -452,6 +462,23 @@ const Page = () => {
             </Form.Item>
           </FormSection>
         )}
+        <FormSection fill>
+          <Form.Item label="加入特卖区" name="onSale" valuePropName="checked">
+            <Switch
+              onChange={(v) => {
+                console.log('onSale onChange', v);
+                if (v) {
+                  // 如果加入特卖区，则不允许借调，只允许出售
+                  setAllowSell(true);
+                  setAllowLease(false);
+                  form.setFieldsValue({
+                    method: [MarkrtMethod['出售']],
+                  });
+                }
+              }}
+            />
+          </Form.Item>
+        </FormSection>
       </Form>
     </BasicLayout>
   );

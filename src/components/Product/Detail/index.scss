@@ -61,6 +61,13 @@
       font-size: $font-size-xlarge;
       color: $text-color-main;
       margin-bottom: 16px;
+
+      &-icon {
+        float: left;
+        clear: both;
+        top: 2px;
+        margin-right: 8px;
+      }
     }
 
     &-desc {

@@ -196,6 +196,7 @@ const Page = () => {
         expressMethod={data?.expressMethod}
         tagList={data?.product?.tagList?.map((item) => item.tag.name)}
         title={data?.title}
+        onSale={!!data?.onSale}
         desc={data?.description}
         fieldData={parseJson<ProductBizData>(
           data?.product?.bizData ?? '[]',
