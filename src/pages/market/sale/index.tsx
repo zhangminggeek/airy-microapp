@@ -1,5 +1,6 @@
 import { Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import { useShareAppMessage } from '@tarojs/taro';
 import { useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
@@ -10,6 +11,7 @@ import { HIDE_PRICE } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { productTypeMap } from '@/constants/product';
 import { useRequest } from '@/hooks';
+import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
@@ -19,6 +21,14 @@ const Page = () => {
 
   // tabs 选中索引
   const [tabIndex, setTabIndex] = useState<number>(0);
+
+  useShareAppMessage(() => {
+    // 来自页面转发分享
+    return {
+      title: '婚纱礼服清仓特卖专区',
+      path: `/pages/market/index/index?shareType=${ShareType.SALE}&shareParams=${JSON.stringify({ invitationCode: info?.company?.invitationCode })}`,
+    };
+  });
 
   // 获取特卖规则
   const { data: rule } = useRequest(getCompanySaleRule);

@@ -113,7 +113,8 @@ const Page = () => {
                   <View
                     key={item.id}
                     className={styles['sale-body-item']}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       RouterUtil.navigateTo('/pages/market/detail/index', {
                         id: item.id,
                       });
@@ -127,7 +128,7 @@ const Page = () => {
                       height={76}
                     />
                     <Product.SellingPrice
-                      value={info?.account ? item.sellingPrice : '??.??'}
+                      value={info?.account ? item.sellingPrice : HIDE_PRICE}
                     />
                   </View>
                 ))}
