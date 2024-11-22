@@ -86,12 +86,17 @@ const Card: FC<CardProps> = ({
             <Image
               className={`${PREFIX_CLS}-content-title-icon`}
               src={ImageSale}
-              width={18}
-              height={18}
+              width={16}
+              height={16}
               mode="aspectFill"
             />
           ) : null}
-          {title}
+          <View
+            className={`${PREFIX_CLS}-content-title-text`}
+            style={{ textIndent: onSale ? 18 : 0 }}
+          >
+            {title}
+          </View>
         </View>
         {tagList?.length ? (
           <View className={`${PREFIX_CLS}-content-tag-group`}>

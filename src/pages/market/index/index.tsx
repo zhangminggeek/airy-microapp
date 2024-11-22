@@ -101,7 +101,7 @@ const Page = () => {
                   <View className={styles['sale-header-title-text']}>
                     特卖区
                   </View>
-                  <Tag className={styles['sale-header-title-tag']}>新品</Tag>
+                  <Tag className={styles['sale-header-title-tag']}>限购</Tag>
                 </Space>
                 <Space className={styles['sale-header-action']} size={4}>
                   <Text>查看更多</Text>

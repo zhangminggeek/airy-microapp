@@ -22,15 +22,19 @@
     padding: 8px 16px;
 
     &-title {
-      font-size: $font-size-base;
-      color: $text-color-main;
-      font-weight: 500;
-      @include ellipsis(2);
+      position: relative;
 
-      &-icon {
-        float: left;
-        clear: both;
-        margin-right: 8px;
+      &-icon.nut-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &-text {
+        font-size: $font-size-base;
+        color: $text-color-main;
+        font-weight: 500;
+        @include ellipsis(2);
       }
     }
 
