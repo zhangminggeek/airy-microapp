@@ -203,6 +203,11 @@ const Page = () => {
                     .plus(data?.market?.leaseDeposit ?? 0)
                     .toString()
             }
+            onClick={() => {
+              RouterUtil.navigateTo('/pages/market/detail/index', {
+                id: data?.market?.id,
+              });
+            }}
           />
           {data?.type === OrderType['借调'] ? (
             <View className={styles.info}>

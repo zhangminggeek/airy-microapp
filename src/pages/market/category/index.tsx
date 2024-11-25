@@ -95,6 +95,7 @@ const Page = () => {
       <InfiniteList
         actionRef={actionRef}
         request={getMarket}
+        requestOnShow={false}
         params={params}
         header={
           <View>
