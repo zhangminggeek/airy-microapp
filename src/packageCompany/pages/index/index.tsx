@@ -85,6 +85,19 @@ const Page = () => {
     );
   }, [id, info, data]);
 
+  // 请求参数
+  const requestParams = useMemo(() => {
+    return {
+      status: `${MarketProductStatus['在售']}`,
+      companyId: id,
+      productTypeCode:
+        tabIndex === 0 || tabIndex === 1
+          ? undefined
+          : Array.from(productTypeMap.values())[tabIndex! - 2]?.value,
+      onSale: tabIndex === 1 ? '1' : undefined,
+    };
+  }, [id, tabIndex]);
+
   return (
     <BasicLayout
       className={styles.container}
@@ -100,14 +113,7 @@ const Page = () => {
       <InfiniteList
         className={styles.list}
         request={getMarket}
-        params={{
-          status: `${MarketProductStatus['在售']}`,
-          companyId: id,
-          productTypeCode:
-            tabIndex === 0
-              ? undefined
-              : Array.from(productTypeMap.values())[tabIndex! - 1]?.value,
-        }}
+        params={requestParams}
         header={
           <View>
             <View className={styles.header}>
@@ -156,6 +162,7 @@ const Page = () => {
                 }}
               >
                 <Tabs.TabPane title="全部" />
+                <Tabs.TabPane title="特卖区" />
                 {Array.from(productTypeMap.values()).map((item) => (
                   <Tabs.TabPane title={item.text} key={item.value} />
                 ))}

@@ -91,9 +91,19 @@
 
 .list {
   :global {
+    .m-infinite-list-content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .m-infinite-list-body {
+      flex: 1;
+      background-color: #fff;
+    }
+
     .m-infinite-list-body-main {
       padding: 24px;
-      background-color: #fff;
     }
   }
 }
