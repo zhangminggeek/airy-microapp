@@ -2,6 +2,7 @@ import ActionSheet from './ActionSheet';
 import AddressCard from './AddressCard';
 import Affix from './Affix';
 import Avatar from './Avatar';
+import Barrage from './Barrage';
 import Cell from './Cell';
 import CodeInput from './CodeInput';
 import Company from './Company';
@@ -35,6 +36,7 @@ export {
   AddressCard,
   Affix,
   Avatar,
+  Barrage,
   Cell,
   CodeInput,
   Company,

@@ -19,6 +19,8 @@ class App extends Component<PropsWithChildren> {
   componentDidShow(options) {
     // 获取平台能力
     useGlobalStore.getState().fetchPlatformAbility();
+    // 打开弹幕
+    useGlobalStore.getState().setShowBarrage(true);
 
     // 获取用户信息
     const token = Taro.getStorageSync(StorageKey.TOKEN);

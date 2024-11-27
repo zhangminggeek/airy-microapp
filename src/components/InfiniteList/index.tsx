@@ -2,13 +2,7 @@ import { Loading } from '@nutui/nutui-react-taro';
 import { ScrollView, Text, View } from '@tarojs/components';
 import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
-import {
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useImperativeHandle, useMemo, useRef, useState } from 'react';
 
 import type { FunctionType } from '@/hooks/useRequest';
 import type { PaginationParams, PaginationResponse } from '@/interfaces/base';
@@ -90,8 +84,6 @@ const InfiniteList = <
       loadData({ ...params, pageNum: `${DEFAULT_PAGE_NUM}` } as U);
     }
   });
-
-  useEffect(() => {}, []);
 
   useDeepCompareEffect(() => {
     setInnerParams(params);

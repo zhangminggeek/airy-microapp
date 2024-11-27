@@ -17,6 +17,8 @@ interface GloablState {
   administrativeCodeTree: AdministrativeCode[];
   // 行政编码字典，以 code 为 key，对应 code 的行政区信息为 value
   administrativeCodeMap: Map<string, AdministrativeCode>;
+  // 是否显示弹幕
+  showBarrage: boolean;
 }
 
 interface GloablStore extends GloablState {
@@ -26,12 +28,15 @@ interface GloablStore extends GloablState {
   fetchAdministrativeCode: () => Promise<AdministrativeCode[]>;
   // 储存行政编码
   saveAdministrativeCode: (code: string, data: AdministrativeCode) => void;
+  // 设置是否显示弹幕
+  setShowBarrage: (show: boolean) => void;
 }
 
 export const useGlobalStore = create<GloablStore>((set, get) => ({
   platformAbility: [],
   administrativeCodeTree: [] as AdministrativeCode[],
   administrativeCodeMap: new Map(),
+  showBarrage: true,
   fetchPlatformAbility: async () => {
     const res = await getPlatformAbility();
     const ability = res.data
@@ -57,5 +62,8 @@ export const useGlobalStore = create<GloablStore>((set, get) => ({
     if (administrativeCodeMap.get(code)) return;
     administrativeCodeMap.set(code, data);
     set({ administrativeCodeMap });
+  },
+  setShowBarrage: (show) => {
+    set({ showBarrage: show });
   },
 }));

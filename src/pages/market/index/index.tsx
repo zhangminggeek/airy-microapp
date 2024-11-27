@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 import { getMarket } from '@/api';
 import ImageSale from '@/assets/icons/sale.jpg';
 import {
+  Barrage,
   Icon,
   InfiniteList,
   InputSearch,
@@ -177,6 +178,7 @@ const Page = () => {
         )}
         padding
       />
+      <Barrage />
     </BasicLayout>
   );
 };
