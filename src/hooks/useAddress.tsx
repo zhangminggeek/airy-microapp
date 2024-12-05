@@ -23,12 +23,17 @@ export const useAddress = ({
     fetchAdministrativeCode();
   }, []);
 
-  const _address = useMemo(() => {
+  const combine = ({ province, city, area, address }: UseAddressProps) => {
     const p = administrativeCodeTree?.find((item) => item.code === province);
     const c = p?.children?.find((item) => item.code === city);
     const a = c?.children?.find((item) => item.code === area);
     return `${p?.name ?? ''}${c?.name ?? ''}${a?.name ?? ''}${address ?? ''}`;
-  }, [province, city, area, administrativeCodeTree]);
+  };
 
-  return { address: _address };
+  const _address = useMemo(
+    () => combine({ province, city, area, address }),
+    [province, city, area, administrativeCodeTree, address],
+  );
+
+  return { address: _address, combine };
 };

@@ -1,0 +1,16 @@
+.container {
+  background: #ff3333;
+
+  :global {
+    .g-basic-layout-header {
+      &-icon {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.main {
+  background-image: linear-gradient(180deg, #fe4733 0%, #ff6a4d 100%);
+  padding: 48px 24px;
+}

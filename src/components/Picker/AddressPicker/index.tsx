@@ -1,15 +1,14 @@
-import { Button, Popup } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
+
+import { PREFIX_CLS } from './constants';
+import useAddressPopup from './useAddressPopup';
 
 import type { GetAddressResponse } from '@/api';
 import type { CSSProperties, FC } from 'react';
 
-import { getAddress } from '@/api';
 import { AddressCard, Icon } from '@/components';
-import { useRequest } from '@/hooks';
-import { RouterUtil } from '@/utils';
 
 import './index.scss';
 
@@ -24,8 +23,6 @@ interface AddressPickerProps {
   onChange?: (value: number) => void;
 }
 
-const PREFIX_CLS = 'm-address-picker';
-
 const AddressPicker: FC<AddressPickerProps> = ({
   className,
   style,
@@ -37,16 +34,14 @@ const AddressPicker: FC<AddressPickerProps> = ({
   // 是否展示地址选择弹出层
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
-  useEffect(() => {
-    // 获取初始化数据
-    run();
-  }, []);
-
-  // 获取地址列表
-  const { data, run } = useRequest(getAddress, {
-    manual: true,
-    onSuccess(data) {
-      onLoad?.(data);
+  // 地址选择弹出层
+  const { popup, data } = useAddressPopup({
+    visible: showPopup,
+    value,
+    onLoad,
+    onChange,
+    onClose: () => {
+      setShowPopup(false);
     },
   });
 
@@ -87,62 +82,7 @@ const AddressPicker: FC<AddressPickerProps> = ({
           />
         </View>
       )}
-      <Popup
-        className={`${PREFIX_CLS}-popup`}
-        title="选择地址"
-        visible={showPopup}
-        position="bottom"
-        closeable
-        onOpen={() => {
-          run();
-        }}
-        onClose={() => {
-          setShowPopup(false);
-        }}
-      >
-        <View className={`${PREFIX_CLS}-popup-content`}>
-          {data?.map((item) => (
-            <AddressCard
-              key={item.id}
-              className={classnames(`${PREFIX_CLS}-popup-content-item`, {
-                [`${PREFIX_CLS}-popup-content-active`]: item.id === value,
-              })}
-              name={item.recipient}
-              phone={item.phone}
-              province={item.province}
-              city={item.city}
-              area={item.area}
-              address={item.address}
-              isDefault={!!item.isDefault}
-              onClick={() => {
-                onChange?.(item.id);
-                setShowPopup(false);
-              }}
-            />
-          ))}
-          <View className={`${PREFIX_CLS}-popup-content-btn-wrapper`}>
-            <Button
-              className={`${PREFIX_CLS}-popup-content-btn`}
-              type="primary"
-              fill="outline"
-              block
-              icon={
-                <Icon
-                  className={`${PREFIX_CLS}-popup-content-btn-icon`}
-                  name="PlusOutlined"
-                />
-              }
-              onClick={() => {
-                RouterUtil.navigateTo(
-                  '/packageCompany/pages/address/action/index',
-                );
-              }}
-            >
-              创建地址
-            </Button>
-          </View>
-        </View>
-      </Popup>
+      {popup}
     </Fragment>
   );
 };

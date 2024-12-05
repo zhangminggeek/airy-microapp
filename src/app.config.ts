@@ -110,6 +110,9 @@ export default {
         'pages/official-account/index',
         // 功能预约
         'pages/feature-reservation/index',
+        // 抽奖
+        'pages/activity/lottery/index',
+        'pages/activity/lottery/record/index',
       ],
     },
   ],

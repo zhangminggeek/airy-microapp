@@ -4,17 +4,17 @@ import { useShareAppMessage } from '@tarojs/taro';
 import Big from 'big.js';
 import { useMemo } from 'react';
 
-import { AWARD, InvitationTask } from './constants';
 import styles from './index.module.scss';
 
 import { getCompanyInvitation } from '@/api';
 import { Avatar, Space, Text } from '@/components';
 import { OSS_ASSETS_DIR } from '@/constants';
+import { AWARD, InvitationTask } from '@/constants/company';
 import { useRequest } from '@/hooks';
 import { ShareType } from '@/hooks/useShareEvent';
 import { BasicLayout } from '@/layouts';
 import { useUserStore } from '@/models';
-import { bin2dec, Toast } from '@/utils';
+import { Toast, verifyBin } from '@/utils';
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
@@ -31,10 +31,6 @@ const Page = () => {
   // 获取邀请的公司列表
   const { data: invitationList } = useRequest(getCompanyInvitation);
 
-  // 验证是否完成任务
-  const verifyTask = (n: string, m: string) =>
-    (bin2dec(n) & bin2dec(m)) === bin2dec(m);
-
   // 统计邀请情况
   const statistics = useMemo(() => {
     // 邀请总数
@@ -42,17 +38,17 @@ const Page = () => {
     // 上传营业执照
     const verified =
       invitationList?.filter((item) =>
-        verifyTask(item.taskStatus, InvitationTask['上传营业执照']),
+        verifyBin(item.taskStatus, InvitationTask['上传营业执照']),
       )?.length ?? 0;
     // 关注公众号
     const followed =
       invitationList?.filter((item) =>
-        verifyTask(item.taskStatus, InvitationTask['关注公众号']),
+        verifyBin(item.taskStatus, InvitationTask['关注公众号']),
       )?.length ?? 0;
     // 完成首笔交易
     const deal =
       invitationList?.filter((item) =>
-        verifyTask(item.taskStatus, InvitationTask['完成首笔交易']),
+        verifyBin(item.taskStatus, InvitationTask['完成首笔交易']),
       )?.length ?? 0;
     return { total, verified, followed, deal };
   }, [invitationList]);
@@ -156,13 +152,13 @@ const Page = () => {
           <View className={styles.list}>
             {invitationList?.map((item) => {
               let award = 0;
-              if (verifyTask(item.taskStatus, InvitationTask['上传营业执照'])) {
+              if (verifyBin(item.taskStatus, InvitationTask['上传营业执照'])) {
                 award += AWARD.get(InvitationTask['上传营业执照'])!;
               }
-              if (verifyTask(item.taskStatus, InvitationTask['关注公众号'])) {
+              if (verifyBin(item.taskStatus, InvitationTask['关注公众号'])) {
                 award += AWARD.get(InvitationTask['关注公众号'])!;
               }
-              if (verifyTask(item.taskStatus, InvitationTask['完成首笔交易'])) {
+              if (verifyBin(item.taskStatus, InvitationTask['完成首笔交易'])) {
                 award += AWARD.get(InvitationTask['完成首笔交易'])!;
               }
               return (
@@ -180,19 +176,19 @@ const Page = () => {
                       <View className={styles['list-item-status']}>
                         <Space size="2px 12px">
                           <Text>已注册</Text>
-                          {verifyTask(
+                          {verifyBin(
                             item.taskStatus,
                             InvitationTask['上传营业执照'],
                           ) ? (
                             <Text>已上传营业执照</Text>
                           ) : null}
-                          {verifyTask(
+                          {verifyBin(
                             item.taskStatus,
                             InvitationTask['关注公众号'],
                           ) ? (
                             <Text>已关注公众号</Text>
                           ) : null}
-                          {verifyTask(
+                          {verifyBin(
                             item.taskStatus,
                             InvitationTask['完成首笔交易'],
                           ) ? (

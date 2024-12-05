@@ -7,7 +7,8 @@ import { getAddressId, postAddress, putAddress } from '@/api';
 import { Picker } from '@/components';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { RouterUtil } from '@/utils';
+import { EventUtil, RouterUtil } from '@/utils';
+import { EventsKey } from '@/utils/event';
 
 const Page = () => {
   const { id } = useRouter().params;
@@ -39,14 +40,16 @@ const Page = () => {
   const { run: create } = useRequest(postAddress, {
     manual: true,
     onSuccess() {
+      EventUtil.emit(EventsKey.UPDATE_ADDRESS_LIST);
       RouterUtil.navigateBack();
     },
   });
 
-  // 创建收货地址
+  // 更新收货地址
   const { run: update } = useRequest(putAddress, {
     manual: true,
     onSuccess() {
+      EventUtil.emit(EventsKey.UPDATE_ADDRESS_LIST);
       RouterUtil.navigateBack();
     },
   });

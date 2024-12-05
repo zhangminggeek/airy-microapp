@@ -1,0 +1,67 @@
+@import '../../../../../styles/var.scss';
+
+.container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+
+  .group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    .item {
+      flex-shrink: 0;
+      flex-grow: 1;
+      flex-basis: auto;
+
+      &-signed {
+        .item-pic {
+          background: $background-color-disabled;
+
+          &-text {
+            color: $text-color-disabled;
+          }
+        }
+      }
+
+      &-pic {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 84px;
+        height: 96px;
+        background: #fbf2e1;
+        border-radius: 12px;
+        overflow: hidden;
+
+        &-text {
+          font-size: 16px;
+          color: $text-color-base;
+          font-weight: 400;
+        }
+      }
+
+      &-label {
+        font-size: $font-size-small;
+        color: $text-color-base;
+        font-weight: 400;
+        text-align: center;
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .btn {
+    width: 490px;
+
+    &-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+  }
+}

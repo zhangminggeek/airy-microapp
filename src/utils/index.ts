@@ -218,6 +218,15 @@ export function bin2dec(bin: string) {
 }
 
 /**
+ * 验证二进制数字是否通过
+ * @param n 二进制数字
+ * @param m 二进制数字
+ * @returns 是否通过
+ */
+export const verifyBin = (n: string, m: string) =>
+  (bin2dec(n) & bin2dec(m)) === bin2dec(m);
+
+/**
  * 获取布局容器的根节点
  * @param id 节点id
  * @returns dom

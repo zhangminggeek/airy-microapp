@@ -6,7 +6,9 @@ const globalEvent = new Events();
 // 通知事件key
 export enum EventsKey {
   LOGOUT = 'logout',
-  CONFIRM_RECEIPT = 'confirm_receipt',
+  CONFIRM_RECEIPT = 'confirm_receipt', // 用户收货
+  REFRESH_LOTTERY_COUNT = 'refresh_lottery_count', // 刷新抽奖次数
+  UPDATE_ADDRESS_LIST = 'update_address_list', // 更新地址列表
 }
 
 // 监听和关闭事件的hooks

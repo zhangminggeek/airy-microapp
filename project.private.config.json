@@ -8,6 +8,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packagePlatform/pages/activity/lottery/record/index",
+          "pathName": "packagePlatform/pages/activity/lottery/record/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "packagePlatform/pages/activity/lottery/index",
+          "pathName": "packagePlatform/pages/activity/lottery/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageCompany/pages/register/code/index",
           "pathName": "packageCompany/pages/register/code/index",
           "query": "",

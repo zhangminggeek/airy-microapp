@@ -39,6 +39,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.24.6",
+    "@lucky-canvas/taro": "^0.0.14",
     "@nutui/icons-react-taro": "^1.0.5",
     "@nutui/nutui-react-taro": "^2.7.0",
     "@tarojs/components": "3.6.30",

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "31683782",
+      "name": "RightFilled",
+      "font_class": "RightFilled",
+      "unicode": "e843",
+      "unicode_decimal": 59459
+    },
+    {
       "icon_id": "41737482",
       "name": "TrumpetFilled",
       "font_class": "TrumpetFilled",

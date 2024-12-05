@@ -12,6 +12,7 @@ import type { DateType } from '@/components/Picker/CalendarPicker';
 import type { Dayjs } from 'dayjs';
 
 import {
+  getAddress,
   getMarketId,
   postOrder,
   postOrderPayBalance,
@@ -59,6 +60,16 @@ const Page = () => {
 
   // 获取详情
   const { data, run: fetchDetail } = useRequest(getMarketId, { manual: true });
+
+  // 获取地址列表
+  useRequest(getAddress, {
+    onSuccess(res) {
+      const defaultAddress = res.find((item) => item.isDefault);
+      if (defaultAddress) {
+        setAddressId(defaultAddress?.id);
+      }
+    },
+  });
 
   // 创建订单
   const { run: create } = useRequest(postOrder, { manual: true });
@@ -145,12 +156,6 @@ const Page = () => {
         <Picker.Address
           placeholder="请选择收货地址"
           value={addressId}
-          onLoad={(v) => {
-            const defaultAddress = v.find((item) => item.isDefault);
-            if (defaultAddress) {
-              setAddressId(defaultAddress?.id);
-            }
-          }}
           onChange={(v) => {
             setAddressId(v);
           }}
