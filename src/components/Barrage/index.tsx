@@ -40,7 +40,7 @@ const Barrage: FC<BarrageProps> = ({ className, style }) => {
         price: generatePrice(),
       });
     },
-    interval: 8000,
+    interval: 300000, // 5分钟
     immediate: true,
   });
 
