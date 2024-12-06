@@ -106,7 +106,7 @@ const Page = () => {
                   </Space>
                 </View>
                 <View className={styles['sale-body']}>
-                  {saleData?.list?.slice(0, 4)?.map((item) => (
+                  {saleData?.list?.slice(0, 2)?.map((item) => (
                     <View
                       key={item.id}
                       className={styles['sale-body-item']}
