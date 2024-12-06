@@ -31,7 +31,7 @@ const PasswordLogin: FC<PasswordLoginProps> = ({
       const { token, bind } = data;
       Taro.setStorageSync(StorageKey.TOKEN, token);
       if (bind) {
-        handleLoginSuccess();
+        await handleLoginSuccess();
       } else {
         RouterUtil.navigateTo('/pages/user/login/bind/index', {
           account: params?.account,

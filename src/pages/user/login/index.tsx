@@ -32,7 +32,7 @@ const Page = () => {
         if (!bind) {
           await WeChatUtil.bindOpenId(account);
         }
-        handleLoginSuccess();
+        await handleLoginSuccess();
       } else {
         // 没注册去注册
         RouterUtil.navigateTo('/packageCompany/pages/register/index');
