@@ -37,7 +37,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title="限时预约" back fill>
+    <BasicLayout title="限时预约" back fill safeArea={false}>
       <View
         className={styles.content}
         style={{

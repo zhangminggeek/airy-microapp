@@ -1,5 +1,6 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import classnames from 'classnames';
 import { useState } from 'react';
 
 import { productTypeOptions, tabsMap } from './config';
@@ -9,13 +10,11 @@ import { getMarket } from '@/api';
 import ImageSale from '@/assets/icons/sale.jpg';
 import {
   Barrage,
-  Icon,
   InfiniteList,
   InputSearch,
   Product,
   Space,
   Tag,
-  Text,
 } from '@/components';
 import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
@@ -84,55 +83,87 @@ const Page = () => {
                 </View>
               ))}
             </View>
-            <View
-              className={styles.sale}
-              onClick={() => {
-                RouterUtil.navigateTo('/pages/market/sale/index');
-              }}
-            >
-              <View className={styles['sale-header']}>
-                <Space className={styles['sale-header-title']} size={4}>
-                  <Image
-                    className={styles['sale-header-title-icon']}
-                    src={ImageSale}
-                    width={20}
-                    height={20}
-                    mode="aspectFill"
-                  />
-                  <View className={styles['sale-header-title-text']}>
-                    特卖区
-                  </View>
-                  <Tag className={styles['sale-header-title-tag']}>限购</Tag>
-                </Space>
-                <Space className={styles['sale-header-action']} size={4}>
-                  <Text>查看更多</Text>
-                  <Icon name="RightOutlined" size={16} />
-                </Space>
-              </View>
-              <View className={styles['sale-body']}>
-                {saleData?.list?.slice(0, 4)?.map((item) => (
-                  <View
-                    key={item.id}
-                    className={styles['sale-body-item']}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      RouterUtil.navigateTo('/pages/market/detail/index', {
-                        id: item.id,
-                      });
-                    }}
-                  >
+            <View className={styles.showcase}>
+              <View
+                className={styles.sale}
+                onClick={() => {
+                  RouterUtil.navigateTo('/pages/market/sale/index');
+                }}
+              >
+                <View className={styles['sale-header']}>
+                  <Space className={styles['sale-header-title']} size={4}>
                     <Image
-                      className={styles['sale-body-item-image']}
+                      className={styles['sale-header-title-icon']}
+                      src={ImageSale}
+                      width={20}
+                      height={20}
                       mode="aspectFill"
-                      src={item.product.picList[0]?.url}
-                      width={76}
-                      height={76}
                     />
-                    <Product.SellingPrice
-                      value={info?.account ? item.sellingPrice : HIDE_PRICE}
-                    />
-                  </View>
-                ))}
+                    <View className={styles['sale-header-title-text']}>
+                      特卖区
+                    </View>
+                    <Tag className={styles['sale-header-title-tag']}>限购</Tag>
+                  </Space>
+                </View>
+                <View className={styles['sale-body']}>
+                  {saleData?.list?.slice(0, 4)?.map((item) => (
+                    <View
+                      key={item.id}
+                      className={styles['sale-body-item']}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        RouterUtil.navigateTo('/pages/market/detail/index', {
+                          id: item.id,
+                        });
+                      }}
+                    >
+                      <Image
+                        className={styles['sale-body-item-image']}
+                        mode="aspectFill"
+                        src={item.product.picList[0]?.url}
+                        width={70}
+                        height={70}
+                      />
+                      <Product.SellingPrice
+                        value={info?.account ? item.sellingPrice : HIDE_PRICE}
+                      />
+                    </View>
+                  ))}
+                </View>
+              </View>
+              <View
+                className={classnames(styles.activity, styles.link)}
+                onClick={() => {
+                  RouterUtil.navigateTo(
+                    '/packagePlatform/pages/activity/lottery/index',
+                  );
+                }}
+              >
+                <View className={styles['link-title']}>签到抽奖</View>
+                <View className={styles['link-desc']}>赢红包</View>
+                <Image
+                  className={styles['link-image']}
+                  src={`${OSS_ASSETS_DIR}/index_showcase_activity.png`}
+                  width={52}
+                  height={52}
+                />
+              </View>
+              <View
+                className={classnames(styles.reservation, styles.link)}
+                onClick={() => {
+                  RouterUtil.navigateTo(
+                    '/packagePlatform/pages/feature-reservation/index',
+                  );
+                }}
+              >
+                <View className={styles['link-title']}>限时预约</View>
+                <View className={styles['link-desc']}>店铺工具免费使用</View>
+                <Image
+                  className={styles['link-image']}
+                  src={`${OSS_ASSETS_DIR}/index_showcase_reservation.png`}
+                  width={52}
+                  height={52}
+                />
               </View>
             </View>
             <Tabs
