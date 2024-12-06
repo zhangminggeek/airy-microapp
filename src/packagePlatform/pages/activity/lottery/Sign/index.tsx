@@ -65,13 +65,10 @@ const Sign = () => {
               : data?.slice((round - 1) * 7, round * 7) ?? [];
           // 是否已签到
           const isSigned = signDataCurrentRound?.length >= day;
-          // 是否是本轮最后一天
-          const isLast = day === 7;
 
           const renderText = () => {
-            if (isLast) return null;
             let text = '';
-            if (day % 7 === 4) {
+            if (day % 7 === 4 || day % 7 === 0) {
               text = '抽奖+1';
             } else if (isSigned) {
               text = '已签到';
@@ -89,29 +86,16 @@ const Sign = () => {
               })}
             >
               <View className={styles['item-pic']}>
-                {isLast ? (
-                  <Image
-                    className={styles['item-pic-icon']}
-                    src={
-                      isSigned
-                        ? `${OSS_ASSETS_DIR}/signed_prize.png`
-                        : `${OSS_ASSETS_DIR}/sign_prize.png`
-                    }
-                    width={30}
-                    height={28}
-                  />
-                ) : (
-                  <Image
-                    className={styles['item-pic-icon']}
-                    src={
-                      isSigned
-                        ? `${OSS_ASSETS_DIR}/signed_icon.png`
-                        : `${OSS_ASSETS_DIR}/sign_icon.png`
-                    }
-                    width={24}
-                    height={24}
-                  />
-                )}
+                <Image
+                  className={styles['item-pic-icon']}
+                  src={
+                    isSigned
+                      ? `${OSS_ASSETS_DIR}/signed_icon.png`
+                      : `${OSS_ASSETS_DIR}/sign_icon.png`
+                  }
+                  width={24}
+                  height={24}
+                />
                 {renderText()}
               </View>
               <View className={styles['item-label']}>{item.label}</View>
