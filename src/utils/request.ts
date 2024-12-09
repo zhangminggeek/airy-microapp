@@ -72,7 +72,7 @@ const request = <ResponseData>(payload: RequestFunctionParams) => {
             !NOT_DEAL_ERROR_URLS.includes(`${method.toUpperCase()} ${path}`)
           ) {
             Toast.info(message, { mask: true });
-            reject();
+            reject(res.data);
           }
         }
         resolve(res.data);

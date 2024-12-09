@@ -3826,19 +3826,19 @@ export type GetCompanyResponse = {
   /**
    * 省
    */
-  province: string
+  province?: string
   /**
    * 市
    */
-  city: string
+  city?: string
   /**
    * 区
    */
-  area: string
+  area?: string
   /**
    * 地址
    */
-  address: string
+  address?: string
   /**
    * 账户余额
    */
@@ -4018,19 +4018,19 @@ export interface GetCompanyWithPageResponse {
     /**
      * 省
      */
-    province: string
+    province?: string
     /**
      * 市
      */
-    city: string
+    city?: string
     /**
      * 区
      */
-    area: string
+    area?: string
     /**
      * 地址
      */
-    address: string
+    address?: string
     /**
      * 账户余额
      */
@@ -4339,19 +4339,19 @@ export interface GetCompanyFansResponse {
     /**
      * 省
      */
-    province: string
+    province?: string
     /**
      * 市
      */
-    city: string
+    city?: string
     /**
      * 区
      */
-    area: string
+    area?: string
     /**
      * 地址
      */
-    address: string
+    address?: string
     /**
      * 账户余额
      */
@@ -4468,19 +4468,19 @@ export interface GetCompanyFolloweeResponse {
     /**
      * 省
      */
-    province: string
+    province?: string
     /**
      * 市
      */
-    city: string
+    city?: string
     /**
      * 区
      */
-    area: string
+    area?: string
     /**
      * 地址
      */
-    address: string
+    address?: string
     /**
      * 账户余额
      */
@@ -4624,19 +4624,19 @@ export interface PostCompanyRegisterRequest {
   /**
    * 省编码
    */
-  province: string
+  province?: string
   /**
    * 市编码
    */
-  city: string
+  city?: string
   /**
    * 区编码
    */
-  area: string
+  area?: string
   /**
    * 地址
    */
-  address: string
+  address?: string
   /**
    * 邀请人的邀请码
    */
@@ -4677,6 +4677,52 @@ export const postCompanyRegister = /*#__PURE__*/ (
 }
 
 postCompanyRegister.requestConfig = postCompanyRegisterRequestConfig
+
+export interface PostCompanyRegisterQuickRequest {
+  /**
+   * 联系电话
+   */
+  contactPhone: string
+  /**
+   * 邀请人的邀请码
+   */
+  invitationCode?: string
+}
+
+export type PostCompanyRegisterQuickResponse = any
+
+type PostCompanyRegisterQuickRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/company/register/quick', 'data', string, string, false>
+>
+
+const postCompanyRegisterQuickRequestConfig: PostCompanyRegisterQuickRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_7,
+  devUrl: devUrl_0_0_0_7,
+  prodUrl: prodUrl_0_0_0_7,
+  path: '/company/register/quick',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_7,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postCompanyRegisterQuick',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postCompanyRegisterQuick = /*#__PURE__*/ (
+  requestData: PostCompanyRegisterQuickRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostCompanyRegisterQuickResponse>(prepare(postCompanyRegisterQuickRequestConfig, requestData), ...args)
+}
+
+postCompanyRegisterQuick.requestConfig = postCompanyRegisterQuickRequestConfig
 
 export interface PostCompanyLicenseRequest {
   /**
@@ -5631,19 +5677,19 @@ export interface GetCompanyIdResponse {
   /**
    * 省
    */
-  province: string
+  province?: string
   /**
    * 市
    */
-  city: string
+  city?: string
   /**
    * 区
    */
-  area: string
+  area?: string
   /**
    * 地址
    */
-  address: string
+  address?: string
   /**
    * 账户余额
    */
@@ -8967,6 +9013,10 @@ export interface GetLotteryWithPageRequest {
    * 分页条数
    */
   pageSize: string
+  /**
+   * 奖品发放状态 0:未发放 1:已发放
+   */
+  status?: string
 }
 
 export interface GetLotteryWithPageResponse {
@@ -9059,7 +9109,11 @@ export interface GetLotteryWithPageResponse {
        * 是否被删除
        */
       isDeleted: boolean
-    }[]
+    }
+    /**
+     * 公司名称
+     */
+    companyName: string
     /**
      * 备注
      */
@@ -9083,7 +9137,7 @@ type GetLotteryWithPageRequestConfig = Readonly<
     '/lottery/with/page',
     'data',
     string,
-    'pageNum' | 'pageSize',
+    'pageNum' | 'pageSize' | 'status',
     false
   >
 >
@@ -9099,7 +9153,7 @@ const getLotteryWithPageRequestConfig: GetLotteryWithPageRequestConfig = /*#__PU
   responseBodyType: ResponseBodyType.json,
   dataKey: dataKey_0_0_0_10,
   paramNames: [],
-  queryNames: ['pageNum', 'pageSize'],
+  queryNames: ['pageNum', 'pageSize', 'status'],
   requestDataOptional: false,
   requestDataJsonSchema: {},
   responseDataJsonSchema: {},
@@ -9116,6 +9170,173 @@ export const getLotteryWithPage = /*#__PURE__*/ (
 }
 
 getLotteryWithPage.requestConfig = getLotteryWithPageRequestConfig
+
+export interface GetLotteryWithPageAdminRequest {
+  /**
+   * 页码
+   */
+  pageNum: string
+  /**
+   * 分页条数
+   */
+  pageSize: string
+  /**
+   * 奖品发放状态 0:未发放 1:已发放
+   */
+  status?: string
+}
+
+export interface GetLotteryWithPageAdminResponse {
+  /**
+   * 数据总条数
+   */
+  total: number
+  /**
+   * 数据
+   */
+  list: {
+    /**
+     * 中奖记录id
+     */
+    id: number
+    /**
+     * 奖品发放状态 0:未发放 1:已发放
+     */
+    status: number
+    /**
+     * 奖品
+     */
+    prize: {
+      /**
+       * 奖项id
+       */
+      id: number
+      /**
+       * 奖项
+       */
+      name: string
+      /**
+       * 奖项图片
+       */
+      pic: string
+      /**
+       * 奖品类型 0:未中奖 1:现金 2:实物
+       */
+      type: number
+    }
+    /**
+     * 地址
+     */
+    address?: {
+      /**
+       * 创建时间
+       */
+      createTime: string
+      /**
+       * 修改时间
+       */
+      updateTime: string
+      /**
+       * 地址id
+       */
+      id: number
+      /**
+       * 公司id
+       */
+      companyId: number
+      /**
+       * 收件人
+       */
+      recipient: string
+      /**
+       * 手机号
+       */
+      phone: string
+      /**
+       * 省code
+       */
+      province: string
+      /**
+       * 市code
+       */
+      city: string
+      /**
+       * 区code
+       */
+      area: string
+      /**
+       * 地址
+       */
+      address: string
+      /**
+       * 是否为默认地址
+       */
+      isDefault: boolean
+      /**
+       * 是否被删除
+       */
+      isDeleted: boolean
+    }
+    /**
+     * 公司名称
+     */
+    companyName: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 创建时间
+     */
+    createTime: string
+    /**
+     * 更新时间
+     */
+    updateTime: string
+  }[]
+}
+
+type GetLotteryWithPageAdminRequestConfig = Readonly<
+  RequestConfig<
+    'http://127.0.0.1:50505/mock/0',
+    '',
+    '',
+    '/lottery/with/page/admin',
+    'data',
+    string,
+    'pageNum' | 'pageSize' | 'status',
+    false
+  >
+>
+
+const getLotteryWithPageAdminRequestConfig: GetLotteryWithPageAdminRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
+  path: '/lottery/with/page/admin',
+  method: Method.GET,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.query,
+  responseBodyType: ResponseBodyType.json,
+  dataKey: dataKey_0_0_0_10,
+  paramNames: [],
+  queryNames: ['pageNum', 'pageSize', 'status'],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'getLotteryWithPageAdmin',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const getLotteryWithPageAdmin = /*#__PURE__*/ (
+  requestData: GetLotteryWithPageAdminRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<GetLotteryWithPageAdminResponse>(prepare(getLotteryWithPageAdminRequestConfig, requestData), ...args)
+}
+
+getLotteryWithPageAdmin.requestConfig = getLotteryWithPageAdminRequestConfig
 
 export interface PutLotteryAddressRequest {
   /**
@@ -9162,6 +9383,53 @@ export const putLotteryAddress = /*#__PURE__*/ (
 }
 
 putLotteryAddress.requestConfig = putLotteryAddressRequestConfig
+
+export interface PutLotteryStatusRequest {
+  /**
+   * 中奖记录id
+   */
+  id: number
+  /**
+   * 奖品发放状态 0:未发放 1:已发放
+   */
+  status: number
+  /**
+   * 备注
+   */
+  remark?: string
+}
+
+export type PutLotteryStatusResponse = any
+
+type PutLotteryStatusRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/lottery/status', 'data', string, string, false>
+>
+
+const putLotteryStatusRequestConfig: PutLotteryStatusRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
+  path: '/lottery/status',
+  method: Method.PUT,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_10,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'putLotteryStatus',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const putLotteryStatus = /*#__PURE__*/ (requestData: PutLotteryStatusRequest, ...args: UserRequestRestArgs) => {
+  return request<PutLotteryStatusResponse>(prepare(putLotteryStatusRequestConfig, requestData), ...args)
+}
+
+putLotteryStatus.requestConfig = putLotteryStatusRequestConfig
 
 export interface GetLotteryTaskStatusRequest {}
 
@@ -9491,19 +9759,19 @@ export interface GetUserSelfResponse {
     /**
      * 省
      */
-    province: string
+    province?: string
     /**
      * 市
      */
-    city: string
+    city?: string
     /**
      * 区
      */
-    area: string
+    area?: string
     /**
      * 地址
      */
-    address: string
+    address?: string
     /**
      * 账户余额
      */
@@ -9656,19 +9924,19 @@ export interface GetUserIdResponse {
     /**
      * 省
      */
-    province: string
+    province?: string
     /**
      * 市
      */
-    city: string
+    city?: string
     /**
      * 区
      */
-    area: string
+    area?: string
     /**
      * 地址
      */
-    address: string
+    address?: string
     /**
      * 账户余额
      */

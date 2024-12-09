@@ -8,34 +8,46 @@ import styles from './index.module.scss';
 import Protocol from './Protocol';
 import useLogin from './useLogin';
 
-import { postAccountLoginWechatPhone } from '@/api';
+import { postAccountLoginWechatPhone, postCompanyRegisterQuick } from '@/api';
 import ImageLogo from '@/assets/logo.svg';
 import { Text } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
+import { useUserStore } from '@/models';
 import { RouterUtil, Toast, WeChatUtil } from '@/utils';
 
 const Page = () => {
+  const { fetchUserInfo } = useUserStore();
   const { handleLoginSuccess } = useLogin();
 
   // 是否已阅读协议
   const [hasRead, setHasRead] = useState<boolean>(false);
 
+  // 快速注册
+  const { run: register } = useRequest(postCompanyRegisterQuick, {
+    manual: true,
+    async onSuccess() {
+      await fetchUserInfo();
+      RouterUtil.navigateTo('/pages/market/index/index');
+    },
+  });
+
   // 微信授权手机号登录
-  const { run } = useRequest(postAccountLoginWechatPhone, {
+  const { run: login } = useRequest(postAccountLoginWechatPhone, {
     manual: true,
     async onSuccess(data) {
-      if (data) {
-        const { token, account, bind } = data;
+      const { token, account, bind } = data;
+      if (token) {
         Taro.setStorageSync(StorageKey.TOKEN, token);
         if (!bind) {
           await WeChatUtil.bindOpenId(account);
         }
         await handleLoginSuccess();
       } else {
-        // 没注册去注册
-        RouterUtil.navigateTo('/packageCompany/pages/register/index');
+        // 没注册进行快速注册
+        const invitationCode = Taro.getStorageSync(StorageKey.INVITATION_CODE);
+        await register({ contactPhone: account, invitationCode });
       }
     },
   });
@@ -63,7 +75,7 @@ const Page = () => {
       onGetPhoneNumber(e) {
         const { code } = e.detail;
         if (code) {
-          run({ code });
+          login({ code });
         }
       },
     };
