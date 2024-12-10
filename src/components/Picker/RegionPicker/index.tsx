@@ -13,7 +13,7 @@ import { useGlobalStore } from '@/models';
 
 type ValueType = [string, string, string];
 
-interface RegionPickerProps {
+export interface RegionPickerProps {
   className?: string;
   style?: CSSProperties;
   value?: ValueType;

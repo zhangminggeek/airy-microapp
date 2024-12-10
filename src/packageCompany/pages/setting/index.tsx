@@ -36,6 +36,15 @@ const Page = () => {
       <EditableCell
         fields={[
           {
+            title: '店铺名称',
+            name: 'name',
+            renderConfig: {
+              renderType: 'textarea',
+              placeholder: '请输入店铺名称',
+              maxLength: 50,
+            },
+          },
+          {
             title: '店铺LOGO',
             name: 'logo',
             renderConfig: {
@@ -44,11 +53,44 @@ const Page = () => {
             },
           },
           {
+            title: '联系人',
+            name: 'contacts',
+            renderConfig: {
+              renderType: 'textarea',
+              placeholder: '请输入联系人',
+              maxLength: 8,
+            },
+          },
+          {
+            title: '联系方式',
+            name: 'contactPhone',
+            editable: false,
+            renderConfig: {
+              renderType: 'text',
+            },
+          },
+          {
             title: '简介',
             name: 'intro',
             renderConfig: {
               renderType: 'textarea',
               placeholder: '一句话介绍店铺',
+              maxLength: 200,
+            },
+          },
+          {
+            title: '店铺地址',
+            name: 'region',
+            renderConfig: {
+              renderType: 'region',
+            },
+          },
+          {
+            title: '详细地址',
+            name: 'address',
+            renderConfig: {
+              renderType: 'textarea',
+              placeholder: '请输入详细地址',
               maxLength: 200,
             },
           },
@@ -80,9 +122,35 @@ const Page = () => {
             },
           },
         ]}
-        data={{ logo: info?.company?.logo, intro: info?.company?.intro }}
+        data={{
+          name: info?.company?.name,
+          logo: info?.company?.logo,
+          contacts: info?.company?.contacts,
+          contactPhone: info?.company?.contactPhone,
+          intro: info?.company?.intro,
+          region: info?.company?.province
+            ? [
+                info?.company?.province,
+                info?.company?.city,
+                info?.company?.area,
+              ]
+            : [],
+          address: info?.company?.address,
+        }}
         onChange={async (field, value) => {
-          await update({ [field]: value });
+          console.log('field', field, value);
+          if (field === 'region') {
+            if (!(Array.isArray(value) && value.length)) return;
+            const [province, city, area] = value;
+            await update({
+              province,
+              city,
+              area,
+            });
+            console.log('region', value);
+          } else {
+            await update({ [field]: value });
+          }
         }}
       />
       <View className={styles.logout}>

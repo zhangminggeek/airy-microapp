@@ -1,0 +1,11 @@
+@import '../../../../styles/var.scss';
+
+.m-editable-cell-region {
+  .m-picker-view-text {
+    color: $text-color-base;
+  }
+
+  .m-picker-view-icon {
+    display: none;
+  }
+}

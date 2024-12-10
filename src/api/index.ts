@@ -3906,9 +3906,33 @@ export interface PutCompanyRequest {
    */
   logo?: string
   /**
+   * 联系人
+   */
+  contacts?: string
+  /**
+   * 联系电话
+   */
+  contactPhone?: string
+  /**
    * 简介
    */
   intro?: string
+  /**
+   * 省编码
+   */
+  province?: string
+  /**
+   * 市编码
+   */
+  city?: string
+  /**
+   * 区编码
+   */
+  area?: string
+  /**
+   * 地址
+   */
+  address?: string
 }
 
 export type PutCompanyResponse = any

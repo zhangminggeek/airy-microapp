@@ -20,8 +20,8 @@ const Page = () => {
   // 上传营业执照
   const { run } = useRequest(postCompanyLicense, {
     manual: true,
-    onSuccess() {
-      fetchUserInfo();
+    async onSuccess() {
+      await fetchUserInfo();
       RouterUtil.navigateBack();
     },
   });

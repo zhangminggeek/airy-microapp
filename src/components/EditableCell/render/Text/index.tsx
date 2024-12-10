@@ -8,6 +8,8 @@ import Wrapper from '../Wrapper';
 
 import type { FC } from 'react';
 
+import './index.scss';
+
 export interface CustomTextProps extends TextProps {
   wrapper?: boolean;
 }
