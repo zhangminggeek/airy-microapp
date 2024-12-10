@@ -92,7 +92,7 @@ const Page = () => {
         leasePrice,
         leaseDeposit,
         companyAddressId,
-        product: { brand },
+        product: { brand, legitimate },
         expressMethod,
         quality,
         onSale,
@@ -110,7 +110,6 @@ const Page = () => {
       } else {
         setAllowLease(false);
       }
-      console.log('onSale', onSale);
       form.setFieldsValue({
         title,
         productId,
@@ -121,6 +120,7 @@ const Page = () => {
         leaseDeposit,
         companyAddressId,
         brand,
+        legitimate: [legitimate],
         expressMethod: [expressMethod],
         quality: [quality],
         onSale: !!onSale,
@@ -172,6 +172,7 @@ const Page = () => {
         initialValues={{
           method: [MarkrtMethod['出售']],
           expressMethod: [ExpressMethod['到付']],
+          legitimate: [1],
           quality: [ProductQuality['几乎全新']],
           onSale: false,
         }}
@@ -195,6 +196,7 @@ const Page = () => {
             productId: productIdBySelected,
             method,
             expressMethod,
+            legitimate,
             quality,
             companyAddressId,
             onSale,
@@ -228,6 +230,7 @@ const Page = () => {
             allowLease: method?.includes(MarkrtMethod['借调']),
             expressMethod: expressMethod[0],
             quality: quality[0],
+            legitimate: legitimate[0],
             onSale,
           };
           if (createFromAlbum) {
@@ -435,6 +438,17 @@ const Page = () => {
             <Form.Item label="品牌" name="brand">
               <Input maxLength={255} />
             </Form.Item>
+            {!id && (
+              <Form.Item label="是否为正品" name="legitimate">
+                <TagChecker
+                  options={[
+                    { text: '是', value: 1 },
+                    { text: '否', value: 0 },
+                  ]}
+                  allowEmpty={false}
+                />
+              </Form.Item>
+            )}
           </FormSection>
         )}
         <FormSection title="新旧程度">

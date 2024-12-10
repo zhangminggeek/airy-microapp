@@ -161,6 +161,10 @@ export type GetProductResponse = {
    */
   description?: string
   /**
+   * 是否正品, 0:否 1:是
+   */
+  legitimate: boolean
+  /**
    * 租赁次数
    */
   leaseCount: number
@@ -243,6 +247,10 @@ export interface PostProductRequest {
    */
   typeCode: string
   /**
+   * 是否正品, 0:否 1:是
+   */
+  legitimate: boolean
+  /**
    * 服饰尺寸
    */
   size: number
@@ -322,6 +330,10 @@ export interface PutProductRequest {
    * 服饰类型code
    */
   typeCode: string
+  /**
+   * 是否正品, 0:否 1:是
+   */
+  legitimate: boolean
   /**
    * 服饰尺寸
    */
@@ -453,6 +465,10 @@ export interface GetProductPageResponse {
      * 描述
      */
     description?: string
+    /**
+     * 是否正品, 0:否 1:是
+     */
+    legitimate: boolean
     /**
      * 租赁次数
      */
@@ -603,6 +619,10 @@ export interface GetProductIdResponse {
    * 描述
    */
   description?: string
+  /**
+   * 是否正品, 0:否 1:是
+   */
+  legitimate: boolean
   /**
    * 租赁次数
    */
@@ -1792,6 +1812,10 @@ export interface PostMarketAndProductRequest {
    */
   size: number
   /**
+   * 是否正品, 0:否 1:是
+   */
+  legitimate: boolean
+  /**
    * 其他信息
    */
   fieldList?: {
@@ -2086,6 +2110,10 @@ export interface GetMarketIdResponse {
      * 描述
      */
     description?: string
+    /**
+     * 是否正品, 0:否 1:是
+     */
+    legitimate: boolean
     /**
      * 租赁次数
      */
@@ -6020,6 +6048,10 @@ export interface GetOrderResponse {
          */
         description?: string
         /**
+         * 是否正品, 0:否 1:是
+         */
+        legitimate: boolean
+        /**
          * 租赁次数
          */
         leaseCount: number
@@ -6420,6 +6452,10 @@ export interface GetOrderBoughtResponse {
          */
         description?: string
         /**
+         * 是否正品, 0:否 1:是
+         */
+        legitimate: boolean
+        /**
          * 租赁次数
          */
         leaseCount: number
@@ -6752,6 +6788,10 @@ export interface GetOrderSoldResponse {
          * 描述
          */
         description?: string
+        /**
+         * 是否正品, 0:否 1:是
+         */
+        legitimate: boolean
         /**
          * 租赁次数
          */
@@ -7317,6 +7357,10 @@ export interface GetOrderWechatOrderStatusResponse {
          * 描述
          */
         description?: string
+        /**
+         * 是否正品, 0:否 1:是
+         */
+        legitimate: boolean
         /**
          * 租赁次数
          */
@@ -7965,6 +8009,10 @@ export interface GetOrderIdResponse {
        * 描述
        */
       description?: string
+      /**
+       * 是否正品, 0:否 1:是
+       */
+      legitimate: boolean
       /**
        * 租赁次数
        */

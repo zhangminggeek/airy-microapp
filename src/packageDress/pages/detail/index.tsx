@@ -72,6 +72,7 @@ const Page = () => {
           },
           {
             brand: data?.brand,
+            legitimate: data?.legitimate ? '是' : '否',
             productTypeName: productTypeMap.get(data?.typeCode as ProductType)
               ?.text,
             size: productSizeMap.get(data?.size)?.text,

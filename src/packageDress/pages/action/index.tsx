@@ -46,6 +46,7 @@ const Page = () => {
         bizData,
         tagList,
         description,
+        legitimate,
       } = data;
       const formData: Record<string, any> = {
         name,
@@ -56,6 +57,7 @@ const Page = () => {
         size: [size],
         tagIdList: tagList.map((item) => item.tagId),
         description,
+        legitimate: legitimate ? [1] : [0],
       };
       parseJson<ProductBizData>(bizData, []).forEach((item) => {
         formData[item.fieldKey] = [item.fieldValue];
@@ -139,6 +141,15 @@ const Page = () => {
           </Form.Item>
           <Form.Item label="品牌" name="brand">
             <Input maxLength={255} placeholder="请输入" />
+          </Form.Item>
+          <Form.Item label="是否为正品" name="legitimate">
+            <TagChecker
+              options={[
+                { text: '是', value: 1 },
+                { text: '否', value: 0 },
+              ]}
+              allowEmpty={false}
+            />
           </Form.Item>
         </FormSection>
         <FormSection fill>
