@@ -126,6 +126,8 @@ const Page = () => {
             color="linear-gradient(180deg, #5C90FF 0%, #214AFF 100%)"
             size="xlarge"
             onClick={() => {
+              Toast.info('活动将于1月1日开放');
+              return;
               if (!info?.company?.license) {
                 open();
                 return;

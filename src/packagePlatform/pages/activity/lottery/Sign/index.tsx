@@ -112,6 +112,8 @@ const Sign = () => {
           block
           disabled={hasSigned}
           onClick={() => {
+            Toast.info('活动将于1月1日开放');
+            return;
             sign();
           }}
         >

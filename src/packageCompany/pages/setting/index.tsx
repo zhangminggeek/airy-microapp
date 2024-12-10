@@ -138,7 +138,6 @@ const Page = () => {
           address: info?.company?.address,
         }}
         onChange={async (field, value) => {
-          console.log('field', field, value);
           if (field === 'region') {
             if (!(Array.isArray(value) && value.length)) return;
             const [province, city, area] = value;
