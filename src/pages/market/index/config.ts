@@ -44,11 +44,13 @@ export const productTypeOptions = [
 ];
 
 export enum TabsEnum {
+  '默认排序' = 0,
   '最新发布' = 1,
   '最多收藏' = 2,
 }
 
 export const tabsMap = new Map([
+  [TabsEnum['默认排序'], { text: '默认排序', value: TabsEnum['默认排序'] }],
   [TabsEnum['最新发布'], { text: '最新发布', value: TabsEnum['最新发布'] }],
   [TabsEnum['最多收藏'], { text: '最多收藏', value: TabsEnum['最多收藏'] }],
 ]);
