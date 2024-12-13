@@ -14,11 +14,9 @@ import { Text } from '@/components';
 import { StorageKey } from '@/constants/storage';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useUserStore } from '@/models';
-import { RouterUtil, Toast, WeChatUtil } from '@/utils';
+import { Toast, WeChatUtil } from '@/utils';
 
 const Page = () => {
-  const { fetchUserInfo } = useUserStore();
   const { handleLoginSuccess } = useLogin();
 
   // 是否已阅读协议
@@ -27,9 +25,15 @@ const Page = () => {
   // 快速注册
   const { run: register } = useRequest(postCompanyRegisterQuick, {
     manual: true,
-    async onSuccess() {
-      await fetchUserInfo();
-      RouterUtil.navigateTo('/pages/market/index/index');
+    async onSuccess(data) {
+      const { token, account, bind } = data;
+      if (token) {
+        Taro.setStorageSync(StorageKey.TOKEN, token);
+        if (!bind) {
+          await WeChatUtil.bindOpenId(account);
+        }
+        await handleLoginSuccess();
+      }
     },
   });
 
