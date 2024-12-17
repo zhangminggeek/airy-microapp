@@ -22,7 +22,6 @@ const Page = () => {
       fill
       transparent
       loginTip={false}
-      safeArea={false}
     >
       <View className={styles.header}>
         <Image

@@ -108,7 +108,6 @@ const Page = () => {
       back
       fill
       transparent
-      safeArea={false}
     >
       <InfiniteList
         className={styles.list}

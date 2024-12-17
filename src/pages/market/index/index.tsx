@@ -1,5 +1,6 @@
 import { Image, Tabs } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
+import { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useState } from 'react';
 
@@ -20,14 +21,19 @@ import { HIDE_PRICE, OSS_ASSETS_DIR } from '@/constants';
 import { MarketProductStatus } from '@/constants/market';
 import { useRequest, useShareEvent } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useUserStore } from '@/models';
+import { useGlobalStore, useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const tabs = Array.from(tabsMap.values());
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
+  const { setTabBarActiveKey } = useGlobalStore((state) => state);
   useShareEvent();
+
+  useDidShow(() => {
+    setTabBarActiveKey('index');
+  });
 
   // tabs 选中索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -50,7 +56,7 @@ const Page = () => {
         />
       }
       fill
-      safeArea={false}
+      safeArea={{ show: true, withTabBar: true }}
     >
       <InfiniteList
         column="multiple"

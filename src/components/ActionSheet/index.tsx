@@ -28,6 +28,7 @@ interface ActionSheetProps
   extends Partial<Omit<NutActionSheetProps, 'visible' | 'options'>> {
   options: Option[];
   children?: ReactNode;
+  withTabBar?: boolean;
 }
 
 const PREFIX_CLS = 'm-action-sheet';
@@ -37,6 +38,7 @@ const ActionSheet = forwardRef<ActionType, ActionSheetProps>(
     {
       className,
       children,
+      withTabBar = false,
       options,
       cancelText = '取消',
       onSelect,
@@ -70,7 +72,11 @@ const ActionSheet = forwardRef<ActionType, ActionSheetProps>(
           {children}
         </View>
         <NutActionSheet
-          className={classnames(PREFIX_CLS, className)}
+          className={classnames(
+            PREFIX_CLS,
+            { [`${PREFIX_CLS}-with-tab-bar`]: withTabBar },
+            className,
+          )}
           visible={showActionSheet}
           portal={rootDom}
           round={false}

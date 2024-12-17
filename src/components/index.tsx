@@ -23,6 +23,7 @@ import ModalForm from './ModalForm';
 import Picker from './Picker';
 import Product from './Product';
 import Result from './Result';
+import SafeArea from './SafeArea';
 import Section from './Section';
 import Space from './Space';
 import Tag from './Tag';
@@ -57,6 +58,7 @@ export {
   Picker,
   Product,
   Result,
+  SafeArea,
   Section,
   Space,
   Tag,

@@ -29,7 +29,7 @@ interface InfiniteListProps<R = any, P = Record<string, any>> {
   params?: ParamWithoutPaginationParams<P>;
   request: FunctionType<P, PaginationResponse<R>>;
   requestOnShow?: boolean;
-  renderItem: (data: R) => ReactNode;
+  renderItem: (data: R, index: number) => ReactNode;
   header?: ReactNode;
   headerFixed?: boolean;
   footer?: ReactNode;
@@ -65,7 +65,7 @@ const InfiniteList = <
   // 请求状态
   const loading = useRef<boolean>(false);
 
-  // 下拉刷行中
+  // 下拉刷新中
   const [refresherTriggered, setRefresherTriggered] = useState<boolean>(false);
   // 请求参数
   const [innerParams, setInnerParams] =
@@ -172,7 +172,7 @@ const InfiniteList = <
         <View className={`${PREFIX_CLS}-body`}>
           {list?.length ? (
             <View className={`${PREFIX_CLS}-body-main`}>
-              {list?.map((item) => renderItem(item))}
+              {list?.map((item, index) => renderItem(item, index))}
             </View>
           ) : (
             <Empty title="暂无数据" />

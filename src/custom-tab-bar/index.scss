@@ -1,0 +1,76 @@
+@import '../styles/var.scss';
+@import '../styles/mixins.scss';
+
+.m-custom-tab-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 116px;
+  background-color: #fff;
+  box-shadow:
+    0 0 8px 0 rgba(0, 0, 0, 0.08),
+    inset 0 0 0 0 $border-color-base;
+
+  &-item {
+    @include flex-center(column);
+    gap: 4px;
+    padding: 0 50px;
+
+    &:nth-child(3) {
+      margin-left: auto;
+    }
+
+    &-active {
+      .m-custom-tab-bar-item-text {
+        color: $color-primary;
+      }
+    }
+
+    &-text {
+      font-size: $font-size-small;
+      color: $text-color-secondary;
+      font-weight: 400;
+    }
+
+    &-icon {
+      width: 48px;
+      height: 48px;
+
+      .nut-img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &-btn {
+    @include flex-center(column);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: $color-primary;
+
+    &-wrapper {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+
+    &-text {
+      font-size: $font-size-small;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    &-icon {
+      .nut-img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

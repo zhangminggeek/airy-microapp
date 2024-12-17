@@ -25,15 +25,17 @@ import { OSS_ASSETS_DIR } from '@/constants';
 import { FeatureType } from '@/constants/platform';
 import { useDialog, useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useUserStore } from '@/models';
+import { useGlobalStore, useUserStore } from '@/models';
 import { EventUtil, RouterUtil } from '@/utils';
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
+  const { setTabBarActiveKey } = useGlobalStore((state) => state);
   // 是否显示打包回收弹框
   const [showDialogRecycle, setShowDialogRecycle] = useState<boolean>(false);
 
   useDidShow(() => {
+    setTabBarActiveKey('my');
     if (info?.company) {
       run();
     }
@@ -194,7 +196,7 @@ const Page = () => {
         </Space>
       }
       transparent
-      safeArea={false}
+      safeArea={{ show: true, withTabBar: true }}
     >
       <Section className={styles.account}>
         <View className={styles['account-header']}>

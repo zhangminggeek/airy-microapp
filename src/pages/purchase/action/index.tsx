@@ -109,7 +109,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title={`${id ? '编辑' : '发布'}求购`} back>
+    <BasicLayout title={`${id ? '编辑' : '发布'}求购`} back safeArea>
       <Form
         form={form}
         labelPosition="left"

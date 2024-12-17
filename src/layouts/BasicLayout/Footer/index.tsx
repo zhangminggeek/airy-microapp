@@ -1,10 +1,13 @@
 import { Button } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
+import { Fragment } from 'react';
 
 import { PREFIX_CLS as ROOT_PREFIX_CLS } from '../constants';
 
 import type { CSSProperties, FC, MouseEvent, ReactNode } from 'react';
+
+import { SafeArea } from '@/components';
 
 import './index.scss';
 
@@ -28,16 +31,19 @@ const Footer: FC<FooterProps> = ({
   onConfirm,
 }) => {
   return (
-    <View className={classnames(PREFIX_CLS, className)} style={style}>
-      {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
-      <View className={`${PREFIX_CLS}-actions`}>
-        {children ?? (
-          <Button type="primary" size="large" onClick={onConfirm}>
-            {btnText}
-          </Button>
-        )}
+    <Fragment>
+      <View className={classnames(PREFIX_CLS, className)} style={style}>
+        {extra ? <View className={`${PREFIX_CLS}-extra`}>{extra}</View> : null}
+        <View className={`${PREFIX_CLS}-actions`}>
+          {children ?? (
+            <Button type="primary" size="large" onClick={onConfirm}>
+              {btnText}
+            </Button>
+          )}
+        </View>
       </View>
-    </View>
+      <SafeArea />
+    </Fragment>
   );
 };
 

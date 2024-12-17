@@ -64,13 +64,13 @@
   &-actions {
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
     width: 100vw;
     z-index: 999;
     background-color: #fff;
 
-    &-safe {
-      padding-bottom: 68px;
+    &-with-tab-bar {
+      bottom: 120px;
     }
   }
 }

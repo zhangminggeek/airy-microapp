@@ -45,13 +45,7 @@ const Page = () => {
   }
 
   return (
-    <BasicLayout
-      className={styles.container}
-      title="选择商品"
-      back
-      fill
-      safeArea={false}
-    >
+    <BasicLayout className={styles.container} title="选择商品" back fill>
       <View className={styles.header}>
         <InputSearch
           placeholder="请输入名称搜索"

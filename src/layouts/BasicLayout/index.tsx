@@ -1,4 +1,4 @@
-import { SafeArea, Skeleton } from '@nutui/nutui-react-taro';
+import { Skeleton } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import { getSystemInfoSync } from '@tarojs/taro';
 import classnames from 'classnames';
@@ -10,7 +10,7 @@ import LoginTip from './LoginTip';
 
 import type { CSSProperties, FC, ReactNode } from 'react';
 
-import { Icon, Space } from '@/components';
+import { Icon, SafeArea, Space } from '@/components';
 import { TAB_PAGE } from '@/constants';
 import { useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
@@ -30,7 +30,12 @@ interface BasicLayoutProps {
   loading?: boolean;
   loginTip?: boolean;
   footer?: FooterProps | null;
-  safeArea?: boolean;
+  safeArea?:
+    | boolean
+    | {
+        show: boolean;
+        withTabBar: boolean;
+      };
 }
 
 const BasicLayout: FC<BasicLayoutProps> = ({
@@ -46,7 +51,7 @@ const BasicLayout: FC<BasicLayoutProps> = ({
   loading = false,
   loginTip = true,
   footer,
-  safeArea = true,
+  safeArea = false,
 }) => {
   const { info } = useUserStore((state) => state);
   // 手机顶部状态栏高度
@@ -57,6 +62,17 @@ const BasicLayout: FC<BasicLayoutProps> = ({
     () => loginTip && !info?.account,
     [loginTip, info],
   );
+
+  // 是否显示安全区域
+  const safeAreaOption = useMemo(() => {
+    if (!safeArea) {
+      return { show: false, withTabBar: false };
+    }
+    if (typeof safeArea === 'boolean') {
+      return { show: safeArea, withTabBar: false };
+    }
+    return safeArea;
+  }, [safeArea]);
 
   const content = (
     <Skeleton rows={10} visible={!loading}>
@@ -119,14 +135,16 @@ const BasicLayout: FC<BasicLayoutProps> = ({
       {showLoginTip || footer ? (
         <View
           className={classnames(`${PREFIX_CLS}-actions`, {
-            [`${PREFIX_CLS}-actions-safe`]: footer, // 底部安全距离
+            [`${PREFIX_CLS}-actions-with-tab-bar`]: safeAreaOption.withTabBar,
           })}
         >
           {showLoginTip ? <LoginTip /> : null}
           {footer ? <Footer {...footer} /> : null}
         </View>
       ) : null}
-      {safeArea ? <SafeArea position="bottom" /> : null}
+      {safeAreaOption.show ? (
+        <SafeArea withTabBar={safeAreaOption.withTabBar} />
+      ) : null}
     </View>
   );
 };

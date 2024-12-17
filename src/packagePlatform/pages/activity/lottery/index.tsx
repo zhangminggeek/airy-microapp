@@ -23,13 +23,7 @@ const Page = () => {
   const { data: prizes } = useRequest(getLotteryPrize);
 
   return (
-    <BasicLayout
-      className={styles.container}
-      transparent
-      fill
-      back
-      safeArea={false}
-    >
+    <BasicLayout className={styles.container} transparent fill back>
       <Marquee
         prizes={prizes}
         onFinish={(id) => {

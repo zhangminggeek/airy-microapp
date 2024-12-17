@@ -164,7 +164,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout title={`${id ? '编辑' : '发布'}商品`} back>
+    <BasicLayout title={`${id ? '编辑' : '发布'}商品`} back safeArea>
       <Form
         form={form}
         labelPosition="left"
@@ -480,7 +480,6 @@ const Page = () => {
           <Form.Item label="加入特卖区" name="onSale" valuePropName="checked">
             <Switch
               onChange={(v) => {
-                console.log('onSale onChange', v);
                 if (v) {
                   // 如果加入特卖区，则不允许借调，只允许出售
                   setAllowSell(true);

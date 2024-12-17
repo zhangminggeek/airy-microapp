@@ -20,7 +20,7 @@ const PlatformAbilityWrapper: FC<PlatformAbilityWrapperProps> = ({
   return platformAbility?.includes(name) ? (
     children
   ) : (
-    <BasicLayout back fill safeArea={false}>
+    <BasicLayout back fill>
       <Image
         style={{ width: '100%' }}
         src={`${OSS_ASSETS_DIR}/reservation.jpg`}

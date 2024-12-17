@@ -1,3 +1,4 @@
+import { useDidShow } from '@tarojs/taro';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
@@ -8,11 +9,16 @@ import { HIDE_PRICE } from '@/constants';
 import { productTypeMap } from '@/constants/product';
 import { PurchaseStatus } from '@/constants/purchase';
 import { BasicLayout } from '@/layouts';
-import { useUserStore } from '@/models';
+import { useGlobalStore, useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const Page = () => {
   const { info } = useUserStore((state) => state);
+  const { setTabBarActiveKey } = useGlobalStore((state) => state);
+
+  useDidShow(() => {
+    setTabBarActiveKey('purchase');
+  });
 
   // 搜索关键字
   const [keyword, setKeyword] = useState<string>('');
@@ -31,7 +37,7 @@ const Page = () => {
         />
       }
       fill
-      safeArea={false}
+      safeArea={{ show: true, withTabBar: true }}
     >
       <InfiniteList
         column="multiple"

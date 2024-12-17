@@ -10,7 +10,11 @@ export interface AdministrativeCode {
   children?: AdministrativeCode[];
 }
 
+export type TabBarActiveKey = 'index' | 'purchase' | 'message' | 'my';
+
 interface GloablState {
+  // tabbar 选中项
+  tabBarActiveKey: TabBarActiveKey;
   // 平台能力项（仅用于应付小程序审核）
   platformAbility: string[];
   // 行政编码树形数据
@@ -22,6 +26,8 @@ interface GloablState {
 }
 
 interface GloablStore extends GloablState {
+  // 设置是否显示弹幕
+  setTabBarActiveKey: (key: TabBarActiveKey) => void;
   // 获取平台能力项
   fetchPlatformAbility: () => Promise<void>;
   // 获取行政编码，获取全量数据并保存
@@ -33,10 +39,14 @@ interface GloablStore extends GloablState {
 }
 
 export const useGlobalStore = create<GloablStore>((set, get) => ({
+  tabBarActiveKey: 'index',
   platformAbility: [],
   administrativeCodeTree: [] as AdministrativeCode[],
   administrativeCodeMap: new Map(),
   showBarrage: true,
+  setTabBarActiveKey: (key) => {
+    set({ tabBarActiveKey: key });
+  },
   fetchPlatformAbility: async () => {
     const res = await getPlatformAbility();
     const ability = res.data

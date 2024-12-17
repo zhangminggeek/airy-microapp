@@ -46,13 +46,7 @@ const Page = () => {
   }, [rule]);
 
   return (
-    <BasicLayout
-      className={styles.container}
-      title="特卖区"
-      back
-      fill
-      safeArea={false}
-    >
+    <BasicLayout className={styles.container} title="特卖区" back fill>
       <InfiniteList
         className={styles.list}
         request={getMarket}

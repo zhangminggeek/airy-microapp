@@ -3,6 +3,10 @@
 .m-action-sheet {
   background-color: $background-color-base;
 
+  &-with-tab-bar + .nut-actionsheet-safe-area {
+    padding-bottom: 120px;
+  }
+
   &-view {
     display: flex;
     align-items: center;

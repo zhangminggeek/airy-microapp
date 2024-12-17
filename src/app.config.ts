@@ -1,4 +1,4 @@
-import { COLOR_PRIMARY } from '@/constants/theme';
+// import { COLOR_PRIMARY } from '@/constants/theme';
 
 export default {
   pages: [
@@ -16,6 +16,8 @@ export default {
     'pages/purchase/action/result/index',
     'pages/purchase/detail/index',
     'pages/purchase/select/index',
+    // 消息
+    'pages/message/index/index',
     // 我的
     'pages/user/index/index',
     'pages/user/password/verification/index',
@@ -30,8 +32,6 @@ export default {
     'pages/user/login/index',
     'pages/user/login/other/index',
     'pages/user/login/bind/index',
-    // 中转页
-    'pages/security/index',
   ],
   subpackages: [
     // 公共页
@@ -121,26 +121,25 @@ export default {
     navigationStyle: 'custom',
   },
   tabBar: {
-    selectedColor: COLOR_PRIMARY,
-    color: '#959595',
+    custom: true,
+    // selectedColor: COLOR_PRIMARY,
+    // color: '#959595',
     list: [
       {
         pagePath: 'pages/market/index/index',
         text: '首页',
-        iconPath: 'assets/icons/tab_index.png',
-        selectedIconPath: 'assets/icons/tab_index_active.png',
       },
       {
         pagePath: 'pages/purchase/index/index',
         text: '求购',
-        iconPath: 'assets/icons/tab_purchase.png',
-        selectedIconPath: 'assets/icons/tab_purchase_active.png',
+      },
+      {
+        pagePath: 'pages/message/index/index',
+        text: '消息',
       },
       {
         pagePath: 'pages/user/index/index',
         text: '我的',
-        iconPath: 'assets/icons/tab_my.png',
-        selectedIconPath: 'assets/icons/tab_my_active.png',
       },
     ],
   },

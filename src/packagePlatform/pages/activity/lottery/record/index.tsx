@@ -46,12 +46,7 @@ const Page = () => {
   });
 
   return (
-    <BasicLayout
-      className={styles.container}
-      title="我的奖品"
-      back
-      safeArea={false}
-    >
+    <BasicLayout className={styles.container} title="我的奖品" back>
       <InfiniteList
         actionRef={actionRef}
         request={getLotteryWithPage}
