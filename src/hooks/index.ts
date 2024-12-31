@@ -6,3 +6,4 @@ export { useInterval } from './useInterval';
 export { useRequest } from './useRequest';
 export { useUpload } from './useUpload';
 export { useShareEvent } from './useShareEvent';
+export { useWebSocket } from './useWebSocket';

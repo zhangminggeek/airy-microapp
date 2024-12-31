@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 
 import type { ProductBizData } from '@/interfaces/product';
 
-import { getMarketId, postMarketFavorite } from '@/api';
+import { getMarketId, postChat, postMarketFavorite } from '@/api';
 import { Icon, Product, Space } from '@/components';
 import { HIDE_PRICE } from '@/constants';
 import {
@@ -59,6 +59,14 @@ const Page = () => {
     manual: true,
     onSuccess() {
       run({ id: `${id}` });
+    },
+  });
+
+  // 创建对话
+  const { run: createChat } = useRequest(postChat, {
+    manual: true,
+    onSuccess(res) {
+      RouterUtil.navigateTo('/pages/message/detail/index', { id: res });
     },
   });
 
@@ -161,11 +169,13 @@ const Page = () => {
                   </Button>
                   <Button
                     className={styles['icon-btn']}
-                    openType="contact"
                     fill="none"
                     shape="square"
+                    onClick={() => {
+                      createChat({ receiver: data?.companyId });
+                    }}
                   >
-                    <Icon name="PhoneOutlined" title="联系商家" />
+                    <Icon name="MessageOutlined" title="联系商家" />
                   </Button>
                 </Space>
               ),

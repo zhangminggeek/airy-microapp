@@ -18,6 +18,7 @@ export default {
     'pages/purchase/select/index',
     // 消息
     'pages/message/index/index',
+    'pages/message/detail/index',
     // 我的
     'pages/user/index/index',
     'pages/user/password/verification/index',
@@ -117,30 +118,17 @@ export default {
     },
   ],
   window: {
+    navigationBarTextStyle: 'black',
     backgroundTextStyle: 'dark',
     navigationStyle: 'custom',
   },
   tabBar: {
     custom: true,
-    // selectedColor: COLOR_PRIMARY,
-    // color: '#959595',
     list: [
-      {
-        pagePath: 'pages/market/index/index',
-        text: '首页',
-      },
-      {
-        pagePath: 'pages/purchase/index/index',
-        text: '求购',
-      },
-      {
-        pagePath: 'pages/message/index/index',
-        text: '消息',
-      },
-      {
-        pagePath: 'pages/user/index/index',
-        text: '我的',
-      },
+      { pagePath: 'pages/market/index/index', text: '首页' },
+      { pagePath: 'pages/purchase/index/index', text: '求购' },
+      { pagePath: 'pages/message/index/index', text: '消息' },
+      { pagePath: 'pages/user/index/index', text: '我的' },
     ],
   },
   lazyCodeLoading: 'requiredComponents',

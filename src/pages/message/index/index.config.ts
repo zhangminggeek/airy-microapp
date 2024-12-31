@@ -1,3 +1,3 @@
 export default {
-  enablePullDownRefresh: false,
+  enablePullDownRefresh: true,
 };

@@ -1,4 +1,44 @@
 @import '../../../styles/var.scss';
+@import '../../../styles/mixins.scss';
 
 .list {
+}
+
+.chat {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  background-color: #fff;
+  border-bottom: 1px solid $border-color-base;
+
+  &-logo {
+    flex-shrink: 0;
+  }
+
+  &-content {
+    flex: 1;
+    overflow: hidden;
+
+    &-name {
+      font-size: $font-size-large;
+      color: $text-color-main;
+      font-weight: 600;
+      @include ellipsis;
+    }
+
+    &-msg {
+      height: 44px;
+      font-size: $font-size-base;
+      color: $text-color-secondary;
+      font-weight: 400;
+      @include ellipsis;
+    }
+  }
+
+  &-time {
+    font-size: $font-size-small;
+    color: $text-color-placeholder;
+    font-weight: 400;
+  }
 }

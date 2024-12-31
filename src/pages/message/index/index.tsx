@@ -1,19 +1,23 @@
 import { ScrollView, View } from '@tarojs/components';
-import { useDidShow } from '@tarojs/taro';
+import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro';
+import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
 import Notice from './Notice';
 
 import { getChatWithPage } from '@/api';
-import { Empty } from '@/components';
+import { Avatar, Empty } from '@/components';
 import { DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE } from '@/constants';
 import { useRequest } from '@/hooks';
 import { BasicLayout } from '@/layouts';
-import { useChatStore, useGlobalStore } from '@/models';
+import { useChatStore, useGlobalStore, useUserStore } from '@/models';
+import { RouterUtil } from '@/utils';
+import { WebSocketWrapper } from '@/wrappers';
 
 const Page = () => {
   const { setTabBarActiveKey } = useGlobalStore((state) => state);
+  const { info } = useUserStore((state) => state);
   const { list, addList, setList } = useChatStore((state) => state);
 
   // 页码
@@ -25,6 +29,10 @@ const Page = () => {
 
   useDidShow(() => {
     setTabBarActiveKey('message');
+  });
+
+  usePullDownRefresh(async () => {
+    await refresh();
   });
 
   // 获取对话列表
@@ -58,6 +66,7 @@ const Page = () => {
       console.log(err);
     } finally {
       setRefresherTriggered(false);
+      Taro.stopPullDownRefresh();
     }
   };
 
@@ -72,25 +81,81 @@ const Page = () => {
     setCurrentPageNum(pageNum);
   };
 
+  // 计算时间
+  const calculateTime = (t: Dayjs) => {
+    const now = dayjs();
+    if (now.isSame(t, 'day')) {
+      // 如果t和当前时间是同一天，返回"hh:mm"格式的时间
+      return t.format('HH:mm');
+    } else {
+      // 如果t和当前时间相差大于等于1天，返回"mm-dd"格式的时间
+      return t.format('MM-DD');
+    }
+  };
+
   return (
-    <BasicLayout title="消息" fill>
-      <Notice />
-      <ScrollView
-        className={styles.list}
-        scrollY
-        enhanced
-        refresherEnabled
-        refresherTriggered={refresherTriggered}
-        onRefresherRefresh={refresh}
-        onScrollToLower={loadMore}
+    <WebSocketWrapper>
+      <BasicLayout
+        title="消息"
+        fill
+        safeArea={{ show: true, withTabBar: true }}
       >
-        {list?.length ? (
-          list?.map((item) => <View key={item.id}>1</View>)
-        ) : (
-          <Empty title="暂无消息" />
-        )}
-      </ScrollView>
-    </BasicLayout>
+        <Notice />
+        <ScrollView
+          className={styles.list}
+          scrollY
+          enhanced
+          onScrollToLower={loadMore}
+        >
+          {list?.length ? (
+            list?.map((item) => {
+              const {
+                id,
+                initiatorCompany,
+                receiverCompany,
+                message,
+                updateTime,
+              } = item;
+              const target =
+                initiatorCompany.id === info?.companyId
+                  ? receiverCompany
+                  : initiatorCompany;
+              return (
+                <View
+                  key={id}
+                  className={styles.chat}
+                  onClick={() => {
+                    RouterUtil.navigateTo('/pages/message/detail/index', {
+                      id,
+                    });
+                  }}
+                >
+                  <Avatar
+                    className={styles['chat-logo']}
+                    src={target.logo}
+                    name={target.name}
+                    size={40}
+                  />
+                  <View className={styles['chat-content']}>
+                    <View className={styles['chat-content-name']}>
+                      {target.name}
+                    </View>
+                    <View className={styles['chat-content-msg']}>
+                      {message?.content}
+                    </View>
+                  </View>
+                  <View className={styles['chat-time']}>
+                    {calculateTime(dayjs(updateTime))}
+                  </View>
+                </View>
+              );
+            })
+          ) : (
+            <Empty title="暂无消息" />
+          )}
+        </ScrollView>
+      </BasicLayout>
+    </WebSocketWrapper>
   );
 };
 
