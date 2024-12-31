@@ -3,6 +3,8 @@ import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro';
 import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 
+import { MessageType } from '../contants';
+
 import styles from './index.module.scss';
 import Notice from './Notice';
 
@@ -141,7 +143,9 @@ const Page = () => {
                       {target.name}
                     </View>
                     <View className={styles['chat-content-msg']}>
-                      {message?.content}
+                      {message?.type === MessageType['文本']
+                        ? message?.content
+                        : '[图片]'}
                     </View>
                   </View>
                   <View className={styles['chat-time']}>
