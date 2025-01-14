@@ -5,11 +5,14 @@ import { useInterval } from './useInterval';
 import type { SocketTask } from '@tarojs/taro';
 
 import { useChatStore } from '@/models';
+import { parseJson } from '@/utils';
 
 export interface WebSocketMessage<T = any> {
   event: string;
   data: T;
 }
+
+type EventHandler = (data: any) => void;
 
 export enum WebSocketEvent {
   KEEP_ALIVE = 'keep_alive',
@@ -18,6 +21,9 @@ export enum WebSocketEvent {
   CHAT_BROADCAST = 'chat_broadcast',
   LEAVE_CHAT = 'leave_chat',
 }
+
+// 监听事件
+const eventMap = new Map<string, Set<EventHandler>>([]);
 
 export const useWebSocket = () => {
   const { ws, setWebSocket, sendMessage } = useChatStore((state) => state);
@@ -54,7 +60,12 @@ export const useWebSocket = () => {
     });
     // 监听 WebSocket 接受到服务器的消息事件
     st?.onMessage((res) => {
-      console.log('onMessage', res);
+      console.log('onMessage', res, eventMap);
+      const { event, data } = parseJson<WebSocketMessage>(res.data);
+      const listeners = eventMap.get(event);
+      listeners?.forEach((listener) => {
+        listener(data);
+      });
     });
     // 监听 WebSocket 通道关闭事件
     st?.onClose((res) => {
@@ -70,6 +81,14 @@ export const useWebSocket = () => {
     });
   };
 
+  // 添加监听事件
+  const addListener = (name: WebSocketEvent, cb: EventHandler) => {
+    const listeners = eventMap.get(name) ?? new Set();
+    if (listeners.has(cb)) return;
+    listeners?.add(cb);
+    eventMap.set(name, listeners);
+  };
+
   // 断开连接
   const disconnect = (options: SocketTask.CloseOption) => {
     if (!ws) return;
@@ -79,6 +98,7 @@ export const useWebSocket = () => {
   return {
     ws,
     connect,
+    addListener,
     send: sendMessage,
     disconnect,
   };

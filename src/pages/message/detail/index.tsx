@@ -9,13 +9,14 @@ import { MessageType } from '../contants';
 
 import styles from './index.module.scss';
 
+import type { GetChatMessageWithPageResponse } from '@/api';
+
 import { getChatId, getChatMessageWithPage } from '@/api';
 import { Avatar } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
 import { useRequest, useWebSocket } from '@/hooks';
-import { WebSocketEvent, WebSocketMessage } from '@/hooks/useWebSocket';
+import { WebSocketEvent } from '@/hooks/useWebSocket';
 import { useChatStore, useUserStore } from '@/models';
-import { parseJson, Toast } from '@/utils';
 import { WebSocketWrapper } from '@/wrappers';
 
 const Page = () => {
@@ -23,6 +24,7 @@ const Page = () => {
   const { info } = useUserStore((state) => state);
   const { messages, updateChat, addMessage, mergeMessages, setMessages } =
     useChatStore((state) => state);
+  const { send, addListener } = useWebSocket();
   const chatId = Number(id);
 
   // 对话消息总数
@@ -33,8 +35,6 @@ const Page = () => {
   const [inputValue, setInputValue] = useState<string>('');
   // 刷新状态
   const [loading, setLoading] = useState<boolean>(false);
-
-  const { ws, send } = useWebSocket();
 
   useEffect(() => {
     // 获取初始聊天内容
@@ -49,27 +49,8 @@ const Page = () => {
       chatId,
       companyId: info?.companyId,
     });
-    // 处理接受事件
-    ws?.onMessage(async (res) => {
-      console.log('onMessage', res);
-      const { event, data } = parseJson<WebSocketMessage>(res.data);
-      if (event === WebSocketEvent.JOIN_CHAT && data === false) {
-        Toast.info('网络异常');
-      }
-      if (event === WebSocketEvent.CHAT_BROADCAST) {
-        // 接受消息广播
-        const { message, count } = data;
-        addMessage(message);
-        setTotal(count);
-        // 修改对话的更新时间
-        updateChat(chatId, {
-          message,
-          updateTime: dayjs().format(DATE_TIME_FORMAT),
-        });
-        // 保证滚动条始终在最底部
-        setScrollTop((prev) => prev + 1);
-      }
-    });
+    // 添加监听事件
+    addListener(WebSocketEvent.CHAT_BROADCAST, handleChatBroadcase);
 
     return () => {
       // 退出聊天通道
@@ -111,6 +92,24 @@ const Page = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // 处理消息广播事件
+  const handleChatBroadcase = (data: {
+    message: GetChatMessageWithPageResponse['list'][number];
+    count: number;
+  }) => {
+    // 接受消息广播
+    const { message, count } = data;
+    addMessage(message);
+    setTotal(count);
+    // 修改对话的更新时间
+    updateChat(chatId, {
+      message,
+      updateTime: dayjs().format(DATE_TIME_FORMAT),
+    });
+    // 保证滚动条始终在最底部
+    setScrollTop((prev) => prev + 1);
   };
 
   return (
