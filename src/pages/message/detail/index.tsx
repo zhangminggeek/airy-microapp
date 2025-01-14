@@ -50,7 +50,10 @@ const Page = () => {
       companyId: info?.companyId,
     });
     // 添加监听事件
-    addListener(WebSocketEvent.CHAT_BROADCAST, handleChatBroadcase);
+    const listener = addListener(
+      WebSocketEvent.CHAT_BROADCAST,
+      handleChatBroadcase,
+    );
 
     return () => {
       // 退出聊天通道
@@ -58,6 +61,8 @@ const Page = () => {
         chatId,
         companyId: info?.companyId,
       });
+      // 移除监听事件
+      listener.remove();
     };
   }, []);
 

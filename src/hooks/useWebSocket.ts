@@ -84,9 +84,15 @@ export const useWebSocket = () => {
   // 添加监听事件
   const addListener = (name: WebSocketEvent, cb: EventHandler) => {
     const listeners = eventMap.get(name) ?? new Set();
-    if (listeners.has(cb)) return;
+    const ins = {
+      remove: () => {
+        listeners.delete(cb);
+      },
+    };
+    if (listeners.has(cb)) return ins;
     listeners?.add(cb);
     eventMap.set(name, listeners);
+    return ins;
   };
 
   // 断开连接
