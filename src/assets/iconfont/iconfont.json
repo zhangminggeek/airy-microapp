@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "41689903",
+      "name": "ImageOutLined",
+      "font_class": "ImageOutLined",
+      "unicode": "ea7a",
+      "unicode_decimal": 60026
+    },
+    {
       "icon_id": "42838680",
       "name": "MessageOutlined",
       "font_class": "MessageOutlined",

@@ -1,6 +1,7 @@
 import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
+import { useMemo } from 'react';
 
 import type { TabBarActiveKey } from '@/models/global';
 
@@ -15,7 +16,7 @@ import IconTabPurchase from '@/assets/icons/tab_purchase.png';
 import IconTabPurchaseActive from '@/assets/icons/tab_purchase_active.png';
 import { ActionSheet } from '@/components';
 import { ProductSource } from '@/constants/product';
-import { useGlobalStore } from '@/models';
+import { useChatStore, useGlobalStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 import './index.scss';
@@ -63,6 +64,12 @@ const PREFIX_CLS = 'm-custom-tab-bar';
 
 const CustomTabBar = () => {
   const { tabBarActiveKey } = useGlobalStore();
+  const { list } = useChatStore();
+
+  // 是否有未读消息
+  const hasUnreadMessage = useMemo(() => {
+    return list.some((item) => item.unreadMessageCount > 0);
+  }, [list]);
 
   return (
     <View className={PREFIX_CLS}>
@@ -86,6 +93,9 @@ const CustomTabBar = () => {
               height={24}
             />
             <View className={`${PREFIX_CLS}-item-text`}>{text}</View>
+            {key === 'message' && hasUnreadMessage ? (
+              <View className={`${PREFIX_CLS}-item-dot`} />
+            ) : null}
           </View>
         );
       })}

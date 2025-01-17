@@ -172,7 +172,7 @@ const Page = () => {
                     fill="none"
                     shape="square"
                     onClick={() => {
-                      createChat({ receiver: data?.companyId });
+                      createChat({ target: data?.companyId });
                     }}
                   >
                     <Icon name="MessageOutlined" title="联系商家" />

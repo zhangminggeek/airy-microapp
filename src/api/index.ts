@@ -4564,9 +4564,9 @@ export interface GetChatWithPageResponse {
      */
     id: number
     /**
-     * 发起公司
+     * 参与对话的公司
      */
-    initiatorCompany: {
+    participants: {
       /**
        * 公司id
        */
@@ -4579,24 +4579,7 @@ export interface GetChatWithPageResponse {
        * 公司LOGO
        */
       logo: string
-    }
-    /**
-     * 接收公司
-     */
-    receiverCompany: {
-      /**
-       * 公司id
-       */
-      id: number
-      /**
-       * 公司名称
-       */
-      name: string
-      /**
-       * 公司LOGO
-       */
-      logo: string
-    }
+    }[]
     /**
      * 最新一条消息
      */
@@ -4629,7 +4612,15 @@ export interface GetChatWithPageResponse {
        * 消息类型 1:文本 2:图片
        */
       type: number
+      /**
+       * 对方是否已读
+       */
+      read: boolean
     }
+    /**
+     * 未读消息数量
+     */
+    unreadMessageCount: number
   }[]
 }
 
@@ -4693,9 +4684,9 @@ export interface GetChatIdResponse {
    */
   id: number
   /**
-   * 发起公司
+   * 参与对话的公司
    */
-  initiatorCompany: {
+  participants: {
     /**
      * 公司id
      */
@@ -4708,24 +4699,7 @@ export interface GetChatIdResponse {
      * 公司LOGO
      */
     logo: string
-  }
-  /**
-   * 接收公司
-   */
-  receiverCompany: {
-    /**
-     * 公司id
-     */
-    id: number
-    /**
-     * 公司名称
-     */
-    name: string
-    /**
-     * 公司LOGO
-     */
-    logo: string
-  }
+  }[]
 }
 
 type GetChatIdRequestConfig = Readonly<
@@ -4760,9 +4734,9 @@ getChatId.requestConfig = getChatIdRequestConfig
 
 export interface PostChatRequest {
   /**
-   * 接收对话的公司id
+   * 参与对话的公司id
    */
-  receiver: number
+  target: number
 }
 
 export type PostChatResponse = number
@@ -4850,6 +4824,10 @@ export interface GetChatMessageWithPageResponse {
      * 消息类型 1:文本 2:图片
      */
     type: number
+    /**
+     * 对方是否已读
+     */
+    read: boolean
   }[]
 }
 
@@ -4941,6 +4919,48 @@ export const postChatMessage = /*#__PURE__*/ (requestData: PostChatMessageReques
 }
 
 postChatMessage.requestConfig = postChatMessageRequestConfig
+
+export interface PostChatMessageReadRequest {
+  /**
+   * 对话id
+   */
+  chatId: number
+}
+
+export type PostChatMessageReadResponse = any
+
+type PostChatMessageReadRequestConfig = Readonly<
+  RequestConfig<'http://127.0.0.1:50505/mock/0', '', '', '/chat/message/read', 'data', string, string, false>
+>
+
+const postChatMessageReadRequestConfig: PostChatMessageReadRequestConfig = /*#__PURE__*/ {
+  mockUrl: mockUrl_0_0_0_10,
+  devUrl: devUrl_0_0_0_10,
+  prodUrl: prodUrl_0_0_0_10,
+  path: '/chat/message/read',
+  method: Method.POST,
+  requestHeaders: {},
+  requestBodyType: RequestBodyType.json,
+  responseBodyType: ResponseBodyType.raw,
+  dataKey: dataKey_0_0_0_10,
+  paramNames: [],
+  queryNames: [],
+  requestDataOptional: false,
+  requestDataJsonSchema: {},
+  responseDataJsonSchema: {},
+  requestFunctionName: 'postChatMessageRead',
+  queryStringArrayFormat: QueryStringArrayFormat.brackets,
+  extraInfo: {},
+}
+
+export const postChatMessageRead = /*#__PURE__*/ (
+  requestData: PostChatMessageReadRequest,
+  ...args: UserRequestRestArgs
+) => {
+  return request<PostChatMessageReadResponse>(prepare(postChatMessageReadRequestConfig, requestData), ...args)
+}
+
+postChatMessageRead.requestConfig = postChatMessageReadRequestConfig
 
 const mockUrl_0_0_0_11 = 'http://127.0.0.1:50505/mock/0' as any
 const devUrl_0_0_0_11 = '' as any
@@ -5509,6 +5529,10 @@ export const getCompany = /*#__PURE__*/ (requestData: GetCompanyRequest, ...args
 getCompany.requestConfig = getCompanyRequestConfig
 
 export interface PutCompanyRequest {
+  /**
+   * 公司名称
+   */
+  name?: string
   /**
    * 公司LOGO
    */

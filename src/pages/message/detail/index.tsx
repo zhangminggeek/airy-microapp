@@ -1,6 +1,11 @@
-import { Image, Input } from '@nutui/nutui-react-taro';
-import { ScrollView, View } from '@tarojs/components';
-import { previewImage, setNavigationBarTitle, useRouter } from '@tarojs/taro';
+import { Input } from '@nutui/nutui-react-taro';
+import { Image, ScrollView, View } from '@tarojs/components';
+import {
+  chooseImage,
+  previewImage,
+  setNavigationBarTitle,
+  useRouter,
+} from '@tarojs/taro';
 import classnames from 'classnames';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -12,20 +17,28 @@ import styles from './index.module.scss';
 import type { GetChatMessageWithPageResponse } from '@/api';
 
 import { getChatId, getChatMessageWithPage } from '@/api';
-import { Avatar } from '@/components';
+import { Avatar, Icon } from '@/components';
 import { DATE_TIME_FORMAT } from '@/constants';
-import { useRequest, useWebSocket } from '@/hooks';
+import { useRequest, useUpload, useWebSocket } from '@/hooks';
 import { WebSocketEvent } from '@/hooks/useWebSocket';
 import { useChatStore, useUserStore } from '@/models';
 import { WebSocketWrapper } from '@/wrappers';
 
 const Page = () => {
   const { id } = useRouter().params;
-  const { info } = useUserStore((state) => state);
-  const { messages, updateChat, addMessage, mergeMessages, setMessages } =
-    useChatStore((state) => state);
-  const { send, addListener } = useWebSocket();
   const chatId = Number(id);
+
+  const { info } = useUserStore((state) => state);
+  const {
+    messages,
+    updateChat,
+    readMessages,
+    addMessage,
+    mergeMessages,
+    setMessages,
+  } = useChatStore((state) => state);
+  const { send, addListener } = useWebSocket();
+  const { upload } = useUpload();
 
   // 对话消息总数
   const [total, setTotal] = useState<number>(0);
@@ -54,6 +67,8 @@ const Page = () => {
       WebSocketEvent.CHAT_BROADCAST,
       handleChatBroadcase,
     );
+    // 将所有消息更新为已读
+    readMessages(chatId);
 
     return () => {
       // 退出聊天通道
@@ -63,6 +78,8 @@ const Page = () => {
       });
       // 移除监听事件
       listener.remove();
+      // 将所有消息更新为已读
+      readMessages(chatId);
     };
   }, []);
 
@@ -70,11 +87,8 @@ const Page = () => {
   const { data } = useRequest(getChatId, {
     defaultParams: { id: `${chatId}` },
     onSuccess(res) {
-      const { initiatorCompany, receiverCompany } = res ?? {};
-      const target =
-        initiatorCompany?.id === info?.companyId
-          ? receiverCompany
-          : initiatorCompany;
+      const { participants } = res ?? {};
+      const target = participants.find((item) => item.id !== info.companyId);
       // 设置页面标题
       setNavigationBarTitle({ title: target?.name ?? '' });
     },
@@ -117,6 +131,25 @@ const Page = () => {
     setScrollTop((prev) => prev + 1);
   };
 
+  // 发送图片
+  const sendImage = () => {
+    chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      async success(result) {
+        const tempUrl = result.tempFilePaths[0];
+        const url = await upload(tempUrl);
+        send(WebSocketEvent.CHAT_MESSAGE, {
+          chatId,
+          type: MessageType['图片'],
+          content: url,
+          sender: info?.companyId,
+        });
+      },
+    });
+  };
+
   return (
     <WebSocketWrapper>
       <View className={styles.container}>
@@ -134,7 +167,7 @@ const Page = () => {
           {messages.map((item) => {
             const { id, sender, content, type } = item;
             const isSelf = sender === info?.companyId;
-
+            // 消息内容
             const val =
               type === MessageType['文本'] ? (
                 <View className={styles['bubble-content-text']}>{content}</View>
@@ -142,19 +175,16 @@ const Page = () => {
                 <Image
                   className={styles['bubble-content-image']}
                   src={content}
-                  width={120}
-                  height={120}
-                  mode="aspectFit"
+                  mode="widthFix"
                   onClick={() => {
                     previewImage({ urls: [content] });
                   }}
                 />
               );
-
-            const company =
-              data?.initiatorCompany?.id === sender
-                ? data?.initiatorCompany
-                : data?.receiverCompany;
+            // 发送消息的公司信息
+            const company = data?.participants?.find(
+              (item) => item.id === sender,
+            );
 
             return (
               <View
@@ -196,6 +226,12 @@ const Page = () => {
                 // 清空输入框内容
                 setInputValue('');
               }}
+            />
+            <Icon
+              className={styles.upload}
+              name="ImageOutLined"
+              size={18}
+              onClick={sendImage}
             />
           </View>
         </View>

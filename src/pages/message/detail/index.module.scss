@@ -85,6 +85,10 @@
           border-bottom: 12px solid transparent;
         }
       }
+
+      &-image {
+        max-width: 200px;
+      }
     }
   }
 }
@@ -95,11 +99,24 @@
   padding-bottom: 64px;
 
   .content {
+    position: relative;
     width: 100%;
     border-radius: 16px;
     box-shadow:
       0 0 4px 0 rgba(0, 0, 0, 0.12),
       0 8px 16px 0 rgba(0, 0, 0, 0.1);
     overflow: hidden;
+
+    .input {
+      padding-left: 32px;
+      padding-right: 72px;
+    }
+
+    .upload {
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%);
+    }
   }
 }

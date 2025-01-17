@@ -1,3 +1,4 @@
+import { Badge } from '@nutui/nutui-react-taro';
 import { ScrollView, View } from '@tarojs/components';
 import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro';
 import dayjs, { type Dayjs } from 'dayjs';
@@ -113,15 +114,14 @@ const Page = () => {
             list?.map((item) => {
               const {
                 id,
-                initiatorCompany,
-                receiverCompany,
+                participants,
                 message,
+                unreadMessageCount,
                 updateTime,
               } = item;
-              const target =
-                initiatorCompany.id === info?.companyId
-                  ? receiverCompany
-                  : initiatorCompany;
+              const target = participants.find(
+                (item) => item.id !== info.companyId,
+              );
               return (
                 <View
                   key={id}
@@ -132,15 +132,20 @@ const Page = () => {
                     });
                   }}
                 >
-                  <Avatar
+                  <Badge
                     className={styles['chat-logo']}
-                    src={target.logo}
-                    name={target.name}
-                    size={40}
-                  />
+                    value={unreadMessageCount}
+                  >
+                    <Avatar
+                      className={styles['chat-logo-avatar']}
+                      src={target?.logo}
+                      name={target?.name}
+                      size={40}
+                    />
+                  </Badge>
                   <View className={styles['chat-content']}>
                     <View className={styles['chat-content-name']}>
-                      {target.name}
+                      {target?.name}
                     </View>
                     <View className={styles['chat-content-msg']}>
                       {message?.type === MessageType['文本']

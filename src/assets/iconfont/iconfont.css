@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 4593602 */
   src:
-    url('iconfont.woff2?t=1734423552858') format('woff2'),
-    url('iconfont.woff?t=1734423552858') format('woff'),
-    url('iconfont.ttf?t=1734423552858') format('truetype');
+    url('iconfont.woff2?t=1737094995932') format('woff2'),
+    url('iconfont.woff?t=1737094995932') format('woff'),
+    url('iconfont.ttf?t=1737094995932') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ImageOutLined:before {
+  content: '\ea7a';
 }
 
 .icon-MessageOutlined:before {
