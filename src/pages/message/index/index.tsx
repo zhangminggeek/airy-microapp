@@ -2,31 +2,26 @@ import { Badge } from '@nutui/nutui-react-taro';
 import { ScrollView, View } from '@tarojs/components';
 import Taro, { useDidShow, usePullDownRefresh } from '@tarojs/taro';
 import dayjs, { type Dayjs } from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { MessageType } from '../contants';
 
 import styles from './index.module.scss';
 import Notice from './Notice';
 
-import { getChatWithPage } from '@/api';
 import { Avatar, Empty } from '@/components';
-import { DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE } from '@/constants';
-import { useRequest } from '@/hooks';
+import { DEFAULT_MAX_PAGE_SIZE, DEFAULT_PAGE_NUM } from '@/constants';
 import { BasicLayout } from '@/layouts';
 import { useChatStore, useGlobalStore, useUserStore } from '@/models';
 import { RouterUtil } from '@/utils';
-import { WebSocketWrapper } from '@/wrappers';
 
 const Page = () => {
   const { setTabBarActiveKey } = useGlobalStore((state) => state);
   const { info } = useUserStore((state) => state);
-  const { list, addList, setList } = useChatStore((state) => state);
+  const { list, total, fetchChatList } = useChatStore((state) => state);
 
   // 页码
   const [currentPageNum, setCurrentPageNum] = useState(DEFAULT_PAGE_NUM);
-  // 总数
-  const [chatTotal, setPageNum] = useState(0);
   // 下拉刷新中
   const [refresherTriggered, setRefresherTriggered] = useState<boolean>(false);
 
@@ -38,31 +33,22 @@ const Page = () => {
     await refresh();
   });
 
-  // 获取对话列表
-  const { run } = useRequest(getChatWithPage, {
-    defaultParams: {
+  useEffect(() => {
+    // 获取对话列表
+    fetchChatList({
       pageNum: `${DEFAULT_PAGE_NUM}`,
-      pageSize: `${DEFAULT_PAGE_SIZE}`,
-    },
-    onSuccess(data) {
-      const { list, total } = data;
-      setPageNum(total);
-      if (currentPageNum === 1) {
-        setList(list);
-      } else {
-        addList(list);
-      }
-    },
-  });
+      pageSize: `${DEFAULT_MAX_PAGE_SIZE}`,
+    });
+  }, []);
 
   // 刷新数据
   const refresh = async () => {
     if (refresherTriggered) return;
     setRefresherTriggered(true);
     try {
-      await run({
+      await fetchChatList({
         pageNum: `${DEFAULT_PAGE_NUM}`,
-        pageSize: `${DEFAULT_PAGE_SIZE}`,
+        pageSize: `${DEFAULT_MAX_PAGE_SIZE}`,
       });
       setCurrentPageNum(DEFAULT_PAGE_NUM);
     } catch (err) {
@@ -75,11 +61,11 @@ const Page = () => {
 
   // 加载更多数据
   const loadMore = async () => {
-    if (list?.length >= chatTotal) return;
+    if (list?.length >= total) return;
     const pageNum = currentPageNum + 1;
-    await run({
+    await fetchChatList({
       pageNum: `${pageNum}`,
-      pageSize: `${DEFAULT_PAGE_SIZE}`,
+      pageSize: `${DEFAULT_MAX_PAGE_SIZE}`,
     });
     setCurrentPageNum(pageNum);
   };
@@ -97,74 +83,68 @@ const Page = () => {
   };
 
   return (
-    <WebSocketWrapper>
-      <BasicLayout
-        title="消息"
-        fill
-        safeArea={{ show: true, withTabBar: true }}
+    <BasicLayout title="消息" fill safeArea={{ show: true, withTabBar: true }}>
+      <Notice />
+      <ScrollView
+        className={styles.list}
+        scrollY
+        enhanced
+        onScrollToLower={loadMore}
       >
-        <Notice />
-        <ScrollView
-          className={styles.list}
-          scrollY
-          enhanced
-          onScrollToLower={loadMore}
-        >
-          {list?.length ? (
-            list?.map((item) => {
-              const {
-                id,
-                participants,
-                message,
-                unreadMessageCount,
-                updateTime,
-              } = item;
-              const target = participants.find(
-                (item) => item.id !== info.companyId,
-              );
-              return (
-                <View
-                  key={id}
-                  className={styles.chat}
-                  onClick={() => {
-                    RouterUtil.navigateTo('/pages/message/detail/index', {
-                      id,
-                    });
-                  }}
+        {list?.length ? (
+          list?.map((item) => {
+            const {
+              id,
+              participants,
+              message,
+              unreadMessageCount,
+              updateTime,
+            } = item;
+            const target = participants?.find(
+              (item) => item.id !== info.companyId,
+            );
+            return (
+              <View
+                key={id}
+                className={styles.chat}
+                onClick={() => {
+                  RouterUtil.navigateTo('/pages/message/detail/index', {
+                    id,
+                  });
+                }}
+              >
+                <Badge
+                  className={styles['chat-logo']}
+                  value={unreadMessageCount}
                 >
-                  <Badge
-                    className={styles['chat-logo']}
-                    value={unreadMessageCount}
-                  >
-                    <Avatar
-                      className={styles['chat-logo-avatar']}
-                      src={target?.logo}
-                      name={target?.name}
-                      size={40}
-                    />
-                  </Badge>
-                  <View className={styles['chat-content']}>
-                    <View className={styles['chat-content-name']}>
-                      {target?.name}
-                    </View>
-                    <View className={styles['chat-content-msg']}>
-                      {message?.type === MessageType['文本']
-                        ? message?.content
-                        : '[图片]'}
-                    </View>
+                  <Avatar
+                    className={styles['chat-logo-avatar']}
+                    src={target?.logo}
+                    name={target?.name}
+                    size={40}
+                  />
+                </Badge>
+                <View className={styles['chat-content']}>
+                  <View className={styles['chat-content-name']}>
+                    {target?.name}
                   </View>
-                  <View className={styles['chat-time']}>
-                    {calculateTime(dayjs(updateTime))}
+                  <View className={styles['chat-content-msg']}>
+                    {message?.type === MessageType['文本']
+                      ? message?.content
+                      : '[图片]'}
                   </View>
                 </View>
-              );
-            })
-          ) : (
-            <Empty title="暂无消息" />
-          )}
-        </ScrollView>
-      </BasicLayout>
-    </WebSocketWrapper>
+                <View className={styles['chat-time']}>
+                  {calculateTime(dayjs(updateTime))}
+                </View>
+              </View>
+            );
+          })
+        ) : (
+          <Empty title="暂无消息" />
+        )}
+      </ScrollView>
+    </BasicLayout>
   );
 };
 

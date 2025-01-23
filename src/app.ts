@@ -1,9 +1,16 @@
 import Taro from '@tarojs/taro';
 import { Component, PropsWithChildren } from 'react';
 
+import { DEFAULT_MAX_PAGE_SIZE, DEFAULT_PAGE_NUM } from './constants';
+
 import { getOrderWechatOrderStatus } from '@/api';
 import { StorageKey } from '@/constants/storage';
-import { useGlobalStore, useUserStore } from '@/models';
+import {
+  useChatStore,
+  useGlobalStore,
+  useUserStore,
+  useWebSocketStore,
+} from '@/models';
 import { EventUtil } from '@/utils';
 
 import './assets/iconfont/iconfont.css';
@@ -16,16 +23,27 @@ class App extends Component<PropsWithChildren> {
 
   componentDidMount() {}
 
-  componentDidShow(options) {
+  async componentDidShow(options) {
+    const { fetchPlatformAbility, setShowBarrage } = useGlobalStore.getState();
+    const { fetchUserInfo } = useUserStore.getState();
+    const { fetchChatList } = useChatStore.getState();
+    const { connect } = useWebSocketStore.getState();
     // 获取平台能力
-    useGlobalStore.getState().fetchPlatformAbility();
+    fetchPlatformAbility();
     // 打开弹幕
-    useGlobalStore.getState().setShowBarrage(true);
+    setShowBarrage(true);
 
-    // 获取用户信息
     const token = Taro.getStorageSync(StorageKey.TOKEN);
     if (token) {
-      useUserStore.getState().fetchUserInfo();
+      // 获取用户信息
+      await fetchUserInfo();
+      // 获取用户对话列表
+      await fetchChatList({
+        pageNum: `${DEFAULT_PAGE_NUM}`,
+        pageSize: `${DEFAULT_MAX_PAGE_SIZE}`,
+      });
+      // 建立 ws 连接
+      await connect();
     }
 
     const { appId, extraData } = options?.referrerInfo ?? {};

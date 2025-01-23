@@ -1,6 +1,9 @@
 import Taro from '@tarojs/taro';
 import { create } from 'zustand';
 
+import { useChatStore } from './chat';
+import { useWebSocketStore } from './websocket';
+
 import type { GetUserSelfResponse } from '@/api';
 
 import { getUserSelf } from '@/api';
@@ -30,7 +33,15 @@ export const useUserStore = create<UserStore>((set) => ({
     return res.data;
   },
   logout: () => {
+    // 清空用户信息
     set({ info: {} as any });
+    // 清空对话信息
+    const { reset } = useChatStore.getState();
+    reset();
+    // 断开 ws 连接
+    const { disconnect } = useWebSocketStore.getState();
+    disconnect({});
+    // 清空本地 cookie
     Taro.removeStorageSync(StorageKey.TOKEN);
     EventUtil.emit(EventUtil.EventsKey.LOGOUT);
   },

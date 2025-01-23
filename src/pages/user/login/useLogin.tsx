@@ -1,12 +1,15 @@
-import { useUserStore } from '@/models';
+import { useUserStore, useWebSocketStore } from '@/models';
 import { RouterUtil } from '@/utils';
 
 const useLogin = () => {
   const { fetchUserInfo } = useUserStore((state) => state);
+  const { connect } = useWebSocketStore((state) => state);
 
   // 处理登录成功后的逻辑
   const handleLoginSuccess = async () => {
     await fetchUserInfo();
+    // 建立 ws 连接
+    connect();
     RouterUtil.switchTab('/pages/market/index/index');
   };
 

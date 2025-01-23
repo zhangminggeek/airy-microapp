@@ -17,6 +17,7 @@ export const DATE_TIME_FORMAT = `${DATE_FORMAT} ${TIME_FORMAT}`;
 // 分页默认值
 export const DEFAULT_PAGE_NUM = 1;
 export const DEFAULT_PAGE_SIZE = 20;
+export const DEFAULT_MAX_PAGE_SIZE = 9999;
 
 // 云托管相关
 export const CLOUD_ENV_ID = 'prod-1gc7fdtuac9b3c9f';

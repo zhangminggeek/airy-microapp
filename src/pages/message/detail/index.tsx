@@ -7,7 +7,6 @@ import {
   useRouter,
 } from '@tarojs/taro';
 import classnames from 'classnames';
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 
 import { MessageType } from '../contants';
@@ -18,26 +17,18 @@ import type { GetChatMessageWithPageResponse } from '@/api';
 
 import { getChatId, getChatMessageWithPage } from '@/api';
 import { Avatar, Icon } from '@/components';
-import { DATE_TIME_FORMAT } from '@/constants';
-import { useRequest, useUpload, useWebSocket } from '@/hooks';
-import { WebSocketEvent } from '@/hooks/useWebSocket';
-import { useChatStore, useUserStore } from '@/models';
-import { WebSocketWrapper } from '@/wrappers';
+import { useRequest, useUpload } from '@/hooks';
+import { useChatStore, useUserStore, useWebSocketStore } from '@/models';
+import { WebSocketEvent } from '@/models/websocket';
 
 const Page = () => {
   const { id } = useRouter().params;
   const chatId = Number(id);
 
   const { info } = useUserStore((state) => state);
-  const {
-    messages,
-    updateChat,
-    readMessages,
-    addMessage,
-    mergeMessages,
-    setMessages,
-  } = useChatStore((state) => state);
-  const { send, addListener } = useWebSocket();
+  const { messages, readMessages, sendMessage, mergeMessages, setMessages } =
+    useChatStore((state) => state);
+  const { addListener } = useWebSocketStore((state) => state);
   const { upload } = useUpload();
 
   // 对话消息总数
@@ -57,29 +48,19 @@ const Page = () => {
       // 获取到聊天内容后，滚动条到最底部
       setScrollTop((prev) => prev + 1);
     });
-    // 加入聊天通道
-    send(WebSocketEvent.JOIN_CHAT, {
-      chatId,
-      companyId: info?.companyId,
-    });
-    // 添加监听事件
+    // 将所有消息更新为已读
+    readMessages(chatId);
+    // 增加监听事件
     const listener = addListener(
       WebSocketEvent.CHAT_BROADCAST,
       handleChatBroadcase,
     );
-    // 将所有消息更新为已读
-    readMessages(chatId);
 
     return () => {
-      // 退出聊天通道
-      send(WebSocketEvent.LEAVE_CHAT, {
-        chatId,
-        companyId: info?.companyId,
-      });
-      // 移除监听事件
-      listener.remove();
       // 将所有消息更新为已读
       readMessages(chatId);
+      // 移除监听事件
+      listener.remove();
     };
   }, []);
 
@@ -88,7 +69,7 @@ const Page = () => {
     defaultParams: { id: `${chatId}` },
     onSuccess(res) {
       const { participants } = res ?? {};
-      const target = participants.find((item) => item.id !== info.companyId);
+      const target = participants?.find((item) => item.id !== info.companyId);
       // 设置页面标题
       setNavigationBarTitle({ title: target?.name ?? '' });
     },
@@ -119,14 +100,8 @@ const Page = () => {
     count: number;
   }) => {
     // 接受消息广播
-    const { message, count } = data;
-    addMessage(message);
+    const { count } = data;
     setTotal(count);
-    // 修改对话的更新时间
-    updateChat(chatId, {
-      message,
-      updateTime: dayjs().format(DATE_TIME_FORMAT),
-    });
     // 保证滚动条始终在最底部
     setScrollTop((prev) => prev + 1);
   };
@@ -140,7 +115,7 @@ const Page = () => {
       async success(result) {
         const tempUrl = result.tempFilePaths[0];
         const url = await upload(tempUrl);
-        send(WebSocketEvent.CHAT_MESSAGE, {
+        sendMessage({
           chatId,
           type: MessageType['图片'],
           content: url,
@@ -151,92 +126,90 @@ const Page = () => {
   };
 
   return (
-    <WebSocketWrapper>
-      <View className={styles.container}>
-        <ScrollView
-          className={styles.body}
-          scrollTop={scrollTop}
-          scrollY
-          scrollWithAnimation
-          enhanced
-          showScrollbar={false}
-          onScrollToUpper={() => {
-            loadMore();
-          }}
-        >
-          {messages.map((item) => {
-            const { id, sender, content, type } = item;
-            const isSelf = sender === info?.companyId;
-            // 消息内容
-            const val =
-              type === MessageType['文本'] ? (
-                <View className={styles['bubble-content-text']}>{content}</View>
-              ) : (
-                <Image
-                  className={styles['bubble-content-image']}
-                  src={content}
-                  mode="widthFix"
-                  onClick={() => {
-                    previewImage({ urls: [content] });
-                  }}
-                />
-              );
-            // 发送消息的公司信息
-            const company = data?.participants?.find(
-              (item) => item.id === sender,
+    <View className={styles.container}>
+      <ScrollView
+        className={styles.body}
+        scrollTop={scrollTop}
+        scrollY
+        scrollWithAnimation
+        enhanced
+        showScrollbar={false}
+        onScrollToUpper={() => {
+          loadMore();
+        }}
+      >
+        {messages.map((item) => {
+          const { id, sender, content, type } = item;
+          const isSelf = sender === info?.companyId;
+          // 消息内容
+          const val =
+            type === MessageType['文本'] ? (
+              <View className={styles['bubble-content-text']}>{content}</View>
+            ) : (
+              <Image
+                className={styles['bubble-content-image']}
+                src={content}
+                mode="widthFix"
+                onClick={() => {
+                  previewImage({ urls: [content] });
+                }}
+              />
             );
+          // 发送消息的公司信息
+          const company = data?.participants?.find(
+            (item) => item.id === sender,
+          );
 
-            return (
-              <View
-                key={id}
-                className={classnames(
-                  styles.bubble,
-                  isSelf ? styles['bubble-right'] : styles['bubble-left'],
-                )}
-              >
-                <Avatar
-                  className={styles['bubble-avatar']}
-                  src={company?.logo}
-                  name={company?.name}
-                  size={36}
-                />
-                <View className={styles['bubble-content']}>{val}</View>
-              </View>
-            );
-          })}
-        </ScrollView>
-        <View className={styles.footer}>
-          <View className={styles.content}>
-            <Input
-              className={styles.input}
-              cursorSpacing={20}
-              confirmType="send"
-              value={inputValue}
-              onChange={(v) => {
-                setInputValue(v);
-              }}
-              onConfirm={async (e) => {
-                const val = e.detail.value;
-                send(WebSocketEvent.CHAT_MESSAGE, {
-                  chatId,
-                  type: MessageType['文本'],
-                  content: val,
-                  sender: info?.companyId,
-                });
-                // 清空输入框内容
-                setInputValue('');
-              }}
-            />
-            <Icon
-              className={styles.upload}
-              name="ImageOutLined"
-              size={18}
-              onClick={sendImage}
-            />
-          </View>
+          return (
+            <View
+              key={id}
+              className={classnames(
+                styles.bubble,
+                isSelf ? styles['bubble-right'] : styles['bubble-left'],
+              )}
+            >
+              <Avatar
+                className={styles['bubble-avatar']}
+                src={company?.logo}
+                name={company?.name}
+                size={36}
+              />
+              <View className={styles['bubble-content']}>{val}</View>
+            </View>
+          );
+        })}
+      </ScrollView>
+      <View className={styles.footer}>
+        <View className={styles.content}>
+          <Input
+            className={styles.input}
+            cursorSpacing={20}
+            confirmType="send"
+            value={inputValue}
+            onChange={(v) => {
+              setInputValue(v);
+            }}
+            onConfirm={async (e) => {
+              const val = e.detail.value;
+              sendMessage({
+                chatId,
+                type: MessageType['文本'],
+                content: val,
+                sender: info?.companyId,
+              });
+              // 清空输入框内容
+              setInputValue('');
+            }}
+          />
+          <Icon
+            className={styles.upload}
+            name="ImageOutLined"
+            size={18}
+            onClick={sendImage}
+          />
         </View>
       </View>
-    </WebSocketWrapper>
+    </View>
   );
 };
 

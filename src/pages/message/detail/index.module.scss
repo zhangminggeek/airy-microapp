@@ -36,6 +36,7 @@
 
       .bubble-content-text {
         color: $text-color-main;
+        border-color: #fff;
         background-color: #fff;
 
         &::after {
@@ -51,6 +52,7 @@
 
       .bubble-content-text {
         color: #fff;
+        border-color: $color-primary;
         background-color: $color-primary;
 
         &::after {

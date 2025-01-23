@@ -140,9 +140,7 @@ const Page = () => {
                     onClick={() => {
                       RouterUtil.navigateTo(
                         '/packageCompany/pages/index/index',
-                        {
-                          id: data?.companyId,
-                        },
+                        { id: data?.companyId },
                       );
                     }}
                   >

@@ -1,45 +1,58 @@
-import Taro from '@tarojs/taro';
 import dayjs from 'dayjs';
 import { create } from 'zustand';
 
+import { useWebSocketStore, WebSocketEvent } from './websocket';
+
 import type {
   GetChatMessageWithPageResponse,
+  GetChatWithPageRequest,
   GetChatWithPageResponse,
 } from '@/api';
 
-import { postChatMessageRead } from '@/api';
+import { getChatWithPage, postChatMessageRead } from '@/api';
 
 type ChatType = GetChatWithPageResponse['list'][number];
 type MessageType = GetChatMessageWithPageResponse['list'][number];
 
 interface ChatState {
-  ws?: Taro.SocketTask;
   list: ChatType[];
+  total: number; // 对话总数
   messages: MessageType[];
 }
 
 interface ChatStore extends ChatState {
-  setWebSocket: (ws?: Taro.SocketTask) => void;
+  fetchChatList: (params: GetChatWithPageRequest) => Promise<void>;
   addList: (data: ChatType[]) => void;
   setList: (data: ChatType[]) => void;
   updateChat: (id: number, data: Partial<ChatType>) => void;
   readMessages: (chatId: number) => Promise<void>;
-  sendMessage: (event: string, data: any) => void;
+  sendMessage: (data: any) => void;
   addMessage: (msg: MessageType) => void;
   mergeMessages: (data: MessageType[]) => void;
   setMessages: (data: MessageType[]) => void;
+  reset: () => void;
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
-  ws: undefined,
   list: [],
+  total: 0,
   messages: [],
   /**
-   * 设置 ws 实例
-   * @param ws 实例
+   * 获取聊天列表
    */
-  setWebSocket: (ws) => {
-    set({ ws });
+  fetchChatList: async (params) => {
+    const { addList, setList } = get();
+    const res = await getChatWithPage(params);
+    const { success, data } = res;
+    if (success) {
+      const { list, total } = data;
+      if (Number(params.pageNum) === 1) {
+        setList(list);
+      } else {
+        addList(list);
+      }
+      set({ total });
+    }
   },
   /**
    * 往全局状态中的对话列表中增加一些对话数据
@@ -80,28 +93,19 @@ export const useChatStore = create<ChatStore>((set, get) => ({
    * @param chatId 对话 id
    */
   readMessages: async (chatId) => {
-    const { list, setList } = get();
+    const { updateChat } = get();
     // 更新对话列表中未读消息数量
-    const newList = list.map((chat) => {
-      if (chat.id === chatId) {
-        return { ...chat, unreadMessageCount: 0 };
-      }
-      return chat;
-    });
-    setList(newList);
+    updateChat(chatId, { unreadMessageCount: 0 });
     // 更新所有未读消息状态
     await postChatMessageRead({ chatId });
   },
   /**
    * 发送消息到服务端
-   * @param event ws 事件类型，如维持心跳、加入对话、离开对话、发送对话消息等
    * @param data 消息内容
    */
-  sendMessage: (event, data) => {
-    const { ws } = get();
-    if (!ws) return;
-    const msg = JSON.stringify({ event, data });
-    ws.send({ data: msg });
+  sendMessage: (data) => {
+    const { send } = useWebSocketStore.getState();
+    send(WebSocketEvent.CHAT_MESSAGE, data);
   },
   /**
    * 往全局存储的消息列表中添加消息
@@ -125,5 +129,14 @@ export const useChatStore = create<ChatStore>((set, get) => ({
    */
   setMessages: (data) => {
     set({ messages: data.reverse() });
+  },
+  /**
+   * 重置存储状态
+   */
+  reset: () => {
+    set({
+      list: [],
+      messages: [],
+    });
   },
 }));
