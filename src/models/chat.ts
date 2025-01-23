@@ -10,6 +10,7 @@ import type {
 } from '@/api';
 
 import { getChatWithPage, postChatMessageRead } from '@/api';
+import { DEFAULT_MAX_PAGE_SIZE, DEFAULT_PAGE_NUM } from '@/constants';
 
 type ChatType = GetChatWithPageResponse['list'][number];
 type MessageType = GetChatMessageWithPageResponse['list'][number];
@@ -21,7 +22,7 @@ interface ChatState {
 }
 
 interface ChatStore extends ChatState {
-  fetchChatList: (params: GetChatWithPageRequest) => Promise<void>;
+  fetchChatList: (params?: GetChatWithPageRequest) => Promise<void>;
   addList: (data: ChatType[]) => void;
   setList: (data: ChatType[]) => void;
   updateChat: (id: number, data: Partial<ChatType>) => void;
@@ -42,11 +43,16 @@ export const useChatStore = create<ChatStore>((set, get) => ({
    */
   fetchChatList: async (params) => {
     const { addList, setList } = get();
-    const res = await getChatWithPage(params);
+    const {
+      pageNum = `${DEFAULT_PAGE_NUM}`,
+      pageSize = `${DEFAULT_MAX_PAGE_SIZE}`,
+      ...rest
+    } = params ?? {};
+    const res = await getChatWithPage({ ...rest, pageNum, pageSize });
     const { success, data } = res;
     if (success) {
       const { list, total } = data;
-      if (Number(params.pageNum) === 1) {
+      if (Number(pageNum) === 1) {
         setList(list);
       } else {
         addList(list);

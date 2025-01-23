@@ -11,7 +11,8 @@ import { useChatStore } from '@/models';
  */
 export const handleChatBroadcast = (params: HandleChatBroadcastParams) => {
   const { message } = params;
-  const { list, updateChat, addMessage } = useChatStore.getState();
+  const { list, fetchChatList, updateChat, addMessage } =
+    useChatStore.getState();
   // 将新消息添加到对应的对话中
   addMessage(message);
   // 修改对话的更新时间和未读消息数量
@@ -22,5 +23,7 @@ export const handleChatBroadcast = (params: HandleChatBroadcastParams) => {
       unreadMessageCount: chat.unreadMessageCount + 1,
       updateTime: dayjs().format(DATE_TIME_FORMAT),
     });
+  } else {
+    fetchChatList();
   }
 };

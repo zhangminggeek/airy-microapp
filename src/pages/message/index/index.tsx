@@ -35,10 +35,7 @@ const Page = () => {
 
   useEffect(() => {
     // 获取对话列表
-    fetchChatList({
-      pageNum: `${DEFAULT_PAGE_NUM}`,
-      pageSize: `${DEFAULT_MAX_PAGE_SIZE}`,
-    });
+    fetchChatList();
   }, []);
 
   // 刷新数据
@@ -46,10 +43,7 @@ const Page = () => {
     if (refresherTriggered) return;
     setRefresherTriggered(true);
     try {
-      await fetchChatList({
-        pageNum: `${DEFAULT_PAGE_NUM}`,
-        pageSize: `${DEFAULT_MAX_PAGE_SIZE}`,
-      });
+      await fetchChatList();
       setCurrentPageNum(DEFAULT_PAGE_NUM);
     } catch (err) {
       console.log(err);
