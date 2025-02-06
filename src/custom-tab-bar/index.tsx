@@ -1,8 +1,9 @@
 import { Image } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import classnames from 'classnames';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
+import type { ActionType } from '@/components/ActionSheet';
 import type { TabBarActiveKey } from '@/models/global';
 
 import IconTabBtn from '@/assets/icons/tab_btn.png';
@@ -66,6 +67,8 @@ const CustomTabBar = () => {
   const { tabBarActiveKey } = useGlobalStore();
   const { list } = useChatStore();
 
+  const actionSheetRef = useRef<ActionType>(null);
+
   // 是否有未读消息
   const hasUnreadMessage = useMemo(() => {
     return list.some((item) => item.unreadMessageCount > 0);
@@ -83,6 +86,7 @@ const CustomTabBar = () => {
               [`${PREFIX_CLS}-item-active`]: active,
             })}
             onClick={() => {
+              actionSheetRef.current?.setOpen(false);
               RouterUtil.switchTab(pagePath);
             }}
           >
@@ -100,6 +104,7 @@ const CustomTabBar = () => {
         );
       })}
       <ActionSheet
+        ref={actionSheetRef}
         options={[
           { name: '从服装管理中选择', key: ProductSource['服装管理'] },
           { name: '从相册中选择', key: ProductSource['相册'] },
