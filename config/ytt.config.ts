@@ -3,7 +3,7 @@ import { defineConfig } from 'yapi-to-typescript';
 export default defineConfig([
   {
     serverType: 'swagger',
-    serverUrl: 'http://localhost:9000/api-json',
+    serverUrl: 'http://localhost/api-json',
     typesOnly: false,
     target: 'typescript',
     reactHooks: {

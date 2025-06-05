@@ -98,7 +98,6 @@ const requestForCloud = <ResponseData>(payload: RequestFunctionParams) => {
     process.env.NODE_ENV === 'release'
       ? 'release-3gumdndcdaf859e0'
       : 'prod-1gc7fdtuac9b3c9f';
-  console.log('env', env);
   return new Promise<BaseResponse<ResponseData>>((resolve, reject) => {
     Taro.cloud.callContainer({
       // @ts-expect-error: 确定此参数存在

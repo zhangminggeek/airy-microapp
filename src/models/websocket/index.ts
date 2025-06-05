@@ -35,30 +35,99 @@ export const useWebSocketStore = create<WebSocketStore>((set, get) => ({
     const { ws } = get();
     if (ws) return;
     const res = await getGetewayWsSign();
-    const st = await Taro.connectSocket({
-      url: 'ws://192.168.43.26:9000',
-      header: { token: res.data },
-      success(res) {
-        console.log('connectSocket success', res);
-      },
-      fail(res) {
-        console.log('connectSocket fail', res);
-      },
-    });
-    set({ ws: st });
-    // 监听 WebSocket 接受到服务器的消息事件
-    st?.onMessage((res) => {
-      const { event, data } = parseJson<WebSocketMessage>(res.data);
-      console.log('onMessage', { event, data });
-      if (event === WebSocketEvent.CHAT_BROADCAST) {
-        handleChatBroadcast(data);
-      }
-      // 执行事件监听栈
-      const handlers = eventHandlerMap.get(event);
-      handlers?.forEach((handler) => {
-        handler(data);
+    if (process.env.NODE_ENV === 'development') {
+      const socketTask = await Taro.connectSocket({
+        url: `ws://192.168.43.26/?token=${res.data}`,
+        success(res) {
+          console.log('connectSocket success', res);
+        },
+        fail(res) {
+          console.log('connectSocket fail', res);
+        },
       });
-    });
+      set({ ws: socketTask });
+      // 监听 WebSocket 接受到服务器的消息事件
+      socketTask?.onMessage((res) => {
+        const { event, data } = parseJson<WebSocketMessage>(res.data);
+        console.log('onMessage', { event, data });
+        if (event === WebSocketEvent.CHAT_BROADCAST) {
+          handleChatBroadcast(data);
+        }
+        // 执行事件监听栈
+        const handlers = eventHandlerMap.get(event);
+        handlers?.forEach((handler) => {
+          handler(data);
+        });
+      });
+    } else {
+      console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+      console.log(
+        'env',
+        process.env.NODE_ENV === 'release'
+          ? 'release-3gumdndcdaf859e0'
+          : 'prod-1gc7fdtuac9b3c9f',
+      );
+      // @ts-expect-error: 确定 wx 存在
+      const { socketTask } = await wx.cloud.connectContainer({
+        config: {
+          env:
+            process.env.NODE_ENV === 'release'
+              ? 'release-3gumdndcdaf859e0'
+              : 'prod-1gc7fdtuac9b3c9f',
+        },
+        service: 'airy-server',
+        path: `/?token=${res.data}`,
+        // success(res) {
+        //   console.log('connectSocket success', res);
+        //   const socketTask = res.socketTask;
+        //   set({ ws: socketTask });
+        //   // 监听 WebSocket 接受到服务器的消息事件
+        //   socketTask?.onMessage((res) => {
+        //     const { event, data } = parseJson<WebSocketMessage>(res.data);
+        //     console.log('onMessage', { event, data });
+        //     if (event === WebSocketEvent.CHAT_BROADCAST) {
+        //       handleChatBroadcast(data);
+        //     }
+        //     // 执行事件监听栈
+        //     const handlers = eventHandlerMap.get(event);
+        //     handlers?.forEach((handler) => {
+        //       handler(data);
+        //     });
+        //   });
+        //   socketTask.onOpen((res) => {
+        //     console.log('connectSocket【WEBSOCKET】链接成功', res);
+        //   });
+        //   socketTask.onClose((res) => {
+        //     console.log('connectSocket【WEBSOCKET】链接关闭', res);
+        //   });
+        // },
+        // fail(res) {
+        //   console.log('connectSocket fail', res);
+        // },
+      });
+      set({ ws: socketTask });
+      socketTask?.onMessage((res) => {
+        const { event, data } = parseJson<WebSocketMessage>(res.data);
+        console.log('onMessage', { event, data });
+        if (event === WebSocketEvent.CHAT_BROADCAST) {
+          handleChatBroadcast(data);
+        }
+        // 执行事件监听栈
+        const handlers = eventHandlerMap.get(event);
+        handlers?.forEach((handler) => {
+          handler(data);
+        });
+      });
+      socketTask.onOpen((res) => {
+        console.log('socketTask.onOpen', res);
+      });
+      socketTask.onClose((res) => {
+        console.log('socketTask.onClose', res);
+      });
+      socketTask.onError((res) => {
+        console.log('socketTask.onError', res);
+      });
+    }
   },
   /**
    * 发送消息到服务端
@@ -67,9 +136,18 @@ export const useWebSocketStore = create<WebSocketStore>((set, get) => ({
    */
   async send(event, data) {
     const { ws } = get();
-    if (!ws) return;
+    console.log('models websocket send', ws);
+    if (!ws || ws.readyState !== 1) return;
     const msg = JSON.stringify({ event, data });
-    ws.send({ data: msg });
+    ws.send({
+      data: msg,
+      success(res) {
+        console.log('models websocket send success', res);
+      },
+      fail(res) {
+        console.log('models websocket send fail', res);
+      },
+    });
   },
   /**
    * 给事件添加监听事件

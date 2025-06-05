@@ -9,6 +9,8 @@ import { MessageType } from '../contants';
 import styles from './index.module.scss';
 import Notice from './Notice';
 
+import type { Message } from '@/models/chat';
+
 import { Avatar, Empty } from '@/components';
 import { DEFAULT_MAX_PAGE_SIZE, DEFAULT_PAGE_NUM } from '@/constants';
 import { BasicLayout } from '@/layouts';
@@ -76,6 +78,19 @@ const Page = () => {
     }
   };
 
+  // 渲染消息内容
+  const renderMessage = (msg?: Message) => {
+    if (!msg) return null;
+    const { type, content } = msg;
+    if (type === MessageType['文本']) {
+      return content;
+    } else if (type === MessageType['图片']) {
+      return '[图片]';
+    } else {
+      return null;
+    }
+  };
+
   return (
     <BasicLayout title="消息" fill safeArea={{ show: true, withTabBar: true }}>
       <Notice />
@@ -123,9 +138,7 @@ const Page = () => {
                     {target?.name}
                   </View>
                   <View className={styles['chat-content-msg']}>
-                    {message?.type === MessageType['文本']
-                      ? message?.content
-                      : '[图片]'}
+                    {renderMessage(message)}
                   </View>
                 </View>
                 <View className={styles['chat-time']}>

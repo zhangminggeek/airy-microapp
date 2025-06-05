@@ -9,7 +9,6 @@ type ParamsType = {
 
 export class RouterUtil {
   private static notReuiredTokenPageList = [
-    '/pages/security/index',
     '/pages/user/login/index',
     '/pages/user/login/other/index',
     '/packageCompany/pages/index/index',

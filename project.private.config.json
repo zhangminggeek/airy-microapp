@@ -69,13 +69,6 @@
           "query": "",
           "launchMode": "default",
           "scene": null
-        },
-        {
-          "name": "pages/security/index",
-          "pathName": "pages/security/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
         }
       ]
     }

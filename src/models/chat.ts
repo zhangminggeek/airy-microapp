@@ -12,25 +12,25 @@ import type {
 import { getChatWithPage, postChatMessageRead } from '@/api';
 import { DEFAULT_MAX_PAGE_SIZE, DEFAULT_PAGE_NUM } from '@/constants';
 
-type ChatType = GetChatWithPageResponse['list'][number];
-type MessageType = GetChatMessageWithPageResponse['list'][number];
+export type Chat = GetChatWithPageResponse['list'][number];
+export type Message = GetChatMessageWithPageResponse['list'][number];
 
 interface ChatState {
-  list: ChatType[];
+  list: Chat[];
   total: number; // 对话总数
-  messages: MessageType[];
+  messages: Message[];
 }
 
 interface ChatStore extends ChatState {
   fetchChatList: (params?: GetChatWithPageRequest) => Promise<void>;
-  addList: (data: ChatType[]) => void;
-  setList: (data: ChatType[]) => void;
-  updateChat: (id: number, data: Partial<ChatType>) => void;
+  addList: (data: Chat[]) => void;
+  setList: (data: Chat[]) => void;
+  updateChat: (id: number, data: Partial<Chat>) => void;
   readMessages: (chatId: number) => Promise<void>;
   sendMessage: (data: any) => void;
-  addMessage: (msg: MessageType) => void;
-  mergeMessages: (data: MessageType[]) => void;
-  setMessages: (data: MessageType[]) => void;
+  addMessage: (msg: Message) => void;
+  mergeMessages: (data: Message[]) => void;
+  setMessages: (data: Message[]) => void;
   reset: () => void;
 }
 
